@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- ¥H¤U¬° Servlet2.3 ¡B Servlet2.4 ¡B Servlet2.5 ¡B Servlet3.0 ¦U­ÓServletª©¥»ªº³¡¸p´y­zÀÉ web.xml ªº³»¼h¼ÐÅÒ-->
+
+<!--
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+-->
+
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+
+<!--    
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    version="2.5">
+-->
+  
+<!--  
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    version="3.0"
+    metadata-complete="false">      
+-->    
+
+    
+    <!-- ¨Ï¥Î¸ê®Æ®w³s½u¦À DataSource-JNDIªº³]©w -->
+	  <resource-ref>
+		    <description>DB Connection</description>
+		    <res-ref-name>jdbc/TestDB</res-ref-name>
+		    <res-type>javax.sql.DataSource</res-type>
+		    <res-auth>Container</res-auth>
+	  </resource-ref>
+
+
+    <servlet>                           <!-- ¤w¸gµLªk¥Hµù¥U¦WºÙ(http://localhost:8081/IBM/servlet/hi)ªº¤è¦¡°õ¦æ,¦]¬°Invoker servletªº¥\¯à¦bTomcat 7.x ¤w¸g³Q²¾°£ -->
+        <servlet-name>hi</servlet-name>
+        <servlet-class>HelloWorld</servlet-class>
+    </servlet>
+                         
+    <servlet-mapping>                   <!-- ©ú½T¹ïÀ³ http://localhost:8081/IBM/hello.html -->
+        <servlet-name>hi</servlet-name>
+        <url-pattern>/hello.html</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>                   <!-- «e¸m¸ô®|¹ïÀ³ http://localhost:8081/IBM/hello.html/xxxxx -->
+        <servlet-name>hi</servlet-name>
+        <url-pattern>/hello.html/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>                   <!-- ©µ¦ùÀÉ¦W¹ïÀ³ http://localhost:8081/IBM/xxx/yyy/zzz.mm-->
+        <servlet-name>hi</servlet-name>
+        <url-pattern>*.mm</url-pattern>
+    </servlet-mapping>
+    
+    
+    <!-- HelloWorldªº²Ä¤G­Óµù¥U¦WºÙ»Pmapping -->
+    <servlet>
+		    <servlet-name>HelloWorld</servlet-name>
+		    <servlet-class>HelloWorld</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+		    <servlet-name>HelloWorld</servlet-name>
+		    <url-pattern>/HelloWorld</url-pattern>
+	  </servlet-mapping>
+    
+    
+    <!-- Helloªºµù¥U¦WºÙ»Pmapping -->
+    <servlet>
+		    <servlet-name>Hello</servlet-name>
+		    <servlet-class>Hello</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+		    <servlet-name>Hello</servlet-name>
+		    <url-pattern>/Hello</url-pattern>
+	  </servlet-mapping>
+	  
+	  
+
+<!-- HTTP¨­¥÷ÅçÃÒ-Basic  HTTP Basic Authentication  , ¡iusername ¬° tomcat ; password ¬° tomcat¡j¡i¥i¬d¬Ýtomcat-users.xml¡j-->
+<!--
+	  <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>
+                SecretProtection
+            </web-resource-name>
+            <url-pattern>
+                /*
+            </url-pattern>
+            
+            <http-method>
+                GET
+            </http-method>
+            <http-method>
+                POST
+            </http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>
+                tomcat
+            </role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>
+            BASIC
+        </auth-method>                                               
+        <realm-name>                                                 
+            Default
+        </realm-name>                                                
+    </login-config>                                                  
+
+    <security-role>
+        <role-name>
+            tomcat
+        </role-name>
+    </security-role>
+-->
+    
+    
+<!-- error-page ¿ù»~ºô­¶ -->
+<!--
+    <error-page>
+        <error-code>
+            400
+        </error-code>
+        <location>
+            /error.html
+        </location>
+    </error-page>
+    
+    <error-page>
+        <error-code>
+            404
+        </error-code>
+        <location>
+            /error.html
+        </location>
+    </error-page>
+
+    <error-page>
+        <error-code>
+            500
+        </error-code>
+        <location>
+            /error.html
+        </location>
+    </error-page>
+   
+    <error-page>
+        <exception-type>
+            javax.servlet.ServletException
+        </exception-type>
+        <location>
+            /error.html
+        </location>
+    </error-page>
+-->
+    
+</web-app>
+
+
+<!-- Servlet 3.0 ªº³¡¸p´y­zÀÉ web.xml ªº³»¼h¼ÐÅÒ ¦³¤@­Ó metadata-complete ÄÝ©Ê¡A¸ÓÄÝ©Ê«ü©w·í«eªº³¡¸p´y­zÀÉ web.xml ¬O§_¬O§¹¥þªº¡C  -->
+<!-- ¹w³]¬°false -->
+<!-- ¦pªG³]¸m¬° true¡A«h¦b³¡¸p®É±N¥u¨Ì¿à web.xml¡A±N©¿²¤©Ò¦³ªºAnotationµù¸Ñ¡]¦P®É¤]·|¸õ¹L web-fragment.xml ªº±½ºË¡A¥ç§Y¸T¥Î¥i´¡©Ê¤ä«ù¡^-->
+<!-- ¦pªG¦bweb.xml¡BAnotation¡Bweb-fragment.xml¤¤©Ò³]©wªºServlet¦³¦P¦Wªºµù¥U¦WºÙ¡A«h¥Hweb.xml¤¤ªº³]©w¬°¥D(¶¶§Ç¬°web.xml -> Anotation -> web-fragment.xml) -->
