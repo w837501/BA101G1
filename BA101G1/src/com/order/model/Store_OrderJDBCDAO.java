@@ -18,13 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.zxing.BarcodeFormat;  
-import com.google.zxing.EncodeHintType;  
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;  
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;  
+
 
 public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 	
@@ -351,16 +345,10 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 	
 
 	
-public static void main(String[] args) throws WriterException, IOException{
+public static void main(String[] args) throws IOException{
 		
 		Store_OrderJDBCDAO dao = new Store_OrderJDBCDAO();
-		String qrCodeData = "https://www.google.com.tw/";
-		String charset = "UTF-8";
-		
-		String filePath = "C:/QRCode.png";
 
-		BitMatrix matrix = new MultiFormatWriter().encode(qrCodeData,BarcodeFormat.QR_CODE, 200, 200);
-		MatrixToImageWriter.writeToFile(matrix, "jpg", new File(filePath));
 		
 
 		
@@ -373,13 +361,7 @@ public static void main(String[] args) throws WriterException, IOException{
 		orderVO1.setTotalprice(1000);
 		orderVO1.setOrder_way(0);
 		orderVO1.setReceive_address("");
-		try {
-			byte[] pic = getPictureByteArray(filePath);
-			orderVO1.setQrcode(pic);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		orderVO1.setOrder_note("");
 		orderVO1.setOrder_taketime(new Timestamp(System.currentTimeMillis()));
 		dao.insert(orderVO1);
