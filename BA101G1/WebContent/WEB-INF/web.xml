@@ -9,21 +9,18 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
   <resource-ref>
-		<description>DB Connection</description>
-		<res-ref-name>jdbc/BA101G1</res-ref-name>
-		<res-type>javax.sql.DataSource</res-type>
-		<res-auth>Container</res-auth>
-	</resource-ref>
-  
-  
+    <description>DB Connection</description>
+    <res-ref-name>jdbc/BA101G1</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
   <servlet>
-  		<servlet-name>ManServlet</servlet-name>
-  		<servlet-class>com.man.controller.ManServlet</servlet-class>
+    <servlet-name>ManServlet</servlet-name>
+    <servlet-class>com.man.controller.ManServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  		<servlet-name>ManServlet</servlet-name>
-  		<url-pattern>/man/man.do</url-pattern>
+    <servlet-name>ManServlet</servlet-name>
+    <url-pattern>/man/man.do</url-pattern>
   </servlet-mapping>
 </web-app>
