@@ -34,9 +34,9 @@
 	<li><a href="ListAllMan.jsp">List</a> all Manager </li> <br><br>
 
 	<li>
-		<form action="emp.do" method="post">
+		<form action="man.do" method="post">
 			<b>輸入管理員編號(MAN-000001):</b>
-			<input type="text" name="empno">
+			<input type="text" name="man_id">
 			<input type="submit" value="送出">
 			<input type="hidden" name="action" value="getOne_For_Display">
 		</form>
