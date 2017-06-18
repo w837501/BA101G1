@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.man.model.*" %>    
@@ -53,14 +53,14 @@
 		    <td>${ManagerVO.man_pw }</td>
 		    <td>${ManagerVO.man_mail }</td>
 			<td>
-				<form method="post" action="<%=request.getContextPath()%>/man/man.do">
+				<form method="post" action="<%=request.getContextPath()%>/backend/man/man.do">
 					<input type="submit" value="­×§ï">
 					<input type="hidden" name="man_id" value="${ManagerVO.man_id }">
 					<input type="hidden" name="action" value="getOne_For_Update">
 				</form>	
 			</td>
 			<td>
-				<form method="post" action="<%=request.getContextPath()%>/man/man.do">
+				<form method="post" action="<%=request.getContextPath()%>/backend/man/man.do">
 					<input type="submit" value="§R°£">
 					<input type="hidden" name="man_id" value="${ManagerVO.man_id }">
 					<input type="hidden" name="action" value="delete">

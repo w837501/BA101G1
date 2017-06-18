@@ -1,7 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.man.model.*"%>
-
+<%
+	ManagerVO managerVO=(ManagerVO)request.getAttribute("managerVO");
+%>
 <html>
 <head>
 <title>員工資料新增 - addMan.jsp</title></head>
@@ -26,28 +28,29 @@
 	</font>
 </c:if>
 
-<FORM METHOD="post" ACTION="man.do" name="form1">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/man/man.do" name="form1">
 <table border="0">
 
 	<tr>
 		<td>員工姓名:<font color=red><b>*</b></font></td>
-		<td><input type="TEXT" name="ename" size="45" 
-			 value="${param.man_name}"/></td><td>${errorMsgs.man_name}</td>
+		<td><input type="TEXT" name="man_name" size="45" 
+			value="<%= (managerVO==null)? "" :managerVO.getMan_name() %>" /></td>
+		
 	</tr>
 	<tr>
 		<td>電話:<font color=red><b>*</b></font></td>
-		<td><input type="TEXT" name="phone" size="45"
-			 value="${param.man_phone}"/></td><td>${errorMsgs.man_phone}</td>
+		<td><input type="TEXT" name="man_phone" size="45"
+			 value="<%= (managerVO==null)? "" :managerVO.getMan_phone() %>" /></td>
 	</tr>
 	<tr>
 		<td>密碼:<font color=red><b>*</b></font></td>
-		<td><input type="TEXT" name="pw" size="45"
-			 value="${param.man_pw}"/></td><td>${errorMsgs.man_pw}</td>
+		<td><input type="TEXT" name="man_pw" size="45"
+			 value="<%= (managerVO==null)? "" :managerVO.getMan_pw() %>" /></td>
 	</tr>
 	<tr>
 		<td>信箱:<font color=red><b>*</b></font></td>
-		<td><input type="TEXT" name="mail" size="45"
-			 value="${param.man_mail}"/></td><td>${errorMsgs.man_mail}</td>
+		<td><input type="TEXT" name="man_mail" size="45"
+			 value="<%= (managerVO==null)? "" :managerVO.getMan_mail() %>" /></td>
 	</tr>
 
 
