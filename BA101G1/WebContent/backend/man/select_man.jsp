@@ -1,5 +1,5 @@
 <%@page import="com.man.model.ManagerService"%>
-<%@ page language="java" contentType="text/html; charset=Big5"
+<%@ page language="java" contentType="text/html; charset=BIG5"
     pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -34,9 +34,9 @@
 	<li><a href="ListAllMan.jsp">List</a> all Manager </li> <br><br>
 
 	<li>
-		<form action="man.do" method="post">
+		<form action="emp.do" method="post">
 			<b>輸入管理員編號(MAN-000001):</b>
-			<input type="text" name="man_id">
+			<input type="text" name="empno">
 			<input type="submit" value="送出">
 			<input type="hidden" name="action" value="getOne_For_Display">
 		</form>
@@ -66,13 +66,13 @@
 				</c:forEach>
 			</select>
 			<input type="submit" value="送出">
-			<input type="hidden" name="action" value="getOne_For_Display">
+			<input type="hidden" anme="action" value="getOne_For_Display">
 		</Form>	
 	</li>
 </ul>
 <h3>管理員管理</h3>
 	<ul>
-		<li><a href='AddMan.jsp'>ADD</a>a new Man.</li>
+		<li><a href='addMan.jsp'>ADD</a>a new Man.</li>
 	</ul>
 
 </body>

@@ -134,7 +134,7 @@ public class ManagerDAO implements ManagerDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ManagerVO managerVO = null;
+		ManagerVO man = null;
 
 		try {
 			con = ds.getConnection();
@@ -142,14 +142,14 @@ public class ManagerDAO implements ManagerDAO_interface {
 
 			pstmt.setString(1, man_id);
 			rs = pstmt.executeQuery();
-			while(rs.next()){
-				managerVO=new ManagerVO();
-				managerVO.setMan_id(rs.getString("man_id"));
-				managerVO.setMan_name(rs.getString("man_name"));
-				managerVO.setMan_phone(rs.getString("man_phone"));
-				managerVO.setMan_pw(rs.getString("man_pw"));
-				managerVO.setMan_mail(rs.getString("man_mail"));
-			}
+			rs.next();
+			String man_name = rs.getString("man_name");
+			String man_phone = rs.getString("man_phone");
+			String man_pw = rs.getString("man_pw");
+			String man_mail = rs.getString("man_mail");
+			String man_idd = rs.getString("man_id");
+			man = new ManagerVO(man_idd, man_name, man_phone, man_pw, man_mail);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -175,7 +175,7 @@ public class ManagerDAO implements ManagerDAO_interface {
 				}
 			}
 		}
-		return managerVO;
+		return man;
 	}
 
 	@Override

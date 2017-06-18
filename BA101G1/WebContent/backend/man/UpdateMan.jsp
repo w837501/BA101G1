@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=Big5"
+<%@ page language="java" contentType="text/html; charset=BIG5"
     pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.man.model.*"%>
