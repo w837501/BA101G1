@@ -17,7 +17,7 @@ public class RecordDAO implements RecordDAO_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA101G1");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
