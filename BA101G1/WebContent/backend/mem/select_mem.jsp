@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=BIG5"
     pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@page import="com.mem.model.MemberService"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,10 +19,10 @@
 
 <h3>查詢</h3>
 <c:if test="${not empty errorMsgs }">
-	<font color=''red'>修正以下錯誤
+	<font color='red'>修正以下錯誤
 	<ul>
-		<c:forEach var="message" items="${erroeMsgs }">
-			<li>${message }</li>
+		<c:forEach var="message" items="${errorMsgs}">
+			<li>${message}</li>
 		</c:forEach>
 	</ul>
 	</font>

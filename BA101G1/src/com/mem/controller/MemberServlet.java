@@ -42,7 +42,7 @@ public class MemberServlet extends HttpServlet {
 					errorMsgs.add("格式錯誤");
 				}
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("backend/mem/select_mem.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/mem/select_mem.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -52,7 +52,7 @@ public class MemberServlet extends HttpServlet {
 					errorMsgs.add("查無資料");
 				}
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("backend/mem/select_mem.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/mem/select_mem.jsp");
 					failureView.forward(req, res);
 					return;
 				}
