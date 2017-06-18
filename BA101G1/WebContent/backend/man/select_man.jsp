@@ -66,7 +66,7 @@
 				</c:forEach>
 			</select>
 			<input type="submit" value="°e¥X">
-			<input type="hidden" anme="action" value="getOne_For_Display">
+			<input type="hidden" name="action" value="getOne_For_Display">
 		</Form>	
 	</li>
 </ul>
