@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=Big5" pageEncoding="Big5"%>
 <table border="0">    
  <tr>
   <%if (rowsPerPage<rowNumber) {%>
