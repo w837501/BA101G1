@@ -196,10 +196,10 @@ public class ManServlet extends HttpServlet {
 				// errorMsgs.add("請輸入信箱");
 				// }
 
-				String man_name = null;
-				String man_phone = null;
-				String man_pw = null;
-				String man_mail = null;
+				String man_name = req.getParameter("man_name");
+				String man_phone = req.getParameter("man_phone");
+				String man_pw = req.getParameter("man_pw");
+				String man_mail = req.getParameter("man_mail");
 
 				if (req.getParameter("man_name") == null || req.getParameter("man_name").trim().isEmpty()) {
 					errorMsgs.add("請輸入名字");
