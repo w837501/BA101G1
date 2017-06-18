@@ -26,4 +26,14 @@
   		<servlet-name>ManServlet</servlet-name>
   		<url-pattern>/man/man.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  		<servlet-name>ProductServlet</servlet-name>
+  		<servlet-class>com.product.controller.ProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  		<servlet-name>ProductServlet</servlet-name>
+  		<url-pattern>/product/product.do</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

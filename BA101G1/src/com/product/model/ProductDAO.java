@@ -20,7 +20,7 @@ public class ProductDAO implements ProductDAO_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA101G1");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -32,7 +32,7 @@ public class ProductDAO implements ProductDAO_interface{
 			"DELETE FROM PRODUCT where pro_id = ?";
 		private static final String UPDATE_STMT = 
 			"UPDATE PRODUCT set store_id=?, pro_name=?, pro_price=?, pro_total=?, pro_state=?, pro_image, pro_type, pro_content where pro_id = ?";
-		private static final String Find_by_PK = "select * from PRODUCT where store_id = ? and pro_id=?";
+		private static final String Find_by_PK = "select * from PRODUCT where pro_id=?";
 		private static final String Find_ALL = "select * from PRODUCT ";
 	
 	@Override

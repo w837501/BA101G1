@@ -253,7 +253,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		ProductJDBCDAO productdao = new ProductJDBCDAO();
 		//新增
 //		ProductVO productVO1=new ProductVO();
-//		productVO1.setStore_id("STO-000005");
+//		productVO1.setStore_id("STO-000006");
 //		productVO1.setPro_name("雞雞雞雞雞排");
 //		productVO1.setPro_price(123);
 //		productVO1.setPro_total(0);
@@ -266,7 +266,6 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		
 		//修改
 //		ProductVO productVO2=new ProductVO();
-		
 //		productVO2.setPro_name("雞排");
 //		productVO2.setPro_price(1123);
 //		productVO2.setPro_state(1);
@@ -275,34 +274,37 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 //		productVO2.setPro_content("安安");
 //		productVO2.setPro_id("PRO-000006");
 //		productdao.update(productVO2);
+		
 		//刪除
 //		productdao.delete("PRO-000006");
+		
 		//找一筆
-//		ProductVO revenueVO4 = productdao.findByPrimaryKey("PRO-000001");
-//		System.out.println(revenueVO4.getPro_id());
-//		System.out.println(revenueVO4.getStore_id());
-//		System.out.println(revenueVO4.getPro_name());
-//		System.out.println(revenueVO4.getPro_price());
-//		System.out.println(revenueVO4.getPro_total());
-//		System.out.println(revenueVO4.getPro_state());
-//		System.out.println(revenueVO4.getPro_image());
-//		System.out.println(revenueVO4.getPro_type());
-//		System.out.println(revenueVO4.getPro_content());
-//		System.out.println("---------------------");
+		ProductVO revenueVO4 = productdao.findByPrimaryKey("PRO-000001");
+		System.out.println(revenueVO4.getPro_id());
+		System.out.println(revenueVO4.getStore_id());
+		System.out.println(revenueVO4.getPro_name());
+		System.out.println(revenueVO4.getPro_price());
+		System.out.println(revenueVO4.getPro_total());
+		System.out.println(revenueVO4.getPro_state());
+		System.out.println(revenueVO4.getPro_image());
+		System.out.println(revenueVO4.getPro_type());
+		System.out.println(revenueVO4.getPro_content());
+		System.out.println("---------------------");
+		
 //		//找全部
-		List<ProductVO> list = productdao.getAll();
-		for (ProductVO aPro : list) {
-			System.out.println(aPro.getPro_id());
-			System.out.println(aPro.getStore_id());
-			System.out.println(aPro.getPro_name());
-			System.out.println(aPro.getPro_price());
-			System.out.println(aPro.getPro_total());
-			System.out.println(aPro.getPro_state());
-			System.out.println(aPro.getPro_image());
-			System.out.println(aPro.getPro_type());
-			System.out.println(aPro.getPro_content());
-			System.out.println("---------------------");
-		}
+//		List<ProductVO> list = productdao.getAll();
+//		for (ProductVO aPro : list) {
+//			System.out.println(aPro.getPro_id());
+//			System.out.println(aPro.getStore_id());
+//			System.out.println(aPro.getPro_name());
+//			System.out.println(aPro.getPro_price());
+//			System.out.println(aPro.getPro_total());
+//			System.out.println(aPro.getPro_state());
+//			System.out.println(aPro.getPro_image());
+//			System.out.println(aPro.getPro_type());
+//			System.out.println(aPro.getPro_content());
+//			System.out.println("---------------------");
+//		}
 	}
 
 }
