@@ -51,7 +51,7 @@ public class ProductService {
 	public void deleteRev(String Pro_id) {
 		dao.delete(Pro_id);
 	}
-	public ProductVO getOneEmp(String store_id,String pro_id) {
+	public ProductVO getOnePro(String pro_id) {
 		return dao.findByPrimaryKey(pro_id);
 	}
 	public List<ProductVO> getAll() {
