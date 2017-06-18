@@ -1,5 +1,5 @@
 <%@page import="com.man.model.ManagerService"%>
-<%@ page language="java" contentType="text/html; charset=BIG5"
+<%@ page language="java" contentType="text/html; charset=Big5"
     pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -72,7 +72,7 @@
 </ul>
 <h3>管理員管理</h3>
 	<ul>
-		<li><a href='addMan.jsp'>ADD</a>a new Man.</li>
+		<li><a href='AddMan.jsp'>ADD</a>a new Man.</li>
 	</ul>
 
 </body>
