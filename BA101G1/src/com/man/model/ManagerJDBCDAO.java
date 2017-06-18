@@ -133,7 +133,7 @@ public class ManagerJDBCDAO implements ManagerDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ManagerVO man = null;
+		ManagerVO managerVO = null;
 
 		try {
 			Class.forName(driver);
@@ -142,14 +142,14 @@ public class ManagerJDBCDAO implements ManagerDAO_interface {
 
 			pstmt.setString(1, man_id);
 			rs = pstmt.executeQuery();
-			rs.next();
-			String man_name = rs.getString("man_name");
-			String man_phone = rs.getString("man_phone");
-			String man_pw = rs.getString("man_pw");
-			String man_mail = rs.getString("man_mail");
-			String man_idd = rs.getString("man_id");
-			man = new ManagerVO(man_idd, man_name, man_phone, man_pw, man_mail);
-
+			while(rs.next()){
+				managerVO=new ManagerVO();
+				managerVO.setMan_id(rs.getString("man_id"));
+				managerVO.setMan_name(rs.getString("man_name"));
+				managerVO.setMan_phone(rs.getString("man_phone"));
+				managerVO.setMan_pw(rs.getString("man_pw"));
+				managerVO.setMan_mail(rs.getString("man_mail"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -177,7 +177,7 @@ public class ManagerJDBCDAO implements ManagerDAO_interface {
 				}
 			}
 		}
-		return man;
+		return managerVO;
 	}
 
 	@Override
@@ -246,16 +246,21 @@ public class ManagerJDBCDAO implements ManagerDAO_interface {
 
 		ManagerJDBCDAO managerdao = new ManagerJDBCDAO();
 
-		ManagerVO managervo = new ManagerVO("元元", "0945612345", "123", "87@87.com");
-		managerdao.insert(managervo);
-		System.out.println("成功");
-
-		ManagerVO managervo1 = new ManagerVO("MAN-000011", "元寶寶", "0947861234", "789789", "123@87.com");
+//		ManagerVO managervo = new ManagerVO("元元", "0945612345", "123", "87@87.com");
+//		managerdao.insert(managervo);
+//		System.out.println("成功");
+//
+		ManagerVO managervo1 = new ManagerVO();
+		managervo1.setMan_id("MAN-000008");
+		managervo1.setMan_name("寶");
+		managervo1.setMan_phone("091235454");
+		managervo1.setMan_pw("123");
+		managervo1.setMan_mail("456@dddd");
 		managerdao.update(managervo1);
 		System.out.println("修改成功");
-
-		managerdao.delete("MAN-000011");
-		System.out.println("刪除成功");
+//
+//		managerdao.delete("MAN-000011");
+//		System.out.println("刪除成功");
 
 		ManagerVO man = managerdao.findByPrimaryKey("MAN-000008");
 		System.out.println("man_id : " + man.getMan_id());

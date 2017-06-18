@@ -11,24 +11,7 @@ public class ManagerVO implements Serializable{
 	private String man_mail;
 	
 	
-	public ManagerVO(String man_name, String man_phone, String man_pw, String man_mail) {
-		super();
-		this.man_name = man_name;
-		this.man_phone = man_phone;
-		this.man_pw = man_pw;
-		this.man_mail = man_mail;
-	}
-
 	
-	public ManagerVO(String man_id, String man_name, String man_phone, String man_pw, String man_mail) {
-		super();
-		this.man_id = man_id;
-		this.man_name = man_name;
-		this.man_phone = man_phone;
-		this.man_pw = man_pw;
-		this.man_mail = man_mail;
-	}
-
 
 	public String getMan_id() {
 		return man_id;
@@ -70,8 +53,6 @@ public class ManagerVO implements Serializable{
 		this.man_mail = man_mail;
 	}
 
-	public ManagerVO() {
-		// TODO Auto-generated constructor stub
-	}
+
 
 }
