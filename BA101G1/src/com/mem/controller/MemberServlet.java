@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mem.model.MemberService;
-import com.mem.model.MemberVO;
+import com.mem.model.*;
 
 public class MemberServlet extends HttpServlet {
 
