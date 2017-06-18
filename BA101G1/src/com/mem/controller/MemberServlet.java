@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.mem.model.MemberService;
 import com.mem.model.MemberVO;
 
+
+
 public class MemberServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -44,7 +46,6 @@ public class MemberServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
-
 				MemberService memSvc = new MemberService();
 				MemberVO memberVO = memSvc.getOneEmp(mem_id);
 				if (memberVO == null) {
@@ -67,5 +68,7 @@ public class MemberServlet extends HttpServlet {
 			}
 
 		}
+				
+			
 	}
 }
