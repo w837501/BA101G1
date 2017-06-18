@@ -103,30 +103,31 @@ public class ManServlet extends HttpServlet {
 
 			try {
 				String man_id = new String(req.getParameter("man_id"));
+
 				String man_name = req.getParameter("man_name");
-				String man_phone = req.getParameter("man_phone").trim();
-				// String man_phone=null;
-				// try{
-				// man_phone=new String(req.getParameter(man_phone).trim());
-				// }catch(Exception e){
-				// man_phone="";
-				// errorMsgs.add("請輸入電話");
-				// }
+				String man_phone = req.getParameter("man_phone");
+				String man_pw = req.getParameter("man_pw");
+				String man_mail = req.getParameter("man_mail");
 
-				String man_pw = null;
-				try {
-					man_pw = new String(req.getParameter("man_pw").trim());
-				} catch (Exception e) {
-					man_pw = "";
-					errorMsgs.add("請輸入密碼");
+				if (req.getParameter("man_name") == null || req.getParameter("man_name").trim().isEmpty()) {
+					errorMsgs.add("請輸入名字");
+				} else {
+					man_name = req.getParameter("man_name");
 				}
-
-				String man_mail = null;
-				try {
-					man_mail = new String(req.getParameter("man_mail").trim());
-				} catch (Exception e) {
-					man_mail = "";
+				if (req.getParameter("man_phone") == null || req.getParameter("man_phone").trim().isEmpty()) {
+					errorMsgs.add("請輸入電話");
+				} else {
+					man_phone = req.getParameter("man_phone");
+				}
+				if (req.getParameter("man_pw") == null || req.getParameter("man_pw").trim().isEmpty()) {
+					errorMsgs.add("請輸入密碼");
+				} else {
+					man_pw = req.getParameter("man_pw");
+				}
+				if (req.getParameter("man_mail") == null || req.getParameter("man_mail").trim().isEmpty()) {
 					errorMsgs.add("請輸入信箱");
+				} else {
+					man_mail = req.getParameter("man_mail");
 				}
 
 				ManagerVO managerVO = new ManagerVO();
