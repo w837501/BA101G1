@@ -26,6 +26,7 @@
   		<servlet-name>ManServlet</servlet-name>
   		<url-pattern>/man/man.do</url-pattern>
   </servlet-mapping>
+
   
   <servlet>
   		<servlet-name>ProductServlet</servlet-name>
@@ -36,4 +37,14 @@
   		<url-pattern>/product/product.do</url-pattern>
   </servlet-mapping>
   
+
+  <servlet>
+  		<servlet-name>MemberServlet</servlet-name>
+  		<servlet-class>com.mem.controller.MemberServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  		<servlet-name>MemberServlet</servlet-name>
+  		<url-pattern>/mem/mem.do</url-pattern>
+  </servlet-mapping>
+
 </web-app>
