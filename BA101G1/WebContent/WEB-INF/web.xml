@@ -24,7 +24,7 @@
   </servlet>
   <servlet-mapping>
   		<servlet-name>ManServlet</servlet-name>
-  		<url-pattern>/man/man.do</url-pattern>
+  		<url-pattern>/backend/man/man.do</url-pattern>
   </servlet-mapping>
 
   
@@ -44,7 +44,7 @@
   </servlet>
   <servlet-mapping>
   		<servlet-name>MemberServlet</servlet-name>
-  		<url-pattern>/mem/mem.do</url-pattern>
+  		<url-pattern>/backend/mem/mem.do</url-pattern>
   </servlet-mapping>
 
 </web-app>

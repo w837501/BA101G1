@@ -103,31 +103,30 @@ public class ManServlet extends HttpServlet {
 
 			try {
 				String man_id = new String(req.getParameter("man_id"));
-				String man_name = null,man_phone=null,man_pw=null,man_mail=null;
-				
-				if (req.getParameter("man_name") == null || req.getParameter("man_name").trim().isEmpty()) {
-					man_name="";
-					errorMsgs.add("請輸入名字");
-				} else {
-					man_name = req.getParameter("man_name");
-				}
-				if (req.getParameter("man_phone") == null || req.getParameter("man_phone").trim().isEmpty()) {
-					man_phone="";
-					errorMsgs.add("請輸入電話");
-				} else {
-					man_phone = req.getParameter("man_phone");
-				}
-				if (req.getParameter("man_pw") == null || req.getParameter("man_pw").trim().isEmpty()) {
-					man_pw="";
+				String man_name = req.getParameter("man_name");
+				String man_phone = req.getParameter("man_phone").trim();
+				// String man_phone=null;
+				// try{
+				// man_phone=new String(req.getParameter(man_phone).trim());
+				// }catch(Exception e){
+				// man_phone="";
+				// errorMsgs.add("請輸入電話");
+				// }
+
+				String man_pw = null;
+				try {
+					man_pw = new String(req.getParameter("man_pw").trim());
+				} catch (Exception e) {
+					man_pw = "";
 					errorMsgs.add("請輸入密碼");
-				} else {
-					man_pw = req.getParameter("man_pw");
 				}
-				if (req.getParameter("man_mail") == null || req.getParameter("man_mail").trim().isEmpty()) {
-					man_mail="";
+
+				String man_mail = null;
+				try {
+					man_mail = new String(req.getParameter("man_mail").trim());
+				} catch (Exception e) {
+					man_mail = "";
 					errorMsgs.add("請輸入信箱");
-				} else {
-					man_mail = req.getParameter("man_mail");
 				}
 
 				ManagerVO managerVO = new ManagerVO();
@@ -204,7 +203,6 @@ public class ManServlet extends HttpServlet {
 
 				if (req.getParameter("man_name") == null || req.getParameter("man_name").trim().isEmpty()) {
 					errorMsgs.add("請輸入名字");
-					System.out.println("manServlet - error 請輸入名字 in");
 				} else {
 					man_name = req.getParameter("man_name");
 				}
@@ -231,9 +229,8 @@ public class ManServlet extends HttpServlet {
 				managerVO.setMan_mail(man_mail);
 
 				if (!errorMsgs.isEmpty()) {
-					System.out.println("manServlet - !errorMsgs.isEmpty()  in");
 					req.setAttribute("managerVO", managerVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/AddMan.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/addMan.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -246,7 +243,7 @@ public class ManServlet extends HttpServlet {
 				successView.forward(req, res);
 			} catch (Exception e) {
 				// errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/AddMan.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/addMan.jsp");
 				failureView.forward(req, res);
 			}
 
