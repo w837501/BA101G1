@@ -24,7 +24,7 @@ private MemberDAO_interface dao;
 		return memVO;
 	}
 	
-	public MemberVO updateMan(String mem_id, String mem_name, String mem_phone, String mem_pw, String mem_mail){
+	public MemberVO updateMem(String mem_id, String mem_name, String mem_phone, String mem_pw, String mem_mail){
 		MemberVO memVO=new MemberVO();
 		
 		memVO.setMem_id(mem_id);
@@ -37,10 +37,10 @@ private MemberDAO_interface dao;
 		return memVO;
 		
 	}
-	public void deleteEmp(String mem_id) {
+	public void deleteMem(String mem_id) {
 		dao.delete(mem_id);
 	}
-	public MemberVO getOneEmp(String mem_id) {
+	public MemberVO getOneMem(String mem_id) {
 		return dao.findByPrimaryKey(mem_id);
 	}
 	public List<MemberVO> getAll() {

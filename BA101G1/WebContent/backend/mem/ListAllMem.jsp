@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.mem.model.*" %>
@@ -20,7 +20,7 @@
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
 		<td>
 		<h3>所有員工資料 - ListAllMem.jsp</h3>
-		<a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
+		<a href="select_mem.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
 		</td>
 	</tr>
 </table>
