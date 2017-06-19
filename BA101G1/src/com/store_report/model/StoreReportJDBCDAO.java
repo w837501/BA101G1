@@ -7,8 +7,8 @@ import java.sql.*;
 public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "servlet";
-	String passwd = "iii";
+	String userid = "BA101G1";
+	String passwd = "ba101g1";
 
 	private static final String INSERT_STMT = 
 		"INSERT INTO STORE_REPORT (sr_id,store_id,sc_id,order_id,man_id,sr_content,sr_image,sr_time,sr_state,sr_result) VALUES ('SR'||'-'||LPAD(to_char(sr_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?)";

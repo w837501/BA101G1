@@ -6,8 +6,8 @@ import java.sql.*;
 public class MemberReportJDBCDAO implements MemberReportDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "servlet";
-	String passwd = "iii";
+	String userid = "BA101G1";
+	String passwd = "ba101g1";
 
 	private static final String INSERT_STMT = 
 		"INSERT INTO MEMBER_REPORT (mr_id,mem_id,order_id,sc_id,man_id,mr_content,mr_image,mr_time,mr_state,mr_result) VALUES ('MR'||'-'||LPAD(to_char(mr_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
