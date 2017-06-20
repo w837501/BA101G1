@@ -178,8 +178,9 @@ public class PushJDBCDAO implements PushDAO_interface {
 			pstmt.setString(1, push_id);
 
 			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
+			rs.next();
+			System.out.println("@@@@@@@@"+pushVO);
+//			while (rs.next()) {
 				// empVo ¤]ºÙ¬° Domain objects
 				pushVO = new PushVO();
 				pushVO.setPush_id(rs.getString("push_id"));
@@ -188,7 +189,7 @@ public class PushJDBCDAO implements PushDAO_interface {
 				pushVO.setPush_time(rs.getTimestamp("push_time"));
 				pushVO.setNews_id(rs.getString("news_id"));
 				pushVO.setAd_id(rs.getString("ad_id"));
-			}
+//			}
 
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {

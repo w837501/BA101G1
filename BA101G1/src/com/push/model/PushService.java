@@ -12,7 +12,7 @@ public class PushService {
 		dao = new PushJNDIDAO();
 	}
 
-	public PushVO addEmp(String man_id, String push_content, java.sql.Timestamp push_time,
+	public PushVO addPush(String man_id, String push_content, java.sql.Timestamp push_time,
 			String news_id, String ad_id) {
 
 		PushVO pushVO = new PushVO();
@@ -27,7 +27,7 @@ public class PushService {
 		return pushVO;
 	}
 
-	public PushVO updateEmp(String push_id, String man_id, String push_content,
+	public PushVO updatePush(String push_id, String man_id, String push_content,
 			java.sql.Timestamp push_time, String news_id, String ad_id) {
 
 		PushVO pushVO = new PushVO();
@@ -43,11 +43,11 @@ public class PushService {
 		return pushVO;
 	}
 
-	public void deleteEmp(String push_id) {
+	public void deletePush(String push_id) {
 		dao.delete(push_id);
 	}
 
-	public PushVO getOneEmp(String push_id) {
+	public PushVO getOnePush(String push_id) {
 		return dao.findPrimaryKey(push_id);
 	}
 

@@ -26,4 +26,13 @@
   		<servlet-name>ManServlet</servlet-name>
   		<url-pattern>/man/man.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  		<servlet-name>PushServlet</servlet-name>
+  		<servlet-class>com.push.controller.PushServlet</servlet-class>
+  </servlet>  
+  <servlet-mapping>
+  		<servlet-name>PushServlet</servlet-name>
+  		<url-pattern>/push/push.do</url-pattern>
+  </servlet-mapping>
 </web-app>
