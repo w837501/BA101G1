@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.mem.model.*" %>
@@ -30,7 +30,7 @@
 		
 	</tr>
 	<tr align='center' valign='middle'>
-		<td><%=memberVO.getMem_id() %> </td>
+			<td><%=memberVO.getMem_id() %> </td>
 			<td><%=memberVO.getMem_name() %></td>
 			<td><%=memberVO.getMem_phone() %></td>
 			<td><%=memberVO.getMem_pw() %></td>

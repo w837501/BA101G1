@@ -23,7 +23,7 @@ public class ManServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-		req.setCharacterEncoding("Big5");
+		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		// 查詢
 		if ("getOne_For_Display".equals(action)) {
@@ -56,7 +56,7 @@ public class ManServlet extends HttpServlet {
 				}
 
 				ManagerService manSvc = new ManagerService();
-				ManagerVO managerVO = manSvc.getOneEmp(man_id);
+				ManagerVO managerVO = manSvc.getOneMan(man_id);
 				if (managerVO == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -84,7 +84,7 @@ public class ManServlet extends HttpServlet {
 			try {
 				String man_id = new String(req.getParameter("man_id"));
 				ManagerService managerSvc = new ManagerService();
-				ManagerVO managerVO = managerSvc.getOneEmp(man_id);
+				ManagerVO managerVO = managerSvc.getOneMan(man_id);
 				req.setAttribute("managerVO", managerVO);
 				String url = "/backend/man/UpdateMan.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
@@ -259,7 +259,7 @@ public class ManServlet extends HttpServlet {
 				String man_id = new String(req.getParameter("man_id"));
 
 				ManagerService manSvc = new ManagerService();
-				manSvc.deleteEmp(man_id);
+				manSvc.deleteMan(man_id);
 				String url = "/backend/man/ListAllMan.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
