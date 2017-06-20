@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.man.model.ManagerService;
 import com.mem.model.MemberService;
 import com.mem.model.MemberVO;
 
@@ -205,6 +206,23 @@ public class MemberServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-			
+		if ("delete".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				String mem_id = new String(req.getParameter("mem_id"));
+
+				MemberService memSvc = new MemberService();
+				memSvc.deleteMem(mem_id);
+				String url = "/backend/mem/ListAllMem.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			} catch (Exception e) {
+				errorMsgs.add("刪除資料失敗" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/mem/ListAllMem.jsp");
+				failureView.forward(req, res);
+			}
+		}	
 	}
 }
