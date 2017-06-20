@@ -6,8 +6,8 @@ import java.sql.*;
 public class PushJDBCDAO implements PushDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "servlet";
-	String passwd = "iii";
+	String userid = "BA101G1";
+	String passwd = "ba101g1";
 
 	private static final String INSERT_STMT = 
 		"INSERT INTO Push (push_id,man_id,push_content,push_time,news_id,ad_id) VALUES ('PUS'||'-'||lpad(to_char(push_seq.nextval),6,'0'), ?, ?, ?, ?, ?)";
