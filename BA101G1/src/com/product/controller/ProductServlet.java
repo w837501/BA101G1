@@ -43,7 +43,7 @@ public class ProductServlet extends HttpServlet{
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/select_page.jsp");
+							.getRequestDispatcher("/product.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -58,14 +58,14 @@ public class ProductServlet extends HttpServlet{
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/select_page.jsp");
+							.getRequestDispatcher("/product.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("productlist", productlist); // 資料庫取出的empVO物件,存入req
-				String url ="/select_page.jsp";
+				String url ="/product.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交select_page.jsp
 				System.out.println(successView);
 				successView.forward(req, res);
@@ -74,7 +74,7 @@ public class ProductServlet extends HttpServlet{
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/select_page.jsp");
+						.getRequestDispatcher("/product.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -95,7 +95,7 @@ public class ProductServlet extends HttpServlet{
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/select_page.jsp");
+							.getRequestDispatcher("/product.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -110,14 +110,14 @@ public class ProductServlet extends HttpServlet{
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/select_page.jsp");
+							.getRequestDispatcher("/product.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("productlist", productlist); // 資料庫取出的empVO物件,存入req
-				String url ="/select_page.jsp";
+				String url ="/product.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交select_page.jsp
 				System.out.println(successView);
 				successView.forward(req, res);
@@ -126,7 +126,7 @@ public class ProductServlet extends HttpServlet{
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/select_page.jsp");
+						.getRequestDispatcher("/product.jsp");
 				failureView.forward(req, res);
 			}
 		}
