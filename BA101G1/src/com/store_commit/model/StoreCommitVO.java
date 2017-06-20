@@ -12,6 +12,10 @@ public class StoreCommitVO implements Serializable {
 	private Timestamp sc_time;
 	private Integer sc_state;
 	
+	public StoreCommitVO(){
+		
+	}
+	
 	
 	public String getSc_id() {
 		return sc_id;
