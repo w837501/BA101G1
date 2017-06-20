@@ -10,4 +10,7 @@ public interface RevenueDAO_interface {
     public void delete(String store_id,String revenue_month);
     public RevenueVO findByPrimaryKey(String store_id,String revenue_month);
     public List<RevenueVO> getAll();
+    public List<RevenueVO> getByStore(String store_id);
+    public List<RevenueVO> getByMonth(String revenue_month);
+    public List<RevenueVO> getSingleStore_id();
 }

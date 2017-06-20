@@ -47,4 +47,12 @@
   		<url-pattern>/backend/mem/mem.do</url-pattern>
   </servlet-mapping>
 
+	<servlet>
+  		<servlet-name>RevenueServlet</servlet-name>
+  		<servlet-class>com.rev.controller.RevenueServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  		<servlet-name>RevenueServlet</servlet-name>
+  		<url-pattern>/backend/rev/rev.do</url-pattern>
+  </servlet-mapping>
 </web-app>
