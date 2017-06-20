@@ -36,9 +36,21 @@
 
 		<li>
 			<form action="rev.do" method="post">
-				<b>輸入商家編號(STR-000001):</b> <input type="text" name="store_id">
-				<input type="submit" value="送出"> <input type="hidden"
-					name="action" value="get_For_Display">
+				<b>輸入商家編號(STO-000001):</b> <input type="text" name="store_id" value="STO-000001">
+				<input type="submit" value="送出"> 
+				<input type="hidden"name="action" value="getStore_For_Display">
+			</form>
+		</li>
+			<jsp:useBean id="revSvc" scope="page" class="com.rev.model.RevenueService"></jsp:useBean>
+		<li>
+			<form method="post" action="rev.do">
+				<b>選擇商家編號:</b> <select size="1" name="store_id">
+					<c:forEach var="RevenueVO" items="${revSvc.singleStore_id }">
+						<option value="${RevenueVO.store_id }">${RevenueVO.store_id}</option>
+					</c:forEach>
+				</select> 
+					<input type="submit" value="送出"> 
+					<input type="hidden" name="action" value="getStore_For_Display">
 			</form>
 		</li>
 		<li>
@@ -57,13 +69,19 @@
 					<option value='11'>11</option>
 					<option value='12'>12</option>
 				</select> 
-				<input type="submit" value="送出">
-				<input type="hidden" name="action" value="get_For_Display">
+					<input type="submit" value="送出"> 
+					<input type="hidden" name="action" value="getMonth_For_Display">
 			</form>
 		</li>
 		<li>
 			<form action="rev.do" method="post">
-				<b>輸入月份及商家編號:</b> <select name="revenue_month">
+				<b>輸入月份及商家編號:</b> 
+				<select size="1" name="store_id">
+					<c:forEach var="RevenueVO" items="${revSvc.singleStore_id }">
+						<option value="${RevenueVO.store_id }">${RevenueVO.store_id}</option>
+					</c:forEach>
+				</select> 
+				<select name="revenue_month">
 					<option value='1'>1</option>
 					<option value='2'>2</option>
 					<option value='3'>3</option>
@@ -77,10 +95,16 @@
 					<option value='11'>11</option>
 					<option value='12'>12</option>
 				</select> 
-				<input type="text" name="store_id">
-				<input type="submit" value="送出">
-				<input type="hidden" name="action" value="get_For_Display">
+					<input type="submit" value="送出"> 
+					<input type="hidden" name="action" value="getOne_For_Display">
 			</form>
 		</li>
+		
+	</ul>
+	<h3>管理</h3>
+		<ul>
+			<li><a href="AddMev.jsp">ADD</a> a new Mem</li>
+		</ul>
+		
 </body>
 </html>
