@@ -21,6 +21,8 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 	private static final String UPDATE_STMT = "UPDATE PRODUCT set pro_name=?, pro_price=?, pro_state=?, pro_image=?, pro_type=?, pro_content=? where pro_id = ?";
 	private static final String Find_by_PK = "select * from PRODUCT where pro_id=?";
 	private static final String Find_ALL = "select * from PRODUCT ";
+	private static final String Find_NAME = "select * from PRODUCT where pro_name like ?";
+
 
 	@Override
 	public void insert(ProductVO productVO) {
@@ -247,22 +249,80 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		return productlist;
 	}
 	
+	@Override
+	public List<ProductVO> findName(String pro_name) {
+		List<ProductVO> productlist = new ArrayList<ProductVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ProductVO proVO = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(Find_NAME);
+
+			pstmt.setString(1, "%"+pro_name+"%");
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				proVO = new ProductVO();
+				proVO.setPro_id(rs.getString("Pro_id"));
+				proVO.setStore_id(rs.getString("store_id"));
+				proVO.setPro_name(rs.getString("Pro_name"));
+				proVO.setPro_price(rs.getInt("Pro_price"));
+				proVO.setPro_total(rs.getInt("Pro_total"));
+				proVO.setPro_state(rs.getInt("Pro_state"));
+				proVO.setPro_image(rs.getBytes("Pro_image"));
+				proVO.setPro_type(rs.getInt("Pro_type"));
+				proVO.setPro_content(rs.getString("Pro_content"));
+				productlist.add(proVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return productlist;
+	}
+	
 	
 	public static void main(String args[]){
 
 		ProductJDBCDAO productdao = new ProductJDBCDAO();
 		//新增
-//		ProductVO productVO1=new ProductVO();
-//		productVO1.setStore_id("STO-000006");
-//		productVO1.setPro_name("雞雞雞雞雞排");
-//		productVO1.setPro_price(123);
-//		productVO1.setPro_total(0);
-//		productVO1.setPro_state(1);
-//		productVO1.setPro_image(null);
-//		productVO1.setPro_type(0);
-//		productVO1.setPro_content("安安");
-//		
-//		productdao.insert(productVO1);
+		ProductVO productVO1=new ProductVO();
+		productVO1.setStore_id("STO-000001");
+		productVO1.setPro_name("大亨堡");
+		productVO1.setPro_price(60);
+		productVO1.setPro_total(0);
+		productVO1.setPro_state(1);
+		productVO1.setPro_image(null);
+		productVO1.setPro_type(0);
+		productVO1.setPro_content("我是大亨堡");
+		
+		productdao.insert(productVO1);
 		
 		//修改
 //		ProductVO productVO2=new ProductVO();
@@ -279,17 +339,17 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 //		productdao.delete("PRO-000006");
 		
 		//找一筆
-		ProductVO revenueVO4 = productdao.findByPrimaryKey("PRO-000001");
-		System.out.println(revenueVO4.getPro_id());
-		System.out.println(revenueVO4.getStore_id());
-		System.out.println(revenueVO4.getPro_name());
-		System.out.println(revenueVO4.getPro_price());
-		System.out.println(revenueVO4.getPro_total());
-		System.out.println(revenueVO4.getPro_state());
-		System.out.println(revenueVO4.getPro_image());
-		System.out.println(revenueVO4.getPro_type());
-		System.out.println(revenueVO4.getPro_content());
-		System.out.println("---------------------");
+//		ProductVO revenueVO4 = productdao.findByPrimaryKey("PRO-000001");
+//		System.out.println(revenueVO4.getPro_id());
+//		System.out.println(revenueVO4.getStore_id());
+//		System.out.println(revenueVO4.getPro_name());
+//		System.out.println(revenueVO4.getPro_price());
+//		System.out.println(revenueVO4.getPro_total());
+//		System.out.println(revenueVO4.getPro_state());
+//		System.out.println(revenueVO4.getPro_image());
+//		System.out.println(revenueVO4.getPro_type());
+//		System.out.println(revenueVO4.getPro_content());
+//		System.out.println("---------------------");
 		
 //		//找全部
 //		List<ProductVO> list = productdao.getAll();
@@ -306,5 +366,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 //			System.out.println("---------------------");
 //		}
 	}
+
+	
 
 }

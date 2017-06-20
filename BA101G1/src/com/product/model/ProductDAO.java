@@ -34,6 +34,7 @@ public class ProductDAO implements ProductDAO_interface{
 			"UPDATE PRODUCT set store_id=?, pro_name=?, pro_price=?, pro_total=?, pro_state=?, pro_image, pro_type, pro_content where pro_id = ?";
 		private static final String Find_by_PK = "select * from PRODUCT where pro_id=?";
 		private static final String Find_ALL = "select * from PRODUCT ";
+		private static final String Find_NAME = "select * from PRODUCT where pro_name like ?";
 	
 	@Override
 	public void insert(ProductVO productVO) {
@@ -219,6 +220,61 @@ public class ProductDAO implements ProductDAO_interface{
 			proVO.setPro_type(rs.getInt("Pro_type"));
 			proVO.setPro_content(rs.getString("Pro_content"));
 			productlist.add(proVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return productlist;
+	}
+
+	@Override
+	public List<ProductVO> findName(String pro_name) {
+		List<ProductVO> productlist = new ArrayList<ProductVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ProductVO proVO = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(Find_NAME);
+
+			pstmt.setString(1, "%"+pro_name+"%");
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				proVO = new ProductVO();
+				proVO.setStore_id(rs.getString("store_id"));
+				proVO.setPro_id(rs.getString("Pro_id"));
+				proVO.setPro_name(rs.getString("Pro_name"));
+				proVO.setPro_price(rs.getInt("Pro_price"));
+				proVO.setPro_total(rs.getInt("Pro_total"));
+				proVO.setPro_state(rs.getInt("Pro_state"));
+				proVO.setPro_image(rs.getBytes("Pro_image"));
+				proVO.setPro_type(rs.getInt("Pro_type"));
+				proVO.setPro_content(rs.getString("Pro_content"));
+				productlist.add(proVO);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
