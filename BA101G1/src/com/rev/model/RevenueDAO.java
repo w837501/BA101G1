@@ -31,7 +31,7 @@ public class RevenueDAO implements RevenueDAO_interface{
 	private static final String Find_ALL = "select * from REVENUE ";
 	private static final String Find_By_Store = "select * from REVENUE  where store_id=?";
 	private static final String Find_By_Month = "select * from REVENUE where  revenue_month=?";
-	private static final String Find_Store_id="select DISTINCT store_id from REVENUE";
+	private static final String Find_Store_id="select DISTINCT store_id from REVENUE order by store_id";
 
 	@Override
 	public void insert(RevenueVO revenueVO) {

@@ -103,7 +103,7 @@
 	</ul>
 	<h3>ºÞ²z</h3>
 		<ul>
-			<li><a href="AddMev.jsp">ADD</a> a new Mem</li>
+			<li><a href="AddRev.jsp">ADD</a> a new Rev</li>
 		</ul>
 		
 </body>
