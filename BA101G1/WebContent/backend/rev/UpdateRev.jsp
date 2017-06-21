@@ -30,6 +30,37 @@
 	</ul>
 	</font>
 </c:if>
+<form action="rev.do" method='post' name='form1'>
+<table border='0'>
+	<tr>
+		<td>商家編號:<font color='red'><b>*</b></font></td>
+		<td><%=revenueVO.getStore_id() %></td>
+	</tr>
+	<tr>
+		<td>月份:<font color='red'><b>*</b></font></td>
+		<td><%=revenueVO.getRevenue_month() %></td>
+	</tr>
+	<tr>
+		<td> 管理員編號:<font color='red'><b>*</b></font></td>
+		<td><%=revenueVO.getMan_id() %></td>
+	</tr>
+	<tr>
+		<td>營業額:</td>
+		<td><input type="TEXT" name="store_revenue" size="45" value="<%=revenueVO.getStore_revenue() %>"/></td>
+	</tr>
+	<tr>
+		<td>狀態:</td>
+		<td><input type="TEXT" name="store_state" size="45" value="<%=revenueVO.getState() %>"/></td>
+	</tr>	
+</table>
+<br>
+<input type="hidden" name="action" value="update">
+<input type="hidden" name="store_id" value="<%=revenueVO.getStore_id()%>">
+<input type="hidden" name="revenue_month" value="<%=revenueVO.getRevenue_month()%>">
+<input type="hidden" name="man_id" value="<%=revenueVO.getMan_id()%>">
+<input type="submit"  value="送出修改">
 
+</form>
+</form>
 </body>
 </html>

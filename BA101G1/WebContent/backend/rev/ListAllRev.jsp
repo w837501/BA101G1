@@ -55,7 +55,7 @@
 				<form method="post" action="<%=request.getContextPath() %>/backend/rev/rev.do">
 					<input type="submit" value="н╫зя">
 					<input type="hidden" name="store_id" value="${RevenueVO.store_id }">
-					<input type="hidden" name="revenue_month" value="${MemberVO.revenue_month }">
+					<input type="hidden" name="revenue_month" value="${RevenueVO.revenue_month }">
 					<input type="hidden" name="action" value="getOne_For_Update">
 				</form>
 			</td>

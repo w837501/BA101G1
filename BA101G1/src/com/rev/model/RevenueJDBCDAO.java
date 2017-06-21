@@ -36,8 +36,8 @@ public class RevenueJDBCDAO implements RevenueDAO_interface{
 			pstmt.setString(1, revenueVO.getStore_id());
 			pstmt.setString(2, revenueVO.getRevenue_month());
 			pstmt.setString(3, revenueVO.getMan_id());
-			pstmt.setInt(4, (int) revenueVO.getStore_revenue());
-			pstmt.setInt(5, (int) revenueVO.getState());
+			pstmt.setInt(4,  revenueVO.getStore_revenue());
+			pstmt.setInt(5, revenueVO.getState());
 
 			pstmt.executeUpdate();
 
@@ -71,8 +71,8 @@ public class RevenueJDBCDAO implements RevenueDAO_interface{
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
 			
-			pstmt.setInt(1, (int) revenueVO.getStore_revenue());
-			pstmt.setInt(2, (int) revenueVO.getState());
+			pstmt.setInt(1, revenueVO.getStore_revenue());
+			pstmt.setInt(2,  revenueVO.getState());
 			pstmt.setString(3, revenueVO.getStore_id());
 			pstmt.setString(4, revenueVO.getRevenue_month());
 
