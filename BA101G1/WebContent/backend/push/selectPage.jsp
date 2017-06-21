@@ -61,6 +61,8 @@
        </select>
        <input type="submit" value="送出">
        <input type="hidden" name="action" value="getOne_For_Display">
+       
+       <p>尚未增加 選擇管理員編號 此功能</p>
      </FORM>
   </li>
   
