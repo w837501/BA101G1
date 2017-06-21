@@ -100,22 +100,22 @@ public class MemberServlet extends HttpServlet {
 				String mem_pw=req.getParameter("mem_pw");
 				String mem_mail=req.getParameter("mem_mail");
 				
-				if (req.getParameter("mem_name") == null || req.getParameter("mem_name").trim().isEmpty()) {
+				if (mem_name == null ||mem_name.trim().isEmpty()) {
 					errorMsgs.add("請輸入名字");
 				} else {
 					mem_name = req.getParameter("mem_name");
 				}
-				if (req.getParameter("mem_phone") == null || req.getParameter("mem_phone").trim().isEmpty()) {
+				if (mem_phone == null || mem_phone.trim().isEmpty()) {
 					errorMsgs.add("請輸入電話");
 				} else {
 					mem_phone = req.getParameter("mem_phone");
 				}
-				if (req.getParameter("mem_pw") == null || req.getParameter("mem_pw").trim().isEmpty()) {
+				if (mem_pw == null || mem_pw.trim().isEmpty()) {
 					errorMsgs.add("請輸入密碼");
 				} else {
 					mem_pw = req.getParameter("mem_pw");
 				}
-				if (req.getParameter("mem_mail") == null || req.getParameter("mem_mail").trim().isEmpty()) {
+				if (mem_mail == null || mem_mail.trim().isEmpty()) {
 					errorMsgs.add("請輸入信箱");
 				} else {
 					mem_mail = req.getParameter("mem_mail");

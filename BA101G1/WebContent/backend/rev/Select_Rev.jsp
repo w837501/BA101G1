@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="com.rev.model.RevenueService"%>
@@ -103,7 +103,7 @@
 	</ul>
 	<h3>ºÞ²z</h3>
 		<ul>
-			<li><a href="AddMev.jsp">ADD</a> a new Mem</li>
+			<li><a href="AddRev.jsp">ADD</a> a new Rev</li>
 		</ul>
 		
 </body>

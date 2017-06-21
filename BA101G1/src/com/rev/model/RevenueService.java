@@ -10,7 +10,7 @@ private RevenueDAO_interface dao;
 		dao = new RevenueDAO();
 	}
 	
-	public RevenueVO addRev(String store_id, String revenue_month, String man_id, Number store_revenue,Number state){
+	public RevenueVO addRev(String store_id, String revenue_month, String man_id, Integer store_revenue,Integer state){
 		RevenueVO revVO=new RevenueVO();
 		
 		revVO.setStore_id(store_id);
@@ -24,7 +24,7 @@ private RevenueDAO_interface dao;
 		return revVO;
 	}
 	
-	public RevenueVO updateRev(String store_id, String revenue_month, String man_id, Number store_revenue,Number state){
+	public RevenueVO updateRev(String store_id, String revenue_month, String man_id, Integer store_revenue,Integer state){
 		RevenueVO revVO=new RevenueVO();
 		
 		revVO.setStore_id(store_id);

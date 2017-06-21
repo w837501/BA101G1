@@ -31,7 +31,7 @@ public class RevenueJNDIDAO implements RevenueDAO_interface{
 	private static final String Find_ALL = "select * from REVENUE ";
 	private static final String Find_By_Store = "select * from REVENUE  where store_id=?";
 	private static final String Find_By_Month = "select * from REVENUE where  revenue_month=?";
-	private static final String Find_Store_id="select DISTINCT store_id from REVENUE";
+	private static final String Find_Store_id="select DISTINCT store_id from REVENUE  order by store_id";
 	@Override
 	public void insert(RevenueVO revenueVO) {
 		Connection con = null;
@@ -43,8 +43,8 @@ public class RevenueJNDIDAO implements RevenueDAO_interface{
 			pstmt.setString(1, revenueVO.getStore_id());
 			pstmt.setString(2, revenueVO.getRevenue_month());
 			pstmt.setString(3, revenueVO.getMan_id());
-			pstmt.setInt(4, (int) revenueVO.getStore_revenue());
-			pstmt.setInt(5, (int) revenueVO.getState());
+			pstmt.setInt(4, revenueVO.getStore_revenue());
+			pstmt.setInt(5,  revenueVO.getState());
 
 			pstmt.executeUpdate();
 
@@ -75,8 +75,8 @@ public class RevenueJNDIDAO implements RevenueDAO_interface{
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
 			
-			pstmt.setInt(1, (int) revenueVO.getStore_revenue());
-			pstmt.setInt(2, (int) revenueVO.getState());
+			pstmt.setInt(1, revenueVO.getStore_revenue());
+			pstmt.setInt(2, revenueVO.getState());
 			pstmt.setString(3, revenueVO.getStore_id());
 			pstmt.setString(4, revenueVO.getRevenue_month());
 
