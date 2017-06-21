@@ -1,5 +1,6 @@
 package com.news.model;
 
+import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -69,9 +70,10 @@ public class NewsJDBCDAO implements NewsDAO_interface{
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE_STMT);
-
+			Clob clob = con.createClob();
+			clob.setString(0, newsVO.getNews_content());
 			pstmt.setString(1, newsVO.getNews_name());
-			pstmt.setString(2, newsVO.getNews_content());
+			pstmt.setClob(2, clob);
 			pstmt.setBytes(3, newsVO.getNews_image());
 			pstmt.setTimestamp(4, newsVO.getNews_time());
 			pstmt.setString(5, newsVO.getNews_push_content());
@@ -255,16 +257,16 @@ public class NewsJDBCDAO implements NewsDAO_interface{
 //
 //		newsdao.insert(newsVO1);
 		
-		//­×§ï
-//		NewsVO newsVO2 = new NewsVO();
-//		newsVO2.setNews_name("HAHAHAHAHA");
-//		newsVO2.setNews_content("®@~®@~®@~®@~®@~®@~¤ö¤ö");
-//		newsVO2.setNews_image(null);
-//		newsVO2.setNews_time(new Timestamp(System.currentTimeMillis()));
-//		newsVO2.setNews_push_content("±À¼½123");
-//		newsVO2.setNews_id("NEWS-00001");
-//
-//		dao.update(newsVO2);
+//		­×§ï
+		NewsVO newsVO2 = new NewsVO();
+		newsVO2.setNews_name("HAHAHAHAHA");
+		newsVO2.setNews_content("®@~®@~®@~®@~®@~®@~¤ö¤ö");
+		newsVO2.setNews_image(null);
+		newsVO2.setNews_time(new Timestamp(System.currentTimeMillis()));
+		newsVO2.setNews_push_content("±À¼½123");
+		newsVO2.setNews_id("NEWS-00001");
+
+		newsdao.update(newsVO2);
 		
 		//§R°£
 //		newsdao.delete("NEWS-00005");

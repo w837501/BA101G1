@@ -20,7 +20,7 @@ public class ProductDAO implements ProductDAO_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA101G1");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -32,9 +32,12 @@ public class ProductDAO implements ProductDAO_interface{
 			"DELETE FROM PRODUCT where pro_id = ?";
 		private static final String UPDATE_STMT = 
 			"UPDATE PRODUCT set store_id=?, pro_name=?, pro_price=?, pro_total=?, pro_state=?, pro_image, pro_type, pro_content where pro_id = ?";
-		private static final String Find_by_PK = "select * from PRODUCT where pro_id=?";
+		private static final String Find_by_PK = "select * from PRODUCT where store_id = ? and pro_id=?";
 		private static final String Find_ALL = "select * from PRODUCT ";
-		private static final String Find_NAME = "select * from PRODUCT where pro_name like ?";
+		
+		private static final String Find_Pro_Image = "select pro_image from product where pro_id = ?";
+		
+		
 	
 	@Override
 	public void insert(ProductVO productVO) {
@@ -248,10 +251,9 @@ public class ProductDAO implements ProductDAO_interface{
 		}
 		return productlist;
 	}
-
+	
 	@Override
-	public List<ProductVO> findName(String pro_name) {
-		List<ProductVO> productlist = new ArrayList<ProductVO>();
+	public ProductVO find_Pro_Image(String pro_id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -259,23 +261,13 @@ public class ProductDAO implements ProductDAO_interface{
 
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(Find_NAME);
+			pstmt = con.prepareStatement(Find_Pro_Image);
 
-			pstmt.setString(1, "%"+pro_name+"%");
+			pstmt.setString(1, pro_id);
 			rs = pstmt.executeQuery();
-			while(rs.next()){
-				proVO = new ProductVO();
-				proVO.setStore_id(rs.getString("store_id"));
-				proVO.setPro_id(rs.getString("Pro_id"));
-				proVO.setPro_name(rs.getString("Pro_name"));
-				proVO.setPro_price(rs.getInt("Pro_price"));
-				proVO.setPro_total(rs.getInt("Pro_total"));
-				proVO.setPro_state(rs.getInt("Pro_state"));
-				proVO.setPro_image(rs.getBytes("Pro_image"));
-				proVO.setPro_type(rs.getInt("Pro_type"));
-				proVO.setPro_content(rs.getString("Pro_content"));
-				productlist.add(proVO);
-			}
+			
+			proVO.setPro_image(rs.getBytes("Pro_image"));
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -301,7 +293,7 @@ public class ProductDAO implements ProductDAO_interface{
 				}
 			}
 		}
-		return productlist;
+		return proVO;
 	}
 
 }
