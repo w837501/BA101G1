@@ -56,4 +56,7 @@ public class AdService {
 	public List<AdVO> getAll() {
 		return dao.getAll();
 	}
+	public List<AdVO> getAvailableAD() {
+		return dao.getAvailableAD();
+	}
 }

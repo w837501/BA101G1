@@ -9,4 +9,5 @@ public interface AdDAO_interface {
     public void delete(String ad_id);
     public AdVO findByPrimaryKey(String ad_id);
     public List<AdVO> getAll();
+    public List<AdVO> getAvailableAD();
 }

@@ -28,8 +28,11 @@ public class AdDAO implements AdDAO_interface {
 	private static final String INSERT_STMT = "INSERT into AD VALUES(?,?,?,?,?,?,?,?)";
 	private static final String UPDATE_STMT = "UPDATE AD set store_id=?, ad_name=?, ad_content=?, ad_image=?, ad_time=?, ad_state=?, ad_push_content=? where ad_id=?";
 	private static final String DELETE = "DELETE FROM AD where ad_id = ?";
-	private static final String Find_by_PK = "select * from AD where ad_id=? and store_id=?";
-	private static final String Find_ALL = "select * from AD";
+	private static final String Find_by_PK = "select * from AD where ad_id=?";
+	private static final String Find_ALL = "select * from AD order by ad_time desc";
+	
+	private static final String AD_Available ="select * from Ad where ad_state = 1 order by ad_time desc";
+	
 	
 	@Override
 	public void insert(AdVO adVO) {
@@ -239,5 +242,56 @@ public class AdDAO implements AdDAO_interface {
 		return adlist;
 	}
 	
-	
+	@Override
+	public List<AdVO> getAvailableAD() {
+		List<AdVO> adlist = new ArrayList<AdVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		AdVO adVO = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(AD_Available);
+
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				adVO=new AdVO();
+				adVO.setAd_id(rs.getString("ad_id"));
+				adVO.setStore_id(rs.getString("store_id"));
+				adVO.setAd_name(rs.getString("ad_name"));
+				adVO.setAd_content(rs.getString("ad_content"));
+				adVO.setAd_image(rs.getBytes("ad_image"));
+				adVO.setAd_time(rs.getTimestamp("ad_time"));
+				adVO.setAd_state(rs.getInt("ad_state"));
+				adVO.setAd_push_content(rs.getString("ad_push_content"));
+				adlist.add(adVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return adlist;
+	}
 }

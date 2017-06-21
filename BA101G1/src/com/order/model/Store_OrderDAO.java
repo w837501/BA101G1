@@ -38,6 +38,9 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 	private static final String GET_ALL_STMT = 
 			"SELECT order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, qrcode, order_note, order_taketime from order order by order_id";
 	
+	private static final String GET_ORDER_BY_MEM = 
+			"select o.order_id, o.store_id, s.store_name, o.totalprice, o.order_time, o.order_way, o.order_state from store_order o join store s on o.store_id = s.store_id where o.mem_id = ? order by order_time desc";
+	
 	@Override
 	public void insert(Store_OrderVO orderVO) {
 		// TODO Auto-generated method stub
@@ -299,6 +302,71 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public Store_OrderVO findOrderByMem(String mem_id) {
+		// TODO Auto-generated method stub
+		Store_OrderVO orderVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ORDER_BY_MEM);
+
+			pstmt.setString(1, mem_id);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVo ¤]ºÙ¬° Domain objects
+				orderVO = new Store_OrderVO();
+				orderVO.setOrder_id(rs.getString("order_id"));
+				orderVO.setOrder_time(rs.getTimestamp("rec_mon"));
+				orderVO.setMem_id(rs.getString("mem_id"));
+				orderVO.setStore_id(rs.getString("store_id"));
+				orderVO.setOrder_state(rs.getInt("order_state"));
+				orderVO.setTotalprice(rs.getInt("totalprice"));
+				orderVO.setOrder_way(rs.getInt("order_way"));
+				orderVO.setReceive_address(rs.getString("receive_address"));
+				orderVO.setQrcode(rs.getBytes("qrcode"));
+				orderVO.setOrder_note(rs.getString("order_note"));
+				orderVO.setOrder_taketime(rs.getTimestamp("order_taketime"));
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		return null;
 	}
 	
 }

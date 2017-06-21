@@ -13,7 +13,7 @@ public class ProductService {
 		dao = new ProductDAO();
 	}
 	
-	public ProductVO addRev(String store_id, String pro_id, String pro_name, Number pro_price,Number pro_total, Number pro_state, byte[] pro_image,Number pro_type,String pro_content){
+	public ProductVO addPro(String store_id, String pro_id, String pro_name, Number pro_price,Number pro_total, Number pro_state, byte[] pro_image,Number pro_type,String pro_content){
 		ProductVO proVO=new ProductVO();
 		
 		proVO.setStore_id(store_id);
@@ -31,7 +31,7 @@ public class ProductService {
 		return proVO;
 	}
 	
-	public ProductVO updateRev(String store_id, String pro_id, String pro_name, Number pro_price,Number pro_total, Number pro_state, byte[] pro_image,Number pro_type,String pro_content){
+	public ProductVO updatePro(String store_id, String pro_id, String pro_name, Number pro_price,Number pro_total, Number pro_state, byte[] pro_image,Number pro_type,String pro_content){
 		ProductVO proVO=new ProductVO();
 		
 		proVO.setStore_id(store_id);
@@ -48,17 +48,14 @@ public class ProductService {
 		return proVO;
 		
 	}
-	public void deleteRev(String Pro_id) {
+	public void deletePro(String Pro_id) {
 		dao.delete(Pro_id);
 	}
-	public ProductVO getOnePro(String pro_id) {
+	public ProductVO getOneEmp(String pro_id) {
 		return dao.findByPrimaryKey(pro_id);
 	}
 	public List<ProductVO> getAll() {
 		return dao.getAll();
-	}
-	public List<ProductVO> getName(String pro_name) {
-		return dao.findName(pro_name);
 	}
 
 }
