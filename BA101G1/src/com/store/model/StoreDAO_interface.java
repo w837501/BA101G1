@@ -5,12 +5,12 @@ import java.util.*;
 
 public interface StoreDAO_interface {
 	
-//	public void insert(StoreVO store);
-//	public void update (StoreVO store);
-//	public void delete(String store_id);
-//	public StoreVO findByPrimaryKey(String store_id);
+	public void insert(StoreVO storeVO);
+	public void update (StoreVO storeVO);
+	public void delete(String store_id);
 	public List<StoreVO> getAll();
-	
-	
+	public StoreVO findByPrimaryKey(String store_id);
+	public List<StoreVO> findName(String store_name);
+	public List<StoreVO> findZone(String store_zone);
 
 }
