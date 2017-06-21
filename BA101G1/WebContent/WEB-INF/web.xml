@@ -35,4 +35,14 @@
   		<servlet-name>PushServlet</servlet-name>
   		<url-pattern>/push/push.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  		<servlet-name>MemberReportServlet</servlet-name>
+  		<servlet-class>com.member_report.controller.MemberReportServlet</servlet-class>
+  </servlet>  
+  <servlet-mapping>
+  		<servlet-name>MemberReportServlet</servlet-name>
+  		<url-pattern>/member_report/member_report.do</url-pattern>
+  </servlet-mapping>
+
 </web-app>
