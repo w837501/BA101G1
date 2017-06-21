@@ -20,6 +20,7 @@ public class PushServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+System.out.println("action: " + action);
 		
 		
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
@@ -32,13 +33,14 @@ public class PushServlet extends HttpServlet {
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String str = req.getParameter("push_id");
+System.out.println("getParameter: " + str);
 				if (str == null || (str.trim()).length() == 0) {
 					errorMsgs.add("請輸入員工編號");
 				}
 				// Send the use back to the form, if there were errors  errorMsgs不為空值時
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/push/select_page.jsp");
+							.getRequestDispatcher("/backend/push/selectPage.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -52,7 +54,7 @@ public class PushServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/push/select_page.jsp");
+							.getRequestDispatcher("/backend/push/selectPage.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -66,7 +68,7 @@ public class PushServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/push/select_page.jsp");
+							.getRequestDispatcher("/backend/push/selectPage.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -81,7 +83,7 @@ public class PushServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/backend/push/select_page.jsp");
+						.getRequestDispatcher("/backend/push/selectPage.jsp");
 				failureView.forward(req, res);
 			}
 		}

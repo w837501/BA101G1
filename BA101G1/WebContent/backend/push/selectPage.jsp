@@ -25,25 +25,25 @@
 </c:if>
 
 <ul>
-  <li><a href='<%=request.getContextPath()%>/push/listAllPush.jsp'>List</a> all Pushes. </li> <br><br>
+  <li><a href='<%=request.getContextPath()%>/backend/push/ListAllPush.jsp'>List</a> all Pushes. </li> <br><br>
   
   <li>
     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/push/push.do" >
-        <b>輸入員工編號 (如7001):</b>
+        <b>輸入推播編號 (如PUS-000001):</b>
         <input type="text" name="push_id">
         <input type="submit" value="送出">
         <input type="hidden" name="action" value="getOne_For_Display">
     </FORM>
   </li>
 
-  <jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService" />
+  <jsp:useBean id="pushSvc" scope="page" class="com.push.model.PushService" />
    
   <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" >
-       <b>選擇員工編號:</b>
-       <select size="1" name="empno">
-         <c:forEach var="empVO" items="${empSvc.all}" > 
-          <option value="${empVO.empno}">${empVO.empno}
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/push/push.do" >
+       <b>選擇推播編號:</b>
+       <select size="1" name="push_id">
+         <c:forEach var="pushVO" items="${pushSvc.all}" > 
+          <option value="${pushVO.push_id}">${pushVO.push_id}
          </c:forEach>   
        </select>
        <input type="submit" value="送出">
@@ -52,11 +52,11 @@
   </li>
   
   <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" >
-       <b>選擇員工姓名:</b>
-       <select size="1" name="empno">
-         <c:forEach var="empVO" items="${empSvc.all}" > 
-          <option value="${empVO.empno}">${empVO.ename}
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/push/push.do" >
+       <b>選擇管理員編號:</b>
+       <select size="1" name="push_id">
+         <c:forEach var="pushVO" items="${pushSvc.all}" > 
+          <option value="${pushVO.man_id}">${pushVO.man_id}
          </c:forEach>   
        </select>
        <input type="submit" value="送出">
@@ -64,35 +64,15 @@
      </FORM>
   </li>
   
-  
-   <jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" />
-  
-  <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/dept/dept.do" >
-       <b><font color=orange>選擇部門:</font></b>
-       <select size="1" name="deptno">
-         <c:forEach var="deptVO" items="${deptSvc.all}" > 
-          <option value="${deptVO.deptno}">${deptVO.dname}
-         </c:forEach>   
-       </select>
-       <input type="submit" value="送出">
-       <input type="hidden" name="action" value="listEmps_ByDeptno_A">
-     </FORM>
-  </li>
 </ul>
 
 
-<h3>員工管理</h3>
+<h3>推播管理</h3>
 
 <ul>
-  <li><a href='<%=request.getContextPath()%>/emp/addEmp.jsp'>Add</a> a new Emp.</li>
+  <li><a href='<%=request.getContextPath()%>/backend/push/addPush.jsp'>Add</a> a new Push.</li>
 </ul>
 
-<h3><font color=orange>部門管理</font></h3>
-
-<ul>
-  <li><a href='<%=request.getContextPath()%>/dept/listAllDept.jsp'>List</a> all Depts. </li>
-</ul>
 
 </body>
 
