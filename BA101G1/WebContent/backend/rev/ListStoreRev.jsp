@@ -27,7 +27,7 @@
 		
 	</tr>
 	
-	<c:forEach var="RevenueVO" items="${oneList}">
+	<c:forEach var="RevenueVO" items="${storeList}">
 		<tr align='center' valign='middle'>
 			<td>${RevenueVO.store_id } </td>
 			<td>${RevenueVO.revenue_month }</td>
