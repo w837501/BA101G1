@@ -2,8 +2,6 @@ package com.news.model;
 
 import java.util.List;
 
-import com.product.model.ProductVO;
-
 public interface NewsDAO_interface {
 
 	public void insert(NewsVO newsVO);

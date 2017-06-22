@@ -1,9 +1,5 @@
 package com.product.model;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -25,8 +21,8 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 	private static final String UPDATE_STMT = "UPDATE PRODUCT set pro_name=?, pro_price=?, pro_state=?, pro_image=?, pro_type=?, pro_content=? where pro_id = ?";
 	private static final String Find_by_PK = "select * from PRODUCT where pro_id=?";
 	private static final String Find_ALL = "select * from PRODUCT ";
-	
-	private static final String Find_Pro_Image = "select pro_image from product where pro_id = ?";
+	private static final String Find_NAME = "select * from PRODUCT where pro_name like ?";
+
 
 	@Override
 	public void insert(ProductVO productVO) {
@@ -254,7 +250,8 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 	}
 	
 	@Override
-	public ProductVO find_Pro_Image(String pro_id) {
+	public List<ProductVO> findName(String pro_name) {
+		List<ProductVO> productlist = new ArrayList<ProductVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -263,18 +260,28 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(Find_Pro_Image);
+			pstmt = con.prepareStatement(Find_NAME);
 
-			pstmt.setString(1, pro_id);
+			pstmt.setString(1, "%"+pro_name+"%");
 			rs = pstmt.executeQuery();
-			rs.next();
-			proVO.setPro_image(rs.getBytes("Pro_image"));
-			
+			while (rs.next()) {
+				proVO = new ProductVO();
+				proVO.setPro_id(rs.getString("Pro_id"));
+				proVO.setStore_id(rs.getString("store_id"));
+				proVO.setPro_name(rs.getString("Pro_name"));
+				proVO.setPro_price(rs.getInt("Pro_price"));
+				proVO.setPro_total(rs.getInt("Pro_total"));
+				proVO.setPro_state(rs.getInt("Pro_state"));
+				proVO.setPro_image(rs.getBytes("Pro_image"));
+				proVO.setPro_type(rs.getInt("Pro_type"));
+				proVO.setPro_content(rs.getString("Pro_content"));
+				productlist.add(proVO);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			if (rs != null) {
 				try {
 					rs.close();
@@ -297,53 +304,40 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 				}
 			}
 		}
-		return proVO;
+		return productlist;
 	}
-
 	
 	
 	public static void main(String args[]){
 
 		ProductJDBCDAO productdao = new ProductJDBCDAO();
 		//新增
-//		ProductVO productVO1=new ProductVO();
-//		productVO1.setStore_id("STO-000005");
-//		productVO1.setPro_name("雞雞雞雞雞排");
-//		productVO1.setPro_price(123);
-//		productVO1.setPro_total(0);
-//		productVO1.setPro_state(1);
-//		productVO1.setPro_image(null);
-//		productVO1.setPro_type(0);
-//		productVO1.setPro_content("安安");
-//		
-//		productdao.insert(productVO1);
+		ProductVO productVO1=new ProductVO();
+		productVO1.setStore_id("STO-000002");
+		productVO1.setPro_name("牛肉麵");
+		productVO1.setPro_price(60);
+		productVO1.setPro_total(0);
+		productVO1.setPro_state(1);
+		productVO1.setPro_image(null);
+		productVO1.setPro_type(0);
+		productVO1.setPro_content("我是牛肉麵");
+		
+		productdao.insert(productVO1);
 		
 		//修改
-		ProductVO productVO2=new ProductVO();
+//		ProductVO productVO2=new ProductVO();
+//		productVO2.setPro_name("雞排");
+//		productVO2.setPro_price(1123);
+//		productVO2.setPro_state(1);
+//		productVO2.setPro_image(null);
+//		productVO2.setPro_type(0);
+//		productVO2.setPro_content("安安");
+//		productVO2.setPro_id("PRO-000006");
+//		productdao.update(productVO2);
 		
-		productVO2.setPro_name("漢堡");
-		productVO2.setPro_price(1123);
-		productVO2.setPro_state(1);
-		productVO2.setPro_type(0);
-		productVO2.setPro_content("安安");
-		productVO2.setPro_id("PRO-000002");
-		byte[] pic;
-		  try {
-		  pic = getPictureByteArray("C:/Users/Java/git/BA101G1/BA101G1/WebContent/frontend/shoppingcart/images/coffee2.jpg");
-		  productVO2.setPro_image(pic);
-		  } catch (IOException e) {
-		  // TODO Auto-generated catch block
-		  e.printStackTrace();
-		  }
-		 
-		 
-		  productdao.update(productVO2);
-		 
-		  
-		
-		//productdao.update(productVO2);
 		//刪除
 //		productdao.delete("PRO-000006");
+		
 		//找一筆
 //		ProductVO revenueVO4 = productdao.findByPrimaryKey("PRO-000001");
 //		System.out.println(revenueVO4.getPro_id());
@@ -356,6 +350,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 //		System.out.println(revenueVO4.getPro_type());
 //		System.out.println(revenueVO4.getPro_content());
 //		System.out.println("---------------------");
+		
 //		//找全部
 //		List<ProductVO> list = productdao.getAll();
 //		for (ProductVO aPro : list) {
@@ -370,26 +365,8 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 //			System.out.println(aPro.getPro_content());
 //			System.out.println("---------------------");
 //		}
-		
-//		ProductVO productVO4 = productdao.find_Pro_Image("PRO-000001");
-//		System.out.println(productVO4.getPro_image());
-//		
+	}
 
-	}	
 	
-	public static byte[] getPictureByteArray(String path) throws IOException {
-		 File file = new File(path);
-		 FileInputStream fis = new FileInputStream(file);
-		 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		 byte[] buffer = new byte[8192];
-		 int i;
-		 while ((i = fis.read(buffer)) != -1) {
-		  baos.write(buffer, 0, i);
-		 }
-		 baos.close();
-		 fis.close();
-
-		 return baos.toByteArray();
-		}
 
 }

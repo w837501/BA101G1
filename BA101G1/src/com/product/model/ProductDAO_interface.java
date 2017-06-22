@@ -8,5 +8,5 @@ public interface ProductDAO_interface {
 	public void delete(String pro_id);
 	public ProductVO findByPrimaryKey(String pro_id);
 	public List<ProductVO> getAll();
-	public ProductVO find_Pro_Image(String pro_id);
+	public List<ProductVO> findName(String pro_name);
 }

@@ -25,6 +25,7 @@ public class StoreVO implements Serializable{
 	private String store_acc;
 	private Number store_out;
 	private String store_zone;
+	private String sc_name;
 	
 	public StoreVO(){
 		
@@ -175,8 +176,12 @@ public class StoreVO implements Serializable{
 		this.store_zone = store_zone;
 	}
 	
-	
-	
-	
+	public String getSc_name() {
+		return sc_name;
+	}
+
+	public void setSc_name(String sc_name) {
+		this.sc_name = sc_name;
+	}
 
 }
