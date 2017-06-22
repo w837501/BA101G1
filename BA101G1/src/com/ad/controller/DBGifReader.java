@@ -16,6 +16,9 @@ public class DBGifReader extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
+		res.setHeader("Cache-Control","no-store"); //HTTP 1.1
+		  res.setHeader("Pragma","no-cache");        //HTTP 1.0
+		  res.setDateHeader ("Expires", 0);
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("image/gif");
 		ServletOutputStream out = res.getOutputStream();

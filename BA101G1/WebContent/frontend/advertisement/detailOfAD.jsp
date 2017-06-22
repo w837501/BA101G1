@@ -139,7 +139,8 @@ AdVO adVO = (AdVO) request.getAttribute("adVO"); //Chatroom_MessageServlet.java(
 			<div id="content">
 				<img src="<%=request.getContextPath()%>/advertisement/DBGifReader.do?ad_id=${adVO.ad_id}"></img>
 			</div>
-			${adVO.ad_content}
+			${adVO.ad_content}--<img src="http://localhost:8081/BA101G1/advertisement/DBGifReader.do?ad_id=AD-000001"></img>
+			
 		</div>
 
 		<script src="https://code.jquery.com/jquery.js"></script>

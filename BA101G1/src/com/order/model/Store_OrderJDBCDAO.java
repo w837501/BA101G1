@@ -40,7 +40,7 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 			"SELECT order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, qrcode, order_note, order_taketime from STORE_order order by order_id";
 	
 	private static final String GET_ORDER_BY_MEM = 
-			"select o.order_id, o.store_id, s.store_name, o.totalprice, o.order_time, o.order_way, o.order_state from store_order o join store s on o.store_id = s.store_id where o.mem_id = ? order by order_time desc";
+			"select order_id, store_id, totalprice, order_time, order_way, order_state, mem_id from store_order where mem_id = ? order by order_time desc";
 	@Override
 	public void insert(Store_OrderVO orderVO) {
 		// TODO Auto-generated method stub
@@ -345,20 +345,19 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 			pstmt = con.prepareStatement(GET_ORDER_BY_MEM);
 
 			pstmt.setString(1, mem_id);
-
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				// empVo ¤]ºÙ¬° Domain objects
 				orderVO = new Store_OrderVO();
-				orderVO.setOrder_id(rs.getString("o.order_id"));
-				orderVO.setOrder_time(rs.getTimestamp("o.order_time"));
-				orderVO.setMem_id(rs.getString("o.mem_id"));
-				orderVO.setStore_id(rs.getString("o.store_id"));
-				orderVO.setOrder_state(rs.getInt("o.order_state"));
-				orderVO.setTotalprice(rs.getInt("o.totalprice"));
-				orderVO.setOrder_way(rs.getInt("o.order_way"));
-				orderVO.setOrder_taketime(rs.getTimestamp("o.order_taketime"));
+				orderVO.setOrder_id(rs.getString("order_id"));
+				orderVO.setOrder_time(rs.getTimestamp("order_time"));
+				orderVO.setMem_id(rs.getString("mem_id"));
+				System.out.println(mem_id);
+				orderVO.setStore_id(rs.getString("store_id"));
+				orderVO.setOrder_state(rs.getInt("order_state"));
+				orderVO.setTotalprice(rs.getInt("totalprice"));
+				orderVO.setOrder_way(rs.getInt("order_way"));
 			}
 
 			// Handle any driver errors
@@ -490,9 +489,7 @@ public static void main(String[] args) throws IOException{
 		System.out.print(orderVO4.getOrder_state() + ",");
 		System.out.print(orderVO4.getTotalprice() + ",");
 		System.out.print(orderVO4.getOrder_way() + ",");
-		System.out.print(orderVO4.getReceive_address() + ",");
-		System.out.print(orderVO4.getOrder_note() + ",");
-		System.out.print(orderVO4.getOrder_taketime() + ",");
+		
 		System.out.println("---------------------");
 	}
 

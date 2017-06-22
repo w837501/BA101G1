@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -39,7 +40,10 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 			"SELECT order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, qrcode, order_note, order_taketime from order order by order_id";
 	
 	private static final String GET_ORDER_BY_MEM = 
-			"select o.order_id, o.store_id, s.store_name, o.totalprice, o.order_time, o.order_way, o.order_state from store_order o join store s on o.store_id = s.store_id where o.mem_id = ? order by order_time desc";
+			"select mem_id, order_id, store_id, totalprice, order_time, order_way, order_state from store_order where mem_id = ? order by order_time desc";
+	
+	private static final String GET_ORDER_BY_MEM2 = 
+			"select o.mem_id, o.order_id, o.store_id, o.totalprice, o.order_time, o.order_way, o.order_state ,s.store_name from store_order o join store s on o.store_id = s.store_id where mem_id = ? order by order_time desc";
 	
 	@Override
 	public void insert(Store_OrderVO orderVO) {
@@ -260,7 +264,7 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 				// empVO 也稱為 Domain objects
 				orderVO = new Store_OrderVO();
 				orderVO.setOrder_id(rs.getString("order_id"));
-				orderVO.setOrder_time(rs.getTimestamp("rec_mon"));
+				orderVO.setOrder_time(rs.getTimestamp("order_time"));
 				orderVO.setMem_id(rs.getString("mem_id"));
 				orderVO.setStore_id(rs.getString("store_id"));
 				orderVO.setOrder_state(rs.getInt("order_state"));
@@ -305,8 +309,9 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 	}
 
 	@Override
-	public Store_OrderVO findOrderByMem(String mem_id) {
+	public List<Store_OrderVO> findOrderByMem(String mem_id) {
 		// TODO Auto-generated method stub
+		List<Store_OrderVO> list = new LinkedList<Store_OrderVO>();
 		Store_OrderVO orderVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -315,7 +320,7 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ORDER_BY_MEM);
+			pstmt = con.prepareStatement(GET_ORDER_BY_MEM2);
 
 			pstmt.setString(1, mem_id);
 
@@ -325,16 +330,14 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 				// empVo 也稱為 Domain objects
 				orderVO = new Store_OrderVO();
 				orderVO.setOrder_id(rs.getString("order_id"));
-				orderVO.setOrder_time(rs.getTimestamp("rec_mon"));
+				orderVO.setOrder_time(rs.getTimestamp("order_time"));
 				orderVO.setMem_id(rs.getString("mem_id"));
 				orderVO.setStore_id(rs.getString("store_id"));
 				orderVO.setOrder_state(rs.getInt("order_state"));
 				orderVO.setTotalprice(rs.getInt("totalprice"));
 				orderVO.setOrder_way(rs.getInt("order_way"));
-				orderVO.setReceive_address(rs.getString("receive_address"));
-				orderVO.setQrcode(rs.getBytes("qrcode"));
-				orderVO.setOrder_note(rs.getString("order_note"));
-				orderVO.setOrder_taketime(rs.getTimestamp("order_taketime"));
+				orderVO.setStore_name(rs.getString("store_name"));
+				list.add(orderVO);
 			}
 
 			// Handle any driver errors
@@ -366,7 +369,6 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 			}
 		}
 		
-		return null;
+		return list;
 	}
-	
 }
