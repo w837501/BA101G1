@@ -1,6 +1,7 @@
 package com.rev.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -128,8 +129,8 @@ public class RevenueServlet extends HttpServlet {
 				RevenueService revSvc = new RevenueService();
 				List<RevenueVO> list = new LinkedList<RevenueVO>();
 				list.add(revSvc.getOneRev(store_id, revenue_month));
-
-				if (list.size() == 0) {
+System.out.println("list.size() : "+list.size());
+				if (revSvc.getOneRev(store_id, revenue_month) == null) {
 					errorMsgs.add("查無資料");
 				}
 				if (!errorMsgs.isEmpty()) {
@@ -274,29 +275,19 @@ public class RevenueServlet extends HttpServlet {
 				}
 
 				String STR_state = req.getParameter("state");
-				System.out.println("STR_state"+STR_state);
 				if (STR_state == null || STR_state.trim().isEmpty()) {
 					errorMsgs.add("請輸入狀態");
 				} else {
 					STR_state = req.getParameter("state");
 				}
 				Integer store_revenue = new Integer(STR_store_revenue);
-				System.out.println("store_revenue : "+store_revenue);
 				Integer state = new Integer(STR_state);
-				System.out.println("state : "+state);
-				System.out.println("sssssss");
 				RevenueVO revenueVO = new RevenueVO();
-				System.out.println("21321332");
 				revenueVO.setStore_id(store_id);
-				System.out.println("store_id"+store_id);				
 				revenueVO.setRevenue_month(revenue_month);
-				System.out.println("revenue_month"+revenue_month);
 				revenueVO.setMan_id(man_id);
-				System.out.println("man_id"+man_id);
 				revenueVO.setStore_revenue(store_revenue);
-				System.out.println("store_revenue"+store_revenue);
 				revenueVO.setState(state); 
-				System.out.println("state"+state);
 
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("revenueVO", revenueVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -304,17 +295,16 @@ public class RevenueServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
-				System.out.println("d d d ");
 				RevenueService revSvc = new RevenueService();
 				revenueVO = revSvc.addRev(store_id, revenue_month, man_id, store_revenue, state);
-				System.out.println(revenueVO);
 				String url = "/backend/rev/ListAllRev.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
 			} catch (Exception e) {
+				
 				System.out.println("123132");
 				System.out.println(e.getMessage());
-				errorMsgs.add(e.getMessage());
+				errorMsgs.add("重覆新增");
 				RequestDispatcher failureView = req.getRequestDispatcher("/backend/rev/AddRev.jsp");
 				failureView.forward(req, res);
 			}
