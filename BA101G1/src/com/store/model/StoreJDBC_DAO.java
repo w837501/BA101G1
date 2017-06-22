@@ -13,7 +13,6 @@ import java.sql.Timestamp;
 import java.util.*;
 
 import com.product.model.ProductVO;
-import com.store_commit.model.StoreCommitVO;
 
 
 public class StoreJDBC_DAO implements StoreDAO_interface {
@@ -534,13 +533,6 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 			System.out.println("¦a°Ï: "+svo1.getStore_zone());
 			System.out.println("---------------------");
 		}
-	}
-
-
-	@Override
-	public Set<StoreCommitVO> getStoreCommitByStore_id(String store_id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 
