@@ -21,7 +21,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 	String userid = "BA101G1";
 	String passwd = "ba101g1";
 
-	private static final String INSERT_STMT = "INSERT into AD VALUES('AD'||'-'||LPAD(to_char(ad_seq.NEXTVAL),6,'0'),?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT into AD (ad_id,store_id,ad_name,ad_content,ad_image,ad_time,ad_push_content) VALUES('AD'||'-'||LPAD(to_char(ad_seq.NEXTVAL),6,'0'),?,?,?,?,?,?)";
 	private static final String UPDATE_STMT = "UPDATE AD set ad_name=?, ad_content=?, ad_image=?, ad_time=?, ad_state=?, ad_push_content=? where ad_id=?";
 	private static final String DELETE = "DELETE FROM AD where ad_id = ?";
 	private static final String Find_by_PK = "select * from AD where ad_id=?";
@@ -44,8 +44,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 			pstmt.setString(3, adVO.getAd_content());
 			pstmt.setBytes(4, adVO.getAd_image());
 			pstmt.setTimestamp(5, adVO.getAd_time());
-			pstmt.setInt(6, (int) adVO.getAd_state());
-			pstmt.setString(7, adVO.getAd_push_content());
+			pstmt.setString(6, adVO.getAd_push_content());
 
 			pstmt.executeUpdate();
 
@@ -312,35 +311,42 @@ public class AdJDBCDAO implements AdDAO_interface {
 		AdJDBCDAO addao = new AdJDBCDAO();
 
 		// 新增
-//		 AdVO adVO1 = new AdVO();
-//		 adVO1.setStore_id("STO-000002");
-//		 adVO1.setAd_name("YOYOYOYO123123");
-//		 adVO1.setAd_content("沒有內文唷");
-//		 adVO1.setAd_image(null);
-//		 adVO1.setAd_time(new Timestamp(System.currentTimeMillis()));
-//		 adVO1.setAd_state(1);
-//		 adVO1.setAd_push_content("推播");
-//		
-//		 addao.insert(adVO1);
+		 AdVO adVO1 = new AdVO();
+		 adVO1.setStore_id("STO-000002");
+		 adVO1.setAd_name("YOYOYOYO12312311111111111111111111111111");
+		 adVO1.setAd_content("沒有內文唷");
+		 byte[] pic=null;
+		try {
+			pic = getPictureByteArray("C:/Users/15-ay118TX/git/BA101G1_M/BA101G1/WebContent/frontend/advertisement/images/coffee1.jpg");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 adVO1.setAd_image(pic);
+		 adVO1.setAd_time(new Timestamp(System.currentTimeMillis()));
+		 adVO1.setAd_state(1);
+		 adVO1.setAd_push_content("推播");
+		
+		 addao.insert(adVO1);
 
 		// 修改
-		 AdVO adVO2 = new AdVO();
-		 adVO2.setAd_name("YOYOYOYO123123");
-		 adVO2.setAd_content("沒有");
-		 adVO2.setAd_time(new Timestamp(System.currentTimeMillis()));
-		 adVO2.setAd_state(1);
-		 adVO2.setAd_push_content("推播");
-		 adVO2.setAd_id("AD-000001");
-		 byte[] pic;
-		  try {
-		  pic = getPictureByteArray("C:/Users/Java/git/BA101G1/BA101G1/WebContent/frontend/advertisement/images/coffee1.jpg");
-		  adVO2.setAd_image(pic);
-		  } catch (IOException e) {
-		  // TODO Auto-generated catch block
-		  e.printStackTrace();
-		  }
-		
-		 addao.update(adVO2);
+//		 AdVO adVO2 = new AdVO();
+//		 adVO2.setAd_name("YOYOYOYO123123");
+//		 adVO2.setAd_content("沒有");
+//		 adVO2.setAd_time(new Timestamp(System.currentTimeMillis()));
+//		 adVO2.setAd_state(1);
+//		 adVO2.setAd_push_content("推播");
+//		 adVO2.setAd_id("AD-000001");
+//		 byte[] pic;
+//		  try {
+//		  pic = getPictureByteArray("C:/Users/Java/git/BA101G1/BA101G1/WebContent/frontend/advertisement/images/coffee1.jpg");
+//		  adVO2.setAd_image(pic);
+//		  } catch (IOException e) {
+//		  // TODO Auto-generated catch block
+//		  e.printStackTrace();
+//		  }
+//		
+//		 addao.update(adVO2);
 
 		// 刪除
 		// addao.delete("AD-000007");
