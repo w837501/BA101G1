@@ -57,7 +57,7 @@ public class MemberReportService {
 		dao.delete(mr_id);
 	}
 
-	public MemberReportVO getOneStoreReport(String mr_id) {
+	public MemberReportVO getOneMemberReport(String mr_id) {
 		return dao.findPrimaryKey(mr_id);
 	}
 

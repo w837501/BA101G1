@@ -88,4 +88,23 @@
     <servlet-name>OrderServlet</servlet-name>
     <url-pattern>/frontend/selectOrder/order.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  		<servlet-name>PushServlet</servlet-name>
+  		<servlet-class>com.push.controller.PushServlet</servlet-class>
+  </servlet>  
+  <servlet-mapping>
+  		<servlet-name>PushServlet</servlet-name>
+  		<url-pattern>/push/push.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  		<servlet-name>MemberReportServlet</servlet-name>
+  		<servlet-class>com.member_report.controller.MemberReportServlet</servlet-class>
+  </servlet>  
+  <servlet-mapping>
+  		<servlet-name>MemberReportServlet</servlet-name>
+  		<url-pattern>/member_report/member_report.do</url-pattern>
+  </servlet-mapping>
+
 </web-app>
