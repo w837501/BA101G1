@@ -313,12 +313,12 @@ public class AdJDBCDAO implements AdDAO_interface {
 
 		// 新增
 //		 AdVO adVO1 = new AdVO();
-//		 adVO1.setStore_id("STO-000001");
+//		 adVO1.setStore_id("STO-000002");
 //		 adVO1.setAd_name("YOYOYOYO123123");
 //		 adVO1.setAd_content("沒有內文唷");
 //		 adVO1.setAd_image(null);
 //		 adVO1.setAd_time(new Timestamp(System.currentTimeMillis()));
-//		 adVO1.setAd_state(0);
+//		 adVO1.setAd_state(1);
 //		 adVO1.setAd_push_content("推播");
 //		
 //		 addao.insert(adVO1);

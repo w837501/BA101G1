@@ -66,7 +66,9 @@ public class Store_OrderService {
 		return dao.getAll();
 	}
 	
-	
+	public List<Store_OrderVO> getOrderByMem_id(String mem_id){
+		return dao.findOrderByMem(mem_id);
+	}
 	
 	
 	

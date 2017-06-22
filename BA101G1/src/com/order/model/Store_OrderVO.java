@@ -15,6 +15,7 @@ public class Store_OrderVO implements Serializable{
 	private byte[] qrcode;
 	private String order_note;
 	private Timestamp order_taketime;
+	private String store_name;
 	
 	public Store_OrderVO() {
 		super();
@@ -106,5 +107,13 @@ public class Store_OrderVO implements Serializable{
 
 	public void setOrder_taketime(Timestamp order_taketime) {
 		this.order_taketime = order_taketime;
+	}
+
+	public String getStore_name() {
+		return store_name;
+	}
+
+	public void setStore_name(String store_name) {
+		this.store_name = store_name;
 	}
 }
