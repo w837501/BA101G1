@@ -25,7 +25,7 @@ public class AdDAO implements AdDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT into AD VALUES(?,?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT into AD (ad_id,store_id,ad_name,ad_content,ad_image,ad_time,ad_push_content) VALUES('AD'||'-'||LPAD(to_char(ad_seq.NEXTVAL),6,'0'),?,?,?,?,?,?)";
 	private static final String UPDATE_STMT = "UPDATE AD set store_id=?, ad_name=?, ad_content=?, ad_image=?, ad_time=?, ad_state=?, ad_push_content=? where ad_id=?";
 	private static final String DELETE = "DELETE FROM AD where ad_id = ?";
 	private static final String Find_by_PK = "select * from AD where ad_id=?";
@@ -43,14 +43,13 @@ public class AdDAO implements AdDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, adVO.getAd_id());
-			pstmt.setString(2, adVO.getStore_id());
-			pstmt.setString(3, adVO.getAd_name());
-			pstmt.setString(4, adVO.getAd_content());
-			pstmt.setBytes(5, adVO.getAd_image());
-			pstmt.setTimestamp(6, adVO.getAd_time());
-			pstmt.setInt(7, (int) adVO.getAd_state());
-			pstmt.setString(8, adVO.getAd_push_content());
+
+			pstmt.setString(1, adVO.getStore_id());
+			pstmt.setString(2, adVO.getAd_name());
+			pstmt.setString(3, adVO.getAd_content());
+			pstmt.setBytes(4, adVO.getAd_image());
+			pstmt.setTimestamp(5, adVO.getAd_time());
+			pstmt.setString(6, adVO.getAd_push_content());
 
 			pstmt.executeUpdate();
 
