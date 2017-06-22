@@ -1,6 +1,5 @@
 package com.store.model;
 
-
 import java.util.List;
 
 import com.store.model.StoreVO;
@@ -63,5 +62,7 @@ public class StoreService {
 	public List<StoreVO> getZone(String store_zone) {
 		return dao.findZone(store_zone);
 	}
+	public List<StoreVO> getStoreClass(String sc_id) {
+		return dao.ClassLink(sc_id);
+	}
 }
-

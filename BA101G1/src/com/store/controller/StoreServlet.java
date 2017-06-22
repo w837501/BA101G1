@@ -27,9 +27,9 @@ public class StoreServlet extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-		
-		if ("get_store".equals(action)) { // 來自select_page.jsp的請求
-
+			// 來自index.jsp的請求			       來自store.jsp的請求
+		if ("get_store_a".equals(action) || "get_store_b".equals(action)) { 
+			System.out.println("我有進來判斷");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -44,7 +44,7 @@ public class StoreServlet extends HttpServlet{
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/store.jsp");
+							.getRequestDispatcher("/store/store.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -52,6 +52,7 @@ public class StoreServlet extends HttpServlet{
 				/***************************2.開始查詢資料*****************************************/
 				StoreService storeSvc = new StoreService();
 				List<StoreVO> storelist = storeSvc.getName(str);
+				System.out.println("str"+str);
 				if (storelist == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -59,15 +60,22 @@ public class StoreServlet extends HttpServlet{
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/store.jsp");
+							.getRequestDispatcher("/store/store.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
-				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("storelist", storelist); // 資料庫取出的empVO物件,存入req
-				String url ="/store.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交select_page.jsp
+				req.setAttribute("storelist", storelist); // 資料庫取出的StoreVO物件,存入req
+				String url = "/store/store.jsp";
+				
+				/*
+				if ("get_store_a".equals(action))
+					url = "/store/listSearchStore.jsp";     // 成功轉交/store/listSearchStore.jsp
+				else if ("get_store_b".equals(action))
+					url = "/store.jsp";             		// 成功轉交 /store.jsp
+				*/
+				
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交store.jsp
 				System.out.println(successView);
 				successView.forward(req, res);
 
@@ -75,15 +83,13 @@ public class StoreServlet extends HttpServlet{
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/store.jsp");
+						.getRequestDispatcher("/store/store.jsp");
 				failureView.forward(req, res);
 			}
 		}
 		
 		if ("get_zone".equals(action)) { // 來自store.jsp的請求
 
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
 			String str = req.getParameter("store_zone");
 			StoreService storeSvc = new StoreService();
 			
@@ -91,7 +97,7 @@ public class StoreServlet extends HttpServlet{
 			
 			req.setAttribute("storelist", storelist); // 資料庫取出的storeVO物件,存入req
 			
-			String url ="/store.jsp";
+			String url ="/store/store.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交store.jsp
 			System.out.println(successView);
 			successView.forward(req, res);

@@ -17,23 +17,25 @@ import com.store.model.StoreVO;
 
 public class StoreClassDAO implements StoreClassDAO_interface {
 	
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA101G1");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String GET_ALL = "SELECT sc_id , sc_name from store_class order by sc_id";
 	
 	//0401新增   透過商家類別編號找出所有商家 (註:商家類別編號Integer跟評價編號String都為sc_id)
 	private static final String GET_STORES_BYSC_ID = 
 			"SELECT STORE_ID, SC_ID, STORE_NAME, STORE_CONTENT, STORE_PHONE, STORE_ADDR,to_char(STORE_DATE,'yyyy-mm-dd') STORE_DATE,STORE_STAR , STORE_COUNT, STORE_STATE,STORE_IMAGE,STORE_REPORT_COUNT,to_char(STORE_START_TIME,'yyyy-mm-dd hh:mm:ss') STORE_START_TIME,to_char(STORE_END_TIME,'yyyy-mm-dd hh:mm:ss') STORE_END_TIME,STORE_PW,STORE_ACC,STORE_OUT,STORE_ZONE from store where sc_id = ? order by store_id";
-
+	private static final String CLASSLINK = "select s.store_name, t.sc_name from store s join store_class t on (s.sc_id = t.sc_id) where t.sc_name = ?;";
 	
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/servlet/BA101G1");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+	
+	
 	@Override
 	public List<StoreClassVO> getAll() {
 		
@@ -49,7 +51,7 @@ public class StoreClassDAO implements StoreClassDAO_interface {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				scVO= new StoreClassVO();
-				scVO.setSc_id(rs.getInt("Sc_id"));
+				scVO.setSc_id(rs.getInt("sc_id"));
 				scVO.setSc_name(rs.getString("sc_name"));
 				
 				list.add(scVO); 
@@ -104,9 +106,9 @@ public class StoreClassDAO implements StoreClassDAO_interface {
 				storeVO.setSc_id(rs.getInt("Sc_id"));
 				storeVO.setStore_name(rs.getString("store_name"));
 				storeVO.setStore_content(rs.getString("store_content"));
-				storeVO.setStore_phone(rs.getInt("store_phone"));
+				storeVO.setStore_phone(rs.getString("store_phone"));
 				storeVO.setStore_addr(rs.getString("store_addr"));
-				storeVO.setStore_date(rs.getDate("store_date"));
+				storeVO.setStore_date(rs.getTimestamp("store_date"));
 				storeVO.setStore_star(rs.getInt("store_star"));
 				storeVO.setStore_count(rs.getInt("store_count"));
 				storeVO.setStore_state(rs.getInt("store_state"));
@@ -150,6 +152,6 @@ public class StoreClassDAO implements StoreClassDAO_interface {
 	}
 		
 		
-
+	
 
 }

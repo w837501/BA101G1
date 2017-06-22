@@ -35,24 +35,20 @@
   </li>
 </ul>
 
-<jsp:useBean id="proSvc" scope="page" class="com.product.model.ProductService" />
-   
   <li>
      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do" >
        <b>選擇商品分類:</b>
        <select size="1" name="pro_type">
-         <c:forEach var="proVO" items="${proSvc.all}" > 
-          <option value="${proVO.pro_type}">${proVO.pro_type}
-         </c:forEach>   
+       		<option value="">
        </select>
        <input type="submit" value="送出">
        <input type="hidden" name="action" value="get_type">
     </FORM>
   </li>
 
-
+ 
 <%if (request.getAttribute("productlist")!=null){%>
-       <jsp:include page="/product/listOnePro.jsp" />
+       <jsp:include page="/product/listSearchProduct.jsp" />
 <%} %>
 
 </body>

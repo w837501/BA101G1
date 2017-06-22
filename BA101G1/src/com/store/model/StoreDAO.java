@@ -1,22 +1,16 @@
 package com.store.model;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.news.model.NewsVO;
-import com.product.model.ProductVO;
-import com.store_commit.model.StoreCommitVO;
 
 public class StoreDAO implements StoreDAO_interface{
 	
@@ -39,7 +33,8 @@ public class StoreDAO implements StoreDAO_interface{
 	private static final String Find_by_PK = "select * from STORE where store_id=?";
 	private static final String Find_ALL = "select * from STORE ";
 	private static final String Find_NAME = "select * from STORE where store_name like ?";
-	private static final String Find_ZONE = "select store_name, sc_id from STORE where store_zone = ?";
+	private static final String Find_ZONE = "select * from STORE where store_zone = ?";
+	private static final String CLASSLINK = "select s.store_name, t.sc_name from store s join store_class t on (s.sc_id = t.sc_id) where t.sc_id = ?";
 	
 	@Override
 	public void insert(StoreVO storeVO) {
@@ -283,7 +278,7 @@ public class StoreDAO implements StoreDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(Find_NAME);
 
-			pstmt.setString(1, store_name);
+			pstmt.setString(1, "%"+store_name+"%");
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				storeVO= new StoreVO();
@@ -401,10 +396,51 @@ public class StoreDAO implements StoreDAO_interface{
 	}
 
 	@Override
-	public Set<StoreCommitVO> getStoreCommitByStore_id(String store_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<StoreVO> ClassLink(String sc_id) {
+		List<StoreVO> storelist = new ArrayList<StoreVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StoreVO storeVO = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(CLASSLINK);
+
+			pstmt.setString(1, sc_id);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				storeVO= new StoreVO();
+				storeVO.setStore_name(rs.getString("store_name"));
+				storeVO.setSc_name(rs.getString("sc_name"));
+				storelist.add(storeVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return storelist;
 	}
 	
 }
-

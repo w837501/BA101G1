@@ -12,8 +12,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.*;
 
-import com.product.model.ProductVO;
-import com.store_commit.model.StoreCommitVO;
+import com.store.model.StoreVO;
 
 
 public class StoreJDBC_DAO implements StoreDAO_interface {
@@ -33,6 +32,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 	private static final String Find_ALL = "select * from STORE ";
 	private static final String Find_NAME = "select * from STORE where store_name like ?";
 	private static final String Find_ZONE = "select * from STORE where store_zone = ?";
+	private static final String CLASSLINK = "select s.store_name, t.sc_name from store s join store_class t on (s.sc_id = t.sc_id) where t.sc_id = ?";
 	
 
 	@Override
@@ -423,6 +423,63 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 		return storetlist;
 	}
 
+	@Override
+	public List<StoreVO> ClassLink(String sc_id) {
+		List<StoreVO> storetlist = new ArrayList<StoreVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StoreVO storeVO = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(CLASSLINK);
+
+			pstmt.setString(1, sc_id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				storeVO= new StoreVO();
+				storeVO.setStore_name(rs.getString("store_name"));
+				storeVO.setSc_name(rs.getString("sc_name"));
+				storetlist.add(storeVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return storetlist;
+	}
+	
+	
+	
+	
+	
+	
+	
 	public static void main(String[] args) throws IOException {
 
 		StoreJDBC_DAO storedao = new StoreJDBC_DAO();
@@ -512,35 +569,34 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 //			System.out.println("---------------------");
 //		}
 //查地區
-		List<StoreVO> list = storedao.findZone("3");
-		for(StoreVO svo1 : list){
-			System.out.println(svo1.getStore_id());
-			System.out.println(svo1.getSc_id());
-			System.out.println(svo1.getStore_name());
-			System.out.println(svo1.getStore_content());
-			System.out.println(svo1.getStore_phone());
-			System.out.println(svo1.getStore_addr());
-			System.out.println("商家進駐日期: "+svo1.getStore_date());
-			System.out.println(svo1.getStore_star());
-			System.out.println(svo1.getStore_count());
-			System.out.println(svo1.getStore_state());
-			System.out.println(svo1.getStore_image());
-			System.out.println(svo1.getStore_report_count());
-			System.out.println(svo1.getStore_start_time());
-			System.out.println(svo1.getStore_end_time());
-			System.out.println(svo1.getStore_pw());
-			System.out.println(svo1.getStore_acc());
-			System.out.println(svo1.getStore_out());
-			System.out.println("地區: "+svo1.getStore_zone());
-			System.out.println("---------------------");
-		}
-	}
-
-
-	@Override
-	public Set<StoreCommitVO> getStoreCommitByStore_id(String store_id) {
-		// TODO Auto-generated method stub
-		return null;
+//		List<StoreVO> list = storedao.findZone("3");
+//		for(StoreVO svo1 : list){
+//			System.out.println(svo1.getStore_id());
+//			System.out.println(svo1.getSc_id());
+//			System.out.println(svo1.getStore_name());
+//			System.out.println(svo1.getStore_content());
+//			System.out.println(svo1.getStore_phone());
+//			System.out.println(svo1.getStore_addr());
+//			System.out.println("商家進駐日期: "+svo1.getStore_date());
+//			System.out.println(svo1.getStore_star());
+//			System.out.println(svo1.getStore_count());
+//			System.out.println(svo1.getStore_state());
+//			System.out.println(svo1.getStore_image());
+//			System.out.println(svo1.getStore_report_count());
+//			System.out.println(svo1.getStore_start_time());
+//			System.out.println(svo1.getStore_end_time());
+//			System.out.println(svo1.getStore_pw());
+//			System.out.println(svo1.getStore_acc());
+//			System.out.println(svo1.getStore_out());
+//			System.out.println("地區: "+svo1.getStore_zone());
+//			System.out.println("---------------------");
+//		}
+//查看商店類型的有哪些商家		
+//		List<StoreVO> list = storedao.ClassLink("3");
+//		for(StoreVO svo1 : list){
+//			System.out.println(svo1.getStore_name());
+//			System.out.println(svo1.getSc_name());
+//		}
 	}
 
 
