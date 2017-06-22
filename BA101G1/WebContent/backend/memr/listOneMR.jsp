@@ -16,7 +16,7 @@
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
 		<td>
 		<h3>單一會員檢舉資料 - ListOneMR.jsp</h3>
-		<a href="<%=request.getContextPath()%>/backend/memr/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
+		<a href="<%=request.getContextPath()%>/backend/memr/select_page.jsp"><img src="/BA101G1/backend/memr/images/back1.gif" width="100" height="32" border="0">回首頁</a>
 		</td>
 	</tr>
 </table>

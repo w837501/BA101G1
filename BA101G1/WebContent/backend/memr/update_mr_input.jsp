@@ -36,22 +36,38 @@ MemberReportVO mrVO = (MemberReportVO) request.getAttribute("mrVO"); //EmpServle
 <FORM METHOD="post" ACTION="/member_report/member_report.do" name="form1">
 <table border="0">
 	<tr>
-		<td>員工編號:<font color=red><b>*</b></font></td>
-		<td><%=mrVO.getEmpno()%></td>
+		<td>會員檢舉單號:<font color=red><b>*</b></font></td>
+		<td><%=mrVO.getMr_id()%></td>
 	</tr>
 	<tr>
-		<td>員工姓名:</td>
-		<td><input type="TEXT" name="ename" size="45" value="<%=empVO.getEname()%>" /></td>
+		<td>會員編號:</td>
+		<td><input type="TEXT" name="mem_id" size="45" value="<%=mrVO.getMem_id()%>" /></td>
 	</tr>
 	<tr>
-		<td>職位:</td>
-		<td><input type="TEXT" name="job" size="45"	value="<%=empVO.getJob()%>" /></td>
+		<td>訂單編號:</td>
+		<td><input type="TEXT" name="order_id" size="45"	value="<%=mrVO.getOrder_id()%>" /></td>
 	</tr>
 	<tr>
-		<td>雇用日期:</td>
+		<td>評論編號:</td>
+		<td><input type="TEXT" name="sc_id" size="45"	value="<%=mrVO.getSc_id()%>" /></td>
+	</tr>
+	<tr>
+		<td>管理員編號:</td>
+		<td><input type="TEXT" name="man_id" size="45"	value="<%=mrVO.getMan_id()%>" /></td>
+	</tr>
+	<tr>
+		<td>檢舉內容:</td>
+		<td><input type="TEXT" name="mr_content" size="45"	value="<%=mrVO.getMr_content()%>" /></td>
+	</tr>
+	<tr>
+		<td>檢舉圖片:</td>
+		<td><input type="TEXT" name="mr_image" size="45"	value="<%=mrVO.getMr_image()%>" /></td>
+	</tr>
+	<tr>
+		<td>檢舉時間:</td>
 		<td bgcolor="#CCCCFF">
 		    <input class="cal-TextBox"
-			onFocus="this.blur()" size="9" readonly type="text" name="hiredate" value="<%=empVO.getHiredate()%>">
+			onFocus="this.blur()" size="9" readonly type="text" name="mr_time" value="<%=mrVO.getMr_time()%>">
 			<a class="so-BtnLink"
 			href="javascript:calClick();return false;"
 			onmouseover="calSwapImg('BTN_date', 'img_Date_OVER',true);"
@@ -61,28 +77,28 @@ MemberReportVO mrVO = (MemberReportVO) request.getAttribute("mrVO"); //EmpServle
 		</td>
 	</tr>
 	<tr>
-		<td>薪水:</td>
-		<td><input type="TEXT" name="sal" size="45"	value="<%=empVO.getSal()%>" /></td>
+		<td>審核狀態:</td>
+		<td><input type="TEXT" name="mr_state" size="45"	value="<%=mrVO.getMr_state()%>" /></td>
 	</tr>
 	<tr>
-		<td>獎金:</td>
-		<td><input type="TEXT" name="comm" size="45" value="<%=empVO.getComm()%>" /></td>
+		<td>檢舉結果:</td>
+		<td><input type="TEXT" name="mr_result" size="45" value="<%=mrVO.getMr_result()%>" /></td>
 	</tr>
 
-	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" />
-	<tr>
-		<td>部門:<font color=red><b>*</b></font></td>
-		<td><select size="1" name="deptno">
-			<c:forEach var="deptVO" items="${deptSvc.all}">
-				<option value="${deptVO.deptno}" ${(empVO.deptno==deptVO.deptno)?'selected':'' } >${deptVO.dname}
-			</c:forEach>
-		</select></td>
-	</tr>
+<%-- 	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" /> --%>
+<!-- 	<tr>join sql表格 -->
+<!-- 		<td>部門:<font color=red><b>*</b></font></td> -->
+<!-- 		<td><select size="1" name="deptno"> -->
+<%-- 			<c:forEach var="deptVO" items="${deptSvc.all}"> --%>
+<%-- 				<option value="${deptVO.deptno}" ${(empVO.deptno==deptVO.deptno)?'selected':'' } >${deptVO.dname} --%>
+<%-- 			</c:forEach> --%>
+<!-- 		</select></td> -->
+<!-- 	</tr> -->
 
 </table>
 <br>
 <input type="hidden" name="action" value="update">
-<input type="hidden" name="empno" value="<%=empVO.getEmpno()%>">
+<input type="hidden" name="mr_id" value="<%=mrVO.getMr_id()%>">
 <input type="hidden" name="requestURL" value="<%=request.getParameter("requestURL")%>"><!--接收原送出修改的來源網頁路徑後,再送給Controller準備轉交之用-->
 <input type="hidden" name="whichPage" value="<%=request.getParameter("whichPage")%>">  <!--只用於:istAllEmp.jsp-->
 <input type="submit" value="送出修改"></FORM>
