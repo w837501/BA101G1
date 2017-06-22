@@ -6,7 +6,7 @@
 <% 
 	RevenueService revSvc=new RevenueService();
 	List<RevenueVO> list=revSvc.getAll();
-	pageContext.setAttribute("list",list);
+	pageContext.setAttribute("list1",list);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -44,7 +44,7 @@
 		<th>刪除</th>
 	</tr>
 	<%@ include file="page1.file" %>	
-	<c:forEach var="RevenueVO" items="${list}" begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
+	<c:forEach var="RevenueVO" items="${list1}" begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
 		<tr align='center' valign='middle'>
 			<td>${RevenueVO.store_id } </td>
 			<td>${RevenueVO.revenue_month }</td>
@@ -67,9 +67,21 @@
 					<input type="hidden" name="action" value="delete">
 				</form>
 			</td>
+			<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/rev/rev.do">
+			    <input type="submit" value="送出商家查詢"> 
+			    <input type="hidden" name="store_id" value="${RevenueVO.store_id}">
+			    <input type="hidden" name="revenue_month" value="${RevenueVO.revenue_month }">
+			    <input type="hidden" name="action" value="getOne_For_Display">
+			</td>
 	</tr>
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>	
+
+
+<%if (request.getAttribute("oneList")!=null){%>
+       <jsp:include page="/backend/rev/ListOneRev.jsp" />
+<%} %>
 </body>
 </html>

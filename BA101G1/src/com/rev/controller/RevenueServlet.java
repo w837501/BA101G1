@@ -52,11 +52,11 @@ public class RevenueServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
-				req.setAttribute("list", list);
+				req.setAttribute("storeList", list);
 				for (RevenueVO aaa : list) {
 					System.out.println("STORE_ID : " + aaa.getStore_id());
 				}
-				String url = "/backend/rev/ListOneRev.jsp";
+				String url = "/backend/rev/ListStoreRev.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
@@ -93,9 +93,9 @@ public class RevenueServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
-				req.setAttribute("list", list);
+				req.setAttribute("monthList", list);
 
-				String url = "/backend/rev/ListOneRev.jsp";
+				String url = "/backend/rev/ListMonthRev.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
@@ -129,7 +129,7 @@ public class RevenueServlet extends HttpServlet {
 				RevenueService revSvc = new RevenueService();
 				List<RevenueVO> list = new LinkedList<RevenueVO>();
 				list.add(revSvc.getOneRev(store_id, revenue_month));
-System.out.println("list.size() : "+list.size());
+				System.out.println("list.size() : " + list.size());
 				if (revSvc.getOneRev(store_id, revenue_month) == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -139,8 +139,8 @@ System.out.println("list.size() : "+list.size());
 					return;
 				}
 
-				req.setAttribute("list", list);
-				String url = "/backend/rev/ListOneRev.jsp";
+				req.setAttribute("oneList", list);
+				String url = "/backend/rev/ListAllRev.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
@@ -287,7 +287,7 @@ System.out.println("list.size() : "+list.size());
 				revenueVO.setRevenue_month(revenue_month);
 				revenueVO.setMan_id(man_id);
 				revenueVO.setStore_revenue(store_revenue);
-				revenueVO.setState(state); 
+				revenueVO.setState(state);
 
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("revenueVO", revenueVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -301,7 +301,7 @@ System.out.println("list.size() : "+list.size());
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
 			} catch (Exception e) {
-				
+
 				System.out.println("123132");
 				System.out.println(e.getMessage());
 				errorMsgs.add("重覆新增");
@@ -318,7 +318,7 @@ System.out.println("list.size() : "+list.size());
 				String store_id = new String(req.getParameter("store_id"));
 				String revenue_month = req.getParameter("revenue_month");
 				RevenueService revSvc = new RevenueService();
-				revSvc.deleteRev(store_id,revenue_month);
+				revSvc.deleteRev(store_id, revenue_month);
 				String url = "/backend/rev/ListAllRev.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -327,7 +327,7 @@ System.out.println("list.size() : "+list.size());
 				RequestDispatcher failureView = req.getRequestDispatcher("/backend/rev/ListAllRev.jsp");
 				failureView.forward(req, res);
 			}
-		}	
-		
+		}
+
 	}
 }
