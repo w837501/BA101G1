@@ -34,7 +34,7 @@ public class RevenueDAO implements RevenueDAO_interface{
 	private static final String Find_Store_id="select DISTINCT store_id from REVENUE order by store_id";
 
 	@Override
-	public void insert(RevenueVO revenueVO) {
+	public void insert(RevenueVO revenueVO) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -49,8 +49,6 @@ public class RevenueDAO implements RevenueDAO_interface{
 
 			pstmt.executeUpdate();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			try {
 				pstmt.close();

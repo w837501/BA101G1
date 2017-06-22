@@ -1,5 +1,6 @@
 package com.rev.model;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -10,7 +11,7 @@ private RevenueDAO_interface dao;
 		dao = new RevenueDAO();
 	}
 	
-	public RevenueVO addRev(String store_id, String revenue_month, String man_id, Integer store_revenue,Integer state){
+	public RevenueVO addRev(String store_id, String revenue_month, String man_id, Integer store_revenue,Integer state) throws SQLException{
 		RevenueVO revVO=new RevenueVO();
 		
 		revVO.setStore_id(store_id);
