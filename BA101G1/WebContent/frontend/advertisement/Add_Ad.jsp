@@ -9,6 +9,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<link rel="stylesheet" type="text/css" href="js/calendar.css">
+<script language="JavaScript" src="js/calendarcode.js"></script>
+<div id="popupcalendar" class="text"></div>
 <title>Add Advertisement here</title>
 </head>
 <bbody bgcolor='white'>
@@ -16,7 +19,7 @@
 	<table border='1' cellpadding='5' cellspacing='0' width='500'>
 		<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
 			<td><h3>員工資料新增 - addMan.jsp</h3></td>
-			<td><a href="browseAD.jsp"><img src="images/logo.png"	width="100" height="100" border="1"> 回首頁 </a></td></tr></table>
+			<td><a href="browseAD.jsp"><img src="${pageContext.request.contextPath}/frontend/advertisement/images/logo.png"	width="100" height="100" border="1"> 回首頁 </a></td></tr></table>
 
 <h4>廣告資料:<font color=red><b>*</b></font>為必填欄位</h4>
 <%-- 錯誤表列 --%>
@@ -31,7 +34,7 @@
 	
 	
 </c:if>
-<FORM METHOD="post" ACTION= "<%=request.getContextPath()%>/frontend/advertisement/ad.do" name="form1">
+<FORM METHOD="post" ACTION= "<%=request.getContextPath()%>/frontend/advertisement/ad.do" name="form1" enctype="multipart/form-data">
 <table border="0">
 
 	<tr>
@@ -52,16 +55,20 @@
 	</tr>
 	<tr>
 		<td>廣告圖片:<font color=red><b>*</b></font></td>
-		<td>
-			<FORM  method=post enctype="multipart/form-data" name="ad_image">
-        		<input type="file" name="upfile1">
-  			</FORM></td>
+		<td><input type="file" name="upfile1">
+  		</td>
 		</tr>
 	<tr>
-		<td>廣告時間:<font color=red><b>*</b></font></td>
-		<td><input type="TEXT" name="ad_time" size="45"
-			 value="<%= (adVO==null)? "null" :adVO.getAd_time() %>" /></td>
-	</tr>
+		<td>廣告時間: <input class="cal-TextBox"
+			onFocus="this.blur()" size="9" readonly type="text" name="ad_time" value="1981-11-17">
+			<a class="so-BtnLink"
+			href="javascript:calClick();return false;"
+			onmouseover="calSwapImg('BTN_date', 'img_Date_OVER',true);"
+			onmouseout="calSwapImg('BTN_date', 'img_Date_UP',true);"
+			onclick="calSwapImg('BTN_date', 'img_Date_DOWN');showCalendar('form1','ad_time','BTN_date');return false;">
+		    <img align="middle" border="0" name="BTN_date"	src="<%=request.getContextPath() %>/frontend/advertisement/images/btn_date_up.gif" width="22" height="17" alt="開始日期"></a>
+		   </td>     
+		</tr>
 	<tr>
 		<td>是否推播:<font color=red><b>*</b></font></td>
 		<td><select>

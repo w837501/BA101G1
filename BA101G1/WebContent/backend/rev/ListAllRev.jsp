@@ -74,6 +74,7 @@
 			    <input type="hidden" name="revenue_month" value="${RevenueVO.revenue_month }">
 			    <input type="hidden" name="action" value="getOne_For_Display">
 			</td>
+			
 	</tr>
 	</c:forEach>
 </table>
@@ -83,5 +84,6 @@
 <%if (request.getAttribute("oneList")!=null){%>
        <jsp:include page="/backend/rev/ListOneRev.jsp" />
 <%} %>
+
 </body>
 </html>
