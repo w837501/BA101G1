@@ -39,7 +39,11 @@ private OrderlistDAO_interface dao;
 		return dao.findByPrimaryKey(order_id, pro_id);
 	}
 	
-	public List<OrderlistVO>getAll(){
+	public List<OrderlistVO> getAll(){
 		return dao.getAll();
+	}
+	
+	public List<OrderlistVO> getDetailOrder(String order_id, String pro_id){
+		return dao.getDetailOrder(order_id, pro_id);
 	}
 }

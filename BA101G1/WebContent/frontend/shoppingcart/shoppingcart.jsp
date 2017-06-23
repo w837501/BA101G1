@@ -88,7 +88,7 @@
 								<td align="center"><img src="images/coffee1.jpg" width="150" height="120"><%=order.getPro_image()%></td>
 								<td valign="center" margin-top="20"><%=order.getPro_name() %></td>
 								<td>$<%=order.getPro_price()%></td>
-								<td><%=order.getQuantity()%></td>
+								<td>${ProductVO.quantity}</td>
 								<td><%=order.getPro_price()%></td>
 								<td>
 								<form name="deleteForm" action="Shopping.html" method="POST">

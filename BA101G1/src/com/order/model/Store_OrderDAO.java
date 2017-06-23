@@ -45,6 +45,9 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 	private static final String GET_ORDER_BY_MEM2 = 
 			"select o.mem_id, o.order_id, o.store_id, o.totalprice, o.order_time, o.order_way, o.order_state ,s.store_name from store_order o join store s on o.store_id = s.store_id where mem_id = ? order by order_time desc";
 	
+	
+	
+	
 	@Override
 	public void insert(Store_OrderVO orderVO) {
 		// TODO Auto-generated method stub

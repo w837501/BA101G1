@@ -24,28 +24,19 @@
 
 <table border='1' bordercolor='#CCCCFF' width='800'>
 	<tr>
-		<th>訂單編號</th>
-		<th>日期</th>
-		<th>商店</th>
-		<th>訂單金額</th>
-		<th>取餐方式</th>
-		<th>訂單狀態</th>
-		<th>取消訂單</th>
-		<th>評價商家</th>
-		<th>檢舉商家</th>
+		<th>商品圖片</th>
+		<th>商品名稱</th>
+		<th>單價</th>
+		<th>數量</th>
+		<th>小計</th>
 	</tr>
-	<c:forEach var="store_orderVO" items="${store_orderVO}" >
+	<c:forEach var="orderlistVO" items="${orderlistVO}" >
 	<tr align='center' valign='middle'>
-		<a href="orderlist.do?order_id=${store_orderVO.order_id}&pro_id=${store_orderVO.pro_id}&action=getOneOrder_For_DetailDisplay">
-		<td>${store_orderVO.order_id }</td></a>
-		<td>${store_orderVO.order_time }</td>
- 		<td>${store_orderVO.store_name }</td>
-		<td>${store_orderVO.totalprice }</td>
-		<td>${store_orderVO.order_way }</td>
-		<td>${store_orderVO.order_state }</td>
-		<td>取消</td>
-		<td>評價</td>
-		<td>檢舉</td>
+		<td></td>
+		<td>${orderlistVO.pro_name}</td>
+ 		<td>${orderlistVO.price}</td>
+		<td>${orderlistVO.order_amount}</td>
+		<td></td>
 	</tr>
 	</c:forEach>
 </table>

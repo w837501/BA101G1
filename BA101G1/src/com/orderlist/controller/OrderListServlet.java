@@ -1,4 +1,4 @@
-package com.order.controller;
+package com.orderlist.controller;
 
 import java.io.*;
 import java.util.*;
@@ -6,11 +6,10 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import com.order.model.Store_OrderService;
-import com.order.model.Store_OrderVO;
+import com.orderlist.model.OrderlistService;
+import com.orderlist.model.OrderlistVO;
 
-
-public class OrderServlet extends HttpServlet {
+public class OrderListServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
@@ -24,7 +23,7 @@ public class OrderServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		
 		
-		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
+		if ("getOneOrder_For_DetailDisplay".equals(action)) { // 來自listOrderByMem_id.jsp的請求
 			
 			System.out.println("友維大棒棒");
 			
@@ -35,32 +34,14 @@ public class OrderServlet extends HttpServlet {
 
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				String str = req.getParameter("mem_id");
-				if (str == null || (str.trim()).length() == 0) {
-					errorMsgs.add("請輸入會員編號");
-				}
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/frontend/selectOrder/selectOrder.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
-				}
-				
-				
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/frontend/selectOrder/selectOrder.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
-				}
-				
+				String str1 = req.getParameter("order_id");
+				String str2 = req.getParameter("pro_id");
+						
 				/***************************2.開始查詢資料*****************************************/
-				Store_OrderService orderSvc = new Store_OrderService();
-				List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
-				store_orderVO= orderSvc.getOrderByMem_id(str);//DAO方法
-				System.out.println(str);
+				OrderlistService orderSvc = new OrderlistService();
+				List<OrderlistVO> store_orderVO=new LinkedList<OrderlistVO>();
+				store_orderVO= orderSvc.getDetailOrder(str1,str2);//DAO方法
+				System.out.println(str1);
 				System.out.println(store_orderVO);
 				if (store_orderVO == null) {
 					errorMsgs.add("查無資料");
@@ -68,7 +49,7 @@ public class OrderServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/frontend/selectOrder/selectOrder.jsp");
+							.getRequestDispatcher("/frontend/selectOrder/listOrderByMem.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -76,7 +57,7 @@ public class OrderServlet extends HttpServlet {
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("store_orderVO", store_orderVO); // 資料庫取出的empVO物件,存入req
 				
-				String url = "/frontend/selectOrder/listOrderByMem_id.jsp";
+				String url = "/frontend/selectOrder/xxxxxxxxxxxxxxxx.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交listOneEmp.jsp
 				successView.forward(req, res);
 
@@ -85,7 +66,7 @@ public class OrderServlet extends HttpServlet {
 				
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/frontend/selectOrder/selectOrder.jsp");
+						.getRequestDispatcher("/frontend/selectOrder/listOrderByMem.jsp");
 				failureView.forward(req, res);
 			}
 		}
