@@ -13,7 +13,7 @@
   </tr>
 </table>
 
-<p>STORE</p>
+<p>STORE CLASS</p>
 
 <h3>商家查詢:</h3>
 <%-- 錯誤表列 --%>
@@ -33,7 +33,7 @@
         <b>搜尋商家:</b>
         <input type="text" name="store_name">
         <input type="submit" value="送出">
-        <input type="hidden" name="action" value="get_store_b">
+        <input type="hidden" name="action" value="get_store">
     </FORM>
   </li>
   
@@ -42,25 +42,25 @@
        <b>選擇地區
        :</b>
        <select size="1" name="store_zone">
-          <option value="0">基隆市
-          <option value="1">臺北市
-          <option value="2">新北市
-          <option value="3">桃園市
-          <option value="4">新竹市
-          <option value="5">新竹縣
-          <option value="6">苗栗縣
-          <option value="7">臺中市
-          <option value="8">彰化縣
-          <option value="9">南投縣
-          <option value="10">雲林縣
-          <option value="11">嘉義市
-          <option value="12">嘉義縣
-          <option value="13">臺南市
-          <option value="14">高雄市
-          <option value="15">屏東縣
-          <option value="16">臺東縣
-          <option value="17">花蓮縣
-          <option value="18">宜蘭縣
+          <option value="基隆市">基隆市
+          <option value="臺北市">臺北市
+          <option value="新北市">新北市
+          <option value="桃園市">桃園市
+          <option value="新竹市">新竹市
+          <option value="新竹縣">新竹縣
+          <option value="苗栗縣">苗栗縣
+          <option value="臺中市">臺中市
+          <option value="彰化縣">彰化縣
+          <option value="南投縣">南投縣
+          <option value="雲林縣">雲林縣
+          <option value="嘉義市">嘉義市
+          <option value="嘉義縣">嘉義縣
+          <option value="臺南市">臺南市
+          <option value="高雄市">高雄市
+          <option value="屏東縣">屏東縣
+          <option value="臺東縣">臺東縣
+          <option value="花蓮縣">花蓮縣
+          <option value="宜蘭縣">宜蘭縣
        </select>
        <input type="submit" value="送出">
        <input type="hidden" name="action" value="get_zone">
