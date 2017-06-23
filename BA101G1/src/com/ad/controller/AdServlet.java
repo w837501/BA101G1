@@ -40,7 +40,7 @@ public class AdServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		
 		if("getOne_For_Display".equals(action)){
-			System.out.println("·F§A¶ý");
+			System.out.println("·F§A¶ýpeter");
 			try{	
 				String ad_id = new String(req.getParameter("ad_id"));
 				System.out.println(ad_id);
