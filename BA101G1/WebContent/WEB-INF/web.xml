@@ -37,7 +37,15 @@
   		<url-pattern>/product/product.do</url-pattern>
   </servlet-mapping>
   
-
+  <servlet>
+  		<servlet-name>StoreServlet</servlet-name>
+  		<servlet-class>com.store.controller.StoreServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  		<servlet-name>StoreServlet</servlet-name>
+  		<url-pattern>/store/store.do</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
   		<servlet-name>MemberServlet</servlet-name>
   		<servlet-class>com.mem.controller.MemberServlet</servlet-class>

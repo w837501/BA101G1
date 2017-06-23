@@ -5,6 +5,8 @@
 <head><title>STORE</title></head>
 <body bgcolor='white'>
 
+<%! int i = 0 ; %>
+
 <table border='1' cellpadding='5' cellspacing='0' width='400'>
   <tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
     <td><h3>STORE CLASS</h3><font color=red>( MVC )</font></td>
@@ -80,7 +82,7 @@
 		<tr align='center' valign='middle'>
 			<td></td>
 			<td>${scVO.sc_id}</td>
-			<td><a href='<%=request.getContextPath()%>/store/store.jsp'>${scVO.sc_name}</a></td>
+			<td><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreClass&sc_id=<%= i++ %>'>${scVO.sc_name}</a></td>
 		</tr>
 	</c:forEach>
 </table>

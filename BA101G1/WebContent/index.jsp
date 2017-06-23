@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
-<head><title>IBM Emp: Home</title></head>
+<head><title>Index</title></head>
 <body bgcolor='white'>
 
 <table border='1' cellpadding='5' cellspacing='0' width='400'>
@@ -10,7 +10,7 @@
   </tr>
 </table>
 
-<p>This is the Home page for IBM Emp: Home</p>
+<p>Index</p>
 
 <h3>商家查詢:</h3>
 <%-- 錯誤表列 --%>
@@ -30,10 +30,9 @@
         <b>搜尋商家:</b>
         <input type="text" name="store_name">
         <input type="submit" value="送出">
-        <input type="hidden" name="action" value="get_store">
+        <input type="hidden" name="action" value="get_store_a">
     </FORM>
   </li>
-</ul>
 
   <li>
      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store/store.do" >
@@ -64,11 +63,14 @@
        <input type="hidden" name="action" value="get_zone">
     </FORM>
   </li>
+</ul>
 
+<h3><font color=orange>商家分類</font></h3>
 
-<%if (request.getAttribute("storelist")!=null){%>
-       <jsp:include page="/store/listSearchStore.jsp" />
-<%} %>
+<ul>
+  <li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
+  <li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
+</ul>
 
 </body>
 </html>
