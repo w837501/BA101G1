@@ -17,7 +17,7 @@
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
 		<td>
 		<h3>員工資料 - ListOneEmp.jsp</h3>
-		<a href="<%=request.getContextPath()%>/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
+		<a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
 		</td>
 	</tr>
 </table>
@@ -36,7 +36,8 @@
 	</tr>
 	<c:forEach var="store_orderVO" items="${store_orderVO}" >
 	<tr align='center' valign='middle'>
-		<td>${store_orderVO.order_id }</td>
+		<a href="orderlist.do?order_id=${store_orderVO.order_id}&pro_id=${store_orderVO.pro_id}&action=getOneOrder_For_DetailDisplay">
+		<td>${store_orderVO.order_id }</td></a>
 		<td>${store_orderVO.order_time }</td>
  		<td>${store_orderVO.store_name }</td>
 		<td>${store_orderVO.totalprice }</td>
