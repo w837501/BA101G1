@@ -9,40 +9,42 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
   <resource-ref>
-		<description>DB Connection</description>
-		<res-ref-name>jdbc/BA101G1</res-ref-name>
-		<res-type>javax.sql.DataSource</res-type>
-		<res-auth>Container</res-auth>
-	</resource-ref>
-  
-  
+    <description>DB Connection</description>
+    <res-ref-name>jdbc/BA101G1</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
   <servlet>
-  		<servlet-name>ManServlet</servlet-name>
-  		<servlet-class>com.man.controller.ManServlet</servlet-class>
+    <servlet-name>ManServlet</servlet-name>
+    <servlet-class>com.man.controller.ManServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  		<servlet-name>ManServlet</servlet-name>
-  		<url-pattern>/man/man.do</url-pattern>
+    <servlet-name>ManServlet</servlet-name>
+    <url-pattern>/man/man.do</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  		<servlet-name>PushServlet</servlet-name>
-  		<servlet-class>com.push.controller.PushServlet</servlet-class>
-  </servlet>  
+    <servlet-name>PushServlet</servlet-name>
+    <servlet-class>com.push.controller.PushServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
-  		<servlet-name>PushServlet</servlet-name>
-  		<url-pattern>/push/push.do</url-pattern>
+    <servlet-name>PushServlet</servlet-name>
+    <url-pattern>/push/push.do</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  		<servlet-name>MemberReportServlet</servlet-name>
-  		<servlet-class>com.member_report.controller.MemberReportServlet</servlet-class>
-  </servlet>  
+    <servlet-name>MemberReportServlet</servlet-name>
+    <servlet-class>com.member_report.controller.MemberReportServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
-  		<servlet-name>MemberReportServlet</servlet-name>
-  		<url-pattern>/member_report/member_report.do</url-pattern>
+    <servlet-name>MemberReportServlet</servlet-name>
+    <url-pattern>/member_report/member_report.do</url-pattern>
   </servlet-mapping>
-
+  <servlet>
+    <servlet-name>StoreReportServlet</servlet-name>
+    <servlet-class>com.store_report.controller.StoreReportServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StoreReportServlet</servlet-name>
+    <url-pattern>/store_report/store_report.do</url-pattern>
+  </servlet-mapping>
 </web-app>
