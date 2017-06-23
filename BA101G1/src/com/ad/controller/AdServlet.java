@@ -3,6 +3,7 @@ package com.ad.controller;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
@@ -73,11 +74,14 @@ public class AdServlet extends HttpServlet {
 					System.out.println("ad_image"+ad_image);	
 				String ad_push_content=req.getParameter("ad_push_content");
 				
-				java.sql.Timestamp ad_time = null;
+				java.sql.Timestamp ad_time=null;
+				SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+				System.out.println(ad_time);
 				try {
-					ad_time = java.sql.Timestamp.valueOf(req.getParameter("ad_time").trim());
+					ad_time = new Timestamp(sdf.parse(req.getParameter("ad_time")).getTime());
 					System.out.println("ad_time"+ad_time);
 				} catch (IllegalArgumentException e) {
+					System.out.println("¿ù»~");
 					ad_time=new java.sql.Timestamp(System.currentTimeMillis());
 				}
 				

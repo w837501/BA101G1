@@ -59,7 +59,8 @@
   		</td>
 		</tr>
 	<tr>
-		<td>廣告時間: <input class="cal-TextBox"
+		<td>廣告時間: </td>
+		<td><input class="cal-TextBox"
 			onFocus="this.blur()" size="9" readonly type="text" name="ad_time" value="1981-11-17">
 			<a class="so-BtnLink"
 			href="javascript:calClick();return false;"
