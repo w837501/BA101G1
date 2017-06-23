@@ -10,6 +10,7 @@ public class ProductVO implements java.io.Serializable {
 	private byte[] pro_image;
 	private Number pro_type;
 	private String pro_content;
+	private Number quantity;
 	
 	public String getPro_id() {
 		return pro_id;
@@ -64,5 +65,11 @@ public class ProductVO implements java.io.Serializable {
 	}
 	public void setPro_content(String pro_content) {
 		this.pro_content = pro_content;
+	}
+	public Number getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(Number quantity) {
+		this.quantity = quantity;
 	}
 }

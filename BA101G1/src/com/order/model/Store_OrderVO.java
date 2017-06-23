@@ -16,6 +16,7 @@ public class Store_OrderVO implements Serializable{
 	private String order_note;
 	private Timestamp order_taketime;
 	private String store_name;
+	private String pro_id;
 	
 	public Store_OrderVO() {
 		super();
@@ -115,5 +116,13 @@ public class Store_OrderVO implements Serializable{
 
 	public void setStore_name(String store_name) {
 		this.store_name = store_name;
+	}
+
+	public String getPro_id() {
+		return pro_id;
+	}
+
+	public void setPro_id(String pro_id) {
+		this.pro_id = pro_id;
 	}
 }

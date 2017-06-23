@@ -331,8 +331,9 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 	
 	
 	@Override
-	public Store_OrderVO findOrderByMem(String mem_id) {
+	public List<Store_OrderVO> findOrderByMem(String mem_id) {
 		// TODO Auto-generated method stub
+		List<Store_OrderVO> list = new ArrayList<Store_OrderVO>();
 		Store_OrderVO orderVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -358,6 +359,7 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 				orderVO.setOrder_state(rs.getInt("order_state"));
 				orderVO.setTotalprice(rs.getInt("totalprice"));
 				orderVO.setOrder_way(rs.getInt("order_way"));
+				list.add(orderVO);
 			}
 
 			// Handle any driver errors
@@ -393,7 +395,7 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 			}
 		}
 		
-		return orderVO;
+		return list;
 	}
 	
 	public static byte[] getPictureByteArray(String path) throws IOException {
@@ -414,7 +416,7 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 	
 
 	
-public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws IOException{
 		
 		Store_OrderJDBCDAO dao = new Store_OrderJDBCDAO();
 
@@ -422,18 +424,18 @@ public static void main(String[] args) throws IOException{
 
 		
 		//·s¼W
-//		Store_OrderVO orderVO1 = new Store_OrderVO();
-//		orderVO1.setOrder_time(new Timestamp(System.currentTimeMillis()));
-//		orderVO1.setMem_id("MEM-000001");
-//		orderVO1.setStore_id("STO-000002");
-//		orderVO1.setOrder_state(3);
-//		orderVO1.setTotalprice(1000);
-//		orderVO1.setOrder_way(0);
-//		orderVO1.setReceive_address("");
-//		
-//		orderVO1.setOrder_note("");
-//		orderVO1.setOrder_taketime(new Timestamp(System.currentTimeMillis()));
-//		dao.insert(orderVO1);
+		Store_OrderVO orderVO1 = new Store_OrderVO();
+		orderVO1.setOrder_time(new Timestamp(System.currentTimeMillis()));
+		orderVO1.setMem_id("MEM-000001");
+		orderVO1.setStore_id("STO-000002");
+		orderVO1.setOrder_state(2);
+		orderVO1.setTotalprice(140);
+		orderVO1.setOrder_way(0);
+		orderVO1.setReceive_address("");
+		
+		orderVO1.setOrder_note("");
+		orderVO1.setOrder_taketime(new Timestamp(System.currentTimeMillis()));
+		dao.insert(orderVO1);
 		
 		//­×§ï
 //		OrderVO orderVO2 = new OrderVO();
@@ -482,15 +484,17 @@ public static void main(String[] args) throws IOException{
 //			System.out.println("---------------------");	
 //		}
 	
-		Store_OrderVO orderVO4 = dao.findOrderByMem("MEM-000001");
-		System.out.print(orderVO4.getOrder_id() + ",");
-		System.out.print(orderVO4.getOrder_time() + ",");
-		System.out.print(orderVO4.getStore_id() + ",");
-		System.out.print(orderVO4.getOrder_state() + ",");
-		System.out.print(orderVO4.getTotalprice() + ",");
-		System.out.print(orderVO4.getOrder_way() + ",");
-		
-		System.out.println("---------------------");
+//		List<Store_OrderVO> list = dao.findOrderByMem("MEM-000001");
+//		for(Store_OrderVO aOrder : list){
+//		System.out.print(aOrder.getOrder_id() + ",");
+//		System.out.print(aOrder.getOrder_time() + ",");
+//		System.out.print(aOrder.getStore_id() + ",");
+//		System.out.print(aOrder.getOrder_state() + ",");
+//		System.out.print(aOrder.getTotalprice() + ",");
+//		System.out.print(aOrder.getOrder_way() + ",");
+//		
+//		System.out.println("---------------------");
+//		}
 	}
 
 
