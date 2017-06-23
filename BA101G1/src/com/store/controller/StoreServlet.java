@@ -102,5 +102,22 @@ public class StoreServlet extends HttpServlet{
 			System.out.println(successView);
 			successView.forward(req, res);
 		} 
+		
+		if ("getStoreClass".equals(action)) { // 來自storeClass.jsp的請求
+			String sc_id = req.getParameter("sc_id");
+			System.out.println(sc_id);
+			
+			String str = req.getParameter("sc_id");
+			StoreService storeSvc = new StoreService();
+			
+			List<StoreVO> storelist = storeSvc.getZone(str);
+			
+			req.setAttribute("storelist", storelist); // 資料庫取出的storeVO物件,存入req
+			
+			String url ="/store/store.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交store.jsp
+			System.out.println(successView);
+			successView.forward(req, res);
+		} 
 	}
 }
