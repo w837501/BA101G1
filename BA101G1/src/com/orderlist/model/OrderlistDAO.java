@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -21,7 +22,7 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA101G1");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -37,7 +38,10 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 			"DELETE FROM orderlist where order_id = ? and pro_id=?";
 		private static final String UPDATE = 
 			"UPDATE orderlist set order_amount, price where order_id=? and pro_id=?";
-	
+		
+		private static final String GET_DETAILORDER_BY_ORDER_ID = 
+			"select p.pro_name, o.price, o.order_amount from orderlist o join product p on o.pro_id = p.pro_id where o.order_id = ? and o.pro_id=? ;";
+		
 	@Override
 	public void insert(OrderlistVO orderlistVO) {
 		// TODO Auto-generated method stub
@@ -162,7 +166,7 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 	}
 
 	@Override
-	public OrderlistVO findByPrimaryKey(String order_id, String Pro_id) {
+	public OrderlistVO findByPrimaryKey(String order_id, String pro_id) {
 		// TODO Auto-generated method stub
 		OrderlistVO orderlistVO = null;
 		Connection con = null;
@@ -175,7 +179,7 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, order_id);
-			pstmt.setString(2, Pro_id);
+			pstmt.setString(2, pro_id);
 
 			rs = pstmt.executeQuery();
 
@@ -241,6 +245,68 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 				orderlistVO.setPro_id(rs.getString("pro_id"));
 				orderlistVO.setOrder_amount(rs.getInt("order_amount"));
 				orderlistVO.setPrice(rs.getInt("price"));
+				list.add(orderlistVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<OrderlistVO> getDetailOrder(String order_id, String pro_id) {
+		// TODO Auto-generated method stub
+		List<OrderlistVO> list = new LinkedList<OrderlistVO>();
+		OrderlistVO orderlistVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_DETAILORDER_BY_ORDER_ID);
+			
+			pstmt.setString(1, order_id);
+			pstmt.setString(2, pro_id);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO ¤]ºÙ¬° Domain objects
+				orderlistVO = new OrderlistVO();
+				orderlistVO.setOrder_id(rs.getString("order_id"));
+				orderlistVO.setPro_id(rs.getString("pro_id"));
+				orderlistVO.setOrder_amount(rs.getInt("order_amount"));
+				orderlistVO.setPrice(rs.getInt("price"));
+				orderlistVO.setPro_name(rs.getString("pro_name"));
 				list.add(orderlistVO); // Store the row in the list
 			}
 

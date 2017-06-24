@@ -13,7 +13,7 @@ public class Store_OrderService {
 		dao = new Store_OrderDAO();
 	}
 	
-	public Store_OrderVO addOrder(String order_id, java.sql.Timestamp order_time, String mem_id, String store_id, Integer order_state, Integer totalprice, Integer order_way, String receive_address, byte[] qrcode, String order_note, Timestamp order_taketime ){
+	public Store_OrderVO addOrder(String order_id, java.sql.Timestamp order_time, String mem_id, String store_id, String order_state, Integer totalprice, String order_way, String receive_address, byte[] qrcode, String order_note, Timestamp order_taketime ){
 		
 		Store_OrderVO orderVO = new Store_OrderVO();
 		
@@ -34,7 +34,7 @@ public class Store_OrderService {
 		
 	}
 	
-	public Store_OrderVO updateRecord(String order_id, java.sql.Timestamp order_time, String mem_id, String store_id, Integer order_state, Integer totalprice, Integer order_way, String receive_address, byte[] qrcode, String order_note, Timestamp order_taketime){
+	public Store_OrderVO updateRecord(String order_id, java.sql.Timestamp order_time, String mem_id, String store_id, String order_state, Integer totalprice, String order_way, String receive_address, byte[] qrcode, String order_note, Timestamp order_taketime){
 		
 		Store_OrderVO orderVO = new Store_OrderVO();
 		
@@ -66,11 +66,7 @@ public class Store_OrderService {
 		return dao.getAll();
 	}
 	
-	
-	
-	
-	
-	
-	
-	
+	public List<Store_OrderVO> getOrderByMem_id(String mem_id){
+		return dao.findOrderByMem(mem_id);
+	}
 }

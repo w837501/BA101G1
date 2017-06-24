@@ -14,8 +14,8 @@ import com.permission.model.PermissionVO;
 public class OrderlistJDBCDAO implements OrderlistDAO_interface{
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "JDBC";
-	String passwd = "JDBC";
+	String userid = "BA101G1";
+	String passwd = "ba101g1";
 	
 	private static final String INSERT_STMT = 
 			"INSERT INTO orderlist (order_id, pro_id,order_amount, price) VALUES (?, ?, ?, ?)";
@@ -296,19 +296,21 @@ public static void main(String[] args){
 		OrderlistJDBCDAO dao = new OrderlistJDBCDAO();
 		
 		//新增
-		OrderlistVO orderlistVO = new OrderlistVO();
-		orderlistVO.setOrder_id("20170612-000005");
-		orderlistVO.setPro_id("PRO-000002");
-		orderlistVO.setPrice(400);
-		orderlistVO.setOrder_amount(2);
-
-		dao.insert(orderlistVO);
+//		OrderlistVO orderlistVO = new OrderlistVO();
+//		orderlistVO.setOrder_id("20170623-000010");
+//		orderlistVO.setPro_id("PRO-000002");
+//		orderlistVO.setPrice(70);
+//		orderlistVO.setOrder_amount(2);
+//
+//		dao.insert(orderlistVO);
 		
 		//修改
-//		PermissionVO permissionVO2 = new PermissionVO();
-//		permissionVO2.setMan_id("");
-//		permissionVO2.setPa_id("");
-//		dao.update(permissionVO2);
+		OrderlistVO orderlistVO2 = new OrderlistVO();
+		orderlistVO2.setOrder_id("20170623-000009");
+		orderlistVO2.setPro_id("PRO-000004");
+		orderlistVO2.setPrice(140);
+		orderlistVO2.setOrder_amount(30);
+		dao.update(orderlistVO2);
 		
 		//查詢
 //		PermissionVO permissionVO3 = dao.findByPrimaryKey("");
@@ -324,4 +326,10 @@ public static void main(String[] args){
 //			System.out.println("---------------------");	
 //		}
 	}
+
+@Override
+public List<OrderlistVO> getDetailOrder(String order_id, String pro_id) {
+	// TODO Auto-generated method stub
+	return null;
+}
 }

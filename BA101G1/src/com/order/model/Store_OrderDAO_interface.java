@@ -8,4 +8,5 @@ public interface Store_OrderDAO_interface {
 	public void delete(String order_id);
 	public Store_OrderVO findByPrimaryKey(String order_id);
 	public List<Store_OrderVO> getAll();
+	public List<Store_OrderVO> findOrderByMem(String mem_id);
 }

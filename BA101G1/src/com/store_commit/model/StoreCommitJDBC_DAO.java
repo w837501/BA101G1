@@ -98,40 +98,40 @@ public class StoreCommitJDBC_DAO implements StoreCommitDAO_interface {
 //		}
 //	}
 
-//	 @Override
-//	 public void delete(String sc_id) {
-//		 
-//		 Connection con = null;
-//		 PreparedStatement pstmt = null;
-//		 
-//		 try{
-//			 Class.forName(driver);
-//			 con = DriverManager.getConnection(url , userid , passwd);
-//			 pstmt = con.prepareStatement(DELETE);
-//			 
-//			 pstmt.setString(1, sc_id);
-//			 pstmt.executeUpdate();
-//			}catch (ClassNotFoundException e) {
-//				throw new RuntimeException("找不到driver" + e.getMessage());
-//			} catch (SQLException se) {
-//				throw new RuntimeException("發生錯誤" + se.getMessage());
-//			} finally {
-//				if (pstmt != null) {
-//					try {
-//						pstmt.close();
-//					} catch (SQLException se) {
-//						se.printStackTrace(System.err);
-//					}
-//				}
-//				if (con != null) {
-//					try {
-//						con.close();
-//					} catch (Exception e) {
-//						e.printStackTrace(System.err);
-//					}
-//				}
-//			}
-//		}
+	 @Override
+	 public void delete(String sc_id) {
+		 
+		 Connection con = null;
+		 PreparedStatement pstmt = null;
+		 
+		 try{
+			 Class.forName(driver);
+			 con = DriverManager.getConnection(url , userid , passwd);
+			 pstmt = con.prepareStatement(DELETE);
+			 
+			 pstmt.setString(1, sc_id);
+			 pstmt.executeUpdate();
+			}catch (ClassNotFoundException e) {
+				throw new RuntimeException("找不到driver" + e.getMessage());
+			} catch (SQLException se) {
+				throw new RuntimeException("發生錯誤" + se.getMessage());
+			} finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+		}
 	
 //	@Override
 //	public StoreCommitVO findByPrimaryKey(String sc_id) {
@@ -205,7 +205,7 @@ public class StoreCommitJDBC_DAO implements StoreCommitDAO_interface {
 				scvo.setMem_id(rs.getString("mem_id"));
 				scvo.setSc_content(rs.getString("sc_content"));
 				scvo.setSc_time(rs.getTimestamp("sc_time"));
-				scvo.setSc_state(rs.getInt("sc_state"));
+				scvo.setSc_state(rs.getString("sc_state"));
 				list.add(scvo);
 				}
 		} catch (ClassNotFoundException e) {
@@ -259,7 +259,7 @@ public class StoreCommitJDBC_DAO implements StoreCommitDAO_interface {
 //		dao.update(svo1);
 
 //刪除		
-//		dao.delete("SC-000007");
+		dao.delete("SC-000003");
 		
 //查單筆		
 //		StoreCommitVO svo2 = dao.findByPrimaryKey("SC-000004");
@@ -277,6 +277,33 @@ public class StoreCommitJDBC_DAO implements StoreCommitDAO_interface {
 			System.out.println(scvo3.getSc_state());
 		}
 		
+	}
+
+
+
+	@Override
+	public void insert(StoreCommitVO storecommit) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void update(StoreCommitVO storecommit) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+
+	@Override
+	public StoreCommitVO findByPrimaryKey(String sc_id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

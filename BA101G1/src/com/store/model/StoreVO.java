@@ -8,23 +8,24 @@ public class StoreVO implements Serializable{
 	
 	
 	private String store_id;
-	private Integer sc_id;
+	private Number sc_id;
 	private String store_name;
 	private String store_content;
-	private Integer store_phone;
+	private String store_phone;
 	private String store_addr;
-	private Date store_date;
-	private Integer store_star;
-	private Integer store_count;
-	private Integer store_state;
+	private Timestamp store_date;
+	private Number store_star;
+	private Number store_count;
+	private String store_state;
 	private byte[] store_image;
-	private Integer store_report_count;
+	private Number store_report_count;
 	private Timestamp store_start_time;
 	private Timestamp store_end_time;
 	private String store_pw;
 	private String store_acc;
-	private Integer store_out;
+	private String store_out;
 	private String store_zone;
+	private String sc_name;
 	
 	public StoreVO(){
 		
@@ -39,11 +40,11 @@ public class StoreVO implements Serializable{
 		this.store_id = store_id;
 	}
 
-	public Integer getSc_id() {
+	public Number getSc_id() {
 		return sc_id;
 	}
 
-	public void setSc_id(Integer sc_id) {
+	public void setSc_id(Number sc_id) {
 		this.sc_id = sc_id;
 	}
 
@@ -63,11 +64,11 @@ public class StoreVO implements Serializable{
 		this.store_content = store_content;
 	}
 
-	public Integer getStore_phone() {
+	public String getStore_phone() {
 		return store_phone;
 	}
 
-	public void setStore_phone(Integer store_phone) {
+	public void setStore_phone(String store_phone) {
 		this.store_phone = store_phone;
 	}
 
@@ -79,35 +80,35 @@ public class StoreVO implements Serializable{
 		this.store_addr = store_addr;
 	}
 
-	public Date getStore_date() {
+	public Timestamp getStore_date() {
 		return store_date;
 	}
 
-	public void setStore_date(Date store_date) {
+	public void setStore_date(Timestamp store_date) {
 		this.store_date = store_date;
 	}
 
-	public Integer getStore_star() {
+	public Number getStore_star() {
 		return store_star;
 	}
 
-	public void setStore_star(Integer store_star) {
+	public void setStore_star(Number store_star) {
 		this.store_star = store_star;
 	}
 
-	public Integer getStore_count() {
+	public Number getStore_count() {
 		return store_count;
 	}
 
-	public void setStore_count(Integer store_count) {
+	public void setStore_count(Number store_count) {
 		this.store_count = store_count;
 	}
 
-	public Integer getStore_state() {
+	public String getStore_state() {
 		return store_state;
 	}
 
-	public void setStore_state(Integer store_state) {
+	public void setStore_state(String store_state) {
 		this.store_state = store_state;
 	}
 
@@ -119,11 +120,11 @@ public class StoreVO implements Serializable{
 		this.store_image = store_image;
 	}
 
-	public Integer getStore_report_count() {
+	public Number getStore_report_count() {
 		return store_report_count;
 	}
 
-	public void setStore_report_count(Integer store_report_count) {
+	public void setStore_report_count(Number store_report_count) {
 		this.store_report_count = store_report_count;
 	}
 
@@ -159,11 +160,11 @@ public class StoreVO implements Serializable{
 		this.store_acc = store_acc;
 	}
 
-	public Integer getStore_out() {
+	public String getStore_out() {
 		return store_out;
 	}
 
-	public void setStore_out(Integer store_out) {
+	public void setStore_out(String store_out) {
 		this.store_out = store_out;
 	}
 
@@ -175,8 +176,12 @@ public class StoreVO implements Serializable{
 		this.store_zone = store_zone;
 	}
 	
-	
-	
-	
+	public String getSc_name() {
+		return sc_name;
+	}
+
+	public void setSc_name(String sc_name) {
+		this.sc_name = sc_name;
+	}
 
 }

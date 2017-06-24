@@ -8,13 +8,15 @@ public class Store_OrderVO implements Serializable{
 	private Timestamp order_time;
 	private String mem_id;
 	private String store_id;
-	private Integer order_state;
+	private String order_state;
 	private Integer totalprice;
-	private Integer order_way;
+	private String order_way;
 	private String receive_address;
 	private byte[] qrcode;
 	private String order_note;
 	private Timestamp order_taketime;
+	private String store_name;
+	private String pro_id;
 	
 	public Store_OrderVO() {
 		super();
@@ -52,11 +54,11 @@ public class Store_OrderVO implements Serializable{
 		this.store_id = store_id;
 	}
 
-	public Integer getOrder_state() {
+	public String getOrder_state() {
 		return order_state;
 	}
 
-	public void setOrder_state(Integer order_state) {
+	public void setOrder_state(String order_state) {
 		this.order_state = order_state;
 	}
 
@@ -68,11 +70,11 @@ public class Store_OrderVO implements Serializable{
 		this.totalprice = totalprice;
 	}
 
-	public Integer getOrder_way() {
+	public String getOrder_way() {
 		return order_way;
 	}
 
-	public void setOrder_way(Integer order_way) {
+	public void setOrder_way(String order_way) {
 		this.order_way = order_way;
 	}
 
@@ -106,5 +108,21 @@ public class Store_OrderVO implements Serializable{
 
 	public void setOrder_taketime(Timestamp order_taketime) {
 		this.order_taketime = order_taketime;
+	}
+
+	public String getStore_name() {
+		return store_name;
+	}
+
+	public void setStore_name(String store_name) {
+		this.store_name = store_name;
+	}
+
+	public String getPro_id() {
+		return pro_id;
+	}
+
+	public void setPro_id(String pro_id) {
+		this.pro_id = pro_id;
 	}
 }

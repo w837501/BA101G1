@@ -24,8 +24,8 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 	
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "JDBC";
-	String passwd = "JDBC";
+	String userid = "BA101G1";
+	String passwd = "ba101g1";
 	
 	private static final String INSERT_STMT = 
 			"INSERT INTO STORE_order (order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, qrcode, order_note, order_taketime) "
@@ -39,6 +39,8 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 	private static final String GET_ALL_STMT = 
 			"SELECT order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, qrcode, order_note, order_taketime from STORE_order order by order_id";
 	
+	private static final String GET_ORDER_BY_MEM = 
+			"select order_id, store_id, totalprice, order_time, order_way, order_state, mem_id from store_order where mem_id = ? order by order_time desc";
 	@Override
 	public void insert(Store_OrderVO orderVO) {
 		// TODO Auto-generated method stub
@@ -54,9 +56,9 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 			pstmt.setTimestamp(1, orderVO.getOrder_time());
 			pstmt.setString(2, orderVO.getMem_id());
 			pstmt.setString(3, orderVO.getStore_id());
-			pstmt.setInt(4, orderVO.getOrder_state());
+			pstmt.setString(4, orderVO.getOrder_state());
 			pstmt.setInt(5, orderVO.getTotalprice());
-			pstmt.setInt(6, orderVO.getOrder_way());
+			pstmt.setString(6, orderVO.getOrder_way());
 			pstmt.setString(7, orderVO.getReceive_address());
 			pstmt.setBytes(8, orderVO.getQrcode());
 			pstmt.setString(9, orderVO.getOrder_note());
@@ -106,9 +108,9 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 			pstmt.setTimestamp(2, orderVO.getOrder_time());
 			pstmt.setString(3, orderVO.getMem_id());
 			pstmt.setString(4, orderVO.getStore_id());
-			pstmt.setInt(5, orderVO.getOrder_state());
+			pstmt.setString(5, orderVO.getOrder_state());
 			pstmt.setInt(6, orderVO.getTotalprice());
-			pstmt.setInt(7, orderVO.getOrder_way());
+			pstmt.setString(7, orderVO.getOrder_way());
 			pstmt.setString(8, orderVO.getReceive_address());
 			pstmt.setBytes(9, orderVO.getQrcode());
 			pstmt.setString(10, orderVO.getOrder_note());
@@ -212,9 +214,9 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 				orderVO.setOrder_time(rs.getTimestamp("rec_mon"));
 				orderVO.setMem_id(rs.getString("mem_id"));
 				orderVO.setStore_id(rs.getString("store_id"));
-				orderVO.setOrder_state(rs.getInt("order_state"));
+				orderVO.setOrder_state(rs.getString("order_state"));
 				orderVO.setTotalprice(rs.getInt("totalprice"));
-				orderVO.setOrder_way(rs.getInt("order_way"));
+				orderVO.setOrder_way(rs.getString("order_way"));
 				orderVO.setReceive_address(rs.getString("receive_address"));
 				orderVO.setQrcode(rs.getBytes("qrcode"));
 				orderVO.setOrder_note(rs.getString("order_note"));
@@ -281,14 +283,83 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 				orderVO.setOrder_time(rs.getTimestamp("order_time"));
 				orderVO.setMem_id(rs.getString("mem_ide"));
 				orderVO.setStore_id(rs.getString("store_id"));
-				orderVO.setOrder_state(rs.getInt("order_state"));
+				orderVO.setOrder_state(rs.getString("order_state"));
 				orderVO.setTotalprice(rs.getInt("totalprice"));
-				orderVO.setOrder_way(rs.getInt("order_way"));
+				orderVO.setOrder_way(rs.getString("order_way"));
 				orderVO.setReceive_address(rs.getString("receive_address"));
 				orderVO.setQrcode(rs.getBytes("qrcode"));
 				orderVO.setOrder_note(rs.getString("order_note"));
 				orderVO.setOrder_taketime(rs.getTimestamp("order_taketime"));
 				list.add(orderVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		return list;
+	}
+	
+	
+	@Override
+	public List<Store_OrderVO> findOrderByMem(String mem_id) {
+		// TODO Auto-generated method stub
+		List<Store_OrderVO> list = new ArrayList<Store_OrderVO>();
+		Store_OrderVO orderVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ORDER_BY_MEM);
+
+			pstmt.setString(1, mem_id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVo 也稱為 Domain objects
+				orderVO = new Store_OrderVO();
+				orderVO.setOrder_id(rs.getString("order_id"));
+				orderVO.setOrder_time(rs.getTimestamp("order_time"));
+				orderVO.setMem_id(rs.getString("mem_id"));
+				System.out.println(mem_id);
+				orderVO.setStore_id(rs.getString("store_id"));
+				orderVO.setOrder_state(rs.getString("order_state"));
+				orderVO.setTotalprice(rs.getInt("totalprice"));
+				orderVO.setOrder_way(rs.getString("order_way"));
+				list.add(orderVO);
 			}
 
 			// Handle any driver errors
@@ -345,7 +416,7 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 	
 
 	
-public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws IOException{
 		
 		Store_OrderJDBCDAO dao = new Store_OrderJDBCDAO();
 
@@ -357,9 +428,9 @@ public static void main(String[] args) throws IOException{
 		orderVO1.setOrder_time(new Timestamp(System.currentTimeMillis()));
 		orderVO1.setMem_id("MEM-000001");
 		orderVO1.setStore_id("STO-000002");
-		orderVO1.setOrder_state(3);
-		orderVO1.setTotalprice(1000);
-		orderVO1.setOrder_way(0);
+		orderVO1.setOrder_state("已確認");
+		orderVO1.setTotalprice(140);
+		orderVO1.setOrder_way("自取");
 		orderVO1.setReceive_address("");
 		
 		orderVO1.setOrder_note("");
@@ -372,9 +443,9 @@ public static void main(String[] args) throws IOException{
 //		orderVO1.setOrder_time(java.sql.Timestamp.valueOf(""));
 //		orderVO1.setMem_id("");
 //		orderVO1.setStore_id("");
-//		orderVO1.setOrder_state(3);
+//		orderVO1.setOrder_state("待取餐");
 //		orderVO1.setTotalprice(1000);
-//		orderVO1.setOrder_way(0);
+//		orderVO1.setOrder_way("內用");
 //		orderVO1.setReceive_address("");
 //		orderVO1.setQrcode(null);
 //		orderVO1.setOrder_note("");
@@ -382,7 +453,7 @@ public static void main(String[] args) throws IOException{
 //		dao.update(orderVO2);
 		
 		//查詢
-//		OrderVO orderVO3 = dao.findByPrimaryKey("");
+//		Store_OrderVO orderVO3 = dao.findByPrimaryKey("");
 //		System.out.print(orderVO3.getOrder_id() + ",");
 //		System.out.print(orderVO3.getOrder_time() + ",");
 //		System.out.print(orderVO3.getMem_id() + ",");
@@ -412,6 +483,20 @@ public static void main(String[] args) throws IOException{
 //			System.out.print(aOrder.getOrder_taketime() + ",");
 //			System.out.println("---------------------");	
 //		}
+	
+//		List<Store_OrderVO> list = dao.findOrderByMem("MEM-000001");
+//		for(Store_OrderVO aOrder : list){
+//		System.out.print(aOrder.getOrder_id() + ",");
+//		System.out.print(aOrder.getOrder_time() + ",");
+//		System.out.print(aOrder.getStore_id() + ",");
+//		System.out.print(aOrder.getOrder_state() + ",");
+//		System.out.print(aOrder.getTotalprice() + ",");
+//		System.out.print(aOrder.getOrder_way() + ",");
+//		
+//		System.out.println("---------------------");
+//		}
 	}
+
+
 
 }

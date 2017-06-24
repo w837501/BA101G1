@@ -21,7 +21,63 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ManServlet</servlet-name>
-    <url-pattern>/man/man.do</url-pattern>
+    <url-pattern>/backend/man/man.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ProductServlet</servlet-name>
+    <servlet-class>com.product.controller.ProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductServlet</servlet-name>
+    <url-pattern>/product/product.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemberServlet</servlet-name>
+    <servlet-class>com.mem.controller.MemberServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberServlet</servlet-name>
+    <url-pattern>/backend/mem/mem.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RevenueServlet</servlet-name>
+    <servlet-class>com.rev.controller.RevenueServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RevenueServlet</servlet-name>
+    <url-pattern>/backend/rev/rev.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>NewsServlet</servlet-name>
+    <servlet-class>com.news.controller.NewsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewsServlet</servlet-name>
+    <url-pattern>/frontend/latestnews/news.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AdServlet</servlet-name>
+    <servlet-class>com.ad.controller.AdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdServlet</servlet-name>
+    <url-pattern>/frontend/advertisement/ad.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DBGifReader</servlet-name>
+    <servlet-class>com.ad.controller.DBGifReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBGifReader</servlet-name>
+    <url-pattern>/advertisement/DBGifReader.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>OrderServlet</servlet-name>
+    <servlet-class>com.order.controller.OrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderServlet</servlet-name>
+    <url-pattern>/frontend/selectOrder/order.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>PushServlet</servlet-name>
@@ -38,6 +94,22 @@
   <servlet-mapping>
     <servlet-name>MemberReportServlet</servlet-name>
     <url-pattern>/member_report/member_report.do</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>OrderListServlet</servlet-name>
+    <servlet-class>com.orderlist.controller.OrderListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderListServlet</servlet-name>
+    <url-pattern>/frontend/selectOrder/orderlist.do</url-pattern>
+  </servlet-mapping>
+   <servlet>
+  		<servlet-name>StoreServlet</servlet-name>
+  		<servlet-class>com.store.controller.StoreServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  		<servlet-name>StoreServlet</servlet-name>
+  		<url-pattern>/store/store.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>StoreReportServlet</servlet-name>

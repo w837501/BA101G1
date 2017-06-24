@@ -10,7 +10,11 @@ public class StoreCommitVO implements Serializable {
 	private String mem_id;
 	private String sc_content;
 	private Timestamp sc_time;
-	private Integer sc_state;
+	private String sc_state;
+	
+	public StoreCommitVO(){
+		
+	}
 	
 	
 	public String getSc_id() {
@@ -43,10 +47,10 @@ public class StoreCommitVO implements Serializable {
 	public void setSc_time(Timestamp sc_time) {
 		this.sc_time = sc_time;
 	}
-	public Integer getSc_state() {
+	public String getSc_state() {
 		return sc_state;
 	}
-	public void setSc_state(Integer sc_state) {
+	public void setSc_state(String sc_state) {
 		this.sc_state = sc_state;
 	}
 	

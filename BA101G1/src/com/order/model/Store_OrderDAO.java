@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -20,7 +21,7 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA101G1");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -38,6 +39,15 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 	private static final String GET_ALL_STMT = 
 			"SELECT order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, qrcode, order_note, order_taketime from order order by order_id";
 	
+	private static final String GET_ORDER_BY_MEM = 
+			"select mem_id, order_id, store_id, totalprice, order_time, order_way, order_state from store_order where mem_id = ? order by order_time desc";
+	
+	private static final String GET_ORDER_BY_MEM2 = 
+			"select o.mem_id, o.order_id, o.store_id, o.totalprice, o.order_time, o.order_way, o.order_state ,s.store_name from store_order o join store s on o.store_id = s.store_id where mem_id = ? order by order_time desc";
+	
+	
+	
+	
 	@Override
 	public void insert(Store_OrderVO orderVO) {
 		// TODO Auto-generated method stub
@@ -52,9 +62,9 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 			pstmt.setTimestamp(1, orderVO.getOrder_time());
 			pstmt.setString(2, orderVO.getMem_id());
 			pstmt.setString(3, orderVO.getStore_id());
-			pstmt.setInt(4, orderVO.getOrder_state());
+			pstmt.setString(4, orderVO.getOrder_state());
 			pstmt.setInt(5, orderVO.getTotalprice());
-			pstmt.setInt(6, orderVO.getOrder_way());
+			pstmt.setString(6, orderVO.getOrder_way());
 			pstmt.setString(7, orderVO.getReceive_address());
 			pstmt.setBytes(8, orderVO.getQrcode());
 			pstmt.setString(9, orderVO.getOrder_note());
@@ -100,9 +110,9 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 			pstmt.setTimestamp(2, orderVO.getOrder_time());
 			pstmt.setString(3, orderVO.getMem_id());
 			pstmt.setString(4, orderVO.getStore_id());
-			pstmt.setInt(5, orderVO.getOrder_state());
+			pstmt.setString(5, orderVO.getOrder_state());
 			pstmt.setInt(6, orderVO.getTotalprice());
-			pstmt.setInt(7, orderVO.getOrder_way());
+			pstmt.setString(7, orderVO.getOrder_way());
 			pstmt.setString(8, orderVO.getReceive_address());
 			pstmt.setBytes(9, orderVO.getQrcode());
 			pstmt.setString(10, orderVO.getOrder_note());
@@ -196,9 +206,9 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 				orderVO.setOrder_time(rs.getTimestamp("rec_mon"));
 				orderVO.setMem_id(rs.getString("mem_id"));
 				orderVO.setStore_id(rs.getString("store_id"));
-				orderVO.setOrder_state(rs.getInt("order_state"));
+				orderVO.setOrder_state(rs.getString("order_state"));
 				orderVO.setTotalprice(rs.getInt("totalprice"));
-				orderVO.setOrder_way(rs.getInt("order_way"));
+				orderVO.setOrder_way(rs.getString("order_way"));
 				orderVO.setReceive_address(rs.getString("receive_address"));
 				orderVO.setQrcode(rs.getBytes("qrcode"));
 				orderVO.setOrder_note(rs.getString("order_note"));
@@ -257,12 +267,12 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 				// empVO 也稱為 Domain objects
 				orderVO = new Store_OrderVO();
 				orderVO.setOrder_id(rs.getString("order_id"));
-				orderVO.setOrder_time(rs.getTimestamp("rec_mon"));
+				orderVO.setOrder_time(rs.getTimestamp("order_time"));
 				orderVO.setMem_id(rs.getString("mem_id"));
 				orderVO.setStore_id(rs.getString("store_id"));
-				orderVO.setOrder_state(rs.getInt("order_state"));
+				orderVO.setOrder_state(rs.getString("order_state"));
 				orderVO.setTotalprice(rs.getInt("totalprice"));
-				orderVO.setOrder_way(rs.getInt("order_way"));
+				orderVO.setOrder_way(rs.getString("order_way"));
 				orderVO.setReceive_address(rs.getString("receive_address"));
 				orderVO.setQrcode(rs.getBytes("qrcode"));
 				orderVO.setOrder_note(rs.getString("order_note"));
@@ -300,5 +310,68 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 		}
 		return list;
 	}
-	
+
+	@Override
+	public List<Store_OrderVO> findOrderByMem(String mem_id) {
+		// TODO Auto-generated method stub
+		List<Store_OrderVO> list = new LinkedList<Store_OrderVO>();
+		Store_OrderVO orderVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ORDER_BY_MEM2);
+
+			pstmt.setString(1, mem_id);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVo 也稱為 Domain objects
+				orderVO = new Store_OrderVO();
+				orderVO.setOrder_id(rs.getString("order_id"));
+				orderVO.setOrder_time(rs.getTimestamp("order_time"));
+				orderVO.setMem_id(rs.getString("mem_id"));
+				orderVO.setStore_id(rs.getString("store_id"));
+				orderVO.setOrder_state(rs.getString("order_state"));
+				orderVO.setTotalprice(rs.getInt("totalprice"));
+				orderVO.setOrder_way(rs.getString("order_way"));
+				orderVO.setStore_name(rs.getString("store_name"));
+				list.add(orderVO);
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		return list;
+	}
 }

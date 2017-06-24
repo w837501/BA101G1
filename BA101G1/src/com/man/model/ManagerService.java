@@ -37,14 +37,16 @@ public class ManagerService {
 		return manVO;
 		
 	}
-	public void deleteEmp(String man_id) {
+	public void deleteMan(String man_id) {
 		dao.delete(man_id);
 	}
-	public ManagerVO getOneEmp(String man_id) {
+	public ManagerVO getOneMan(String man_id) {
 		return dao.findByPrimaryKey(man_id);
 	}
 	public List<ManagerVO> getAll() {
 		return dao.getAll();
 	}
+
+	
 	
 }

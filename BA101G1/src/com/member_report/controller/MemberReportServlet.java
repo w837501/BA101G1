@@ -146,19 +146,17 @@ public class MemberReportServlet extends HttpServlet {
 					errorMsgs.add("請輸入日期87!");
 				}
 
-				Integer mr_state = null;
+				String mr_state = null;
 				try {
-					mr_state = new Integer(req.getParameter("mr_state").trim());
-				} catch (NumberFormatException e) {
-					mr_state = 0;
-					errorMsgs.add("會員檢舉狀態請填數字012.");
+					mr_state = req.getParameter("mr_state").trim();
+				} catch (Exception e) {
+					errorMsgs.add("請輸入會員檢舉狀態");
 				}
 
-				Integer mr_result = null;
+				String mr_result = null;
 				try {
-					mr_result = new Integer(req.getParameter("mr_result").trim());
-				} catch (NumberFormatException e) {
-					mr_result = 0;
+					mr_result = req.getParameter("mr_result").trim();
+				} catch (Exception e) {
 					errorMsgs.add("會員檢舉狀態請填數字01.");
 				}
 
@@ -227,19 +225,19 @@ public class MemberReportServlet extends HttpServlet {
 					errorMsgs.add("請輸入日期!");
 				}
 				
-				Integer mr_state = null;
+				String mr_state = null;
 				try {
-					mr_state = new Integer(req.getParameter("mr_state").trim());
-				} catch (NumberFormatException e) {
-					mr_state = 0;
+					mr_state =req.getParameter("mr_state").trim();
+				} catch (Exception e) {
+				
 					errorMsgs.add("薪水請填數字.");
 				}
 				
-				Integer mr_result = null;
+				String mr_result = null;
 				try {
-					mr_result = new Integer(req.getParameter("mr_result").trim());
-				} catch (NumberFormatException e) {
-					mr_result = 0;
+					mr_result = req.getParameter("mr_result").trim();
+				} catch (Exception e) {
+				
 					errorMsgs.add("獎金請填數字.");
 				}
 				
