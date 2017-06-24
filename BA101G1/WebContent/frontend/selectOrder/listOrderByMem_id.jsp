@@ -36,8 +36,8 @@
 	</tr>
 	<c:forEach var="store_orderVO" items="${store_orderVO}" >
 	<tr align='center' valign='middle'>
-		<a href="orderlist.do?order_id=${store_orderVO.order_id}&pro_id=${store_orderVO.pro_id}&action=getOneOrder_For_DetailDisplay">
-		<td>${store_orderVO.order_id }</td></a>
+		
+		<td><a href="orderlist.do?order_id=${store_orderVO.order_id}&action=getOneOrder_For_DetailDisplay">${store_orderVO.order_id }</a></td>
 		<td>${store_orderVO.order_time }</td>
  		<td>${store_orderVO.store_name }</td>
 		<td>${store_orderVO.totalprice }</td>

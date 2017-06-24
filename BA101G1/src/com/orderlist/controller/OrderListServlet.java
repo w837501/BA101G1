@@ -25,7 +25,7 @@ public class OrderListServlet extends HttpServlet {
 		
 		if ("getOneOrder_For_DetailDisplay".equals(action)) { // 來自listOrderByMem_id.jsp的請求
 			
-			System.out.println("友維大棒棒");
+			System.out.println("友維大棒棒??????????????????");
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -36,28 +36,19 @@ public class OrderListServlet extends HttpServlet {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String str1 = req.getParameter("order_id");
 				String str2 = req.getParameter("pro_id");
-						
+				System.out.println(str1+" "+str2);
 				/***************************2.開始查詢資料*****************************************/
 				OrderlistService orderSvc = new OrderlistService();
-				List<OrderlistVO> store_orderVO=new LinkedList<OrderlistVO>();
-				store_orderVO= orderSvc.getDetailOrder(str1,str2);//DAO方法
-				System.out.println(str1);
-				System.out.println(store_orderVO);
-				if (store_orderVO == null) {
-					errorMsgs.add("查無資料");
-				}
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/frontend/selectOrder/listOrderByMem.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
-				}
+				List<OrderlistVO> orderlistVO=new LinkedList<OrderlistVO>();
+				orderlistVO= orderSvc.getDetailOrder(str1,str2);//DAO方法
+				System.out.println("友維大棒棒?????????101020025025200202");
+				
+			
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("store_orderVO", store_orderVO); // 資料庫取出的empVO物件,存入req
+				req.setAttribute("orderlistVO", orderlistVO); // 資料庫取出的empVO物件,存入req
 				
-				String url = "/frontend/selectOrder/xxxxxxxxxxxxxxxx.jsp";
+				String url = "/frontend/selectOrder/orderDetail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交listOneEmp.jsp
 				successView.forward(req, res);
 
