@@ -48,7 +48,7 @@
 	</tr>
 	<%@ include file="page1.file" %>	
 	<c:forEach var="adVO" items="${list}" begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
-		<tr align='center' valign='middle'>
+		<tr align='center' valign='middle' ${(adVO.ad_id==param.ad_id) ? 'bgcolor=#CCCCFF':''}>
 			<td>${adVO.ad_id } </td>
 			<td>${adVO.store_id }</td>
 			<td>${adVO.ad_name }</td>
@@ -58,18 +58,16 @@
 			<td>${adVO.ad_state }</td>
 			<td>${adVO.ad_push_content }</td>
 			<td>
-				<form method="post" action="<%=request.getContextPath() %>/backend/rev/rev.do">
+				<form method="post" action="<%=request.getContextPath() %>/frontend/advertisement/ad.do">
 					<input type="submit" value="­×§ï">
-					<input type="hidden" name="store_id" value="${RevenueVO.store_id }">
-					<input type="hidden" name="revenue_month" value="${RevenueVO.revenue_month }">
+					<input type="hidden" name="ad_id" value="${adVO.ad_id }">
 					<input type="hidden" name="action" value="getOne_For_Update">
 				</form>
 			</td>
 			<td>
-				<form method="post" action="<%=request.getContextPath() %>/backend/rev/rev.do">
+				<form method="post" action="<%=request.getContextPath() %>/frontend/advertisement/ad.do">
 					<input type="submit" value="§R°£">
-					<input type="hidden" name="store_id" value="${RevenueVO.store_id }">
-					<input type="hidden" name="revenue_month" value="${RevenueVO.revenue_month }">
+					<input type="hidden" name="ad_id" value="${adVO.ad_id }">
 					<input type="hidden" name="action" value="delete">
 				</form>
 			</td>

@@ -17,21 +17,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import org.apache.taglibs.standard.tag.common.fmt.RequestEncodingSupport;
+
 import com.ad.model.AdDAO;
 import com.ad.model.AdService;
 import com.ad.model.AdVO;
 import com.man.model.ManagerService;
+import com.rev.model.RevenueVO;
 
-
-@MultipartConfig(fileSizeThreshold=5*1024*1024 , maxFileSize=5*1024*1024,maxRequestSize=5*5*1024*1024)
-//@WebServlet("/AdServlet")
+@MultipartConfig(fileSizeThreshold = 5 * 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024
+		* 1024)
+// @WebServlet("/AdServlet")
 public class AdServlet extends HttpServlet {
-	
-	public void doGet(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
+
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 	}
-	
+
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		
@@ -65,13 +67,8 @@ public class AdServlet extends HttpServlet {
 				String store_id=req.getParameter("store_id");
 				String ad_name=req.getParameter("ad_name");
 				String ad_content=req.getParameter("ad_content");
-				System.out.println(store_id);
-				System.out.println(ad_name);
-				System.out.println(ad_content);
 				Part pic=req.getPart("upfile1");
-				System.out.println("pic : "+pic);
 				byte[] ad_image=getPictureByteArrayFromWeb(pic);
-					System.out.println("ad_image"+ad_image);	
 				String ad_push_content=req.getParameter("ad_push_content");
 				
 				java.sql.Timestamp ad_time=null;
@@ -131,18 +128,116 @@ public class AdServlet extends HttpServlet {
 			}
 
 		}
+		if("getOne_For_Update".equals(action)){
+			List<String> errorMsgs=new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try{
+				String ad_id=req.getParameter("ad_id");
+				
+				AdService adSvc=new AdService();
+				AdVO adVO=adSvc.getOneAd(ad_id);
+				
+				req.setAttribute("adVO", adVO);
+				String url="/frontend/advertisement/UpdateAd.jsp";
+				RequestDispatcher successView=req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			}catch(Exception e){
+				errorMsgs.add("無法取得要修改的資料");
+				RequestDispatcher failureView=req.getRequestDispatcher("/frontend/advertisement/ListAllAd.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		if("update".equals(action)){
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			try{
+				String ad_id=req.getParameter("ad_id");
+				String store_id=req.getParameter("store_id");
+				String ad_name=req.getParameter("ad_name");
+				if(ad_name==null||ad_name.trim().isEmpty()){
+					errorMsgs.add("請輸入廣告名字");
+				}else{
+					ad_name=req.getParameter("ad_name");
+				}
+				String ad_content=req.getParameter("ad_content");
+				if(ad_content==null||ad_content.trim().isEmpty()){
+					errorMsgs.add("請輸入廣告內容");
+				}else{
+					ad_content=req.getParameter("ad_content");
+				}
+					Part pic=req.getPart("upfile1");
+				byte[] ad_image=getPictureByteArrayFromWeb(pic);
+				
+				
+				String ad_push_content=req.getParameter("ad_push_content");
+				
+				
+				java.sql.Timestamp ad_time=null;
+				SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+				System.out.println(ad_time);
+				try {
+					ad_time = new Timestamp(sdf.parse(req.getParameter("ad_time")).getTime());
+					System.out.println("ad_time"+ad_time);
+				} catch (IllegalArgumentException e) {
+					System.out.println("錯誤");
+					errorMsgs.add("請輸入廣告時間");
+				}
+				String str_ad_state=req.getParameter("ad_state");
+				if(str_ad_state==null||str_ad_state.trim().isEmpty()){
+					errorMsgs.add("請輸入狀態");
+				}else{
+					str_ad_state=req.getParameter("ad_state");
+				}
+				Integer ad_state=null;
+				try{
+					ad_state=new Integer(str_ad_state);
+				}catch(Exception e){
+					errorMsgs.add("ad_state轉型錯誤");
+				}
+				
+				AdVO adVO=new AdVO();
+				adVO.setAd_id(ad_id);
+				adVO.setStore_id(store_id);
+				adVO.setAd_name(ad_name);
+				adVO.setAd_image(ad_image);
+				adVO.setAd_content(ad_content);
+				adVO.setAd_time(ad_time);
+				adVO.setAd_push_content(ad_push_content);
+				adVO.setAd_state(ad_state);
+				
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("adVO", adVO);
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/advertisement/UpdateAdd.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				
+				AdService adSvc=new AdService();
+				adVO=adSvc.updateAd(ad_id, store_id, ad_name, ad_content, ad_image, ad_time, ad_state, ad_push_content);
+				
+				req.setAttribute("adVO", adVO);
+				String url="/frontend/advertisement/ListAllAd.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			}catch(Exception e){
+				errorMsgs.add("修改失敗" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/advertisement/UpdateAd.jsp");
+				failureView.forward(req, res);
+			}
+		}
 	}
-	
-	public static byte[] getPictureByteArrayFromWeb(Part part) throws IOException{
-		  InputStream is = part.getInputStream();
-		  ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		  byte[] buffer = new byte[8192];
-		  int i;
-		  while((i=is.read(buffer))!=-1){
-		   baos.write(buffer, 0 , i);
-		  }
-		  baos.close();
-		  is.close();
-		  return baos.toByteArray();
-		 }
+
+	public static byte[] getPictureByteArrayFromWeb(Part part) throws IOException {
+		InputStream is = part.getInputStream();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] buffer = new byte[8192];
+		int i;
+		while ((i = is.read(buffer)) != -1) {
+			baos.write(buffer, 0, i);
+		}
+		baos.close();
+		is.close();
+		return baos.toByteArray();
+	}
 }
