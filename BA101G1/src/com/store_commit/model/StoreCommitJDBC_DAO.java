@@ -205,7 +205,7 @@ public class StoreCommitJDBC_DAO implements StoreCommitDAO_interface {
 				scvo.setMem_id(rs.getString("mem_id"));
 				scvo.setSc_content(rs.getString("sc_content"));
 				scvo.setSc_time(rs.getTimestamp("sc_time"));
-				scvo.setSc_state(rs.getInt("sc_state"));
+				scvo.setSc_state(rs.getString("sc_state"));
 				list.add(scvo);
 				}
 		} catch (ClassNotFoundException e) {

@@ -111,14 +111,14 @@ public class StoreClassDAO implements StoreClassDAO_interface {
 				storeVO.setStore_date(rs.getTimestamp("store_date"));
 				storeVO.setStore_star(rs.getInt("store_star"));
 				storeVO.setStore_count(rs.getInt("store_count"));
-				storeVO.setStore_state(rs.getInt("store_state"));
+				storeVO.setStore_state(rs.getString("store_state"));
 				storeVO.setStore_image(rs.getBytes("store_image"));
 				storeVO.setStore_report_count(rs.getInt("store_report_count"));
 				storeVO.setStore_start_time(rs.getTimestamp("store_start_time"));
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getInt("store_out"));
+				storeVO.setStore_out(rs.getString("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 			}
 			

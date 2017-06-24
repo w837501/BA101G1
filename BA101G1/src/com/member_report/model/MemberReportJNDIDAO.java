@@ -19,16 +19,11 @@ public class MemberReportJNDIDAO implements MemberReportDAO_interface {
 			e.printStackTrace();
 		}
 	}
-	private static final String INSERT_STMT = 
-		"INSERT INTO MEMBER_REPORT (mr_id,mem_id,order_id,sc_id,man_id,mr_content,mr_image,mr_time,mr_state,mr_result) VALUES ('MR'||'-'||LPAD(to_char(mr_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String GET_ALL_STMT = 
-		"SELECT* FROM MEMBER_REPORT order by mr_id";
-	private static final String GET_ONE_STMT = 
-		"SELECT mr_id,mem_id,order_id,sc_id,man_id,mr_content,mr_image,mr_time,mr_state,mr_result FROM MEMBER_REPORT where mr_id = ?";
-	private static final String DELETE = 
-		"DELETE FROM MEMBER_REPORT where mr_id = ?";
-	private static final String UPDATE = 
-		"UPDATE MEMBER_REPORT set mem_id=?, order_id=?, sc_id=?, man_id=?, mr_content=?, mr_image=?, mr_time=?, mr_state=?, mr_result=?  where mr_id = ?";
+	private static final String INSERT_STMT = "INSERT INTO MEMBER_REPORT (mr_id,mem_id,order_id,sc_id,man_id,mr_content,mr_image,mr_time,mr_state,mr_result) VALUES ('MR'||'-'||LPAD(to_char(mr_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String GET_ALL_STMT = "SELECT* FROM MEMBER_REPORT order by mr_id";
+	private static final String GET_ONE_STMT = "SELECT mr_id,mem_id,order_id,sc_id,man_id,mr_content,mr_image,mr_time,mr_state,mr_result FROM MEMBER_REPORT where mr_id = ?";
+	private static final String DELETE = "DELETE FROM MEMBER_REPORT where mr_id = ?";
+	private static final String UPDATE = "UPDATE MEMBER_REPORT set mem_id=?, order_id=?, sc_id=?, man_id=?, mr_content=?, mr_image=?, mr_time=?, mr_state=?, mr_result=?  where mr_id = ?";
 
 	@Override
 	public void insert(MemberReportVO mrVO) {
@@ -48,16 +43,14 @@ public class MemberReportJNDIDAO implements MemberReportDAO_interface {
 			pstmt.setString(5, mrVO.getMr_content());
 			pstmt.setBytes(6, mrVO.getMr_image());
 			pstmt.setTimestamp(7, mrVO.getMr_time());
-			pstmt.setInt(8, mrVO.getMr_state());
-			pstmt.setInt(9, mrVO.getMr_result());
+			pstmt.setString(8, mrVO.getMr_state());
+			pstmt.setString(9, mrVO.getMr_result());
 
 			pstmt.executeUpdate();
 
-			
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -96,17 +89,15 @@ public class MemberReportJNDIDAO implements MemberReportDAO_interface {
 			pstmt.setString(5, mrVO.getMr_content());
 			pstmt.setBytes(6, mrVO.getMr_image());
 			pstmt.setTimestamp(7, mrVO.getMr_time());
-			pstmt.setInt(8, mrVO.getMr_state());
-			pstmt.setInt(9, mrVO.getMr_result());
+			pstmt.setString(8, mrVO.getMr_state());
+			pstmt.setString(9, mrVO.getMr_result());
 			pstmt.setString(10, mrVO.getMr_id());
 
 			pstmt.executeUpdate();
 
-			
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -141,11 +132,9 @@ public class MemberReportJNDIDAO implements MemberReportDAO_interface {
 
 			pstmt.executeUpdate();
 
-		
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -193,14 +182,13 @@ public class MemberReportJNDIDAO implements MemberReportDAO_interface {
 				mrVO.setMr_content(rs.getString("mr_content"));
 				mrVO.setMr_image(rs.getBytes("mr_image"));
 				mrVO.setMr_time(rs.getTimestamp("mr_time"));
-				mrVO.setMr_state(rs.getInt("mr_state"));
-				mrVO.setMr_result(rs.getInt("mr_result"));
+				mrVO.setMr_state(rs.getString("mr_state"));
+				mrVO.setMr_result(rs.getString("mr_result"));
 			}
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -253,15 +241,14 @@ public class MemberReportJNDIDAO implements MemberReportDAO_interface {
 				mrVO.setMr_content(rs.getString("mr_content"));
 				mrVO.setMr_image(rs.getBytes("mr_image"));
 				mrVO.setMr_time(rs.getTimestamp("mr_time"));
-				mrVO.setMr_state(rs.getInt("mr_state"));
-				mrVO.setMr_result(rs.getInt("mr_result"));
+				mrVO.setMr_state(rs.getString("mr_state"));
+				mrVO.setMr_result(rs.getString("mr_result"));
 				list.add(mrVO); // Store the row in the list
 			}
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -288,69 +275,4 @@ public class MemberReportJNDIDAO implements MemberReportDAO_interface {
 		}
 		return list;
 	}
-
-/*	public static void main(String[] args) {
-
-		MemberReportJDBCDAO dao = new MemberReportJDBCDAO();
-
-		// 新增
-		MemberReportVO mrVO1 = new MemberReportVO();
-		mrVO1.setMem_id("MEM-000002");
-		mrVO1.setOrder_id("");
-		mrVO1.setSc_id("SC-000002");
-		mrVO1.setMan_id(new String("MAN-000002"));
-		mrVO1.setMr_content(new String("一諾千金"));
-		mrVO1.setMr_image(new byte[0]);
-		mrVO1.setMr_time(java.sql.Timestamp.valueOf("2002-02-22 22:22:22"));
-		mrVO1.setMr_state(new Integer(1));
-		mrVO1.setMr_result(new Integer(1));
-		dao.insert(mrVO1);
-
-		// 修改
-		MemberReportVO mrVO2 = new MemberReportVO();
-		mrVO2.setMr_id("MR-000001");
-		mrVO2.setMem_id("MEM-000002");
-		mrVO2.setOrder_id("20170614-000002");
-		mrVO2.setSc_id(null);
-		mrVO2.setMan_id(new String("MAN-000002"));
-		mrVO2.setMr_content(new String("AD-000003"));
-		mrVO2.setMr_image(null);
-		mrVO2.setMr_time(java.sql.Timestamp.valueOf("2002-02-02 11:22:33"));
-		mrVO2.setMr_state(1);
-		mrVO2.setMr_result(1);
-		dao.update(mrVO2);
-
-		// 刪除
-		dao.delete("MR-000004");
-
-		// 查詢
-		MemberReportVO mrVO3 = dao.findPrimaryKey("MR-000003");
-		System.out.print(mrVO3.getMr_id() + ",");
-		System.out.print(mrVO3.getMem_id() + ",");
-		System.out.print(mrVO3.getOrder_id() + ",");
-		System.out.print(mrVO3.getSc_id() + ",");
-		System.out.print(mrVO3.getMan_id() + ",");
-		System.out.print(mrVO3.getMr_content() + ",");
-		System.out.print(mrVO3.getMr_image() + ",");
-		System.out.print(mrVO3.getMr_time() + ",");
-		System.out.print(mrVO3.getMr_state() + ",");
-		System.out.print(mrVO3.getMr_result() + ",");
-		System.out.println("---------------------");
-
-		// 查詢
-		List<MemberReportVO> list = dao.getAll();
-		for (MemberReportVO aMR : list) {
-			System.out.print(aMR.getMr_id() + ",");
-			System.out.print(aMR.getMem_id() + ",");
-			System.out.print(aMR.getOrder_id() + ",");
-			System.out.print(aMR.getSc_id() + ",");
-			System.out.print(aMR.getMan_id() + ",");
-			System.out.print(aMR.getMr_content() + ",");
-			System.out.print(mrVO3.getMr_image() + ",");
-			System.out.print(mrVO3.getMr_time() + ",");
-			System.out.print(mrVO3.getMr_state() + ",");
-			System.out.print(mrVO3.getMr_result() + ",");
-			System.out.println();
-		}
-	}*/
 }

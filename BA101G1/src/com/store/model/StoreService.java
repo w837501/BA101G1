@@ -11,7 +11,7 @@ public class StoreService {
 	public StoreService(){
 		dao = new StoreDAO();
 	}
-	public StoreVO addStore(Number sc_id, String store_name, String store_content, String store_phone,String store_addr, byte[] store_image, String store_pw,String store_acc,Number store_out,String store_zone){
+	public StoreVO addStore(Number sc_id, String store_name, String store_content, String store_phone,String store_addr, byte[] store_image, String store_pw,String store_acc,String store_out,String store_zone){
 		StoreVO storeVO=new StoreVO();
 		
 		storeVO.setSc_id(sc_id);
@@ -30,7 +30,7 @@ public class StoreService {
 		return storeVO;
 	}
 	
-	public StoreVO updateStore(Number sc_id, String store_content, String store_phone, String store_addr,byte[] store_image, Number store_out, String store_zone,String store_pw,String store_id){
+	public StoreVO updateStore(Number sc_id, String store_content, String store_phone, String store_addr,byte[] store_image, String store_out, String store_zone,String store_pw,String store_id){
 		StoreVO storeVO=new StoreVO();
 		
 		storeVO.setSc_id(sc_id);

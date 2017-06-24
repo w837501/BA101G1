@@ -37,7 +37,7 @@ public class RevenueJDBCDAO implements RevenueDAO_interface{
 			pstmt.setString(2, revenueVO.getRevenue_month());
 			pstmt.setString(3, revenueVO.getMan_id());
 			pstmt.setInt(4,  revenueVO.getStore_revenue());
-			pstmt.setInt(5, revenueVO.getState());
+			pstmt.setString(5, revenueVO.getState());
 
 			pstmt.executeUpdate();
 
@@ -72,7 +72,7 @@ public class RevenueJDBCDAO implements RevenueDAO_interface{
 
 			
 			pstmt.setInt(1, revenueVO.getStore_revenue());
-			pstmt.setInt(2,  revenueVO.getState());
+			pstmt.setString(2,  revenueVO.getState());
 			pstmt.setString(3, revenueVO.getStore_id());
 			pstmt.setString(4, revenueVO.getRevenue_month());
 
@@ -153,7 +153,7 @@ public class RevenueJDBCDAO implements RevenueDAO_interface{
 			revVO.setRevenue_month(rs.getString("revenue_month"));
 			revVO.setMan_id(rs.getString("man_id"));
 			revVO.setStore_revenue(rs.getInt("store_revenue"));
-			revVO.setState(rs.getInt("state"));
+			revVO.setState(rs.getString("state"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -205,7 +205,7 @@ public class RevenueJDBCDAO implements RevenueDAO_interface{
 			revVO.setRevenue_month(rs.getString("revenue_month"));
 			revVO.setMan_id(rs.getString("man_id"));
 			revVO.setStore_revenue(rs.getInt("store_revenue"));
-			revVO.setState(rs.getInt("state"));
+			revVO.setState(rs.getString("state"));
 			revenuelist.add(revVO);
 			}
 		} catch (SQLException e) {
@@ -258,7 +258,7 @@ public class RevenueJDBCDAO implements RevenueDAO_interface{
 			revVO.setRevenue_month(rs.getString("revenue_month"));
 			revVO.setMan_id(rs.getString("man_id"));
 			revVO.setStore_revenue(rs.getInt("store_revenue"));
-			revVO.setState(rs.getInt("state"));
+			revVO.setState(rs.getString("state"));
 			revenuelist.add(revVO);
 			}
 		} catch (SQLException e) {
@@ -315,7 +315,7 @@ public class RevenueJDBCDAO implements RevenueDAO_interface{
 			revVO.setRevenue_month(rs.getString("revenue_month"));
 			revVO.setMan_id(rs.getString("man_id"));
 			revVO.setStore_revenue(rs.getInt("store_revenue"));
-			revVO.setState(rs.getInt("state"));
+			revVO.setState(rs.getString("state"));
 			revenuelist.add(revVO);
 			}
 		} catch (SQLException e) {

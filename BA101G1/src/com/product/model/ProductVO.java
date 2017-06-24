@@ -6,11 +6,11 @@ public class ProductVO implements java.io.Serializable {
 	private String pro_name;
 	private Number pro_price;
 	private Number pro_total;
-	private Number pro_state;
+	private String pro_state;
 	private byte[] pro_image;
-	private Number pro_type;
 	private String pro_content;
 	private Number quantity;
+	private String pc_id;
 	
 	public String getPro_id() {
 		return pro_id;
@@ -42,10 +42,10 @@ public class ProductVO implements java.io.Serializable {
 	public void setPro_total(Number pro_total) {
 		this.pro_total = pro_total;
 	}
-	public Number getPro_state() {
+	public String getPro_state() {
 		return pro_state;
 	}
-	public void setPro_state(Number pro_state) {
+	public void setPro_state(String pro_state) {
 		this.pro_state = pro_state;
 	}
 	public byte[] getPro_image() {
@@ -54,12 +54,7 @@ public class ProductVO implements java.io.Serializable {
 	public void setPro_image(byte[] pro_image) {
 		this.pro_image = pro_image;
 	}
-	public Number getPro_type() {
-		return pro_type;
-	}
-	public void setPro_type(Number pro_type) {
-		this.pro_type = pro_type;
-	}
+	
 	public String getPro_content() {
 		return pro_content;
 	}
@@ -71,5 +66,11 @@ public class ProductVO implements java.io.Serializable {
 	}
 	public void setQuantity(Number quantity) {
 		this.quantity = quantity;
+	}
+	public String getPc_id() {
+		return pc_id;
+	}
+	public void setPc_id(String pc_id) {
+		this.pc_id = pc_id;
 	}
 }

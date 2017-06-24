@@ -81,7 +81,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 			pstmt.setString(2, adVO.getAd_content());
 			pstmt.setBytes(3, adVO.getAd_image());
 			pstmt.setTimestamp(4, adVO.getAd_time());
-			pstmt.setInt(5, (int) adVO.getAd_state());
+			pstmt.setString(5,  adVO.getAd_state());
 			pstmt.setString(6, adVO.getAd_push_content());
 			pstmt.setString(7, adVO.getAd_id());
 
@@ -164,7 +164,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 				adVO.setAd_content(rs.getString("ad_content"));
 				adVO.setAd_image(rs.getBytes("ad_image"));
 				adVO.setAd_time(rs.getTimestamp("ad_time"));
-				adVO.setAd_state(rs.getInt("ad_state"));
+				adVO.setAd_state(rs.getString("ad_state"));
 				adVO.setAd_push_content(rs.getString("ad_push_content"));
 			}
 		} catch (SQLException e) {
@@ -218,7 +218,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 				adVO.setAd_content(rs.getString("ad_content"));
 				adVO.setAd_image(rs.getBytes("ad_image"));
 				adVO.setAd_time(rs.getTimestamp("ad_time"));
-				adVO.setAd_state(rs.getInt("ad_state"));
+				adVO.setAd_state(rs.getString("ad_state"));
 				adVO.setAd_push_content(rs.getString("ad_push_content"));
 				adlist.add(adVO);
 			}
@@ -273,7 +273,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 				adVO.setAd_content(rs.getString("ad_content"));
 				adVO.setAd_image(rs.getBytes("ad_image"));
 				adVO.setAd_time(rs.getTimestamp("ad_time"));
-				adVO.setAd_state(rs.getInt("ad_state"));
+				adVO.setAd_state(rs.getString("ad_state"));
 				adVO.setAd_push_content(rs.getString("ad_push_content"));
 				adlist.add(adVO);
 			}
@@ -324,7 +324,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 		}
 		 adVO1.setAd_image(pic);
 		 adVO1.setAd_time(new Timestamp(System.currentTimeMillis()));
-		 adVO1.setAd_state(1);
+		 adVO1.setAd_state("¼f®Ö");
 		 adVO1.setAd_push_content("±À¼½");
 		
 		 addao.insert(adVO1);

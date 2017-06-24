@@ -16,14 +16,14 @@ public class StoreVO implements Serializable{
 	private Timestamp store_date;
 	private Number store_star;
 	private Number store_count;
-	private Number store_state;
+	private String store_state;
 	private byte[] store_image;
 	private Number store_report_count;
 	private Timestamp store_start_time;
 	private Timestamp store_end_time;
 	private String store_pw;
 	private String store_acc;
-	private Number store_out;
+	private String store_out;
 	private String store_zone;
 	private String sc_name;
 	
@@ -104,11 +104,11 @@ public class StoreVO implements Serializable{
 		this.store_count = store_count;
 	}
 
-	public Number getStore_state() {
+	public String getStore_state() {
 		return store_state;
 	}
 
-	public void setStore_state(Number store_state) {
+	public void setStore_state(String store_state) {
 		this.store_state = store_state;
 	}
 
@@ -160,11 +160,11 @@ public class StoreVO implements Serializable{
 		this.store_acc = store_acc;
 	}
 
-	public Number getStore_out() {
+	public String getStore_out() {
 		return store_out;
 	}
 
-	public void setStore_out(Number store_out) {
+	public void setStore_out(String store_out) {
 		this.store_out = store_out;
 	}
 

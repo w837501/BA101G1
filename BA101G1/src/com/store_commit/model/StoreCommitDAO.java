@@ -49,7 +49,7 @@ public class StoreCommitDAO implements StoreCommitDAO_interface {
 			 pstmt.setString(2,storecommit.getMem_id());
 			 pstmt.setString(3,storecommit.getSc_content());
 			 pstmt.setTimestamp(4,storecommit.getSc_time());
-			 pstmt.setInt(5,storecommit.getSc_state());
+			 pstmt.setString(5,storecommit.getSc_state());
 			 pstmt.executeUpdate();
 		} catch (SQLException se) {
 			throw new RuntimeException("發生錯誤" + se.getMessage());
@@ -83,7 +83,7 @@ public class StoreCommitDAO implements StoreCommitDAO_interface {
 			 pstmt.setString(2,storecommit.getMem_id());
 			 pstmt.setString(3,storecommit.getSc_content());
 			 pstmt.setTimestamp(4,storecommit.getSc_time());
-			 pstmt.setInt(5,storecommit.getSc_state());
+			 pstmt.setString(5,storecommit.getSc_state());
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
 			throw new RuntimeException("發生錯誤" + se.getMessage());
@@ -159,7 +159,7 @@ public class StoreCommitDAO implements StoreCommitDAO_interface {
 				scVO.setMem_id(rs.getString("mem_id"));
 				scVO.setSc_content(rs.getString("sc_content"));
 				scVO.setSc_time(rs.getTimestamp("sc_time"));
-				scVO.setSc_state(rs.getInt("sc_state"));
+				scVO.setSc_state(rs.getString("sc_state"));
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("發生錯誤" + se.getMessage());
@@ -209,7 +209,7 @@ public class StoreCommitDAO implements StoreCommitDAO_interface {
 				scvo.setMem_id(rs.getString("mem_id"));
 				scvo.setSc_content(rs.getString("sc_content"));
 				scvo.setSc_time(rs.getTimestamp("sc_time"));
-				scvo.setSc_state(rs.getInt("sc_state"));
+				scvo.setSc_state(rs.getString("sc_state"));
 				list.add(scvo);
 				}
 		} catch (SQLException se) {

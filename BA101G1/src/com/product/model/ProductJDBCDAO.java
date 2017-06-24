@@ -18,7 +18,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 
 	private static final String INSERT_STMT = "INSERT INTO PRODUCT VALUES ('PRO'||'-'||LPAD(to_char(pro_seq.NEXTVAL),6,'0'),?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String DELETE = "DELETE FROM PRODUCT where pro_id = ?";
-	private static final String UPDATE_STMT = "UPDATE PRODUCT set pro_name=?, pro_price=?, pro_state=?, pro_image=?, pro_type=?, pro_content=? where pro_id = ?";
+	private static final String UPDATE_STMT = "UPDATE PRODUCT set pro_name=?, pro_price=?, pro_state=?, pro_image=?, pc_id=?, pro_content=? where pro_id = ?";
 	private static final String Find_by_PK = "select * from PRODUCT where pro_id=?";
 	private static final String Find_ALL = "select * from PRODUCT ";
 	private static final String Find_NAME = "select * from PRODUCT where pro_name like ?";
@@ -37,9 +37,9 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 			pstmt.setString(2, productVO.getPro_name());
 			pstmt.setInt(3, (int)productVO.getPro_price());
 			pstmt.setInt(4, (int)productVO.getPro_total());
-			pstmt.setInt(5, (int)productVO.getPro_state());
+			pstmt.setString(5, productVO.getPro_state());
 			pstmt.setBytes(6, productVO.getPro_image());
-			pstmt.setInt(7, (int)productVO.getPro_type());
+			pstmt.setString(7, productVO.getPc_id());
 			pstmt.setString(8, productVO.getPro_content());
 
 			pstmt.executeUpdate();
@@ -75,9 +75,9 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 
 			pstmt.setString(1, productVO.getPro_name());
 			pstmt.setInt(2, (int)productVO.getPro_price());
-			pstmt.setInt(3, (int)productVO.getPro_state());
+			pstmt.setString(3, productVO.getPro_state());
 			pstmt.setBytes(4, productVO.getPro_image());
-			pstmt.setInt(5, (int)productVO.getPro_type());
+			pstmt.setString(5, productVO.getPc_id());
 			pstmt.setString(6, productVO.getPro_content());
 			pstmt.setString(7, productVO.getPro_id());
 
@@ -157,9 +157,9 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 				proVO.setPro_name(rs.getString("Pro_name"));
 				proVO.setPro_price(rs.getInt("Pro_price"));
 				proVO.setPro_total(rs.getInt("Pro_total"));
-				proVO.setPro_state(rs.getInt("Pro_state"));
+				proVO.setPro_state(rs.getString("Pro_state"));
 				proVO.setPro_image(rs.getBytes("Pro_image"));
-				proVO.setPro_type(rs.getInt("Pro_type"));
+				proVO.setPc_id(rs.getString("Pc_id"));
 				proVO.setPro_content(rs.getString("Pro_content"));
 			}
 		} catch (SQLException e) {
@@ -213,9 +213,9 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 				proVO.setPro_name(rs.getString("Pro_name"));
 				proVO.setPro_price(rs.getInt("Pro_price"));
 				proVO.setPro_total(rs.getInt("Pro_total"));
-				proVO.setPro_state(rs.getInt("Pro_state"));
+				proVO.setPro_state(rs.getString("Pro_state"));
 				proVO.setPro_image(rs.getBytes("Pro_image"));
-				proVO.setPro_type(rs.getInt("Pro_type"));
+				proVO.setPc_id(rs.getString("Pc_id"));
 				proVO.setPro_content(rs.getString("Pro_content"));
 				productlist.add(proVO);
 			}
@@ -271,9 +271,9 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 				proVO.setPro_name(rs.getString("Pro_name"));
 				proVO.setPro_price(rs.getInt("Pro_price"));
 				proVO.setPro_total(rs.getInt("Pro_total"));
-				proVO.setPro_state(rs.getInt("Pro_state"));
+				proVO.setPro_state(rs.getString("Pro_state"));
 				proVO.setPro_image(rs.getBytes("Pro_image"));
-				proVO.setPro_type(rs.getInt("Pro_type"));
+				proVO.setPc_id(rs.getString("Pc_id"));
 				proVO.setPro_content(rs.getString("Pro_content"));
 				productlist.add(proVO);
 			}
@@ -317,9 +317,9 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		productVO1.setPro_name("¤û¦×ÄÑ");
 		productVO1.setPro_price(60);
 		productVO1.setPro_total(0);
-		productVO1.setPro_state(1);
+		productVO1.setPro_state("¤W¬[");
 		productVO1.setPro_image(null);
-		productVO1.setPro_type(0);
+		productVO1.setPc_id("ÄÑ­¹");
 		productVO1.setPro_content("§Ú¬O¤û¦×ÄÑ");
 		
 		productdao.insert(productVO1);

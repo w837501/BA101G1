@@ -183,18 +183,13 @@ public class AdServlet extends HttpServlet {
 					System.out.println("錯誤");
 					errorMsgs.add("請輸入廣告時間");
 				}
-				String str_ad_state=req.getParameter("ad_state");
-				if(str_ad_state==null||str_ad_state.trim().isEmpty()){
+				String ad_state=req.getParameter("ad_state");
+				if(ad_state==null||ad_state.trim().isEmpty()){
 					errorMsgs.add("請輸入狀態");
 				}else{
-					str_ad_state=req.getParameter("ad_state");
+					ad_state=req.getParameter("ad_state");
 				}
-				Integer ad_state=null;
-				try{
-					ad_state=new Integer(str_ad_state);
-				}catch(Exception e){
-					errorMsgs.add("ad_state轉型錯誤");
-				}
+				
 				
 				AdVO adVO=new AdVO();
 				adVO.setAd_id(ad_id);
