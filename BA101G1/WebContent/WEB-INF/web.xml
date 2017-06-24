@@ -103,4 +103,13 @@
     <servlet-name>OrderListServlet</servlet-name>
     <url-pattern>/frontend/selectOrder/orderlist.do</url-pattern>
   </servlet-mapping>
+   <servlet>
+  		<servlet-name>StoreServlet</servlet-name>
+  		<servlet-class>com.store.controller.StoreServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  		<servlet-name>StoreServlet</servlet-name>
+  		<url-pattern>/store/store.do</url-pattern>
+  </servlet-mapping>
+
 </web-app>

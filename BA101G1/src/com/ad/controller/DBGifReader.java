@@ -39,8 +39,10 @@ public class DBGifReader extends HttpServlet {
 					out.write(buf, 0, len);
 				}
 				in.close();
-			} else {
-				InputStream in=getServletContext().getResourceAsStream("/images/back1.gif");
+			} 
+			else {
+				System.out.println("所以這裡要幹嘛?????????????????");
+				InputStream in=getServletContext().getResourceAsStream("/frontend/advertisement/images/logo.png");
 				byte[] buf=new byte[in.available()];
 				in.read(buf);
 				out.write(buf);
@@ -49,7 +51,8 @@ public class DBGifReader extends HttpServlet {
 			rs.close();
 			stmt.close();
 		} catch (Exception e) {
-			InputStream in=getServletContext().getResourceAsStream("/images/back1.gif");
+			System.out.println("沒圖片唷");
+			InputStream in=getServletContext().getResourceAsStream("/frontend/advertisement/images/logo.png");
 			byte[] buf=new byte[in.available()];
 			in.read(buf);
 			out.write(buf);
