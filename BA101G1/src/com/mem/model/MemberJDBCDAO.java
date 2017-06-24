@@ -37,7 +37,7 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 			pstmt.setString(2, memberVO.getMem_phone());
 			pstmt.setString(3, memberVO.getMem_pw());
 			pstmt.setString(4, memberVO.getMem_mail());
-			pstmt.setInt(5, (int) memberVO.getMem_state());
+			pstmt.setString(5,  memberVO.getMem_state());
 			pstmt.setInt(6, (int) memberVO.getMem_report_count());
 			pstmt.setTimestamp(7, memberVO.getMem_start_time());
 			pstmt.setTimestamp(8, memberVO.getMem_end_time());
@@ -251,7 +251,7 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 		memVO1.setMem_phone("123");
 		memVO1.setMem_pw("132");
 		memVO1.setMem_mail("peter1@abc.com");
-		memVO1.setMem_state(2);
+		memVO1.setMem_state("คwป{รา");
 		memVO1.setMem_report_count(6);
 		memVO1.setMem_start_time(new Timestamp(System.currentTimeMillis()));
 		memVO1.setMem_end_time(new Timestamp(System.currentTimeMillis()+100000000L));

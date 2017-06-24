@@ -12,7 +12,7 @@ public class StoreReportService {
 
 	public StoreReportVO addStoreReport(String store_id, String sc_id, String order_id,
 			String man_id, String sr_content, byte[] sr_image, java.sql.Timestamp sr_time, 
-			Integer sr_state, Integer sr_result) {
+			String sr_state, String sr_result) {
 
 		StoreReportVO srVO = new StoreReportVO();
 
@@ -32,7 +32,7 @@ public class StoreReportService {
 
 	public StoreReportVO updateStoreReport(String sr_id, String store_id, String sc_id,
 			String order_id, String man_id, String sr_content, byte[] sr_image, java.sql.Timestamp sr_time,
-			Integer sr_state, Integer sr_result) {
+			String sr_state, String sr_result) {
 
 		StoreReportVO srVO = new StoreReportVO();
 

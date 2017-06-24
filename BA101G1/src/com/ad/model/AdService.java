@@ -29,7 +29,7 @@ public class AdService {
 		return adVO;
 	}
 	
-	public AdVO updateAd(String ad_id, String store_id, String ad_name, String ad_content, byte[] ad_image, Timestamp ad_time, Number ad_state, String ad_push_content ){
+	public AdVO updateAd(String ad_id, String store_id, String ad_name, String ad_content, byte[] ad_image, Timestamp ad_time, String ad_state, String ad_push_content ){
 		AdVO adVO=new AdVO();
 		
 		adVO.setAd_id(ad_id);

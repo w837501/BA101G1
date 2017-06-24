@@ -39,8 +39,8 @@ public class MemberReportJDBCDAO implements MemberReportDAO_interface {
 			pstmt.setString(5, mrVO.getMr_content());
 			pstmt.setBytes(6, mrVO.getMr_image());
 			pstmt.setTimestamp(7, mrVO.getMr_time());
-			pstmt.setInt(8, mrVO.getMr_state());
-			pstmt.setInt(9, mrVO.getMr_result());
+			pstmt.setString(8, mrVO.getMr_state());
+			pstmt.setString(9, mrVO.getMr_result());
 
 			pstmt.executeUpdate();
 
@@ -91,8 +91,8 @@ public class MemberReportJDBCDAO implements MemberReportDAO_interface {
 			pstmt.setString(5, mrVO.getMr_content());
 			pstmt.setBytes(6, mrVO.getMr_image());
 			pstmt.setTimestamp(7, mrVO.getMr_time());
-			pstmt.setInt(8, mrVO.getMr_state());
-			pstmt.setInt(9, mrVO.getMr_result());
+			pstmt.setString(8, mrVO.getMr_state());
+			pstmt.setString(9, mrVO.getMr_result());
 			pstmt.setString(10, mrVO.getMr_id());
 
 			pstmt.executeUpdate();
@@ -198,8 +198,8 @@ public class MemberReportJDBCDAO implements MemberReportDAO_interface {
 				mrVO.setMr_content(rs.getString("mr_content"));
 				mrVO.setMr_image(rs.getBytes("mr_image"));
 				mrVO.setMr_time(rs.getTimestamp("mr_time"));
-				mrVO.setMr_state(rs.getInt("mr_state"));
-				mrVO.setMr_result(rs.getInt("mr_result"));
+				mrVO.setMr_state(rs.getString("mr_state"));
+				mrVO.setMr_result(rs.getString("mr_result"));
 			}
 
 			// Handle any driver errors
@@ -264,8 +264,8 @@ public class MemberReportJDBCDAO implements MemberReportDAO_interface {
 				mrVO.setMr_content(rs.getString("mr_content"));
 				mrVO.setMr_image(rs.getBytes("mr_image"));
 				mrVO.setMr_time(rs.getTimestamp("mr_time"));
-				mrVO.setMr_state(rs.getInt("mr_state"));
-				mrVO.setMr_result(rs.getInt("mr_result"));
+				mrVO.setMr_state(rs.getString("mr_state"));
+				mrVO.setMr_result(rs.getString("mr_result"));
 				list.add(mrVO); // Store the row in the list
 			}
 
@@ -317,8 +317,8 @@ public class MemberReportJDBCDAO implements MemberReportDAO_interface {
 		mrVO1.setMr_content(new String("一諾千金"));
 		mrVO1.setMr_image(new byte[0]);
 		mrVO1.setMr_time(java.sql.Timestamp.valueOf("2002-02-22 22:22:22"));
-		mrVO1.setMr_state(new Integer(1));
-		mrVO1.setMr_result(new Integer(1));
+		mrVO1.setMr_state("審核中");
+		mrVO1.setMr_result("");
 		dao.insert(mrVO1);
 
 		// 修改
@@ -331,8 +331,8 @@ public class MemberReportJDBCDAO implements MemberReportDAO_interface {
 		mrVO2.setMr_content(new String("AD-000003"));
 		mrVO2.setMr_image(null);
 		mrVO2.setMr_time(java.sql.Timestamp.valueOf("2002-02-02 11:22:33"));
-		mrVO2.setMr_state(1);
-		mrVO2.setMr_result(1);
+		mrVO2.setMr_state("已審核");
+		mrVO2.setMr_result("未成立");
 		dao.update(mrVO2);
 
 		// 刪除

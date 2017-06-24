@@ -181,7 +181,7 @@ public class RevenueServlet extends HttpServlet {
 				String man_id = req.getParameter("man_id");
 
 				String str_store_revenue = req.getParameter("store_revenue");
-				String str_store_state = req.getParameter("store_state");
+				String store_state = req.getParameter("store_state");
 
 				if (str_store_revenue == null || str_store_revenue.trim().isEmpty()) {
 					errorMsgs.add("請輸入營業額");
@@ -189,10 +189,10 @@ public class RevenueServlet extends HttpServlet {
 					str_store_revenue = req.getParameter("store_revenue");
 				}
 
-				if (str_store_state == null || str_store_state.trim().isEmpty()) {
+				if (store_state == null || store_state.trim().isEmpty()) {
 					errorMsgs.add("請輸入狀態");
 				} else {
-					str_store_state = req.getParameter("store_state");
+					store_state = req.getParameter("store_state");
 				}
 
 				if (!errorMsgs.isEmpty()) {
@@ -206,12 +206,7 @@ public class RevenueServlet extends HttpServlet {
 				} catch (Exception e) {
 					errorMsgs.add("格式不正確");
 				}
-				Integer store_state = null;
-				try {
-					store_state = new Integer(str_store_state);
-				} catch (Exception e) {
-					errorMsgs.add("格式不正確");
-				}
+				
 
 				RevenueVO revenueVO = new RevenueVO();
 				revenueVO.setStore_id(store_id);
@@ -274,14 +269,13 @@ public class RevenueServlet extends HttpServlet {
 					STR_store_revenue = req.getParameter("store_revenue");
 				}
 
-				String STR_state = req.getParameter("state");
-				if (STR_state == null || STR_state.trim().isEmpty()) {
+				String state = req.getParameter("state");
+				if (state == null || state.trim().isEmpty()) {
 					errorMsgs.add("請輸入狀態");
 				} else {
-					STR_state = req.getParameter("state");
+					state = req.getParameter("state");
 				}
 				Integer store_revenue = new Integer(STR_store_revenue);
-				Integer state = new Integer(STR_state);
 				RevenueVO revenueVO = new RevenueVO();
 				revenueVO.setStore_id(store_id);
 				revenueVO.setRevenue_month(revenue_month);

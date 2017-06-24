@@ -12,8 +12,8 @@ public class StoreReportVO implements Serializable{
 	private String sr_content;
 	private byte[] sr_image;
 	private Timestamp sr_time;
-	private Integer sr_state;
-	private Integer sr_result;
+	private String sr_state;
+	private String sr_result;
 	
 	public StoreReportVO(){
 		
@@ -22,7 +22,7 @@ public class StoreReportVO implements Serializable{
 
 
 	public StoreReportVO(String sr_id, String store_id, String sc_id, String order_id, String man_id, String sr_content,
-			byte[] sr_image, Timestamp sr_time, Integer sr_state, Integer sr_result) {
+			byte[] sr_image, Timestamp sr_time, String sr_state, String sr_result) {
 		super();
 		this.sr_id = sr_id;
 		this.store_id = store_id;
@@ -102,19 +102,19 @@ public class StoreReportVO implements Serializable{
 		this.sr_time = sr_time;
 	}
 
-	public Integer getSr_state() {
+	public String getSr_state() {
 		return sr_state;
 	}
 
-	public void setSr_state(Integer sr_state) {
+	public void setSr_state(String sr_state) {
 		this.sr_state = sr_state;
 	}
 
-	public Integer getSr_result() {
+	public String getSr_result() {
 		return sr_result;
 	}
 
-	public void setSr_result(Integer sr_result) {
+	public void setSr_result(String sr_result) {
 		this.sr_result = sr_result;
 	}
 

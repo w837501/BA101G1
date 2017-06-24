@@ -14,7 +14,7 @@ public class MemberReportService {
 
 	public MemberReportVO addMemberReport(String mem_id, String order_id, String sc_id,
 			String man_id, String mr_content, byte[] mr_image, java.sql.Timestamp mr_time, 
-			Integer mr_state, Integer mr_result) {
+			String mr_state, String mr_result) {
 
 		MemberReportVO mrVO = new MemberReportVO();
 
@@ -34,7 +34,7 @@ public class MemberReportService {
 
 	public MemberReportVO updateMemberReport(String mr_id, String mem_id, String order_id,
 			String sc_id, String man_id, String mr_content, byte[] mr_image, java.sql.Timestamp mr_time,
-			Integer mr_state, Integer mr_result) {
+			String mr_state, String mr_result) {
 
 		MemberReportVO mrVO = new MemberReportVO();
 

@@ -119,7 +119,7 @@ public class StoreCommitServlet extends HttpServlet {
 			String mem_id = new String(req.getParameter("mem_id").trim());
 			String sc_content = new String(req.getParameter("sc_content").trim());
 			java.sql.Timestamp sc_time = java.sql.Timestamp.valueOf(req.getParameter("sc_time").trim());
-			Integer sc_state = new Integer(req.getParameter("sc_state").trim());
+			String sc_state =req.getParameter("sc_state").trim();
 			
 
 			StoreCommitVO scVO = new StoreCommitVO();
@@ -169,7 +169,7 @@ public class StoreCommitServlet extends HttpServlet {
 			String sc_content = new String(req.getParameter("sc_content").trim());
 			java.sql.Time currentTime = new java.sql.Time(System.currentTimeMillis());
 			java.sql.Timestamp sc_time = java.sql.Timestamp.valueOf(req.getParameter("sc_time") +" " +currentTime.toString() );
-			Integer sc_state = new Integer(req.getParameter("sc_state").trim());	
+			String sc_state = req.getParameter("sc_state").trim();	
 		
 			
 			StoreCommitVO scVO = new StoreCommitVO();

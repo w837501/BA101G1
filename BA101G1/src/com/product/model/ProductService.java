@@ -13,7 +13,7 @@ public class ProductService {
 		dao = new ProductDAO();
 	}
 	
-	public ProductVO addPro(String store_id, String pro_id, String pro_name, Number pro_price,Number pro_total, Number pro_state, byte[] pro_image,Number pro_type,String pro_content){
+	public ProductVO addPro(String store_id, String pro_id, String pro_name, Number pro_price,Number pro_total, String pro_state, byte[] pro_image,String pc_id,String pro_content){
 		ProductVO proVO=new ProductVO();
 		
 		proVO.setStore_id(store_id);
@@ -23,7 +23,7 @@ public class ProductService {
 		proVO.setPro_total(pro_total);
 		proVO.setPro_state(pro_state);
 		proVO.setPro_image(pro_image);
-		proVO.setPro_type(pro_type);
+		proVO.setPc_id(pc_id);
 		proVO.setPro_content(pro_content);
 		
 		dao.insert(proVO);
@@ -31,7 +31,7 @@ public class ProductService {
 		return proVO;
 	}
 	
-	public ProductVO updatePro(String store_id, String pro_id, String pro_name, Number pro_price,Number pro_total, Number pro_state, byte[] pro_image,Number pro_type,String pro_content){
+	public ProductVO updatePro(String store_id, String pro_id, String pro_name, Number pro_price,Number pro_total, String pro_state, byte[] pro_image,String pc_id,String pro_content){
 		ProductVO proVO=new ProductVO();
 		
 		proVO.setStore_id(store_id);
@@ -41,7 +41,7 @@ public class ProductService {
 		proVO.setPro_total(pro_total);
 		proVO.setPro_state(pro_state);
 		proVO.setPro_image(pro_image);
-		proVO.setPro_type(pro_type);
+		proVO.setPc_id(pc_id);
 		proVO.setPro_content(pro_content);
 		dao.update(proVO);
 		
