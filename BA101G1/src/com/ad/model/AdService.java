@@ -29,7 +29,7 @@ public class AdService {
 		return adVO;
 	}
 	
-	public AdVO updateRev(String ad_id, String store_id, String ad_name, String ad_content, byte[] ad_image, Timestamp ad_time, Number ad_state, String ad_push_content ){
+	public AdVO updateAd(String ad_id, String store_id, String ad_name, String ad_content, byte[] ad_image, Timestamp ad_time, Number ad_state, String ad_push_content ){
 		AdVO adVO=new AdVO();
 		
 		adVO.setAd_id(ad_id);
@@ -49,7 +49,7 @@ public class AdService {
 	public void deleteRev(String ad_id) {
 		dao.delete(ad_id);
 	}
-	public AdVO getOneEmp(String ad_id, String store_id) {
+	public AdVO getOneAd(String ad_id) {
 		return dao.findByPrimaryKey(ad_id);
 	}
 	public List<AdVO> getAll() {
