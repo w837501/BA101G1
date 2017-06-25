@@ -5,7 +5,7 @@
 
 <%
 	AdService adSvc = new AdService();
-	List<AdVO> list = adSvc.getAvailableAD();
+	List<AdVO> list = adSvc.getAll();
 	pageContext.setAttribute("list", list);
 %>
 
@@ -88,22 +88,22 @@
 	</div>
     
 
-		<p"><font size = "500px">
+		<p><font size = "500px">
 		<b> ¼s§iÂsÄý </b>
 		</font></p>
 		<%@ include file="pages/page1.file" %> 
 		<c:forEach var="adVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1 %>">
 		
 		<div class="col-xs-12 col-sm-3 aa" align="center">
-		<a href="ad.do?ad_id=${adVO.ad_id}&action=getOne_For_Display">
-		<img src="https://api.fnkr.net/testimg/350x200/00CED1/FFF/?text=img+placeholder"
-		width="170px" height="170px" vspace="10px" style="display:block; margin:auto;border-radius: 25%;"></a>
+		<a href="ad.do?action=getOne_For_Display&ad_id=${adVO.ad_id }">
+		<img src="<%=request.getContextPath()%>/advertisement/DBGifReader.do?ad_id=${adVO.ad_id}" style="max-width: 150px; max-height: 150px;">
 		<br>
 		<p>
 		${adVO.ad_name}<br>
 		${adVO.ad_time}     
 		
 		</p>
+		</a>
 		</div>
 	   </c:forEach>
 	   

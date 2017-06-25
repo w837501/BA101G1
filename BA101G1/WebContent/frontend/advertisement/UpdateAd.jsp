@@ -20,7 +20,7 @@
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
 		<td>
 		<h3>員工資料修改 - update_emp_input.jsp</h3>
-		<a href="select_man.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></td>
+		<a href="ListAllAd.jsp"><img src="images/logo.png" width="100" height="32" border="0">回首頁</a></td>
 	</tr>
 </table>
 
@@ -74,9 +74,9 @@
 	<tr>
 		<td>廣告狀態:<font color=red><b>*</b></font></td>
 		<td><select name="ad_state"><%=adVO.getAd_state() %>
-					<option value="0">審核中</option>
-					<option value="1">刊登中</option>
-					<option value="2">下架</option>		
+					<option value="審核中">審核中</option>
+					<option value="刊登中">刊登中</option>
+					<option value="下架">下架</option>		
 			</select></td>
 	</tr>
 	<tr>

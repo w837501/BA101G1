@@ -42,7 +42,6 @@ public class AdServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		
 		if("getOne_For_Display".equals(action)){
-			System.out.println("·F§A¶ýpeter");
 			try{	
 				String ad_id = new String(req.getParameter("ad_id"));
 				System.out.println(ad_id);
@@ -212,7 +211,7 @@ public class AdServlet extends HttpServlet {
 				adVO=adSvc.updateAd(ad_id, store_id, ad_name, ad_content, ad_image, ad_time, ad_state, ad_push_content);
 				
 				req.setAttribute("adVO", adVO);
-				String url="/frontend/advertisement/ListAllAd.jsp";
+				String url="/frontend/advertisement/ListOneAd.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}catch(Exception e){

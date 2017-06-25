@@ -4,7 +4,10 @@
 <%@ page import="com.ad.model.*" %>
 
 <%
-AdVO adVO = (AdVO) request.getAttribute("adVO"); //Chatroom_MessageServlet.java(Concroller), 存入req的empVO物件
+// AdVO adVO = (AdVO) request.getAttribute("adVO"); //Chatroom_MessageServlet.java(Concroller), 存入req的empVO物件
+AdService adSvc=new AdService();
+String ad_id=request.getParameter("ad_id");
+AdVO adVO=adSvc.getOneAd(ad_id);
 %>
 
 <!DOCTYPE html>
@@ -60,7 +63,7 @@ AdVO adVO = (AdVO) request.getAttribute("adVO"); //Chatroom_MessageServlet.java(
 		}
 		
 		div#outside{
-			width: 1700px;
+			width: 1200px;
 			padding-left: 350px;
 		}
 		div#outside #title{
@@ -117,8 +120,6 @@ AdVO adVO = (AdVO) request.getAttribute("adVO"); //Chatroom_MessageServlet.java(
 				</ul>
 			</div>
 	</div>
-    
-
 		<p><font size = "500px">
 		<b style ="display:inline-block;"><a href="?????"> 廣告 </a>> 內容 </b>
 		</font></p>
@@ -128,18 +129,14 @@ AdVO adVO = (AdVO) request.getAttribute("adVO"); //Chatroom_MessageServlet.java(
 		<div id ="outside" align="center"">
 			<!-- <div id = "title" style="border: solid red;"></div> -->
 			<!-- <div id="time" style="border: solid;"></div> -->
-			<div id="title">
 				<h1>${adVO.ad_name}</h1>
 				<h2>${adVO.ad_time}</h2>
-			</div>
-			
-
-			
 			<hr style="border-color: red;">
 			<div id="content">
-				<img src="<%=request.getContextPath()%>/advertisement/DBGifReader.do?ad_id=${adVO.ad_id}"></img>
+			<img src="<%=request.getContextPath()%>/advertisement/DBGifReader.do?ad_id=${adVO.ad_id}"style="max-width: 150px; max-height: 150px;"></img>
 			</div>
-			${adVO.ad_content}--<img src="http://localhost:8081/BA101G1/advertisement/DBGifReader.do?ad_id=AD-000001"></img>
+			${adVO.ad_content}
+<!-- 			<img src="http://localhost:8081/BA101G1/advertisement/DBGifReader.do?ad_id=AD-000001"> -->
 			
 		</div>
 
