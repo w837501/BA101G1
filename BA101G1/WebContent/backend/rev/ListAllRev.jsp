@@ -73,6 +73,7 @@
 			    <input type="hidden" name="store_id" value="${RevenueVO.store_id}">
 			    <input type="hidden" name="revenue_month" value="${RevenueVO.revenue_month }">
 			    <input type="hidden" name="action" value="getOne_For_Display">
+			    </FORM>
 			</td>
 			
 	</tr>
@@ -81,9 +82,9 @@
 <%@ include file="page2.file" %>	
 
 
-<%if (request.getAttribute("oneList")!=null){%>
-       <jsp:include page="/backend/rev/ListOneRev.jsp" />
-<%} %>
+<%-- <%if (request.getAttribute("oneList")!=null){%> --%>
+<%--        <jsp:include page="/backend/rev/ListOneRev.jsp" /> --%>
+<%-- <%} %> --%>
 
 </body>
 </html>

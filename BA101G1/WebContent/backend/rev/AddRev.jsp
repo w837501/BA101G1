@@ -64,11 +64,7 @@
 		<td><input type="TEXT" name="store_revenue" size="45"
 			 value="<%= (revenueVO==null)? "602120" :revenueVO.getStore_revenue() %>" /></td>
 	</tr>
-	<tr>
-		<td>ª¬ºA:<font color=red><b>*</b></font></td>
-		<td><input type="TEXT" name="state" size="45"
-			 value="<%= (revenueVO==null)? 0 :revenueVO.getState() %>" /></td>
-	</tr>
+	
 	</table>
 	<br>
 		<input type="hidden" name="action" value="insert">
