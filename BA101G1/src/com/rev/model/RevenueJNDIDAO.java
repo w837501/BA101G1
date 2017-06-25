@@ -24,7 +24,7 @@ public class RevenueJNDIDAO implements RevenueDAO_interface{
 		}
 	}
 	
-	private static final String INSERT_STMT = "INSERT into REVENUE VALUES(?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT into REVENUE (store_id,revenue_month,man_id,store_revenue)VALUES(?,?,?,?)";
 	private static final String UPDATE_STMT = "UPDATE REVENUE set store_revenue=?, state=? where store_id = ? and revenue_month=?";
 	private static final String DELETE = "DELETE FROM REVENUE where store_id = ? and revenue_month=?";
 	private static final String Find_by_PK = "select * from REVENUE where store_id = ? and revenue_month=?";
@@ -44,7 +44,6 @@ public class RevenueJNDIDAO implements RevenueDAO_interface{
 			pstmt.setString(2, revenueVO.getRevenue_month());
 			pstmt.setString(3, revenueVO.getMan_id());
 			pstmt.setInt(4, revenueVO.getStore_revenue());
-			pstmt.setString(5,  revenueVO.getState());
 
 			pstmt.executeUpdate();
 
