@@ -10,7 +10,7 @@ public class MemberVO implements Serializable{
 	private String mem_phone;
 	private String mem_pw;
 	private String mem_mail;
-	private Number mem_state;
+	private String mem_state;
 	private Number mem_report_count;
 	private Timestamp mem_start_time;
 	private Timestamp mem_end_time;
@@ -46,10 +46,10 @@ public class MemberVO implements Serializable{
 	public void setMem_mail(String mem_mail) {
 		this.mem_mail = mem_mail;
 	}
-	public Number getMem_state() {
+	public String getMem_state() {
 		return mem_state;
 	}
-	public void setMem_state(Number mem_state) {
+	public void setMem_state(String mem_state) {
 		this.mem_state = mem_state;
 	}
 	public Number getMem_report_count() {

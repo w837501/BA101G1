@@ -9,7 +9,7 @@ public class AdVO implements java.io.Serializable{
 	private String ad_content;
 	private byte[] ad_image;
 	private Timestamp ad_time;
-	private Number ad_state;
+	private String ad_state;
 	private String ad_push_content;
 	
 	public String getAd_id() {
@@ -48,10 +48,10 @@ public class AdVO implements java.io.Serializable{
 	public void setAd_time(Timestamp ad_time) {
 		this.ad_time = ad_time;
 	}
-	public Number getAd_state() {
+	public String getAd_state() {
 		return ad_state;
 	}
-	public void setAd_state(Number ad_state) {
+	public void setAd_state(String ad_state) {
 		this.ad_state = ad_state;
 	}
 	public String getAd_push_content() {

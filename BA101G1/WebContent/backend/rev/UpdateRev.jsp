@@ -50,7 +50,11 @@
 	</tr>
 	<tr>
 		<td>狀態:</td>
-		<td><input type="TEXT" name="store_state" size="45" value="<%=revenueVO.getState() %>"/></td>
+		<td><select name="store_state" value="<%=revenueVO.getState() %>">
+					<option value='未付'>未付</option>
+					<option value='已付'>已付</option>
+			</select>
+		</td>
 	</tr>	
 </table>
 <br>
@@ -61,6 +65,6 @@
 <input type="submit"  value="送出修改">
 
 </form>
-</form>
+
 </body>
 </html>

@@ -24,7 +24,7 @@ public class RevenueDAO implements RevenueDAO_interface{
 		}
 	}
 	
-	private static final String INSERT_STMT = "INSERT into REVENUE VALUES(?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT into REVENUE  (store_id,revenue_month,man_id,store_revenue)VALUES(?,?,?,?)";
 	private static final String UPDATE_STMT = "UPDATE REVENUE set store_revenue=?, state=? where store_id = ? and revenue_month=?";
 	private static final String DELETE = "DELETE FROM REVENUE where store_id = ? and revenue_month=?";
 	private static final String Find_by_PK = "select * from REVENUE where store_id = ? and revenue_month=?";
@@ -45,7 +45,6 @@ public class RevenueDAO implements RevenueDAO_interface{
 			pstmt.setString(2, revenueVO.getRevenue_month());
 			pstmt.setString(3, revenueVO.getMan_id());
 			pstmt.setInt(4,revenueVO.getStore_revenue());
-			pstmt.setInt(5, revenueVO.getState());
 
 			pstmt.executeUpdate();
 
@@ -75,7 +74,7 @@ public class RevenueDAO implements RevenueDAO_interface{
 
 			
 			pstmt.setInt(1,  revenueVO.getStore_revenue());
-			pstmt.setInt(2,  revenueVO.getState());
+			pstmt.setString(2,  revenueVO.getState());
 			pstmt.setString(3, revenueVO.getStore_id());
 			pstmt.setString(4, revenueVO.getRevenue_month());
 
@@ -150,7 +149,7 @@ public class RevenueDAO implements RevenueDAO_interface{
 			revVO.setRevenue_month(rs.getString("revenue_month"));
 			revVO.setMan_id(rs.getString("man_id"));
 			revVO.setStore_revenue(rs.getInt("store_revenue"));
-			revVO.setState(rs.getInt("state"));
+			revVO.setState(rs.getString("state"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -199,7 +198,7 @@ public class RevenueDAO implements RevenueDAO_interface{
 			revVO.setRevenue_month(rs.getString("revenue_month"));
 			revVO.setMan_id(rs.getString("man_id"));
 			revVO.setStore_revenue(rs.getInt("store_revenue"));
-			revVO.setState(rs.getInt("state"));
+			revVO.setState(rs.getString("state"));
 			revenuelist.add(revVO);
 			}
 		} catch (SQLException e) {
@@ -251,7 +250,7 @@ public class RevenueDAO implements RevenueDAO_interface{
 			revVO.setRevenue_month(rs.getString("revenue_month"));
 			revVO.setMan_id(rs.getString("man_id"));
 			revVO.setStore_revenue(rs.getInt("store_revenue"));
-			revVO.setState(rs.getInt("state"));
+			revVO.setState(rs.getString("state"));
 			revenuelist.add(revVO);
 			}
 		} catch (SQLException e) {
@@ -304,7 +303,7 @@ public class RevenueDAO implements RevenueDAO_interface{
 			revVO.setRevenue_month(rs.getString("revenue_month"));
 			revVO.setMan_id(rs.getString("man_id"));
 			revVO.setStore_revenue(rs.getInt("store_revenue"));
-			revVO.setState(rs.getInt("state"));
+			revVO.setState(rs.getString("state"));
 			revenuelist.add(revVO);
 			}
 		} catch (SQLException e) {

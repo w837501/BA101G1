@@ -29,7 +29,7 @@ public class AdDAO implements AdDAO_interface {
 	private static final String UPDATE_STMT = "UPDATE AD set store_id=?, ad_name=?, ad_content=?, ad_image=?, ad_time=?, ad_state=?, ad_push_content=? where ad_id=?";
 	private static final String DELETE = "DELETE FROM AD where ad_id = ?";
 	private static final String Find_by_PK = "select * from AD where ad_id=?";
-	private static final String Find_ALL = "select * from AD order by ad_time desc";
+	private static final String Find_ALL = "select * from AD ";
 	
 	private static final String AD_Available ="select * from Ad where ad_state = 1 order by ad_time desc";
 	
@@ -83,7 +83,7 @@ public class AdDAO implements AdDAO_interface {
 			pstmt.setString(3, adVO.getAd_content());
 			pstmt.setBytes(4, adVO.getAd_image());
 			pstmt.setTimestamp(5, adVO.getAd_time());
-			pstmt.setInt(6, (int) adVO.getAd_state());
+			pstmt.setString(6, adVO.getAd_state());
 			pstmt.setString(7, adVO.getAd_push_content());
 			pstmt.setString(8, adVO.getAd_id());
 
@@ -158,7 +158,7 @@ public class AdDAO implements AdDAO_interface {
 				adVO.setAd_content(rs.getString("ad_content"));
 				adVO.setAd_image(rs.getBytes("ad_image"));
 				adVO.setAd_time(rs.getTimestamp("ad_time"));
-				adVO.setAd_state(rs.getInt("ad_state"));
+				adVO.setAd_state(rs.getString("ad_state"));
 				adVO.setAd_push_content(rs.getString("ad_push_content"));
 			}
 		} catch (SQLException e) {
@@ -209,7 +209,7 @@ public class AdDAO implements AdDAO_interface {
 				adVO.setAd_content(rs.getString("ad_content"));
 				adVO.setAd_image(rs.getBytes("ad_image"));
 				adVO.setAd_time(rs.getTimestamp("ad_time"));
-				adVO.setAd_state(rs.getInt("ad_state"));
+				adVO.setAd_state(rs.getString("ad_state"));
 				adVO.setAd_push_content(rs.getString("ad_push_content"));
 				adlist.add(adVO);
 			}
@@ -262,7 +262,7 @@ public class AdDAO implements AdDAO_interface {
 				adVO.setAd_content(rs.getString("ad_content"));
 				adVO.setAd_image(rs.getBytes("ad_image"));
 				adVO.setAd_time(rs.getTimestamp("ad_time"));
-				adVO.setAd_state(rs.getInt("ad_state"));
+				adVO.setAd_state(rs.getString("ad_state"));
 				adVO.setAd_push_content(rs.getString("ad_push_content"));
 				adlist.add(adVO);
 			}

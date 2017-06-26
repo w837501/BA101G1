@@ -40,8 +40,8 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 			pstmt.setString(5, srVO.getSr_content());
 			pstmt.setBytes(6, srVO.getSr_image());
 			pstmt.setTimestamp(7, srVO.getSr_time());
-			pstmt.setInt(8, srVO.getSr_state());
-			pstmt.setInt(9, srVO.getSr_result());
+			pstmt.setString(8, srVO.getSr_state());
+			pstmt.setString(9, srVO.getSr_result());
 
 			pstmt.executeUpdate();
 
@@ -92,8 +92,8 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 			pstmt.setString(5, srVO.getSr_content());
 			pstmt.setBytes(6, srVO.getSr_image());
 			pstmt.setTimestamp(7, srVO.getSr_time());
-			pstmt.setInt(8, srVO.getSr_state());
-			pstmt.setInt(9, srVO.getSr_result());
+			pstmt.setString(8, srVO.getSr_state());
+			pstmt.setString(9, srVO.getSr_result());
 			pstmt.setString(10, srVO.getSr_id());
 
 			pstmt.executeUpdate();
@@ -199,8 +199,8 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 				srVO.setSr_content(rs.getString("sr_content"));
 				srVO.setSr_image(null);
 				srVO.setSr_time(rs.getTimestamp("sr_time"));
-				srVO.setSr_state(rs.getInt("sr_state"));
-				srVO.setSr_result(rs.getInt("sr_result"));
+				srVO.setSr_state(rs.getString("sr_state"));
+				srVO.setSr_result(rs.getString("sr_result"));
 			}
 
 			// Handle any driver errors
@@ -265,8 +265,8 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 				srVO.setSr_content(rs.getString("sr_content"));
 				srVO.setSr_image(rs.getBytes("sr_image"));
 				srVO.setSr_time(rs.getTimestamp("sr_time"));
-				srVO.setSr_state(rs.getInt("sr_state"));
-				srVO.setSr_result(rs.getInt("sr_result"));
+				srVO.setSr_state(rs.getString("sr_state"));
+				srVO.setSr_result(rs.getString("sr_result"));
 				list.add(srVO); // Store the row in the list
 			}
 
@@ -318,8 +318,8 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 		srVO1.setSr_content(new String("新垣結衣我老婆"));
 		srVO1.setSr_image(new byte[0]);
 		srVO1.setSr_time(java.sql.Timestamp.valueOf("2003-03-31 03:33:33"));
-		srVO1.setSr_state(new Integer(0));
-		srVO1.setSr_result(new Integer(0));
+		srVO1.setSr_state("已審核");
+		srVO1.setSr_result("成立");
 		dao.insert(srVO1);
 
 		// 修改
@@ -332,8 +332,8 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 		srVO2.setSr_content(new String("吳永志吳永志"));
 		srVO2.setSr_image(null);
 		srVO2.setSr_time(java.sql.Timestamp.valueOf("2001-01-01 11:11:11"));
-		srVO2.setSr_state(1);
-		srVO2.setSr_result(1);
+		srVO2.setSr_state("已審核");
+		srVO2.setSr_result("不成立");
 		dao.update(srVO2);
 
 		// 刪除

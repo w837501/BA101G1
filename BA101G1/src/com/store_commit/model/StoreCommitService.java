@@ -15,7 +15,7 @@ public class StoreCommitService {
 	}
 	
 	public StoreCommitVO addStoreCommit(String store_id , String mem_id , 
-			String sc_content, Timestamp sc_time , Integer sc_state){
+			String sc_content, Timestamp sc_time , String sc_state){
 
 		StoreCommitVO scVO = new StoreCommitVO();
 		scVO.setStore_id(store_id);
@@ -29,7 +29,7 @@ public class StoreCommitService {
 	}
 	
 	public StoreCommitVO updateStoreCommit(String sc_id , String store_id ,
-			String mem_id , String sc_content , Timestamp sc_time , Integer sc_state){
+			String mem_id , String sc_content , Timestamp sc_time , String sc_state){
 		
 		StoreCommitVO scVO = new StoreCommitVO();
 		scVO.setSc_id(sc_id);

@@ -11,21 +11,20 @@ private RevenueDAO_interface dao;
 		dao = new RevenueDAO();
 	}
 	
-	public RevenueVO addRev(String store_id, String revenue_month, String man_id, Integer store_revenue,Integer state) throws SQLException{
+	public RevenueVO addRev(String store_id, String revenue_month, String man_id, Integer store_revenue) throws SQLException{
 		RevenueVO revVO=new RevenueVO();
 		
 		revVO.setStore_id(store_id);
 		revVO.setRevenue_month(revenue_month);
 		revVO.setMan_id(man_id);
 		revVO.setStore_revenue(store_revenue);
-		revVO.setState(state);
 		
 		dao.insert(revVO);
 		
 		return revVO;
 	}
 	
-	public RevenueVO updateRev(String store_id, String revenue_month, String man_id, Integer store_revenue,Integer state){
+	public RevenueVO updateRev(String store_id, String revenue_month, String man_id, Integer store_revenue,String state){
 		RevenueVO revVO=new RevenueVO();
 		
 		revVO.setStore_id(store_id);

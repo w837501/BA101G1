@@ -42,9 +42,9 @@ public class RevenueServlet extends HttpServlet {
 					return;
 				}
 				RevenueService revSvc = new RevenueService();
-				List<RevenueVO> list = new LinkedList<RevenueVO>();
-				list = revSvc.getByStore(store_id);
-				if (list == null) {
+				List<RevenueVO> storeList = new LinkedList<RevenueVO>();
+				storeList = revSvc.getByStore(store_id);
+				if (storeList == null) {
 					errorMsgs.add("查無資料");
 				}
 				if (!errorMsgs.isEmpty()) {
@@ -52,8 +52,8 @@ public class RevenueServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
-				req.setAttribute("storeList", list);
-				for (RevenueVO aaa : list) {
+				req.setAttribute("storeList", storeList);
+				for (RevenueVO aaa : storeList) {
 					System.out.println("STORE_ID : " + aaa.getStore_id());
 				}
 				String url = "/backend/rev/ListStoreRev.jsp";
@@ -83,9 +83,9 @@ public class RevenueServlet extends HttpServlet {
 					return;
 				}
 				RevenueService revSvc = new RevenueService();
-				List<RevenueVO> list = new LinkedList<RevenueVO>();
-				list = revSvc.getByMonth(revenue_month);
-				if (list.size() == 0) {
+				List<RevenueVO> monthList = new LinkedList<RevenueVO>();
+				monthList = revSvc.getByMonth(revenue_month);
+				if (monthList.size() == 0) {
 					errorMsgs.add("查無資料");
 				}
 				if (!errorMsgs.isEmpty()) {
@@ -93,7 +93,7 @@ public class RevenueServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
-				req.setAttribute("monthList", list);
+				req.setAttribute("monthList", monthList);
 
 				String url = "/backend/rev/ListMonthRev.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
@@ -127,9 +127,9 @@ public class RevenueServlet extends HttpServlet {
 				}
 
 				RevenueService revSvc = new RevenueService();
-				List<RevenueVO> list = new LinkedList<RevenueVO>();
-				list.add(revSvc.getOneRev(store_id, revenue_month));
-				System.out.println("list.size() : " + list.size());
+				List<RevenueVO> oneList = new LinkedList<RevenueVO>();
+				oneList.add(revSvc.getOneRev(store_id, revenue_month));
+				System.out.println("oneList.size() : " + oneList.size());
 				if (revSvc.getOneRev(store_id, revenue_month) == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -139,7 +139,7 @@ public class RevenueServlet extends HttpServlet {
 					return;
 				}
 
-				req.setAttribute("oneList", list);
+				req.setAttribute("oneList", oneList);
 				String url = "/backend/rev/ListAllRev.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -174,14 +174,14 @@ public class RevenueServlet extends HttpServlet {
 		if ("update".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			List<RevenueVO> list = new LinkedList<RevenueVO>();
+			List<RevenueVO> oneList = new LinkedList<RevenueVO>();
 			try {
 				String store_id = req.getParameter("store_id");
 				String revenue_month = req.getParameter("revenue_month");
 				String man_id = req.getParameter("man_id");
 
 				String str_store_revenue = req.getParameter("store_revenue");
-				String str_store_state = req.getParameter("store_state");
+				String store_state = req.getParameter("store_state");
 
 				if (str_store_revenue == null || str_store_revenue.trim().isEmpty()) {
 					errorMsgs.add("請輸入營業額");
@@ -189,10 +189,10 @@ public class RevenueServlet extends HttpServlet {
 					str_store_revenue = req.getParameter("store_revenue");
 				}
 
-				if (str_store_state == null || str_store_state.trim().isEmpty()) {
+				if (store_state == null || store_state.trim().isEmpty()) {
 					errorMsgs.add("請輸入狀態");
 				} else {
-					str_store_state = req.getParameter("store_state");
+					store_state = req.getParameter("store_state");
 				}
 
 				if (!errorMsgs.isEmpty()) {
@@ -206,12 +206,7 @@ public class RevenueServlet extends HttpServlet {
 				} catch (Exception e) {
 					errorMsgs.add("格式不正確");
 				}
-				Integer store_state = null;
-				try {
-					store_state = new Integer(str_store_state);
-				} catch (Exception e) {
-					errorMsgs.add("格式不正確");
-				}
+				
 
 				RevenueVO revenueVO = new RevenueVO();
 				revenueVO.setStore_id(store_id);
@@ -219,7 +214,7 @@ public class RevenueServlet extends HttpServlet {
 				revenueVO.setRevenue_month(revenue_month);
 				revenueVO.setStore_revenue(store_revenue);
 				revenueVO.setState(store_state);
-				list.add(revenueVO);
+				oneList.add(revenueVO);
 
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("revenueVO", revenueVO);
@@ -230,7 +225,7 @@ public class RevenueServlet extends HttpServlet {
 				RevenueService revSvc = new RevenueService();
 				revenueVO = revSvc.updateRev(store_id, revenue_month, man_id, store_revenue, store_state);
 
-				req.setAttribute("list", list);
+				req.setAttribute("oneList", oneList);
 				String url = "/backend/rev/ListOneRev.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -274,20 +269,13 @@ public class RevenueServlet extends HttpServlet {
 					STR_store_revenue = req.getParameter("store_revenue");
 				}
 
-				String STR_state = req.getParameter("state");
-				if (STR_state == null || STR_state.trim().isEmpty()) {
-					errorMsgs.add("請輸入狀態");
-				} else {
-					STR_state = req.getParameter("state");
-				}
+				
 				Integer store_revenue = new Integer(STR_store_revenue);
-				Integer state = new Integer(STR_state);
 				RevenueVO revenueVO = new RevenueVO();
 				revenueVO.setStore_id(store_id);
 				revenueVO.setRevenue_month(revenue_month);
 				revenueVO.setMan_id(man_id);
 				revenueVO.setStore_revenue(store_revenue);
-				revenueVO.setState(state);
 
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("revenueVO", revenueVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -296,7 +284,7 @@ public class RevenueServlet extends HttpServlet {
 					return;
 				}
 				RevenueService revSvc = new RevenueService();
-				revenueVO = revSvc.addRev(store_id, revenue_month, man_id, store_revenue, state);
+				revenueVO = revSvc.addRev(store_id, revenue_month, man_id, store_revenue);
 				String url = "/backend/rev/ListAllRev.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);

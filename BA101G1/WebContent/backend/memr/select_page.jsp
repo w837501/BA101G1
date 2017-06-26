@@ -55,7 +55,7 @@
      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member_report/member_report.do" >
        <b>選擇會員檢舉單號:</b>
        <select size="1" name="mr_id">
-         <c:forEach var="mrVO" items="${empSvc.all}" > 
+         <c:forEach var="mrVO" items="${mrSvc.all}" > 
           <option value="${mrVO.mr_id}">${mrVO.mr_id}
          </c:forEach>   
        </select>

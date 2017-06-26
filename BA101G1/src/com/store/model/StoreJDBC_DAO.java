@@ -52,7 +52,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 			pstmt.setBytes(6, storeVO.getStore_image());
 			pstmt.setString(7, storeVO.getStore_pw());
 			pstmt.setString(8, storeVO.getStore_acc());
-			pstmt.setInt(9, (int)storeVO.getStore_out());
+			pstmt.setString(9, storeVO.getStore_out());
 			pstmt.setString(10, storeVO.getStore_zone());
 
 			pstmt.executeUpdate();
@@ -93,7 +93,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 		pstmt.setString(3, storeVO.getStore_phone());
 		pstmt.setString(4, storeVO.getStore_addr());
 		pstmt.setBytes(5, storeVO.getStore_image());
-		pstmt.setInt(6, (int)storeVO.getStore_out());
+		pstmt.setString(6, storeVO.getStore_out());
 		pstmt.setString(7, storeVO.getStore_zone());
 		pstmt.setString(8, storeVO.getStore_pw());
 		pstmt.setString(9, storeVO.getStore_id());
@@ -181,14 +181,14 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 				storeVO.setStore_date(rs.getTimestamp("store_date"));
 				storeVO.setStore_star(rs.getInt("store_star"));
 				storeVO.setStore_count(rs.getInt("store_count"));
-				storeVO.setStore_state(rs.getInt("store_state"));
+				storeVO.setStore_state(rs.getString("store_state"));
 				storeVO.setStore_image(rs.getBytes("store_image"));
 				storeVO.setStore_report_count(rs.getInt("store_report_count"));
 				storeVO.setStore_start_time(rs.getTimestamp("store_start_time"));
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getInt("store_out"));
+				storeVO.setStore_out(rs.getString("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 			}
 		} catch (ClassNotFoundException e) {
@@ -248,14 +248,14 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 				storeVO.setStore_date(rs.getTimestamp("store_date"));
 				storeVO.setStore_star(rs.getInt("store_star"));
 				storeVO.setStore_count(rs.getInt("store_count"));
-				storeVO.setStore_state(rs.getInt("store_state"));
+				storeVO.setStore_state(rs.getString("store_state"));
 				storeVO.setStore_image(rs.getBytes("store_image"));
 				storeVO.setStore_report_count(rs.getInt("store_report_count"));
 				storeVO.setStore_start_time(rs.getTimestamp("store_start_time"));
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getInt("store_out"));
+				storeVO.setStore_out(rs.getString("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 				storelist.add(storeVO);
 			}
@@ -315,14 +315,14 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 				storeVO.setStore_date(rs.getTimestamp("store_date"));
 				storeVO.setStore_star(rs.getInt("store_star"));
 				storeVO.setStore_count(rs.getInt("store_count"));
-				storeVO.setStore_state(rs.getInt("store_state"));
+				storeVO.setStore_state(rs.getString("store_state"));
 				storeVO.setStore_image(rs.getBytes("store_image"));
 				storeVO.setStore_report_count(rs.getInt("store_report_count"));
 				storeVO.setStore_start_time(rs.getTimestamp("store_start_time"));
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getInt("store_out"));
+				storeVO.setStore_out(rs.getString("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 				storetlist.add(storeVO);
 			}
@@ -382,14 +382,14 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 				storeVO.setStore_date(rs.getTimestamp("store_date"));
 				storeVO.setStore_star(rs.getInt("store_star"));
 				storeVO.setStore_count(rs.getInt("store_count"));
-				storeVO.setStore_state(rs.getInt("store_state"));
+				storeVO.setStore_state(rs.getString("store_state"));
 				storeVO.setStore_image(rs.getBytes("store_image"));
 				storeVO.setStore_report_count(rs.getInt("store_report_count"));
 				storeVO.setStore_start_time(rs.getTimestamp("store_start_time"));
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getInt("store_out"));
+				storeVO.setStore_out(rs.getString("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 				storetlist.add(storeVO);
 			}

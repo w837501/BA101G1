@@ -111,5 +111,12 @@
   		<servlet-name>StoreServlet</servlet-name>
   		<url-pattern>/store/store.do</url-pattern>
   </servlet-mapping>
-
+  <servlet>
+    <servlet-name>StoreReportServlet</servlet-name>
+    <servlet-class>com.store_report.controller.StoreReportServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StoreReportServlet</servlet-name>
+    <url-pattern>/store_report/store_report.do</url-pattern>
+  </servlet-mapping>
 </web-app>

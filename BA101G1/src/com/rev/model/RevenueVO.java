@@ -8,7 +8,7 @@ public class RevenueVO implements Serializable{
 	private String revenue_month;
 	private String man_id;
 	private Integer store_revenue;
-	private Integer state;
+	private String state;
 	public String getStore_id() {
 		return store_id;
 	}
@@ -33,10 +33,10 @@ public class RevenueVO implements Serializable{
 	public void setStore_revenue(Integer store_revenue) {
 		this.store_revenue = store_revenue;
 	}
-	public Integer getState() {
+	public String getState() {
 		return state;
 	}
-	public void setState(Integer state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 	

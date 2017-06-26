@@ -47,8 +47,8 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 			pstmt.setString(5, srVO.getSr_content());
 			pstmt.setBytes(6, srVO.getSr_image());
 			pstmt.setTimestamp(7, srVO.getSr_time());
-			pstmt.setInt(8, srVO.getSr_state());
-			pstmt.setInt(9, srVO.getSr_result());
+			pstmt.setString(8, srVO.getSr_state());
+			pstmt.setString(9, srVO.getSr_result());
 
 			pstmt.executeUpdate();
 
@@ -94,8 +94,8 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 			pstmt.setString(5, srVO.getSr_content());
 			pstmt.setBytes(6, srVO.getSr_image());
 			pstmt.setTimestamp(7, srVO.getSr_time());
-			pstmt.setInt(8, srVO.getSr_state());
-			pstmt.setInt(9, srVO.getSr_result());
+			pstmt.setString(8, srVO.getSr_state());
+			pstmt.setString(9, srVO.getSr_result());
 			pstmt.setString(10, srVO.getSr_id());
 
 			pstmt.executeUpdate();
@@ -190,8 +190,8 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 				srVO.setSr_content(rs.getString("sr_content"));
 				srVO.setSr_image(null);
 				srVO.setSr_time(rs.getTimestamp("sr_time"));
-				srVO.setSr_state(rs.getInt("sr_state"));
-				srVO.setSr_result(rs.getInt("sr_result"));
+				srVO.setSr_state(rs.getString("sr_state"));
+				srVO.setSr_result(rs.getString("sr_result"));
 			}
 
 			// Handle any SQL errors
@@ -250,8 +250,8 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 				srVO.setSr_content(rs.getString("sr_content"));
 				srVO.setSr_image(rs.getBytes("sr_image"));
 				srVO.setSr_time(rs.getTimestamp("sr_time"));
-				srVO.setSr_state(rs.getInt("sr_state"));
-				srVO.setSr_result(rs.getInt("sr_result"));
+				srVO.setSr_state(rs.getString("sr_state"));
+				srVO.setSr_result(rs.getString("sr_result"));
 				list.add(srVO); // Store the row in the list
 			}
 
