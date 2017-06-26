@@ -326,4 +326,10 @@ public static void main(String[] args){
 //			System.out.println("---------------------");	
 //		}
 	}
+
+@Override
+public List<OrderlistVO> getDetailOrder(String order_id, String pro_id) {
+	// TODO Auto-generated method stub
+	return null;
+}
 }
