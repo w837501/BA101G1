@@ -74,6 +74,7 @@
 	<tr>
 		<td>廣告狀態:<font color=red><b>*</b></font></td>
 		<td><select name="ad_state"><%=adVO.getAd_state() %>
+				<option value="${adVO.ad_state}" ${(adVO.ad_state==adVO.ad_state)?'selected':'' } >${adVO.ad_state}
 					<option value="審核中">審核中</option>
 					<option value="刊登中">刊登中</option>
 					<option value="下架">下架</option>		

@@ -74,7 +74,7 @@
 
 
 
-  <IMG src="<%=request.getContextPath()%>/StoreClassReader?store_id=STO-000010">
+  <IMG src="<%=request.getContextPath()%>/StoreClassReader?store_id=STO-000001">
 
 </body>
 </html>

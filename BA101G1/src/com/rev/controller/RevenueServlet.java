@@ -97,7 +97,7 @@ public class RevenueServlet extends HttpServlet {
 				}
 				req.setAttribute("monthList", monthList);
 
-				String url = "/backend/rev/ListOneRev.jsp";
+				String url = "/backend/rev/ListMonthRev.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
