@@ -33,7 +33,8 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 	private static final String Find_NAME = "select * from STORE where store_name like ?";
 	private static final String Find_ZONE = "select * from STORE where store_zone = ?";
 	private static final String CLASSLINK = "select s.store_name, t.sc_name from store s join store_class t on (s.sc_id = t.sc_id) where t.sc_id = ?";
-	
+	private static final String UPDATE_STMT2 = 
+			"UPDATE STORE set store_phone=?, store_addr=?, store_name=?, store_state=? where store_id = ?";
 
 	@Override
 	public void insert(StoreVO storeVO) {
@@ -474,7 +475,43 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 		return storetlist;
 	}
 	
-	
+	@Override
+	public void update2(StoreVO storeVO) {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement pstmt= null;
+		try{
+		Class.forName(driver);
+		con = DriverManager.getConnection(url, userid, passwd);
+		pstmt = con.prepareStatement(UPDATE_STMT2);
+		
+		
+		pstmt.setString(1, storeVO.getStore_phone());
+		pstmt.setString(2, storeVO.getStore_addr());
+		pstmt.setString(3, storeVO.getStore_name());
+		pstmt.setString(4, storeVO.getStore_state());
+		pstmt.setString(5, storeVO.getStore_id());
+		
+		pstmt.executeUpdate();
+		
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
 	
 	
 	
@@ -598,6 +635,9 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 //			System.out.println(svo1.getSc_name());
 //		}
 	}
+
+
+
 
 
 	
