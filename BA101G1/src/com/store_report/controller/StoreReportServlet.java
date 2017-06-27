@@ -153,19 +153,19 @@ public class StoreReportServlet extends HttpServlet {
 					errorMsgs.add("請輸入日期87!");
 				}
 
-				Integer sr_state = null;
+				String sr_state = null;
 				try {
-					sr_state = new Integer(req.getParameter("sr_state").trim());
+					sr_state = new String(req.getParameter("sr_state").trim());
 				} catch (NumberFormatException e) {
-					sr_state = 0;
+					sr_state = "";
 					errorMsgs.add("會員檢舉狀態請填數字012.");
 				}
 
-				Integer sr_result = null;
+				String sr_result = null;
 				try {
-					sr_result = new Integer(req.getParameter("sr_result").trim());
+					sr_result = new String(req.getParameter("sr_result").trim());
 				} catch (NumberFormatException e) {
-					sr_result = 0;
+					sr_result = "";
 					errorMsgs.add("會員檢舉狀態請填數字01.");
 				}
 
@@ -238,24 +238,24 @@ public class StoreReportServlet extends HttpServlet {
 					errorMsgs.add("請輸入日期!");
 				}
 				
-				Integer sr_state = null;
-//				try {
+				String sr_state = null;
+				try {
 					System.out.println("req.getParameter('sr_state'): " + req.getParameter("sr_state"));
-					sr_state = new Integer(req.getParameter("sr_state").trim());
+					sr_state = new String(req.getParameter("sr_state").trim());
 					System.out.println("sr_state: " + sr_state);
-//				} catch (NumberFormatException e) {
-////					sr_state = 0;
-//					errorMsgs.add("薪水請填數字.");
-//				}
+				} catch (NumberFormatException e) {
+					sr_state = "";
+					errorMsgs.add("Controller_insert的sr_state錯誤，第248行.");
+				}
 				
-				Integer sr_result = 0;
+				String sr_result = null;
 				try {
 					System.out.println("req.getParameter('sr_result'): " + req.getParameter("sr_result"));
-					sr_result = new Integer(req.getParameter("sr_result").trim());
+					sr_result = new String(req.getParameter("sr_result").trim());
 					System.out.println("sr_result: " + sr_result);
 				} catch (NumberFormatException e) {
-					sr_result = 0;
-					errorMsgs.add("獎金請填數字.");
+					sr_result = "";
+					errorMsgs.add("Controller_insert的sr_result錯誤，第258行.");
 				}
 				
 				StoreReportVO srVO = new StoreReportVO();
