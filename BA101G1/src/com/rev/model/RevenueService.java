@@ -3,6 +3,8 @@ package com.rev.model;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.order.model.Store_OrderVO;
+
 
 public class RevenueService {
 private RevenueDAO_interface dao;
@@ -54,5 +56,8 @@ private RevenueDAO_interface dao;
 	}
 	public List<RevenueVO> getSingleStore_id() {
 		return dao.getSingleStore_id();
+	}
+	public List<Store_OrderVO> getMonthRevenue(String month){
+		return dao.getMonthRevenue(month);
 	}
 }

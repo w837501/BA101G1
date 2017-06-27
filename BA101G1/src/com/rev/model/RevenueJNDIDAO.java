@@ -12,6 +12,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.order.model.Store_OrderVO;
+
 
 public class RevenueJNDIDAO implements RevenueDAO_interface{
 	private static DataSource ds = null;
@@ -28,10 +30,11 @@ public class RevenueJNDIDAO implements RevenueDAO_interface{
 	private static final String UPDATE_STMT = "UPDATE REVENUE set store_revenue=?, state=? where store_id = ? and revenue_month=?";
 	private static final String DELETE = "DELETE FROM REVENUE where store_id = ? and revenue_month=?";
 	private static final String Find_by_PK = "select * from REVENUE where store_id = ? and revenue_month=?";
-	private static final String Find_ALL = "select * from REVENUE ";
+	private static final String Find_ALL = "select * from REVENUE order by store_id ,revenue_month asc";
 	private static final String Find_By_Store = "select * from REVENUE  where store_id=?";
 	private static final String Find_By_Month = "select * from REVENUE where  revenue_month=?";
 	private static final String Find_Store_id="select DISTINCT store_id from REVENUE  order by store_id";
+	private static final String Find_Store_Month_Revenue = "select store_id,sum(totalprice)sum_totalprice from store_order where order_time like ? group by store_id order by store_id";
 	@Override
 	public void insert(RevenueVO revenueVO) {
 		Connection con = null;
@@ -380,6 +383,57 @@ public class RevenueJNDIDAO implements RevenueDAO_interface{
 			}
 		}
 		return revenuelist;
+	}
+
+	@Override
+	public List<Store_OrderVO> getMonthRevenue(String month) {
+		List<Store_OrderVO> store_orderVOlist = new ArrayList<Store_OrderVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Store_OrderVO store_orderVO = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(Find_Store_Month_Revenue);
+
+			pstmt.setString(1, "%" + month + "%");
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				store_orderVO = new Store_OrderVO();
+				store_orderVO.setStore_id(rs.getString("store_id"));
+				store_orderVO.setSum_totalprice(rs.getString("sum_totalprice"));
+				store_orderVOlist.add(store_orderVO);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return store_orderVOlist;
+	
 	}
 
 	

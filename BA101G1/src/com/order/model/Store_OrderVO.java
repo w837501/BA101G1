@@ -17,6 +17,7 @@ public class Store_OrderVO implements Serializable{
 	private Timestamp order_taketime;
 	private String store_name;
 	private String pro_id;
+	private String sum_totalprice;
 	
 	public Store_OrderVO() {
 		super();
@@ -124,5 +125,13 @@ public class Store_OrderVO implements Serializable{
 
 	public void setPro_id(String pro_id) {
 		this.pro_id = pro_id;
+	}
+
+	public String getSum_totalprice() {
+		return sum_totalprice;
+	}
+
+	public void setSum_totalprice(String sum_totalprice) {
+		this.sum_totalprice = sum_totalprice;
 	}
 }

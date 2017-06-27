@@ -18,8 +18,7 @@
 <table border='1' cellpadding='5' cellspacing='0' width='800'>
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
 		<td>
-		<h3>所有員工資料 - ListAllMem.jsp</h3>
-		<a href="Select_Rev.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
+		<h3>所有營業資料 - ListAllMemRev.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
 		</td>
 	</tr>
 </table>
@@ -50,12 +49,13 @@
 			<td>${RevenueVO.revenue_month }</td>
 			<td>${RevenueVO.man_id }</td>
 			<td>${RevenueVO.store_revenue }</td>
-			<td>${RevenueVO.state }</td>
+			<td>${RevenueVO.state }</td> 
 			<td>
 				<form method="post" action="<%=request.getContextPath() %>/backend/rev/rev.do">
 					<input type="submit" value="修改">
 					<input type="hidden" name="store_id" value="${RevenueVO.store_id }">
 					<input type="hidden" name="revenue_month" value="${RevenueVO.revenue_month }">
+					<input type="hidden" name="requestURI" value="<%= request.getRequestURI()%>">					
 					<input type="hidden" name="action" value="getOne_For_Update">
 				</form>
 			</td>
@@ -81,10 +81,32 @@
 </table>
 <%@ include file="page2.file" %>	
 
+<form action="rev.do" method="post">
+<td>選擇月份:</td>
+<td><select name="revenue_month">
+					<option value='1'>1</option>
+					<option value='2'>2</option>
+					<option value='3'>3</option>
+					<option value='4'>4</option>
+					<option value='5'>5</option>
+					<option value='6'>6</option>
+					<option value='7'>7</option>
+					<option value='8'>8</option>
+					<option value='9'>9</option>
+					<option value='10'>10</option>
+					<option value='11'>11</option>
+					<option value='12'>12</option>
+				</select> </td>
 
-<%-- <%if (request.getAttribute("oneList")!=null){%> --%>
-<%--        <jsp:include page="/backend/rev/ListOneRev.jsp" /> --%>
-<%-- <%} %> --%>
+<input type="submit" value="送出"> 
+<input type="hidden" name="action" value="getMonth_For_Display">
+</form>
+
+
+<%if (request.getAttribute("oneList")!=null){%>
+       <jsp:include page="/backend/rev/ListOneRev.jsp" />
+<%} %>
+
 
 </body>
 </html>

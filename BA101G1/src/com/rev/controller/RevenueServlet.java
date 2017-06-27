@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mem.model.MemberService;
+import com.order.model.Store_OrderVO;
 import com.rev.model.RevenueService;
 import com.rev.model.RevenueVO;
 
@@ -24,8 +25,10 @@ public class RevenueServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		System.out.println("action"+action);
 
 		if ("getStore_For_Display".equals(action)) {
+			System.out.println("2323233!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
@@ -53,9 +56,7 @@ public class RevenueServlet extends HttpServlet {
 					return;
 				}
 				req.setAttribute("storeList", storeList);
-				for (RevenueVO aaa : storeList) {
-					System.out.println("STORE_ID : " + aaa.getStore_id());
-				}
+			
 				String url = "/backend/rev/ListStoreRev.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -95,12 +96,12 @@ public class RevenueServlet extends HttpServlet {
 				}
 				req.setAttribute("monthList", monthList);
 
-				String url = "/backend/rev/ListMonthRev.jsp";
+				String url = "/backend/rev/ListOneRev.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料 : " + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/backend/rev/Select_Rev");
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/rev/Select_Rev.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -151,9 +152,9 @@ public class RevenueServlet extends HttpServlet {
 
 		}
 		if ("getOne_For_Update".equals(action)) {
+			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
 			try {
 				String store_id = req.getParameter("store_id");
 				String revenue_month = req.getParameter("revenue_month");
@@ -226,7 +227,7 @@ public class RevenueServlet extends HttpServlet {
 				revenueVO = revSvc.updateRev(store_id, revenue_month, man_id, store_revenue, store_state);
 
 				req.setAttribute("oneList", oneList);
-				String url = "/backend/rev/ListOneRev.jsp";
+				String url = "/backend/rev/ListAllRev.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
@@ -316,6 +317,44 @@ public class RevenueServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		if("getMonthRevenue_For_Display".equals(action)){
+			System.out.println("@@@@@@@@@@@");
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			try{
+				String month = req.getParameter("month");
+				if (month == null || month.trim().isEmpty()) {
+					errorMsgs.add("請輸入月份");
+				}
 
+				System.out.println("month : " + month);
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/rev/Select_Rev.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				RevenueService revSvc = new RevenueService();
+				List<Store_OrderVO> revenueList = new LinkedList<Store_OrderVO>();
+				revenueList = revSvc.getMonthRevenue(month);
+				if (revenueList.size() == 0) {
+					errorMsgs.add("查無資料");
+				}
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/rev/Select_Rev.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				req.setAttribute("revenueList", revenueList);
+
+				String url = "/backend/rev/ListOrderRevenue.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料 : " + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/rev/Select_Rev.jsp");
+				failureView.forward(req, res);
+			}
+			}
+		
 	}
 }
