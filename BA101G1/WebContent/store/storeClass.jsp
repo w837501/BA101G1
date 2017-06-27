@@ -5,7 +5,7 @@
 <head><title>STORE</title></head>
 <body bgcolor='white'>
 
-<%! int i = 0 ; %>
+
 
 <table border='1' cellpadding='5' cellspacing='0' width='400'>
   <tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
@@ -77,12 +77,11 @@
 		<th>類別編號</th>
 		<th>商家類別</th>
 	</tr>
-	
-	<c:forEach var="scVO" items="${scSvc.all}">
+	<c:forEach var="scVO" items="${scSvc.all}" varStatus="loop">
 		<tr align='center' valign='middle'>
 			<td></td>
 			<td>${scVO.sc_id}</td>
-			<td><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreClass&sc_id=<%= i++ %>'>${scVO.sc_name}</a></td>
+			<td><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreClass&sc_id=<c:out value="${loop.index}" />'>${scVO.sc_name} </a></td>
 		</tr>
 	</c:forEach>
 </table>

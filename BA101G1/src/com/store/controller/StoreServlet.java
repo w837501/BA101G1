@@ -30,8 +30,7 @@ public class StoreServlet extends HttpServlet{
 		String action = req.getParameter("action");
 		
 			// 來自index.jsp的請求			       來自store.jsp的請求
-		if ("get_store_a".equals(action) || "get_store_b".equals(action)) { 
-			System.out.println("我有進來判斷");
+		if ("get_store".equals(action)) { 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -54,7 +53,6 @@ public class StoreServlet extends HttpServlet{
 				/***************************2.開始查詢資料*****************************************/
 				StoreService storeSvc = new StoreService();
 				List<StoreVO> storelist = storeSvc.getName(str);
-				System.out.println("str"+str);
 				if (storelist == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -96,7 +94,6 @@ public class StoreServlet extends HttpServlet{
 			StoreService storeSvc = new StoreService();
 			
 			List<StoreVO> storelist = storeSvc.getZone(str);
-			
 			req.setAttribute("storelist", storelist); // 資料庫取出的storeVO物件,存入req
 			
 			String url ="/store/store.jsp";
@@ -106,14 +103,10 @@ public class StoreServlet extends HttpServlet{
 		} 
 		
 		if ("getStoreClass".equals(action)) { // 來自storeClass.jsp的請求
-			String sc_id = req.getParameter("sc_id");
-			System.out.println(sc_id);
-			
 			String str = req.getParameter("sc_id");
 			StoreService storeSvc = new StoreService();
 			
-			List<StoreVO> storelist = storeSvc.getZone(str);
-			
+			List<StoreVO> storelist = storeSvc.getStoreClass(str);
 			req.setAttribute("storelist", storelist); // 資料庫取出的storeVO物件,存入req
 			
 			String url ="/store/store.jsp";
