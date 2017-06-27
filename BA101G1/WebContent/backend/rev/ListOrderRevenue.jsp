@@ -2,6 +2,9 @@
     pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.rev.model.*" %>
+<%
+String month=request.getParameter("month");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,11 +28,11 @@
 		
 	</tr>
 	
-	<c:forEach var="RevenueVO" items="${revenueList}">
+	<c:forEach var="Store_OrderVO" items="${revenueList}">
 		<tr align='center' valign='middle'>
-			<td>${RevenueVO.store_id } </td>
-			<td>${RevenueVO.revenue_month }</td>
-			<td>${RevenueVO.sum_totalprice }</td>
+			<td>${Store_OrderVO.store_id } </td>
+			<td><%=month %></td>
+			<td>${Store_OrderVO.sum_totalprice }</td>
 	</tr>
 	</c:forEach>
 </table>
