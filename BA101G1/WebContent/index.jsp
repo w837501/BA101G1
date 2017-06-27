@@ -72,5 +72,9 @@
   <li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>§ä°Ó«~</a></li>
 </ul>
 
+
+
+  <IMG src="<%=request.getContextPath()%>/StoreClassReader?store_id=STO-000010">
+
 </body>
 </html>
