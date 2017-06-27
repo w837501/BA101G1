@@ -47,6 +47,21 @@ public class StoreService {
 		return storeVO;
 		
 	}
+	
+	public StoreVO updateStore2( String store_phone, String store_addr, String store_name, String store_state,String store_id){
+		StoreVO storeVO=new StoreVO();
+		
+		storeVO.setStore_name(store_name);
+		storeVO.setStore_phone(store_phone);
+		storeVO.setStore_addr(store_addr);
+		storeVO.setStore_state(store_state);
+		storeVO.setStore_id(store_id);
+		dao.update2(storeVO);
+		
+		return storeVO;
+		
+	}
+	
 	public void deleteStore(String store_id) {
 		dao.delete(store_id);
 	}

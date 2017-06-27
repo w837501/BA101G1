@@ -28,6 +28,9 @@ public class StoreDAO implements StoreDAO_interface{
 			"INSERT INTO STORE (STORE_ID,SC_ID,STORE_NAME,STORE_CONTENT,STORE_PHONE,STORE_ADDR,STORE_IMAGE,STORE_PW,STORE_ACC,STORE_OUT,STORE_ZONE)VALUES ('STO'||'-'||LPAD(to_char(store_seq.NEXTVAL),6,'0'),?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = 
 			"UPDATE STORE set sc_id=?, store_content=?, store_phone=?, store_addr=?, store_image=?, store_out=?, store_zone=?, store_pw=? where store_id = ?";
+	private static final String UPDATE_STMT2 = 
+			"UPDATE STORE set store_phone=?, store_addr=?, store_name=?, store_state=? where store_id = ?";
+	
 	private static final String DELETE = 
 			"DELETE FROM STORE where store_id = ?";
 	private static final String Find_by_PK = "select * from STORE where store_id=?";
@@ -111,6 +114,42 @@ public class StoreDAO implements StoreDAO_interface{
 		}
 	}
 
+	@Override
+	public void update2(StoreVO storeVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_STMT2);
+
+			
+			
+			pstmt.setString(1, storeVO.getStore_phone());
+			pstmt.setString(2, storeVO.getStore_addr());
+			pstmt.setString(3, storeVO.getStore_name());
+			pstmt.setString(4, storeVO.getStore_state());
+			
+			pstmt.setString(5, storeVO.getStore_id());
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
+	
 	@Override
 	public void delete(String store_id) {
 		Connection con = null;
