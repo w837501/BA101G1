@@ -13,6 +13,7 @@
 <%-- 取出 Concroller EmpServlet.java已存入request的EmpVO物件--%>
 <%--  <%List<ProductVO> productVO = (List) request.getAttribute("productlist");%>--%>
 <jsp:useBean id="storeSvc" scope="page" class="com.store.model.StoreService" />
+<jsp:useBean id="storeclassSvc" scope="page" class="com.store_class.model.StoreClassService" />
 
 <html>
 <head>
@@ -37,14 +38,14 @@
 		<th>商家類型名稱</th>
 	</tr>
 	
-	<c:forEach var="store" items="${storelist}">
+	<c:forEach var="storeVO" items="${storelist}">
 		<tr align='center' valign='middle'>
-			<td>${store.store_image}</td>
-			<td>${store.store_name}</td>
-			<td>${store.sc_id}</td>
-			<td><c:forEach var="store_class" items="${store_class.all}">
-                    <c:if test="${storeVO.sc_id==storeClassVO.sc_id}">
-	                    ${store_class.sc_name}
+			<td>${storeVO.store_image}</td>
+			<td>${storeVO.store_name}</td>
+			<td>${storeVO.sc_id}</td>
+			<td><c:forEach var="storeclasslistVO" items="${storeclassSvc.all}">
+                    <c:if test="${storeVO.sc_id==storeclasslistVO.sc_id}">
+	                    ${storeclasslistVO.sc_name}
                     </c:if>
                 </c:forEach>
 			</td>
