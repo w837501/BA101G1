@@ -4,6 +4,7 @@
 <%@ page import="com.rev.model.*" %>
 <%
 String month=request.getParameter("month");
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -33,6 +34,14 @@ String month=request.getParameter("month");
 			<td>${Store_OrderVO.store_id } </td>
 			<td><%=month %></td>
 			<td>${Store_OrderVO.sum_totalprice }</td>
+			
+			<td><form method="post" action="<%=request.getContextPath() %>/backend/rev/rev.do">
+					<input type="submit" value="·s¼W">
+					<input type="hidden" name="store_id" value="${Store_OrderVO.store_id }">
+					<input type="hidden" name="revenue_month" value="<%=month %>">
+					<input type="hidden" name="store_revenue" value="${Store_OrderVO.sum_totalprice }">
+					<input type="hidden" name="action" value="revenueinsert">
+				</form></td>
 	</tr>
 	</c:forEach>
 </table>

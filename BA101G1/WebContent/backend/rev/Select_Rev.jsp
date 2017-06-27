@@ -2,6 +2,9 @@
 	pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="com.rev.model.*"%>
+<% 
+session.setAttribute("man_id", "MAN-000001");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -107,7 +110,7 @@
 					<option value='3る'>3</option>
 					<option value='4る'>4</option>
 					<option value='5る'>5</option>
-					<option value='6る'>6</option>
+					<option value='6'>6</option>
 					<option value='7る'>7</option>
 					<option value='8る'>8</option>
 					<option value='9る'>9</option>
