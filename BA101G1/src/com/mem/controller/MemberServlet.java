@@ -140,7 +140,7 @@ public class MemberServlet extends HttpServlet {
 				memberVO=memberSvc.updateMem(mem_id, mem_name, mem_phone, mem_pw, mem_mail);
 				
 				req.setAttribute("memberVO", memberVO);
-				String url="/backend/mem/ListOneMem.jsp";
+				String url="/backend/mem/ListAllMem.jsp";
 				RequestDispatcher successView=req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}catch(Exception e){

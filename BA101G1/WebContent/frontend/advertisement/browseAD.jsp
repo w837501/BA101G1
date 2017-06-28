@@ -62,7 +62,7 @@
 	<body>
 	<div id="page">
 		<div id="header">
-				<a href="index.html"><img src="https://api.fnkr.net/testimg/350x200/00CED1/FFF/?text=img+placeholder">
+				<a href="index.html"><img src="images/logo.png">
 				</a>
 				<div class="signin">
 					<input type="button" value="Sing in">

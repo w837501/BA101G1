@@ -24,7 +24,6 @@ public class DBGifReader extends HttpServlet {
 		ServletOutputStream out = res.getOutputStream();
 
 		try {
-			System.out.println("§A©f"); 
 			String ad_id=req.getParameter("ad_id");
 			String ad_id2=new String(ad_id.getBytes("ISO-8859-1"),"UTF-8");
 			Statement stmt = con.createStatement();
