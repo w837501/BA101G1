@@ -51,7 +51,7 @@ public class StoreServlet extends HttpServlet{
 				/***************************2.開始查詢資料*****************************************/
 				StoreService storeSvc = new StoreService();
 				List<StoreVO> storelist = storeSvc.getName(str);
-				if (storelist == null) {
+				if (storelist.isEmpty()) {
 					errorMsgs.add("查無資料");
 				}
 				

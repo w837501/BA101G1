@@ -22,9 +22,14 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 	String userid = "BA101G1";
 	String passwd = "ba101g1";
 
-	private static final String INSERT_STMT = "INSERT INTO STORE (STORE_ID,SC_ID,STORE_NAME,STORE_CONTENT,STORE_PHONE,STORE_ADDR,STORE_IMAGE,STORE_PW,STORE_ACC,STORE_OUT,STORE_ZONE)VALUES ('STO'||'-'||LPAD(to_char(store_seq.NEXTVAL),6,'0'),?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE_STMT = "UPDATE STORE set sc_id=?, store_content=?, store_phone=?, store_addr=?, store_image=?, store_out=?, store_zone=?, store_pw=? where store_id = ?";
-	private static final String DELETE = "DELETE FROM STORE where store_id = ?";
+
+	private static final String INSERT_STMT = 
+			"INSERT INTO STORE (STORE_ID,SC_ID,STORE_NAME,STORE_CONTENT,STORE_PHONE,STORE_ADDR,STORE_IMAGE,STORE_PW,STORE_ACC,STORE_OUT,STORE_ZONE)VALUES ('STO'||'-'||LPAD(to_char(store_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String UPDATE_STMT = 
+			"UPDATE STORE set sc_id=?, store_content=?, store_phone=?, store_addr=?, store_image=?, store_out=?, store_zone=?, store_pw=? where store_id = ?";
+	private static final String DELETE = 
+			"DELETE FROM STORE where store_id = ?";
+
 	private static final String Find_by_PK = "select * from STORE where store_id=?";
 	private static final String Find_ALL = "select * from STORE ";
 	private static final String Find_NAME = "select * from STORE where store_name like ?";
@@ -129,9 +134,9 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("§ä¤£¨ìdriver" + e.getMessage());
+			throw new RuntimeException("æ‰¾ä¸åˆ°driver" + e.getMessage());
 		} catch (SQLException se) {
-			throw new RuntimeException("µo¥Í¿ù»~" + se.getMessage());
+			throw new RuntimeException("ç™¼ç”ŸéŒ¯èª¤" + se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -186,9 +191,9 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 				storeVO.setStore_zone(rs.getString("store_zone"));
 			}
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("§ä¤£¨ìdriver" + e.getMessage());
+			throw new RuntimeException("æ‰¾ä¸åˆ°driver" + e.getMessage());
 		} catch (SQLException se) {
-			throw new RuntimeException("µo¥Í¿ù»~" + se.getMessage());
+			throw new RuntimeException("ç™¼ç”ŸéŒ¯èª¤" + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -253,9 +258,9 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 				storelist.add(storeVO);
 			}
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("§ä¤£¨ìdriver" + e.getMessage());
+			throw new RuntimeException("æ‰¾ä¸åˆ°driver" + e.getMessage());
 		} catch (SQLException se) {
-			throw new RuntimeException("µo¥Í¿ù»~" + se.getMessage());
+			throw new RuntimeException("ç™¼ç”ŸéŒ¯èª¤" + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -472,45 +477,45 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 	public static void main(String[] args) throws IOException {
 
 		StoreJDBC_DAO storedao = new StoreJDBC_DAO();
-		// ·s¼W
+		// æ–°å¢
 		// StoreVO svo = new StoreVO();
 		// svo.setSc_id(3);
-		// svo.setStore_name("º~³ù¤ı");
-		// svo.setStore_content("º~³ù¤ı¡A¬OÁ`³¡¦ì©ó¬ü°êªºª¾¦W°ê»Ú©Ê³t­¹³sÂê©±");
+		// svo.setStore_name("æ¼¢å ¡ç‹");
+		// svo.setStore_content("æ¼¢å ¡ç‹ï¼Œæ˜¯ç¸½éƒ¨ä½æ–¼ç¾åœ‹çš„çŸ¥ååœ‹éš›æ€§é€Ÿé£Ÿé€£é–åº—");
 		// svo.setStore_phone("123123123");
-		// svo.setStore_addr("¬ü°ê¦òÃ¹¨½¹F¦{ÁÚªü±K");
+		// svo.setStore_addr("ç¾åœ‹ä½›ç¾…é‡Œé”å·é‚é˜¿å¯†");
 		// byte[] pic = getPictureByteArray("FakeInfo/king.png");
 		// svo.setStore_image(pic);
 		// svo.setStore_pw("1234");
 		// svo.setStore_acc("a123456");
 		// svo.setStore_out(1);
-		// svo.setStore_zone("·s¦Ë¥«");
+		// svo.setStore_zone("æ–°ç«¹å¸‚");
 		// storedao.insert(svo);
 
-		// ­×§ï
+		// ä¿®æ”¹
 		// StoreVO storesVO2 = new StoreVO();
 		// storesVO2.setSc_id(3);
 		// storesVO2.setStore_content("I love it");
 		// storesVO2.setStore_phone("10000006");
-		// storesVO2.setStore_addr("¸êµ¦·|");
+		// storesVO2.setStore_addr("è³‡ç­–æœƒ");
 		// byte[] pic = getPictureByteArray("FakeInfo/mm.png");
 		// storesVO2.setStore_image(pic);
 		// storesVO2.setStore_out(0);
-		// storesVO2.setStore_zone("®ç¶é¥«");
+		// storesVO2.setStore_zone("æ¡ƒåœ’å¸‚");
 		// storesVO2.setStore_pw("cccccc");
 		// storesVO2.setStore_id("STO-000004");
 		// storedao.update(storesVO2);
 
-		// §R°£
+		// åˆªé™¤
 		// storedao.delete("STO-000007");
-		// ¬d³æµ§
+		// æŸ¥å–®ç­†
 		// StoreVO svo3 = storedao.findByPrimaryKey("STO-000001");
 		// System.out.println(svo3.getSc_id());
 		// System.out.println(svo3.getStore_name());
 		// System.out.println(svo3.getStore_content());
 		// System.out.println(svo3.getStore_phone());
 		// System.out.println("---------------------");
-		// ¬d¥ş³¡
+		// æŸ¥å…¨éƒ¨
 		// List<StoreVO> list = storedao.getAll();
 		// for(StoreVO svo1 : list){
 		// System.out.println(svo1.getStore_id());
@@ -519,7 +524,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 		// System.out.println(svo1.getStore_content());
 		// System.out.println(svo1.getStore_phone());
 		// System.out.println(svo1.getStore_addr());
-		// System.out.println("°Ó®a¶i¾n¤é´Á: "+svo1.getStore_date());
+		// System.out.println("å•†å®¶é€²é§æ—¥æœŸ: "+svo1.getStore_date());
 		// System.out.println(svo1.getStore_star());
 		// System.out.println(svo1.getStore_count());
 		// System.out.println(svo1.getStore_state());
@@ -533,7 +538,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 		// System.out.println(svo1.getStore_zone());
 		// System.out.println("---------------------");
 		// }
-		// ¬d¦WºÙ
+		// æŸ¥åç¨±
 		// List<StoreVO> list = storedao.findName("BB");
 		// for(StoreVO svo1 : list){
 		// System.out.println(svo1.getStore_id());
@@ -542,7 +547,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 		// System.out.println(svo1.getStore_content());
 		// System.out.println(svo1.getStore_phone());
 		// System.out.println(svo1.getStore_addr());
-		// System.out.println("°Ó®a¶i¾n¤é´Á: "+svo1.getStore_date());
+		// System.out.println("å•†å®¶é€²é§æ—¥æœŸ: "+svo1.getStore_date());
 		// System.out.println(svo1.getStore_star());
 		// System.out.println(svo1.getStore_count());
 		// System.out.println(svo1.getStore_state());
@@ -556,7 +561,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 		// System.out.println(svo1.getStore_zone());
 		// System.out.println("---------------------");
 		// }
-		// ¬d¦a°Ï
+		// æŸ¥åœ°å€
 		// List<StoreVO> list = storedao.findZone("3");
 		// for(StoreVO svo1 : list){
 		// System.out.println(svo1.getStore_id());
@@ -565,7 +570,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 		// System.out.println(svo1.getStore_content());
 		// System.out.println(svo1.getStore_phone());
 		// System.out.println(svo1.getStore_addr());
-		// System.out.println("°Ó®a¶i¾n¤é´Á: "+svo1.getStore_date());
+		// System.out.println("å•†å®¶é€²é§æ—¥æœŸ: "+svo1.getStore_date());
 		// System.out.println(svo1.getStore_star());
 		// System.out.println(svo1.getStore_count());
 		// System.out.println(svo1.getStore_state());
@@ -576,10 +581,10 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 		// System.out.println(svo1.getStore_pw());
 		// System.out.println(svo1.getStore_acc());
 		// System.out.println(svo1.getStore_out());
-		// System.out.println("¦a°Ï: "+svo1.getStore_zone());
+		// System.out.println("åœ°å€: "+svo1.getStore_zone());
 		// System.out.println("---------------------");
 		// }
-		// ¬d¬İ°Ó©±Ãş«¬ªº¦³­ş¨Ç°Ó®a
+		// æŸ¥çœ‹å•†åº—é¡å‹çš„æœ‰å“ªäº›å•†å®¶
 		// List<StoreVO> list = storedao.ClassLink("3");
 		// for(StoreVO svo1 : list){
 		// System.out.println(svo1.getStore_id());
