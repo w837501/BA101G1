@@ -28,7 +28,7 @@ public class ManagerDAO implements ManagerDAO_interface {
 	private static final String UPDATE_STMT = "UPDATE MANAGER set man_name=?, man_phone=?, man_pw=?, man_mail=? where man_id = ?";
 	private static final String DELETE = "DELETE FROM MANAGER where man_id = ?";
 	private static final String Find_by_PK = "select * from manager where man_id=?";
-	private static final String GET_ALL = "select * from manager";
+	private static final String GET_ALL = "select * from manager order by man_id desc";
 
 	@Override
 	public void insert(ManagerVO managerVO) {
