@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -31,10 +32,9 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 	private static final String Find_by_PK = "select * from STORE where store_id=?";
 	private static final String Find_ALL = "select * from STORE ";
 	private static final String Find_NAME = "select * from STORE where store_name like ?";
-	private static final String Find_ZONE = "select * from STORE where store_zone = ?";
-	private static final String CLASSLINK = "select s.store_name, t.sc_name from store s join store_class t on (s.sc_id = t.sc_id) where t.sc_id = ?";
-	private static final String UPDATE_STMT2 = 
-			"UPDATE STORE set store_phone=?, store_addr=?, store_name=?, store_state=? where store_id = ?";
+	private static final String Find_ZONE = "select * from STORE where store_zone = '?'";
+	private static final String CLASSLINK = "select s.sc_id, s.store_id, s.store_name, t.sc_name from store s join store_class t on (s.sc_id = t.sc_id) where t.sc_id = ?";
+	
 
 	@Override
 	public void insert(StoreVO storeVO) {
@@ -53,7 +53,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 			pstmt.setBytes(6, storeVO.getStore_image());
 			pstmt.setString(7, storeVO.getStore_pw());
 			pstmt.setString(8, storeVO.getStore_acc());
-			pstmt.setString(9, storeVO.getStore_out());
+			pstmt.setInt(9, (int)storeVO.getStore_out());
 			pstmt.setString(10, storeVO.getStore_zone());
 
 			pstmt.executeUpdate();
@@ -94,7 +94,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 		pstmt.setString(3, storeVO.getStore_phone());
 		pstmt.setString(4, storeVO.getStore_addr());
 		pstmt.setBytes(5, storeVO.getStore_image());
-		pstmt.setString(6, storeVO.getStore_out());
+		pstmt.setInt(6, (int)storeVO.getStore_out());
 		pstmt.setString(7, storeVO.getStore_zone());
 		pstmt.setString(8, storeVO.getStore_pw());
 		pstmt.setString(9, storeVO.getStore_id());
@@ -189,7 +189,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getString("store_out"));
+				storeVO.setStore_out(rs.getInt("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 			}
 		} catch (ClassNotFoundException e) {
@@ -256,7 +256,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getString("store_out"));
+				storeVO.setStore_out(rs.getInt("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 				storelist.add(storeVO);
 			}
@@ -323,7 +323,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getString("store_out"));
+				storeVO.setStore_out(rs.getInt("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 				storetlist.add(storeVO);
 			}
@@ -390,7 +390,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getString("store_out"));
+				storeVO.setStore_out(rs.getInt("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 				storetlist.add(storeVO);
 			}
@@ -426,7 +426,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 
 	@Override
 	public List<StoreVO> ClassLink(String sc_id) {
-		List<StoreVO> storetlist = new ArrayList<StoreVO>();
+		List<StoreVO> storelist = new ArrayList<StoreVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -441,9 +441,11 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				storeVO= new StoreVO();
+				storeVO.setSc_id(rs.getInt("sc_id"));
+				storeVO.setStore_id(rs.getString("store_id"));
 				storeVO.setStore_name(rs.getString("store_name"));
 				storeVO.setSc_name(rs.getString("sc_name"));
-				storetlist.add(storeVO);
+				storelist.add(storeVO);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -472,46 +474,10 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 				}
 			}
 		}
-		return storetlist;
+		return storelist;
 	}
 	
-	@Override
-	public void update2(StoreVO storeVO) {
-		// TODO Auto-generated method stub
-		Connection con = null;
-		PreparedStatement pstmt= null;
-		try{
-		Class.forName(driver);
-		con = DriverManager.getConnection(url, userid, passwd);
-		pstmt = con.prepareStatement(UPDATE_STMT2);
-		
-		
-		pstmt.setString(1, storeVO.getStore_phone());
-		pstmt.setString(2, storeVO.getStore_addr());
-		pstmt.setString(3, storeVO.getStore_name());
-		pstmt.setString(4, storeVO.getStore_state());
-		pstmt.setString(5, storeVO.getStore_id());
-		
-		pstmt.executeUpdate();
-		
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-		}
-	}
+	
 	
 	
 	
@@ -522,36 +488,36 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 		StoreJDBC_DAO storedao = new StoreJDBC_DAO();
 //新增
 //		StoreVO svo = new StoreVO();
-//		svo.setSc_id(7);
-//		svo.setStore_name("BBQ1");
-//		svo.setStore_content("roast");
+//		svo.setSc_id(3);
+//		svo.setStore_name("漢堡王");
+//		svo.setStore_content("漢堡王，是總部位於美國的知名國際性速食連鎖店");
 //		svo.setStore_phone("123123123");
-//		svo.setStore_addr("taoyuan");
-////		byte[] pic = getPictureByteArray("FakeInfo/code.png");
-////		svo.setStore_image(pic);
-//		svo.setStore_image(null);
+//		svo.setStore_addr("美國佛羅里達州邁阿密");
+//		byte[] pic = getPictureByteArray("FakeInfo/king.png");
+//		svo.setStore_image(pic);
 //		svo.setStore_pw("1234");
 //		svo.setStore_acc("a123456");
 //		svo.setStore_out(1);
-//		svo.setStore_zone("3");
+//		svo.setStore_zone("新竹市");
 //		storedao.insert(svo);
 		
 	
 //修改		
 //		StoreVO storesVO2 = new StoreVO();
-//		storesVO2.setSc_id(0);
-//		storesVO2.setStore_content("我家的東西很好ㄘ");
+//		storesVO2.setSc_id(3);
+//		storesVO2.setStore_content("I love it");
 //		storesVO2.setStore_phone("10000006");
-//		storesVO2.setStore_addr("中壢");
-//		storesVO2.setStore_image(null);
+//		storesVO2.setStore_addr("資策會");
+//		byte[] pic = getPictureByteArray("FakeInfo/mm.png");
+//		storesVO2.setStore_image(pic);
 //		storesVO2.setStore_out(0);
-//		storesVO2.setStore_zone("1");
+//		storesVO2.setStore_zone("桃園市");
 //		storesVO2.setStore_pw("cccccc");
-//		storesVO2.setStore_id("STO-000006");
+//		storesVO2.setStore_id("STO-000004");
 //		storedao.update(storesVO2);
 		
 //刪除		
-//		storedao.delete("STO-000006");
+//		storedao.delete("STO-000007");
 //查單筆		
 //		StoreVO svo3 = storedao.findByPrimaryKey("STO-000001");
 //		System.out.println(svo3.getSc_id());
@@ -631,31 +597,34 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 //查看商店類型的有哪些商家		
 //		List<StoreVO> list = storedao.ClassLink("3");
 //		for(StoreVO svo1 : list){
+//			System.out.println(svo1.getStore_id());
+//			System.out.println(svo1.getSc_id());
 //			System.out.println(svo1.getStore_name());
 //			System.out.println(svo1.getSc_name());
 //		}
 	}
 
 
-
-
-
+	public static InputStream getPictureStream(String path) throws IOException {
+		File file = new File(path);
+		FileInputStream fis = new FileInputStream(file);
+		return fis;
+	}
 	
 	
-	
-//	private static byte[] getPictureByteArray(String string)throws IOException {
-//		File file = new File(string);
-//		FileInputStream fis = new FileInputStream(file);
-//		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//		byte[] image = new byte[8192];
-//		int i ;
-//		while((i = fis.read(image)) != -1){
-//			baos.write(image,0,i);
-//		}
-//		baos.close();
-//		fis.close();	
-//		return baos.toByteArray();
-//	}
+	private static byte[] getPictureByteArray(String string)throws IOException {
+		File file = new File(string);
+		FileInputStream fis = new FileInputStream(file);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] image = new byte[8192];
+		int i ;
+		while((i = fis.read(image)) != -1){
+			baos.write(image,0,i);
+		}
+		baos.close();
+		fis.close();	
+		return baos.toByteArray();
+	}
 
 
 	
