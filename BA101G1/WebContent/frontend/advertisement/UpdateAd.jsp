@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="js/calendar.css">
 <script language="JavaScript" src="js/calendarcode.js"></script>
 <script language="JavaScript" src="js/pic_preview.js"></script>
+<script language="JavaScript" src="js/push_select.js"></script>
 <div id="popupcalendar" class="text"></div>
 <title>Update Ad here</title>
 </head>
@@ -86,9 +87,13 @@
 			</select></td>
 	</tr>
 	<tr>
-		<td>廣告推播:<font color=red><b>*</b></font></td>
-			<td><input type="text" name="ad_push_content" size="45" value="<%=adVO.getAd_push_content()%>" />
-		</td>
+		<td>是否推播:<font color=red><b>*</b></font></td>
+		<td><select id="push_select" onclick=selectChange()>
+			<option value='1'>是</option>
+			
+			<option value='2'>否</option>
+		</select>
+		<input type="TEXT" id="ad_push_content" name="ad_push_content" size="45" value="<%=adVO.getAd_push_content()%>" /></td></td>
 	</tr>
 	</table>
 	<br>

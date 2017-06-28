@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="js/calendar.css">
 <script language="JavaScript" src="js/calendarcode.js"></script>
 <script language="JavaScript" src="js/pic_preview.js"></script>
+<script language="JavaScript" src="js/push_select.js"></script>
 <div id="popupcalendar" class="text"></div>
 <title>Add Advertisement here</title>
 </head>
@@ -76,12 +77,12 @@
 		</tr>
 	<tr>
 		<td>¬O§_±À¼½:<font color=red><b>*</b></font></td>
-		<td><select>
+		<td><select id="push_select" onclick=selectChange()>
 			<option value='1'>¬O</option>
 			
 			<option value='2'>§_</option>
 		</select>
-		<input type="TEXT" name="ad_push_content" size="45" value="<%= (adVO==null)? "4654" :adVO.getAd_push_content() %>" /></td></td>
+		<input type="TEXT" id="ad_push_content" name="ad_push_content" size="45" value="<%= (adVO==null)? "4654" :adVO.getAd_push_content() %>" /></td></td>
 	</tr>
 
 
