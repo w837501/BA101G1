@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.member_report.model.*"%>
 <%
 MemberReportVO mrVO = (MemberReportVO) request.getAttribute("mrVO");
@@ -10,6 +11,17 @@ MemberReportVO mrVO = (MemberReportVO) request.getAttribute("mrVO");
 <title>會員檢舉資料新增 - addMR.jsp</title></head>
 <link rel="stylesheet" type="text/css" href="js/calendar.css">
 <script language="JavaScript" src="js/calendarcode.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+	  $('#datepicker').datepicker({
+	      dateFormat: 'yy-mm-dd'
+	});
+	  } );
+  </script>
 <div id="popupcalendar" class="text"></div>
 
 <body bgcolor='white'>
@@ -37,7 +49,7 @@ MemberReportVO mrVO = (MemberReportVO) request.getAttribute("mrVO");
 	</font>
 </c:if>
 
-<FORM METHOD="post" ACTION="/member_report/member_report.do" name="form1">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member_report/member_report.do" name="form1">
 <table border="0">
 
 	<tr>
@@ -48,7 +60,7 @@ MemberReportVO mrVO = (MemberReportVO) request.getAttribute("mrVO");
 	<tr>
 		<td>訂單編號:</td>
 		<td><input type="TEXT" name="order_id" size="45"
-			value="<%= (mrVO==null)? "ORD-000001" : mrVO.getOrder_id()%>" /></td>
+			value="<%= (mrVO==null)? "20170627-000001" : mrVO.getOrder_id()%>" /></td>
 	</tr>
 	<tr>
 		<td>評論編號:</td>
@@ -70,18 +82,17 @@ MemberReportVO mrVO = (MemberReportVO) request.getAttribute("mrVO");
 		<td><input type="TEXT" name="mr_image" size="45"
 			value="<%= (mrVO==null)? "PICTURE" : mrVO.getMr_image()%>" /></td>
 	</tr>
+	
+
+	
 	<tr>
 		<%java.sql.Timestamp date_SQL = new java.sql.Timestamp(System.currentTimeMillis());%>
 		<td>檢舉時間:</td>
+		
 		<td bgcolor="#CCCCFF">
-		    <input class="cal-TextBox"
-			onFocus="this.blur()" size="9" readonly type="text" name="mr_time" value="<%= (mrVO==null)? date_SQL : mrVO.getMr_time()%>">
-			<a class="so-BtnLink"
-			href="javascript:calClick();return false;"
-			onmouseover="calSwapImg('BTN_date', 'img_Date_OVER',true);"
-			onmouseout="calSwapImg('BTN_date', 'img_Date_UP',true);"
-			onclick="calSwapImg('BTN_date', 'img_Date_DOWN');showCalendar('form1','mr_time','BTN_date');return false;">
-		    <img align="middle" border="0" name="BTN_date"	src="images/btn_date_up.gif" width="22" height="17" alt="開始日期"></a>
+			<input type="text" id="datepicker" name="mr_time" value="<%= (mrVO==null)? date_SQL : mrVO.getMr_time()%>">
+			
+		    
 		</td>
 	</tr>
 	<tr>
@@ -99,6 +110,11 @@ MemberReportVO mrVO = (MemberReportVO) request.getAttribute("mrVO");
 <br>
 <input type="hidden" name="action" value="insert">
 <input type="submit" value="送出新增"></FORM>
+<script>
+$('#datepicker').on('change',  function(){
+	console.log(this.value);
+});
+</script>
 </body>
 
 </html>

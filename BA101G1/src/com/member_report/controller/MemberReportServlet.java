@@ -219,11 +219,13 @@ public class MemberReportServlet extends HttpServlet {
 				
 				java.sql.Timestamp mr_time = null;
 				try {
-					mr_time = java.sql.Timestamp.valueOf(req.getParameter("mr_time").trim());
+					 mr_time = java.sql.Timestamp.valueOf(req.getParameter("mr_time").trim()+" 00:00:00");
 				} catch (IllegalArgumentException e) {
 					mr_time=new java.sql.Timestamp(System.currentTimeMillis());
 					errorMsgs.add("請輸入日期!");
 				}
+				
+				System.out.println("aaaaaaa "+String.valueOf(mr_time) );
 				
 				String mr_state = null;
 				try {
@@ -256,7 +258,7 @@ public class MemberReportServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("mrVO", mrVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/memr/addEmp.jsp");
+							.getRequestDispatcher("/backend/memr/addMR.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -266,7 +268,7 @@ public class MemberReportServlet extends HttpServlet {
 				mrVO = mrSvc.addMemberReport(mem_id, order_id, sc_id, man_id, mr_content, mr_image,mr_time,mr_state,mr_result);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/backend/memr/listAllEmp.jsp";
+				String url = "/backend/memr/listAllMR.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);				
 				
