@@ -40,7 +40,7 @@
 	
 	<c:forEach var="storeVO" items="${storelist}">
 		<tr align='center' valign='middle'>
-			<td>${storeVO.store_image}</td>
+			<td><IMG src="<%=request.getContextPath()%>/StoreClassReader?store_id=${storeVO.store_id}"></td>
 			<td>${storeVO.store_name}</td>
 			<td>${storeVO.sc_id}</td>
 			<td><c:forEach var="storeclasslistVO" items="${storeclassSvc.all}">
