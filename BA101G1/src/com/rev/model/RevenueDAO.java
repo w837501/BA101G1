@@ -30,7 +30,7 @@ public class RevenueDAO implements RevenueDAO_interface {
 	private static final String UPDATE_STMT = "UPDATE REVENUE set store_revenue=?, state=? where store_id = ? and revenue_month=?";
 	private static final String DELETE = "DELETE FROM REVENUE where store_id = ? and revenue_month=?";
 	private static final String Find_by_PK = "select * from REVENUE where store_id = ? and revenue_month=?";
-	private static final String Find_ALL = "select * from REVENUE order by store_id ,revenue_month asc";
+	private static final String Find_ALL = "select * from REVENUE order by store_id ,revenue_month desc";
 	private static final String Find_By_Store = "select * from REVENUE  where store_id=? order by revenue_month desc";
 	private static final String Find_By_Month = "select * from REVENUE where  revenue_month=? order by store_id asc";
 	private static final String Find_Store_id = "select DISTINCT store_id from REVENUE order by store_id";

@@ -66,8 +66,11 @@ public class AdServlet extends HttpServlet {
 				String store_id=req.getParameter("store_id");
 				String ad_name=req.getParameter("ad_name");
 				String ad_content=req.getParameter("ad_content");
+				
 				Part pic=req.getPart("upfile1");
+				System.out.println("upfile1"+pic);
 				byte[] ad_image=getPictureByteArrayFromWeb(pic);
+				
 				String ad_push_content=req.getParameter("ad_push_content");
 				
 				java.sql.Timestamp ad_time=null;
