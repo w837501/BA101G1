@@ -24,7 +24,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 	String passwd = "ba101g1";
 
 	private static final String INSERT_STMT = 
-			"INSERT INTO STORE (STORE_ID,SC_ID,STORE_NAME,STORE_CONTENT,STORE_PHONE,STORE_ADDR,STORE_IMAGE,STORE_PW,STORE_ACC,STORE_OUT,STORE_ZONE)VALUES ('STO'||'-'||LPAD(to_char(store_seq.NEXTVAL),6,'0'),?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			"INSERT INTO STORE (STORE_ID,SC_ID,STORE_NAME,STORE_CONTENT,STORE_PHONE,STORE_ADDR,STORE_IMAGE,STORE_PW,STORE_ACC,STORE_OUT,STORE_ZONE)VALUES ('STO'||'-'||LPAD(to_char(store_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = 
 			"UPDATE STORE set sc_id=?, store_content=?, store_phone=?, store_addr=?, store_image=?, store_out=?, store_zone=?, store_pw=? where store_id = ?";
 	private static final String DELETE = 

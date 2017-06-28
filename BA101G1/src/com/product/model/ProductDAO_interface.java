@@ -9,4 +9,5 @@ public interface ProductDAO_interface {
 	public ProductVO findByPrimaryKey(String pro_id);
 	public List<ProductVO> getAll();
 	public List<ProductVO> findName(String pro_name);
+	public List<ProductVO> ClassLink(String pc_id);
 }
