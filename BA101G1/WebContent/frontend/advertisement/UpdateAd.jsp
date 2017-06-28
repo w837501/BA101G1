@@ -11,6 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <link rel="stylesheet" type="text/css" href="js/calendar.css">
 <script language="JavaScript" src="js/calendarcode.js"></script>
+<script language="JavaScript" src="js/pic_preview.js"></script>
 <div id="popupcalendar" class="text"></div>
 <title>Update Ad here</title>
 </head>
@@ -55,8 +56,12 @@
 	</tr>
 	<tr>
 		<td>廣告圖片:<font color=red><b>*</b></font></td>
-			<td><img src="<%=request.getContextPath()%>/advertisement/DBGifReader.do?ad_id=${adVO.ad_id}" style="max-width: 150px; max-height: 150px;">
-			<input type="file" name="upfile1"></td>
+			<td>
+			<input type="file" name="upfile1" id="upfile1">
+			 <p>
+    			<img src="<%=request.getContextPath()%>/advertisement/DBGifReader.do?ad_id=${adVO.ad_id}" id="image"   style="max-width: 150px; max-height: 150px;">
+			</p>
+			</td>
 	</tr>
 	<tr>
 		<td>廣告時間:<font color=red><b>*</b></font></td>
