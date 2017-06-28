@@ -15,4 +15,5 @@ public interface StoreDAO_interface {
 	public List<StoreVO> findName(String store_name);
 	public List<StoreVO> findZone(String store_zone);
 	public List<StoreVO> ClassLink(String sc_name);
+	void update2(StoreVO storeVO);
 }
