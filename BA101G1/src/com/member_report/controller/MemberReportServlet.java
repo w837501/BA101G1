@@ -221,7 +221,8 @@ public class MemberReportServlet extends HttpServlet {
 //				byte[] mr_image = req.getParameter("mr_image").trim().getBytes();
 /*******************************************************************************/
 				Part addPic = req.getPart("mr_image");
-				InputStream in = addPic.getInputStream();
+//				InputStream in = addPic.getInputStream();
+				InputStream in = new InputStream(addPic);
 				ByteArrayOutputStream baos =  new ByteArrayOutputStream();
 				byte[] mr_image = new byte[8 * 1024];
 				int i;
@@ -230,15 +231,7 @@ public class MemberReportServlet extends HttpServlet {
 				}
 				baos.close();
 				in.close();
-				
-				
-				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("picture"));
-				byte[] buf = new byte[4 * 1024]; // 4K buffer
-				int len;
-				while ((len = in.read(buf)) != -1) {
-					out.write(buf, 0, len);
-				}
-				in.close();
+
 /*******************************************************************************/
 				java.sql.Timestamp mr_time = null;
 				try {
