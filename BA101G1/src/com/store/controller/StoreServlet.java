@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.product.model.ProductService;
+import com.product.model.ProductVO;
 import com.store.model.StoreService;
 import com.store.model.StoreVO;
 
@@ -112,5 +114,23 @@ public class StoreServlet extends HttpServlet{
 			System.out.println(successView);
 			successView.forward(req, res);
 		} 
+		
+		if ("getProduct_By_Store".equals(action)) { // 來自storeClass.jsp的請求
+			String str = req.getParameter("store_id");
+			StoreService storeSvc = new StoreService();
+			StoreVO storeVO = storeSvc.getOneStore(str);
+			ProductService productSvc = new ProductService();
+			List<ProductVO> productlist = productSvc.getProductByStore(str);
+			System.out.println("productlist="+productlist);
+			req.setAttribute("productlist", productlist); // 資料庫取出的storeVO物件,存入req
+			req.setAttribute("storeVO", storeVO);
+			
+			
+			String url ="/store/listProductByStore.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交store.jsp
+			System.out.println(successView);
+			successView.forward(req, res);
+		} 
+		
 	}
 }

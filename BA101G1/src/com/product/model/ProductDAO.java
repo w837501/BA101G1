@@ -35,6 +35,9 @@ public class ProductDAO implements ProductDAO_interface{
 		private static final String Find_by_PK = "select * from PRODUCT where pro_id=?";
 		private static final String Find_ALL = "select * from PRODUCT ";
 		private static final String Find_NAME = "select * from PRODUCT where pro_name like ?";
+		
+		private static final String Find_By_Store_id 
+			= "select pro_id, pro_name, pro_price, pro_content from product where store_id = ? and pro_state = '¤W¬['";
 	
 	@Override
 	public void insert(ProductVO productVO) {
@@ -271,8 +274,6 @@ public class ProductDAO implements ProductDAO_interface{
 				proVO.setPro_price(rs.getInt("Pro_price"));
 				proVO.setPro_total(rs.getInt("Pro_total"));
 				proVO.setPro_state(rs.getString("Pro_state"));
-				proVO.setPro_image(rs.getBytes("Pro_image"));
-				proVO.setPc_id(rs.getString("Pc_id"));
 				proVO.setPro_content(rs.getString("Pro_content"));
 				productlist.add(proVO);
 			}
@@ -301,6 +302,63 @@ public class ProductDAO implements ProductDAO_interface{
 				}
 			}
 		}
+		return productlist;
+	}
+
+	@Override
+	public List<ProductVO> findProductByStore_id(String store_id) {
+		// TODO Auto-generated method stub
+		List<ProductVO> productlist = new ArrayList<ProductVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ProductVO proVO = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(Find_By_Store_id);
+
+			pstmt.setString(1, store_id);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				proVO = new ProductVO();
+				
+				proVO.setPro_id(rs.getString("Pro_id"));
+				proVO.setPro_name(rs.getString("Pro_name"));
+				proVO.setPro_price(rs.getInt("Pro_price"));
+				
+				proVO.setPro_content(rs.getString("Pro_content"));
+				productlist.add(proVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+		
+		
 		return productlist;
 	}
 

@@ -489,32 +489,32 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 //新增
 //		StoreVO svo = new StoreVO();
 //		svo.setSc_id(3);
-//		svo.setStore_name("漢堡王");
-//		svo.setStore_content("漢堡王，是總部位於美國的知名國際性速食連鎖店");
-//		svo.setStore_phone("123123123");
-//		svo.setStore_addr("美國佛羅里達州邁阿密");
-//		byte[] pic = getPictureByteArray("FakeInfo/king.png");
+//		svo.setStore_name("MOS");
+//		svo.setStore_content("MOS，是總部位於日本的國際性速食連鎖店");
+//		svo.setStore_phone("94879487");
+//		svo.setStore_addr("日本");
+//		byte[] pic = getPictureByteArray("C:/Users/Java/git/BA101G1_fat/BA101G1/WebContent/FakeInfo/mos.png");
 //		svo.setStore_image(pic);
 //		svo.setStore_pw("1234");
 //		svo.setStore_acc("a123456");
 //		svo.setStore_out(1);
-//		svo.setStore_zone("新竹市");
+//		svo.setStore_zone("台北市");
 //		storedao.insert(svo);
-		
+//		
 	
 //修改		
-//		StoreVO storesVO2 = new StoreVO();
-//		storesVO2.setSc_id(3);
-//		storesVO2.setStore_content("I love it");
-//		storesVO2.setStore_phone("10000006");
-//		storesVO2.setStore_addr("資策會");
-//		byte[] pic = getPictureByteArray("FakeInfo/mm.png");
-//		storesVO2.setStore_image(pic);
-//		storesVO2.setStore_out(0);
-//		storesVO2.setStore_zone("桃園市");
-//		storesVO2.setStore_pw("cccccc");
-//		storesVO2.setStore_id("STO-000004");
-//		storedao.update(storesVO2);
+		StoreVO storesVO2 = new StoreVO();
+		storesVO2.setSc_id(3);
+		storesVO2.setStore_content("I love it");
+		storesVO2.setStore_phone("10000006");
+		storesVO2.setStore_addr("資策會嵐苑");
+		byte[] pic = getPictureByteArray("C:/Users/Java/git/BA101G1_fat/BA101G1/WebContent/FakeInfo/mm.png");
+		storesVO2.setStore_image(pic);
+		storesVO2.setStore_out(0);
+		storesVO2.setStore_zone("桃園市");
+		storesVO2.setStore_pw("cccccc");
+		storesVO2.setStore_id("STO-000004");
+		storedao.update(storesVO2);
 		
 //刪除		
 //		storedao.delete("STO-000007");

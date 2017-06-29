@@ -60,5 +60,8 @@ public class ProductService {
 	public List<ProductVO> getName(String pro_name) {
 		return dao.findName(pro_name);
 	}
-
+	
+	public List<ProductVO> getProductByStore(String store_id){
+		return dao.findProductByStore_id(store_id);
+	}
 }
