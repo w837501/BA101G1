@@ -120,6 +120,17 @@ public class ProductServlet extends HttpServlet{
 
 		if ("getOne_In_ShoppingCart".equals(action)) { // 來自select_page.jsp的請求
 			
+			String str = req.getParameter("store_id");
+			StoreService storeSvc = new StoreService();
+			StoreVO storeVO = storeSvc.getOneStore(str);
+			ProductService productSvc = new ProductService();
+			List<ProductVO> productlist = productSvc.getProductByStore(str);
+			System.out.println("productlist="+productlist);
+			req.setAttribute("productlist", productlist); // 資料庫取出的storeVO物件,存入req
+			req.setAttribute("storeVO", storeVO);
+			
+			
+			
 			ProductVO aproduct = getProduct(req);
 			
 			boolean match = false;
@@ -131,11 +142,14 @@ public class ProductServlet extends HttpServlet{
 				for(int i = 0 ; i < buylist.size();i++){
 					ProductVO productVO = buylist.get(i);
 					System.out.println(productVO);
+					
 					//若新增到一樣的商品
 					if(productVO.getPro_name().equals(aproduct.getPro_name())){
 						productVO.setQuantity(productVO.getQuantity()
 								+aproduct.getQuantity());
-						//buylist.setElementAt(productVO, i);
+						buylist.setElementAt(productVO, i);
+						System.out.println(productVO.getQuantity());
+						System.out.println(buylist);
 						match = true;
 					}
 					
@@ -146,21 +160,13 @@ public class ProductServlet extends HttpServlet{
 				}
 				
 			}
-//			String str = req.getParameter("store_id");
-//			String str2 = req.getParameter("pro_id");
-//			StoreService storeSvc = new StoreService();
-//			StoreVO storeVO = storeSvc.getOneStore(str);
-//			ProductService productSvc = new ProductService();
-//			ProductVO productVO = productSvc.getOnePro(str2);
-//			System.out.println("store_id="+str);
-//			System.out.println("productVO="+productVO.getPro_id());
-//			req.setAttribute("productVO", productVO); // 資料庫取出的storeVO物件,存入req
-//			req.setAttribute("storeVO", storeVO);
 			
 			session.setAttribute("shoppingcart", buylist);
-			String url ="/frontend/store/listProductByStore.jsp";
+			String url ="/store/listProductByStore.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交store.jsp
 			System.out.println(successView);
+			System.out.println("123123123123");
+			
 			successView.forward(req, res);
 		}
 		
@@ -175,13 +181,15 @@ public class ProductServlet extends HttpServlet{
 			
 			String amount = String.valueOf(total);
 			req.setAttribute("amount", amount);
-			String url = "frontend/shoppingcart/Checkout.jsp";
+			String url = "/frontend/shoppingcart/Checkout.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
 		}
 		
-		if(action.equals("goto_Shoppingcart")){
-			String url = "frontend/shoppingcart/shoppingcart.jsp";
+		if(action.equals("goto_ShoppingCart")){
+			System.out.println("asdadasdadasa");
+			session.setAttribute("shoppingcart", buylist);
+			String url = "/frontend/shoppingcart/shoppingcart.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
 		}
@@ -194,6 +202,7 @@ public class ProductServlet extends HttpServlet{
 		String pro_price = req.getParameter("pro_price");
 		String pro_content = req.getParameter("pro_content");
 		String store_id = req.getParameter("store_id");
+		String quantity = req.getParameter("quantity");
 
 		ProductVO productVO = new ProductVO();
 
@@ -202,6 +211,7 @@ public class ProductServlet extends HttpServlet{
 		productVO.setPro_price((new Integer(pro_price)).intValue());
 		productVO.setPro_content(pro_content);
 		productVO.setStore_id(store_id);
+		productVO.setQuantity((new Integer(quantity)).intValue());
 		return productVO;
 	}
 

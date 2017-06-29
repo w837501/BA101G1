@@ -42,7 +42,7 @@
 		<th>商品價格</th>
 		<th>商品編號</th>
 		<th>商品說明</th>
-		<th>商品數量</th>th>
+		<th>商品數量</th>
 		<th>加入購物車</th>
 	</tr>
 	
@@ -58,16 +58,15 @@
 				<div>數量： <input type="text" name="quantity" size="3" value=1></div>
 			</td>
 			<td>
-				
-			     <input type="submit" value="加入購物車"> 
+			     <input type="submit" value="加入購物車"></td>
+			</tr>
 			     <input type="hidden" name="pro_name" value="${product.pro_name}">
 			     <input type="hidden" name="pro_price" value="${product.pro_price}">
 			     <input type="hidden" name="pro_id" value="${product.pro_id}">
 			     <input type="hidden" name="store_id" value="${storeVO.store_id}"> 
 			     <input type="hidden" name="pro_content" value="${product.pro_content}">       
-			     <input type="hidden" name="action"	value="getOne_In_ShoppingCart"></FORM>
-			</td>
-		<tr>
+			     <input type="hidden" name="action"	value="getOne_In_ShoppingCart">
+			 </FORM>
 	</c:forEach>
 	
 </table>

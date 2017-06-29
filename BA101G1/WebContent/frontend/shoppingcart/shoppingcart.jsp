@@ -70,7 +70,8 @@
 								<th></th>
 							</tr>
 						</thead>
-						<%
+						
+						<%	
 	 						for (int index = 0; index < buylist.size(); index++) {
 							ProductVO productVO = buylist.get(index);
 						%>
@@ -110,7 +111,7 @@
 		</div>
 
 
-
+		<%System.out.println(buylist.size());%>
 		
 		<script src="https://code.jquery.com/jquery.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
