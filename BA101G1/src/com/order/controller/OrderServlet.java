@@ -8,6 +8,8 @@ import javax.servlet.http.*;
 
 import com.order.model.Store_OrderService;
 import com.order.model.Store_OrderVO;
+import com.orderlist.model.OrderlistService;
+import com.orderlist.model.OrderlistVO;
 
 
 public class OrderServlet extends HttpServlet {
@@ -60,6 +62,11 @@ public class OrderServlet extends HttpServlet {
 				Store_OrderService orderSvc = new Store_OrderService();
 				List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 				store_orderVO= orderSvc.getOrderByMem_id(str);//DAO方法
+//				==================================orderDetail.jsp======================
+				OrderlistService orderlistSvc = new OrderlistService();
+				List<OrderlistVO> orderlistVO=new LinkedList<OrderlistVO>();
+				orderlistVO = orderlistSvc.getAll();
+//				=======================================================================
 				System.out.println(str);
 				System.out.println(store_orderVO);
 				if (store_orderVO == null) {
@@ -75,7 +82,7 @@ public class OrderServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("store_orderVO", store_orderVO); // 資料庫取出的empVO物件,存入req
-				
+				req.setAttribute("orderlistVO", orderlistVO);
 				String url = "/frontend/selectOrder/listOrderByMem_id.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交listOneEmp.jsp
 				successView.forward(req, res);

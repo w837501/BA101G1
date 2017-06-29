@@ -4,9 +4,12 @@ import java.io.*;
 import java.util.*;
 
 import javax.servlet.*;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import com.member_report.model.*;
-
+@WebServlet("/BA101G1/member_report/member_report.do")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class MemberReportServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -208,18 +211,19 @@ public class MemberReportServlet extends HttpServlet {
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			try {
+//			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				String mem_id = req.getParameter("mem_id").trim();
 				String order_id = req.getParameter("order_id").trim();
 				String sc_id = req.getParameter("sc_id").trim();
 				String man_id = req.getParameter("man_id").trim();
 				String mr_content = req.getParameter("mr_content").trim();
+				System.out.println("aaaaaaaaaa"+req.getParameter("mr_image"));
 				byte[] mr_image = req.getParameter("mr_image").trim().getBytes();
 				
 				java.sql.Timestamp mr_time = null;
 				try {
-					 mr_time = java.sql.Timestamp.valueOf(req.getParameter("mr_time").trim()+" 00:00:00");
+					 mr_time = java.sql.Timestamp.valueOf(req.getParameter("mr_time").trim());
 				} catch (IllegalArgumentException e) {
 					mr_time=new java.sql.Timestamp(System.currentTimeMillis());
 					errorMsgs.add("請輸入日期!");
@@ -232,7 +236,7 @@ public class MemberReportServlet extends HttpServlet {
 					mr_state =req.getParameter("mr_state").trim();
 				} catch (Exception e) {
 				
-					errorMsgs.add("薪水請填數字.");
+					errorMsgs.add("第238行.");
 				}
 				
 				String mr_result = null;
@@ -273,12 +277,12 @@ public class MemberReportServlet extends HttpServlet {
 				successView.forward(req, res);				
 				
 				/***************************其他可能的錯誤處理**********************************/
-			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/backend/memr/addMR.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e) {
+//				errorMsgs.add(e.getMessage()+"第280行");
+//				RequestDispatcher failureView = req
+//						.getRequestDispatcher("/backend/memr/addMR.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 		
        

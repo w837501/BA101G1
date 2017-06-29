@@ -9,7 +9,7 @@
 
 <html>
 <head>
-<title>員工資料 - listOneEmp.jsp</title>
+<title>員工資料 - listOneOrder.jsp</title>
 </head>
 <body bgcolor='white'>
 <b><font color=red>此頁練習採用 Script 的寫法取值:</font></b>
@@ -17,7 +17,7 @@
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
 		<td>
 		<h3>員工資料 - ListOneEmp.jsp</h3>
-		<a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
+		<a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><img src="<%=request.getContextPath()%>/backend/push/images/back1.gif" width="100" height="32" border="0">回首頁</a>
 		</td>
 	</tr>
 </table>
@@ -38,6 +38,7 @@
 	<tr align='center' valign='middle'>
 		
 		<td><a href="orderlist.do?order_id=${store_orderVO.order_id}&action=getOneOrder_For_DetailDisplay">${store_orderVO.order_id }</a></td>
+		<td><a href="<%=request.getContextPath()%>/frontend/selectOrder/orderDetail.jsp?order_id=${store_orderVO.order_id}">${store_orderVO.order_id }</a></td>
 		<td>${store_orderVO.order_time }</td>
  		<td>${store_orderVO.store_name }</td>
 		<td>${store_orderVO.totalprice }</td>
