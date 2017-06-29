@@ -218,9 +218,28 @@ public class MemberReportServlet extends HttpServlet {
 				String sc_id = req.getParameter("sc_id").trim();
 				String man_id = req.getParameter("man_id").trim();
 				String mr_content = req.getParameter("mr_content").trim();
-				System.out.println("aaaaaaaaaa"+req.getParameter("mr_image"));
-				byte[] mr_image = req.getParameter("mr_image").trim().getBytes();
+//				byte[] mr_image = req.getParameter("mr_image").trim().getBytes();
+/*******************************************************************************/
+				Part addPic = req.getPart("mr_image");
+				InputStream in = addPic.getInputStream();
+				ByteArrayOutputStream baos =  new ByteArrayOutputStream();
+				byte[] mr_image = new byte[8 * 1024];
+				int i;
+				while((i = in.read(mr_image)) != -1){
+					baos.write(mr_image, 0, i);
+				}
+				baos.close();
+				in.close();
 				
+				
+				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("picture"));
+				byte[] buf = new byte[4 * 1024]; // 4K buffer
+				int len;
+				while ((len = in.read(buf)) != -1) {
+					out.write(buf, 0, len);
+				}
+				in.close();
+/*******************************************************************************/
 				java.sql.Timestamp mr_time = null;
 				try {
 					 mr_time = java.sql.Timestamp.valueOf(req.getParameter("mr_time").trim());
@@ -229,13 +248,11 @@ public class MemberReportServlet extends HttpServlet {
 					errorMsgs.add("請輸入日期!");
 				}
 				
-				System.out.println("aaaaaaa "+String.valueOf(mr_time) );
 				
 				String mr_state = null;
 				try {
 					mr_state =req.getParameter("mr_state").trim();
 				} catch (Exception e) {
-				
 					errorMsgs.add("第238行.");
 				}
 				
@@ -244,7 +261,7 @@ public class MemberReportServlet extends HttpServlet {
 					mr_result = req.getParameter("mr_result").trim();
 				} catch (Exception e) {
 				
-					errorMsgs.add("獎金請填數字.");
+					errorMsgs.add("第250行.");
 				}
 				
 				MemberReportVO mrVO = new MemberReportVO();
@@ -322,4 +339,8 @@ public class MemberReportServlet extends HttpServlet {
 			}
 		}
 	}
+	public static void encodingPic(){
+	}
+
 }
+

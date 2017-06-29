@@ -85,8 +85,7 @@ MemberReportVO mrVO = (MemberReportVO) request.getAttribute("mrVO");
 		<td>ÀËÁ|¹Ï¤ù:</td>
 		<td>			
 		<div id="demo">
-	        <input id="file_upload" type="file"/>
-	        	<input type=hidden  name="mr_image" value="<%= request.getServletContext()%>/member_report/member_report.do?mr_image=${mrVO.mr_image}">
+	        <input id="file_upload" type="file"  name="mr_image"/>
 	            <img id="preview" style="width:200px;display: none;">
 	        
 	    </div>
