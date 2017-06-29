@@ -40,7 +40,9 @@
 	
 	<c:forEach var="storeVO" items="${storelist}">
 		<tr align='center' valign='middle'>
-			<td><IMG src="<%=request.getContextPath()%>/StoreClassReader?store_id=${storeVO.store_id}"></td>
+			<td>
+			<a href="store.do?action=getProduct_By_Store&store_id=${storeVO.store_id }">
+			<IMG src="<%=request.getContextPath()%>/StoreClassReader?store_id=${storeVO.store_id}"></td>
 			<td>${storeVO.store_name}</td>
 			<td>${storeVO.sc_id}</td>
 			<td><c:forEach var="storeclasslistVO" items="${storeclassSvc.all}">

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.product.model.ProductService;
+import com.product.model.ProductVO;
 import com.store.model.StoreService;
 import com.store.model.StoreVO;
 
@@ -112,6 +114,7 @@ public class StoreServlet extends HttpServlet{
 			System.out.println(successView);
 			successView.forward(req, res);
 		} 
+<<<<<<< HEAD
 		if ("getOne_For_Update".equals(action)) { // ®”¶€listAllEmp.jsp ©Œ  /dept/listEmps_ByDeptno.jsp ™∫Ω–®D
 			  
 			  			List<String> errorMsgs = new LinkedList<String>();
@@ -210,5 +213,25 @@ public class StoreServlet extends HttpServlet{
 			  				failureView.forward(req, res);
 			  			}
 			  		}
+=======
+		
+		if ("getProduct_By_Store".equals(action)) { // ®”¶€storeClass.jsp™∫Ω–®D
+			String str = req.getParameter("store_id");
+			StoreService storeSvc = new StoreService();
+			StoreVO storeVO = storeSvc.getOneStore(str);
+			ProductService productSvc = new ProductService();
+			List<ProductVO> productlist = productSvc.getProductByStore(str);
+			System.out.println("productlist="+productlist);
+			req.setAttribute("productlist", productlist); // ∏ÍÆ∆Æw®˙•X™∫storeVO™´•Û,¶s§Jreq
+			req.setAttribute("storeVO", storeVO);
+			
+			
+			String url ="/store/listProductByStore.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // ¶®•\¬‡•Êstore.jsp
+			System.out.println(successView);
+			successView.forward(req, res);
+		} 
+		
+>>>>>>> branch 'ËÉñÂ≠ê' of https://github.com/w837501/BA101G1.git
 	}
 }
