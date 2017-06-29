@@ -4,10 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-<<<<<<< HEAD
 import java.io.InputStream;
-=======
->>>>>>> branch 'ËÉñÂ≠ê' of https://github.com/w837501/BA101G1.git
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -379,26 +376,21 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		ProductJDBCDAO productdao = new ProductJDBCDAO();
 		//∑sºW
 		ProductVO productVO1=new ProductVO();
-<<<<<<< HEAD
 		productVO1.setStore_id("STO-000002");
 		productVO1.setPro_name("§˚¶◊ƒ—");
 		productVO1.setPro_price(150);
-=======
 		productVO1.setStore_id("STO-000004");
 		productVO1.setPro_name("≥¡Ø‹¬˚");
 		productVO1.setPro_price(90);
 		productVO1.setPro_total(80);
->>>>>>> branch 'ËÉñÂ≠ê' of https://github.com/w837501/BA101G1.git
 		productVO1.setPro_state("§W¨[");
-<<<<<<< HEAD
 		byte[] pic = getPictureByteArray("WebContent/FakeInfo/BeefNoodles.jpg");
 		productVO1.setPro_image(pic);
 		productVO1.setPc_id("1");
 		productVO1.setPro_content("ß⁄¨O§˚¶◊ƒ—");
-=======
-		byte[] pic=null;
+		byte[] pic1=null;
 		try {
-			pic = getPictureByteArray("C:/Users/Java/git/BA101G1_fat/BA101G1/WebContent/FakeInfo/McCrispy.png");
+			pic1 = getPictureByteArray("C:/Users/Java/git/BA101G1_fat/BA101G1/WebContent/FakeInfo/McCrispy.png");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -406,7 +398,6 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		productVO1.setPro_image(pic);
 		productVO1.setPc_id("0");
 		productVO1.setPro_content("¨µ¬˚¬˚");
->>>>>>> branch 'ËÉñÂ≠ê' of https://github.com/w837501/BA101G1.git
 		
 		productdao.insert(productVO1);
 		
@@ -470,7 +461,6 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		
 	}
 
-<<<<<<< HEAD
 	public static InputStream getPictureStream(String path) throws IOException {
 		File file = new File(path);
 		FileInputStream fis = new FileInputStream(file);
@@ -478,20 +468,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 	}
 	
 	
-	private static byte[] getPictureByteArray(String string)throws IOException {
-		File file = new File(string);
-		FileInputStream fis = new FileInputStream(file);
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		byte[] image = new byte[8192];
-		int i ;
-		while((i = fis.read(image)) != -1){
-			baos.write(image,0,i);
-		}
-		baos.close();
-		fis.close();	
-		return baos.toByteArray();
-	}
-=======
+
 	public static byte[] getPictureByteArray(String path) throws IOException {
 		 File file = new File(path);
 		 FileInputStream fis = new FileInputStream(file);
@@ -503,7 +480,6 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		 }
 		 baos.close();
 		 fis.close();
->>>>>>> branch 'ËÉñÂ≠ê' of https://github.com/w837501/BA101G1.git
 
 		 return baos.toByteArray();
 	}

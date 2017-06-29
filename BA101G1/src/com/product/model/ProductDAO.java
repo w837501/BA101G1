@@ -35,15 +35,10 @@ public class ProductDAO implements ProductDAO_interface{
 		private static final String Find_by_PK = "select * from PRODUCT where pro_id=?";
 		private static final String Find_ALL = "select * from PRODUCT ";
 		private static final String Find_NAME = "select * from PRODUCT where pro_name like ?";
-<<<<<<< HEAD
 		private static final String CLASSLINK = "select * from PRODUCT where pc_id = ?";
-		
-=======
-		
 		private static final String Find_By_Store_id 
 			= "select pro_id, pro_name, pro_price, pro_content from product where store_id = ? and pro_state = '�W�['";
 	
->>>>>>> branch '胖子' of https://github.com/w837501/BA101G1.git
 	@Override
 	public void insert(ProductVO productVO) {
 		Connection con = null;
@@ -317,7 +312,6 @@ public class ProductDAO implements ProductDAO_interface{
 		ResultSet rs = null;
 		ProductVO proVO = null;
 
-<<<<<<< HEAD
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(CLASSLINK);
@@ -364,7 +358,6 @@ public class ProductDAO implements ProductDAO_interface{
 		}
 		return productlist;
 	}
-=======
 	@Override
 	public List<ProductVO> findProductByStore_id(String store_id) {
 		// TODO Auto-generated method stub
@@ -422,5 +415,4 @@ public class ProductDAO implements ProductDAO_interface{
 		return productlist;
 	}
 
->>>>>>> branch '胖子' of https://github.com/w837501/BA101G1.git
 }

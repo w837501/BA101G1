@@ -134,9 +134,9 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("找不到driver" + e.getMessage());
+			throw new RuntimeException(e.getMessage());
 		} catch (SQLException se) {
-			throw new RuntimeException("發生錯誤" + se.getMessage());
+			throw new RuntimeException(se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -191,9 +191,9 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 				storeVO.setStore_zone(rs.getString("store_zone"));
 			}
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("找不到driver" + e.getMessage());
+			throw new RuntimeException( e.getMessage());
 		} catch (SQLException se) {
-			throw new RuntimeException("發生錯誤" + se.getMessage());
+			throw new RuntimeException( se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -258,9 +258,9 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 				storelist.add(storeVO);
 			}
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("找不到driver" + e.getMessage());
+			throw new RuntimeException( e.getMessage());
 		} catch (SQLException se) {
-			throw new RuntimeException("發生錯誤" + se.getMessage());
+			throw new RuntimeException( se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -477,22 +477,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 	public static void main(String[] args) throws IOException {
 
 		StoreJDBC_DAO storedao = new StoreJDBC_DAO();
-<<<<<<< HEAD
-		// 新增
-		// StoreVO svo = new StoreVO();
-		// svo.setSc_id(3);
-		// svo.setStore_name("漢堡王");
-		// svo.setStore_content("漢堡王，是總部位於美國的知名國際性速食連鎖店");
-		// svo.setStore_phone("123123123");
-		// svo.setStore_addr("美國佛羅里達州邁阿密");
-		// byte[] pic = getPictureByteArray("FakeInfo/king.png");
-		// svo.setStore_image(pic);
-		// svo.setStore_pw("1234");
-		// svo.setStore_acc("a123456");
-		// svo.setStore_out(1);
-		// svo.setStore_zone("新竹市");
-		// storedao.insert(svo);
-=======
+
 //�s�W
 //		StoreVO svo = new StoreVO();
 //		svo.setSc_id(3);
@@ -610,109 +595,8 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 //			System.out.println(svo1.getSc_name());
 //		}
 	}
->>>>>>> branch '胖子' of https://github.com/w837501/BA101G1.git
 
-		// 修改
-		// StoreVO storesVO2 = new StoreVO();
-		// storesVO2.setSc_id(3);
-		// storesVO2.setStore_content("I love it");
-		// storesVO2.setStore_phone("10000006");
-		// storesVO2.setStore_addr("資策會");
-		// byte[] pic = getPictureByteArray("FakeInfo/mm.png");
-		// storesVO2.setStore_image(pic);
-		// storesVO2.setStore_out(0);
-		// storesVO2.setStore_zone("桃園市");
-		// storesVO2.setStore_pw("cccccc");
-		// storesVO2.setStore_id("STO-000004");
-		// storedao.update(storesVO2);
 
-		// 刪除
-		// storedao.delete("STO-000007");
-		// 查單筆
-		// StoreVO svo3 = storedao.findByPrimaryKey("STO-000001");
-		// System.out.println(svo3.getSc_id());
-		// System.out.println(svo3.getStore_name());
-		// System.out.println(svo3.getStore_content());
-		// System.out.println(svo3.getStore_phone());
-		// System.out.println("---------------------");
-		// 查全部
-		// List<StoreVO> list = storedao.getAll();
-		// for(StoreVO svo1 : list){
-		// System.out.println(svo1.getStore_id());
-		// System.out.println(svo1.getSc_id());
-		// System.out.println(svo1.getStore_name());
-		// System.out.println(svo1.getStore_content());
-		// System.out.println(svo1.getStore_phone());
-		// System.out.println(svo1.getStore_addr());
-		// System.out.println("商家進駐日期: "+svo1.getStore_date());
-		// System.out.println(svo1.getStore_star());
-		// System.out.println(svo1.getStore_count());
-		// System.out.println(svo1.getStore_state());
-		// System.out.println(svo1.getStore_image());
-		// System.out.println(svo1.getStore_report_count());
-		// System.out.println(svo1.getStore_start_time());
-		// System.out.println(svo1.getStore_end_time());
-		// System.out.println(svo1.getStore_pw());
-		// System.out.println(svo1.getStore_acc());
-		// System.out.println(svo1.getStore_out());
-		// System.out.println(svo1.getStore_zone());
-		// System.out.println("---------------------");
-		// }
-		// 查名稱
-		// List<StoreVO> list = storedao.findName("BB");
-		// for(StoreVO svo1 : list){
-		// System.out.println(svo1.getStore_id());
-		// System.out.println(svo1.getSc_id());
-		// System.out.println(svo1.getStore_name());
-		// System.out.println(svo1.getStore_content());
-		// System.out.println(svo1.getStore_phone());
-		// System.out.println(svo1.getStore_addr());
-		// System.out.println("商家進駐日期: "+svo1.getStore_date());
-		// System.out.println(svo1.getStore_star());
-		// System.out.println(svo1.getStore_count());
-		// System.out.println(svo1.getStore_state());
-		// System.out.println(svo1.getStore_image());
-		// System.out.println(svo1.getStore_report_count());
-		// System.out.println(svo1.getStore_start_time());
-		// System.out.println(svo1.getStore_end_time());
-		// System.out.println(svo1.getStore_pw());
-		// System.out.println(svo1.getStore_acc());
-		// System.out.println(svo1.getStore_out());
-		// System.out.println(svo1.getStore_zone());
-		// System.out.println("---------------------");
-		// }
-		// 查地區
-		// List<StoreVO> list = storedao.findZone("3");
-		// for(StoreVO svo1 : list){
-		// System.out.println(svo1.getStore_id());
-		// System.out.println(svo1.getSc_id());
-		// System.out.println(svo1.getStore_name());
-		// System.out.println(svo1.getStore_content());
-		// System.out.println(svo1.getStore_phone());
-		// System.out.println(svo1.getStore_addr());
-		// System.out.println("商家進駐日期: "+svo1.getStore_date());
-		// System.out.println(svo1.getStore_star());
-		// System.out.println(svo1.getStore_count());
-		// System.out.println(svo1.getStore_state());
-		// System.out.println(svo1.getStore_image());
-		// System.out.println(svo1.getStore_report_count());
-		// System.out.println(svo1.getStore_start_time());
-		// System.out.println(svo1.getStore_end_time());
-		// System.out.println(svo1.getStore_pw());
-		// System.out.println(svo1.getStore_acc());
-		// System.out.println(svo1.getStore_out());
-		// System.out.println("地區: "+svo1.getStore_zone());
-		// System.out.println("---------------------");
-		// }
-		// 查看商店類型的有哪些商家
-		// List<StoreVO> list = storedao.ClassLink("3");
-		// for(StoreVO svo1 : list){
-		// System.out.println(svo1.getStore_id());
-		// System.out.println(svo1.getSc_id());
-		// System.out.println(svo1.getStore_name());
-		// System.out.println(svo1.getSc_name());
-		// }
-	}
 
 	public static InputStream getPictureStream(String path) throws IOException {
 		File file = new File(path);

@@ -114,7 +114,6 @@ public class StoreServlet extends HttpServlet{
 			System.out.println(successView);
 			successView.forward(req, res);
 		} 
-<<<<<<< HEAD
 		if ("getOne_For_Update".equals(action)) { // ®”¶€listAllEmp.jsp ©Œ  /dept/listEmps_ByDeptno.jsp ™∫Ω–®D
 			  
 			  			List<String> errorMsgs = new LinkedList<String>();
@@ -213,7 +212,6 @@ public class StoreServlet extends HttpServlet{
 			  				failureView.forward(req, res);
 			  			}
 			  		}
-=======
 		
 		if ("getProduct_By_Store".equals(action)) { // ®”¶€storeClass.jsp™∫Ω–®D
 			String str = req.getParameter("store_id");
@@ -232,6 +230,5 @@ public class StoreServlet extends HttpServlet{
 			successView.forward(req, res);
 		} 
 		
->>>>>>> branch 'ËÉñÂ≠ê' of https://github.com/w837501/BA101G1.git
 	}
 }
