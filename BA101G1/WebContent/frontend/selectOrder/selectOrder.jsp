@@ -35,8 +35,16 @@
         <input type="hidden" name="action" value="getOne_For_Display">
     </FORM>
   </li>
+   <li>
+    <FORM METHOD="post" ACTION="order.do" >
+        <b>查詢未確認訂單 :</b>
+        <input type="submit" value="送出">        
+        <input type="hidden" name="order_state" value="未確認">
+        <input type="hidden" name="action" value="getOrder_State">
+    </FORM>
+  </li>
 
-
+</ul>
 
 </body>
 
