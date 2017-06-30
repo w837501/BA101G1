@@ -369,7 +369,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		return productlist;
 	}
 	
-<<<<<<< HEAD
+
 	public static void main(String args[]) throws IOException{
 
 		ProductJDBCDAO productdao = new ProductJDBCDAO();
@@ -483,110 +483,11 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		 return baos.toByteArray();
 	}
 
-=======
->>>>>>> branch 'ç¬¨' of https://github.com/w837501/BA101G1.git
+
 	@Override
 	public List<ProductVO> findProductByStore_id(String store_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public static void main(String args[]) throws IOException {
-
-		ProductJDBCDAO productdao = new ProductJDBCDAO();
-		// ·s¼W
-		ProductVO productVO1 = new ProductVO();
-		productVO1.setStore_id("STO-000004");
-		productVO1.setPro_name("³Á¯ÜÂû");
-		productVO1.setPro_price(90);
-		productVO1.setPro_total(80);
-		productVO1.setPro_state("¤W¬[");
-		byte[] pic = getPictureByteArray("WebContent/FakeInfo/BeefNoodles.jpg");
-		productVO1.setPro_image(pic);
-		productVO1.setPc_id("1");
-		productVO1.setPro_content("12312312");
-		productdao.insert(productVO1);
-
-		// ­×§ï
-		// ProductVO productVO2=new ProductVO();
-		// productVO2.setPro_name("¤û¦×ÄÑ");
-		// productVO2.setPro_price(150);
-		// productVO2.setPro_state("¤W¬[");
-		// byte[] pic =
-		// getPictureByteArray("WebContent/FakeInfo/BeefNoodles.jpg");
-		// productVO2.setPro_image(pic);
-		// productVO2.setPc_id("1");
-		// productVO2.setPro_content("¦n¦Yªº¤û¦×ÄÑ~~~");
-		// productVO2.setPro_id("PRO-000010");
-		// productdao.update(productVO2);
-
-		// §R°£
-		// productdao.delete("PRO-000009");
-
-		// §ä¤@µ§
-		// ProductVO revenueVO4 = productdao.findByPrimaryKey("PRO-000001");
-		// System.out.println(revenueVO4.getPro_id());
-		// System.out.println(revenueVO4.getStore_id());
-		// System.out.println(revenueVO4.getPro_name());
-		// System.out.println(revenueVO4.getPro_price());
-		// System.out.println(revenueVO4.getPro_total());
-		// System.out.println(revenueVO4.getPro_state());
-		// System.out.println(revenueVO4.getPro_image());
-		// System.out.println(revenueVO4.getPro_type());
-		// System.out.println(revenueVO4.getPro_content());
-		// System.out.println("---------------------");
-
-		// //§ä¥þ³¡
-		// List<ProductVO> list = productdao.getAll();
-		// for (ProductVO aPro : list) {
-		// System.out.println(aPro.getPro_id());
-		// System.out.println(aPro.getStore_id());
-		// System.out.println(aPro.getPro_name());
-		// System.out.println(aPro.getPro_price());
-		// System.out.println(aPro.getPro_total());
-		// System.out.println(aPro.getPro_state());
-		// System.out.println(aPro.getPro_image());
-		// System.out.println(aPro.getPro_type());
-		// System.out.println(aPro.getPro_content());
-		// System.out.println("---------------------");
-		// }
-
-		// ¬dÃþ§O
-		// List<ProductVO> list = productdao.ClassLink("2");
-		// for(ProductVO proVO : list){
-		// System.out.println(proVO.getPro_id());
-		// System.out.println(proVO.getStore_id());
-		// System.out.println(proVO.getPro_name());
-		// System.out.println(proVO.getPro_price());
-		// System.out.println(proVO.getPro_total());
-		// System.out.println(proVO.getPro_state());
-		// System.out.println(proVO.getPro_image());
-		// System.out.println(proVO.getPc_id());
-		// System.out.println(proVO.getPro_content());
-		// System.out.println("---------------------");
-		// }
-
-	}
-
-	public static InputStream getPictureStream(String path) throws IOException {
-		File file = new File(path);
-		FileInputStream fis = new FileInputStream(file);
-		return fis;
-	}
-
-	private static byte[] getPictureByteArray(String string) throws IOException {
-		File file = new File(string);
-		FileInputStream fis = new FileInputStream(file);
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		byte[] image = new byte[8192];
-		int i;
-		while ((i = fis.read(image)) != -1) {
-			baos.write(image, 0, i);
-		}
-		baos.close();
-		fis.close();
-		return baos.toByteArray();
-	}
-
-	
 }

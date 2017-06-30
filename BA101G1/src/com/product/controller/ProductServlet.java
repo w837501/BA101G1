@@ -17,15 +17,12 @@ import com.product.model.ProductVO;
 import com.store.model.StoreService;
 import com.store.model.StoreVO;
 
-<<<<<<< HEAD
+
 
 public class ProductServlet extends HttpServlet{
 	
-	
-=======
-public class ProductServlet extends HttpServlet {
->>>>>>> branch 'ç¬¨' of https://github.com/w837501/BA101G1.git
-	
+
+
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		doPost(req, res);
@@ -122,10 +119,7 @@ public class ProductServlet extends HttpServlet {
 
 		}
 
-<<<<<<< HEAD
-=======
-		
->>>>>>> branch 'ç¬¨' of https://github.com/w837501/BA101G1.git
+
 		if ("getOne_In_ShoppingCart".equals(action)) { // ¨Ó¦Ûselect_page.jspªº½Ð¨D
 			
 			String str = req.getParameter("store_id");
@@ -201,10 +195,7 @@ public class ProductServlet extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
 		}
-<<<<<<< HEAD
-=======
-		
->>>>>>> branch 'ç¬¨' of https://github.com/w837501/BA101G1.git
+
 	}
 
 	private ProductVO getProduct(HttpServletRequest req) {
@@ -226,9 +217,5 @@ public class ProductServlet extends HttpServlet {
 		productVO.setQuantity((new Integer(quantity)).intValue());
 		return productVO;
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'ç¬¨' of https://github.com/w837501/BA101G1.git
 
 }
