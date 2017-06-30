@@ -8,7 +8,7 @@
 
 <html>
 <head>
-<title>員工資料 - listOneEmp.jsp</title>
+<title>單一訂單詳細資料 - listOneOrderList.jsp</title>
 </head>
 <body bgcolor='white'>
 <b><font color=red>此頁練習採用 Script 的寫法取值:</font></b>

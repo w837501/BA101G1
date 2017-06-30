@@ -63,11 +63,11 @@ public class OrderServlet extends HttpServlet {
 				List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 				store_orderVO= orderSvc.getOrderByMem_id(str);//DAO方法
 //				==================================orderDetail.jsp======================
-				OrderlistService orderlistSvc = new OrderlistService();
-				List<OrderlistVO> orderlistVO=new LinkedList<OrderlistVO>();
-				orderlistVO = orderlistSvc.getAll();
+//				OrderlistService orderlistSvc = new OrderlistService();
+//				List<OrderlistVO> orderlistVO=new LinkedList<OrderlistVO>();
+//				orderlistVO = orderlistSvc.getAll();
 //				=======================================================================
-				System.out.println(str);
+				System.out.println("mem_id:"+str);
 				System.out.println(store_orderVO);
 				if (store_orderVO == null) {
 					errorMsgs.add("查無資料");
@@ -82,9 +82,11 @@ public class OrderServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("store_orderVO", store_orderVO); // 資料庫取出的empVO物件,存入req
-				req.setAttribute("orderlistVO", orderlistVO);
+//				req.setAttribute("orderlistVO", orderlistVO);
 				String url = "/frontend/selectOrder/listOrderByMem_id.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交listOneEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				System.out.println("successView"+successView);
+				// 成功轉交listOneEmp.jsp
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理*************************************/

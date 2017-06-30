@@ -22,6 +22,7 @@
 	</tr>
 </table>
 
+
 <table border='1' bordercolor='#CCCCFF' width='800'>
 	<tr>
 		<th>≠q≥ÊΩs∏π</th>
@@ -37,8 +38,15 @@
 	<c:forEach var="store_orderVO" items="${store_orderVO}" >
 	<tr align='center' valign='middle'>
 		
-		<td><a href="orderlist.do?order_id=${store_orderVO.order_id}&action=getOneOrder_For_DetailDisplay">${store_orderVO.order_id }</a></td>
-		<td><a href="<%=request.getContextPath()%>/frontend/selectOrder/orderDetail.jsp?order_id=${store_orderVO.order_id}">${store_orderVO.order_id }</a></td>
+<%-- 		<td><a href="orderlist.do?order_id=${store_orderVO.order_id}&action=getOneOrder_For_DetailDisplay">${store_orderVO.order_id }</a></td> --%>
+<%-- 		<td><a href="<%=request.getContextPath()%>/frontend/selectOrder/orderDetail.jsp?order_id=${store_orderVO.order_id}">${store_orderVO.order_id }</a></td> --%>
+		<td>
+			<form action="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do" method="post">
+    			<a href="#" onclick="parentNode.submit();">${store_orderVO.order_id }</a>
+    			<input type="hidden" name="order_id" value="${store_orderVO.order_id}"/>
+    			<input type="hidden" name="action" value="getOneOrder_For_DetailDisplay">
+			</form>
+		</td>
 		<td>${store_orderVO.order_time }</td>
  		<td>${store_orderVO.store_name }</td>
 		<td>${store_orderVO.totalprice }</td>
@@ -49,6 +57,7 @@
 		<td>¿À¡|</td>
 	</tr>
 	</c:forEach>
+
 </table>
 
 </body>
