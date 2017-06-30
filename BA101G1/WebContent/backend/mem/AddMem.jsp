@@ -3,8 +3,9 @@
 <%@ page import="com.mem.model.*"%>
 <%
 	MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
+	String tab2=request.getParameter("tab2");
+	String url=request.getServletPath();
 %>
-
 <html>
 <head>
 <meta charset="utf-8">
@@ -19,6 +20,15 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 </head>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	  if(window.location.hash != "") {
+	      $('a[href="' + window.location.hash + '"]').click()
+	  }
+
+	});</script>
 <style>
 .aa {
 	margin-top: 150px;
@@ -32,9 +42,7 @@
 		<center>
 			<a href="http://www.google.com"> <img src="images/logo.png"
 				width="150px" height="150px">
-			</a> <br>
-			<br>
-			<br>
+			</a> <br> <br> <br>
 			<p font-size="100px">
 				<b> <a href="http://www.google.com"> 吃定我線上訂餐</a> > 登入
 				</b>
@@ -56,41 +64,51 @@
 					<div role="tabpanel" class="tab-pane active" id="tab1">
 						<p class="well" align="center">
 							<label for="帳號">帳號</label> <input type="text" name="帳號" id="帳號"
-								placeholder="請輸入E-MAIL"> <br>
-							<br> <label for="密碼">密碼</label> <input type="password"
-								name="密碼" id="密碼" placeholder="請輸入密碼"> <br>
-							<br> <a herf="">忘記密碼?</a> <br>
-							<br> <a href="#" class="btn btn-info"><i
+								placeholder="請輸入E-MAIL"> <br> <br> <label
+								for="密碼">密碼</label> <input type="password" name="密碼" id="密碼"
+								placeholder="請輸入密碼"> <br> <br> <a herf="">忘記密碼?</a>
+							<br> <br> <a href="#" class="btn btn-info"><i
 								class="glyphicon glyphicon-ok"></i> 送出</a>
 						</p>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="tab2">
 						<div class="well" align="center">
-						<form METHOD="post"
-							ACTION="<%=request.getContextPath()%>/backend/mem/mem.do"
-							name="form1">
-							<label for="mem_mail">會員信箱</label> <input type="text"
-								name="mem_mail" id="mem_mail" placeholder="請輸入E-MAIL"
-								value="<%=(memberVO == null) ? "sadqwe" : memberVO.getMem_mail()%>">
-							<br>
-							<br> <label for="mem_pw">會員密碼</label> <input type="password"
-								name="mem_pw" id="mem_pw" placeholder="請輸入密碼"
-								value="<%=(memberVO == null) ? "1222212" : memberVO.getMem_pw()%>">
-							<br>
-							<br> <label for="確認密碼">確認密碼</label> <input type="password"
-								name="密碼" id="密碼" placeholder="再輸入一次密碼"> <br>
-							<br> <label for="mem_name"> 姓名</label> <input type="text"
-								name="mem_name" id="mem_name" placeholder="請輸入姓名"
-								value="<%=(memberVO == null) ? "老王" : memberVO.getMem_pw()%>">
-							<br>
-							<br> <label for="mem_phone"> 手機</label> <input type="text"
-								name="mem_phone" id="mem_phone" placeholder="請輸入手機號碼"
-								value="<%=(memberVO == null) ? "123" : memberVO.getMem_phone()%>">
-							<br>
-							<br> <input type="hidden" name="action" value="insert">
-							<input type="submit" value="送出新增">
-						</form>
-					</div>
+							<c:if test="${not empty errorMsgs}">
+								<font color='red'>請修正以下錯誤:
+									<ul>
+										<c:forEach var="message" items="${errorMsgs}">
+											<li>${message}</li>
+										</c:forEach>
+									</ul>
+								</font>
+							</c:if>
+							<form METHOD="post"
+								ACTION="<%=request.getContextPath()%>/backend/mem/mem.do"
+								name="form1">
+								<label for="mem_mail">會員信箱</label> <input type="text"
+									name="mem_mail" id="mem_mail" placeholder="請輸入E-MAIL"
+									value="<%=(memberVO == null) ? "sadqwe" : memberVO.getMem_mail()%>">
+								<br> <br> <label for="mem_pw">會員密碼</label> <input
+									type="password" name="mem_pw" id="mem_pw" placeholder="請輸入密碼"
+									value="<%=(memberVO == null) ? "1222212" : memberVO.getMem_pw()%>">
+								<br> <br> <label for="mem_pw_again">確認密碼</label> <input
+									type="password" name="mem_pw_again" id="密碼"
+									placeholder="再輸入一次密碼"
+									value="<%=(memberVO == null) ? "1222212" : memberVO.getMem_pw()%>">
+								<br> <br> <label for="mem_name">
+									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp姓名</label> <input type="text"
+									name="mem_name" id="mem_name" placeholder="請輸入姓名"
+									value="<%=(memberVO == null) ? "老王" : memberVO.getMem_pw()%>">
+								<br> <br> <label for="mem_phone">
+									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp手機</label> <input type="text"
+									name="mem_phone" id="mem_phone" placeholder="請輸入手機號碼"
+									value="<%=(memberVO == null) ? "123" : memberVO.getMem_phone()%>">
+								<br> <br> <input type="hidden" name="requestURL"
+									value="<%=request.getServletPath()%>"> 
+								<br> <br> <input type="hidden" name="action"
+									value="insert"> <input type="submit" value="送出新增">
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>

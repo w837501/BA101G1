@@ -153,11 +153,13 @@ public class MemberServlet extends HttpServlet {
 		if("insert".equals(action)){
 			List<String> errorMsgs=new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+			String requestURL=req.getParameter("requestURL");
+			System.out.println(requestURL);
 			try{
 				String mem_name=req.getParameter("mem_name");
 				String mem_phone=req.getParameter("mem_phone");
 				String mem_pw=req.getParameter("mem_pw");
+				String mem_pw_again=req.getParameter("mem_pw_again");
 				String mem_mail=req.getParameter("mem_mail");
 				
 				if(req.getParameter("mem_name")==null || req.getParameter("mem_name").trim().isEmpty()){
@@ -176,21 +178,31 @@ public class MemberServlet extends HttpServlet {
 				}else{
 					mem_pw=req.getParameter("mem_pw");
 				}
+				if(req.getParameter("mem_pw_again")==null || req.getParameter("mem_pw_again").trim().isEmpty()){
+					errorMsgs.add("請輸入密碼");
+				}else{
+					mem_pw_again=req.getParameter("mem_pw_again");
+				}
 				if(req.getParameter("mem_mail")==null || req.getParameter("mem_mail").trim().isEmpty()){
 					errorMsgs.add("請輸入信箱");
 				}else{
 					mem_mail=req.getParameter("mem_mail");
 				}
-				
+				if(!mem_pw.equals(mem_pw_again)){
+					errorMsgs.add("密碼不相符");
+				}
 				MemberVO memberVO=new MemberVO();
 				memberVO.setMem_name(mem_name);
 				memberVO.setMem_phone(mem_phone);
 				memberVO.setMem_pw(mem_pw);
 				memberVO.setMem_mail(mem_mail);
 				
+				req.setAttribute("tab2", "#tab2");
+				
 				if(!errorMsgs.isEmpty()){
 					req.setAttribute("errorMsgs", errorMsgs);
-					RequestDispatcher failureView=req.getRequestDispatcher("/backend/mem/AddMem.jsp");
+					String tab="#tab2";
+					RequestDispatcher failureView=req.getRequestDispatcher(requestURL+tab);
 					failureView.forward(req, res);
 					return;
 				}
@@ -202,7 +214,8 @@ public class MemberServlet extends HttpServlet {
 				RequestDispatcher successView=req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}catch(Exception e){
-				RequestDispatcher failureView = req.getRequestDispatcher("/backend/mem/AddMem.jsp");
+				String tab="#tab2";
+				RequestDispatcher failureView=req.getRequestDispatcher(requestURL+tab	);
 				failureView.forward(req, res);
 			}
 		}
