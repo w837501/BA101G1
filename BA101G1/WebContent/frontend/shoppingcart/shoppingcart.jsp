@@ -70,10 +70,10 @@
 								<th></th>
 							</tr>
 						</thead>
-						
+						<%ProductVO productVO1 = buylist.get(0); %>
 						<%	
 	 						for (int index = 0; index < buylist.size(); index++) {
-							ProductVO productVO = buylist.get(index);
+	 							ProductVO productVO = buylist.get(index);
 						%>
 						
 						<tbody>
@@ -83,7 +83,7 @@
 								<td><%=productVO.getPro_name() %></td>
 								<td><%=productVO.getPro_price() %></td>
 								<td><%=productVO.getQuantity() %></td>
-								<td><%=productVO.getPro_price() %></td>
+								<td><%=(Integer)productVO.getPro_price()* productVO.getQuantity() %></td>
 								<td>
 								<form name="deleteForm" action="Shopping.html" method="POST">
                                 <input type="hidden" name="action" value="DELETE">
@@ -103,7 +103,7 @@
 		<div class="col-xs-12 col-sm-8  cc"></div>
 		<div class="col-xs-12 col-sm-4  dd">
 			<br><br>
-			<a href="#" class="btn btn-info"><i class="glyphicon glyphicon-ok"></i>回商店/繼續購物</a>
+			<a href="<%=request.getContextPath()%>/store/store.do?action=getProduct_By_Store&store_id=<%=productVO1.getStore_id() %>" class="btn btn-info"><i class="glyphicon glyphicon-ok"></i>回商店/繼續購物</a>
 			<form name="checkoutForm" action="<%=request.getContextPath()%>/product/product.do" method="POST">
               <input type="hidden" name="action"	value="Checkout"> 
               <input type="submit" value="付款結帳">
