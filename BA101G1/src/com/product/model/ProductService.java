@@ -68,6 +68,9 @@ public class ProductService {
 	
 	public List<ProductVO> getProductByStore(String store_id){
 		return dao.findProductByStore_id(store_id);
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch '笨' of https://github.com/w837501/BA101G1.git
 	}
 }
