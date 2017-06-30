@@ -44,7 +44,7 @@ public class StoreClassReader extends HttpServlet {
 			rs.close();
 			stmt.close();
 		} catch (Exception e) {
-			System.out.println(e);
+//			System.out.println(e);
 			InputStream in = getServletContext().getResourceAsStream("/NoData/loading_spinner.gif");
 			byte[] buf = new byte[in.available()];
 			in.read(buf);

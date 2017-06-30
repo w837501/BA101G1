@@ -21,14 +21,14 @@
 <jsp:useBean id="storeSvc" scope="page" class="com.store.model.StoreService" />
 <html>
 <head>
-<title>商品查詢結果 - listOnePro.jsp</title>
+<title>商品查詢結果 - listProductByStore.jsp</title>
 </head>
 <body bgcolor='white'>
 <b><font color=red>此頁練習採用 Script 的寫法取值:</font></b>
 <table border='1' cellpadding='5' cellspacing='0' width='800'>
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
 		<td>
-		<h3>商品查詢結果 - listOnePro.jsp</h3>
+		<h3>商品查詢結果 - listProductByStore.jsp</h3>
 		<h1>${storeVO.store_name}</h1>
 		<a href="<%=request.getContextPath()%>/index.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
 		</td>
@@ -42,14 +42,14 @@
 		<th>商品價格</th>
 		<th>商品編號</th>
 		<th>商品說明</th>
-		<th>商品數量</th>th>
+		<th>商品數量</th>
 		<th>加入購物車</th>
 	</tr>
 	
 	<c:forEach var="product" items="${productlist}">
 		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do">
 		<tr align='center' valign='middle'>
-			<td><IMG src="<%=request.getContextPath()%>/ProductReader?pro_id=${product.pro_id}"></td>
+			<td><IMG src="<%=request.getContextPath()%>/ProductClassReader?pro_id=${product.pro_id}"></td>
 			<td>${product.pro_name}</td>
 			<td>${product.pro_price}</td>
 			<td>${product.pro_id}</td>

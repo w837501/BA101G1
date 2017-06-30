@@ -4,10 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-<<<<<<< HEAD
 import java.io.InputStream;
-=======
->>>>>>> branch '鑳栧瓙' of https://github.com/w837501/BA101G1.git
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -24,14 +21,13 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 	String userid = "BA101G1";
 	String passwd = "ba101g1";
 
-	private static final String INSERT_STMT ="INSERT INTO PRODUCT (PRO_ID,STORE_ID,PRO_NAME,PRO_PRICE,PRO_STATE,PRO_IMAGE,PC_ID,PRO_CONTENT) VALUES ('PRO'||'-'||LPAD(to_char(store_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO PRODUCT (PRO_ID,STORE_ID,PRO_NAME,PRO_PRICE,PRO_STATE,PRO_IMAGE,PC_ID,PRO_CONTENT) VALUES ('PRO'||'-'||LPAD(to_char(store_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?)";
 	private static final String DELETE = "DELETE FROM PRODUCT where pro_id = ?";
 	private static final String UPDATE_STMT = "UPDATE PRODUCT set pro_name=?, pro_price=?, pro_state=?, pro_image=?, pc_id=?, pro_content=? where pro_id = ?";
 	private static final String Find_by_PK = "select * from PRODUCT where pro_id=?";
 	private static final String Find_ALL = "select * from PRODUCT ";
 	private static final String Find_NAME = "select * from PRODUCT where pro_name like ?";
 	private static final String CLASSLINK = "select * from PRODUCT where pc_id = ?";
-	
 
 	@Override
 	public void insert(ProductVO productVO) {
@@ -44,7 +40,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 
 			pstmt.setString(1, productVO.getStore_id());
 			pstmt.setString(2, productVO.getPro_name());
-			pstmt.setInt(3, (int)productVO.getPro_price());
+			pstmt.setInt(3, (int) productVO.getPro_price());
 			pstmt.setString(4, productVO.getPro_state());
 			pstmt.setBytes(5, productVO.getPro_image());
 			pstmt.setString(6, productVO.getPc_id());
@@ -83,7 +79,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 
 			pstmt.setString(1, productVO.getStore_id());
 			pstmt.setString(2, productVO.getPro_name());
-			pstmt.setInt(3, (int)productVO.getPro_price());
+			pstmt.setInt(3, (int) productVO.getPro_price());
 			pstmt.setString(4, productVO.getPro_state());
 			pstmt.setBytes(5, productVO.getPro_image());
 			pstmt.setString(6, productVO.getPc_id());
@@ -256,7 +252,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		}
 		return productlist;
 	}
-	
+
 	@Override
 	public List<ProductVO> findName(String pro_name) {
 		List<ProductVO> productlist = new ArrayList<ProductVO>();
@@ -270,7 +266,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(Find_NAME);
 
-			pstmt.setString(1, "%"+pro_name+"%");
+			pstmt.setString(1, "%" + pro_name + "%");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				proVO = new ProductVO();
@@ -314,8 +310,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		}
 		return productlist;
 	}
-	
-	
+
 	@Override
 	public List<ProductVO> ClassLink(String pc_id) {
 		List<ProductVO> productlist = new ArrayList<ProductVO>();
@@ -374,145 +369,108 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		return productlist;
 	}
 	
-	public static void main(String args[]) throws IOException{
-
-		ProductJDBCDAO productdao = new ProductJDBCDAO();
-		//穝糤
-		ProductVO productVO1=new ProductVO();
-<<<<<<< HEAD
-		productVO1.setStore_id("STO-000002");
-		productVO1.setPro_name("ψ难");
-		productVO1.setPro_price(150);
-=======
-		productVO1.setStore_id("STO-000004");
-		productVO1.setPro_name("沉蔓");
-		productVO1.setPro_price(90);
-		productVO1.setPro_total(80);
->>>>>>> branch '鑳栧瓙' of https://github.com/w837501/BA101G1.git
-		productVO1.setPro_state("琜");
-<<<<<<< HEAD
-		byte[] pic = getPictureByteArray("WebContent/FakeInfo/BeefNoodles.jpg");
-		productVO1.setPro_image(pic);
-		productVO1.setPc_id("1");
-		productVO1.setPro_content("и琌ψ难");
-=======
-		byte[] pic=null;
-		try {
-			pic = getPictureByteArray("C:/Users/Java/git/BA101G1_fat/BA101G1/WebContent/FakeInfo/McCrispy.png");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-		productVO1.setPro_image(pic);
-		productVO1.setPc_id("0");
-		productVO1.setPro_content("蔓蔓");
->>>>>>> branch '鑳栧瓙' of https://github.com/w837501/BA101G1.git
-		
-		productdao.insert(productVO1);
-		
-		//э
-//		ProductVO productVO2=new ProductVO();
-//		productVO2.setPro_name("ψ难");
-//		productVO2.setPro_price(150);
-//		productVO2.setPro_state("琜");
-//		byte[] pic = getPictureByteArray("WebContent/FakeInfo/BeefNoodles.jpg");
-//		productVO2.setPro_image(pic);
-//		productVO2.setPc_id("1");
-//		productVO2.setPro_content("ψ难~~~");
-//		productVO2.setPro_id("PRO-000010");
-//		productdao.update(productVO2);
-		
-		//埃
-//		productdao.delete("PRO-000009");
-		
-		//т掸
-//		ProductVO revenueVO4 = productdao.findByPrimaryKey("PRO-000001");
-//		System.out.println(revenueVO4.getPro_id());
-//		System.out.println(revenueVO4.getStore_id());
-//		System.out.println(revenueVO4.getPro_name());
-//		System.out.println(revenueVO4.getPro_price());
-//		System.out.println(revenueVO4.getPro_total());
-//		System.out.println(revenueVO4.getPro_state());
-//		System.out.println(revenueVO4.getPro_image());
-//		System.out.println(revenueVO4.getPro_type());
-//		System.out.println(revenueVO4.getPro_content());
-//		System.out.println("---------------------");
-		
-//		//т场
-//		List<ProductVO> list = productdao.getAll();
-//		for (ProductVO aPro : list) {
-//			System.out.println(aPro.getPro_id());
-//			System.out.println(aPro.getStore_id());
-//			System.out.println(aPro.getPro_name());
-//			System.out.println(aPro.getPro_price());
-//			System.out.println(aPro.getPro_total());
-//			System.out.println(aPro.getPro_state());
-//			System.out.println(aPro.getPro_image());
-//			System.out.println(aPro.getPro_type());
-//			System.out.println(aPro.getPro_content());
-//			System.out.println("---------------------");
-//		}
-		
-		//琩摸
-//		List<ProductVO> list = productdao.ClassLink("2");
-//		for(ProductVO proVO : list){
-//			System.out.println(proVO.getPro_id());
-//			System.out.println(proVO.getStore_id());
-//			System.out.println(proVO.getPro_name());
-//			System.out.println(proVO.getPro_price());
-//			System.out.println(proVO.getPro_total());
-//			System.out.println(proVO.getPro_state());
-//			System.out.println(proVO.getPro_image());
-//			System.out.println(proVO.getPc_id());
-//			System.out.println(proVO.getPro_content());
-//			System.out.println("---------------------");
-//		}
-		
-	}
-
-<<<<<<< HEAD
-	public static InputStream getPictureStream(String path) throws IOException {
-		File file = new File(path);
-		FileInputStream fis = new FileInputStream(file);
-		return fis;
-	}
-	
-	
-	private static byte[] getPictureByteArray(String string)throws IOException {
-		File file = new File(string);
-		FileInputStream fis = new FileInputStream(file);
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		byte[] image = new byte[8192];
-		int i ;
-		while((i = fis.read(image)) != -1){
-			baos.write(image,0,i);
-		}
-		baos.close();
-		fis.close();	
-		return baos.toByteArray();
-	}
-=======
-	public static byte[] getPictureByteArray(String path) throws IOException {
-		 File file = new File(path);
-		 FileInputStream fis = new FileInputStream(file);
-		 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		 byte[] buffer = new byte[8192];
-		 int i;
-		 while ((i = fis.read(buffer)) != -1) {
-		  baos.write(buffer, 0, i);
-		 }
-		 baos.close();
-		 fis.close();
->>>>>>> branch '鑳栧瓙' of https://github.com/w837501/BA101G1.git
-
-		 return baos.toByteArray();
-	}
-
 	@Override
 	public List<ProductVO> findProductByStore_id(String store_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public static void main(String args[]) throws IOException {
+
+		ProductJDBCDAO productdao = new ProductJDBCDAO();
+		// 穝糤
+		ProductVO productVO1 = new ProductVO();
+		productVO1.setStore_id("STO-000004");
+		productVO1.setPro_name("沉蔓");
+		productVO1.setPro_price(90);
+		productVO1.setPro_total(80);
+		productVO1.setPro_state("琜");
+		byte[] pic = getPictureByteArray("WebContent/FakeInfo/BeefNoodles.jpg");
+		productVO1.setPro_image(pic);
+		productVO1.setPc_id("1");
+		productVO1.setPro_content("12312312");
+		productdao.insert(productVO1);
+
+		// э
+		// ProductVO productVO2=new ProductVO();
+		// productVO2.setPro_name("ψ难");
+		// productVO2.setPro_price(150);
+		// productVO2.setPro_state("琜");
+		// byte[] pic =
+		// getPictureByteArray("WebContent/FakeInfo/BeefNoodles.jpg");
+		// productVO2.setPro_image(pic);
+		// productVO2.setPc_id("1");
+		// productVO2.setPro_content("ψ难~~~");
+		// productVO2.setPro_id("PRO-000010");
+		// productdao.update(productVO2);
+
+		// 埃
+		// productdao.delete("PRO-000009");
+
+		// т掸
+		// ProductVO revenueVO4 = productdao.findByPrimaryKey("PRO-000001");
+		// System.out.println(revenueVO4.getPro_id());
+		// System.out.println(revenueVO4.getStore_id());
+		// System.out.println(revenueVO4.getPro_name());
+		// System.out.println(revenueVO4.getPro_price());
+		// System.out.println(revenueVO4.getPro_total());
+		// System.out.println(revenueVO4.getPro_state());
+		// System.out.println(revenueVO4.getPro_image());
+		// System.out.println(revenueVO4.getPro_type());
+		// System.out.println(revenueVO4.getPro_content());
+		// System.out.println("---------------------");
+
+		// //т场
+		// List<ProductVO> list = productdao.getAll();
+		// for (ProductVO aPro : list) {
+		// System.out.println(aPro.getPro_id());
+		// System.out.println(aPro.getStore_id());
+		// System.out.println(aPro.getPro_name());
+		// System.out.println(aPro.getPro_price());
+		// System.out.println(aPro.getPro_total());
+		// System.out.println(aPro.getPro_state());
+		// System.out.println(aPro.getPro_image());
+		// System.out.println(aPro.getPro_type());
+		// System.out.println(aPro.getPro_content());
+		// System.out.println("---------------------");
+		// }
+
+		// 琩摸
+		// List<ProductVO> list = productdao.ClassLink("2");
+		// for(ProductVO proVO : list){
+		// System.out.println(proVO.getPro_id());
+		// System.out.println(proVO.getStore_id());
+		// System.out.println(proVO.getPro_name());
+		// System.out.println(proVO.getPro_price());
+		// System.out.println(proVO.getPro_total());
+		// System.out.println(proVO.getPro_state());
+		// System.out.println(proVO.getPro_image());
+		// System.out.println(proVO.getPc_id());
+		// System.out.println(proVO.getPro_content());
+		// System.out.println("---------------------");
+		// }
+
+	}
+
+	public static InputStream getPictureStream(String path) throws IOException {
+		File file = new File(path);
+		FileInputStream fis = new FileInputStream(file);
+		return fis;
+	}
+
+	private static byte[] getPictureByteArray(String string) throws IOException {
+		File file = new File(string);
+		FileInputStream fis = new FileInputStream(file);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] image = new byte[8192];
+		int i;
+		while ((i = fis.read(image)) != -1) {
+			baos.write(image, 0, i);
+		}
+		baos.close();
+		fis.close();
+		return baos.toByteArray();
+	}
+
+	
 }
-
-

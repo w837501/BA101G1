@@ -17,18 +17,10 @@ import com.product.model.ProductVO;
 import com.store.model.StoreService;
 import com.store.model.StoreVO;
 
-<<<<<<< HEAD
 public class ProductServlet extends HttpServlet {
-
-	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-=======
-public class ProductServlet extends HttpServlet{
-	
-	
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
->>>>>>> branch 'ËÉñÂ≠ê' of https://github.com/w837501/BA101G1.git
 		doPost(req, res);
 	}
 
@@ -122,9 +114,7 @@ public class ProductServlet extends HttpServlet{
 			successView.forward(req, res);
 
 		}
-<<<<<<< HEAD
 
-=======
 		
 		if ("getOne_In_ShoppingCart".equals(action)) { // ®”¶€select_page.jsp™∫Ω–®D
 			
@@ -194,10 +184,7 @@ public class ProductServlet extends HttpServlet{
 			rd.forward(req, res);
 		}
 		
->>>>>>> branch 'ËÉñÂ≠ê' of https://github.com/w837501/BA101G1.git
 	}
-<<<<<<< HEAD
-=======
 
 	private ProductVO getProduct(HttpServletRequest req) {
 
@@ -216,6 +203,5 @@ public class ProductServlet extends HttpServlet{
 		productVO.setStore_id(store_id);
 		return productVO;
 	}
->>>>>>> branch 'ËÉñÂ≠ê' of https://github.com/w837501/BA101G1.git
 
 }
