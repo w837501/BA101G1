@@ -46,7 +46,7 @@
 	</tr>
 	<%@ include file="page1.file" %>
 	<c:forEach var="ManagerVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1 %>">
-		<tr align='center' valign='middle'>
+		<tr align='center' valign='middle' ${(ManagerVO.man_id==param.man_id) ? 'style="background-color:#84d8d1;"':''}}>
 			<td>${ManagerVO.man_id }</td>
 			<td>${ManagerVO.man_name }</td>
 		    <td>${ManagerVO.man_phone }</td>

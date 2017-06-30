@@ -119,4 +119,22 @@
     <servlet-name>StoreReportServlet</servlet-name>
     <url-pattern>/store_report/store_report.do</url-pattern>
   </servlet-mapping>
+  
+<servlet>
+		<servlet-name>StoreClassReader</servlet-name>
+		<servlet-class>com.store.controller.StoreClassReader</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StoreClassReader</servlet-name>
+		<url-pattern>/StoreClassReader</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ProductReader</servlet-name>
+		<servlet-class>com.product.controller.DBGifReader</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProductReader</servlet-name>
+		<url-pattern>/ProductReader</url-pattern>
+	</servlet-mapping>
 </web-app>

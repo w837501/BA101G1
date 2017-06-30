@@ -3,14 +3,14 @@ package com.store_class.model;
 public class StoreClassVO {
 	
 	
-	private Integer sc_id;
+	private Number sc_id;
 	private String sc_name;
 	
 	
-	public Integer getSc_id() {
+	public Number getSc_id() {
 		return sc_id;
 	}
-	public void setSc_id(Integer sc_id) {
+	public void setSc_id(Number sc_id) {
 		this.sc_id = sc_id;
 	}
 	public String getSc_name() {

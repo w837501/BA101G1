@@ -1,6 +1,7 @@
 package com.ad.controller;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
@@ -42,7 +43,6 @@ public class AdServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		
 		if("getOne_For_Display".equals(action)){
-			System.out.println("幹你媽peter");
 			try{	
 				String ad_id = new String(req.getParameter("ad_id"));
 				System.out.println(ad_id);
@@ -67,8 +67,11 @@ public class AdServlet extends HttpServlet {
 				String store_id=req.getParameter("store_id");
 				String ad_name=req.getParameter("ad_name");
 				String ad_content=req.getParameter("ad_content");
+				
 				Part pic=req.getPart("upfile1");
+				System.out.println("upfile1"+pic);
 				byte[] ad_image=getPictureByteArrayFromWeb(pic);
+				
 				String ad_push_content=req.getParameter("ad_push_content");
 				
 				java.sql.Timestamp ad_time=null;
@@ -200,6 +203,7 @@ public class AdServlet extends HttpServlet {
 				adVO.setAd_time(ad_time);
 				adVO.setAd_push_content(ad_push_content);
 				adVO.setAd_state(ad_state);
+				AdVO adVO1=new AdVO();
 				
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("adVO", adVO);
@@ -209,10 +213,14 @@ public class AdServlet extends HttpServlet {
 				}
 				
 				AdService adSvc=new AdService();
+				adVO1=adSvc.getOneAd(ad_id);
+				byte[] defaultpic=adVO1.getAd_image();
+				if (getFileNameFromPart(pic) != null) 
 				adVO=adSvc.updateAd(ad_id, store_id, ad_name, ad_content, ad_image, ad_time, ad_state, ad_push_content);
-				
+				else
+					adVO=adSvc.updateAd(ad_id, store_id, ad_name, ad_content, defaultpic, ad_time, ad_state, ad_push_content);
 				req.setAttribute("adVO", adVO);
-				String url="/frontend/advertisement/ListAllAd.jsp";
+				String url="/frontend/advertisement/ListOneAd.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}catch(Exception e){
@@ -234,5 +242,15 @@ public class AdServlet extends HttpServlet {
 		baos.close();
 		is.close();
 		return baos.toByteArray();
+	}
+	public String getFileNameFromPart(Part part) {
+		String header = part.getHeader("content-disposition");
+		System.out.println("header=" + header); // 測試用
+		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
+		System.out.println("filename=" + filename); // 測試用
+		if (filename.length() == 0) {
+			return null;
+		}
+		return filename;
 	}
 }

@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page import="com.rev.model.RevenueService"%>
+<%@page import="com.rev.model.*"%>
+<% 
+session.setAttribute("man_id", "MAN-000001");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -99,6 +102,26 @@
 					<input type="hidden" name="action" value="getOne_For_Display">
 			</form>
 		</li>
+		<li>
+			<form action="<%=request.getContextPath() %>/backend/rev/rev.do" method="post">
+				<b>從取訂單營業額，輸入月份:</b> <select name="month">
+					<option value='1月'>1</option>
+					<option value='2月'>2</option>
+					<option value='3月'>3</option>
+					<option value='4月'>4</option>
+					<option value='5月'>5</option>
+					<option value='6'>6</option>
+					<option value='7月'>7</option>
+					<option value='8月'>8</option>
+					<option value='9月'>9</option>
+					<option value='10月'>10</option>
+					<option value='11月'>11</option>
+					<option value='12月'>12</option>
+				</select> 
+					<input type="submit" value="送出"> 
+					<input type="hidden" name="action" value="getMonthRevenue_For_Display">
+			</form>
+			</li>
 		
 	</ul>
 	<h3>管理</h3>
@@ -106,5 +129,6 @@
 			<li><a href="AddRev.jsp">ADD</a> a new Rev</li>
 		</ul>
 		
+	
 </body>
 </html>

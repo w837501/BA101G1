@@ -15,20 +15,16 @@ import com.store_report.model.StoreReportVO;
 
 public class StoreReportServlet extends HttpServlet {
 
-
-	public void doGet(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 	}
 
-	public void doPost(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
-		
-		if ("getOne_For_Display".equals(action)) { // ¨Ó¦Ûselect_page.jspªº½Ğ¨D
+
+		if ("getOne_For_Display".equals(action)) { // ä¾†è‡ªselect_page.jspçš„è«‹æ±‚
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -36,107 +32,120 @@ public class StoreReportServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z**********************/
+				/***************************
+				 * 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç†
+				 **********************/
 				String str = req.getParameter("sr_id");
 				if (str == null || (str.trim()).length() == 0) {
-					errorMsgs.add("½Ğ¿é¤J°Ó®aÀËÁ|½s¸¹");
+					errorMsgs.add("è«‹è¼¸å…¥å•†å®¶æª¢èˆ‰ç·¨è™Ÿ");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/str/selectPage.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/selectPage.jsp");
 					failureView.forward(req, res);
-					return;//µ{¦¡¤¤Â_
+					return;// ç¨‹å¼ä¸­æ–·
 				}
-				
+
 				String sr_id = null;
 				try {
 					sr_id = new String(str);
 				} catch (Exception e) {
-					errorMsgs.add("°Ó®aÀËÁ|½s¸¹®æ¦¡¤£¥¿½T");
+					errorMsgs.add("å•†å®¶æª¢èˆ‰ç·¨è™Ÿæ ¼å¼ä¸æ­£ç¢º");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/str/selectPage.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/selectPage.jsp");
 					failureView.forward(req, res);
-					return;//µ{¦¡¤¤Â_
+					return;// ç¨‹å¼ä¸­æ–·
 				}
-				
-				/***************************2.¶}©l¬d¸ß¸ê®Æ*****************************************/
+
+				/*************************** 2.é–‹å§‹æŸ¥è©¢è³‡æ–™ *****************************************/
 				StoreReportService srSvc = new StoreReportService();
 				StoreReportVO srVO = srSvc.getOneStoreReport(sr_id);
 				if (srVO == null) {
-					errorMsgs.add("¬dµL¸ê®Æ");
+					errorMsgs.add("æŸ¥ç„¡è³‡æ–™");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/str/selectPage.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/selectPage.jsp");
 					failureView.forward(req, res);
-					return;//µ{¦¡¤¤Â_
+					return;// ç¨‹å¼ä¸­æ–·
 				}
-				
-				/***************************3.¬d¸ß§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)*************/
-				req.setAttribute("srVO", srVO); // ¸ê®Æ®w¨ú¥XªºsrVOª«¥ó,¦s¤Jreq
+
+				/***************************
+				 * 3.æŸ¥è©¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view)
+				 *************/
+				req.setAttribute("srVO", srVO); // è³‡æ–™åº«å–å‡ºçš„srVOç‰©ä»¶,å­˜å…¥req
 				String url = "/backend/str/listOneSR.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // ¦¨¥\Âà¥ælistOneSR.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // æˆåŠŸè½‰äº¤listOneSR.jsp
 				successView.forward(req, res);
 
-				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z*************************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† *************************************/
 			} catch (Exception e) {
-				errorMsgs.add("µLªk¨ú±o¸ê®Æ:" + e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/backend/str/selectPage.jsp");
+				errorMsgs.add("ç„¡æ³•å–å¾—è³‡æ–™:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/selectPage.jsp");
 				failureView.forward(req, res);
 			}
 		}
-		
-		
-		if ("getOne_For_Update".equals(action)) { // ¨Ó¦ÛlistAllEmp.jsp ©Î  /dept/listEmps_ByDeptno.jsp ªº½Ğ¨D
+
+		if ("getOne_For_Update".equals(action)) { // ä¾†è‡ªlistAllEmp.jsp æˆ–
+													// /dept/listEmps_ByDeptno.jsp
+													// çš„è«‹æ±‚
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			
-			String requestURL = req.getParameter("requestURL"); // °e¥X­×§ïªº¨Ó·½ºô­¶¸ô®|: ¥i¯à¬°¡i/emp/listAllEmp.jsp¡j ©Î  ¡i/dept/listEmps_ByDeptno.jsp¡j ©Î ¡i /dept/listAllDept.jsp¡j		
-			
+
+			String requestURL = req.getParameter("requestURL"); // é€å‡ºä¿®æ”¹çš„ä¾†æºç¶²é è·¯å¾‘:
+																// å¯èƒ½ç‚ºã€/emp/listAllEmp.jspã€‘
+																// æˆ–
+																// ã€/dept/listEmps_ByDeptno.jspã€‘
+																// æˆ– ã€
+																// /dept/listAllDept.jspã€‘
+
 			try {
-				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ****************************************/
+				/*************************** 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ ****************************************/
 				String sr_id = new String(req.getParameter("sr_id"));
-				
-				/***************************2.¶}©l¬d¸ß¸ê®Æ****************************************/
+
+				/*************************** 2.é–‹å§‹æŸ¥è©¢è³‡æ–™ ****************************************/
 				StoreReportService srSvc = new StoreReportService();
 				StoreReportVO srVO = srSvc.getOneStoreReport(sr_id);
-								
-				/***************************3.¬d¸ß§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)************/
-				req.setAttribute("srVO", srVO); // ¸ê®Æ®w¨ú¥XªºempVOª«¥ó,¦s¤Jreq
+
+				/***************************
+				 * 3.æŸ¥è©¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view)
+				 ************/
+				req.setAttribute("srVO", srVO); // è³‡æ–™åº«å–å‡ºçš„empVOç‰©ä»¶,å­˜å…¥req
 				String url = "/backend/str/update_sr_input.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // ¦¨¥\Âà¥æupdate_emp_input.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // æˆåŠŸè½‰äº¤update_emp_input.jsp
 				successView.forward(req, res);
 
-				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z************************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† ************************************/
 			} catch (Exception e) {
-				errorMsgs.add("­×§ï¸ê®Æ¨ú¥X®É¥¢±Ñ:"+e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher(requestURL);
+				errorMsgs.add("ä¿®æ”¹è³‡æ–™å–å‡ºæ™‚å¤±æ•—:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			}
 		}
-		
-		
-		if ("update".equals(action)) { // ¨Ó¦Ûupdate_sr_input.jspªº½Ğ¨D
-			
+
+		if ("update".equals(action)) { // ä¾†è‡ªupdate_sr_input.jspçš„è«‹æ±‚
+
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			
-			String requestURL = req.getParameter("requestURL"); // °e¥X­×§ïªº¨Ó·½ºô­¶¸ô®|: ¥i¯à¬°¡i/emp/listAllEmp.jsp¡j ©Î  ¡i/dept/listEmps_ByDeptno.jsp¡j ©Î ¡i /dept/listAllDept.jsp¡j
-		
+
+			String requestURL = req.getParameter("requestURL"); // é€å‡ºä¿®æ”¹çš„ä¾†æºç¶²é è·¯å¾‘:
+																// å¯èƒ½ç‚ºã€/emp/listAllEmp.jspã€‘
+																// æˆ–
+																// ã€/dept/listEmps_ByDeptno.jspã€‘
+																// æˆ– ã€
+																// /dept/listAllDept.jspã€‘
+
 			try {
-				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z**********************/
+				/***************************
+				 * 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç†
+				 **********************/
 				String sr_id = new String(req.getParameter("sr_id").trim());
 				String store_id = req.getParameter("mem_id").trim();
 				String sc_id = req.getParameter("sc_id").trim();
@@ -144,31 +153,29 @@ public class StoreReportServlet extends HttpServlet {
 				String man_id = req.getParameter("man_id").trim();
 				String sr_content = req.getParameter("sr_content").trim();
 				byte[] sr_image = req.getParameter("sr_image").trim().getBytes();
-				
+
 				java.sql.Timestamp sr_time = null;
 				try {
 					sr_time = java.sql.Timestamp.valueOf(req.getParameter("sr_time").trim());
 				} catch (IllegalArgumentException e) {
 					sr_time = new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsgs.add("½Ğ¿é¤J¤é´Á87!");
+					errorMsgs.add("è«‹è¼¸å…¥æ—¥æœŸ!");
 				}
 
 				String sr_state = null;
 				try {
-					sr_state = new String(req.getParameter("sr_state").trim());
-				} catch (NumberFormatException e) {
-					sr_state = "";
-					errorMsgs.add("·|­ûÀËÁ|ª¬ºA½Ğ¶ñ¼Æ¦r012.");
+					sr_state = req.getParameter("sr_state").trim();
+				} catch (Exception e) {
+					errorMsgs.add("è«‹è¼¸å…¥æœƒå“¡æª¢èˆ‰ç‹€æ…‹");
+
 				}
 
 				String sr_result = null;
 				try {
-					sr_result = new String(req.getParameter("sr_result").trim());
-				} catch (NumberFormatException e) {
-					sr_result = "";
-					errorMsgs.add("·|­ûÀËÁ|ª¬ºA½Ğ¶ñ¼Æ¦r01.");
+					sr_result = req.getParameter("sr_result").trim();
+				} catch (Exception e) {
+					errorMsgs.add("è«‹è¼¸å…¥æœƒå“¡æª¢èˆ‰ç‹€æ…‹.");
 				}
-
 
 				StoreReportVO srVO = new StoreReportVO();
 				srVO.setSr_id(sr_id);
@@ -184,80 +191,83 @@ public class StoreReportServlet extends HttpServlet {
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("srVO", srVO); // §t¦³¿é¤J®æ¦¡¿ù»~ªºmrVOª«¥ó,¤]¦s¤Jreq
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/str/update_sr_input.jsp");
+					req.setAttribute("srVO", srVO); // å«æœ‰è¼¸å…¥æ ¼å¼éŒ¯èª¤çš„mrVOç‰©ä»¶,ä¹Ÿå­˜å…¥req
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/update_sr_input.jsp");
 					failureView.forward(req, res);
-					return; //µ{¦¡¤¤Â_
+					return; // ç¨‹å¼ä¸­æ–·
 				}
-				
-				/***************************2.¶}©l­×§ï¸ê®Æ*****************************************/
-				StoreReportService srSvc = new StoreReportService();
-				srVO = srSvc.updateStoreReport(sr_id , store_id, sc_id, order_id, man_id, sr_content,sr_image,sr_time,sr_state,sr_result);
-				
-				/***************************3.­×§ï§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)*************/				
 
-                String url = requestURL;
-				RequestDispatcher successView = req.getRequestDispatcher(url);   // ­×§ï¦¨¥\«á,Âà¥æ¦^°e¥X­×§ïªº¨Ó·½ºô­¶
+				/*************************** 2.é–‹å§‹ä¿®æ”¹è³‡æ–™ *****************************************/
+				StoreReportService srSvc = new StoreReportService();
+				srVO = srSvc.updateStoreReport(sr_id, store_id, sc_id, order_id, man_id, sr_content, sr_image, sr_time,
+						sr_state, sr_result);
+
+				/***************************
+				 * 3.ä¿®æ”¹å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view)
+				 *************/
+
+				String url = requestURL;
+				RequestDispatcher successView = req.getRequestDispatcher(url); // ä¿®æ”¹æˆåŠŸå¾Œ,è½‰äº¤å›é€å‡ºä¿®æ”¹çš„ä¾†æºç¶²é 
 				successView.forward(req, res);
 
-				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z*************************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† *************************************/
 			} catch (Exception e) {
-				errorMsgs.add("­×§ï¸ê®Æ¥¢±Ñ:"+e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/backend/str/update_sr_input.jsp");
+				errorMsgs.add("ä¿®æ”¹è³‡æ–™å¤±æ•—:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/update_sr_input.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
-        if ("insert".equals(action)) { // ¨Ó¦ÛaddEmp.jspªº½Ğ¨D  
-			
+		if ("insert".equals(action)) { // ä¾†è‡ªaddEmp.jspçš„è«‹æ±‚
+
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/***********************1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z*************************/
+				/***********************
+				 * 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç†
+				 *************************/
 				String store_id = req.getParameter("store_id").trim();
 				String sc_id = req.getParameter("sc_id").trim();
-				String order_id = req.getParameter("order_id").trim().equals("null") ? null : req.getParameter("order_id").trim();
-//				System.out.println("order_id: " + order_id);
-//				System.out.println("order_id == 'null' " + (order_id.trim() == "null"));
+				String order_id = req.getParameter("order_id").trim().equals("null") ? null
+						: req.getParameter("order_id").trim();
+				// System.out.println("order_id: " + order_id);
+				// System.out.println("order_id == 'null' " + (order_id.trim()
+				// == "null"));
 				String man_id = req.getParameter("man_id").trim();
 				String sr_content = req.getParameter("sr_content").trim();
 				byte[] sr_image = req.getParameter("sr_image").trim().getBytes();
-				
+
 				java.sql.Timestamp sr_time = null;
 				try {
 					System.out.println("req.getParameter('sr_time'): " + req.getParameter("sr_time"));
 					sr_time = java.sql.Timestamp.valueOf(req.getParameter("sr_time").trim() + " 11:12:13");
 					System.out.println("sr_time: " + sr_time);
 				} catch (IllegalArgumentException e) {
-					sr_time=new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsgs.add("½Ğ¿é¤J¤é´Á!");
+					sr_time = new java.sql.Timestamp(System.currentTimeMillis());
+					errorMsgs.add("è«‹è¼¸å…¥æ—¥æœŸ!");
 				}
-				
+
 				String sr_state = null;
 				try {
 					System.out.println("req.getParameter('sr_state'): " + req.getParameter("sr_state"));
-					sr_state = new String(req.getParameter("sr_state").trim());
+					sr_state = req.getParameter("sr_state").trim();
 					System.out.println("sr_state: " + sr_state);
-				} catch (NumberFormatException e) {
-					sr_state = "";
-					errorMsgs.add("Controller_insertªºsr_state¿ù»~¡A²Ä248¦æ.");
+				} catch (Exception e) {
+					errorMsgs.add("è«‹è¼¸å…¥ç‹€æ…‹.");
 				}
-				
+
 				String sr_result = null;
 				try {
 					System.out.println("req.getParameter('sr_result'): " + req.getParameter("sr_result"));
-					sr_result = new String(req.getParameter("sr_result").trim());
+					sr_result =req.getParameter("sr_result").trim();
 					System.out.println("sr_result: " + sr_result);
-				} catch (NumberFormatException e) {
-					sr_result = "";
-					errorMsgs.add("Controller_insertªºsr_result¿ù»~¡A²Ä258¦æ.");
+				} catch (Exception e) {
+					errorMsgs.add("è«‹è¼¸å…¥æª¢èˆ‰çµæœ");
 				}
-				
+
 				StoreReportVO srVO = new StoreReportVO();
 				srVO.setStore_id(store_id);
 				srVO.setSc_id(sc_id);
@@ -271,64 +281,73 @@ public class StoreReportServlet extends HttpServlet {
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("srVO", srVO); // §t¦³¿é¤J®æ¦¡¿ù»~ªºempVOª«¥ó,¤]¦s¤Jreq
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/str/addSR.jsp");
+					req.setAttribute("srVO", srVO); // å«æœ‰è¼¸å…¥æ ¼å¼éŒ¯èª¤çš„empVOç‰©ä»¶,ä¹Ÿå­˜å…¥req
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/addSR.jsp");
 					failureView.forward(req, res);
 					return;
 				}
-				
-				/***************************2.¶}©l·s¼W¸ê®Æ***************************************/
+
+				/*************************** 2.é–‹å§‹æ–°å¢è³‡æ–™ ***************************************/
 				StoreReportService srSvc = new StoreReportService();
-				srVO = srSvc.addStoreReport(store_id, sc_id, order_id, man_id, sr_content, sr_image,sr_time,sr_state,sr_result);
-				
-				/***************************3.·s¼W§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)***********/
+				srVO = srSvc.addStoreReport(store_id, sc_id, order_id, man_id, sr_content, sr_image, sr_time, sr_state,
+						sr_result);
+
+				/***************************
+				 * 3.æ–°å¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view)
+				 ***********/
 				String url = "/backend/str/listAllSR.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // ·s¼W¦¨¥\«áÂà¥ælistAllEmp.jsp
-				successView.forward(req, res);				
-				
-				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z**********************************/
+				RequestDispatcher successView = req.getRequestDispatcher(url); // æ–°å¢æˆåŠŸå¾Œè½‰äº¤listAllEmp.jsp
+				successView.forward(req, res);
+
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/backend/str/addSR.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/addSR.jsp");
 				failureView.forward(req, res);
 			}
 		}
-		
-       
-		if ("delete".equals(action)) { // ¨Ó¦ÛlistAllEmp.jsp ©Î  /dept/listEmps_ByDeptno.jspªº½Ğ¨D
+
+		if ("delete".equals(action)) { // ä¾†è‡ªlistAllEmp.jsp æˆ–
+										// /dept/listEmps_ByDeptno.jspçš„è«‹æ±‚
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			
-			String requestURL = req.getParameter("requestURL"); // °e¥X§R°£ªº¨Ó·½ºô­¶¸ô®|: ¥i¯à¬°¡i/emp/listAllEmp.jsp¡j ©Î  ¡i/dept/listEmps_ByDeptno.jsp¡j ©Î ¡i /dept/listAllDept.jsp¡j
+
+			String requestURL = req.getParameter("requestURL"); // é€å‡ºåˆªé™¤çš„ä¾†æºç¶²é è·¯å¾‘:
+																// å¯èƒ½ç‚ºã€/emp/listAllEmp.jspã€‘
+																// æˆ–
+																// ã€/dept/listEmps_ByDeptno.jspã€‘
+																// æˆ– ã€
+																// /dept/listAllDept.jspã€‘
 
 			try {
-				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ***************************************/
+				/*************************** 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ ***************************************/
 				String sr_id = new String(req.getParameter("sr_id"));
-				
-				/***************************2.¶}©l§R°£¸ê®Æ***************************************/
+
+				/*************************** 2.é–‹å§‹åˆªé™¤è³‡æ–™ ***************************************/
 				StoreReportService srSvc = new StoreReportService();
 				StoreReportVO srVO = srSvc.getOneStoreReport(sr_id);
 				srSvc.deleteStoreReport(sr_id);
-				
-				/***************************3.§R°£§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)***********/
-//				DeptService deptSvc = new DeptService();
-//				if(requestURL.equals("/dept/listEmps_ByDeptno.jsp") || requestURL.equals("/dept/listAllDept.jsp"))
-//					req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(empVO.getDeptno())); // ¸ê®Æ®w¨ú¥Xªºlistª«¥ó,¦s¤Jrequest
-//				
+
+				/***************************
+				 * 3.åˆªé™¤å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view)
+				 ***********/
+				// DeptService deptSvc = new DeptService();
+				// if(requestURL.equals("/dept/listEmps_ByDeptno.jsp") ||
+				// requestURL.equals("/dept/listAllDept.jsp"))
+				// req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(empVO.getDeptno()));
+				// // è³‡æ–™åº«å–å‡ºçš„listç‰©ä»¶,å­˜å…¥request
+				//
 				String url = requestURL;
-				RequestDispatcher successView = req.getRequestDispatcher(url); // §R°£¦¨¥\«á,Âà¥æ¦^°e¥X§R°£ªº¨Ó·½ºô­¶
+				RequestDispatcher successView = req.getRequestDispatcher(url); // åˆªé™¤æˆåŠŸå¾Œ,è½‰äº¤å›é€å‡ºåˆªé™¤çš„ä¾†æºç¶²é 
 				successView.forward(req, res);
-				
-				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z**********************************/
+
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† **********************************/
 			} catch (Exception e) {
-				errorMsgs.add("§R°£¸ê®Æ¥¢±Ñ:"+e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher(requestURL);
+				errorMsgs.add("åˆªé™¤è³‡æ–™å¤±æ•—:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			}
 		}

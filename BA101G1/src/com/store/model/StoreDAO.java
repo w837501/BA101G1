@@ -11,9 +11,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+public class StoreDAO implements StoreDAO_interface {
 
-public class StoreDAO implements StoreDAO_interface{
-	
 	private static DataSource ds = null;
 	static {
 		try {
@@ -23,18 +22,17 @@ public class StoreDAO implements StoreDAO_interface{
 			e.printStackTrace();
 		}
 	}
-	
-	private static final String INSERT_STMT = 
-			"INSERT INTO STORE (STORE_ID,SC_ID,STORE_NAME,STORE_CONTENT,STORE_PHONE,STORE_ADDR,STORE_IMAGE,STORE_PW,STORE_ACC,STORE_OUT,STORE_ZONE)VALUES ('STO'||'-'||LPAD(to_char(store_seq.NEXTVAL),6,'0'),?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE_STMT = 
-			"UPDATE STORE set sc_id=?, store_content=?, store_phone=?, store_addr=?, store_image=?, store_out=?, store_zone=?, store_pw=? where store_id = ?";
-	private static final String DELETE = 
-			"DELETE FROM STORE where store_id = ?";
+
+	private static final String INSERT_STMT = "INSERT INTO STORE (STORE_ID,SC_ID,STORE_NAME,STORE_CONTENT,STORE_PHONE,STORE_ADDR,STORE_IMAGE,STORE_PW,STORE_ACC,STORE_OUT,STORE_ZONE)VALUES ('STO'||'-'||LPAD(to_char(store_seq.NEXTVAL),6,'0'),?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String UPDATE_STMT = "UPDATE STORE set sc_id=?, store_content=?, store_phone=?, store_addr=?, store_image=?, store_out=?, store_zone=?, store_pw=? where store_id = ?";
+	private static final String DELETE = "DELETE FROM STORE where store_id = ?";
 	private static final String Find_by_PK = "select * from STORE where store_id=?";
 	private static final String Find_ALL = "select * from STORE ";
 	private static final String Find_NAME = "select * from STORE where store_name like ?";
 	private static final String Find_ZONE = "select * from STORE where store_zone = ?";
-	private static final String CLASSLINK = "select s.store_name, t.sc_name from store s join store_class t on (s.sc_id = t.sc_id) where t.sc_id = ?";
+	private static final String CLASSLINK = "select s.sc_id, s.store_id, s.store_name, t.sc_name from store s join store_class t on (s.sc_id = t.sc_id) where t.sc_id = ?";
+	private static final String UPDATE_STMT2 = "UPDATE STORE set store_phone=?, store_addr=?, store_name=?, store_state=? where store_id = ?";
+	private static final String Find_HOT = "select * from store where store_star > ? order by store_star desc";
 	
 	@Override
 	public void insert(StoreVO storeVO) {
@@ -44,7 +42,7 @@ public class StoreDAO implements StoreDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setInt(1, (int)storeVO.getSc_id());
+			pstmt.setInt(1, (int) storeVO.getSc_id());
 			pstmt.setString(2, storeVO.getStore_name());
 			pstmt.setString(3, storeVO.getStore_content());
 			pstmt.setString(4, storeVO.getStore_phone());
@@ -52,11 +50,11 @@ public class StoreDAO implements StoreDAO_interface{
 			pstmt.setBytes(6, storeVO.getStore_image());
 			pstmt.setString(7, storeVO.getStore_pw());
 			pstmt.setString(8, storeVO.getStore_acc());
-			pstmt.setString(9, storeVO.getStore_out());
+			pstmt.setInt(9, (int) storeVO.getStore_out());
 			pstmt.setString(10, storeVO.getStore_zone());
 
 			pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -82,18 +80,18 @@ public class StoreDAO implements StoreDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
-			pstmt.setInt(1, (int)storeVO.getSc_id());
+			pstmt.setInt(1, (int) storeVO.getSc_id());
 			pstmt.setString(2, storeVO.getStore_content());
 			pstmt.setString(3, storeVO.getStore_phone());
 			pstmt.setString(4, storeVO.getStore_addr());
 			pstmt.setBytes(5, storeVO.getStore_image());
-			pstmt.setString(6, storeVO.getStore_out());
+			pstmt.setInt(6, (int) storeVO.getStore_out());
 			pstmt.setString(7, storeVO.getStore_zone());
 			pstmt.setString(8, storeVO.getStore_pw());
 			pstmt.setString(9, storeVO.getStore_id());
-			
+
 			pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -154,8 +152,8 @@ public class StoreDAO implements StoreDAO_interface{
 			pstmt = con.prepareStatement(Find_ALL);
 
 			rs = pstmt.executeQuery();
-			while(rs.next()){
-				storeVO= new StoreVO();
+			while (rs.next()) {
+				storeVO = new StoreVO();
 				storeVO.setStore_id(rs.getString("store_id"));
 				storeVO.setSc_id(rs.getInt("Sc_id"));
 				storeVO.setStore_name(rs.getString("store_name"));
@@ -172,7 +170,7 @@ public class StoreDAO implements StoreDAO_interface{
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getString("store_out"));
+				storeVO.setStore_out(rs.getInt("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 				storelist.add(storeVO);
 			}
@@ -217,7 +215,7 @@ public class StoreDAO implements StoreDAO_interface{
 
 			pstmt.setString(1, store_id);
 			rs = pstmt.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				storeVO = new StoreVO();
 				storeVO.setStore_id(rs.getString("store_id"));
 				storeVO.setSc_id(rs.getInt("Sc_id"));
@@ -235,7 +233,7 @@ public class StoreDAO implements StoreDAO_interface{
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getString("store_out"));
+				storeVO.setStore_out(rs.getInt("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 			}
 		} catch (SQLException e) {
@@ -278,10 +276,10 @@ public class StoreDAO implements StoreDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(Find_NAME);
 
-			pstmt.setString(1, "%"+store_name+"%");
+			pstmt.setString(1, "%" + store_name + "%");
 			rs = pstmt.executeQuery();
-			while(rs.next()){
-				storeVO= new StoreVO();
+			while (rs.next()) {
+				storeVO = new StoreVO();
 				storeVO.setStore_id(rs.getString("store_id"));
 				storeVO.setSc_id(rs.getInt("Sc_id"));
 				storeVO.setStore_name(rs.getString("store_name"));
@@ -298,7 +296,7 @@ public class StoreDAO implements StoreDAO_interface{
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getString("store_out"));
+				storeVO.setStore_out(rs.getInt("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 				storelist.add(storeVO);
 			}
@@ -329,8 +327,7 @@ public class StoreDAO implements StoreDAO_interface{
 		}
 		return storelist;
 	}
-	
-	
+
 	@Override
 	public List<StoreVO> findZone(String store_zone) {
 		List<StoreVO> storelist = new ArrayList<StoreVO>();
@@ -345,8 +342,8 @@ public class StoreDAO implements StoreDAO_interface{
 
 			pstmt.setString(1, store_zone);
 			rs = pstmt.executeQuery();
-			while(rs.next()){
-				storeVO= new StoreVO();
+			while (rs.next()) {
+				storeVO = new StoreVO();
 				storeVO.setStore_id(rs.getString("store_id"));
 				storeVO.setSc_id(rs.getInt("Sc_id"));
 				storeVO.setStore_name(rs.getString("store_name"));
@@ -363,7 +360,7 @@ public class StoreDAO implements StoreDAO_interface{
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getString("store_out"));
+				storeVO.setStore_out(rs.getInt("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 				storelist.add(storeVO);
 			}
@@ -409,8 +406,10 @@ public class StoreDAO implements StoreDAO_interface{
 
 			pstmt.setString(1, sc_id);
 			rs = pstmt.executeQuery();
-			while(rs.next()){
-				storeVO= new StoreVO();
+			while (rs.next()) {
+				storeVO = new StoreVO();
+				storeVO.setSc_id(rs.getInt("sc_id"));
+				storeVO.setStore_id(rs.getString("store_id"));
 				storeVO.setStore_name(rs.getString("store_name"));
 				storeVO.setSc_name(rs.getString("sc_name"));
 				storelist.add(storeVO);
@@ -442,5 +441,102 @@ public class StoreDAO implements StoreDAO_interface{
 		}
 		return storelist;
 	}
-	
+
+	public void update2(StoreVO storeVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_STMT2);
+
+			pstmt.setString(1, storeVO.getStore_phone());
+			pstmt.setString(2, storeVO.getStore_addr());
+			pstmt.setString(3, storeVO.getStore_name());
+			pstmt.setString(4, storeVO.getStore_state());
+
+			pstmt.setString(5, storeVO.getStore_id());
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
+
+	@Override
+	public List<StoreVO> findHot(Number store_star) {
+		List<StoreVO> storelist = new ArrayList<StoreVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StoreVO storeVO = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(Find_HOT);
+
+			pstmt.setInt(1, (Integer)store_star);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				storeVO = new StoreVO();
+				storeVO.setStore_id(rs.getString("store_id"));
+				storeVO.setSc_id(rs.getInt("Sc_id"));
+				storeVO.setStore_name(rs.getString("store_name"));
+				storeVO.setStore_content(rs.getString("store_content"));
+				storeVO.setStore_phone(rs.getString("store_phone"));
+				storeVO.setStore_addr(rs.getString("store_addr"));
+				storeVO.setStore_date(rs.getTimestamp("store_date"));
+				storeVO.setStore_star(rs.getInt("store_star"));
+				storeVO.setStore_count(rs.getInt("store_count"));
+				storeVO.setStore_state(rs.getString("store_state"));
+				storeVO.setStore_image(rs.getBytes("store_image"));
+				storeVO.setStore_report_count(rs.getInt("store_report_count"));
+				storeVO.setStore_start_time(rs.getTimestamp("store_start_time"));
+				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
+				storeVO.setStore_pw(rs.getString("store_pw"));
+				storeVO.setStore_acc(rs.getString("store_acc"));
+				storeVO.setStore_out(rs.getInt("store_out"));
+				storeVO.setStore_zone(rs.getString("store_zone"));
+				storelist.add(storeVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return storelist;
+	}
+
 }

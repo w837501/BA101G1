@@ -6,13 +6,13 @@
 
 <table border='1' cellpadding='5' cellspacing='0' width='400'>
   <tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-    <td><h3>IBM Emp: Home</h3><font color=red>( MVC )</font></td>
+    <td><h3>吃訂我線上訂餐系統</h3><font color=red>( MVC )</font></td>
   </tr>
 </table>
 
 <p>Index</p>
 
-<h3>商家查詢:</h3>
+
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
   <font color='red'>請修正以下錯誤:
@@ -24,6 +24,18 @@
   </font>
 </c:if>
 
+<IMG src="FakeInfo/LOGO.png" width="100px" height="100px">
+
+<h3><font color=orange>Header</font></h3>
+
+<ul>
+  <li><a href='store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
+  <li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
+  <li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
+</ul>
+
+
+<h3><font color=orange>商家查詢</font></h3>
 <ul>
   <li>
     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store/store.do" >
@@ -36,8 +48,7 @@
 
   <li>
      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store/store.do" >
-       <b>選擇地區
-       :</b>
+       <b>選擇地區 :</b>
        <select size="1" name="store_zone">
           <option value="基隆市">基隆市
           <option value="臺北市">臺北市
@@ -65,12 +76,12 @@
   </li>
 </ul>
 
-<h3><font color=orange>商家分類</font></h3>
 
-<ul>
-  <li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
-  <li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
-</ul>
+
+
+<!--  
+  <IMG src="<%=request.getContextPath()%>/StoreClassReader?store_id=STO-000004">
+-->
 
 </body>
 </html>

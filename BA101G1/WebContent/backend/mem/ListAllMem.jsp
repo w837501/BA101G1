@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+j<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.mem.model.*" %>
@@ -47,7 +47,7 @@
 	</tr>
 	<%@ include file="page1.file" %>	
 	<c:forEach var="MemberVO" items="${list }" begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
-		<tr align="center" valign="middle">
+		<tr align="center" valign="middle" ${(MemberVO.mem_id==param.mem_id) ? 'bgcolor=#CCCCFF':''}>
 			<td>${MemberVO.mem_id }</td>
 			<td>${MemberVO.mem_name }</td>
 			<td>${MemberVO.mem_phone }</td>

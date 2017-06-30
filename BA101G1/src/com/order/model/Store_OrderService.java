@@ -69,4 +69,8 @@ public class Store_OrderService {
 	public List<Store_OrderVO> getOrderByMem_id(String mem_id){
 		return dao.findOrderByMem(mem_id);
 	}
+	
+	public List<Store_OrderVO> getOrderByState(String state){
+		return dao.findOrderByState(state);
+	}
 }

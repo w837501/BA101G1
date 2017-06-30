@@ -50,7 +50,11 @@
 	</tr>
 	<tr>
 		<td>ª¬ºA:</td>
-		<td><input type="TEXT" name="store_state" size="45" value="<%=revenueVO.getState() %>"/></td>
+		<td><select name="store_state" value="<%=revenueVO.getState() %>">
+					<option value='¥¼¥I'>¥¼¥I</option>
+					<option value='¤w¥I'>¤w¥I</option>
+			</select>
+		</td>
 	</tr>	
 </table>
 <br>

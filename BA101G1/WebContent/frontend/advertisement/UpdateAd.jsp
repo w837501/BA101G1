@@ -11,6 +11,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <link rel="stylesheet" type="text/css" href="js/calendar.css">
 <script language="JavaScript" src="js/calendarcode.js"></script>
+<script language="JavaScript" src="js/pic_preview.js"></script>
+<script language="JavaScript" src="js/push_select.js"></script>
 <div id="popupcalendar" class="text"></div>
 <title>Update Ad here</title>
 </head>
@@ -20,7 +22,7 @@
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
 		<td>
 		<h3>員工資料修改 - update_emp_input.jsp</h3>
-		<a href="select_man.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></td>
+		<a href="ListAllAd.jsp"><img src="images/logo.png" width="100" height="32" border="0">回首頁</a></td>
 	</tr>
 </table>
 
@@ -55,8 +57,12 @@
 	</tr>
 	<tr>
 		<td>廣告圖片:<font color=red><b>*</b></font></td>
-			<td><img src="<%=request.getContextPath()%>/advertisement/DBGifReader.do?ad_id=${adVO.ad_id}" style="max-width: 150px; max-height: 150px;">
-			<input type="file" name="upfile1"></td>
+			<td>
+			<input type="file" name="upfile1" id="upfile1">
+			 <p>
+    			<img src="<%=request.getContextPath()%>/advertisement/DBGifReader.do?ad_id=${adVO.ad_id}" id="image"   style="max-width: 150px; max-height: 150px;">
+			</p>
+			</td>
 	</tr>
 	<tr>
 		<td>廣告時間:<font color=red><b>*</b></font></td>
@@ -74,15 +80,20 @@
 	<tr>
 		<td>廣告狀態:<font color=red><b>*</b></font></td>
 		<td><select name="ad_state"><%=adVO.getAd_state() %>
-					<option value="0">審核中</option>
-					<option value="1">刊登中</option>
-					<option value="2">下架</option>		
+				<option value="${adVO.ad_state}" ${(adVO.ad_state==adVO.ad_state)?'selected':'' } >${adVO.ad_state}
+					<option value="審核中">審核中</option>
+					<option value="刊登中">刊登中</option>
+					<option value="下架">下架</option>		
 			</select></td>
 	</tr>
 	<tr>
-		<td>廣告推播:<font color=red><b>*</b></font></td>
-			<td><input type="text" name="ad_push_content" size="45" value="<%=adVO.getAd_push_content()%>" />
-		</td>
+		<td>是否推播:<font color=red><b>*</b></font></td>
+		<td><select id="push_select" onclick=selectChange()>
+			<option value='1'>是</option>
+			
+			<option value='2'>否</option>
+		</select>
+		<input type="TEXT" id="ad_push_content" name="ad_push_content" size="45" value="<%=adVO.getAd_push_content()%>" /></td></td>
 	</tr>
 	</table>
 	<br>
