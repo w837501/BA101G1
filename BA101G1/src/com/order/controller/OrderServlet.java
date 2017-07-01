@@ -105,10 +105,10 @@ public class OrderServlet extends HttpServlet {
 			try{
 				String state=req.getParameter("order_state");
 				
-				
+				if(state.equals("未確認")){
 				Store_OrderService  orderSvc=new Store_OrderService();
 				List<Store_OrderVO> orderList=new LinkedList<Store_OrderVO>();
-				orderList=orderSvc.getOrderByState("未確認");
+				orderList=orderSvc.getOrderByState(state);
 				
 				if(orderList.isEmpty()){
 					errorMsgs.add("查無資料");
@@ -120,7 +120,41 @@ public class OrderServlet extends HttpServlet {
 					failureView.forward(req, res);
 				}
 				req.setAttribute("orderList", orderList);
-				RequestDispatcher successView=req.getRequestDispatcher("/frontend/selectOrder/ListOrderState.jsp");
+				RequestDispatcher successView=req.getRequestDispatcher("/frontend/selectOrder/ListOrderState_unconfirm.jsp");
+				successView.forward(req, res);
+				}else if(state.equals("已確認")){
+					Store_OrderService  orderSvc=new Store_OrderService();
+					List<Store_OrderVO> orderList=new LinkedList<Store_OrderVO>();
+					orderList=orderSvc.getOrderByState(state);
+					
+					if(orderList.isEmpty()){
+						errorMsgs.add("查無資料");
+						return;
+					}
+					
+					if(!errorMsgs.isEmpty()){
+						RequestDispatcher failureView=req.getRequestDispatcher("/frontend/selectOrder/selectOrder.jsp");
+						failureView.forward(req, res);
+					}
+					req.setAttribute("orderList", orderList);
+					RequestDispatcher successView=req.getRequestDispatcher("/frontend/selectOrder/ListOrderState_confirm.jsp");
+					successView.forward(req, res);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				RequestDispatcher failureView=req.getRequestDispatcher("/frontend/selectOrder/selectOrder.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		if("Confirm_Order".equals(action)){
+			try{
+				String order_id=req.getParameter("order_id");
+				
+				Store_OrderService store_orderSvc=new Store_OrderService();
+				store_orderSvc.confirm_order(order_id, "已確認");
+				
+				RequestDispatcher successView=req.getRequestDispatcher("order.do?action=getOrder_State&order_state=已確認");
 				successView.forward(req, res);
 			}catch(Exception e){
 				e.printStackTrace();

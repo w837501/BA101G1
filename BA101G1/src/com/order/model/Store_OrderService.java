@@ -73,4 +73,7 @@ public class Store_OrderService {
 	public List<Store_OrderVO> getOrderByState(String state){
 		return dao.findOrderByState(state);
 	}
+	public void confirm_order(String order_id,String order_state){
+		dao.confirm_order(order_id, order_state);
+	}
 }

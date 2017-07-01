@@ -44,7 +44,8 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 			"select order_id, store_id, totalprice, order_time, order_way, order_state, mem_id from store_order where mem_id = ? order by order_time desc";
 	private static final String GET_ORDER_BY_STATE=
 			"select mem_id, order_id, store_id, totalprice, order_time, order_way, receive_address,order_note, order_taketime ,order_state from  store_order where order_state=?";
-	
+	private static final String CONFIRM_ORDER=
+			"Update store_order set order_state=? where order_id=?";
 	@Override
 	public void insert(Store_OrderVO orderVO) {
 		// TODO Auto-generated method stub
@@ -487,6 +488,46 @@ rs = pstmt.executeQuery();
 	}
 	
 
+	@Override
+	public void confirm_order(String order_id, String order_state) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(CONFIRM_ORDER);
+			pstmt.setString(1, order_state);
+			pstmt.setString(2, order_id);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+		
+	
 	
 	public static void main(String[] args) throws IOException{
 		
