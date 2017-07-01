@@ -12,7 +12,7 @@
 <table border='1' cellpadding='5' cellspacing='0' width='600'>
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
 		<td>
-		<h3>已確認訂單 - ListOrderState_Confirm.jsp</h3>
+		<h3>待取餐訂單 - ListOrderState_nottake.jsp</h3>
 		<a href="selectOrder.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
 		</td>
 	</tr>
@@ -50,7 +50,7 @@
 				<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
 					<input type="submit" value="確認訂單">
 					<input type="hidden" name="order_id" value="${Store_OrderVO.order_id}">
-					<input type="hidden" name="action" value="Change_Order_To_Take">
+					<input type="hidden" name="action" value="Confirm_Order">
 				</form>	
 			</td>
 	</tr>

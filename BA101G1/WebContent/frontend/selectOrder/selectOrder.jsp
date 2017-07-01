@@ -26,7 +26,7 @@
 
 <ul>
 
-  
+  <li><a href="<%=request.getContextPath() %>/frontend/selectOrder/ListAllOrder.jsp">List All</a></li>
   <li>
     <FORM METHOD="post" ACTION="order.do" >
         <b>輸入會員編號 :</b>
@@ -52,6 +52,14 @@
     </FORM>
   </li>
 
+<li>
+    <FORM METHOD="post" ACTION="order.do" >
+        <b>查詢待取餐訂單 :</b>
+        <input type="submit" value="送出">        
+        <input type="hidden" name="order_state" value="待取餐">
+        <input type="hidden" name="action" value="getOrder_State">
+    </FORM>
+  </li>
 </ul>
 
 </body>

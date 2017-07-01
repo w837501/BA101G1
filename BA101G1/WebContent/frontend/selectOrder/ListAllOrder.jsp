@@ -2,6 +2,12 @@
     pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.order.model.*" %>
+<%@ page import="java.util.*" %>
+<% 
+	Store_OrderService store_orderSvc=new Store_OrderService();
+	List<Store_OrderVO> list=store_orderSvc.getAll();
+	pageContext.setAttribute("list",list);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,11 +36,10 @@
 		<th>點餐備註</th>
 		<th>取餐時間</th>
 		<th>訂單狀態</th>
-		<th>修改</th>
 		
 	</tr>
 	
-	<c:forEach var="Store_OrderVO" items="${orderList}">
+	<c:forEach var="Store_OrderVO" items="${list}">
 		<tr align='center' valign='middle'${(Store_OrderVO.order_id==param.order_id) ? 'bgcolor=#CCCCFF':''}>
 			<td>${Store_OrderVO.order_id } </td>
 			<td>${Store_OrderVO.mem_id }</td>
@@ -46,13 +51,7 @@
 			<td>${Store_OrderVO.order_note }</td>
 			<td>${Store_OrderVO.order_taketime }</td>
 			<td>${Store_OrderVO.order_state }</td>
-			<td>
-				<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
-					<input type="submit" value="確認訂單">
-					<input type="hidden" name="order_id" value="${Store_OrderVO.order_id}">
-					<input type="hidden" name="action" value="Change_Order_To_Take">
-				</form>	
-			</td>
+			
 	</tr>
 	</c:forEach>
 </table>
