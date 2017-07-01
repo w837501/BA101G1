@@ -334,13 +334,13 @@ public class AdJDBCDAO implements AdDAO_interface {
 //		 adVO2.setAd_name("YOYOYOYO123123");
 //		 adVO2.setAd_content("沒有");
 //		 adVO2.setAd_time(new Timestamp(System.currentTimeMillis()));
-//		 adVO2.setAd_state(1);
+//		 adVO2.setAd_state("審核中");
 //		 adVO2.setAd_push_content("推播");
 //		 adVO2.setAd_id("AD-000001");
-//		 byte[] pic;
+//		 byte[] pic1;
 //		  try {
-//		  pic = getPictureByteArray("C:/Users/Java/git/BA101G1/BA101G1/WebContent/frontend/advertisement/images/coffee1.jpg");
-//		  adVO2.setAd_image(pic);
+//		  pic1 = getPictureByteArray("C:/Users/Java/git/BA101G1/BA101G1/WebContent/frontend/advertisement/images/coffee1.jpg");
+//		  adVO2.setAd_image(pic1);
 //		  } catch (IOException e) {
 //		  // TODO Auto-generated catch block
 //		  e.printStackTrace();
@@ -389,5 +389,5 @@ public class AdJDBCDAO implements AdDAO_interface {
 		 fis.close();
 
 		 return baos.toByteArray();
-		}
+	}
 }

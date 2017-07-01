@@ -2,14 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.order.model.*"%>
 <%@ page import="com.store.model.*"%>
+<%@ page import="com.orderlist.model.*" %> 
 <%@ page import="java.util.*"%>
-
-
 
 
 <html>
 <head>
-<title>員工資料 - listOneEmp.jsp</title>
+<title>單一訂單詳細資料 - listOneOrderList.jsp</title>
 </head>
 <body bgcolor='white'>
 <b><font color=red>此頁練習採用 Script 的寫法取值:</font></b>
@@ -32,7 +31,10 @@
 	</tr>
 	<c:forEach var="orderlistVO" items="${orderlistVO}" >
 	<tr align='center' valign='middle'>
-		<td></td>
+		<td>${param["order_id"]}</td>
+		
+		<td>${orderlistVO.order_id}</td>
+		
 		<td>${orderlistVO.pro_name}</td>
  		<td>${orderlistVO.price}</td>
 		<td>${orderlistVO.order_amount}</td>

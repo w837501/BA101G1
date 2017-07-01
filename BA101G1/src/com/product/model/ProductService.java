@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.product.model.ProductDAO;
 import com.product.model.ProductVO;
+import com.store.model.StoreVO;
 
 public class ProductService {
 	
@@ -61,4 +62,12 @@ public class ProductService {
 		return dao.findName(pro_name);
 	}
 
+	public List<ProductVO> getProductClass(String sc_id) {
+		return dao.ClassLink(sc_id);
+	}
+	
+	public List<ProductVO> getProductByStore(String store_id){
+		return dao.findProductByStore_id(store_id);
+
+	}
 }

@@ -238,7 +238,8 @@ public class ManServlet extends HttpServlet {
 
 				ManagerService manSvc = new ManagerService();
 				managerVO = manSvc.addMan(man_name, man_phone, man_pw, man_mail);
-
+				req.setAttribute("managerVO", managerVO);
+				
 				String url = "/backend/man/ListAllMan.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);

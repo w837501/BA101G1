@@ -39,7 +39,7 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 		private static final String UPDATE = 
 			"UPDATE orderlist set order_amount, price where order_id=? and pro_id=?";
 		
-		private static final String GET_DETAILORDER_BY_ORDER_ID = 
+		private static final String GET_DETAIL_ORDER_BY_ORDER_ID = 
 			"select p.pro_name, o.price, o.order_amount from orderlist o join product p on o.pro_id = p.pro_id where o.order_id = ? and o.pro_id=? ;";
 		
 	@Override
@@ -292,7 +292,7 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_DETAILORDER_BY_ORDER_ID);
+			pstmt = con.prepareStatement(GET_DETAIL_ORDER_BY_ORDER_ID);
 			
 			pstmt.setString(1, order_id);
 			pstmt.setString(2, pro_id);

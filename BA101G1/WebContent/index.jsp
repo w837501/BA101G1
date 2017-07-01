@@ -29,6 +29,7 @@
 <h3><font color=orange>Header</font></h3>
 
 <ul>
+  <li><a href='store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
   <li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
   <li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
 </ul>
@@ -47,8 +48,7 @@
 
   <li>
      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store/store.do" >
-       <b>選擇地區
-       :</b>
+       <b>選擇地區 :</b>
        <select size="1" name="store_zone">
           <option value="基隆市">基隆市
           <option value="臺北市">臺北市

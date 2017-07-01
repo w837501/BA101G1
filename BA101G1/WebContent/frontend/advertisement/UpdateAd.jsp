@@ -11,6 +11,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <link rel="stylesheet" type="text/css" href="js/calendar.css">
 <script language="JavaScript" src="js/calendarcode.js"></script>
+<script language="JavaScript" src="js/pic_preview.js"></script>
+<script language="JavaScript" src="js/push_select.js"></script>
 <div id="popupcalendar" class="text"></div>
 <title>Update Ad here</title>
 </head>
@@ -55,8 +57,12 @@
 	</tr>
 	<tr>
 		<td>廣告圖片:<font color=red><b>*</b></font></td>
-			<td><img src="<%=request.getContextPath()%>/advertisement/DBGifReader.do?ad_id=${adVO.ad_id}" style="max-width: 150px; max-height: 150px;">
-			<input type="file" name="upfile1"></td>
+			<td>
+			<input type="file" name="upfile1" id="upfile1">
+			 <p>
+    			<img src="<%=request.getContextPath()%>/advertisement/DBGifReader.do?ad_id=${adVO.ad_id}" id="image"   style="max-width: 150px; max-height: 150px;">
+			</p>
+			</td>
 	</tr>
 	<tr>
 		<td>廣告時間:<font color=red><b>*</b></font></td>
@@ -81,9 +87,13 @@
 			</select></td>
 	</tr>
 	<tr>
-		<td>廣告推播:<font color=red><b>*</b></font></td>
-			<td><input type="text" name="ad_push_content" size="45" value="<%=adVO.getAd_push_content()%>" />
-		</td>
+		<td>是否推播:<font color=red><b>*</b></font></td>
+		<td><select id="push_select" onclick=selectChange()>
+			<option value='1'>是</option>
+			
+			<option value='2'>否</option>
+		</select>
+		<input type="TEXT" id="ad_push_content" name="ad_push_content" size="45" value="<%=adVO.getAd_push_content()%>" /></td></td>
 	</tr>
 	</table>
 	<br>
