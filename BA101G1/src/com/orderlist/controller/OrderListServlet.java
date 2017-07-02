@@ -25,22 +25,20 @@ public class OrderListServlet extends HttpServlet {
 		
 		if ("getOneOrder_For_DetailDisplay".equals(action)) { // 來自listOrderByMem_id.jsp的請求
 			
-			System.out.println("友維大棒棒??????????????????");
-			
+System.out.println("!!!!");			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-//			try {
+			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				String str1 = req.getParameter("order_id");
-				String str2 = req.getParameter("pro_id");
-				System.out.println("order_id"+str1+"\n"+"pro_id "+str2);
+				String order_id = req.getParameter("order_id");
+				System.out.println("order_id"+order_id);
 				/***************************2.開始查詢資料*****************************************/
 				OrderlistService orderSvc = new OrderlistService();
 				List<OrderlistVO> orderlistVO=new LinkedList<OrderlistVO>();
-				orderlistVO= orderSvc.getDetailOrder(str1,str2);//DAO方法
+				orderlistVO= orderSvc.getOrderlist(order_id);//DAO方法
 				System.out.println("第44行");
 				
 			
@@ -53,13 +51,13 @@ public class OrderListServlet extends HttpServlet {
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理*************************************/
-//			} catch (Exception e) {
-//				
-//				errorMsgs.add("無法取得資料:" + e.getMessage());
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher("/frontend/selectOrder/listOrderByMem.jsp");
-//				failureView.forward(req, res);
-//			}
+			} catch (Exception e) {
+				
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/frontend/selectOrder/listOrderByMem.jsp");
+				failureView.forward(req, res);
+			}
 		}
 		
 //		if ("getOneOrder_For_DetailDisplay".equals(action)) { // 來自select_page.jsp的請求

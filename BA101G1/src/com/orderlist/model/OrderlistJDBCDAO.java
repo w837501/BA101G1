@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.permission.model.PermissionJDBCDAO;
@@ -22,7 +23,7 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface{
 		private static final String GET_ALL_STMT = 
 			"SELECT order_id, pro_id,order_amount, price FROM orderlist order by orderlist";
 		private static final String GET_ONE_STMT = 
-			"SELECT order_id, pro_id,order_amount, price FROM orderlist where order_id = ? and pro_id = ?";
+			"SELECT order_id, pro_id,order_amount, price FROM orderlist where order_id = ? ";
 		private static final String DELETE = 
 			"DELETE FROM orderlist where order_id = ? and pro_id=?";
 		private static final String UPDATE = 
@@ -168,13 +169,13 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface{
 	}
 
 	@Override
-	public OrderlistVO findByPrimaryKey(String order_id, String Pro_id) {
+	public List<OrderlistVO> findByPrimaryKey(String order_id) {
 		// TODO Auto-generated method stub
 		OrderlistVO orderlistVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		List<OrderlistVO> list=new LinkedList<OrderlistVO>();
 		try {
 			try {
 				Class.forName(driver);
@@ -186,7 +187,6 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface{
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, order_id);
-			pstmt.setString(2, Pro_id);
 
 			rs = pstmt.executeQuery();
 
@@ -196,6 +196,7 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface{
 				orderlistVO.setPro_id(rs.getString("pro_id"));
 				orderlistVO.setOrder_amount(rs.getInt("order_amount"));
 				orderlistVO.setPrice(rs.getInt("price"));
+				list.add(orderlistVO);
 			}
 
 			// Handle any driver errors
@@ -226,7 +227,7 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface{
 				}
 			}
 		}
-		return orderlistVO;
+		return list;
 	}
 
 	@Override

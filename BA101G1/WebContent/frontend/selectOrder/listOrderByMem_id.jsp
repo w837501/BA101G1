@@ -41,11 +41,7 @@
 <%-- 		<td><a href="orderlist.do?order_id=${store_orderVO.order_id}&action=getOneOrder_For_DetailDisplay">${store_orderVO.order_id }</a></td> --%>
 <%-- 		<td><a href="<%=request.getContextPath()%>/frontend/selectOrder/orderDetail.jsp?order_id=${store_orderVO.order_id}">${store_orderVO.order_id }</a></td> --%>
 		<td>
-			<form action="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do" method="post">
-    			<a href="#" onclick="parentNode.submit();">${store_orderVO.order_id }</a>
-    			<input type="hidden" name="order_id" value="${store_orderVO.order_id}"/>
-    			<input type="hidden" name="action" value="getOneOrder_For_DetailDisplay">
-			</form>
+			<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO.order_id}">${store_orderVO.order_id}</a>
 		</td>
 		<td>${store_orderVO.order_time }</td>
  		<td>${store_orderVO.store_name }</td>
