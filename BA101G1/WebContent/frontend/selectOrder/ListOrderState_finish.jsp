@@ -12,7 +12,7 @@
 <table border='1' cellpadding='5' cellspacing='0' width='600'>
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
 		<td>
-		<h3>未確認訂單 - ListOrderState_unconfirm.jsp</h3>
+		<h3>已取餐訂單 - ListOrderState_finish.jsp</h3>
 		<a href="selectOrder.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
 		</td>
 	</tr>
@@ -31,12 +31,11 @@
 		<th>取餐時間</th>
 		<th>訂單狀態</th>
 		<th>修改</th>
-		<th>取消</th>
 		
 	</tr>
 	
 	<c:forEach var="Store_OrderVO" items="${orderList}">
-		<tr align='center' valign='middle'>
+		<tr align='center' valign='middle'${(Store_OrderVO.order_id==param.order_id) ? 'bgcolor=#CCCCFF':''}>
 			<td>${Store_OrderVO.order_id } </td>
 			<td>${Store_OrderVO.mem_id }</td>
 			<td>${Store_OrderVO.store_id }</td>
@@ -51,14 +50,7 @@
 				<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
 					<input type="submit" value="確認訂單">
 					<input type="hidden" name="order_id" value="${Store_OrderVO.order_id}">
-					<input type="hidden" name="action" value="Confirm_Order">
-				</form>	
-			</td>
-			<td>
-				<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
-					<input type="submit" value="取消訂單">
-					<input type="hidden" name="order_id" value="${Store_OrderVO.order_id}">
-					<input type="hidden" name="action" value="Cancel">
+					<input type="hidden" name="action" value="Change_Order_To_Finish">
 				</form>	
 			</td>
 	</tr>

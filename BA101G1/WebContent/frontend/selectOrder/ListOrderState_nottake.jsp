@@ -50,7 +50,7 @@
 				<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
 					<input type="submit" value="½T»{­q³æ">
 					<input type="hidden" name="order_id" value="${Store_OrderVO.order_id}">
-					<input type="hidden" name="action" value="Confirm_Order">
+					<input type="hidden" name="action" value="Change_Order_To_Finish">
 				</form>	
 			</td>
 	</tr>

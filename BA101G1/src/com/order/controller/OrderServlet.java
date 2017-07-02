@@ -157,6 +157,44 @@ public class OrderServlet extends HttpServlet {
 					RequestDispatcher successView = req
 							.getRequestDispatcher("/frontend/selectOrder/ListOrderState_nottake.jsp");
 					successView.forward(req, res);
+				}else if(state.equals("已取餐")){
+					Store_OrderService orderSvc = new Store_OrderService();
+					List<Store_OrderVO> orderList = new LinkedList<Store_OrderVO>();
+					orderList = orderSvc.getOrderByState(state);
+
+					if (orderList.isEmpty()) {
+						errorMsgs.add("查無資料");
+						return;
+					}
+
+					if (!errorMsgs.isEmpty()) {
+						RequestDispatcher failureView = req
+								.getRequestDispatcher("/frontend/selectOrder/selectOrder.jsp");
+						failureView.forward(req, res);
+					}
+					req.setAttribute("orderList", orderList);
+					RequestDispatcher successView = req
+							.getRequestDispatcher("/frontend/selectOrder/ListOrderState_finish.jsp");
+					successView.forward(req, res);
+				}else if(state.equals("已取消")){
+					Store_OrderService orderSvc = new Store_OrderService();
+					List<Store_OrderVO> orderList = new LinkedList<Store_OrderVO>();
+					orderList = orderSvc.getOrderByState(state);
+
+					if (orderList.isEmpty()) {
+						errorMsgs.add("查無資料");
+						return;
+					}
+
+					if (!errorMsgs.isEmpty()) {
+						RequestDispatcher failureView = req
+								.getRequestDispatcher("/frontend/selectOrder/selectOrder.jsp");
+						failureView.forward(req, res);
+					}
+					req.setAttribute("orderList", orderList);
+					RequestDispatcher successView = req
+							.getRequestDispatcher("/frontend/selectOrder/ListOrderState_cancel.jsp");
+					successView.forward(req, res);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -190,6 +228,38 @@ public class OrderServlet extends HttpServlet {
 
 				RequestDispatcher successView = req
 						.getRequestDispatcher("order.do?action=getOrder_State&order_state=待取餐");
+				successView.forward(req, res);
+			} catch (Exception e) {
+				e.printStackTrace();
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/selectOrder/selectOrder.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		if ("Change_Order_To_Finish".equals(action)) {
+			try {
+				String order_id = req.getParameter("order_id");
+				
+				Store_OrderService store_orderSvc = new Store_OrderService();
+				store_orderSvc.confirm_order(order_id, "已取餐");
+				
+				RequestDispatcher successView = req
+						.getRequestDispatcher("order.do?action=getOrder_State&order_state=已取餐");
+				successView.forward(req, res);
+			} catch (Exception e) {
+				e.printStackTrace();
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/selectOrder/selectOrder.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		if ("Cancel".equals(action)) {
+			try {
+				String order_id = req.getParameter("order_id");
+				
+				Store_OrderService store_orderSvc = new Store_OrderService();
+				store_orderSvc.confirm_order(order_id, "已取消");
+				
+				RequestDispatcher successView = req
+						.getRequestDispatcher("order.do?action=getOrder_State&order_state=已取消");
 				successView.forward(req, res);
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -53,6 +53,7 @@
 					<input type="hidden" name="action" value="Change_Order_To_Take">
 				</form>	
 			</td>
+			
 	</tr>
 	</c:forEach>
 </table>

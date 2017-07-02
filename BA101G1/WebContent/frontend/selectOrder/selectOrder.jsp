@@ -60,6 +60,22 @@
         <input type="hidden" name="action" value="getOrder_State">
     </FORM>
   </li>
+<li>
+    <FORM METHOD="post" ACTION="order.do" >
+        <b>查詢已取餐訂單 :</b>
+        <input type="submit" value="送出">        
+        <input type="hidden" name="order_state" value="已取餐">
+        <input type="hidden" name="action" value="getOrder_State">
+    </FORM>
+  </li>
+  <li>
+    <FORM METHOD="post" ACTION="order.do" >
+        <b>查詢已取消訂單 :</b>
+        <input type="submit" value="送出">        
+        <input type="hidden" name="order_state" value="已取消">
+        <input type="hidden" name="action" value="getOrder_State">
+    </FORM>
+  </li>
 </ul>
 
 </body>
