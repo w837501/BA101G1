@@ -28,8 +28,13 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 	}
 	
 	private static final String INSERT_STMT = 
+<<<<<<< HEAD
+			"INSERT INTO order (order_id, order_time, mem_id, store_id, totalprice, order_way, receive_address, qrcode, order_note, order_taketime) "
+			         + "VALUES (to_char(sysdate,'YYYYmmdd')||'-'||LPAD(to_char(order_seq.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?)";
+=======
 			"INSERT INTO store_order (order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, qrcode, order_note, order_taketime) "
 			         + "VALUES (to_char(sysdate,'YYYYmmdd')||'-'||LPAD(to_char(order_seq.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?,?)";
+>>>>>>> branch 'master' of https://github.com/w837501/BA101G1.git
 	private static final String UPDATE = 
 			"UPDATE store_order set order_id=?, order_time=?, mem_id=?, store_id=?, order_state=?, totalprice=?, order_way=?, receive_address=?, qrcode=?, order_note=?, order_taketime=?";
 	private static final String DELETE = 
@@ -62,13 +67,12 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 			pstmt.setTimestamp(1, orderVO.getOrder_time());
 			pstmt.setString(2, orderVO.getMem_id());
 			pstmt.setString(3, orderVO.getStore_id());
-			pstmt.setString(4, orderVO.getOrder_state());
-			pstmt.setInt(5, orderVO.getTotalprice());
-			pstmt.setString(6, orderVO.getOrder_way());
-			pstmt.setString(7, orderVO.getReceive_address());
-			pstmt.setBytes(8, orderVO.getQrcode());
-			pstmt.setString(9, orderVO.getOrder_note());
-			pstmt.setTimestamp(10, orderVO.getOrder_taketime());
+			pstmt.setInt(4, orderVO.getTotalprice());
+			pstmt.setString(5, orderVO.getOrder_way());
+			pstmt.setString(6, orderVO.getReceive_address());
+			pstmt.setBytes(7, orderVO.getQrcode());
+			pstmt.setString(8, orderVO.getOrder_note());
+			pstmt.setTimestamp(9, orderVO.getOrder_taketime());
 			
 			pstmt.executeUpdate();
 

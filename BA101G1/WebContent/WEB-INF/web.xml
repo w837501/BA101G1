@@ -137,4 +137,12 @@
 		<servlet-name>ProductReader</servlet-name>
 		<url-pattern>/ProductReader</url-pattern>
 	</servlet-mapping>
+	 <servlet>
+    <servlet-name>OrderServlet2</servlet-name>
+    <servlet-class>com.order.controller.OrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderServlet2</servlet-name>
+    <url-pattern>/order/order.do</url-pattern>
+  </servlet-mapping>
 </web-app>

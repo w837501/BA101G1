@@ -38,11 +38,11 @@
 	<c:forEach var="store_orderVO" items="${store_orderVO}" >
 	<tr align='center' valign='middle'>
 		
-<%-- 		<td><a href="orderlist.do?order_id=${store_orderVO.order_id}&action=getOneOrder_For_DetailDisplay">${store_orderVO.order_id }</a></td> --%>
-<%-- 		<td><a href="<%=request.getContextPath()%>/frontend/selectOrder/orderDetail.jsp?order_id=${store_orderVO.order_id}">${store_orderVO.order_id }</a></td> --%>
+
 		<td>
 			<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO.order_id}">${store_orderVO.order_id}</a>
 		</td>
+
 		<td>${store_orderVO.order_time }</td>
  		<td>${store_orderVO.store_name }</td>
 		<td>${store_orderVO.totalprice }</td>
