@@ -33,15 +33,15 @@ System.out.println("!!!!");
 
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-<<<<<<< HEAD
+
 				String str1 = req.getParameter("order_id");
 				String str2 = req.getParameter("pro_id");
 				String str3 = req.getParameter("quentity");
-				System.out.println(str1+" "+str2);
-=======
+				System.out.println(str1+" "+str2+" "+str3);
+
 				String order_id = req.getParameter("order_id");
 				System.out.println("order_id"+order_id);
->>>>>>> branch 'master' of https://github.com/w837501/BA101G1.git
+
 				/***************************2.開始查詢資料*****************************************/
 				OrderlistService orderSvc = new OrderlistService();
 				List<OrderlistVO> orderlistVO=new LinkedList<OrderlistVO>();
