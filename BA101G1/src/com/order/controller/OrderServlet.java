@@ -93,7 +93,7 @@ public class OrderServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-<<<<<<< HEAD
+
 		
 		if ("setOrder_Into".equals(action)) { // 來自Checkout.jsp的請求
 			
@@ -151,7 +151,7 @@ public class OrderServlet extends HttpServlet {
 			}
 		}
 		
-=======
+
 
 		if ("getOrder_State".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
@@ -612,6 +612,5 @@ public class OrderServlet extends HttpServlet {
 		// failureView.forward(req, res);
 		// }
 		// }
->>>>>>> branch 'master' of https://github.com/w837501/BA101G1.git
 	}
 }

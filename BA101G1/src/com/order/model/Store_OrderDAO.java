@@ -28,13 +28,8 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 	}
 	
 	private static final String INSERT_STMT = 
-<<<<<<< HEAD
 			"INSERT INTO order (order_id, order_time, mem_id, store_id, totalprice, order_way, receive_address, qrcode, order_note, order_taketime) "
 			         + "VALUES (to_char(sysdate,'YYYYmmdd')||'-'||LPAD(to_char(order_seq.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?)";
-=======
-			"INSERT INTO store_order (order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, qrcode, order_note, order_taketime) "
-			         + "VALUES (to_char(sysdate,'YYYYmmdd')||'-'||LPAD(to_char(order_seq.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?,?)";
->>>>>>> branch 'master' of https://github.com/w837501/BA101G1.git
 	private static final String UPDATE = 
 			"UPDATE store_order set order_id=?, order_time=?, mem_id=?, store_id=?, order_state=?, totalprice=?, order_way=?, receive_address=?, qrcode=?, order_note=?, order_taketime=?";
 	private static final String DELETE = 
