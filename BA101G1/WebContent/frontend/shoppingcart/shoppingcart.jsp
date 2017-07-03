@@ -79,7 +79,7 @@
 						<tbody>
 						
 							<tr>
-								<td align="center"><img src="<%=request.getContextPath()%>/ProductReader?pro_id=<%= productVO.getPro_id()%>" width="150" height="120"></td>
+								<td align="center"><img src="<%=request.getContextPath()%>/ProductClassReader?pro_id=<%= productVO.getPro_id()%>" width="150" height="120"></td>
 								<td><%=productVO.getPro_name() %></td>
 								<td><%=productVO.getPro_price() %></td>
 								<td><%=productVO.getQuantity() %></td>

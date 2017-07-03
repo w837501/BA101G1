@@ -33,7 +33,7 @@
 		String amount =  (String) request.getAttribute("amount");
 		Store_OrderVO orderVO = (Store_OrderVO) request.getAttribute("orderVO");
 	%>	
-	<%ProductVO productVO=null; %>
+	<%ProductVO productVO=new ProductVO(); %>
 	<%	for (int i = 0; i < buylist.size(); i++) {
 			productVO = buylist.get(i);
 			String name = productVO.getPro_name();
@@ -41,7 +41,7 @@
 			int quantity = productVO.getQuantity();
 	%>
 	<tr>
-		<td width="200"><div align="center"><b><img src="<%=request.getContextPath()%>/ProductReader?pro_id=<%= productVO.getPro_id()%>" width="150" height="120"></b></div></td>
+		<td width="200"><div align="center"><b><img src="<%=request.getContextPath()%>/ProductClassReader?pro_id=<%= productVO.getPro_id()%>" width="150" height="120"></b></div></td>
 		<td width="100"><div align="center"><b><%=name%></b></div></td>
 		<td width="100"><div align="center"><b><%=price%></b></div></td>
 		<td width="100"><div align="center"><b><%=quantity%></b></div></td>
@@ -61,8 +61,8 @@
 	</tr>
 </table>
 
-<FORM METHOD = "post" ACTION = "order.do" name = "checkform" >
 
+<FORM METHOD = "post" ACTION = "<%=request.getContextPath()%>/frontend/selectOrder/order.do" name = "checkform" >
 	<div>
 		<h1 id="title">點餐設定</h1>
 		<br>
@@ -134,7 +134,7 @@
 		
 		<p>備註</p>
 		
-		<textarea name="note" id="note" cols="30" rows="3"></textarea>	
+		<textarea name="order_note" id="note" cols="30" rows="3" value="123"></textarea>	
 
 		</div>
 		
@@ -143,7 +143,11 @@
 		<br>
 		<br>
 			<a href=""><i class="glyphicon glyphicon-ok"></i>取消</a>
-			<a href="<%=request.getContextPath()%>/order/order.do?action=setOrder_Into&store_id=<%=productVO.getStore_id() %>&quentity=<%=productVO.getQuantity() %>" class="btn btn-info" class="btn btn-info"><i id="finish" class="glyphicon glyphicon-ok"></i>完成點餐</a>
+<%-- 			<a href="<%=request.getContextPath()%>/order/order.do?action=setOrder_Into&store_id=<%=productVO.getStore_id() %>&quentity=<%=productVO.getQuantity() %>" class="btn btn-info" class="btn btn-info"><i id="finish" class="glyphicon glyphicon-ok"></i>完成點餐</a> --%>
+		<input type="hidden"  value = "setOrder_Into" name="action">
+		<input type="hidden"  value = "<%=amount%> " name="amount">
+		<input type="hidden"  value = "${productVO.store_id }" name="store_id">
+		<input type="submit" value="送出新增">
 		</div>
 		<br>
 		<br>
