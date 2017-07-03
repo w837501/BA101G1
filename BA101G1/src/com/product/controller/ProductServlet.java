@@ -167,7 +167,6 @@ public class ProductServlet extends HttpServlet{
 			String url ="/store/listProductByStore.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交store.jsp
 			System.out.println(successView);
-			System.out.println("123123123123");
 			
 			successView.forward(req, res);
 		}

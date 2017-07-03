@@ -130,12 +130,12 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>ProductReader</servlet-name>
-		<servlet-class>com.product.controller.DBGifReader</servlet-class>
+		<servlet-name>ProductClassReader</servlet-name>
+		<servlet-class>com.product.controller.ProductClassReader</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ProductReader</servlet-name>
-		<url-pattern>/ProductReader</url-pattern>
+		<servlet-name>ProductClassReader</servlet-name>
+		<url-pattern>/ProductClassReader</url-pattern>
 	</servlet-mapping>
 	 <servlet>
     <servlet-name>OrderServlet2</servlet-name>

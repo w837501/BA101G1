@@ -2,6 +2,7 @@ package com.order.controller;
 
 import java.io.*;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.*;
@@ -97,56 +98,86 @@ public class OrderServlet extends HttpServlet {
 		
 		if ("setOrder_Into".equals(action)) { // 來自Checkout.jsp的請求
 			
-			System.out.println("友維小胖妹");
+			
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
+			System.out.println("suck my dick");
 			try{
-
-				String mem_id = req.getParameter("mem_id");
+				String mem_id = "MEM-000001";
+				System.out.println("1");
 				String store_id = req.getParameter("store_id");
-				int totalprice = new Integer (req.getParameter("totalprice"));
+				System.out.println("2");
+				String amount= req.getParameter("amount");
+				System.out.println("3");
 				String order_way = req.getParameter("order_way");
+				System.out.println("4");
 				String receive_address = req.getParameter("receive_address");
+				System.out.println("5");
 				String order_note = req.getParameter("order_note");
-				
+				System.out.println("6");
+//				int quentity = new Integer(req.getParameter("quentity"));
+//				String pro_id = req.getParameter("pro_id");
+				System.out.println("store_id"+store_id);
+				System.out.println("mem_id"+mem_id);
+				System.out.println("amount"+amount);
+				System.out.println("order_way"+order_way);
+				System.out.println("receive_address"+receive_address);
+				System.out.println("order_note"+order_note);
+				String order_taketime1 = req.getParameter("order_taketime1").trim();
+				String order_taketime2 = req.getParameter("order_taketime2").trim();
+				String order_taketime3 = order_taketime1 + " "+order_taketime2;
+				System.out.println(order_taketime3);
+//				SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//				Timestamp aaa=(Timestamp) fmt.parse(order_taketime3);
 				java.sql.Timestamp order_taketime = null;
+				//java.sql.Timestamp order_taketime2 = null;
 				try {
-					order_taketime = java.sql.Timestamp.valueOf(req.getParameter("order_taketime").trim());
+					order_taketime = java.sql.Timestamp.valueOf(order_taketime3);
+					
 				} catch (IllegalArgumentException e) {
 					order_taketime = new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsgs.add("請輸入日期!");
+					//errorMsgs.add("請輸入日期!");
 				}
-				
+				System.out.println("order_taketime"+order_taketime);
 				Store_OrderVO orderVO = new Store_OrderVO();
+				OrderlistVO orderlistVO = new OrderlistVO();
+				
 				orderVO.setMem_id(mem_id);
 				orderVO.setStore_id(store_id);
-				orderVO.setTotalprice(totalprice);
+				//orderVO.setTotalprice(amount);
 				orderVO.setOrder_way(order_way);
 				orderVO.setReceive_address(receive_address);
 				orderVO.setOrder_note(order_note);
 				orderVO.setOrder_taketime(order_taketime);
+		
 				
+				System.out.println("友維小胖妹");
 				if (!errorMsgs.isEmpty()) {
+					System.out.println("?????????1121");
 					req.setAttribute("orderVO", orderVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					req.setAttribute("orderlistVO", orderlistVO); 
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/shoppingcart/Checkout.jsp");
+							.getRequestDispatcher("/frontend/shoppingcart/Checkout.jsp");
 					failureView.forward(req, res);
 					return;
 				}
-				
+				System.out.println("6");
 				Store_OrderService orderSvc = new Store_OrderService();
-				orderVO = orderSvc.addOrder(new Timestamp(System.currentTimeMillis()), mem_id, store_id,totalprice, order_way, receive_address, null, order_note, order_taketime);
-				
+				orderVO = orderSvc.addOrder(mem_id, "STO-000004",150, order_way, receive_address,order_note, order_taketime);
+//				req.setAttribute("orderVO", orderVO); 
+//				req.setAttribute("orderlistVO", orderlistVO); 
+				System.out.println("7");
 				String url = "/index.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
 			}catch(Exception e) {
+				e.printStackTrace();
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/shoppingcart/Checkout.jsp");
+						.getRequestDispatcher("/frontend/shoppingcart/Checkout.jsp");
 				failureView.forward(req, res);
 			}
 		}
