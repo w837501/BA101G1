@@ -38,8 +38,8 @@
 		<th>­q³æª¬ºA</th>
 		
 	</tr>
-	
-	<c:forEach var="Store_OrderVO" items="${list}">
+	<%@ include file="page1.file" %>	
+	<c:forEach var="Store_OrderVO" items="${list}" begin="<%=pageIndex %>" end="<%=pageIndex+rowsPerPage-1 %>">
 		<tr align='center' valign='middle'${(Store_OrderVO.order_id==param.order_id) ? 'bgcolor=#CCCCFF':''}>
 			<td>${Store_OrderVO.order_id } </td>
 			<td>${Store_OrderVO.mem_id }</td>
@@ -55,5 +55,6 @@
 	</tr>
 	</c:forEach>
 </table>
+<%@ include file="page2.file" %>
 </body>
 </html>
