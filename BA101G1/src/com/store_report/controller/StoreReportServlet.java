@@ -24,7 +24,7 @@ public class StoreReportServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
-		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
+		if ("getOne_For_Display".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -32,34 +32,31 @@ public class StoreReportServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/***************************
-				 * 1.接收請求參數 - 輸入格式的錯誤處理
-				 **********************/
+			
 				String str = req.getParameter("sr_id");
 				if (str == null || (str.trim()).length() == 0) {
-					errorMsgs.add("請輸入商家檢舉編號");
+					errorMsgs.add("請輸入檢舉編號");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/selectPage.jsp");
 					failureView.forward(req, res);
-					return;// 程式中斷
+					return;
 				}
 
 				String sr_id = null;
 				try {
 					sr_id = new String(str);
 				} catch (Exception e) {
-					errorMsgs.add("商家檢舉編號格式不正確");
+					errorMsgs.add("格式不正確");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/selectPage.jsp");
 					failureView.forward(req, res);
-					return;// 程式中斷
+					return;
 				}
 
-				/*************************** 2.開始查詢資料 *****************************************/
 				StoreReportService srSvc = new StoreReportService();
 				StoreReportVO srVO = srSvc.getOneStoreReport(sr_id);
 				if (srVO == null) {
@@ -69,83 +66,58 @@ public class StoreReportServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/selectPage.jsp");
 					failureView.forward(req, res);
-					return;// 程式中斷
+					return;
 				}
 
-				/***************************
-				 * 3.查詢完成,準備轉交(Send the Success view)
-				 *************/
-				req.setAttribute("srVO", srVO); // 資料庫取出的srVO物件,存入req
+				req.setAttribute("srVO", srVO); 
 				String url = "/backend/str/listOneSR.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交listOneSR.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
-				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
-				errorMsgs.add("無法取得資料:" + e.getMessage());
+				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/selectPage.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
-		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp 或
-													// /dept/listEmps_ByDeptno.jsp
-													// 的請求
+		if ("getOne_For_Update".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			String requestURL = req.getParameter("requestURL"); // 送出修改的來源網頁路徑:
-																// 可能為【/emp/listAllEmp.jsp】
-																// 或
-																// 【/dept/listEmps_ByDeptno.jsp】
-																// 或 【
-																// /dept/listAllDept.jsp】
+			String requestURL = req.getParameter("requestURL"); 
 
 			try {
-				/*************************** 1.接收請求參數 ****************************************/
 				String sr_id = new String(req.getParameter("sr_id"));
 
-				/*************************** 2.開始查詢資料 ****************************************/
 				StoreReportService srSvc = new StoreReportService();
 				StoreReportVO srVO = srSvc.getOneStoreReport(sr_id);
 
-				/***************************
-				 * 3.查詢完成,準備轉交(Send the Success view)
-				 ************/
-				req.setAttribute("srVO", srVO); // 資料庫取出的empVO物件,存入req
+				req.setAttribute("srVO", srVO); 
 				String url = "/backend/str/update_sr_input.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交update_emp_input.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
-				/*************************** 其他可能的錯誤處理 ************************************/
 			} catch (Exception e) {
-				errorMsgs.add("修改資料取出時失敗:" + e.getMessage());
+				errorMsgs.add( e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			}
 		}
 
-		if ("update".equals(action)) { // 來自update_sr_input.jsp的請求
+		if ("update".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			String requestURL = req.getParameter("requestURL"); // 送出修改的來源網頁路徑:
-																// 可能為【/emp/listAllEmp.jsp】
-																// 或
-																// 【/dept/listEmps_ByDeptno.jsp】
-																// 或 【
-																// /dept/listAllDept.jsp】
+			String requestURL = req.getParameter("requestURL"); 
 
 			try {
-				/***************************
-				 * 1.接收請求參數 - 輸入格式的錯誤處理
-				 **********************/
 				String sr_id = new String(req.getParameter("sr_id").trim());
 				String store_id = req.getParameter("mem_id").trim();
 				String sc_id = req.getParameter("sc_id").trim();
@@ -159,21 +131,22 @@ public class StoreReportServlet extends HttpServlet {
 					sr_time = java.sql.Timestamp.valueOf(req.getParameter("sr_time").trim());
 				} catch (IllegalArgumentException e) {
 					sr_time = new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsgs.add("請輸入日期!");
+					errorMsgs.add("輸入錯誤");
 				}
 
 				String sr_state = null;
 				try {
 					sr_state = req.getParameter("sr_state").trim();
 				} catch (Exception e) {
-					errorMsgs.add("請輸入會員檢舉狀態");
+					errorMsgs.add("請輸入狀態");
+
 				}
 
 				String sr_result = null;
 				try {
 					sr_result = req.getParameter("sr_result").trim();
 				} catch (Exception e) {
-					errorMsgs.add("請輸入會員檢舉狀態.");
+					errorMsgs.add("請輸入結果");
 				}
 
 				StoreReportVO srVO = new StoreReportVO();
@@ -190,34 +163,29 @@ public class StoreReportServlet extends HttpServlet {
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("srVO", srVO); // 含有輸入格式錯誤的mrVO物件,也存入req
+					req.setAttribute("srVO", srVO); 
 					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/update_sr_input.jsp");
 					failureView.forward(req, res);
-					return; // 程式中斷
+					return; 
 				}
 
-				/*************************** 2.開始修改資料 *****************************************/
 				StoreReportService srSvc = new StoreReportService();
 				srVO = srSvc.updateStoreReport(sr_id, store_id, sc_id, order_id, man_id, sr_content, sr_image, sr_time,
 						sr_state, sr_result);
 
-				/***************************
-				 * 3.修改完成,準備轉交(Send the Success view)
-				 *************/
 
 				String url = requestURL;
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
-				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
-				errorMsgs.add("修改資料失敗:" + e.getMessage());
+				errorMsgs.add( e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/update_sr_input.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
-		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
+		if ("insert".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -225,9 +193,6 @@ public class StoreReportServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/***********************
-				 * 1.接收請求參數 - 輸入格式的錯誤處理
-				 *************************/
 				String store_id = req.getParameter("store_id").trim();
 				String sc_id = req.getParameter("sc_id").trim();
 				String order_id = req.getParameter("order_id").trim().equals("null") ? null
@@ -246,7 +211,7 @@ public class StoreReportServlet extends HttpServlet {
 					System.out.println("sr_time: " + sr_time);
 				} catch (IllegalArgumentException e) {
 					sr_time = new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsgs.add("請輸入日期!");
+					errorMsgs.add("格式不正確");
 				}
 
 				String sr_state = null;
@@ -255,7 +220,7 @@ public class StoreReportServlet extends HttpServlet {
 					sr_state = req.getParameter("sr_state").trim();
 					System.out.println("sr_state: " + sr_state);
 				} catch (Exception e) {
-					errorMsgs.add("請輸入狀態.");
+					errorMsgs.add("請輸入狀態");
 				}
 
 				String sr_result = null;
@@ -264,7 +229,7 @@ public class StoreReportServlet extends HttpServlet {
 					sr_result =req.getParameter("sr_result").trim();
 					System.out.println("sr_result: " + sr_result);
 				} catch (Exception e) {
-					errorMsgs.add("請輸入檢舉結果");
+					errorMsgs.add("請輸入結果");
 				}
 
 				StoreReportVO srVO = new StoreReportVO();
@@ -280,25 +245,20 @@ public class StoreReportServlet extends HttpServlet {
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("srVO", srVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					req.setAttribute("srVO", srVO); 
 					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/addSR.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 
-				/*************************** 2.開始新增資料 ***************************************/
 				StoreReportService srSvc = new StoreReportService();
 				srVO = srSvc.addStoreReport(store_id, sc_id, order_id, man_id, sr_content, sr_image, sr_time, sr_state,
 						sr_result);
 
-				/***************************
-				 * 3.新增完成,準備轉交(Send the Success view)
-				 ***********/
 				String url = "/backend/str/listAllSR.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
-				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/addSR.jsp");
@@ -306,46 +266,32 @@ public class StoreReportServlet extends HttpServlet {
 			}
 		}
 
-		if ("delete".equals(action)) { // 來自listAllEmp.jsp 或
-										// /dept/listEmps_ByDeptno.jsp的請求
+		if ("delete".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			String requestURL = req.getParameter("requestURL"); // 送出刪除的來源網頁路徑:
-																// 可能為【/emp/listAllEmp.jsp】
-																// 或
-																// 【/dept/listEmps_ByDeptno.jsp】
-																// 或 【
-																// /dept/listAllDept.jsp】
+			String requestURL = req.getParameter("requestURL"); 
 
 			try {
-				/*************************** 1.接收請求參數 ***************************************/
 				String sr_id = new String(req.getParameter("sr_id"));
 
-				/*************************** 2.開始刪除資料 ***************************************/
 				StoreReportService srSvc = new StoreReportService();
 				StoreReportVO srVO = srSvc.getOneStoreReport(sr_id);
 				srSvc.deleteStoreReport(sr_id);
-
-				/***************************
-				 * 3.刪除完成,準備轉交(Send the Success view)
-				 ***********/
 				// DeptService deptSvc = new DeptService();
 				// if(requestURL.equals("/dept/listEmps_ByDeptno.jsp") ||
 				// requestURL.equals("/dept/listAllDept.jsp"))
 				// req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(empVO.getDeptno()));
-				// // 資料庫取出的list物件,存入request
 				//
 				String url = requestURL;
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 刪除成功後,轉交回送出刪除的來源網頁
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
-				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
-				errorMsgs.add("刪除資料失敗:" + e.getMessage());
+				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			}

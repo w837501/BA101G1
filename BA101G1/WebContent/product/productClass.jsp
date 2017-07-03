@@ -2,16 +2,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.product.model.*"%>
 <html>
-<head><title>IBM Emp: Home</title></head>
+<head><title>PRODUCT CLASS</title></head>
 <body bgcolor='white'>
+
+
 
 <table border='1' cellpadding='5' cellspacing='0' width='400'>
   <tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-    <td><h3>IBM Emp: Home</h3><font color=red>( MVC )</font></td>
+    <td><h3>PRODUCT CLASS</h3><font color=red>( MVC )</font></td>
   </tr>
 </table>
 
-<p>This is the Home page for IBM Emp: Home</p>
+<p>PRODUCT CLASS</p>
 
 <h3>餐點查詢:</h3>
 <%-- 錯誤表列 --%>
@@ -31,12 +33,12 @@
         <b>輸入餐點關鍵字:</b>
         <input type="text" name="pro_name">
         <input type="submit" value="送出">
-        <input type="hidden" name="action" value="get_product">
+        <input type="hidden" name="action" value="getproduct_a">
     </FORM>
   </li>
 </ul>
 
-<jsp:useBean id="proSvc" scope="page" class="com.product.model.ProductService" />
+<jsp:useBean id="pcSvc" scope="page" class="com.product_class.model.ProductClassService" />
 
 <table border='1' bordercolor='#CCCCFF' width='800'>
 	<tr>
@@ -44,10 +46,10 @@
 		<th>商品類型</th>
 	</tr>
 	
-	<c:forEach var="proVO" items="${proSvc.all}">
+	<c:forEach var="pcVO" items="${pcSvc.all}" varStatus="loop">
 		<tr align='center' valign='middle'>
 			<td></td>
-			<td><a href='<%=request.getContextPath()%>/product/product.do?action=get_type&pro_type='>${proVO.pro_type}</a></td>
+			<td><a href='<%=request.getContextPath()%>/product/product.do?action=getProductClass&pc_id=${pcVO.pc_id}'>${pcVO.pc_name}</a></td>
 		</tr>
 	</c:forEach>
 </table>

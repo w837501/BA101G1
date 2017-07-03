@@ -27,7 +27,7 @@ public class ProductDAO implements ProductDAO_interface{
 	}
 	
 		private static final String INSERT_STMT = 
-			"INSERT INTO PRODUCT VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			"INSERT INTO PRODUCT (PRO_ID,STORE_ID,PRO_NAME,PRO_PRICE,PRO_STATE,PRO_IMAGE,PC_ID,PRO_CONTENT) VALUES ('PRO'||'-'||LPAD(to_char(store_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?)";
 		private static final String DELETE = 
 			"DELETE FROM PRODUCT where pro_id = ?";
 		private static final String UPDATE_STMT = 
@@ -35,7 +35,7 @@ public class ProductDAO implements ProductDAO_interface{
 		private static final String Find_by_PK = "select * from PRODUCT where pro_id=?";
 		private static final String Find_ALL = "select * from PRODUCT ";
 		private static final String Find_NAME = "select * from PRODUCT where pro_name like ?";
-		
+		private static final String CLASSLINK = "select * from PRODUCT where pc_id = ?";
 		private static final String Find_By_Store_id 
 			= "select pro_id, pro_name, pro_price, pro_content from product where store_id = ? and pro_state = '¤W¬['";
 	
@@ -51,11 +51,10 @@ public class ProductDAO implements ProductDAO_interface{
 			pstmt.setString(2, productVO.getStore_id());
 			pstmt.setString(3, productVO.getPro_name());
 			pstmt.setInt(4, (int)productVO.getPro_price());
-			pstmt.setInt(5, (int)productVO.getPro_total());
-			pstmt.setString(6, productVO.getPro_state());
-			pstmt.setBytes(7, productVO.getPro_image());
-			pstmt.setString(8, productVO.getPc_id());
-			pstmt.setString(9, productVO.getPro_content());
+			pstmt.setString(5, productVO.getPro_state());
+			pstmt.setBytes(6, productVO.getPro_image());
+			pstmt.setString(7, productVO.getPc_id());
+			pstmt.setString(8, productVO.getPro_content());
 
 			pstmt.executeUpdate();
 
@@ -304,7 +303,61 @@ public class ProductDAO implements ProductDAO_interface{
 		}
 		return productlist;
 	}
+	
+	@Override
+	public List<ProductVO> ClassLink(String pc_id) {
+		List<ProductVO> productlist = new ArrayList<ProductVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ProductVO proVO = null;
 
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(CLASSLINK);
+
+			pstmt.setString(1, pc_id);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				proVO=new ProductVO();
+				proVO.setStore_id(rs.getString("store_id"));
+				proVO.setPro_id(rs.getString("Pro_id"));
+				proVO.setPro_name(rs.getString("Pro_name"));
+				proVO.setPro_price(rs.getInt("Pro_price"));
+				proVO.setPro_total(rs.getInt("Pro_total"));
+				proVO.setPro_state(rs.getString("Pro_state"));
+				proVO.setPro_image(rs.getBytes("Pro_image"));
+				proVO.setPc_id(rs.getString("Pc_id"));
+				proVO.setPro_content(rs.getString("Pro_content"));
+				productlist.add(proVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return productlist;
+	}
 	@Override
 	public List<ProductVO> findProductByStore_id(String store_id) {
 		// TODO Auto-generated method stub

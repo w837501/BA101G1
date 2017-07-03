@@ -33,22 +33,22 @@ var FuncsToRun;
 var img_del;
 var img_close;
 img_del=new Image();
-img_del.src="../images/btn_del_small.gif";
+img_del.src="./images/btn_del_small.gif";
 img_close=new Image();
-img_close.src="../images/btn_close_small.gif";
+img_close.src="./images/btn_close_small.gif";
 
 minYearList=todayDate.getFullYear()-50;
 maxYearList=todayDate.getFullYear()+50;
 IsCalendarVisible=false;
 
 img_Date_UP=new Image();
-img_Date_UP.src="../images/btn_date_up.gif";
+img_Date_UP.src="./images/btn_date_up.gif";
 
 img_Date_OVER=new Image();
-img_Date_OVER.src="../images/btn_date_over.gif";
+img_Date_OVER.src="./images/btn_date_over.gif";
 
 img_Date_DOWN=new Image();
-img_Date_DOWN.src="../images/btn_date_down.gif";
+img_Date_DOWN.src="./images/btn_date_down.gif";
 
 
 function calSwapImg(whatID, NewImg,override) {
@@ -220,7 +220,7 @@ function Calendar(whatMonth,whatYear) {
         output += '<table width="185" border="3" class="cal-Table" cellspacing="0" cellpadding="0"><form name="Cal"><tr>';
     }
      
-    output += '<td class="cal-HeadCell" align="center" width="100%"><a href="javascript:clearDay();"><img name="calbtn1" src="../images/btn_del_small.gif" border="0" width="12" height="10"></a>&nbsp;&nbsp;<a href="javascript:scrollMonth(-1);" class="cal-DayLink">&lt;</a>&nbsp;<SELECT class="cal-TextBox" NAME="cboMonth" onChange="changeMonth();">';
+    output += '<td class="cal-HeadCell" align="center" width="100%"><a href="javascript:clearDay();"><img name="calbtn1" src="./images/btn_del_small.gif" border="0" width="12" height="10"></a>&nbsp;&nbsp;<a href="javascript:scrollMonth(-1);" class="cal-DayLink">&lt;</a>&nbsp;<SELECT class="cal-TextBox" NAME="cboMonth" onChange="changeMonth();">';
     for (month=0; month<12; month++) {
         if (month == whatMonth) output += '<OPTION VALUE="' + month + '" SELECTED>' + names[month] + '<\/OPTION>';
         else                output += '<OPTION VALUE="' + month + '">'          + names[month] + '<\/OPTION>';
@@ -233,7 +233,7 @@ function Calendar(whatMonth,whatYear) {
         else              output += '<OPTION VALUE="' + year + '">'          + year + '<\/OPTION>';
     }
 
-    output += '<\/SELECT>&nbsp;<a href="javascript:scrollMonth(1);" class="cal-DayLink">&gt;</a>&nbsp;&nbsp;<a href="javascript:hideCalendar();"><img name="calbtn2" src="../images/btn_close_small.gif" border="0" width="12" height="10"></a><\/td><\/tr><tr><td width="100%" align="center">';
+    output += '<\/SELECT>&nbsp;<a href="javascript:scrollMonth(1);" class="cal-DayLink">&gt;</a>&nbsp;&nbsp;<a href="javascript:hideCalendar();"><img name="calbtn2" src="./images/btn_close_small.gif" border="0" width="12" height="10"></a><\/td><\/tr><tr><td width="100%" align="center">';
 
     firstDay = new Date(whatYear,whatMonth,1);
     startDay = firstDay.getDay();

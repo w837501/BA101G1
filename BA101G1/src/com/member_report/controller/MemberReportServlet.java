@@ -4,9 +4,12 @@ import java.io.*;
 import java.util.*;
 
 import javax.servlet.*;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import com.member_report.model.*;
-
+@WebServlet("/BA101G1/member_report/member_report.do")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class MemberReportServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -208,29 +211,42 @@ public class MemberReportServlet extends HttpServlet {
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			try {
+//			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				String mem_id = req.getParameter("mem_id").trim();
 				String order_id = req.getParameter("order_id").trim();
 				String sc_id = req.getParameter("sc_id").trim();
 				String man_id = req.getParameter("man_id").trim();
 				String mr_content = req.getParameter("mr_content").trim();
-				byte[] mr_image = req.getParameter("mr_image").trim().getBytes();
-				
+//				byte[] mr_image = req.getParameter("mr_image").trim().getBytes();
+/*******************************************************************************/
+				Part addPic = req.getPart("mr_image");
+				InputStream in = addPic.getInputStream();
+				ByteArrayOutputStream baos =  new ByteArrayOutputStream();
+				byte[] mr_image = new byte[8 * 1024];
+				int i;
+				while((i = in.read(mr_image)) != -1){
+					baos.write(mr_image, 0, i);
+				}
+				baos.close();
+				in.close();
+				mr_image = baos.toByteArray();
+
+/*******************************************************************************/
 				java.sql.Timestamp mr_time = null;
 				try {
-					mr_time = java.sql.Timestamp.valueOf(req.getParameter("mr_time").trim());
+					 mr_time = java.sql.Timestamp.valueOf(req.getParameter("mr_time").trim());
 				} catch (IllegalArgumentException e) {
 					mr_time=new java.sql.Timestamp(System.currentTimeMillis());
 					errorMsgs.add("請輸入日期!");
 				}
 				
+				
 				String mr_state = null;
 				try {
 					mr_state =req.getParameter("mr_state").trim();
 				} catch (Exception e) {
-				
-					errorMsgs.add("薪水請填數字.");
+					errorMsgs.add("第238行.");
 				}
 				
 				String mr_result = null;
@@ -238,7 +254,7 @@ public class MemberReportServlet extends HttpServlet {
 					mr_result = req.getParameter("mr_result").trim();
 				} catch (Exception e) {
 				
-					errorMsgs.add("獎金請填數字.");
+					errorMsgs.add("第250行.");
 				}
 				
 				MemberReportVO mrVO = new MemberReportVO();
@@ -256,7 +272,7 @@ public class MemberReportServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("mrVO", mrVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/memr/addEmp.jsp");
+							.getRequestDispatcher("/backend/memr/addMR.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -266,17 +282,17 @@ public class MemberReportServlet extends HttpServlet {
 				mrVO = mrSvc.addMemberReport(mem_id, order_id, sc_id, man_id, mr_content, mr_image,mr_time,mr_state,mr_result);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/backend/memr/listAllEmp.jsp";
+				String url = "/backend/memr/listAllMR.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);				
 				
 				/***************************其他可能的錯誤處理**********************************/
-			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/backend/memr/addMR.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e) {
+//				errorMsgs.add(e.getMessage()+"第280行");
+//				RequestDispatcher failureView = req
+//						.getRequestDispatcher("/backend/memr/addMR.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 		
        
@@ -316,4 +332,8 @@ public class MemberReportServlet extends HttpServlet {
 			}
 		}
 	}
+	public static void encodingPic(){
+	}
+
 }
+
