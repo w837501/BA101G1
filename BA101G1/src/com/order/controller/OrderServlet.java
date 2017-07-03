@@ -380,6 +380,10 @@ public class OrderServlet extends HttpServlet {
 		// }
 		// }
 
+
+	
+
+
 		// if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp 或
 		// /dept/listEmps_ByDeptno.jsp 的請求
 		//
@@ -612,5 +616,6 @@ public class OrderServlet extends HttpServlet {
 		// failureView.forward(req, res);
 		// }
 		// }
+
 	}
 }

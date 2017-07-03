@@ -37,6 +37,9 @@ System.out.println("!!!!");
 				String str1 = req.getParameter("order_id");
 				String str2 = req.getParameter("pro_id");
 				String str3 = req.getParameter("quentity");
+
+				System.out.println(str1+" "+str2+" "+str3);
+
 				System.out.println(str1+" "+str2);
 
 				String order_id = req.getParameter("order_id");
