@@ -42,6 +42,9 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 		private static final String GET_DETAIL_ORDER_BY_ORDER_ID = 
 			"select p.pro_name, o.price, o.order_amount from orderlist o join product p on o.pro_id = p.pro_id where o.order_id = ? and o.pro_id=? ;";
 		
+		/*******************OrderDetailByOrderIdªº from OrderListServlet.java********************************/
+		private static final String GET_DETAIL_PROID_BY_ORDER_ID = 
+			"select pro_id from orderlist where order_id=?";
 	@Override
 	public void insert(OrderlistVO orderlistVO) {
 		// TODO Auto-generated method stub
@@ -339,6 +342,50 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 			}
 		}
 		return list;
+	}
+	/*******************OrderDetailByOrderIdªº from OrderListServlet.java********************************/
+	@Override
+	public String getDetailProIdByOrderId(String order_id) {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String proId = "";
+		
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_DETAIL_PROID_BY_ORDER_ID);
+
+			pstmt.setString(1, order_id);
+
+			rs = pstmt.executeQuery();
+
+			proId = rs.getString("order_id");
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return proId;
+
 	}
 
 }

@@ -332,4 +332,13 @@ public List<OrderlistVO> getDetailOrder(String order_id, String pro_id) {
 	// TODO Auto-generated method stub
 	return null;
 }
+/*******************OrderDetailByOrderId的 from OrderListServlet.java********************************/
+@Override
+public String getDetailProIdByOrderId(String order_id) {
+	// TODO Auto-generated method stub
+	
+	
+	/*請參考JDBC*/
+	return null;
+}
 }
