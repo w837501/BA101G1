@@ -30,7 +30,12 @@ public class StoreClassDAO implements StoreClassDAO_interface {
 	private static final String GET_ALL = "SELECT * from store_class";
 	
 	
-	
+	@Override
+	public void update(StoreClassVO storeclassVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
 	public List<StoreClassVO> getAll() {
 		
