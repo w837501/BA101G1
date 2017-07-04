@@ -1,4 +1,4 @@
-package com.store_class.controller;
+package com.store.controller;
 
 import java.io.*;
 import java.sql.*;
@@ -20,11 +20,11 @@ public class StoreClassReader extends HttpServlet {
 		ServletOutputStream out = res.getOutputStream();
 
 		try {
-			String empno = req.getParameter("sc_id");
+			String empno = req.getParameter("store_id");
 			String empno2 = new String (empno.getBytes("ISO-8859-1"),"UTF-8");
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(
-				"SELECT sc_pic from STORE_CLASS where sc_id = '"+empno2+"' ");
+				"SELECT store_image from STORE where store_id = '"+empno2+"' ");
 			if (rs.next()) {
 				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream(1));
 				byte[] buf = new byte[4 * 1024]; // 4K buffer
@@ -44,7 +44,7 @@ public class StoreClassReader extends HttpServlet {
 			rs.close();
 			stmt.close();
 		} catch (Exception e) {
-			//System.out.println(e);
+//			System.out.println(e);
 			InputStream in = getServletContext().getResourceAsStream("/NoData/loading_spinner.gif");
 			byte[] buf = new byte[in.available()];
 			in.read(buf);

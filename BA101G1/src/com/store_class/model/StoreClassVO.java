@@ -5,7 +5,6 @@ public class StoreClassVO {
 	
 	private Number sc_id;
 	private String sc_name;
-	private byte[] sc_pic;
 	
 	
 	public Number getSc_id() {
@@ -19,12 +18,6 @@ public class StoreClassVO {
 	}
 	public void setSc_name(String sc_name) {
 		this.sc_name = sc_name;
-	}
-	public byte[] getSc_pic() {
-		return sc_pic;
-	}
-	public void setSc_pic(byte[] sc_pic) {
-		this.sc_pic = sc_pic;
 	}
 	
 	

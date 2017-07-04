@@ -21,14 +21,13 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 	String userid = "BA101G1";
 	String passwd = "ba101g1";
 
-	private static final String INSERT_STMT ="INSERT INTO PRODUCT (PRO_ID,STORE_ID,PRO_NAME,PRO_PRICE,PRO_STATE,PRO_IMAGE,PC_ID,PRO_CONTENT) VALUES ('PRO'||'-'||LPAD(to_char(store_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO PRODUCT (PRO_ID,STORE_ID,PRO_NAME,PRO_PRICE,PRO_STATE,PRO_IMAGE,PC_ID,PRO_CONTENT) VALUES ('PRO'||'-'||LPAD(to_char(store_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?)";
 	private static final String DELETE = "DELETE FROM PRODUCT where pro_id = ?";
 	private static final String UPDATE_STMT = "UPDATE PRODUCT set pro_name=?, pro_price=?, pro_state=?, pro_image=?, pc_id=?, pro_content=? where pro_id = ?";
 	private static final String Find_by_PK = "select * from PRODUCT where pro_id=?";
 	private static final String Find_ALL = "select * from PRODUCT ";
 	private static final String Find_NAME = "select * from PRODUCT where pro_name like ?";
 	private static final String CLASSLINK = "select * from PRODUCT where pc_id = ?";
-	
 
 	@Override
 	public void insert(ProductVO productVO) {
@@ -41,7 +40,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 
 			pstmt.setString(1, productVO.getStore_id());
 			pstmt.setString(2, productVO.getPro_name());
-			pstmt.setInt(3, (int)productVO.getPro_price());
+			pstmt.setInt(3, (int) productVO.getPro_price());
 			pstmt.setString(4, productVO.getPro_state());
 			pstmt.setBytes(5, productVO.getPro_image());
 			pstmt.setString(6, productVO.getPc_id());
@@ -80,7 +79,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 
 			pstmt.setString(1, productVO.getStore_id());
 			pstmt.setString(2, productVO.getPro_name());
-			pstmt.setInt(3, (int)productVO.getPro_price());
+			pstmt.setInt(3, (int) productVO.getPro_price());
 			pstmt.setString(4, productVO.getPro_state());
 			pstmt.setBytes(5, productVO.getPro_image());
 			pstmt.setString(6, productVO.getPc_id());
@@ -253,7 +252,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		}
 		return productlist;
 	}
-	
+
 	@Override
 	public List<ProductVO> findName(String pro_name) {
 		List<ProductVO> productlist = new ArrayList<ProductVO>();
@@ -267,7 +266,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(Find_NAME);
 
-			pstmt.setString(1, "%"+pro_name+"%");
+			pstmt.setString(1, "%" + pro_name + "%");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				proVO = new ProductVO();
@@ -311,8 +310,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		}
 		return productlist;
 	}
-	
-	
+
 	@Override
 	public List<ProductVO> ClassLink(String pc_id) {
 		List<ProductVO> productlist = new ArrayList<ProductVO>();
@@ -371,11 +369,6 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		return productlist;
 	}
 	
-	@Override
-	public List<ProductVO> findProductByStore_id(String store_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public static void main(String args[]) throws IOException{
 
@@ -385,11 +378,25 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		productVO1.setStore_id("STO-000002");
 		productVO1.setPro_name("¤û¦×ÄÑ");
 		productVO1.setPro_price(150);
+		productVO1.setStore_id("STO-000004");
+		productVO1.setPro_name("³Á¯ÜÂû");
+		productVO1.setPro_price(90);
+		productVO1.setPro_total(80);
 		productVO1.setPro_state("¤W¬[");
 		byte[] pic = getPictureByteArray("WebContent/FakeInfo/BeefNoodles.jpg");
 		productVO1.setPro_image(pic);
 		productVO1.setPc_id("1");
 		productVO1.setPro_content("§Ú¬O¤û¦×ÄÑ");
+		byte[] pic1=null;
+		try {
+			pic1 = getPictureByteArray("C:/Users/Java/git/BA101G1_fat/BA101G1/WebContent/FakeInfo/McCrispy.png");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		productVO1.setPro_image(pic);
+		productVO1.setPc_id("0");
+		productVO1.setPro_content("¬µÂûÂû");
 		
 		productdao.insert(productVO1);
 		
@@ -460,18 +467,27 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 	}
 	
 	
-	private static byte[] getPictureByteArray(String string)throws IOException {
-		File file = new File(string);
-		FileInputStream fis = new FileInputStream(file);
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		byte[] image = new byte[8192];
-		int i ;
-		while((i = fis.read(image)) != -1){
-			baos.write(image,0,i);
-		}
-		baos.close();
-		fis.close();	
-		return baos.toByteArray();
+
+	public static byte[] getPictureByteArray(String path) throws IOException {
+		 File file = new File(path);
+		 FileInputStream fis = new FileInputStream(file);
+		 ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		 byte[] buffer = new byte[8192];
+		 int i;
+		 while ((i = fis.read(buffer)) != -1) {
+		  baos.write(buffer, 0, i);
+		 }
+		 baos.close();
+		 fis.close();
+
+		 return baos.toByteArray();
+	}
+
+
+	@Override
+	public List<ProductVO> findProductByStore_id(String store_id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
