@@ -38,7 +38,7 @@
 			productVO = buylist.get(i);
 			String name = productVO.getPro_name();
 			int price = (Integer)productVO.getPro_price();
-			int quantity = productVO.getQuantity();
+			int quantity =(int) productVO.getQuantity();
 	%>
 	<tr>
 		<td width="200"><div align="center"><b><img src="<%=request.getContextPath()%>/ProductClassReader?pro_id=<%= productVO.getPro_id()%>" width="150" height="120"></b></div></td>
