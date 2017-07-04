@@ -61,10 +61,13 @@ public class ProductService {
 	public List<ProductVO> getName(String pro_name) {
 		return dao.findName(pro_name);
 	}
+
 	public List<ProductVO> getProductClass(String sc_id) {
 		return dao.ClassLink(sc_id);
 	}
+	
 	public List<ProductVO> getProductByStore(String store_id){
 		return dao.findProductByStore_id(store_id);
+
 	}
 }
