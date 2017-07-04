@@ -32,6 +32,12 @@ public class ProductClassDAO implements ProductClassDAO_interface{
 	private static final String getAllById = "select * from PRODUCT_CLASS where pc_id = ?";
 	
 	@Override
+	public void update(ProductClassVO productclassVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public List<ProductClassVO> getAll() {
 		List<ProductClassVO> productclasslist = new ArrayList<ProductClassVO>();
 		ProductClassVO pcVO = null;
@@ -47,6 +53,7 @@ public class ProductClassDAO implements ProductClassDAO_interface{
 				pcVO= new ProductClassVO();
 				pcVO.setPc_id(rs.getString("pc_id"));
 				pcVO.setPc_name(rs.getString("pc_name"));
+				pcVO.setPc_pic(rs.getBytes("pc_pic"));
 				productclasslist.add(pcVO); 
 			}
 		} catch (SQLException se) {
@@ -96,6 +103,7 @@ public class ProductClassDAO implements ProductClassDAO_interface{
 				productclassVO= new ProductClassVO();
 				productclassVO.setPc_id(rs.getString("pc_id"));
 				productclassVO.setPc_name(rs.getString("pc_name"));
+				productclassVO.setPc_pic(rs.getBytes("pc_pic"));
 				productclasslist.add(productclassVO);
 			}
 		} catch (SQLException e) {

@@ -32,6 +32,14 @@ public class StoreClassDAO implements StoreClassDAO_interface {
 	
 	
 	@Override
+	public void update(StoreClassVO storeclassVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
 	public List<StoreClassVO> getAll() {
 		
 		List<StoreClassVO> storeclasslist = new ArrayList<StoreClassVO>();
