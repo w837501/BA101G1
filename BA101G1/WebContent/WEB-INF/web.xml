@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>BA101G1-ben</display-name>
+  <display-name>BA101G1</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -37,6 +37,7 @@
   		<url-pattern>/product/product.do</url-pattern>
   </servlet-mapping>
 
+  
   <servlet>
   		<servlet-name>StoreServlet</servlet-name>
   		<servlet-class>com.store.controller.StoreServlet</servlet-class>
@@ -46,14 +47,7 @@
   		<url-pattern>/store/store.do</url-pattern>
   </servlet-mapping>
   
-  <servlet>
-  		<servlet-name>MemberServlet</servlet-name>
-  		<servlet-class>com.mem.controller.MemberServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  		<servlet-name>MemberServlet</servlet-name>
-  		<url-pattern>/backend/mem/mem.do</url-pattern>
-  </servlet-mapping>
+ 
   
   	<servlet>
 		<servlet-name>StoreReader</servlet-name>
@@ -90,5 +84,78 @@
 		<servlet-name>ProductClassReader</servlet-name>
 		<url-pattern>/ProductClassReader</url-pattern>
 	</servlet-mapping>
-
+<servlet>
+    <servlet-name>RevenueServlet</servlet-name>
+    <servlet-class>com.rev.controller.RevenueServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RevenueServlet</servlet-name>
+    <url-pattern>/backend/rev/rev.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>NewsServlet</servlet-name>
+    <servlet-class>com.news.controller.NewsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewsServlet</servlet-name>
+    <url-pattern>/frontend/latestnews/news.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AdServlet</servlet-name>
+    <servlet-class>com.ad.controller.AdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdServlet</servlet-name>
+    <url-pattern>/frontend/advertisement/ad.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DBGifReader</servlet-name>
+    <servlet-class>com.ad.controller.DBGifReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBGifReader</servlet-name>
+    <url-pattern>/advertisement/DBGifReader.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>OrderServlet</servlet-name>
+    <servlet-class>com.order.controller.OrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderServlet</servlet-name>
+    <url-pattern>/frontend/selectOrder/order.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PushServlet</servlet-name>
+    <servlet-class>com.push.controller.PushServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PushServlet</servlet-name>
+    <url-pattern>/push/push.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemberReportServlet</servlet-name>
+    <servlet-class>com.member_report.controller.MemberReportServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberReportServlet</servlet-name>
+    <url-pattern>/member_report/member_report.do</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>OrderListServlet</servlet-name>
+    <servlet-class>com.orderlist.controller.OrderListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderListServlet</servlet-name>
+    <url-pattern>/frontend/selectOrder/orderlist.do</url-pattern>
+  </servlet-mapping>
+ 
+  <servlet>
+    <servlet-name>StoreReportServlet</servlet-name>
+    <servlet-class>com.store_report.controller.StoreReportServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StoreReportServlet</servlet-name>
+    <url-pattern>/store_report/store_report.do</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
