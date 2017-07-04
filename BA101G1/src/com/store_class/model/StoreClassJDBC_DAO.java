@@ -1,6 +1,10 @@
 package com.store_class.model;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.product_class.model.ProductClassVO;
 import com.store.model.StoreJDBC_DAO;
 import com.store.model.StoreVO;
 
@@ -19,9 +24,44 @@ public class StoreClassJDBC_DAO implements StoreClassDAO_interface{
 	String userid = "BA101G1";
 	String passwd = "ba101g1";
 	
-	
+	private static final String UPDATE_STMT = "UPDATE STORE_CLASS set sc_pic=? where sc_id = ?";
 	private static final String GET_ALL = "SELECT * from store_class";
 	
+	@Override
+	public void update(StoreClassVO storeclassVO) {
+		Connection con = null;
+		PreparedStatement pstmt= null;
+		try{
+		Class.forName(driver);
+		con = DriverManager.getConnection(url, userid, passwd);
+		pstmt = con.prepareStatement(UPDATE_STMT);
+		
+		pstmt.setBytes(1, storeclassVO.getSc_pic());
+		pstmt.setInt(2, (int)storeclassVO.getSc_id());
+		
+		pstmt.executeUpdate();
+		
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
+
+
+
 	@Override
 	public List<StoreClassVO> getAll() {
 		List<StoreClassVO> storeclasslist = new ArrayList<StoreClassVO>();
@@ -79,10 +119,41 @@ public class StoreClassJDBC_DAO implements StoreClassDAO_interface{
 
 		StoreClassJDBC_DAO storeclassdao = new StoreClassJDBC_DAO();
 		
-		List<StoreClassVO> list = storeclassdao.getAll();
-		for(StoreClassVO svo1 : list){
-			System.out.println(svo1.getSc_id());
-			System.out.println(svo1.getSc_name());
-		}
+		
+		//н╫зя		
+		StoreClassVO scVO = new StoreClassVO();
+		byte[] pic = getPictureByteArray("WebContent/FakeInfo/Salad.jpg");
+		scVO.setSc_pic(pic);
+		scVO.setSc_id(0);
+		storeclassdao.update(scVO);
+		
+		
+//		List<StoreClassVO> list = storeclassdao.getAll();
+//		for(StoreClassVO svo1 : list){
+//			System.out.println(svo1.getSc_id());
+//			System.out.println(svo1.getSc_name());
+//		}
 	}
+	
+	public static InputStream getPictureStream(String path) throws IOException {
+		File file = new File(path);
+		FileInputStream fis = new FileInputStream(file);
+		return fis;
+	}
+	
+	
+	private static byte[] getPictureByteArray(String string)throws IOException {
+		File file = new File(string);
+		FileInputStream fis = new FileInputStream(file);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] image = new byte[8192];
+		int i ;
+		while((i = fis.read(image)) != -1){
+			baos.write(image,0,i);
+		}
+		baos.close();
+		fis.close();	
+		return baos.toByteArray();
+	}
+
 }
