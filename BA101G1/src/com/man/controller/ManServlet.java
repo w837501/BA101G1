@@ -348,9 +348,13 @@ public class ManServlet extends HttpServlet {
 					return;
 				}
 				/******************我新增的帳密條件判斷*********************/
-			String man_id = null;
+			String man_id = account;
 			ManagerVO managerVO = manSvc.getOneMan(man_id);
+			/****************transferID***********************/
+			HttpSession sessionId = req.getSession();
+			sessionId.setAttribute("account", account);
 			
+			/****************transferID***********************/
 				/*String str = req.getParameter("man_id");
 				if (str == null || (str.trim().length() == 0)) {
 					errorMsgs.add("請輸入員工編號");
@@ -383,13 +387,13 @@ public class ManServlet extends HttpServlet {
 					return;
 				}*/
 				errorMsgs.removeAll(errorMsgs);
-				req.setAttribute("managerVO", managerVO);
-				String url = "/backend/man/select_man.jsp";
+				req.getSession().setAttribute("manVO", managerVO);
+				String url = "/backend/index.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/login_man.jsp");
 				failureView.forward(req, res);
 			}
 

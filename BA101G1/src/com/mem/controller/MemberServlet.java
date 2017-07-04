@@ -71,7 +71,7 @@ public class MemberServlet extends HttpServlet {
 		if("getOne_For_Update".equals(action)){
 			List<String> errorMsgs=new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+			req.setAttribute("whichPage", "修改單一會員");    // 資料庫取出的set物件,存入request
 			try{
 				String mem_id=new String(req.getParameter("mem_id"));
 				MemberService memberSvc=new MemberService();
@@ -79,7 +79,7 @@ public class MemberServlet extends HttpServlet {
 				System.out.println("mem_id1:"+mem_id);
 				req.setAttribute("memberVO", memberVO);
 				
-				String url="/backend/mem/Update_mem.jsp";
+				String url="/backend/mem/select_mem.jsp";
 				RequestDispatcher successView=req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}catch(Exception e){
@@ -91,7 +91,7 @@ public class MemberServlet extends HttpServlet {
 		if("update".equals(action)){
 			List<String> errorMsgs=new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+			req.setAttribute("whichPage", "列出所有會員");    // 資料庫取出的set物件,存入request
 			try{
 				String mem_id=req.getParameter("mem_id");
 				
@@ -140,7 +140,7 @@ public class MemberServlet extends HttpServlet {
 				memberVO=memberSvc.updateMem(mem_id, mem_name, mem_phone, mem_pw, mem_mail);
 				
 				req.setAttribute("memberVO", memberVO);
-				String url="/backend/mem/ListAllMem.jsp";
+				String url="/backend/mem/select_mem.jsp";
 				RequestDispatcher successView=req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}catch(Exception e){
@@ -222,13 +222,13 @@ public class MemberServlet extends HttpServlet {
 		if ("delete".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			req.setAttribute("whichPage", "列出所有會員");    // 資料庫取出的set物件,存入request
 			try {
-				String mem_id = new String(req.getParameter("mem_id"));
+				String mem_id = req.getParameter("mem_id") ;
 
 				MemberService memSvc = new MemberService();
 				memSvc.deleteMem(mem_id);
-				String url = "/backend/mem/ListAllMem.jsp";
+				String url = "/backend/mem/select_mem.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
@@ -236,6 +236,13 @@ public class MemberServlet extends HttpServlet {
 				RequestDispatcher failureView = req.getRequestDispatcher("/backend/mem/ListAllMem.jsp");
 				failureView.forward(req, res);
 			}
-		}	
+		}
+		if ("listAll".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("whichPage", "列出所有會員");    // 資料庫取出的set物件,存入request
+				String url = "/backend/mem/select_mem.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+		}
 	}
 }

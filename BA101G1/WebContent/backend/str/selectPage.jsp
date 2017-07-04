@@ -40,7 +40,8 @@
                 </div>
                 
                 <span class="logout-spn" >
-                  <a href="#" data-toggle="modal" data-target="#login-modal">登入</a>  
+                  ${manVO.man_id} ${manVO.man_name}
+                  <a href="<%=request.getContextPath() %>/backend/man/login_man.jsp">登出</a>
                 </span>
                 
                 
@@ -62,22 +63,13 @@
                     <li>
                         <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>訂單管理  <span class="badge">Included</span></a>
                     </li>
-
- <!-- 收合式清單====檢舉管理============================== -->
-                    <li class="panel panel-default panel-heading" role="tab" id="panel1">
-     
-                      <a href="#aaa" data-parent="#accordion2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="aaa">
-                        <i class="fa fa-edit "></i>檢舉管理  <span class="badge">Included</span>
-                      </a>
-                    
-                      <div id="aaa" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="panel1">
-                        <div class="list-group">
-                          <a href="<%=request.getContextPath() %>/backend/memr/select_page.jsp" class="list-group-item">會員檢舉</a>
-                          <a href="<%=request.getContextPath() %>/backend/str/selectPage.jsp" class="list-group-item">商家檢舉</a>                       
-                        </div>
-                      </div>                   
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/memr/select_page.jsp"><i class="glyphicon glyphicon-thumbs-down"></i>會員檢舉  <span class="badge">Included</span></a>
                     </li>
-<!-- ================================== -->
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/str/selectPage.jsp"><i class="	glyphicon glyphicon-hand-down "></i>商家檢舉  <span class="badge">Included</span></a>
+                    </li>
+
                     <li>
                         <a href="#"><i class="fa fa-qrcode "></i>審核管理<span class="badge">要連結哪個?</span></a>
                     </li>
@@ -142,11 +134,15 @@
 					</c:if>
 					
 					<ul>
-					  <li><a href='<%=request.getContextPath()%>/backend/str/listAllSR.jsp'>List</a> all StoreReports. </li> <br><br>
-					  <li><%=request.getContextPath()%>/store_report/store_report.do</li>
+					  <li>
+				  		<form action="store_report.do" method="post">
+							<a href="javascript:;" onclick="parentNode.submit();">List</a>
+							<input type="hidden" name="action" value="listAll">
+						</form>  
+					  </li>
 					  <li>
 					  
-					    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store_report/store_report.do" >
+					    <FORM METHOD="post" ACTION="store_report.do" >
 					        <b>輸入商家檢舉單號 (如SR-000001):</b>
 					        <input type="text" name="sr_id">
 					        <input type="submit" value="送出">
@@ -157,7 +153,7 @@
 					  <jsp:useBean id="srSvc" scope="page" class="com.store_report.model.StoreReportService" />
 					   
 					  <li>
-					     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store_report/store_report.do" >
+					     <FORM METHOD="post" ACTION="store_report.do" >
 					       <b>選擇商家檢舉單號:</b>
 					       <select size="1" name="sr_id">
 					         <c:forEach var="srVO" items="${srSvc.all}" > 
@@ -196,7 +192,19 @@
 				<!-- ******************select_man.jsp原先內容********************* -->
 
                 </div>
+<!-- *********************include頁面******************* -->
+<%if ("列出所有商家檢舉"==request.getAttribute("whichPage")){%>
+       <jsp:include page="listAllSR.jsp" />
+<%} %>
+<%if ("列出單一商家檢舉"==request.getAttribute("whichPage")){%>
+       <jsp:include page="listOneSR.jsp" />
+<%} %>
 
+<%if ("修改單一商家檢舉"==request.getAttribute("whichPage")){%>
+       <jsp:include page="update_sr_input.jsp" />
+<%} %>
+
+<!-- *********************include頁面******************* -->
                   <!-- /. ROW  --> 
             </div>   
         </div>             
@@ -220,24 +228,7 @@
       <!-- CUSTOM SCRIPTS -->
     <script src="<%=request.getContextPath() %>/backend/assets/js/custom.js"></script>
     
-<!-- ***************************Login***************************** -->              
-	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-   	  <div class="modal-dialog">
-			<div class="loginmodal-container">
-				<h1>Login to Your Account</h1><br>
-			  <form>
-				<input type="text" name="user" placeholder="Username">
-				<input type="password" name="pass" placeholder="Password">
-				<input type="submit" name="login" class="login loginmodal-submit" value="Login">
-			  </form>
-				
-			  <div class="login-help">
-				<a href="#">Register</a> - <a href="#">Forgot Password</a>
-			  </div>
-			</div>
-		</div>
-	 </div>
-<!-- ***************************Login***************************** -->    
+
 </body>
 </html>
 
