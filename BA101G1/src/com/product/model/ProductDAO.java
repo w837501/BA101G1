@@ -32,13 +32,13 @@ public class ProductDAO implements ProductDAO_interface{
 			"DELETE FROM PRODUCT where pro_id = ?";
 		private static final String UPDATE_STMT = 
 			"UPDATE PRODUCT set store_id=?, pro_name=?, pro_price=?, pro_total=?, pro_state=?, pro_image=?, pc_id=?, pro_content=? where pro_id = ?";
-		private static final String Find_by_PK = "select * from PRODUCT where pro_id=?";
+		private static final String Find_by_PK = "select * from PRODUCT where pro_id=? and pro_state = '上架'";
 		private static final String Find_ALL = "select * from PRODUCT ";
-		private static final String Find_NAME = "select * from PRODUCT where pro_name like ?";
-		private static final String CLASSLINK = "select * from PRODUCT where pc_id = ?";
+		private static final String Find_NAME = "select * from PRODUCT where pro_name like ?  and pro_state = '上架'";
+		private static final String CLASSLINK = "select * from PRODUCT where pc_id = ? and pro_state = '上架'";
 		private static final String Find_By_Store_id 
-			= "select pro_id, pro_name, pro_price, pro_content from product where store_id = ? and pro_state = '上架'";
-	
+		= "select pro_id, pro_name, pro_price, pro_content from product where store_id = ? and pro_state = '上架'";
+
 	@Override
 	public void insert(ProductVO productVO) {
 		Connection con = null;
@@ -273,6 +273,8 @@ public class ProductDAO implements ProductDAO_interface{
 				proVO.setPro_price(rs.getInt("Pro_price"));
 				proVO.setPro_total(rs.getInt("Pro_total"));
 				proVO.setPro_state(rs.getString("Pro_state"));
+				proVO.setPro_image(rs.getBytes("Pro_image"));
+				proVO.setPc_id(rs.getString("Pc_id"));
 				proVO.setPro_content(rs.getString("Pro_content"));
 				productlist.add(proVO);
 			}
@@ -358,6 +360,7 @@ public class ProductDAO implements ProductDAO_interface{
 		}
 		return productlist;
 	}
+	
 	@Override
 	public List<ProductVO> findProductByStore_id(String store_id) {
 		// TODO Auto-generated method stub
@@ -408,11 +411,6 @@ public class ProductDAO implements ProductDAO_interface{
 				}
 			}
 		}
-		
-		
-		
-		
 		return productlist;
 	}
-
 }

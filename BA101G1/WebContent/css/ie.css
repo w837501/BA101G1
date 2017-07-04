@@ -1,0 +1,41 @@
+/* Website template by freewebsitetemplates.com */
+/*------------------------------ CONTENTS ------------------------------*/
+#contents {
+	min-height: 1050px;
+}
+#promotions li a {
+	text-decoration: none;
+}
+/** SIDEBAR **/
+#sidebar ul[class^='menu'] li > ul {
+	left: 78px;
+}
+/*------------------------------ Needed for IE7 ------------------------------*/
+.links {
+ *vertical-align: top;
+}
+#newsletter form {
+ *width: 200px;
+ *margin-left: 9px;
+}
+#products li > a, #items li > a {
+ *text-decoration: none;
+}
+/** Checkout **/
+#main #checkout input.txtfield {
+ *margin-top: 6px;
+}
+#checkout .fakeselect {
+ *margin-bottom: 0;
+ *margin-top: 6px;
+}
+#checkout div.contentbox ul {
+ *margin-bottom: 6px;
+}
+#footer .navigation {
+ *width: 400px;
+}
+#footer .navigation li {
+ *float: left;
+ *margin-right: 5px;
+}
