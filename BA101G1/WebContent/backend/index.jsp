@@ -14,7 +14,6 @@
     <link href="assets/css/custom.css" rel="stylesheet" />
     	<!-- LOGIN STYLES -->
     <link href="assets/css/login.css" rel="stylesheet" />
-    <script src="assets/js/login.js"></script>
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
@@ -188,24 +187,28 @@
    	  <div class="modal-dialog">
 			<div class="loginmodal-container">
 				<h1>Login to Your Account</h1><br>
-			  <form>
-				<input type="text" name="user" placeholder="請輸入帳號">
-				<input type="password" name="pass" placeholder="請輸入密碼">
-				<input type="submit" name="login" class="login loginmodal-submit" value="Login">
-			  </form>
 				
+			  <form method="post" action="<%=request.getContextPath() %>/backend/man/man.do">
+				<input type="text" name="user" placeholder="請輸入帳號" id="accText">
+				<input type="password" name="pass" placeholder="請輸入密碼" id="pwdText">
+				<input type="submit" name="login" class="login loginmodal-submit" value="Login">
+				<input type="hidden" name="action" value="loginCHK">
+			  </form>
+				<p id="demo">Click the button to delete my HTML content (innerHTML).</p>
 			  <div class="login-help">
 				  <button type="button" class="btn btn-lg btn-success">
 						<a href="<%=request.getContextPath() %>/backend/man/register.jsp">Register</a>
 				  </button>-
 				  <button type="button" class="btn btn-lg btn-success">
-						<a href="<%=request.getContextPath() %>/backend/man/register.jsp">Forgot Password</a>
+						<a href="<%=request.getContextPath() %>/back end/man/register.jsp">Forgot Password</a>
 				  </button>
 			  </div>
+
 			</div>
 		</div>
 	 </div>
 <!-- ***************************Login區塊************************************************************************ -->    
 </body>
 </html>
+
 

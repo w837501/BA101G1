@@ -30,7 +30,7 @@ public class ManServlet extends HttpServlet {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			req.setAttribute("whichPage", "列出單一管理員");    // 資料庫取出的set物件,存入request
 			try {
 				String str = req.getParameter("man_id");
 				if (str == null || (str.trim().length() == 0)) {
@@ -66,7 +66,7 @@ public class ManServlet extends HttpServlet {
 					return;
 				}
 				req.setAttribute("managerVO", managerVO);
-				String url = "/backend/man/ListOneMan.jsp";
+				String url = "/backend/man/select_man.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
@@ -80,13 +80,13 @@ public class ManServlet extends HttpServlet {
 		if ("getOne_For_Update".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			req.setAttribute("whichPage", "修改單一管理員");    // 資料庫取出的set物件,存入request
 			try {
 				String man_id = new String(req.getParameter("man_id"));
 				ManagerService managerSvc = new ManagerService();
 				ManagerVO managerVO = managerSvc.getOneMan(man_id);
 				req.setAttribute("managerVO", managerVO);
-				String url = "/backend/man/UpdateMan.jsp";
+				String url = "/backend/man/select_man.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
@@ -100,7 +100,7 @@ public class ManServlet extends HttpServlet {
 		if ("update".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			req.setAttribute("whichPage", "列出所有管理員");    // 資料庫取出的set物件,存入request
 			try {
 				String man_id = new String(req.getParameter("man_id"));
 
@@ -148,7 +148,7 @@ public class ManServlet extends HttpServlet {
 				managerVO = manSvc.updateMan(man_id, man_name, man_phone, man_pw, man_mail);
 
 				req.setAttribute("managerVO", managerVO);
-				String url = "/backend/man/ListAllMan.jsp";
+				String url = "/backend/man/select_man.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
@@ -162,7 +162,7 @@ public class ManServlet extends HttpServlet {
 		if ("insert".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			req.setAttribute("whichPage", "新增單一管理員");    // 資料庫取出的set物件,存入request
 			try {
 				// String man_name="";
 				// try{
@@ -231,7 +231,7 @@ public class ManServlet extends HttpServlet {
 
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("managerVO", managerVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/addMan.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -240,12 +240,12 @@ public class ManServlet extends HttpServlet {
 				managerVO = manSvc.addMan(man_name, man_phone, man_pw, man_mail);
 				req.setAttribute("managerVO", managerVO);
 				
-				String url = "/backend/man/ListAllMan.jsp";
+				String url = "/backend/man/select_man.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
 				// errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/addMan.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
 				failureView.forward(req, res);
 			}
 
@@ -255,13 +255,13 @@ public class ManServlet extends HttpServlet {
 		if ("delete".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			req.setAttribute("whichPage", "列出所有管理員");    // 資料庫取出的set物件,存入request
 			try {
 				String man_id = new String(req.getParameter("man_id"));
 
 				ManagerService manSvc = new ManagerService();
 				manSvc.deleteMan(man_id);
-				String url = "/backend/man/ListAllMan.jsp";
+				String url = "/backend/man/select_man.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
@@ -290,5 +290,57 @@ public class ManServlet extends HttpServlet {
 //				failureView.forward(req, res);
 //			}
 		}
+		// login 登入檢查
+		if ("loginCHK".equals(action)) {
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				String str = req.getParameter("man_id");
+				if (str == null || (str.trim().length() == 0)) {
+					errorMsgs.add("請輸入員工編號");
+				}
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+
+				String man_id = null;
+				try {
+					man_id = new String(str);
+				} catch (Exception e) {
+					errorMsgs.add("輸入格式錯誤");
+				}
+
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+
+				ManagerService manSvc = new ManagerService();
+				ManagerVO managerVO = manSvc.getOneMan(man_id);
+				if (managerVO == null) {
+					errorMsgs.add("查無資料");
+				}
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				req.setAttribute("managerVO", managerVO);
+				String url = "/backend/man/ListOneMan.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
+				failureView.forward(req, res);
+			}
+
+		}
+		
 	}
 }
