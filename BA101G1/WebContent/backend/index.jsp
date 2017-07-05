@@ -1,6 +1,5 @@
-<%@page import="com.man.model.ManagerService"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -8,14 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>吃訂我EatMe</title>
 	<!-- BOOTSTRAP STYLES-->
-    <link href="<%=request.getContextPath() %>/backend/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
-    <link href="<%=request.getContextPath() %>/backend/assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
         <!-- CUSTOM STYLES-->
-    <link href="<%=request.getContextPath() %>/backend/assets/css/custom.css" rel="stylesheet" />
+    <link href="assets/css/custom.css" rel="stylesheet" />
     	<!-- LOGIN STYLES -->
-    <link href="<%=request.getContextPath() %>/backend/assets/css/login.css" rel="stylesheet" />
-    <script src="<%=request.getContextPath() %>/backend/assets/js/login.js"></script>
+    <link href="assets/css/login.css" rel="stylesheet" />
+    <script src="assets/js/login.js"></script>
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
@@ -33,7 +32,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="" href="<%=request.getContextPath() %>/backend/index.jsp">
-                        <img src="<%=request.getContextPath() %>/backend/assets/img/LOGO_2.png" style="width: 180px;"/>
+                        <img src="assets/img/LOGO_2.png" style="width: 180px;"/>
 
                     </a>
                     
@@ -118,79 +117,14 @@
                  <!-- /. ROW  -->
                   <hr />
                 <div class="row">
-<!-- ******************select_man.jsp原先內容********************* -->
-					<body bgcolor='white'>
-					
-					<table border='1' cellpadding='5' cellspacing='0' width='400'>
-					  <tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-					    <td><h3>Group1 Manager: Home</h3><font color=red>( MVC )</font></td>
-					  </tr>
-					</table>
-					
-					<p>This is the Home page for Group1 Man: Home</p>
-					
-					<h3>查詢</h3>
-					
-					<c:if test="${not empty errorMsgs }">
-						<font color='red'>修正以下錯誤
-						<ul>
-							<c:forEach var="message" items="${errorMsgs }">
-								<li>${message}</li>
-							</c:forEach>
-						</ul>
-						</font>
-					</c:if>
-					
-					<ul>
-						<li>
-							<form action="man.do" method="post">
-								<input type="submit" value="List all Manager">
-								<input type="hidden" name="action" value="listAll">
-							</form>
-						</li>
-					
-						<li>
-							<form action="man.do" method="post">
-								<b>輸入管理員編號(MAN-000001):</b>
-								<input type="text" name="man_id">
-								<input type="submit" value="送出">
-								<input type="hidden" name="action" value="getOne_For_Display">
-							</form>
-						</li>
-					
-						<jsp:useBean id="manSvc" scope="page" class="com.man.model.ManagerService"></jsp:useBean>
-					
-						<li>
-							<form action="man.do" method="post">
-								<b>選擇管理員編號:</b>
-								<select size="1" name="man_id">
-									<c:forEach var="ManagerVO" items="${manSvc.all }">
-										<option value="${ManagerVO.man_id}">${ManagerVO.man_id}
-									</c:forEach>
-								</select>
-								<input type="submit" value="送出">
-								<input type="hidden" name="action" value="getOne_For_Display">
-							</form>
-						</li>
-					
-						<li>
-							<Form method="post" action="man.do">
-								<b>選擇員工姓名:</b>
-								<select size="1" name="man_id">
-									<c:forEach var="ManagerVO" items="${manSvc.all}">
-										<option value="${ManagerVO.man_id }">${ManagerVO.man_name}
-									</c:forEach>
-								</select>
-								<input type="submit" value="送出">
-								<input type="hidden" name="action" value="getOne_For_Display">
-							</Form>	
-						</li>
-					</ul>
-					<h3>管理員管理</h3>
-						<ul>
-							<li><a href='addMan.jsp'>ADD</a>a new Man.</li>
-						</ul>
-<!-- ******************select_man.jsp原先內容********************* -->
+                    <div class="col-lg-12 ">
+                        <div class="alert alert-info">
+                             <strong>歡迎使用EatMe後端管理系統 ! </strong>今天還要繼續努力加油喔!
+                        </div>            
+                    </div>
+                    <div class="well">
+                      思維實施先進性就能批准只要價格所屬就會夢幻，買了實行無法充滿根據繼續，同意上市興趣中間手機鈴聲介紹招聘人體緊張人，數量目錄中央公安大會越來越到達面前如下同一水果他，計劃語言一生會員安裝並在房地產一番大多格式只不，友情連結一件但我操作系統當時科學手術均為來，報紙作業出租第二章普通專利先進性教育從事報，專業細胞人民共和國壓縮名單自治區各類藍色低價能在廣播想想體制，給我們高效有限明顯加。
+                    </div>
 
                 </div>
 
@@ -211,11 +145,11 @@
      <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
-    <script src="<%=request.getContextPath() %>/backend/assets/js/jquery-1.10.2.js"></script>
+    <script src="assets/js/jquery-1.10.2.js"></script>
       <!-- BOOTSTRAP SCRIPTS -->
-    <script src="<%=request.getContextPath() %>/backend/assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
       <!-- CUSTOM SCRIPTS -->
-    <script src="<%=request.getContextPath() %>/backend/assets/js/custom.js"></script>
+    <script src="assets/js/custom.js"></script>
     
 <!-- ***************************Login***************************** -->              
 	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -234,13 +168,7 @@
 			</div>
 		</div>
 	 </div>
-<!-- ***************************Login***************************** -->   
-
-<%if ("列出所有管理員"==request.getAttribute("whichPage")){%>
-       <jsp:include page="ListAllMan.jsp" />
-<%} %>
-
- 
+<!-- ***************************Login***************************** -->    
 </body>
 </html>
 

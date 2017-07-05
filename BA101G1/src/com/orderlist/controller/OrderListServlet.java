@@ -23,18 +23,21 @@ public class OrderListServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		
 		
-		if ("getOneOrder_For_DetailDisplay".equals(action)) { // ¨Ó¦ÛlistOrderByMem_id.jspªº½Ğ¨D
+		if ("getOneOrder_For_DetailDisplay".equals(action)) { // ä¾†è‡ªlistOrderByMem_id.jspçš„è«‹æ±‚
 			
-System.out.println("!!!!");			
+
+			System.out.println("Controller OrderList ç¬¬28è¡Œ");
+
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z**********************/
+				/***************************1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç†**********************/
 
 				String str1 = req.getParameter("order_id");
+
 				String str2 = req.getParameter("pro_id");
 				String str3 = req.getParameter("quentity");
 
@@ -45,25 +48,26 @@ System.out.println("!!!!");
 				String order_id = req.getParameter("order_id");
 				System.out.println("order_id"+order_id);
 
-				/***************************2.¶}©l¬d¸ß¸ê®Æ*****************************************/
+				/***************************2.é–‹å§‹æŸ¥è©¢è³‡æ–™*****************************************/
 				OrderlistService orderSvc = new OrderlistService();
 				List<OrderlistVO> orderlistVO=new LinkedList<OrderlistVO>();
-				orderlistVO= orderSvc.getOrderlist(order_id);//DAO¤èªk
-				System.out.println("²Ä44¦æ");
+				orderlistVO= orderSvc.getOrderlist(order_id);//DAOæ–¹æ³•
+				System.out.println("ç¬¬44è¡Œ");
+
 				
 			
 				
-				/***************************3.¬d¸ß§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)*************/
-				req.setAttribute("orderlistVO", orderlistVO); // ¸ê®Æ®w¨ú¥XªºempVOª«¥ó,¦s¤Jreq
+				/***************************3.æŸ¥è©¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view)*************/
+				req.setAttribute("orderlistVO", orderlistVO); // è³‡æ–™åº«å–å‡ºçš„empVOç‰©ä»¶,å­˜å…¥req
 				
 				String url = "/frontend/selectOrder/orderDetail.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // ¦¨¥\Âà¥ælistOneEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // æˆåŠŸè½‰äº¤listOneEmp.jsp
 				successView.forward(req, res);
 
-				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z*************************************/
+				/***************************å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç†*************************************/
 			} catch (Exception e) {
 				
-				errorMsgs.add("µLªk¨ú±o¸ê®Æ:" + e.getMessage());
+				errorMsgs.add("ç„¡æ³•å–å¾—è³‡æ–™:" + e.getMessage());
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/frontend/selectOrder/listOrderByMem.jsp");
 				failureView.forward(req, res);

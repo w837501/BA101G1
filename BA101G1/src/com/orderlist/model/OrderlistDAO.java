@@ -40,8 +40,11 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 			"UPDATE orderlist set order_amount, price where order_id=? and pro_id=?";
 		
 		private static final String GET_DETAIL_ORDER_BY_ORDER_ID = 
-			"select p.pro_name, o.price, o.order_amount from orderlist o join product p on o.pro_id = p.pro_id where o.order_id = ? and o.pro_id=? ;";
+			"select p.pro_name, o.price, o.order_amount from orderlist o join product p on o.pro_id = p.pro_id where o.order_id = ? and o.pro_id=?";
 		
+		/*******************OrderDetailByOrderId的 from OrderListServlet.java********************************/
+		private static final String GET_DETAIL_PROID_BY_ORDER_ID = 
+			"select pro_id from orderlist where order_id=?";
 	@Override
 	public void insert(OrderlistVO orderlistVO) {
 		// TODO Auto-generated method stub
@@ -290,26 +293,26 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 		ResultSet rs = null;
 
 		try {
+			
+			System.out.println(" order_id: " + order_id +" pro_id: " + pro_id);
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_DETAIL_ORDER_BY_ORDER_ID);
 			
+			
+			
 			pstmt.setString(1, order_id);
 			pstmt.setString(2, pro_id);
-			
 			rs = pstmt.executeQuery();
-
 			while (rs.next()) {
-				// empVO 也稱為 Domain objects
 				orderlistVO = new OrderlistVO();
-				orderlistVO.setOrder_id(rs.getString("order_id"));
-				orderlistVO.setPro_id(rs.getString("pro_id"));
+//				orderlistVO.setOrder_id(rs.getString("order_id"));
+//				orderlistVO.setPro_id(rs.getString("pro_id"));
 				orderlistVO.setOrder_amount(rs.getInt("order_amount"));
 				orderlistVO.setPrice(rs.getInt("price"));
 				orderlistVO.setPro_name(rs.getString("pro_name"));
 				list.add(orderlistVO); // Store the row in the list
 			}
-
 			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -339,6 +342,50 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 			}
 		}
 		return list;
+	}
+	/*******************OrderDetailByOrderId的 from OrderListServlet.java********************************/
+	@Override
+	public String getDetailProIdByOrderId(String order_id) {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String proId = "";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_DETAIL_PROID_BY_ORDER_ID);
+			pstmt.setString(1, order_id);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				proId = rs.getString("pro_id");
+	
+				System.out.println("proID : " + proId);
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return proId;
+
 	}
 
 }

@@ -9,15 +9,15 @@
 
 <html>
 <head>
-<title>­û¤u¸ê®Æ - listOneOrder.jsp</title>
+<title>å“¡å·¥è³‡æ–™ - listOneOrder.jsp</title>
 </head>
 <body bgcolor='white'>
-<b><font color=red>¦¹­¶½m²ß±Ä¥Î Script ªº¼gªk¨ú­È:</font></b>
+<b><font color=red>æ­¤é ç·´ç¿’æ¡ç”¨ Script çš„å¯«æ³•å–å€¼:</font></b>
 <table border='1' cellpadding='5' cellspacing='0' width='800'>
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
 		<td>
-		<h3>·|­û­q³æ - ListOrderByMem_id.jsp</h3>
-		<a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><img src="<%=request.getContextPath()%>/backend/push/images/back1.gif" width="100" height="32" border="0">¦^­º­¶</a>
+		<h3>æœƒå“¡è¨‚å–® - ListOrderByMem_id.jsp</h3>
+		<a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><img src="<%=request.getContextPath()%>/backend/push/images/back1.gif" width="100" height="32" border="0">å›é¦–é </a>
 		</td>
 	</tr>
 </table>
@@ -25,22 +25,28 @@
 
 <table border='1' bordercolor='#CCCCFF' width='800'>
 	<tr>
-		<th>­q³æ½s¸¹</th>
-		<th>¤é´Á</th>
-		<th>°Ó©±</th>
-		<th>­q³æª÷ÃB</th>
-		<th>¨úÀ\¤è¦¡</th>
-		<th>­q³æª¬ºA</th>
-		<th>¨ú®ø­q³æ</th>
-		<th>µû»ù°Ó®a</th>
-		<th>ÀËÁ|°Ó®a</th>
+		<th>è¨‚å–®ç·¨è™Ÿ</th>
+		<th>æ—¥æœŸ</th>
+		<th>å•†åº—</th>
+		<th>è¨‚å–®é‡‘é¡</th>
+		<th>å–é¤æ–¹å¼</th>
+		<th>è¨‚å–®ç‹€æ…‹</th>
+		<th>å–æ¶ˆè¨‚å–®</th>
+		<th>è©•åƒ¹å•†å®¶</th>
+		<th>æª¢èˆ‰å•†å®¶</th>
 	</tr>
 	<c:forEach var="store_orderVO" items="${store_orderVO}" >
 	<tr align='center' valign='middle'>
 		
 
 		<td>
-			<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO.order_id}">${store_orderVO.order_id}</a>
+
+			<form action="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do" method="post">
+    			<a href="javascript:;" onclick="parentNode.submit();">${store_orderVO.order_id }</a>
+    			<input type="hidden" name="order_id" value="${store_orderVO.order_id}"/>
+    			<input type="hidden" name="action" value="getOneOrder_For_DetailDisplay">
+			</form>
+<
 		</td>
 
 		<td>${store_orderVO.order_time }</td>
@@ -48,9 +54,9 @@
 		<td>${store_orderVO.totalprice }</td>
 		<td>${store_orderVO.order_way }</td>
 		<td>${store_orderVO.order_state }</td>
-		<td>¨ú®ø</td>
-		<td>µû»ù</td>
-		<td>ÀËÁ|</td>
+		<td>å–æ¶ˆ</td>
+		<td>è©•åƒ¹</td>
+		<td>æª¢èˆ‰</td>
 	</tr>
 	</c:forEach>
 

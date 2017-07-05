@@ -9,4 +9,7 @@ public interface OrderlistDAO_interface {
     public List<OrderlistVO> findByPrimaryKey(String order_id);
     public List<OrderlistVO> getAll();
 	public List<OrderlistVO> getDetailOrder(String order_id, String pro_id);
+	/*******************OrderDetailByOrderIdªº from OrderListServlet.java********************************/
+	public String getDetailProIdByOrderId(String order_id);
+	
 }
