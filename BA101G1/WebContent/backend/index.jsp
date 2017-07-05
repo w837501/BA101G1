@@ -31,7 +31,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="" href="index.html">
+                    <a class="" href="<%=request.getContextPath() %>/backend/index.jsp">
                         <img src="assets/img/LOGO_2.png" style="width: 180px;"/>
 
                     </a>
@@ -54,12 +54,12 @@
 
 
                     <li class="active-link">
-                        <a href="index.html" ><i class="fa fa-desktop "></i>會員管理 <span class="badge">Included</span></a>
+                        <a href="<%=request.getContextPath() %>/backend/mem/select_mem.jsp" ><i class="fa fa-desktop "></i>會員管理 <span class="badge">Included</span></a>
                     </li>
                    
 
                     <li>
-                        <a href="order.html"><i class="fa fa-table "></i>訂單管理  <span class="badge">Included</span></a>
+                        <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>訂單管理  <span class="badge">Included</span></a>
                     </li>
 
  <!-- 收合式清單====檢舉管理============================== -->
@@ -71,28 +71,28 @@
                     
                       <div id="aaa" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="panel1">
                         <div class="list-group">
-                          <a href="#" class="list-group-item">會員檢舉</a>
-                          <a href="#" class="list-group-item">商家檢舉</a>                       
+                          <a href="<%=request.getContextPath() %>/backend/memr/select_page.jsp" class="list-group-item">會員檢舉</a>
+                          <a href="<%=request.getContextPath() %>/backend/str/selectPage.jsp" class="list-group-item">商家檢舉</a>                       
                         </div>
                       </div>                   
                     </li>
 <!-- ================================== -->
                     <li>
-                        <a href="#"><i class="fa fa-qrcode "></i>審核管理</a>
+                        <a href="#"><i class="fa fa-qrcode "></i>審核管理<span class="badge">要連結哪個?</span></a>
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-edit "></i>推播管理 </a>
+                        <a href="<%=request.getContextPath() %>/backend/push/selectPage.jsp"><i class="fa fa-edit "></i>推播管理 </a>
                     </li>
 
-                    <li>
-                        <a href="#"><i class="fa fa-table "></i>行事曆</a>
-                    </li>
                      <li>
                         <a href="#"><i class="fa fa-edit "></i>個人資料</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o"></i>商家月結算</a>
+                        <a href="<%=request.getContextPath() %>/backend/rev/Select_Rev.jsp"><i class="fa fa-bar-chart-o"></i>商家月結算</a>
+                    </li>
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/man/select_man.jsp"><i class="fa fa-bar-chart-o"></i>管理員管理</a>
                     </li>
 
 
@@ -111,7 +111,7 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-lg-12">
-                     <h2>管理者頁面</h2>   
+                     	<h2>後端管理者平台</h2>   
                     </div>
                 </div>              
                  <!-- /. ROW  -->
