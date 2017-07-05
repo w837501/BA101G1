@@ -281,11 +281,9 @@ public class ManServlet extends HttpServlet {
 //				
 //				ManagerService manSvc = new ManagerService();
 //				manSvc.deleteMan(man_id);
-			System.out.println("第284行");
 				String url = "/backend/man/select_man.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-				System.out.println("第288行");
 //			} catch (Exception e) {
 //				errorMsgs.add("刪除資料失敗" + e.getMessage());
 //				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");

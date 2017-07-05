@@ -144,8 +144,9 @@
 					<ul>
 						<li>
 							<form action="man.do" method="post">
-								<input type="submit" value="List all Manager">
-								<input type="hidden" name="action" value="listAll">
+    							<a href="javascript:;" onclick="parentNode.submit();">List</a>
+    							<input type="hidden" name="order_id" value="${store_orderVO.order_id}"/>
+    							<input type="hidden" name="action" value="listAll">
 							</form>
 						</li>
 					
@@ -193,7 +194,11 @@
 <!-- ******************select_man.jsp原先內容********************* -->
 
                 </div>
-
+<!-- *********************include頁面******************* -->
+<%if ("列出所有管理員"==request.getAttribute("whichPage")){%>
+       <jsp:include page="ListAllMan.jsp" />
+<%} %>
+<!-- *********************include頁面******************* -->
                   <!-- /. ROW  --> 
             </div>   
         </div>             
@@ -236,9 +241,6 @@
 	 </div>
 <!-- ***************************Login***************************** -->   
 
-<%if ("列出所有管理員"==request.getAttribute("whichPage")){%>
-       <jsp:include page="ListAllMan.jsp" />
-<%} %>
 
  
 </body>

@@ -114,19 +114,51 @@
                      	<h2>後端管理者平台</h2>   
                     </div>
                 </div>              
-                 <!-- /. ROW  -->
-                  <hr />
-                <div class="row">
+
                     <div class="col-lg-12 ">
                         <div class="alert alert-info">
-                             <strong>歡迎使用EatMe後端管理系統 ! </strong>今天還要繼續努力加油喔!
-                        </div>            
+                            <strong> Nash  之代辦事項</strong> You Have No pending Task For Today.
+                        </div>
                     </div>
-                    <div class="well">
-                      思維實施先進性就能批准只要價格所屬就會夢幻，買了實行無法充滿根據繼續，同意上市興趣中間手機鈴聲介紹招聘人體緊張人，數量目錄中央公安大會越來越到達面前如下同一水果他，計劃語言一生會員安裝並在房地產一番大多格式只不，友情連結一件但我操作系統當時科學手術均為來，報紙作業出租第二章普通專利先進性教育從事報，專業細胞人民共和國壓縮名單自治區各類藍色低價能在廣播想想體制，給我們高效有限明顯加。
+                    
+<!-- ****************代辦事項************************ -->
+                <div class="row text-center pad-top">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                        <div class="div-square">
+                            <a href="blank.html">
+                                <i class="fa fa-circle-o-notch fa-5x"></i>
+                                <h4>Check Data</h4>
+                            </a>
+                        </div>
                     </div>
-
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                        <div class="div-square">
+                            <a href="blank.html">
+                                <i class="fa fa-envelope-o fa-5x"></i>
+                                <h4>Mail Box</h4>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                        <div class="div-square">
+                            <a href="blank.html">
+                                <i class="fa fa-lightbulb-o fa-5x"></i>
+                                <h4>New Issues</h4>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                        <div class="div-square">
+                            <a href="blank.html">
+                                <i class="fa fa-users fa-5x"></i>
+                                <h4>See Users</h4>
+                            </a>
+                        </div>
+                    </div>
                 </div>
+<!-- ****************代辦事項************************ -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
 
                   <!-- /. ROW  --> 
             </div>   
@@ -151,24 +183,29 @@
       <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
     
-<!-- ***************************Login***************************** -->              
+<!-- ***************************Login區塊************************************************************************ -->              
 	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
    	  <div class="modal-dialog">
 			<div class="loginmodal-container">
 				<h1>Login to Your Account</h1><br>
 			  <form>
-				<input type="text" name="user" placeholder="Username">
-				<input type="password" name="pass" placeholder="Password">
+				<input type="text" name="user" placeholder="請輸入帳號">
+				<input type="password" name="pass" placeholder="請輸入密碼">
 				<input type="submit" name="login" class="login loginmodal-submit" value="Login">
 			  </form>
 				
 			  <div class="login-help">
-				<a href="#">Register</a> - <a href="#">Forgot Password</a>
+				  <button type="button" class="btn btn-lg btn-success">
+						<a href="<%=request.getContextPath() %>/backend/man/register.jsp">Register</a>
+				  </button>-
+				  <button type="button" class="btn btn-lg btn-success">
+						<a href="<%=request.getContextPath() %>/backend/man/register.jsp">Forgot Password</a>
+				  </button>
 			  </div>
 			</div>
 		</div>
 	 </div>
-<!-- ***************************Login***************************** -->    
+<!-- ***************************Login區塊************************************************************************ -->    
 </body>
 </html>
 
