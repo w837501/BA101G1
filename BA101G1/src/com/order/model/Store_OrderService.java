@@ -2,7 +2,9 @@ package com.order.model;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Vector;
 
+import com.product.model.ProductVO;
 import com.record.model.RecordVO;
 
 public class Store_OrderService {
@@ -13,7 +15,7 @@ public class Store_OrderService {
 		dao = new Store_OrderDAO();
 	}
 	
-	public Store_OrderVO addOrder(String mem_id, String store_id, Integer totalprice, String order_way, String receive_address, String order_note, Timestamp order_taketime ){
+	public Store_OrderVO addOrder(String mem_id, String store_id, Integer totalprice, String order_way, String receive_address, String order_note, Timestamp order_taketime ,Vector<ProductVO> buylist){
 		
 		Store_OrderVO orderVO = new Store_OrderVO();
 		
@@ -24,7 +26,7 @@ public class Store_OrderService {
 		orderVO.setReceive_address(receive_address);
 		orderVO.setOrder_note(order_note);
 		orderVO.setOrder_taketime(order_taketime);
-		dao.insert(orderVO);
+		dao.insertOrderandOrderList(orderVO,buylist);
 		
 		return orderVO;
 		

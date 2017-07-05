@@ -49,7 +49,7 @@
 	<c:forEach var="product" items="${productlist}">
 		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do">
 		<tr align='center' valign='middle'>
-			<td><IMG src="<%=request.getContextPath()%>/ProductClassReader?pro_id=${product.pro_id}"></td>
+			<td><IMG src="<%=request.getContextPath()%>/ProDBGifReader?pro_id=${product.pro_id}"></td>
 			<td>${product.pro_name}</td>
 			<td>${product.pro_price}</td>
 			<td>${product.pro_id}</td>

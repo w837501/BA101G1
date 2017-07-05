@@ -159,4 +159,12 @@
     <servlet-name>storereader</servlet-name>
     <url-pattern>/StoreReader</url-pattern>
   </servlet-mapping>
+	 <servlet>
+    <servlet-name>ProDBGifReader</servlet-name>
+    <servlet-class>com.product.controller.DBGifReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProDBGifReader</servlet-name>
+    <url-pattern>/ProDBGifReader</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -147,8 +147,8 @@
 <%-- 			<a href="<%=request.getContextPath()%>/order/order.do?action=setOrder_Into&store_id=<%=productVO.getStore_id() %>&quentity=<%=productVO.getQuantity() %>" class="btn btn-info" class="btn btn-info"><i id="finish" class="glyphicon glyphicon-ok"></i>完成點餐</a> --%>
 		<input type="hidden"  value = "setOrder_Into" name="action">
 		<input type="hidden"  value = "<%=amount%> " name="amount">
+		<input type="hidden"  value = "<%=buylist%>" name="buylist">
 		<input type="hidden"  value = "<%=productVO.getStore_id()%>" name="store_id">
-		
 		<input type="submit" value="送出新增">
 		</div>
 		<br>
