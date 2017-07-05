@@ -15,7 +15,9 @@
 		<div id="header">
 			<div id="logo">
 				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
-				<span id="login"><a href="news.html">Login in</a></span>
+				<span id="login"><a href="<%=request.getContextPath()%>/backend/mem/AddMem.jsp">Login in</a>
+ 				<a href="<%=request.getContextPath()%>/backend/mem/AddMem.jsp">Login in</a></span>
+				
 
 				<ul>
 					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>

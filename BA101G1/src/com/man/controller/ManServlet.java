@@ -199,7 +199,6 @@ public class ManServlet extends HttpServlet {
 
 				String man_name = req.getParameter("man_name");
 				String man_phone = req.getParameter("man_phone");
-				String man_pw = req.getParameter("man_pw");
 				String man_mail = req.getParameter("man_mail");
 
 				if (req.getParameter("man_name") == null || req.getParameter("man_name").trim().isEmpty()) {
@@ -212,17 +211,14 @@ public class ManServlet extends HttpServlet {
 				} else {
 					man_phone = req.getParameter("man_phone");
 				}
-				if (req.getParameter("man_pw") == null || req.getParameter("man_pw").trim().isEmpty()) {
-					errorMsgs.add("請輸入密碼");
-				} else {
-					man_pw = req.getParameter("man_pw");
-				}
 				if (req.getParameter("man_mail") == null || req.getParameter("man_mail").trim().isEmpty()) {
 					errorMsgs.add("請輸入信箱");
 				} else {
 					man_mail = req.getParameter("man_mail");
 				}
-
+				int ran=(int)(Math.random()*1000000);
+				
+				String man_pw=String.valueOf(ran);
 				ManagerVO managerVO = new ManagerVO();
 				managerVO.setMan_name(man_name);
 				managerVO.setMan_phone(man_phone);
