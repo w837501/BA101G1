@@ -7,12 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.orderlist.model.OrderlistService;
+import com.product.model.ProductVO;
 import com.record.model.RecordVO;
 
 public class Store_OrderDAO implements Store_OrderDAO_interface{
@@ -471,5 +474,63 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 			}
 		}
 		
+	}
+
+	@Override
+	public void insertOrderandOrderList(Store_OrderVO orderVO, Vector<ProductVO> buylist) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+
+			con = ds.getConnection();
+			String[] cols = { "order_id" };
+			pstmt = con.prepareStatement(INSERT_STMT,cols);
+
+			pstmt.setString(1, orderVO.getMem_id());
+			pstmt.setString(2, orderVO.getStore_id());
+			pstmt.setInt(3, orderVO.getTotalprice());
+			pstmt.setString(4, orderVO.getOrder_way());
+			pstmt.setString(5, orderVO.getReceive_address());
+			pstmt.setString(6, orderVO.getOrder_note());
+			pstmt.setTimestamp(7, orderVO.getOrder_taketime());
+			
+			pstmt.executeUpdate();
+			String next_ord_id = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_ord_id = rs.getString(1);
+				System.out.println("自增主鍵值= " + next_ord_id +"(剛新增成功的訂單編號)");
+			} else {
+				System.out.println("未取得自增主鍵值");
+			}
+			rs.close();
+			
+			OrderlistService orderlistSvc=new OrderlistService();
+			for(ProductVO aaa:buylist){
+				orderlistSvc.addOrderlist(next_ord_id,aaa);
+			}
+			
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
 	}
 }
