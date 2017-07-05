@@ -27,17 +27,20 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 		}
 	}
 	
+
 	private static final String INSERT_STMT = 
-			"INSERT INTO order (order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, qrcode, order_note, order_taketime) "
-			         + "VALUES (to_char(sysdate,'YYYYmmdd')||'-'||LPAD(to_char(order_seq.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?,?)";
+			"INSERT INTO store_order (order_id,mem_id, store_id, totalprice, order_way, receive_address, qrcode, order_note, order_taketime) "
+	  + "VALUES (to_char(sysdate,'YYYYmmdd')||'-'||LPAD(to_char(order_seq.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?)";
+
+
 	private static final String UPDATE = 
-			"UPDATE order set order_id=?, order_time=?, mem_id=?, store_id=?, order_state=?, totalprice=?, order_way=?, receive_address=?, qrcode=?, order_note=?, order_taketime=?";
+			"UPDATE store_order set order_id=?, order_time=?, mem_id=?, store_id=?, order_state=?, totalprice=?, order_way=?, receive_address=?, qrcode=?, order_note=?, order_taketime=?";
 	private static final String DELETE = 
-			"DELETE FROM order where order_id = ?";
+			"DELETE FROM store_order where order_id = ?";
 	private static final String GET_ONE_STMT = 
 			"SELECT order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, qrcode, order_note, order_taketime from order where order_id = ?";
 	private static final String GET_ALL_STMT = 
-			"SELECT order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, qrcode, order_note, order_taketime from order order by order_id";
+			"SELECT order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, qrcode, order_note, order_taketime from store_order order by order_id";
 	
 	private static final String GET_ORDER_BY_MEM = 
 			"select mem_id, order_id, store_id, totalprice, order_time, order_way, order_state from store_order where mem_id = ? order by order_time desc";
@@ -46,7 +49,8 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 			"select o.mem_id, o.order_id, o.store_id, o.totalprice, o.order_time, o.order_way, o.order_state ,s.store_name from store_order o join store s on o.store_id = s.store_id where mem_id = ? order by order_time desc";
 	private static final String GET_ORDER_BY_STATE=
 			"select mem_id, order_id, store_id, totalprice, order_time, order_way, receive_address,order_note, order_taketime ,order_state from  store_order where order_state=?";	
-	
+	private static final String CONFIRM_ORDER=
+			"Update store_order set order_state=? where order_id=?";
 	@Override
 	public void insert(Store_OrderVO orderVO) {
 		// TODO Auto-generated method stub
@@ -58,16 +62,14 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setTimestamp(1, orderVO.getOrder_time());
-			pstmt.setString(2, orderVO.getMem_id());
-			pstmt.setString(3, orderVO.getStore_id());
-			pstmt.setString(4, orderVO.getOrder_state());
-			pstmt.setInt(5, orderVO.getTotalprice());
-			pstmt.setString(6, orderVO.getOrder_way());
-			pstmt.setString(7, orderVO.getReceive_address());
-			pstmt.setBytes(8, orderVO.getQrcode());
-			pstmt.setString(9, orderVO.getOrder_note());
-			pstmt.setTimestamp(10, orderVO.getOrder_taketime());
+			pstmt.setString(1, orderVO.getMem_id());
+			pstmt.setString(2, orderVO.getStore_id());
+			pstmt.setInt(3, orderVO.getTotalprice());
+			pstmt.setString(4, orderVO.getOrder_way());
+			pstmt.setString(5, orderVO.getReceive_address());
+			pstmt.setBytes(6, orderVO.getQrcode());
+			pstmt.setString(7, orderVO.getOrder_note());
+			pstmt.setTimestamp(8, orderVO.getOrder_taketime());
 			
 			pstmt.executeUpdate();
 
@@ -437,5 +439,41 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 		}
 		
 		return list;
+	}
+
+	@Override
+	public void confirm_order(String order_id, String order_state) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(CONFIRM_ORDER);
+			pstmt.setString(1, order_state);
+			pstmt.setString(2, order_id);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		}finally{
+			
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
 	}
 }

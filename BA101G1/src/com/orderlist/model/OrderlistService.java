@@ -35,8 +35,8 @@ private OrderlistDAO_interface dao;
 		dao.delete(order_id,pro_id);
 	}
 	
-	public OrderlistVO getOneRecord(String order_id, String pro_id){
-		return dao.findByPrimaryKey(order_id, pro_id);
+	public List<OrderlistVO> getOrderlist(String order_id){
+		return dao.findByPrimaryKey(order_id);
 	}
 	
 	public List<OrderlistVO> getAll(){

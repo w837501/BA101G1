@@ -23,307 +23,58 @@ public class OrderListServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		
 		
-		if ("getOneOrder_For_DetailDisplay".equals(action)) { // ¨Ó¦ÛlistOrderByMem_id.jspªº½Ğ¨D
+		if ("getOneOrder_For_DetailDisplay".equals(action)) { // ä¾†è‡ªlistOrderByMem_id.jspçš„è«‹æ±‚
 			
-			System.out.println("Controller OrderList ²Ä28¦æ");
-			
+
+			System.out.println("Controller OrderList ç¬¬28è¡Œ");
+
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-//			try {
-				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z**********************/
+			try {
+				/***************************1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç†**********************/
+
 				String str1 = req.getParameter("order_id");
-//				String str2 = req.getParameter("pro_id");
-//				System.out.println("order_id"+str1+"\n"+"pro_id "+str2);
-				/***************************2.¶}©l¬d¸ß¸ê®Æ*****************************************/
+
+				String str2 = req.getParameter("pro_id");
+				String str3 = req.getParameter("quentity");
+
+				System.out.println(str1+" "+str2+" "+str3);
+
+				System.out.println(str1+" "+str2);
+
+				String order_id = req.getParameter("order_id");
+				System.out.println("order_id"+order_id);
+
+				/***************************2.é–‹å§‹æŸ¥è©¢è³‡æ–™*****************************************/
 				OrderlistService orderSvc = new OrderlistService();
 				List<OrderlistVO> orderlistVO=new LinkedList<OrderlistVO>();
-				
-				/*******************OrderDetailByOrderIdªº from OrderListServlet.java****************/
-				String str2 = orderSvc.getDetailProIdByOrderId(str1);
-				orderlistVO= orderSvc.getDetailOrder(str1,str2);//DAO¤èªk
+				orderlistVO= orderSvc.getOrderlist(order_id);//DAOæ–¹æ³•
+				System.out.println("ç¬¬44è¡Œ");
+
 				
 			
 				
-				/***************************3.¬d¸ß§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)*************/
-				req.setAttribute("orderlistVO", orderlistVO); // ¸ê®Æ®w¨ú¥XªºempVOª«¥ó,¦s¤Jreq
+				/***************************3.æŸ¥è©¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view)*************/
+				req.setAttribute("orderlistVO", orderlistVO); // è³‡æ–™åº«å–å‡ºçš„empVOç‰©ä»¶,å­˜å…¥req
 				
 				String url = "/frontend/selectOrder/orderDetail.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // ¦¨¥\Âà¥ælistOneEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // æˆåŠŸè½‰äº¤listOneEmp.jsp
 				successView.forward(req, res);
 
-				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z*************************************/
-//			} catch (Exception e) {
-//				
-//				errorMsgs.add("µLªk¨ú±o¸ê®Æ:" + e.getMessage());
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher("/frontend/selectOrder/listOrderByMem.jsp");
-//				failureView.forward(req, res);
-//			}
+				/***************************å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç†*************************************/
+			} catch (Exception e) {
+				
+				errorMsgs.add("ç„¡æ³•å–å¾—è³‡æ–™:" + e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/frontend/selectOrder/listOrderByMem.jsp");
+				failureView.forward(req, res);
+			}
 		}
 		
-//		if ("getOneOrder_For_DetailDisplay".equals(action)) { // ¨Ó¦Ûselect_page.jspªº½Ğ¨D
-//			
-//			System.out.println("¤Íºû¤p´Î´Î");
-//			
-//			List<String> errorMsgs = new LinkedList<String>();
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//			req.setAttribute("errorMsgs", errorMsgs);
-//
-//			try {
-//				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z**********************/
-//				String str = req.getParameter("order_id");
-//				/***************************2.¶}©l¬d¸ß¸ê®Æ*****************************************/
-//				Store_OrderService orderSvc = new Store_OrderService();
-//				List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
-//				store_orderVO= orderSvc.getOrderByMem_id(str);//DAO¤èªk
-//				System.out.println(str);
-//				System.out.println(store_orderVO);
-//				if (store_orderVO == null) {
-//					errorMsgs.add("¬dµL¸ê®Æ");
-//				}
-//				// Send the use back to the form, if there were errors
-//				if (!errorMsgs.isEmpty()) {
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/frontend/selectOrder/selectOrder.jsp");
-//					failureView.forward(req, res);
-//					return;//µ{¦¡¤¤Â_
-//				}
-//				
-//				/***************************3.¬d¸ß§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)*************/
-//				req.setAttribute("store_orderVO", store_orderVO); // ¸ê®Æ®w¨ú¥XªºempVOª«¥ó,¦s¤Jreq
-//				
-//				String url = "/frontend/selectOrder/listOrderByMem_id.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url); // ¦¨¥\Âà¥ælistOneEmp.jsp
-//				successView.forward(req, res);
-//
-//				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z*************************************/
-//			} catch (Exception e) {
-//				
-//				errorMsgs.add("µLªk¨ú±o¸ê®Æ:" + e.getMessage());
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher("/frontend/selectOrder/selectOrder.jsp");
-//				failureView.forward(req, res);
-//			}
-//		}
-		
-		
-//		if ("getOne_For_Update".equals(action)) { // ¨Ó¦ÛlistAllEmp.jsp ©Î  /dept/listEmps_ByDeptno.jsp ªº½Ğ¨D
-//
-//			List<String> errorMsgs = new LinkedList<String>();
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//			req.setAttribute("errorMsgs", errorMsgs);
-//			
-//			try {
-//				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ****************************************/
-//				Integer empno = new Integer(req.getParameter("empno"));
-//				
-//				/***************************2.¶}©l¬d¸ß¸ê®Æ****************************************/
-//				EmpService empSvc = new EmpService();
-//				EmpVO empVO = empSvc.getOneEmp(empno);
-//								
-//				/***************************3.¬d¸ß§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)************/
-//				req.setAttribute("empVO", empVO); // ¸ê®Æ®w¨ú¥XªºempVOª«¥ó,¦s¤Jreq
-//				String url = "/emp/update_emp_input.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url); // ¦¨¥\Âà¥æupdate_emp_input.jsp
-//				successView.forward(req, res);
-//
-//				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z************************************/
-//			} catch (Exception e) {
-//				throw new ServletException(e);
-//			}
-//		}
-//		
-//		
-//		if ("update".equals(action)) { // ¨Ó¦Ûupdate_emp_input.jspªº½Ğ¨D
-//			
-//			List<String> errorMsgs = new LinkedList<String>();
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//			req.setAttribute("errorMsgs", errorMsgs);
-//		
-//			try {
-//				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z**********************/
-//				Integer empno = new Integer(req.getParameter("empno").trim());
-//				String ename = req.getParameter("ename").trim();
-//				String job = req.getParameter("job").trim();				
-//				
-//				java.sql.Date hiredate = null;
-//				try {
-//					hiredate = java.sql.Date.valueOf(req.getParameter("hiredate").trim());
-//				} catch (IllegalArgumentException e) {
-//					hiredate=new java.sql.Date(System.currentTimeMillis());
-//					errorMsgs.add("½Ğ¿é¤J¤é´Á!");
-//				}
-//
-//				Double sal = null;
-//				try {
-//					sal = new Double(req.getParameter("sal").trim());
-//				} catch (NumberFormatException e) {
-//					sal = 0.0;
-//					errorMsgs.add("Á~¤ô½Ğ¶ñ¼Æ¦r.");
-//				}
-//
-//				Double comm = null;
-//				try {
-//					comm = new Double(req.getParameter("comm").trim());
-//				} catch (NumberFormatException e) {
-//					comm = 0.0;
-//					errorMsgs.add("¼úª÷½Ğ¶ñ¼Æ¦r.");
-//				}
-//
-//				Integer deptno = new Integer(req.getParameter("deptno").trim());
-//
-//				EmpVO empVO = new EmpVO();
-//				empVO.setEmpno(empno);
-//				empVO.setEname(ename);
-//				empVO.setJob(job);
-//				empVO.setHiredate(hiredate);
-//				empVO.setSal(sal);
-//				empVO.setComm(comm);
-//				empVO.setDeptno(deptno);
-//
-//				// Send the use back to the form, if there were errors
-//				if (!errorMsgs.isEmpty()) {
-//					req.setAttribute("empVO", empVO); // §t¦³¿é¤J®æ¦¡¿ù»~ªºempVOª«¥ó,¤]¦s¤Jreq
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/emp/update_emp_input.jsp");
-//					failureView.forward(req, res);
-//					return; //µ{¦¡¤¤Â_
-//				}
-//				
-//				/***************************2.¶}©l­×§ï¸ê®Æ*****************************************/
-//				EmpService empSvc = new EmpService();
-//				empVO = empSvc.updateEmp(empno, ename, job, hiredate, sal,comm, deptno);
-//				
-//				/***************************3.­×§ï§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)*************/
-//				req.setAttribute("empVO", empVO); // ¸ê®Æ®wupdate¦¨¥\«á,¥¿½TªºªºempVOª«¥ó,¦s¤Jreq
-//				String url = "/emp/listOneEmp.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url); // ­×§ï¦¨¥\«á,Âà¥ælistOneEmp.jsp
-//				successView.forward(req, res);
-//
-//				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z*************************************/
-//			} catch (Exception e) {
-//				errorMsgs.add("­×§ï¸ê®Æ¥¢±Ñ:"+e.getMessage());
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher("/emp/update_emp_input.jsp");
-//				failureView.forward(req, res);
-//			}
-//		}
-//
-//        if ("insert".equals(action)) { // ¨Ó¦ÛaddEmp.jspªº½Ğ¨D  
-//			
-//			List<String> errorMsgs = new LinkedList<String>();
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//			req.setAttribute("errorMsgs", errorMsgs);
-//
-//			try {
-//				/***********************1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z*************************/
-//				String ename = req.getParameter("ename").trim();
-//				String job = req.getParameter("job").trim();
-//				
-//				java.sql.Date hiredate = null;
-//				try {
-//					hiredate = java.sql.Date.valueOf(req.getParameter("hiredate").trim());
-//				} catch (IllegalArgumentException e) {
-//					hiredate=new java.sql.Date(System.currentTimeMillis());
-//					errorMsgs.add("½Ğ¿é¤J¤é´Á!");
-//				}
-//				
-//				Double sal = null;
-//				try {
-//					sal = new Double(req.getParameter("sal").trim());
-//				} catch (NumberFormatException e) {
-//					sal = 0.0;
-//					errorMsgs.add("Á~¤ô½Ğ¶ñ¼Æ¦r.");
-//				}
-//				
-//				Double comm = null;
-//				try {
-//					comm = new Double(req.getParameter("comm").trim());
-//				} catch (NumberFormatException e) {
-//					comm = 0.0;
-//					errorMsgs.add("¼úª÷½Ğ¶ñ¼Æ¦r.");
-//				}
-//				
-//				Integer deptno = new Integer(req.getParameter("deptno").trim());
-//
-//				EmpVO empVO = new EmpVO();
-//				empVO.setEname(ename);
-//				empVO.setJob(job);
-//				empVO.setHiredate(hiredate);
-//				empVO.setSal(sal);
-//				empVO.setComm(comm);
-//				empVO.setDeptno(deptno);
-//
-//				// Send the use back to the form, if there were errors
-//				if (!errorMsgs.isEmpty()) {
-//					req.setAttribute("empVO", empVO); // §t¦³¿é¤J®æ¦¡¿ù»~ªºempVOª«¥ó,¤]¦s¤Jreq
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/emp/addEmp.jsp");
-//					failureView.forward(req, res);
-//					return;
-//				}
-//				
-//				/***************************2.¶}©l·s¼W¸ê®Æ***************************************/
-//				EmpService empSvc = new EmpService();
-//				empVO = empSvc.addEmp(ename, job, hiredate, sal, comm, deptno);
-//				
-//				/***************************3.·s¼W§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)***********/
-//				String url = "/emp/listAllEmp.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url); // ·s¼W¦¨¥\«áÂà¥ælistAllEmp.jsp
-//				successView.forward(req, res);				
-//				
-//				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z**********************************/
-//			} catch (Exception e) {
-//				errorMsgs.add(e.getMessage());
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher("/emp/addEmp.jsp");
-//				failureView.forward(req, res);
-//			}
-//		}
-//		
-//       
-//		if ("delete".equals(action)) { // ¨Ó¦ÛlistAllEmp.jsp ©Î  /dept/listEmps_ByDeptno.jspªº½Ğ¨D
-//
-//			List<String> errorMsgs = new LinkedList<String>();
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//			req.setAttribute("errorMsgs", errorMsgs);
-//			
-//			String requestURL = req.getParameter("requestURL"); // °e¥X§R°£ªº¨Ó·½ºô­¶¸ô®|: ¥i¯à¬°¡i/emp/listAllEmp.jsp¡j ©Î  ¡i/dept/listEmps_ByDeptno.jsp¡j ©Î ¡i /dept/listAllDept.jsp¡j
-//	
-//			try {
-//				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ***************************************/
-//				Integer empno = new Integer(req.getParameter("empno"));
-//				
-//				/***************************2.¶}©l§R°£¸ê®Æ***************************************/
-//				EmpService empSvc = new EmpService();
-//				EmpVO empVO = empSvc.getOneEmp(empno);
-//				empSvc.deleteEmp(empno);
-//				
-//				/***************************3.§R°£§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)***********/
-//				DeptService deptSvc = new DeptService();
-//				if(requestURL.equals("/dept/listEmps_ByDeptno.jsp") || requestURL.equals("/dept/listAllDept.jsp"))
-//					req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(empVO.getDeptno())); // ¸ê®Æ®w¨ú¥Xªºlistª«¥ó,¦s¤Jrequest
-//				
-//				String url = requestURL;
-//				RequestDispatcher successView = req.getRequestDispatcher(url); // §R°£¦¨¥\«á,Âà¥æ¦^°e¥X§R°£ªº¨Ó·½ºô­¶
-//				successView.forward(req, res);
-//				
-//				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z**********************************/
-//			} catch (Exception e) {
-//				errorMsgs.add("§R°£¸ê®Æ¥¢±Ñ:"+e.getMessage());
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher(requestURL);
-//				failureView.forward(req, res);
-//			}
-//		}
+
 	}
 }
 

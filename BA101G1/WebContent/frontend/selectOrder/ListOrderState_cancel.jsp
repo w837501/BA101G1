@@ -12,7 +12,7 @@
 <table border='1' cellpadding='5' cellspacing='0' width='600'>
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
 		<td>
-		<h3>未確認訂單 - ListOrderState.jsp</h3>
+		<h3>已取消訂單 - ListOrderState_cancel.jsp</h3>
 		<a href="selectOrder.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
 		</td>
 	</tr>
@@ -34,7 +34,7 @@
 	</tr>
 	
 	<c:forEach var="Store_OrderVO" items="${orderList}">
-		<tr align='center' valign='middle'>
+		<tr align='center' valign='middle'${(Store_OrderVO.order_id==param.order_id) ? 'bgcolor=#CCCCFF':''}>
 			<td>${Store_OrderVO.order_id } </td>
 			<td>${Store_OrderVO.mem_id }</td>
 			<td>${Store_OrderVO.store_id }</td>
@@ -45,6 +45,7 @@
 			<td>${Store_OrderVO.order_note }</td>
 			<td>${Store_OrderVO.order_taketime }</td>
 			<td>${Store_OrderVO.order_state }</td>
+			
 	</tr>
 	</c:forEach>
 </table>

@@ -31,6 +31,7 @@
     <servlet-name>ProductServlet</servlet-name>
     <url-pattern>/product/product.do</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>MemberServlet</servlet-name>
     <servlet-class>com.mem.controller.MemberServlet</servlet-class>
@@ -111,6 +112,7 @@
   		<servlet-name>StoreServlet</servlet-name>
   		<url-pattern>/store/store.do</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>StoreReportServlet</servlet-name>
     <servlet-class>com.store_report.controller.StoreReportServlet</servlet-class>
@@ -119,10 +121,13 @@
     <servlet-name>StoreReportServlet</servlet-name>
     <url-pattern>/store_report/store_report.do</url-pattern>
   </servlet-mapping>
+
+  
+
   
 <servlet>
 		<servlet-name>StoreClassReader</servlet-name>
-		<servlet-class>com.store.controller.StoreClassReader</servlet-class>
+		<servlet-class>com.store_class.controller.StoreClassReader</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>StoreClassReader</servlet-name>
@@ -130,11 +135,28 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>ProductReader</servlet-name>
-		<servlet-class>com.product.controller.DBGifReader</servlet-class>
+		<servlet-name>ProductClassReader</servlet-name>
+		<servlet-class>com.product_class.controller.ProductClassReader</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ProductReader</servlet-name>
-		<url-pattern>/ProductReader</url-pattern>
+		<servlet-name>ProductClassReader</servlet-name>
+		<url-pattern>/ProductClassReader</url-pattern>
 	</servlet-mapping>
+
+	 <servlet>
+    <servlet-name>OrderServlet2</servlet-name>
+    <servlet-class>com.order.controller.OrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderServlet2</servlet-name>
+    <url-pattern>/order/order.do</url-pattern>
+  </servlet-mapping>
+	 <servlet>
+    <servlet-name>storereader</servlet-name>
+    <servlet-class>com.store.controller.StoreReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>storereader</servlet-name>
+    <url-pattern>/StoreReader</url-pattern>
+  </servlet-mapping>
 </web-app>

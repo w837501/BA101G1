@@ -30,11 +30,11 @@ public class RevenueDAO implements RevenueDAO_interface {
 	private static final String UPDATE_STMT = "UPDATE REVENUE set store_revenue=?, state=? where store_id = ? and revenue_month=?";
 	private static final String DELETE = "DELETE FROM REVENUE where store_id = ? and revenue_month=?";
 	private static final String Find_by_PK = "select * from REVENUE where store_id = ? and revenue_month=?";
-	private static final String Find_ALL = "select * from REVENUE order by store_id ,revenue_month desc";
+	private static final String Find_ALL = "select * from REVENUE order by store_id ,revenue_month asc";
 	private static final String Find_By_Store = "select * from REVENUE  where store_id=? order by revenue_month desc";
 	private static final String Find_By_Month = "select * from REVENUE where  revenue_month=? order by store_id asc";
 	private static final String Find_Store_id = "select DISTINCT store_id from REVENUE order by store_id";
-	private static final String Find_Store_Month_Revenue = "select store_id,sum(totalprice)sum_totalprice from store_order where order_time like ? group by store_id order by store_id";
+	private static final String Find_Store_Month_Revenue = "select store_id,sum(totalprice)sum_totalprice from store_order where order_time like ? and order_state not like '¤w¨ú®ø' group by store_id order by store_id";
 
 	@Override
 	public void insert(RevenueVO revenueVO) throws SQLException {

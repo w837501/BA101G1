@@ -20,6 +20,8 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 </head>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -40,11 +42,11 @@ $(document).ready(function(){
 
 	<div class="col-xs-12 col-sm-4 ">
 		<center>
-			<a href="http://www.google.com"> <img src="images/logo.png"
+			<a href="<%=request.getContextPath() %>/index.jsp"> <img src="images/logo.png"
 				width="150px" height="150px">
 			</a> <br> <br> <br>
 			<p font-size="100px">
-				<b> <a href="http://www.google.com"> 吃定我線上訂餐</a> > 登入
+				<b> <a href="<%=request.getContextPath() %>/index.jsp"> 吃定我線上訂餐</a> > LogIn
 				</b>
 			</p>
 		</center>

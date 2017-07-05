@@ -33,7 +33,7 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 		private static final String GET_ALL_STMT = 
 			"SELECT order_id, pro_id,order_amount, price FROM orderlist order by orderlist";
 		private static final String GET_ONE_STMT = 
-			"SELECT order_id, pro_id,order_amount, price FROM orderlist where order_id = ? and pro_id = ?";
+			"SELECT order_id, pro_id,order_amount, price FROM orderlist where order_id = ? ";
 		private static final String DELETE = 
 			"DELETE FROM orderlist where order_id = ? and pro_id=?";
 		private static final String UPDATE = 
@@ -169,20 +169,19 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 	}
 
 	@Override
-	public OrderlistVO findByPrimaryKey(String order_id, String pro_id) {
+	public List<OrderlistVO> findByPrimaryKey(String order_id) {
 		// TODO Auto-generated method stub
 		OrderlistVO orderlistVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		List<OrderlistVO> list=new LinkedList<OrderlistVO>();
 		try {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, order_id);
-			pstmt.setString(2, pro_id);
 
 			rs = pstmt.executeQuery();
 
@@ -192,6 +191,7 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 				orderlistVO.setPro_id(rs.getString("pro_id"));
 				orderlistVO.setOrder_amount(rs.getInt("order_amount"));
 				orderlistVO.setPrice(rs.getInt("price"));
+				list.add(orderlistVO);
 			}
 
 			// Handle any driver errors
@@ -222,7 +222,7 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 				}
 			}
 		}
-		return orderlistVO;
+		return list;
 	}
 
 	@Override
