@@ -1,6 +1,8 @@
 package com.mem.controller;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.man.model.ManagerService;
 import com.mem.model.MemberService;
@@ -161,6 +164,7 @@ public class MemberServlet extends HttpServlet {
 				String mem_pw=req.getParameter("mem_pw");
 				String mem_pw_again=req.getParameter("mem_pw_again");
 				String mem_mail=req.getParameter("mem_mail");
+				String tab=req.getParameter("tab");
 				
 				if(req.getParameter("mem_name")==null || req.getParameter("mem_name").trim().isEmpty()){
 					errorMsgs.add("½Ð¿é¤J¦W¦r");
@@ -197,13 +201,19 @@ public class MemberServlet extends HttpServlet {
 				memberVO.setMem_pw(mem_pw);
 				memberVO.setMem_mail(mem_mail);
 				
-				req.setAttribute("tab2", "#tab2");
 				
 				if(!errorMsgs.isEmpty()){
-					req.setAttribute("errorMsgs", errorMsgs);
-					String tab="#tab2";
-					RequestDispatcher failureView=req.getRequestDispatcher(requestURL+tab);
-					failureView.forward(req, res);
+					HttpSession session=req.getSession();
+					session.setAttribute("errorMsgs", errorMsgs);
+//					String tab=URLEncoder.encode("#tab2","UTF-8");
+//					System.out.println(tab);
+//					String url = requestURL+ tab;
+//					System.out.println(url);
+//					String taburl=URLDecoder.decode(url,"UTF-8");
+//					req.setAttribute("selectedTabInput", "#tab2");
+//					RequestDispatcher failureView=req.getRequestDispatcher(requestURL);
+//					failureView.forward(req, res);
+					res.sendRedirect("/BA101G1"+requestURL + "#tab2");
 					return;
 				}
 				
@@ -214,8 +224,8 @@ public class MemberServlet extends HttpServlet {
 				RequestDispatcher successView=req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}catch(Exception e){
-				String tab="#tab2";
-				RequestDispatcher failureView=req.getRequestDispatcher(requestURL+tab	);
+			//	String tab=URLEncoder.encode("#tab2","UT F-8");
+				RequestDispatcher failureView=req.getRequestDispatcher(requestURL	);
 				failureView.forward(req, res);
 			}
 		}

@@ -5,6 +5,8 @@
 	MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
 	String tab2=request.getParameter("tab2");
 	String url=request.getServletPath();
+	session.getAttribute("errorMsgs");
+	
 %>
 <html>
 <head>
@@ -30,7 +32,20 @@ $(document).ready(function(){
 	      $('a[href="' + window.location.hash + '"]').click()
 	  }
 
-	});</script>
+	});
+
+$(function() {
+    var param = document.getElementById("selectedTabInput").value;
+    window.alert(param);
+    if (param != 0) {
+        $('#tabs').tabs({
+            active : param
+        });
+    } else {
+        $('#tabs').tabs();
+    }
+});
+</script>
 <style>
 .aa {
 	margin-top: 150px;
@@ -56,7 +71,7 @@ $(document).ready(function(){
 		<div class="col-xs-12 col-sm-5 aa">
 			<div role="tabpanel">
 
-				<ul class="nav nav-tabs" role="tablist">
+				<ul class="nav nav-tabs" role="tablist" id="tabs">
 					<li role="presentation" class="active"><a href="#tab1"
 						aria-controls="tab1" role="tab" data-toggle="tab">會員登入</a></li>
 					<li role="presentation"><a href="#tab2" aria-controls="tab2"
@@ -84,6 +99,7 @@ $(document).ready(function(){
 									</ul>
 								</font>
 							</c:if>
+							<%session.removeAttribute("errorMsgs"); %>
 							<form METHOD="post"
 								ACTION="<%=request.getContextPath()%>/backend/mem/mem.do"
 								name="form1">
@@ -109,6 +125,8 @@ $(document).ready(function(){
 									value="<%=request.getServletPath()%>"> 
 								<br> <br> <input type="hidden" name="action"
 									value="insert"> <input type="submit" value="送出新增">
+									<input type="hidden" name="selectedTabInput"
+									value="${requestScope.selectedTabInput}">
 							</form>
 						</div>
 					</div>
