@@ -29,7 +29,6 @@ public class NewsServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		
 		if("getOne_For_Display".equals(action)){
-			System.out.println("·F§A¶ý");
 			try{	
 				String news_id = new String(req.getParameter("news_id"));
 				System.out.println(news_id);

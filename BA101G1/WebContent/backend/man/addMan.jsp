@@ -42,11 +42,7 @@
 		<td><input type="TEXT" name="man_phone" size="45"
 			 value="<%= (managerVO==null)? "123" :managerVO.getMan_phone() %>" /></td>
 	</tr>
-	<tr>
-		<td>±K½X:<font color=red><b>*</b></font></td>
-		<td><input type="TEXT" name="man_pw" size="45"
-			 value="<%= (managerVO==null)? "1222212" :managerVO.getMan_pw() %>" /></td>
-	</tr>
+	
 	<tr>
 		<td>«H½c:<font color=red><b>*</b></font></td>
 		<td><input type="TEXT" name="man_mail" size="45"

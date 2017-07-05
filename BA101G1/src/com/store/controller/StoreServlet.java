@@ -27,23 +27,28 @@ public class StoreServlet extends HttpServlet {
 		String action = req.getParameter("action");
 
 		// 來自index.jsp的請求 來自store.jsp的請求
-		if ("get_store".equals(action)) {
+		if ("get_store_a".equals(action) || "get_store_b".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/***************************
-				 * 1.接收請求參數 - 輸入格式的錯誤處理
-				 **********************/
+				/**************************** 1.接收請求參數 - 輸入格式的錯誤處理  **********************/
 				String str = req.getParameter("store_name");
 				if (str == null || (str.trim()).length() == 0) {
 					errorMsgs.add("請輸入商家關鍵字");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/store/store.jsp");
+
+					String url = null;
+					if ("get_store_a".equals(action))
+						url = "/index.jsp";       
+					else if ("get_store_b".equals(action))
+						url = "/store/store.jsp";
+					
+					RequestDispatcher failureView = req.getRequestDispatcher(url);
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -57,13 +62,18 @@ public class StoreServlet extends HttpServlet {
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/store/store.jsp");
+
+					String url = null;
+					if ("get_store_a".equals(action))
+						url = "/index.jsp";       
+					else if ("get_store_b".equals(action))
+						url = "/store/store.jsp";
+					
+					RequestDispatcher failureView = req.getRequestDispatcher(url);
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
-				/***************************
-				 * 3.查詢完成,準備轉交(Send the Success view)
-				 *************/
+				/**************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("storelist", storelist); // 資料庫取出的StoreVO物件,存入req
 				String url = "/store/store.jsp";
 
@@ -167,14 +177,7 @@ public class StoreServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			String requestURL = req.getParameter("requestURL"); // 送出修改的來源網頁路徑:
-																// 可能為【/emp/listAllEmp.jsp】
-																// 或
-																// 【/dept/listEmps_ByDeptno.jsp】
-																// 或 【
-																// /dept/listAllDept.jsp】
-																// 或 【
-																// /emp/listEmps_ByCompositeQuery.jsp】
-
+																
 			try {
 				/***************************
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
@@ -214,10 +217,7 @@ public class StoreServlet extends HttpServlet {
 				StoreService storeSvc = new StoreService();
 				storeVO = storeSvc.updateStore2(store_phone, store_addr, store_name, store_state, store_id);
 				System.out.println("XXXXXXXXXXXX");
-				/***************************
-				 * 3.修改完成,準備轉交(Send the Success view)
-				 *************/
-
+				/**************************** 3.修改完成,準備轉交(Send the Success view)*************/
 				String url = "/backend/store/ListAllStore.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
 				successView.forward(req, res);

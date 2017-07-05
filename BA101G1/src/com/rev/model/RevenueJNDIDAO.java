@@ -34,7 +34,7 @@ public class RevenueJNDIDAO implements RevenueDAO_interface{
 	private static final String Find_By_Store = "select * from REVENUE  where store_id=?";
 	private static final String Find_By_Month = "select * from REVENUE where  revenue_month=?";
 	private static final String Find_Store_id="select DISTINCT store_id from REVENUE  order by store_id";
-	private static final String Find_Store_Month_Revenue = "select store_id,sum(totalprice)sum_totalprice from store_order where order_time like ? group by store_id order by store_id";
+	private static final String Find_Store_Month_Revenue = "select store_id,sum(totalprice)sum_totalprice from store_order where order_time like ? and order_state not like '¤w¨ú®ø' group by store_id order by store_id";
 	@Override
 	public void insert(RevenueVO revenueVO) {
 		Connection con = null;
