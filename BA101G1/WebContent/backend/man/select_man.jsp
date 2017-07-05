@@ -118,7 +118,7 @@
                  <!-- /. ROW  -->
                   <hr />
                 <div class="row">
-                <!-- ******************select_man.jsp原先內容********************* -->
+<!-- ******************select_man.jsp原先內容********************* -->
 					<body bgcolor='white'>
 					
 					<table border='1' cellpadding='5' cellspacing='0' width='400'>
@@ -142,7 +142,12 @@
 					</c:if>
 					
 					<ul>
-						<li><a href="ListAllMan.jsp">List</a> all Manager </li> <br><br>
+						<li>
+							<form action="man.do" method="post">
+								<input type="submit" value="List all Manager">
+								<input type="hidden" name="action" value="listAll">
+							</form>
+						</li>
 					
 						<li>
 							<form action="man.do" method="post">
@@ -185,7 +190,7 @@
 						<ul>
 							<li><a href='addMan.jsp'>ADD</a>a new Man.</li>
 						</ul>
-				<!-- ******************select_man.jsp原先內容********************* -->
+<!-- ******************select_man.jsp原先內容********************* -->
 
                 </div>
 
@@ -229,7 +234,13 @@
 			</div>
 		</div>
 	 </div>
-<!-- ***************************Login***************************** -->    
+<!-- ***************************Login***************************** -->   
+
+<%if ("列出所有管理員"==request.getAttribute("whichPage")){%>
+       <jsp:include page="ListAllMan.jsp" />
+<%} %>
+
+ 
 </body>
 </html>
 

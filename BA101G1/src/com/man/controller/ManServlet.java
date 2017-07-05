@@ -270,5 +270,27 @@ public class ManServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		// 列出所有管理員include
+		
+		if ("listAll".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+//			req.setAttribute("errorMsgs", errorMsgs);
+			req.setAttribute("whichPage", "列出所有管理員");    // 資料庫取出的set物件,存入request
+//			try {
+//				String man_id = new String(req.getParameter("man_id"));
+//				
+//				ManagerService manSvc = new ManagerService();
+//				manSvc.deleteMan(man_id);
+			System.out.println("第284行");
+				String url = "/backend/man/select_man.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				System.out.println("第288行");
+//			} catch (Exception e) {
+//				errorMsgs.add("刪除資料失敗" + e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
+//				failureView.forward(req, res);
+//			}
+		}
 	}
 }
