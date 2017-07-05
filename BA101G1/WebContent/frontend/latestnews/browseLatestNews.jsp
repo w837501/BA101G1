@@ -104,7 +104,7 @@
 		<p>
 		${newsVO.news_name}<br>
 		${newsVO.news_time}
-		${newsVO.news_id}    
+		${newsVO.newa63233s_id}    
 		
 		</p>
 		</div>
