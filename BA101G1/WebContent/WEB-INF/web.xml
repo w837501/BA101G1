@@ -127,7 +127,7 @@
   
 <servlet>
 		<servlet-name>StoreClassReader</servlet-name>
-		<servlet-class>com.store.controller.StoreClassReader</servlet-class>
+		<servlet-class>com.store_class.controller.StoreClassReader</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>StoreClassReader</servlet-name>
@@ -136,7 +136,7 @@
 	
 	<servlet>
 		<servlet-name>ProductClassReader</servlet-name>
-		<servlet-class>com.product.controller.ProductClassReader</servlet-class>
+		<servlet-class>com.product_class.controller.ProductClassReader</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ProductClassReader</servlet-name>
@@ -150,5 +150,13 @@
   <servlet-mapping>
     <servlet-name>OrderServlet2</servlet-name>
     <url-pattern>/order/order.do</url-pattern>
+  </servlet-mapping>
+	 <servlet>
+    <servlet-name>storereader</servlet-name>
+    <servlet-class>com.store.controller.StoreReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>storereader</servlet-name>
+    <url-pattern>/StoreReader</url-pattern>
   </servlet-mapping>
 </web-app>
