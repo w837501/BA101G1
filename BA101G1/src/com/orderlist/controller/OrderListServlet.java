@@ -43,9 +43,7 @@ public class OrderListServlet extends HttpServlet {
 				
 				/*******************OrderDetailByOrderId的 from OrderListServlet.java****************/
 				String str2 = orderSvc.getDetailProIdByOrderId(str1);
-				
 				orderlistVO= orderSvc.getDetailOrder(str1,str2);//DAO方法
-				System.out.println("第44行");
 				
 			
 				

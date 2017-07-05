@@ -42,10 +42,15 @@
 <%-- 		<td><a href="<%=request.getContextPath()%>/frontend/selectOrder/orderDetail.jsp?order_id=${store_orderVO.order_id}">${store_orderVO.order_id }</a></td> --%>
 		<td>
 			<form action="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do" method="post">
-    			<a href="#" onclick="$(this).closest('form').submit()">${store_orderVO.order_id }</a>
+    			<a href="javascript:;" onclick="parentNode.submit();">${store_orderVO.order_id }</a>
     			<input type="hidden" name="order_id" value="${store_orderVO.order_id}"/>
     			<input type="hidden" name="action" value="getOneOrder_For_DetailDisplay">
 			</form>
+<%-- 			<form action="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do" method="post"> --%>
+<%--     			<input type="hidden" name="order_id" value="${store_orderVO.order_id}"/> --%>
+<!--     			<input type="hidden" name="action" value="getOneOrder_For_DetailDisplay"> -->
+<%--     			<input type="submit" value="${store_orderVO.order_id}"> --%>
+<!-- 			</form> -->
 		</td>
 		<td>${store_orderVO.order_time }</td>
  		<td>${store_orderVO.store_name }</td>
