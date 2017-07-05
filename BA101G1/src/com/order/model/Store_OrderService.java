@@ -42,7 +42,6 @@ public class Store_OrderService {
 		orderVO.setTotalprice(totalprice);
 		orderVO.setOrder_way(order_way);
 		orderVO.setReceive_address(receive_address);
-		orderVO.setQrcode(qrcode);
 		orderVO.setOrder_note(order_note);
 		orderVO.setOrder_taketime(order_taketime);
 		dao.update(orderVO);

@@ -29,18 +29,18 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 	
 
 	private static final String INSERT_STMT = 
-			"INSERT INTO store_order (order_id,mem_id, store_id, totalprice, order_way, receive_address, qrcode, order_note, order_taketime) "
-	  + "VALUES (to_char(sysdate,'YYYYmmdd')||'-'||LPAD(to_char(order_seq.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?)";
+			"INSERT INTO store_order (order_id,mem_id, store_id, totalprice, order_way, receive_address, order_note, order_taketime) "
+	  + "VALUES (to_char(sysdate,'YYYYmmdd')||'-'||LPAD(to_char(order_seq.NEXTVAL),6,'0'),?,?,?,?,?,?,?)";
 
 
 	private static final String UPDATE = 
-			"UPDATE store_order set order_id=?, order_time=?, mem_id=?, store_id=?, order_state=?, totalprice=?, order_way=?, receive_address=?, qrcode=?, order_note=?, order_taketime=?";
+			"UPDATE store_order set order_id=?, order_time=?, mem_id=?, store_id=?, order_state=?, totalprice=?, order_way=?, receive_address=?,  order_note=?, order_taketime=?";
 	private static final String DELETE = 
 			"DELETE FROM store_order where order_id = ?";
 	private static final String GET_ONE_STMT = 
-			"SELECT order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, qrcode, order_note, order_taketime from order where order_id = ?";
+			"SELECT order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, order_note, order_taketime from order where order_id = ?";
 	private static final String GET_ALL_STMT = 
-			"SELECT order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, qrcode, order_note, order_taketime from store_order order by order_id";
+			"SELECT order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address,  order_note, order_taketime from store_order order by order_id";
 	
 	private static final String GET_ORDER_BY_MEM = 
 			"select mem_id, order_id, store_id, totalprice, order_time, order_way, order_state from store_order where mem_id = ? order by order_time desc";
@@ -67,9 +67,8 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 			pstmt.setInt(3, orderVO.getTotalprice());
 			pstmt.setString(4, orderVO.getOrder_way());
 			pstmt.setString(5, orderVO.getReceive_address());
-			pstmt.setBytes(6, orderVO.getQrcode());
-			pstmt.setString(7, orderVO.getOrder_note());
-			pstmt.setTimestamp(8, orderVO.getOrder_taketime());
+			pstmt.setString(6, orderVO.getOrder_note());
+			pstmt.setTimestamp(7, orderVO.getOrder_taketime());
 			
 			pstmt.executeUpdate();
 
@@ -115,9 +114,8 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 			pstmt.setInt(6, orderVO.getTotalprice());
 			pstmt.setString(7, orderVO.getOrder_way());
 			pstmt.setString(8, orderVO.getReceive_address());
-			pstmt.setBytes(9, orderVO.getQrcode());
-			pstmt.setString(10, orderVO.getOrder_note());
-			pstmt.setTimestamp(11, orderVO.getOrder_taketime());
+			pstmt.setString(9, orderVO.getOrder_note());
+			pstmt.setTimestamp(10, orderVO.getOrder_taketime());
 			
 
 			pstmt.executeUpdate();
@@ -211,7 +209,6 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 				orderVO.setTotalprice(rs.getInt("totalprice"));
 				orderVO.setOrder_way(rs.getString("order_way"));
 				orderVO.setReceive_address(rs.getString("receive_address"));
-				orderVO.setQrcode(rs.getBytes("qrcode"));
 				orderVO.setOrder_note(rs.getString("order_note"));
 				orderVO.setOrder_taketime(rs.getTimestamp("order_taketime"));
 			}
@@ -275,7 +272,6 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 				orderVO.setTotalprice(rs.getInt("totalprice"));
 				orderVO.setOrder_way(rs.getString("order_way"));
 				orderVO.setReceive_address(rs.getString("receive_address"));
-				orderVO.setQrcode(rs.getBytes("qrcode"));
 				orderVO.setOrder_note(rs.getString("order_note"));
 				orderVO.setOrder_taketime(rs.getTimestamp("order_taketime"));
 				list.add(orderVO); // Store the row in the list
