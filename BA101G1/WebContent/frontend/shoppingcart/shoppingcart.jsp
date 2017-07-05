@@ -83,7 +83,7 @@
 								<td><%=productVO.getPro_name() %></td>
 								<td><%=productVO.getPro_price() %></td>
 								<td><%=productVO.getQuantity() %></td>
-								<td><%=(int)productVO.getPro_price()*(int)productVO.getQuantity() %></td>
+								<td><%=(Integer)productVO.getPro_price()*(Integer)productVO.getQuantity() %></td>
 								<td>
 								<form name="deleteForm" action="Shopping.html" method="POST">
                                 <input type="hidden" name="action" value="DELETE">

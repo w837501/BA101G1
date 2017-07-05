@@ -38,11 +38,12 @@
 			productVO = buylist.get(i);
 			String name = productVO.getPro_name();
 			int price = (Integer)productVO.getPro_price();
-			int quantity =(int) productVO.getQuantity();
+			int quantity =(Integer) productVO.getQuantity();
+			String store_id = productVO.getStore_id();
 	%>
 	<tr>
 		<td width="200"><div align="center"><b><img src="<%=request.getContextPath()%>/ProductClassReader?pro_id=<%= productVO.getPro_id()%>" width="150" height="120"></b></div></td>
-		<td width="100"><div align="center"><b><%=name%></b></div></td>
+		<td width="100"><div align="center"><b><%=name%><%=store_id %></b></div></td>
 		<td width="100"><div align="center"><b><%=price%></b></div></td>
 		<td width="100"><div align="center"><b><%=quantity%></b></div></td>
 		<td width="100"><div align="center"><b><%=price*quantity %></b></div></td>
@@ -146,7 +147,8 @@
 <%-- 			<a href="<%=request.getContextPath()%>/order/order.do?action=setOrder_Into&store_id=<%=productVO.getStore_id() %>&quentity=<%=productVO.getQuantity() %>" class="btn btn-info" class="btn btn-info"><i id="finish" class="glyphicon glyphicon-ok"></i>完成點餐</a> --%>
 		<input type="hidden"  value = "setOrder_Into" name="action">
 		<input type="hidden"  value = "<%=amount%> " name="amount">
-		<input type="hidden"  value = "${productVO.store_id }" name="store_id">
+		<input type="hidden"  value = "<%=productVO.getStore_id()%>" name="store_id">
+		
 		<input type="submit" value="送出新增">
 		</div>
 		<br>

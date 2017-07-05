@@ -104,13 +104,18 @@ public class OrderServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			System.out.println("suck my dick");
+//			String amountStr =  (String) req.getAttribute("amount");
 			try{
 				String mem_id = "MEM-000001";
 				System.out.println("1");
 				String store_id = req.getParameter("store_id");
+				System.out.println("store_id" + store_id);
 				System.out.println("2");
-				String amount= req.getParameter("amount");
+				String amountStr= req.getParameter("amount").trim();
+				System.out.println("amountStr"+amountStr);
+				int amount = Integer.parseInt(amountStr); 
+			
+				System.out.println("amount"+amount);
 				System.out.println("3");
 				String order_way = req.getParameter("order_way");
 				System.out.println("4");
@@ -128,7 +133,7 @@ public class OrderServlet extends HttpServlet {
 				System.out.println("order_note"+order_note);
 				String order_taketime1 = req.getParameter("order_taketime1").trim();
 				String order_taketime2 = req.getParameter("order_taketime2").trim();
-				String order_taketime3 = order_taketime1 + " "+order_taketime2;
+				String order_taketime3 = order_taketime1 + " "+order_taketime2+":00";
 				System.out.println(order_taketime3);
 //				SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 //				Timestamp aaa=(Timestamp) fmt.parse(order_taketime3);
@@ -136,6 +141,7 @@ public class OrderServlet extends HttpServlet {
 				//java.sql.Timestamp order_taketime2 = null;
 				try {
 					order_taketime = java.sql.Timestamp.valueOf(order_taketime3);
+//					order_taketime = aaa;
 					
 				} catch (IllegalArgumentException e) {
 					order_taketime = new java.sql.Timestamp(System.currentTimeMillis());
@@ -166,7 +172,7 @@ public class OrderServlet extends HttpServlet {
 				}
 				System.out.println("6");
 				Store_OrderService orderSvc = new Store_OrderService();
-				orderVO = orderSvc.addOrder(mem_id, "STO-000004",150, order_way, receive_address,order_note, order_taketime);
+				orderVO = orderSvc.addOrder(mem_id, store_id,amount, order_way, receive_address,order_note, order_taketime);
 //				req.setAttribute("orderVO", orderVO); 
 //				req.setAttribute("orderlistVO", orderlistVO); 
 				System.out.println("7");
