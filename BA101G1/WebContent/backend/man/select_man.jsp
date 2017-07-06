@@ -201,9 +201,7 @@
 <%if ("列出單一管理員"==request.getAttribute("whichPage")){%>
        <jsp:include page="ListOneMan.jsp" />
 <%} %>
-<%if ("新增單一管理員"==request.getAttribute("whichPage")){%>
-       <jsp:include page="addMan.jsp" />
-<%} %>
+
 <%if ("修改單一管理員"==request.getAttribute("whichPage")){%>
        <jsp:include page="UpdateMan.jsp" />
 <%} %>

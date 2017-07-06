@@ -32,6 +32,8 @@
 <!-- 	                    <button class="btn btn-info btn-block login" type="submit">送出</button> -->
 	                </form>
             	</div>
+            	<div><a href="addMan.jsp">加入我們</a></div>
+            	
             		<%-- 錯誤表列 --%>
             		<p style="opacity:0.7">
 						<c:if test="${not empty errorMsgs}">
