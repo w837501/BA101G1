@@ -29,6 +29,7 @@ public class ManagerDAO implements ManagerDAO_interface {
 	private static final String DELETE = "DELETE FROM MANAGER where man_id = ?";
 	private static final String Find_by_PK = "select * from manager where man_id=?";
 	private static final String GET_ALL = "select * from manager order by man_id desc";
+	private static final String GET_ALL_PK = "select man_id from manager";
 
 	@Override
 	public void insert(ManagerVO managerVO) {
@@ -135,11 +136,9 @@ public class ManagerDAO implements ManagerDAO_interface {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ManagerVO man = null;
-
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(Find_by_PK);
-
 			pstmt.setString(1, man_id);
 			rs = pstmt.executeQuery();
 			rs.next();
@@ -152,6 +151,7 @@ public class ManagerDAO implements ManagerDAO_interface {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return man = null;
 		} finally {
 			if (rs != null) {
 				try {

@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.man.model.ManagerService;
 import com.man.model.ManagerVO;
@@ -167,10 +168,8 @@ public class ManServlet extends HttpServlet {
 				// String man_name="";
 				// try{
 				// man_name=req.getParameter("man_name").trim();
-				// System.out.println("648465654");
 				// }catch(Exception e){
 				// man_name="";
-				// System.out.println("648465654");
 				// errorMsgs.add("請輸入名字");
 				// }
 				// String man_phone="";
@@ -178,7 +177,6 @@ public class ManServlet extends HttpServlet {
 				// man_phone=new String(req.getParameter("man_phone").trim());
 				// }catch (Exception e) {
 				// man_phone="";
-				// System.out.println("1321312");
 				// errorMsgs.add("請輸入電話");
 				// }
 				// String man_pw=null;
@@ -291,9 +289,47 @@ public class ManServlet extends HttpServlet {
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			
+			errorMsgs.add("");
+			/******************我新增的帳密條件判斷*********************/
+			String account = req.getParameter("loginUser").trim();
+			String password = req.getParameter("loginPwd").trim();
+			HttpSession session = req.getSession();
+			ManagerService manSvc = new ManagerService();
+			
+			session.setAttribute("errorMsgs", errorMsgs);
+			session.setAttribute("location" , req.getRequestURI());
 			try {
-				String str = req.getParameter("man_id");
+				if(account.isEmpty()){
+					errorMsgs.add("員工編號不能為空");
+					res.sendRedirect(req.getContextPath()+"/backend/man/login_man.jsp");
+					return;
+				}
+				if(manSvc.getOneMan(account)==null){
+					res.sendRedirect(req.getContextPath()+"/backend/man/login_man.jsp");
+					errorMsgs.add("請輸入正確員工編號");
+					return;
+				}
+				if(manSvc.getOneMan(account).getMan_id()==null){
+					res.sendRedirect(req.getContextPath()+"/backend/man/login_man.jsp");
+					errorMsgs.add("請輸入正確員工編號");
+					return;
+				}
+				if(password.isEmpty()){
+					res.sendRedirect(req.getContextPath()+"/backend/man/login_man.jsp");
+					errorMsgs.add("密碼不能為空");
+					return;
+				}
+				if(!manSvc.getOneMan(account).getMan_pw().equals(password)){
+					res.sendRedirect(req.getContextPath()+"/backend/man/login_man.jsp");
+					errorMsgs.add("請輸入正確密碼");
+					return;
+				}
+				/******************我新增的帳密條件判斷*********************/
+			String man_id = null;
+			ManagerVO managerVO = manSvc.getOneMan(man_id);
+			
+				/*String str = req.getParameter("man_id");
 				if (str == null || (str.trim().length() == 0)) {
 					errorMsgs.add("請輸入員工編號");
 				}
@@ -302,8 +338,8 @@ public class ManServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
+				
 
-				String man_id = null;
 				try {
 					man_id = new String(str);
 				} catch (Exception e) {
@@ -316,8 +352,6 @@ public class ManServlet extends HttpServlet {
 					return;
 				}
 
-				ManagerService manSvc = new ManagerService();
-				ManagerVO managerVO = manSvc.getOneMan(man_id);
 				if (managerVO == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -325,9 +359,10 @@ public class ManServlet extends HttpServlet {
 					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
 					failureView.forward(req, res);
 					return;
-				}
+				}*/
+				errorMsgs.removeAll(errorMsgs);
 				req.setAttribute("managerVO", managerVO);
-				String url = "/backend/man/ListOneMan.jsp";
+				String url = "/backend/man/select_man.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {

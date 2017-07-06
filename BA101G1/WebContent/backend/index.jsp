@@ -116,45 +116,31 @@
 
                     <div class="col-lg-12 ">
                         <div class="alert alert-info">
-                            <strong> Nash  之代辦事項</strong> You Have No pending Task For Today.
+                            <strong> 歪哥  之代辦事項</strong> You Have No pending Task For Today.
                         </div>
                     </div>
                     
 <!-- ****************代辦事項************************ -->
-                <div class="row text-center pad-top">
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
-                        <div class="div-square">
-                            <a href="blank.html">
-                                <i class="fa fa-circle-o-notch fa-5x"></i>
-                                <h4>Check Data</h4>
-                            </a>
-                        </div>
+                    <div class="col-md-4"> 
+
+                         <div class="schedule">
+                         	
+								<div class="alert alert-success">
+									<strong>件數</strong> 筆需要審核的商家
+								</div>
+								<div class="alert alert-info">
+									<strong>件數</strong> 筆需要審核的會員
+								</div>
+								<div class="alert alert-warning">
+									<strong>件數</strong> 筆需要審核的廣告
+								</div>
+								<div class="alert alert-danger">
+									<strong>件數</strong> 筆需要審核的訂單
+								</div>
+                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
-                        <div class="div-square">
-                            <a href="blank.html">
-                                <i class="fa fa-envelope-o fa-5x"></i>
-                                <h4>Mail Box</h4>
-                            </a>
-                        </div>
+                    <div class="col-md-8"> 
                     </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
-                        <div class="div-square">
-                            <a href="blank.html">
-                                <i class="fa fa-lightbulb-o fa-5x"></i>
-                                <h4>New Issues</h4>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
-                        <div class="div-square">
-                            <a href="blank.html">
-                                <i class="fa fa-users fa-5x"></i>
-                                <h4>See Users</h4>
-                            </a>
-                        </div>
-                    </div>
-                </div>
 <!-- ****************代辦事項************************ -->
         </div>
         <!-- /. PAGE WRAPPER  -->
@@ -186,7 +172,7 @@
 	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
    	  <div class="modal-dialog">
 			<div class="loginmodal-container">
-				<h1>Login to Your Account</h1><br>
+				<h1>這是登入畫面</h1><br>
 				
 			  <form method="post" action="<%=request.getContextPath() %>/backend/man/man.do">
 				<input type="text" name="user" placeholder="請輸入帳號" id="accText">
@@ -194,7 +180,6 @@
 				<input type="submit" name="login" class="login loginmodal-submit" value="Login">
 				<input type="hidden" name="action" value="loginCHK">
 			  </form>
-				<p id="demo">Click the button to delete my HTML content (innerHTML).</p>
 			  <div class="login-help">
 				  <button type="button" class="btn btn-lg btn-success">
 						<a href="<%=request.getContextPath() %>/backend/man/register.jsp">Register</a>
