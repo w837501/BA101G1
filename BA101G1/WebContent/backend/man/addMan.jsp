@@ -63,10 +63,10 @@
 	}
 	function myFunction2(){
 		document.getElementById("empName").value = "邱小竣";
-		document.getElementById("empPhone").value = "0912345678";
+		document.getElementById("empPhone").value = "0988589732";
 		document.getElementById("empEmail").value = "ex051240@gmail.com";
 	}
-	function myFunction2(){
+	function myFunction3(){
 		document.getElementById("empName").value = "王小傑";
 		document.getElementById("empPhone").value = "0987043790";
 		document.getElementById("empEmail").value = "w837501@gmail.com";
