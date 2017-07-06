@@ -42,7 +42,7 @@
 			String store_id = productVO.getStore_id();
 	%>
 	<tr>
-		<td width="200"><div align="center"><b><img src="<%=request.getContextPath()%>/ProductClassReader?pro_id=<%= productVO.getPro_id()%>" width="150" height="120"></b></div></td>
+		<td width="200"><div align="center"><b><img src="<%=request.getContextPath()%>/ProDBGifReader?pro_id=<%= productVO.getPro_id()%>" width="150" height="120"></b></div></td>
 		<td width="100"><div align="center"><b><%=name%><%=store_id %></b></div></td>
 		<td width="100"><div align="center"><b><%=price%></b></div></td>
 		<td width="100"><div align="center"><b><%=quantity%></b></div></td>

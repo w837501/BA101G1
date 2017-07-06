@@ -12,7 +12,7 @@ body {
 img {
 	border: 0;
 }
-/* LOGO位置大小 */
+/* LOGO雿蔭憭批�� */
 #page div#header div#logo a img{
 	height:100px;
 	padding-left: 20px;
@@ -21,7 +21,7 @@ img {
 /*------------------------------ Sprites ------------------------------*/
 #navigation, .box > h2, form#cart table th, #cart table tbody tr:hover td {
 	/*background: url(../images/bg-strips.png) repeat-x;*/
-	/*background-color: #FF8C00;*/ /*HOME 最新消息 熱門商家 區塊...的底色*/
+	/*background-color: #FF8C00;*/ /*HOME ���瘨 �����振 ��憛�...���*/
 }
 #connect a, #sidebar .cart a, #contact .details ul li {
 	background: url(../images/icons.png) no-repeat;
@@ -142,7 +142,7 @@ img {
 	/*padding: 20px 0 0;*/
 	margin-bottom: 16px;
 }
-/** 最上面的區塊 **/
+/** ��銝���憛� **/
 #logo {
 	background-color: #F5F5DC;
 	height: 150px;
@@ -408,7 +408,7 @@ form#message {
 }
 
 
-/*首頁的banner上的文字、框框、按鈕*/
+/*擐��anner銝����������*/
 #adbox .info h1, #adbox .shop {
 	background-position: 0 -52px;
 	color: #D6656A;
@@ -462,7 +462,7 @@ form#message {
 	list-style: none;
 	width: 100%;
 	/*
-	border-bottom: 1px solid #282828; (分隔線)
+	border-bottom: 1px solid #282828; (�����)
 	*/
 	margin: 0 0 13px;
 	padding: 0;
@@ -1260,4 +1260,16 @@ form#cart table thead th {
 	color: #656465;
 	font-size: 11px;
 	margin: 0;
+}
+#content > h3{
+	background-color:red; 
+	font-size: 50px;
+}
+#ad > h1{
+	float:left;
+	padding-left: 5px;
+}
+#ad > h2{
+	float:right;
+	padding-right: 5px;
 }

@@ -383,13 +383,13 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		ProductVO productVO1=new ProductVO();
 		productVO1.setStore_id("STO-000004");
 		productVO1.setPro_name("½æ¬ÛÂû");
-		productVO1.setPro_price(40);
+		productVO1.setPro_price(60);
 	
 		productVO1.setPro_state("¤W¬[");
-		byte[] pic = getPictureByteArray("C:/Users/15-ay118TX/git/BA101G1/BA101G1/WebContent/FakeInfo/McCrispy.png");
+		byte[] pic = getPictureByteArray("C:/Users/glayk/git/BA101G1/BA101G1/WebContent/FakeInfo/McChicken.png");
 		productVO1.setPro_image(pic);
 		productVO1.setPc_id("0");
-		productVO1.setPro_content("GG");
+		productVO1.setPro_content("GGGGBBBBB");
 		
 		
 		productdao.insert(productVO1);
