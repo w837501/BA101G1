@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.store.model.*"%>
@@ -30,7 +30,7 @@ StoreVO storeVO=(StoreVO)request.getAttribute("storeVO");
 	</ul>
 	</font>
 </c:if>
-<FORM METHOD="post" ACTION="store.do" name="form1" enctype="multipart/form-data">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store/store.do" name="form1" enctype="multipart/form-data">
 <table border="0">
 
 	<tr>
@@ -38,12 +38,12 @@ StoreVO storeVO=(StoreVO)request.getAttribute("storeVO");
 		<td><input type="TEXT" name="store_name" size="45" 
 			 value="<%= (storeVO==null)? "肯德基" :storeVO.getStore_name() %>"></td>
 	</tr>
-	<jsp:useBean id="productclassSvc" scope="page" class="com.product_class.model.ProductClassService" />
+	<jsp:useBean id="storeclassSvc" scope="page" class="com.store_class.model.StoreClassService" />
 	<tr>
 		<td>商家類別:<font color=red><b>*</b></font></td>
-		<td><select size="1" name="pc_id">
-			<c:forEach var="ProductClassVO" items="${productclassSvc.all}">
-				<option value="${ProductClassVO.pc_id}" ${(storeVO.pc_id==ProductClassVO.pc_id)? 'selected':'' } >${ProductClassVO.pc_name}
+		<td><select size="1" name="sc_id">
+			<c:forEach var="StoreClassVO" items="${storeclassSvc.all}">
+				<option value="${StoreClassVO.sc_id}" ${(storeVO.sc_id==StoreClassVO.sc_id)? 'selected':'' } >${StoreClassVO.sc_name}
 			</c:forEach>
 		</select></td>
 	</tr>
@@ -82,7 +82,7 @@ StoreVO storeVO=(StoreVO)request.getAttribute("storeVO");
 	</tr>
 	<tr>
 		<td>商家是否外送:<font color=red><b>*</b></font></td>
-		<td><select name="revenue_month">
+		<td><select name="store_out">
 					<option value='有外送'>有外送</option>
 					<option value='沒有外送'>沒有外送</option></select> </td>
 	</tr>
