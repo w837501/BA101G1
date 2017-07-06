@@ -20,9 +20,6 @@
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
-     
-           
-          
     <div id="wrapper">
          <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #ccc;">
             <div class="adjust-nav">
@@ -144,8 +141,9 @@
 					<ul>
 						<li>
 							<form action="man.do" method="post">
-								<input type="submit" value="List all Manager">
-								<input type="hidden" name="action" value="listAll">
+    							<a href="javascript:;" onclick="parentNode.submit();">List</a>
+    							<input type="hidden" name="order_id" value="${store_orderVO.order_id}"/>
+    							<input type="hidden" name="action" value="listAll">
 							</form>
 						</li>
 					
@@ -188,12 +186,27 @@
 					</ul>
 					<h3>管理員管理</h3>
 						<ul>
-							<li><a href='addMan.jsp'>ADD</a>a new Man.</li>
+							<form action="man.do" method="post">
+    							<a href="javascript:;" onclick="parentNode.submit();">ADD</a>
+    							<input type="hidden" name="action" value="insert">
+							</form>
 						</ul>
 <!-- ******************select_man.jsp原先內容********************* -->
 
                 </div>
+<!-- *********************include頁面******************* -->
+<%if ("列出所有管理員"==request.getAttribute("whichPage")){%>
+       <jsp:include page="ListAllMan.jsp" />
+<%} %>
+<%if ("列出單一管理員"==request.getAttribute("whichPage")){%>
+       <jsp:include page="ListOneMan.jsp" />
+<%} %>
 
+<%if ("修改單一管理員"==request.getAttribute("whichPage")){%>
+       <jsp:include page="UpdateMan.jsp" />
+<%} %>
+
+<!-- *********************include頁面******************* -->
                   <!-- /. ROW  --> 
             </div>   
         </div>             
@@ -236,9 +249,6 @@
 	 </div>
 <!-- ***************************Login***************************** -->   
 
-<%if ("列出所有管理員"==request.getAttribute("whichPage")){%>
-       <jsp:include page="ListAllMan.jsp" />
-<%} %>
 
  
 </body>
