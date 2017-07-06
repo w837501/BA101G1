@@ -38,14 +38,11 @@
 	<tr align='center' valign='middle'>
 		
 
-		<td>
+		
 
-			<form action="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do" method="post">
-    			<a href="javascript:;" onclick="parentNode.submit();">${store_orderVO.order_id }</a>
-    			<input type="hidden" name="order_id" value="${store_orderVO.order_id}"/>
-    			<input type="hidden" name="action" value="getOneOrder_For_DetailDisplay">
-			</form>
-<
+			
+		<td>
+			<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO.order_id}">${store_orderVO.order_id}</a>
 		</td>
 
 		<td>${store_orderVO.order_time }</td>
