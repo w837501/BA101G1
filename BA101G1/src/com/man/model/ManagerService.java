@@ -47,6 +47,7 @@ public class ManagerService {
 		return dao.getAll();
 	}
 
+
 	
 	
 }
