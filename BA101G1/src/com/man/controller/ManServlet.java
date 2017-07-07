@@ -17,6 +17,8 @@ import com.man.model.ManagerVO;
 import com.tools.Send;
 
 import java.util.Properties;
+import java.util.regex.Pattern;
+
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -250,7 +252,7 @@ public class ManServlet extends HttpServlet {
 		/**************寄送至手機********************************************/
 			 	Send se = new Send();
 			 	String[] tel ={man_phone};
-			 	String message = "邱祈竣先生你好，這裡是吃訂我線上平台系統，恭喜你註冊囉，密碼已送至信箱，已經可以登入囉";
+			 	String message = man_name+"先生你好，這裡是吃訂我線上平台系統，恭喜你註冊囉，密碼已送至信箱，已經可以登入囉";
 			 	se.sendMessage(tel , message);
 		/**************寄送mail********************************************/
 	
@@ -433,5 +435,6 @@ public class ManServlet extends HttpServlet {
 		     e.printStackTrace();
 	     }
 	   }
+
 		
 }

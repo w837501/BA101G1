@@ -27,14 +27,15 @@
 	                <img class="profile-img" src="<%=request.getContextPath() %>/backend/assets/img/logo.png">
 	                <form class="form-signin" METHOD="post" ACTION="<%=request.getContextPath()%>/backend/man/man.do" name="form1">
 		                <input type="text" class="form-control" name="man_name"  placeholder="員工姓名" value="<%= (managerVO==null)? "" :managerVO.getMan_name() %>" required autofocus id="empName">
-		                <input type="text" class="form-control" name="man_phone" placeholder="09xxxxxxxx" value="<%= (managerVO==null)? "" :managerVO.getMan_phone() %>"  required id="empPhone">
-		                <input type="text" class="form-control" name="man_mail" placeholder="xxx@gmail.com" value="<%= (managerVO==null)? "" :managerVO.getMan_mail() %>" required id="empEmail">
+		                <input type="text" class="form-control" name="man_phone" placeholder="09xxxxxxxx" value="<%= (managerVO==null)? "" :managerVO.getMan_phone() %>"  required id="empPhone" onblur="checkPhone()">
+		                <input type="text" class="form-control" name="man_mail" placeholder="xxx@gmail.com" value="<%= (managerVO==null)? "" :managerVO.getMan_mail() %>" required id="empEmail" onblur="chkEmail()">
 		                <input type="hidden" name="action" value="insert">
 		                <button class="btn btn-lg btn-primary btn-block" type="submit">
 		                   Create an account </button>
 	
 		                <a href="<%=request.getContextPath() %>/backend/man/login_man.jsp" class="pull-right need-help">Sign in </a><span class="clearfix"></span>
 	                </form>
+	                <div class="text-center" id="wrongMsg" style="color:red;">
 						<%-- 錯誤表列 --%>
 						<c:if test="${not empty errorMsgs}">
 							<font color='red'>請修正以下錯誤:
@@ -45,6 +46,7 @@
 							</ul>
 							</font>
 						</c:if>
+					</div>
 	            </div>
 	            <button onclick="myFunction1()">剛哥</button>
 	            <button onclick="myFunction2()">邱X竣</button>
@@ -63,14 +65,38 @@
 	}
 	function myFunction2(){
 		document.getElementById("empName").value = "邱小竣";
-		document.getElementById("empPhone").value = "0912345678";
+		document.getElementById("empPhone").value = "0988589732";
 		document.getElementById("empEmail").value = "ex051240@gmail.com";
 	}
-	function myFunction2(){
+	function myFunction3(){
 		document.getElementById("empName").value = "王小傑";
 		document.getElementById("empPhone").value = "0987043790";
 		document.getElementById("empEmail").value = "w837501@gmail.com";
 	}
+	function chkEmail(){
+		//please input the test email to see is valid
+		var strEmail = document.getElementById("empEmail").value; 
+
+		//Regular expression Testing
+
+		emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+
+		if(strEmail.search(emailRule)!= -1){
+			document.getElementById("wrongMsg").innerHTML = "";
+		}else{
+			document.getElementById("wrongMsg").innerHTML = "Email格式錯誤";        
+		}
+	}
+	function checkPhone(){ 
+		var cellphone = /^09[0-9]{8}$/; 
+		var strPhone = document.getElementById("empPhone").value; 
+		if (cellphone.test(strPhone)){ 
+			document.getElementById("wrongMsg").innerHTML = "";
+		} 
+		else { 
+			document.getElementById("wrongMsg").innerHTML = "手機格式錯誤";
+		} 
+	};  
 </script>
 
 <style type="text/css">
