@@ -2,8 +2,11 @@ package com.order.model;
 
 import java.util.*;
 
+import com.product.model.ProductVO;
+
 public interface Store_OrderDAO_interface {
 	public void insert(Store_OrderVO orderVO);
+	public void insertOrderandOrderList(Store_OrderVO orderVO,Vector<ProductVO> buylist);
 	public void update(Store_OrderVO orderVO);
 	public void delete(String order_id);
 	public Store_OrderVO findByPrimaryKey(String order_id);

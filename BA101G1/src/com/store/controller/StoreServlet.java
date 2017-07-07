@@ -1,20 +1,26 @@
 package com.store.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import com.product.model.ProductService;
 import com.product.model.ProductVO;
 import com.store.model.StoreService;
 import com.store.model.StoreVO;
-
+@MultipartConfig(fileSizeThreshold = 5 * 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024
+* 1024)
 public class StoreServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -25,16 +31,16 @@ public class StoreServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-
+System.out.println(action);
 		// 來自index.jsp的請求 來自store.jsp的請求
-		if ("get_store".equals(action)) {
+		if ("get_store_a".equals(action) || "get_store_b".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/***************************
+				/****************************
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 **********************/
 				String str = req.getParameter("store_name");
@@ -43,7 +49,14 @@ public class StoreServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/store/store.jsp");
+
+					String url = null;
+					if ("get_store_a".equals(action))
+						url = "/index.jsp";
+					else if ("get_store_b".equals(action))
+						url = "/store/store.jsp";
+
+					RequestDispatcher failureView = req.getRequestDispatcher(url);
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -57,11 +70,18 @@ public class StoreServlet extends HttpServlet {
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/store/store.jsp");
+
+					String url = null;
+					if ("get_store_a".equals(action))
+						url = "/index.jsp";
+					else if ("get_store_b".equals(action))
+						url = "/store/store.jsp";
+
+					RequestDispatcher failureView = req.getRequestDispatcher(url);
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
-				/***************************
+				/****************************
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 *************/
 				req.setAttribute("storelist", storelist); // 資料庫取出的StoreVO物件,存入req
@@ -167,13 +187,6 @@ public class StoreServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			String requestURL = req.getParameter("requestURL"); // 送出修改的來源網頁路徑:
-																// 可能為【/emp/listAllEmp.jsp】
-																// 或
-																// 【/dept/listEmps_ByDeptno.jsp】
-																// 或 【
-																// /dept/listAllDept.jsp】
-																// 或 【
-																// /emp/listEmps_ByCompositeQuery.jsp】
 
 			try {
 				/***************************
@@ -214,10 +227,9 @@ public class StoreServlet extends HttpServlet {
 				StoreService storeSvc = new StoreService();
 				storeVO = storeSvc.updateStore2(store_phone, store_addr, store_name, store_state, store_id);
 				System.out.println("XXXXXXXXXXXX");
-				/***************************
+				/****************************
 				 * 3.修改完成,準備轉交(Send the Success view)
 				 *************/
-
 				String url = "/backend/store/ListAllStore.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
 				successView.forward(req, res);
@@ -261,5 +273,109 @@ public class StoreServlet extends HttpServlet {
 			System.out.println(successView);
 			successView.forward(req, res);
 		}
+
+		if ("insert".equals(action)) {
+			System.out.println("111111");
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			String requestURL=req.getParameter("requestURL");
+			try {
+				String store_name = req.getParameter("store_name");
+				Number sc_id =Integer.parseInt( req.getParameter("sc_id"));
+				String store_content = req.getParameter("store_content");
+				String store_phone = req.getParameter("store_phone");
+				String store_addr = req.getParameter("store_addr");
+				String store_acc = req.getParameter("store_acc");
+				String store_pw = req.getParameter("store_pw");
+				String store_out = req.getParameter("store_out");
+				String store_zone = req.getParameter("store_zone");
+				
+			
+				Part pic=req.getPart("store_image");
+				byte[] store_image=getPictureByteArrayFromWeb(pic);
+			
+				if(pic==null){
+					errorMsgs.add("請上傳照片");
+				}
+				if(store_name.trim().isEmpty()||store_name==null){
+					errorMsgs.add("請輸入店名");
+				}
+				
+				if(store_content.trim().isEmpty()||store_content==null){
+					errorMsgs.add("請輸入商家簡介");
+				}
+				if(store_phone.trim().isEmpty()||store_phone==null){
+					errorMsgs.add("請輸入商家電話");
+				}
+				if(store_addr.trim().isEmpty()||store_addr==null){
+					errorMsgs.add("請輸入商家地址");
+				}
+				if(store_acc.trim().isEmpty()||store_acc==null){
+					errorMsgs.add("請輸入帳號");
+				}
+				if(store_pw.trim().isEmpty()||store_pw==null){
+					errorMsgs.add("請輸入密碼");
+				}
+				if(store_out.trim().isEmpty()||store_out==null){
+					errorMsgs.add("請輸入是否可以外送");
+				}
+				if(store_zone.trim().isEmpty()||store_zone==null){
+					errorMsgs.add("請輸入商家地區");
+				}
+				StoreVO storeVO=new StoreVO();
+				storeVO.setStore_name(store_name);
+				storeVO.setSc_id(sc_id);
+				storeVO.setStore_content(store_content);
+				storeVO.setStore_phone(store_phone);
+				storeVO.setStore_addr(store_addr);
+				storeVO.setStore_acc(store_acc);
+				storeVO.setStore_pw(store_pw);
+				storeVO.setStore_out(store_out);
+				storeVO.setStore_zone(store_zone);
+				storeVO.setStore_image(store_image);
+				
+				if(!errorMsgs.isEmpty()){
+					req.setAttribute("storeVO", storeVO);
+					RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
+					failureView.forward(req, res);
+					return;
+				}
+				
+				StoreService storeSvc=new StoreService();
+				storeSvc.addStore(sc_id, store_name, store_content, store_phone, store_addr, store_image, store_pw, store_acc, store_out, store_zone);
+				
+				String url="/index.jsp";
+				RequestDispatcher successView=req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			} catch (Exception e) {
+				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
+				failureView.forward(req, res);
+				return;
+			}
+		}
+	}
+
+	public static byte[] getPictureByteArrayFromWeb(Part part) throws IOException {
+		InputStream is = part.getInputStream();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] buffer = new byte[8192];
+		int i;
+		while ((i = is.read(buffer)) != -1) {
+			baos.write(buffer, 0, i);
+		}
+		baos.close();
+		is.close();
+		return baos.toByteArray();
+	}
+
+	public String getFileNameFromPart(Part part) {
+		String header = part.getHeader("content-disposition");
+		System.out.println("header=" + header); // 測試用
+		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
+		System.out.println("filename=" + filename); // 測試用
+		if (filename.length() == 0) {
+			return null;
+		}
+		return filename;
 	}
 }

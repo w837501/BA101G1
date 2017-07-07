@@ -49,7 +49,7 @@
 	<c:forEach var="product" items="${productlist}">
 		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do">
 		<tr align='center' valign='middle'>
-			<td><IMG src="<%=request.getContextPath()%>/ProductClassReader?pro_id=${product.pro_id}"></td>
+			<td><IMG src="<%=request.getContextPath()%>/ProDBGifReader?pro_id=${product.pro_id}"></td>
 			<td>${product.pro_name}</td>
 			<td>${product.pro_price}</td>
 			<td>${product.pro_id}</td>
@@ -58,15 +58,16 @@
 				<div>數量： <input type="text" name="quantity" size="3" value=1></div>
 			</td>
 			<td>
-			     <input type="submit" value="加入購物車"></td>
-			</tr>
+				
+			     <input type="submit" value="加入購物車"> 
 			     <input type="hidden" name="pro_name" value="${product.pro_name}">
 			     <input type="hidden" name="pro_price" value="${product.pro_price}">
 			     <input type="hidden" name="pro_id" value="${product.pro_id}">
 			     <input type="hidden" name="store_id" value="${storeVO.store_id}"> 
 			     <input type="hidden" name="pro_content" value="${product.pro_content}">       
-			     <input type="hidden" name="action"	value="getOne_In_ShoppingCart">
-			 </FORM>
+			     <input type="hidden" name="action"	value="getOne_In_ShoppingCart"></FORM>
+			</td>
+		<tr>
 	</c:forEach>
 	
 </table>

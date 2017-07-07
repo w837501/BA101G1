@@ -46,7 +46,7 @@ public class ProductServlet extends HttpServlet{
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String str = req.getParameter("pro_name");
 				if (str == null || (str.trim()).length() == 0) {
-					errorMsgs.add("請輸入商品關鍵字");
+					errorMsgs.add("請輸入餐點關鍵字");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -147,8 +147,7 @@ public class ProductServlet extends HttpServlet{
 					
 					//若新增到一樣的商品
 					if(productVO.getPro_name().equals(aproduct.getPro_name())){
-						productVO.setQuantity(productVO.getQuantity()
-								+aproduct.getQuantity());
+						productVO.setQuantity((int)productVO.getQuantity()+(int)aproduct.getQuantity());
 						buylist.setElementAt(productVO, i);
 						System.out.println(productVO.getQuantity());
 						System.out.println(buylist);
@@ -176,7 +175,7 @@ public class ProductServlet extends HttpServlet{
 			for(int i = 0; i< buylist.size();i++){
 				ProductVO productVO = buylist.get(i);
 				int price  = (int) productVO.getPro_price();
-				int quantity = productVO.getQuantity();
+				int quantity = (int)productVO.getQuantity();
 				total += (price*quantity);
 			}
 			

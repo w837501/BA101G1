@@ -79,11 +79,11 @@
 						<tbody>
 						
 							<tr>
-								<td align="center"><img src="<%=request.getContextPath()%>/ProductClassReader?pro_id=<%= productVO.getPro_id()%>" width="150" height="120"></td>
+								<td align="center"><img src="<%=request.getContextPath()%>/ProDBGifReader?pro_id=<%= productVO.getPro_id()%>" width="150" height="120"></td>
 								<td><%=productVO.getPro_name() %></td>
 								<td><%=productVO.getPro_price() %></td>
 								<td><%=productVO.getQuantity() %></td>
-								<td><%=(Integer)productVO.getPro_price()* productVO.getQuantity() %></td>
+								<td><%=(Integer)productVO.getPro_price()*(Integer)productVO.getQuantity() %></td>
 								<td>
 								<form name="deleteForm" action="Shopping.html" method="POST">
                                 <input type="hidden" name="action" value="DELETE">

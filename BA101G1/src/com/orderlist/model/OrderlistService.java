@@ -1,6 +1,9 @@
 package com.orderlist.model;
 
 import java.util.List;
+import java.util.Vector;
+
+import com.product.model.ProductVO;
 
 public class OrderlistService {
 private OrderlistDAO_interface dao;
@@ -9,12 +12,13 @@ private OrderlistDAO_interface dao;
 		dao = new OrderlistDAO();
 	}
 	
-	public OrderlistVO addOrderlist(String order_id, String pro_id){
+	public OrderlistVO addOrderlist(String order_id,ProductVO buylist){
 		
 		OrderlistVO orderlistVO = new OrderlistVO();
-		
 		orderlistVO.setOrder_id(order_id);
-		orderlistVO.setPro_id(pro_id);
+		orderlistVO.setPro_id(buylist.getPro_id());
+		orderlistVO.setOrder_amount((Integer) buylist.getQuantity());;
+		orderlistVO.setPrice((Integer) buylist.getPro_price());
 		dao.insert(orderlistVO);
 		
 		return orderlistVO;
@@ -45,5 +49,9 @@ private OrderlistDAO_interface dao;
 	
 	public List<OrderlistVO> getDetailOrder(String order_id, String pro_id){
 		return dao.getDetailOrder(order_id, pro_id);
+	}
+	
+	public String getDetailProIdByOrderId(String order_id){
+		return dao.getDetailProIdByOrderId(order_id);
 	}
 }

@@ -1,6 +1,10 @@
 package com.product_class.model;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,8 +24,42 @@ public class ProductClassJDBC_DAO implements ProductClassDAO_interface{
 	String userid = "BA101G1";
 	String passwd = "ba101g1";
 	
+	private static final String UPDATE_STMT = "UPDATE PRODUCT_CLASS set pc_pic=? where pc_id = ?";
 	private static final String getAll = "select * from PRODUCT_CLASS";
 	private static final String getAllById = "select * from PRODUCT_CLASS where pc_id = ?";
+	
+	@Override
+	public void update(ProductClassVO productclassVO) {
+		Connection con = null;
+		PreparedStatement pstmt= null;
+		try{
+		Class.forName(driver);
+		con = DriverManager.getConnection(url, userid, passwd);
+		pstmt = con.prepareStatement(UPDATE_STMT);
+		
+		pstmt.setBytes(1, productclassVO.getPc_pic());
+		pstmt.setString(2, productclassVO.getPc_id());
+		
+		pstmt.executeUpdate();
+		
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
 	
 	@Override
 	public List<ProductClassVO> getAll() {
@@ -132,11 +170,32 @@ public class ProductClassJDBC_DAO implements ProductClassDAO_interface{
 		ProductClassJDBC_DAO productclassdao = new ProductClassJDBC_DAO();
 		
 		//¬d¥þ³¡ by id
-		List<ProductClassVO> list = productclassdao.getProductClassById("2");
-		for(ProductClassVO svo1 : list){
-			System.out.println(svo1.getPc_id());
-			System.out.println(svo1.getPc_name());
+		ProductClassVO pcVO = new ProductClassVO();
+		byte[] pic = getPictureByteArray("WebContent/FakeInfo/Salad.jpg");
+		pcVO.setPc_pic(pic);
+		pcVO.setPc_id("5");
+		productclassdao.update(pcVO);
+	}
+		
+	public static InputStream getPictureStream(String path) throws IOException {
+		File file = new File(path);
+		FileInputStream fis = new FileInputStream(file);
+		return fis;
+	}
+	
+	
+	private static byte[] getPictureByteArray(String string)throws IOException {
+		File file = new File(string);
+		FileInputStream fis = new FileInputStream(file);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] image = new byte[8192];
+		int i ;
+		while((i = fis.read(image)) != -1){
+			baos.write(image,0,i);
 		}
+		baos.close();
+		fis.close();	
+		return baos.toByteArray();
 	}
 
 	
