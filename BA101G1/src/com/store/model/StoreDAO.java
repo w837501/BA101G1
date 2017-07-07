@@ -26,12 +26,12 @@ public class StoreDAO implements StoreDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO STORE (STORE_ID,SC_ID,STORE_NAME,STORE_CONTENT,STORE_PHONE,STORE_ADDR,STORE_IMAGE,STORE_PW,STORE_ACC,STORE_OUT,STORE_ZONE)VALUES ('STO'||'-'||LPAD(to_char(store_seq.NEXTVAL),6,'0'),?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE STORE set sc_id=?, store_content=?, store_phone=?, store_addr=?, store_image=?, store_out=?, store_zone=?, store_pw=? where store_id = ?";
 	private static final String DELETE = "DELETE FROM STORE where store_id = ?";
-	private static final String Find_by_PK = "select * from STORE where store_id=? and store_state = '開店中'";
+	private static final String Find_by_PK = "select * from STORE where store_id=? ";
 	private static final String Find_ALL = "select * from STORE ";
 	private static final String Find_NAME = "select * from STORE where store_name like ? and store_state = '開店中'";
 	private static final String Find_ZONE = "select * from STORE where store_zone = ? and store_state = '開店中'";
 	private static final String CLASSLINK = "select s.sc_id, s.store_id, s.store_name, t.sc_name from store s join store_class t on (s.sc_id = t.sc_id) where t.sc_id = ? and store_state = '開店中'";
-	private static final String UPDATE_STMT2 = "UPDATE STORE set store_phone=?, store_addr=?, store_name=?, store_state=? where store_id = ?";
+	private static final String UPDATE_STMT2 = "UPDATE STORE set store_name=?, sc_id=?, store_content=? , store_phone=?, store_addr=?,store_image=?,store_acc=?,store_pw=?,store_out=?, store_zone=?,store_state=? where store_id = ?";
 	private static final String Find_HOT = "select * from store where store_star > ? and store_state = '開店中' order by store_star desc";
 	
 	@Override
@@ -449,12 +449,18 @@ public class StoreDAO implements StoreDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT2);
 
-			pstmt.setString(1, storeVO.getStore_phone());
-			pstmt.setString(2, storeVO.getStore_addr());
-			pstmt.setString(3, storeVO.getStore_name());
-			pstmt.setString(4, storeVO.getStore_state());
-
-			pstmt.setString(5, storeVO.getStore_id());
+			pstmt.setString(1, storeVO.getStore_name());
+			pstmt.setInt(2, (int)storeVO.getSc_id());
+			pstmt.setString(3, storeVO.getStore_content());
+			pstmt.setString(4, storeVO.getStore_phone());
+			pstmt.setString(5, storeVO.getStore_addr());
+			pstmt.setBytes(6, storeVO.getStore_image());
+			pstmt.setString(7, storeVO.getStore_acc());
+			pstmt.setString(8, storeVO.getStore_pw());
+			pstmt.setString(9, storeVO.getStore_out());
+			pstmt.setString(10, storeVO.getStore_zone());
+			pstmt.setString(11, storeVO.getStore_state());
+			pstmt.setString(12, storeVO.getStore_id());
 
 			pstmt.executeUpdate();
 
