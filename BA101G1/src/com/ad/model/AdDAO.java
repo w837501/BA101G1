@@ -31,7 +31,7 @@ public class AdDAO implements AdDAO_interface {
 	private static final String Find_by_PK = "select * from AD where ad_id=?";
 	private static final String Find_ALL = "select * from AD ";
 	
-	private static final String AD_Available ="select * from Ad where ad_state = 1 order by ad_time desc";
+	private static final String AD_Available ="select * from Ad where ad_state = '¥Zµn¤¤' order by ad_time";
 	
 	
 	@Override

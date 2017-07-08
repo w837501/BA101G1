@@ -32,7 +32,7 @@ img {
 }
 */
 #sidebar .cart, #sidebar .news > h2, #cart .frame, #compute .frame2 {
-	background: url(../images/frames.png) no-repeat;
+	/**background: url(../images/frames.png) no-repeat;**/
 }
 .btnCart, .btn, .checkout, .shopping, .update, .order {
 	background: url(../images/buttons.png) no-repeat;
@@ -150,7 +150,7 @@ img {
 }
 #logo span#login a{
 	float: right;
-	margin: 20px 20px 20px 20px;
+	margin: 20px 20px 20px 0px;
 	background: url(../images/bg-find-out.png) repeat;
 	color: #fff;
 	font-size: 14px;
@@ -222,19 +222,15 @@ img {
 #contentsHome div#main div#adbox img{
 	width:100%;
 }
-
-#contentsHome div#sidebar{
-	width:130px;
-}
-
-
 /*------------------------------ CONTENTS ------------------------------*/
 #contents {
 	display: inline-block;
 	min-height: 950px;
-	width: 90%;
+	width: 940px;
+	padding: 0 10px 17px;
 }
 #contents p {
+	color: #f7f7f7;
 	font-size: 12px;
 	line-height: 18px;
 	margin: 0;
@@ -253,52 +249,12 @@ img {
 	margin: 0 0 17px;
 	padding: 0 20px;
 }
-#contents div#main div#adbox img{
-	width:100%;
-}
-#contents div#sidebar{
-	width:130px;
-}
-#contents div#items{
-	padding: 0 30px;
-}
-/** classcontents **/
-#classcontents {
-	display: inline-block;
-	min-height: 950px;
-	width: 90%;
-}
-#classcontents p {
-	font-size: 12px;
-	line-height: 18px;
-	margin: 0;
-	padding: 0 0 18px;
-}
-#classcontents p a {
-	color: #f7f7f7;
-}
-#classcontents p a:hover {
-	color: #938ce8;
-}
-#classcontents h2 {
-	color: #949393;
-	font-size: 20px;
-	line-height: 38px;
-	margin: 0 0 17px;
-	padding: 0 20px;
-}
-#classcontents div#main div#adbox img{
-	width:100%;
-}
-#classcontents div#sidebar{
-	width:130px;
-}
-#classcontents div#items{
-	padding: 0 100px;
-}
-
-
 /** MAIN **/
+#main02 {
+	
+}
+
+
 #main {
 	float: right;
 	display: inline-block;
@@ -323,7 +279,8 @@ img {
 	margin: 0 0 15px;
 }
 #main form {
-	
+	background: url(../images/bg-contentbox.png);
+	padding: 18px 20px;
 }
 #main form > ul, #main form > ul li {
 	display: inline-block;
@@ -370,6 +327,8 @@ form#message {
 	display: inline-block;
 	width: 220px;
 }
+
+
 /** #adbox **/
 #adbox {
 	margin: 0 0 14px;
@@ -401,13 +360,11 @@ form#message {
 #adbox .info{
 	background-color: #fff;
 	opacity: 0.8;
-	height: 150px;
+	height: 100px;
 	padding-top: 18px;
 	margin: 0 0 0 19%;
 	text-align: center;
 }
-
-
 /*首頁的banner上的文字、框框、按鈕*/
 #adbox .info h1, #adbox .shop {
 	background-position: 0 -52px;
@@ -656,7 +613,7 @@ form#message {
 }
 #sidebar > h1 {
 	color: #b9315a;
-	font-size: 20px;
+	font-size: 30px;
 	height: 36px;
 	line-height: 36px;
 	margin: 28px 0 30px;
@@ -796,6 +753,43 @@ form#message {
 	margin: 0;
 	text-transform: none;
 }
+#store_sidebar {
+	/**background-color: #fff;**/
+	float:left;
+	width:200px;
+}
+#store_sidebar img {
+	width:100%;
+}
+
+#store_sidebar .store_logo,#store_sidebar .introduction,#store_sidebar .information {
+	background-color: #fff;
+	padding:5px 10px 15px 10px;
+}
+#store_sidebar div#title {
+	background-color: #D6656A;
+	height:50px;
+	margin-bottom: 10px;
+}
+
+#store_sidebar h1 {
+	color: #fff;
+	font-size: 25px;
+	height: 36px;
+	line-height: 36px;
+	padding:7px;
+}
+#store_sidebar span {
+	color:gray;
+	font-size: 20px;
+	height: 36px;
+	line-height: 20px;
+	padding-left: 13px;
+}
+
+
+
+
 /** About **/
 #about {
 	padding: 30px 20px 16px;
@@ -924,17 +918,27 @@ form#message {
 	line-height: 20px;
 	margin: 2px 0 10px;
 	text-decoration: none;
+	text-transform: uppercase;
 }
 #items ul {
 	display: inline-block;
 	width: 720px;
 	margin-left: -10px;
 }
+#items > h1 {
+	color: #D6656A;
+	display: block;
+	font-size: 40px;
+	line-height: 20px;
+	text-transform: uppercase;
+	margin-bottom: 30px;
+}
 #items > h3 {
 	color: #D6656A;
 	display: block;
 	font-size: 25px;
 	line-height: 20px;
+	text-transform: uppercase;
 }
 #items li {
 	float: left;
@@ -1033,7 +1037,7 @@ form#cart table thead th {
 	margin-right: 20px;
 }
 #cart tfoot {
-	background-color: #b9315a;
+	background-color: #D6656A;
 	color: #fff;
 	padding: 1px;
 }

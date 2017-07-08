@@ -344,7 +344,27 @@ public class ProductServlet extends HttpServlet{
 		}
 		
 		if(action.equals("goto_ShoppingCart")){
-			System.out.println("asdadasdadasa");
+			int total = 0;
+			for(int i = 0; i< buylist.size();i++){
+				ProductVO productVO = buylist.get(i);
+				int price  = (int) productVO.getPro_price();
+				int quantity = (int)productVO.getQuantity();
+				total += (price*quantity);
+			}
+			
+			String amount = String.valueOf(total);
+			req.setAttribute("amount", amount);
+			session.setAttribute("shoppingcart", buylist);
+			String url = "/frontend/shoppingcart/shoppingcart.jsp";
+			RequestDispatcher rd = req.getRequestDispatcher(url);
+			rd.forward(req, res);
+		}
+		System.out.println("action"+action);
+		if (action.equals("DELETE")) {
+			String del = req.getParameter("del");
+			System.out.println("del"+del);
+			int d = Integer.parseInt(del);
+			buylist.removeElementAt(d);
 			session.setAttribute("shoppingcart", buylist);
 			String url = "/frontend/shoppingcart/shoppingcart.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);

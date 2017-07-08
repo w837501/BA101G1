@@ -27,7 +27,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 	private static final String Find_by_PK = "select * from AD where ad_id=?";
 	private static final String Find_ALL = "select * from AD";
 	
-	private static final String AD_Available ="select * from Ad where ad_state = '1' order by ad_time desc";
+	private static final String AD_Available ="select * from Ad where ad_state = '刊登中' order by ad_time";
 
 	@Override
 	public void insert(AdVO adVO) {
@@ -312,19 +312,19 @@ public class AdJDBCDAO implements AdDAO_interface {
 
 		// 新增
 		 AdVO adVO1 = new AdVO();
-		 adVO1.setStore_id("STO-000002");
-		 adVO1.setAd_name("YOYOYOYO12312311111111111111111111111111");
-		 adVO1.setAd_content("沒有內文唷");
+		 adVO1.setStore_id("STO-000004");
+		 adVO1.setAd_name("King is back!!!4");
+		 adVO1.setAd_content("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
 		 byte[] pic=null;
 		try {
-			pic = getPictureByteArray("C:/Users/15-ay118TX/git/BA101G1_M/BA101G1/WebContent/frontend/advertisement/images/coffee1.jpg");
+			pic = getPictureByteArray("C:/Users/glayk/git/BA101G1/BA101G1/WebContent/FakeInfo/king.png");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		 adVO1.setAd_image(pic);
 		 adVO1.setAd_time(new Timestamp(System.currentTimeMillis()));
-		 adVO1.setAd_state("審核");
+		 adVO1.setAd_state("刊登中");
 		 adVO1.setAd_push_content("推播");
 		
 		 addao.insert(adVO1);
