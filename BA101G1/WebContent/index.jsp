@@ -4,20 +4,16 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>吃訂我線上訂餐系統</title>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/style.css" type="text/css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 </head>
 <body>
 	<div id="page">
 		<div id="header">
 			<div id="logo">
 				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
-				<span id="login"><a href="<%=request.getContextPath()%>/backend/mem/AddMem.jsp">Login in</a>
- 				<a href="<%=request.getContextPath()%>/backend/mem/AddMem.jsp">Login in</a></span>
-				
+				<span id="login"><a href="news.html">Login in</a></span>
 
 				<ul>
 					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
@@ -34,7 +30,7 @@
 				<div id="adbox">
 					<img src="<%=request.getContextPath()%>/images/Cuisine.jpg" alt="Img">
 					<div class="info">
-						<h1>搜尋商家</h1>
+						<h1>選擇地區</h1>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store/store.do">
 							<select size="1" name="store_zone">
 								<option value="基隆市">基隆市
@@ -60,6 +56,7 @@
 							<input type="submit" value="送出"> <input type="hidden" name="action" value="get_zone">
 						</FORM>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store/store.do">
+							<b>搜尋商家:</b>
 							<input type="text" name="store_name">
 							<input type="submit" value="送出">
 							<input type="hidden" name="action" value="get_store_a">
@@ -170,8 +167,7 @@
 				<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
 				<li><a href="news.html">最新消息</a></li>
 			</ul>
-			<p id="footnote">Eternal Beauty Essentials 2012. All Rights
-				Reserved.</p>
+			<p id="footnote">Eternal Beauty Essentials 2012. All Rights Reserved.</p>
 		</div>
 
 	</div>

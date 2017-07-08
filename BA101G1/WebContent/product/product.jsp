@@ -27,17 +27,13 @@
 
 		<div id="contents">
 
-			<!-- 餐廳類型  -->
-			<jsp:useBean id="scSvc" scope="page"
-				class="com.store_class.model.StoreClassService" />
+			<!-- 餐點類型  -->
+			<jsp:useBean id="pcSvc" scope="page" class="com.product_class.model.ProductClassService" />
 			<div id="sidebar">
-				<h1>餐廳類型</h1>
+				<h1>餐點類型</h1>
 				<ul class="menu2">
-					<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
-					<c:forEach var="scVO" items="${scSvc.all}" varStatus="loop">
-						<li class="selected"><a
-							href='<%=request.getContextPath()%>/store/store.do?action=getStoreClass&sc_id=<c:out value="${loop.index}" />'>${scVO.sc_name}
-						</a></li>
+					<c:forEach var="pcVO" items="${pcSvc.all}" varStatus="loop">
+						<li class="selected"><a href='<%=request.getContextPath()%>/product/product.do?action=getProductClass&pc_id=${pcVO.pc_id}'>${pcVO.pc_name}</a></li>
 					</c:forEach>
 				</ul>
 			</div>

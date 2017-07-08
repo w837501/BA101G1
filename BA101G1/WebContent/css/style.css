@@ -12,7 +12,7 @@ body {
 img {
 	border: 0;
 }
-/* LOGO位置大小 */
+/* LOGO雿蔭憭批�� */
 #page div#header div#logo a img{
 	height:100px;
 	padding-left: 20px;
@@ -21,7 +21,7 @@ img {
 /*------------------------------ Sprites ------------------------------*/
 #navigation, .box > h2, form#cart table th, #cart table tbody tr:hover td {
 	/*background: url(../images/bg-strips.png) repeat-x;*/
-	/*background-color: #FF8C00;*/ /*HOME 最新消息 熱門商家 區塊...的底色*/
+	/*background-color: #FF8C00;*/ /*HOME ���瘨 �����振 ��憛�...���*/
 }
 #connect a, #sidebar .cart a, #contact .details ul li {
 	background: url(../images/icons.png) no-repeat;
@@ -32,7 +32,7 @@ img {
 }
 */
 #sidebar .cart, #sidebar .news > h2, #cart .frame, #compute .frame2 {
-	/**background: url(../images/frames.png) no-repeat;**/
+	background: url(../images/frames.png) no-repeat;
 }
 .btnCart, .btn, .checkout, .shopping, .update, .order {
 	background: url(../images/buttons.png) no-repeat;
@@ -142,7 +142,7 @@ img {
 	/*padding: 20px 0 0;*/
 	margin-bottom: 16px;
 }
-/** 最上面的區塊 **/
+/** ��銝���憛� **/
 #logo {
 	background-color: #F5F5DC;
 	height: 150px;
@@ -150,7 +150,7 @@ img {
 }
 #logo span#login a{
 	float: right;
-	margin: 20px 20px 20px 0px;
+	margin: 20px 20px 20px 20px;
 	background: url(../images/bg-find-out.png) repeat;
 	color: #fff;
 	font-size: 14px;
@@ -222,15 +222,19 @@ img {
 #contentsHome div#main div#adbox img{
 	width:100%;
 }
+
+#contentsHome div#sidebar{
+	width:130px;
+}
+
+
 /*------------------------------ CONTENTS ------------------------------*/
 #contents {
 	display: inline-block;
 	min-height: 950px;
-	width: 940px;
-	padding: 0 10px 17px;
+	width: 90%;
 }
 #contents p {
-	color: #f7f7f7;
 	font-size: 12px;
 	line-height: 18px;
 	margin: 0;
@@ -249,12 +253,56 @@ img {
 	margin: 0 0 17px;
 	padding: 0 20px;
 }
-/** MAIN **/
-#main02 {
-	
+#contents div#main div#adbox img{
+	width:100%;
+}
+#contents div#main{
+	width:620px;
+}
+#contents div#sidebar{
+	width:200px;
+	margin-left:10px;
+}
+/**AAA**/
+#contents div#items{
+	float:left;
+}
+/** classcontents **/
+#classcontents {
+	display: inline-block;
+	min-height: 950px;
+}
+#classcontents p {
+	font-size: 12px;
+	line-height: 18px;
+	margin: 0;
+	padding: 0 0 18px;
+}
+#classcontents p a {
+	color: #f7f7f7;
+}
+#classcontents p a:hover {
+	color: #938ce8;
+}
+#classcontents h2 {
+	color: #949393;
+	font-size: 20px;
+	line-height: 38px;
+	margin: 0 0 17px;
+	padding: 0 20px;
+}
+#classcontents div#main div#adbox img{
+	width:100%;
+}
+#classcontents div#sidebar{
+	width:130px;
+}
+#classcontents div#items{
+	padding: 0 100px;
 }
 
 
+/** MAIN **/
 #main {
 	float: right;
 	display: inline-block;
@@ -279,8 +327,7 @@ img {
 	margin: 0 0 15px;
 }
 #main form {
-	background: url(../images/bg-contentbox.png);
-	padding: 18px 20px;
+	
 }
 #main form > ul, #main form > ul li {
 	display: inline-block;
@@ -327,8 +374,6 @@ form#message {
 	display: inline-block;
 	width: 220px;
 }
-
-
 /** #adbox **/
 #adbox {
 	margin: 0 0 14px;
@@ -360,12 +405,14 @@ form#message {
 #adbox .info{
 	background-color: #fff;
 	opacity: 0.8;
-	height: 100px;
+	height: 150px;
 	padding-top: 18px;
 	margin: 0 0 0 19%;
 	text-align: center;
 }
-/*首頁的banner上的文字、框框、按鈕*/
+
+
+/*擐��anner銝����������*/
 #adbox .info h1, #adbox .shop {
 	background-position: 0 -52px;
 	color: #D6656A;
@@ -419,7 +466,7 @@ form#message {
 	list-style: none;
 	width: 100%;
 	/*
-	border-bottom: 1px solid #282828; (分隔線)
+	border-bottom: 1px solid #282828; (�����)
 	*/
 	margin: 0 0 13px;
 	padding: 0;
@@ -613,7 +660,7 @@ form#message {
 }
 #sidebar > h1 {
 	color: #b9315a;
-	font-size: 30px;
+	font-size: 20px;
 	height: 36px;
 	line-height: 36px;
 	margin: 28px 0 30px;
@@ -755,8 +802,10 @@ form#message {
 }
 #store_sidebar {
 	/**background-color: #fff;**/
-	float:left;
-	width:200px;
+	float: left;
+	height: auto;
+	width: 200px;
+	padding-left: 10px;
 }
 #store_sidebar img {
 	width:100%;
@@ -781,14 +830,10 @@ form#message {
 }
 #store_sidebar span {
 	color:gray;
-	font-size: 20px;
+	font-size: 15px;
 	height: 36px;
 	line-height: 20px;
-	padding-left: 13px;
 }
-
-
-
 
 /** About **/
 #about {
@@ -918,27 +963,17 @@ form#message {
 	line-height: 20px;
 	margin: 2px 0 10px;
 	text-decoration: none;
-	text-transform: uppercase;
 }
 #items ul {
 	display: inline-block;
 	width: 720px;
 	margin-left: -10px;
 }
-#items > h1 {
-	color: #D6656A;
-	display: block;
-	font-size: 40px;
-	line-height: 20px;
-	text-transform: uppercase;
-	margin-bottom: 30px;
-}
 #items > h3 {
 	color: #D6656A;
 	display: block;
 	font-size: 25px;
 	line-height: 20px;
-	text-transform: uppercase;
 }
 #items li {
 	float: left;
@@ -1037,7 +1072,7 @@ form#cart table thead th {
 	margin-right: 20px;
 }
 #cart tfoot {
-	background-color: #D6656A;
+	background-color: #b9315a;
 	color: #fff;
 	padding: 1px;
 }

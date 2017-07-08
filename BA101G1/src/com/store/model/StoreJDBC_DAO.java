@@ -53,7 +53,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 			pstmt.setBytes(6, storeVO.getStore_image());
 			pstmt.setString(7, storeVO.getStore_pw());
 			pstmt.setString(8, storeVO.getStore_acc());
-			pstmt.setString(9, storeVO.getStore_out());
+			pstmt.setInt(9, (int)storeVO.getStore_out());
 			pstmt.setString(10, storeVO.getStore_zone());
 
 			pstmt.executeUpdate();
@@ -94,7 +94,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 		pstmt.setString(3, storeVO.getStore_phone());
 		pstmt.setString(4, storeVO.getStore_addr());
 		pstmt.setBytes(5, storeVO.getStore_image());
-		pstmt.setString(6, storeVO.getStore_out());
+		pstmt.setInt(6, (int)storeVO.getStore_out());
 		pstmt.setString(7, storeVO.getStore_zone());
 		pstmt.setString(8, storeVO.getStore_pw());
 		pstmt.setString(9, storeVO.getStore_id());
@@ -135,9 +135,9 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 			
 			pstmt.executeUpdate();
 		}catch (ClassNotFoundException e) {
-			throw new RuntimeException("ï¿½ä¤£ï¿½ï¿½driver" + e.getMessage());
+			throw new RuntimeException("§ä¤£¨ìdriver" + e.getMessage());
 		} catch (SQLException se) {
-			throw new RuntimeException("ï¿½oï¿½Í¿ï¿½ï¿½~" + se.getMessage());
+			throw new RuntimeException("µo¥Í¿ù»~" + se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -189,13 +189,13 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getString("store_out"));
+				storeVO.setStore_out(rs.getInt("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 			}
 		} catch (ClassNotFoundException e) {
-		throw new RuntimeException("ï¿½ä¤£ï¿½ï¿½driver" + e.getMessage());
+		throw new RuntimeException("§ä¤£¨ìdriver" + e.getMessage());
 	} catch (SQLException se) {
-		throw new RuntimeException("ï¿½oï¿½Í¿ï¿½ï¿½~" + se.getMessage());
+		throw new RuntimeException("µo¥Í¿ù»~" + se.getMessage());
 	} finally {
 		if (rs != null) {
 			try {
@@ -256,14 +256,14 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getString("store_out"));
+				storeVO.setStore_out(rs.getInt("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 				storelist.add(storeVO);
 			}
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("ï¿½ä¤£ï¿½ï¿½driver" + e.getMessage());
+			throw new RuntimeException("§ä¤£¨ìdriver" + e.getMessage());
 		} catch (SQLException se) {
-			throw new RuntimeException("ï¿½oï¿½Í¿ï¿½ï¿½~" + se.getMessage());
+			throw new RuntimeException("µo¥Í¿ù»~" + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -323,7 +323,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getString("store_out"));
+				storeVO.setStore_out(rs.getInt("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 				storetlist.add(storeVO);
 			}
@@ -390,7 +390,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getString("store_out"));
+				storeVO.setStore_out(rs.getInt("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 				storetlist.add(storeVO);
 			}
@@ -497,46 +497,46 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 	public static void main(String[] args) throws IOException {
 
 		StoreJDBC_DAO storedao = new StoreJDBC_DAO();
-//ï¿½sï¿½W
+//·s¼W
 		StoreVO svo = new StoreVO();
 		svo.setSc_id(3);
-		svo.setStore_name("ï¿½~ï¿½ï¿½ï¿½ï¿½");
-		svo.setStore_content("ï¿½~ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Oï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½êªºï¿½ï¿½ï¿½Wï¿½ï¿½Ú©Ê³tï¿½ï¿½ï¿½sï¿½ê©±");
+		svo.setStore_name("º~³ù¤ı");
+		svo.setStore_content("º~³ù¤ı¡A¬OÁ`³¡¦ì©ó¬ü°êªºª¾¦W°ê»Ú©Ê³t­¹³sÂê©±");
 		svo.setStore_phone("123123123");
-		svo.setStore_addr("ï¿½ï¿½ï¿½ï¿½ï¿½Ã¹ï¿½ï¿½ï¿½Fï¿½{ï¿½Úªï¿½ï¿½K");
+		svo.setStore_addr("¬ü°ê¦òÃ¹¨½¹F¦{ÁÚªü±K");
 		byte[] pic = getPictureByteArray("WebContent/FakeInfo/king.png");
 		svo.setStore_image(pic);
 		svo.setStore_pw("1234");
 		svo.setStore_acc("a123456");
-		svo.setStore_out("å¯ä»¥å¤–é€");
-		svo.setStore_zone("ï¿½sï¿½Ë¥ï¿½");
+		svo.setStore_out(1);
+		svo.setStore_zone("·s¦Ë¥«");
 		storedao.insert(svo);
 		
 	
-//ï¿½×§ï¿½		
+//­×§ï		
 //		StoreVO storesVO2 = new StoreVO();
 //		storesVO2.setSc_id(3);
 //		storesVO2.setStore_content("I love it");
 //		storesVO2.setStore_phone("10000006");
-//		storesVO2.setStore_addr("ï¿½êµ¦ï¿½|");
+//		storesVO2.setStore_addr("¸êµ¦·|");
 //		byte[] pic = getPictureByteArray("FakeInfo/mm.png");
 //		storesVO2.setStore_image(pic);
 //		storesVO2.setStore_out(0);
-//		storesVO2.setStore_zone("ï¿½ï¿½é¥«");
+//		storesVO2.setStore_zone("®ç¶é¥«");
 //		storesVO2.setStore_pw("cccccc");
 //		storesVO2.setStore_id("STO-000004");
 //		storedao.update(storesVO2);
 		
-//ï¿½Rï¿½ï¿½		
+//§R°£		
 //		storedao.delete("STO-000007");
-//ï¿½dï¿½æµ§		
+//¬d³æµ§		
 //		StoreVO svo3 = storedao.findByPrimaryKey("STO-000001");
 //		System.out.println(svo3.getSc_id());
 //		System.out.println(svo3.getStore_name());
 //		System.out.println(svo3.getStore_content());
 //		System.out.println(svo3.getStore_phone());
 //		System.out.println("---------------------");
-//ï¿½dï¿½ï¿½ï¿½ï¿½		
+//¬d¥ş³¡		
 //		List<StoreVO> list = storedao.getAll();
 //		for(StoreVO svo1 : list){
 //			System.out.println(svo1.getStore_id());
@@ -545,7 +545,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 //			System.out.println(svo1.getStore_content());
 //			System.out.println(svo1.getStore_phone());
 //			System.out.println(svo1.getStore_addr());
-//			System.out.println("ï¿½Ó®aï¿½iï¿½nï¿½ï¿½ï¿½: "+svo1.getStore_date());
+//			System.out.println("°Ó®a¶i¾n¤é´Á: "+svo1.getStore_date());
 //			System.out.println(svo1.getStore_star());
 //			System.out.println(svo1.getStore_count());
 //			System.out.println(svo1.getStore_state());
@@ -559,7 +559,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 //			System.out.println(svo1.getStore_zone());
 //			System.out.println("---------------------");
 //		}
-//ï¿½dï¿½Wï¿½ï¿½	
+//¬d¦WºÙ	
 //		List<StoreVO> list = storedao.findName("BB");
 //		for(StoreVO svo1 : list){
 //			System.out.println(svo1.getStore_id());
@@ -568,7 +568,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 //			System.out.println(svo1.getStore_content());
 //			System.out.println(svo1.getStore_phone());
 //			System.out.println(svo1.getStore_addr());
-//			System.out.println("ï¿½Ó®aï¿½iï¿½nï¿½ï¿½ï¿½: "+svo1.getStore_date());
+//			System.out.println("°Ó®a¶i¾n¤é´Á: "+svo1.getStore_date());
 //			System.out.println(svo1.getStore_star());
 //			System.out.println(svo1.getStore_count());
 //			System.out.println(svo1.getStore_state());
@@ -582,7 +582,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 //			System.out.println(svo1.getStore_zone());
 //			System.out.println("---------------------");
 //		}
-//ï¿½dï¿½aï¿½ï¿½
+//¬d¦a°Ï
 //		List<StoreVO> list = storedao.findZone("3");
 //		for(StoreVO svo1 : list){
 //			System.out.println(svo1.getStore_id());
@@ -591,7 +591,7 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 //			System.out.println(svo1.getStore_content());
 //			System.out.println(svo1.getStore_phone());
 //			System.out.println(svo1.getStore_addr());
-//			System.out.println("ï¿½Ó®aï¿½iï¿½nï¿½ï¿½ï¿½: "+svo1.getStore_date());
+//			System.out.println("°Ó®a¶i¾n¤é´Á: "+svo1.getStore_date());
 //			System.out.println(svo1.getStore_star());
 //			System.out.println(svo1.getStore_count());
 //			System.out.println(svo1.getStore_state());
@@ -602,10 +602,10 @@ public class StoreJDBC_DAO implements StoreDAO_interface {
 //			System.out.println(svo1.getStore_pw());
 //			System.out.println(svo1.getStore_acc());
 //			System.out.println(svo1.getStore_out());
-//			System.out.println("ï¿½aï¿½ï¿½: "+svo1.getStore_zone());
+//			System.out.println("¦a°Ï: "+svo1.getStore_zone());
 //			System.out.println("---------------------");
 //		}
-//ï¿½dï¿½İ°Ó©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°Ó®a		
+//¬d¬İ°Ó©±Ãş«¬ªº¦³­ş¨Ç°Ó®a		
 //		List<StoreVO> list = storedao.ClassLink("3");
 //		for(StoreVO svo1 : list){
 //			System.out.println(svo1.getStore_id());
