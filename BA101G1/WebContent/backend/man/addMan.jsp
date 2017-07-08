@@ -1,59 +1,183 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="com.man.model.ManagerService"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
 <%@ page import="com.man.model.*"%>
 <%
 	ManagerVO managerVO=(ManagerVO)request.getAttribute("managerVO");
 %>
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>­û¤u¸ê®Æ·s¼W - addMan.jsp</title></head>
-
-
-<body bgcolor='white'>
-
-	<table border='1' cellpadding='5' cellspacing='0' width='500'>
-		<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-			<td><h3>­û¤u¸ê®Æ·s¼W - addMan.jsp</h3></td>
-			<td><a href="select_man.jsp"><img src="images/tomcat.gif"	width="100" height="100" border="1"> ¦^­º­¶ </a></td></tr></table>
-
-<h4>­û¤u¸ê®Æ:<font color=red><b>*</b></font>¬°¥²¶ñÄæ¦ì</h4>
-<%-- ¿ù»~ªí¦C --%>
-<c:if test="${not empty errorMsgs}">
-	<font color='red'>½Ğ­×¥¿¥H¤U¿ù»~:
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li>${message}</li>
-		</c:forEach>
-	</ul>
-	</font>
-</c:if>
-
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/man/man.do" name="form1">
-<table border="0">
-
-	<tr>
-		<td>­û¤u©m¦W:<font color=red><b>*</b></font></td>
-		<td><input type="TEXT" name="man_name" size="45" 
-			value="<%= (managerVO==null)? "¦Ñ¤ı" :managerVO.getMan_name() %>" /></td>
-		
-	</tr>
-	<tr>
-		<td>¹q¸Ü:<font color=red><b>*</b></font></td>
-		<td><input type="TEXT" name="man_phone" size="45"
-			 value="<%= (managerVO==null)? "123" :managerVO.getMan_phone() %>" /></td>
-	</tr>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>åƒè¨‚æˆ‘EatMe</title>
+	<!-- BOOTSTRAP STYLES-->
+    <link href="<%=request.getContextPath() %>/backend/assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- GOOGLE FONTS-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+	<div class="container">
+	    <div class="row">
+	        <div class="col-sm-6 col-md-4 col-md-offset-4">
+	            <h1 class="text-center login-title">
+					<img class="profile-img" src="<%=request.getContextPath() %>/images/Hamburgers01.jpg">
+				</h1>
+	            <div class="account-wall">
+	                <img class="profile-img" src="<%=request.getContextPath() %>/backend/assets/img/logo.png">
+	                <form class="form-signin" METHOD="post" ACTION="<%=request.getContextPath()%>/backend/man/man.do" name="form1">
+		                <input type="text" class="form-control" name="man_name"  placeholder="å“¡å·¥å§“å" value="<%= (managerVO==null)? "" :managerVO.getMan_name() %>" required autofocus id="empName">
+		                <input type="text" class="form-control" name="man_phone" placeholder="09xxxxxxxx" value="<%= (managerVO==null)? "" :managerVO.getMan_phone() %>"  required id="empPhone" onblur="checkPhone()">
+		                <input type="text" class="form-control" name="man_mail" placeholder="xxx@gmail.com" value="<%= (managerVO==null)? "" :managerVO.getMan_mail() %>" required id="empEmail" onblur="chkEmail()">
+		                <input type="hidden" name="action" value="insert">
+		                <button class="btn btn-lg btn-primary btn-block" type="submit">
+		                   Create an account </button>
 	
-	<tr>
-		<td>«H½c:<font color=red><b>*</b></font></td>
-		<td><input type="TEXT" name="man_mail" size="45"
-			 value="<%= (managerVO==null)? "sadqwe" :managerVO.getMan_mail() %>" /></td>
-	</tr>
+		                <a href="<%=request.getContextPath() %>/backend/man/login_man.jsp" class="pull-right need-help">Sign in </a><span class="clearfix"></span>
+	                </form>
+	                <div class="text-center" id="wrongMsg" style="color:red;">
+						<%-- éŒ¯èª¤è¡¨åˆ— --%>
+						<c:if test="${not empty errorMsgs}">
+							<font color='red'>è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:
+							<ul>
+								<c:forEach var="message" items="${errorMsgs}">
+									<li>${message}</li>
+								</c:forEach>
+							</ul>
+							</font>
+						</c:if>
+					</div>
+	            </div>
+	            <button onclick="myFunction1()">å‰›å“¥</button>
+	            <button onclick="myFunction2()">é‚±Xç«£</button>
+	            <button onclick="myFunction3()">ç‹å°å‚‘</button>
+	        </div>
+	    </div>
+	</div>
 
-
-</table>
-<br>
-<input type="hidden" name="action" value="insert">
-<input type="submit" value="°e¥X·s¼W"></FORM>
 </body>
-
 </html>
+<script>
+	function myFunction1(){
+		document.getElementById("empName").value = "å‘¨é˜¿å‰›";
+		document.getElementById("empPhone").value = "0988589732";
+		document.getElementById("empEmail").value = "java@gmail.com";
+	}
+	function myFunction2(){
+		document.getElementById("empName").value = "é‚±å°ç«£";
+		document.getElementById("empPhone").value = "0988589732";
+		document.getElementById("empEmail").value = "ex051240@gmail.com";
+	}
+	function myFunction3(){
+		document.getElementById("empName").value = "ç‹å°å‚‘";
+		document.getElementById("empPhone").value = "0987043790";
+		document.getElementById("empEmail").value = "w837501@gmail.com";
+	}
+	function chkEmail(){
+		//please input the test email to see is valid
+		var strEmail = document.getElementById("empEmail").value; 
+
+		//Regular expression Testing
+
+		emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+
+		if(strEmail.search(emailRule)!= -1){
+			document.getElementById("wrongMsg").innerHTML = "";
+		}else{
+			document.getElementById("wrongMsg").innerHTML = "Emailæ ¼å¼éŒ¯èª¤";        
+		}
+	}
+	function checkPhone(){ 
+		var cellphone = /^09[0-9]{8}$/; 
+		var strPhone = document.getElementById("empPhone").value; 
+		if (cellphone.test(strPhone)){ 
+			document.getElementById("wrongMsg").innerHTML = "";
+		} 
+		else { 
+			document.getElementById("wrongMsg").innerHTML = "æ‰‹æ©Ÿæ ¼å¼éŒ¯èª¤";
+		} 
+	};  
+</script>
+
+<style type="text/css">
+body{
+	background-image:url("<%=request.getContextPath() %>/images/bg-body.jpg");
+}
+.form-signin
+{
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+    margin-bottom: 10px;
+}
+.form-signin .checkbox
+{
+    font-weight: normal;
+}
+.form-signin .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus
+{
+    z-index: 2;
+}
+.form-signin input[type="text"]
+{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"]
+{
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.account-wall
+{
+    margin-top: 20px;
+    padding: 40px 0px 20px 0px;
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.login-title
+{
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    display: block;
+}
+.profile-img
+{
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.need-help
+{
+    margin-top: 10px;
+}
+.new-account
+{
+    display: block;
+    margin-top: 10px;
+}
+</style>
+
+

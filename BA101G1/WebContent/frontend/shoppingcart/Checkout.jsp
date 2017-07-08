@@ -18,7 +18,7 @@
  <font size="+3"> 結帳 </font>
 <hr><p>
 
-<table border="1" width="720">
+<table border="0" width="720">
 	<tr bgcolor="#999999">
 		<th width="200">商品圖片</th>
 		<th width="100">商品名稱</th>

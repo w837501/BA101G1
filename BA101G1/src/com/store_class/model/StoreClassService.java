@@ -13,4 +13,7 @@ public class StoreClassService {
 	public List<StoreClassVO> getAll(){
 		return dao.getAll();
 	}
+	public StoreClassVO  getSC_name(Number sc_id){
+		return dao.getSCname(sc_id);
+	}
 }

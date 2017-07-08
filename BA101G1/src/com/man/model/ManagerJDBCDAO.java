@@ -257,7 +257,7 @@ public class ManagerJDBCDAO implements ManagerDAO_interface {
 		managerdao.delete("MAN-000011");
 		System.out.println("§R°£¦¨¥\");
 
-		ManagerVO man = managerdao.findByPrimaryKey("MAN-000008");
+		ManagerVO man = managerdao.findByPrimaryKey("MAN-000001");
 		System.out.println("man_id : " + man.getMan_id());
 		System.out.println("man_name : " + man.getMan_name());
 		System.out.println("man_phone : " + man.getMan_phone());
