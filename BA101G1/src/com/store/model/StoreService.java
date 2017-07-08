@@ -13,7 +13,7 @@ public class StoreService {
 	}
 
 	public StoreVO addStore(Number sc_id, String store_name, String store_content, String store_phone,
-			String store_addr, byte[] store_image, String store_pw, String store_acc, String store_out,
+			String store_addr, byte[] store_image, String store_pw, String store_acc, Number store_out,
 			String store_zone) {
 		StoreVO storeVO = new StoreVO();
 
@@ -34,7 +34,7 @@ public class StoreService {
 	}
 
 	public StoreVO updateStore(Number sc_id, String store_content, String store_phone, String store_addr,
-			byte[] store_image, String store_out, String store_zone, String store_pw, String store_id) {
+			byte[] store_image, Number store_out, String store_zone, String store_pw, String store_id) {
 		StoreVO storeVO = new StoreVO();
 
 		storeVO.setSc_id(sc_id);
@@ -76,19 +76,13 @@ public class StoreService {
 		return dao.ClassLink(sc_id);
 	}
 
-	public StoreVO updateStore2(String store_name ,Number sc_id,String store_content,String store_phone,String store_addr ,byte[] store_image,String store_acc,String store_pw, String store_out,String store_zone, String store_state ,String store_id) {
+	public StoreVO updateStore2(String store_phone, String store_addr, String store_name, String store_state,
+			String store_id) {
 		StoreVO storeVO = new StoreVO();
-		
+
 		storeVO.setStore_name(store_name);
-		storeVO.setSc_id(sc_id);
-		storeVO.setStore_content(store_content);
 		storeVO.setStore_phone(store_phone);
 		storeVO.setStore_addr(store_addr);
-		storeVO.setStore_image(store_image);
-		storeVO.setStore_acc(store_acc);
-		storeVO.setStore_pw(store_pw);
-		storeVO.setStore_out(store_out);
-		storeVO.setStore_zone(store_zone);
 		storeVO.setStore_state(store_state);
 		storeVO.setStore_id(store_id);
 		dao.update2(storeVO);

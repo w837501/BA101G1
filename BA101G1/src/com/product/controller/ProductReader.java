@@ -9,7 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.sql.DataSource;
 
-public class ProductClassReader extends HttpServlet {
+public class ProductReader extends HttpServlet {
 
 	Connection con;
 
@@ -20,10 +20,9 @@ public class ProductClassReader extends HttpServlet {
 		ServletOutputStream out = res.getOutputStream();
 
 		try {
-			String empno = req.getParameter("p_id");
+			String empno = req.getParameter("pro_id");
 			String empno2 = new String (empno.getBytes("ISO-8859-1"),"UTF-8");
 			Statement stmt = con.createStatement();
-			System.out.println("??????");
 			ResultSet rs = stmt.executeQuery(
 				"SELECT pro_image from PRODUCT where pro_id = '"+empno2+"' ");
 			if (rs.next()) {

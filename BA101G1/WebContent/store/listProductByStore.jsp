@@ -19,61 +19,132 @@
 
 
 <jsp:useBean id="storeSvc" scope="page" class="com.store.model.StoreService" />
+<jsp:useBean id="storeclassSvc" scope="page" class="com.store_class.model.StoreClassService" />
+
 <html>
 <head>
-<title>商品查詢結果 - listProductByStore.jsp</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>吃訂我線上訂餐系統</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 </head>
-<body bgcolor='white'>
-<b><font color=red>此頁練習採用 Script 的寫法取值:</font></b>
-<table border='1' cellpadding='5' cellspacing='0' width='800'>
-	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-		<td>
-		<h3>商品查詢結果 - listProductByStore.jsp</h3>
-		<h1>${storeVO.store_name}</h1>
-		<a href="<%=request.getContextPath()%>/index.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
-		</td>
-	</tr>
-</table>
-
-<table border='1' bordercolor='#CCCCFF' width='800'>
-	<tr>
-		<th>商品圖片</th>
-		<th>商家名稱</th>
-		<th>商品價格</th>
-		<th>商品編號</th>
-		<th>商品說明</th>
-		<th>商品數量</th>
-		<th>加入購物車</th>
-	</tr>
-	
-	<c:forEach var="product" items="${productlist}">
-		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do">
-		<tr align='center' valign='middle'>
-			<td><IMG src="<%=request.getContextPath()%>/ProDBGifReader?pro_id=${product.pro_id}"></td>
-			<td>${product.pro_name}</td>
-			<td>${product.pro_price}</td>
-			<td>${product.pro_id}</td>
-			<td>${product.pro_content}</td>
-			<td>
-				<div>數量： <input type="text" name="quantity" size="3" value=1></div>
-			</td>
-			<td>
+<body>
+	<div id="page">
+		<div id="header">
+			<div id="logo">
+				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
+				<span id="login"><a href="news.html">Login in</a></span>
+				<span id="login"><a href="news.html">購物車</a></span>
+			
+				<ul>
+					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
+					<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
+					<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
+					<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
+					<li><a href="news.html">最新消息</a></li>
+				</ul>
+			</div>
+		</div>
+		
+		<div id="contents">
+			<div id="main">
+				<div id="items">
+					<h1>${storeVO.store_name}</h1>
+					<ul>
+						<c:forEach var="product" items="${productlist}">
+						<li class="box">
+							<IMG src="<%=request.getContextPath()%>/ProductClassReader?pro_id=${product.pro_id}" height="186" width="178">
+							<h3>${product.pro_name}</h3>
+							<span class="price">$ ${product.pro_price}</span>
+							<div>數量： <input type="text" name="quantity" size="3" value=1></div>
+							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do">
+								<input type="submit" value="加入購物車"> 
+							    <input type="hidden" name="pro_name" value="${product.pro_name}">
+							    <input type="hidden" name="pro_price" value="${product.pro_price}">
+							    <input type="hidden" name="pro_id" value="${product.pro_id}">
+							    <input type="hidden" name="store_id" value="${storeVO.store_id}"> 
+							    <input type="hidden" name="pro_content" value="${product.pro_content}">       
+							    <input type="hidden" name="action"	value="getOne_In_ShoppingCart">
+							</FORM>
+						</li>
+						</c:forEach>
+					</ul>
+				</div>
 				
-			     <input type="submit" value="加入購物車"> 
-			     <input type="hidden" name="pro_name" value="${product.pro_name}">
-			     <input type="hidden" name="pro_price" value="${product.pro_price}">
-			     <input type="hidden" name="pro_id" value="${product.pro_id}">
-			     <input type="hidden" name="store_id" value="${storeVO.store_id}"> 
-			     <input type="hidden" name="pro_content" value="${product.pro_content}">       
-			     <input type="hidden" name="action"	value="getOne_In_ShoppingCart"></FORM>
-			</td>
-		<tr>
-	</c:forEach>
+				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do">
+						<input type="submit" value="前往購物車" >
+						<input type="hidden" name="action"	value="goto_ShoppingCart">
+				</FORM>
+			</div>
+			<div id="store_sidebar">
+				<div class="store_logo">
+					<IMG src="<%=request.getContextPath()%>/StoreReader?store_id=${storeVO.store_id}" height="186" width="178">
+				</div>
+				<div class="introduction">
+					<div id="title">
+						<h1>餐點簡介</h1>
+					</div>
+					<span>${storeVO.store_content}</span>
+				</div>
+				<div class="information">
+					<div id="title">
+						<h1>餐廳資訊</h1>
+					</div>
+					<span>地址：${storeVO.store_addr} <br>
+					電話：${storeVO.store_phone} <br>
+					餐廳類型：
+					<c:forEach var="storeclasslistVO" items="${storeclassSvc.all}">
+						<c:if test="${storeVO.sc_id==storeclasslistVO.sc_id}">
+		                    ${storeclasslistVO.sc_name}
+	                    </c:if>
+					</c:forEach>
+					<br>
+					<br>
+					商店評價：<br>
+						<c:if test="${storeVO.store_star >= 0 && storeVO.store_star < 20}">
+		              		★☆☆☆☆
+	                    </c:if>
+	                    <c:if test="${storeVO.store_star >= 20 && storeVO.store_star < 40}">
+		              		★★☆☆☆
+	                    </c:if>
+	                    <c:if test="${storeVO.store_star >= 40 && storeVO.store_star < 60}">
+		              		★★★☆☆
+	                    </c:if>
+	                    <c:if test="${storeVO.store_star >= 60 && storeVO.store_star < 80}">
+		              		★★★★☆
+	                    </c:if>
+	                    <c:if test="${storeVO.store_star >= 80}">
+		              		★★★★★
+	                    </c:if>
+					</span>
+				</div>
+			</div>
+		</div>
+		
+		<div id="footer">
+			<ul class="navigation">
+					<li class="selected">
+						<a href="index.html">Home</a>
+					</li>
+					<li>
+						<a href="news.html">最新消息</a>
+					</li>
+					<li>
+						<a href="cosmetics.html">熱門商家</a>
+					</li>
+					<li>
+						<a href="skincare.html">找商家</a>
+					</li>
+					<li>
+						<a href="fragrance.html">找商品</a>
+					</li>	
+			</ul>
+			<p id="footnote">Eternal Beauty Essentials 2012. All Rights Reserved.</p>
+		</div>
+	</div>
+
 	
-</table>
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do">
-	<input type="submit" value="前往購物車" >
-	<input type="hidden" name="action"	value="goto_ShoppingCart"></FORM>
 
 </body>
 </html>
