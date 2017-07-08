@@ -28,6 +28,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 	private static final String Find_ALL = "select * from PRODUCT ";
 	private static final String Find_NAME = "select * from PRODUCT where pro_name like ?";
 	private static final String CLASSLINK = "select * from PRODUCT where pc_id = ?";
+	
 
 	@Override
 	public void insert(ProductVO productVO) {
@@ -252,7 +253,6 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		}
 		return productlist;
 	}
-
 	
 	@Override
 	public List<ProductVO> findName(String pro_name) {
@@ -267,7 +267,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(Find_NAME);
 
-			pstmt.setString(1, "%"+ pro_name +"%");
+			pstmt.setString(1, "%"+pro_name+"%");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				proVO = new ProductVO();
@@ -311,7 +311,8 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		}
 		return productlist;
 	}
-
+	
+	
 	@Override
 	public List<ProductVO> ClassLink(String pc_id) {
 		List<ProductVO> productlist = new ArrayList<ProductVO>();
@@ -381,16 +382,31 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		ProductJDBCDAO productdao = new ProductJDBCDAO();
 		//·s¼W
 		ProductVO productVO1=new ProductVO();
+<<<<<<< HEAD
 		productVO1.setStore_id("STO-000004");
 		productVO1.setPro_name("¤j³Á§J");
 		productVO1.setPro_price(80);
 	
+=======
+		productVO1.setStore_id("STO-000002");
+		productVO1.setPro_name("¤û¦×ÄÑ");
+		productVO1.setPro_price(150);
+>>>>>>> branch 'ç¬¨' of https://github.com/w837501/BA101G1.git
 		productVO1.setPro_state("¤W¬[");
+<<<<<<< HEAD
 		byte[] pic = getPictureByteArray("C:/Users/glayk/git/BA101G1/BA101G1/WebContent/FakeInfo/Big-Mac.png");
+=======
+		byte[] pic = getPictureByteArray("WebContent/FakeInfo/BeefNoodles.jpg");
+>>>>>>> branch 'ç¬¨' of https://github.com/w837501/BA101G1.git
 		productVO1.setPro_image(pic);
+<<<<<<< HEAD
 		productVO1.setPc_id("0");
 		productVO1.setPro_content("BBBB");
 		
+=======
+		productVO1.setPc_id("1");
+		productVO1.setPro_content("§Ú¬O¤û¦×ÄÑ");
+>>>>>>> branch 'ç¬¨' of https://github.com/w837501/BA101G1.git
 		
 		productdao.insert(productVO1);
 		
@@ -474,4 +490,5 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		fis.close();	
 		return baos.toByteArray();
 	}
+
 }

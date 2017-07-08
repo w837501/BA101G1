@@ -11,8 +11,7 @@ public class ProductVO implements java.io.Serializable {
 	private String pro_content;
 	private Number quantity;
 	private String pc_id;
-	
-	
+	private String pc_name;
 	
 	public String getPro_id() {
 		return pro_id;
@@ -74,5 +73,11 @@ public class ProductVO implements java.io.Serializable {
 	}
 	public void setPc_id(String pc_id) {
 		this.pc_id = pc_id;
+	}
+	public String getPc_name() {
+		return pc_name;
+	}
+	public void setPc_name(String pc_name) {
+		this.pc_name = pc_name;
 	}
 }
