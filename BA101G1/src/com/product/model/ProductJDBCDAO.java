@@ -382,31 +382,21 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		ProductJDBCDAO productdao = new ProductJDBCDAO();
 		//·s¼W
 		ProductVO productVO1=new ProductVO();
-<<<<<<< HEAD
 		productVO1.setStore_id("STO-000004");
 		productVO1.setPro_name("¤j³Á§J");
 		productVO1.setPro_price(80);
 	
-=======
 		productVO1.setStore_id("STO-000002");
 		productVO1.setPro_name("¤û¦×ÄÑ");
 		productVO1.setPro_price(150);
->>>>>>> branch 'ç¬¨' of https://github.com/w837501/BA101G1.git
 		productVO1.setPro_state("¤W¬[");
-<<<<<<< HEAD
-		byte[] pic = getPictureByteArray("C:/Users/glayk/git/BA101G1/BA101G1/WebContent/FakeInfo/Big-Mac.png");
-=======
 		byte[] pic = getPictureByteArray("WebContent/FakeInfo/BeefNoodles.jpg");
->>>>>>> branch 'ç¬¨' of https://github.com/w837501/BA101G1.git
 		productVO1.setPro_image(pic);
-<<<<<<< HEAD
 		productVO1.setPc_id("0");
 		productVO1.setPro_content("BBBB");
 		
-=======
 		productVO1.setPc_id("1");
 		productVO1.setPro_content("§Ú¬O¤û¦×ÄÑ");
->>>>>>> branch 'ç¬¨' of https://github.com/w837501/BA101G1.git
 		
 		productdao.insert(productVO1);
 		

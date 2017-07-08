@@ -30,15 +30,9 @@ public class ProductDAO implements ProductDAO_interface{
 			"INSERT INTO PRODUCT (PRO_ID,STORE_ID,PRO_NAME,PRO_PRICE,PRO_STATE,PRO_IMAGE,PC_ID,PRO_CONTENT) VALUES ('PRO'||'-'||LPAD(to_char(store_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?)";
 		private static final String DELETE = 
 			"DELETE FROM PRODUCT where pro_id = ?";
-		private static final String UPDATE_STMT = 
-<<<<<<< HEAD
-			"UPDATE PRODUCT set store_id=?, pro_name=?, pro_price=?, pro_state=?, pro_image=?, pc_id=?, pro_content=? where pro_id = ?";
+		private static final String UPDATE_STMT ="UPDATE PRODUCT set store_id=?, pro_name=?, pro_price=?, pro_total=?, pro_state=?, pro_image=?, pc_id=?, pro_content=? where pro_id = ?";
 		private static final String Find_by_PK = "select * from PRODUCT where pro_id=? and pro_state = '¤W¬['";
 		private static final String Find_by_PK2 = "select * from PRODUCT where pro_id=? ";
-=======
-			"UPDATE PRODUCT set store_id=?, pro_name=?, pro_price=?, pro_total=?, pro_state=?, pro_image=?, pc_id=?, pro_content=? where pro_id = ?";
-		private static final String Find_by_PK = "select * from PRODUCT where pro_id=? and pro_state = '¤W¬['";
->>>>>>> branch 'ç¬¨' of https://github.com/w837501/BA101G1.git
 		private static final String Find_ALL = "select * from PRODUCT ";
 		private static final String Find_NAME = "select * from PRODUCT where pro_name like ?  and pro_state = '¤W¬['";
 		private static final String CLASSLINK = "select c.pc_id, c.pc_name, p.pro_id, p.pro_name, p.pro_price, p.store_id from product p join product_class c on (p.pc_id = c.pc_id) where p.pc_id = ?";

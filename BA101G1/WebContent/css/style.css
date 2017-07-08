@@ -32,7 +32,7 @@ img {
 }
 */
 #sidebar .cart, #sidebar .news > h2, #cart .frame, #compute .frame2 {
-	/**background: url(../images/frames.png) no-repeat;**/
+	background: url(../images/frames.png) no-repeat;
 }
 .btnCart, .btn, .checkout, .shopping, .update, .order {
 	background: url(../images/buttons.png) no-repeat;
@@ -150,7 +150,7 @@ img {
 }
 #logo span#login a{
 	float: right;
-	margin: 20px 20px 20px 0px;
+	margin: 20px 20px 20px 20px;
 	background: url(../images/bg-find-out.png) repeat;
 	color: #fff;
 	font-size: 14px;
@@ -222,15 +222,19 @@ img {
 #contentsHome div#main div#adbox img{
 	width:100%;
 }
+
+#contentsHome div#sidebar{
+	width:130px;
+}
+
+
 /*------------------------------ CONTENTS ------------------------------*/
 #contents {
 	display: inline-block;
 	min-height: 950px;
-	width: 940px;
-	padding: 0 10px 17px;
+	width: 90%;
 }
 #contents p {
-	color: #f7f7f7;
 	font-size: 12px;
 	line-height: 18px;
 	margin: 0;
@@ -249,8 +253,6 @@ img {
 	margin: 0 0 17px;
 	padding: 0 20px;
 }
-<<<<<<< HEAD
-=======
 #contents div#main div#adbox img{
 	width:100%;
 }
@@ -300,13 +302,7 @@ img {
 }
 
 
->>>>>>> branch '笨' of https://github.com/w837501/BA101G1.git
 /** MAIN **/
-#main02 {
-	
-}
-
-
 #main {
 	float: right;
 	display: inline-block;
@@ -331,8 +327,7 @@ img {
 	margin: 0 0 15px;
 }
 #main form {
-	background: url(../images/bg-contentbox.png);
-	padding: 18px 20px;
+	
 }
 #main form > ul, #main form > ul li {
 	display: inline-block;
@@ -379,8 +374,6 @@ form#message {
 	display: inline-block;
 	width: 220px;
 }
-
-
 /** #adbox **/
 #adbox {
 	margin: 0 0 14px;
@@ -412,18 +405,14 @@ form#message {
 #adbox .info{
 	background-color: #fff;
 	opacity: 0.8;
-	height: 100px;
+	height: 150px;
 	padding-top: 18px;
 	margin: 0 0 0 19%;
 	text-align: center;
 }
-<<<<<<< HEAD
-/*首頁的banner上的文字、框框、按鈕*/
-=======
 
 
 /*擐��anner銝����������*/
->>>>>>> branch '笨' of https://github.com/w837501/BA101G1.git
 #adbox .info h1, #adbox .shop {
 	background-position: 0 -52px;
 	color: #D6656A;
@@ -671,7 +660,7 @@ form#message {
 }
 #sidebar > h1 {
 	color: #b9315a;
-	font-size: 30px;
+	font-size: 20px;
 	height: 36px;
 	line-height: 36px;
 	margin: 28px 0 30px;
@@ -813,42 +802,6 @@ form#message {
 }
 #store_sidebar {
 	/**background-color: #fff;**/
-<<<<<<< HEAD
-	float:left;
-	width:200px;
-}
-#store_sidebar img {
-	width:100%;
-}
-
-#store_sidebar .store_logo,#store_sidebar .introduction,#store_sidebar .information {
-	background-color: #fff;
-	padding:5px 10px 15px 10px;
-}
-#store_sidebar div#title {
-	background-color: #D6656A;
-	height:50px;
-	margin-bottom: 10px;
-}
-
-#store_sidebar h1 {
-	color: #fff;
-	font-size: 25px;
-	height: 36px;
-	line-height: 36px;
-	padding:7px;
-}
-#store_sidebar span {
-	color:gray;
-	font-size: 20px;
-	height: 36px;
-	line-height: 20px;
-	padding-left: 13px;
-}
-
-
-
-=======
 	float: left;
 	height: auto;
 	width: 200px;
@@ -881,7 +834,6 @@ form#message {
 	height: 36px;
 	line-height: 20px;
 }
->>>>>>> branch '笨' of https://github.com/w837501/BA101G1.git
 
 /** About **/
 #about {
@@ -1011,27 +963,17 @@ form#message {
 	line-height: 20px;
 	margin: 2px 0 10px;
 	text-decoration: none;
-	text-transform: uppercase;
 }
 #items ul {
 	display: inline-block;
 	width: 720px;
 	margin-left: -10px;
 }
-#items > h1 {
-	color: #D6656A;
-	display: block;
-	font-size: 40px;
-	line-height: 20px;
-	text-transform: uppercase;
-	margin-bottom: 30px;
-}
 #items > h3 {
 	color: #D6656A;
 	display: block;
 	font-size: 25px;
 	line-height: 20px;
-	text-transform: uppercase;
 }
 #items li {
 	float: left;
@@ -1130,7 +1072,7 @@ form#cart table thead th {
 	margin-right: 20px;
 }
 #cart tfoot {
-	background-color: #D6656A;
+	background-color: #b9315a;
 	color: #fff;
 	padding: 1px;
 }
