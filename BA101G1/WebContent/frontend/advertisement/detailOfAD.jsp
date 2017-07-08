@@ -49,7 +49,7 @@ AdVO adVO=adSvc.getOneAd(ad_id);
 		<div id="ad" align="center">
 			<h1>${adVO.ad_name}</h1>
 			<h2><fmt:formatDate value="${adVO.ad_time}" pattern="yyyy-MM-dd"/></h2>
- 			<hr style="border-color: red;">
+<!--  			<hr style="border-color: red;"> -->
 			<img src="<%=request.getContextPath()%>/advertisement/DBGifReader.do?ad_id=${adVO.ad_id}"style="max-width: 250px; max-height: 250px;"></img>
 			<div id="content">
 				<h3>${adVO.ad_content}</h3>
