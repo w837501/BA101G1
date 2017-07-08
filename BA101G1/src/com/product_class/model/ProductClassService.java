@@ -19,4 +19,7 @@ public class ProductClassService {
 	public List<ProductClassVO> getProductClassById(String pc_id){
 		return dao.getProductClassById(pc_id);
 	}
+	public ProductClassVO getPC_Name(String pc_id){
+		return dao.getPCname(pc_id);
+	}
 }

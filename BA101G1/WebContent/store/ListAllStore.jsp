@@ -33,7 +33,7 @@
 	</font>
 </c:if>	
 	<jsp:useBean id="storeclassSvc" scope="page" class="com.store_class.model.StoreClassService" />
-<table border='1' bordercolor='#ccf' width='600'>
+<table border='1' bordercolor='#ccf' width='1200'>
 	<tr>
 		<th>商家編號</th>
 		<th>商家名稱</th>

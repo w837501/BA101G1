@@ -31,8 +31,9 @@ public class ProductDAO implements ProductDAO_interface{
 		private static final String DELETE = 
 			"DELETE FROM PRODUCT where pro_id = ?";
 		private static final String UPDATE_STMT = 
-			"UPDATE PRODUCT set store_id=?, pro_name=?, pro_price=?, pro_total=?, pro_state=?, pro_image=?, pc_id=?, pro_content=? where pro_id = ?";
-		private static final String Find_by_PK = "select * from PRODUCT where pro_id=? and pro_state = '上架'";;
+			"UPDATE PRODUCT set store_id=?, pro_name=?, pro_price=?, pro_state=?, pro_image=?, pc_id=?, pro_content=? where pro_id = ?";
+		private static final String Find_by_PK = "select * from PRODUCT where pro_id=? and pro_state = '上架'";
+		private static final String Find_by_PK2 = "select * from PRODUCT where pro_id=? ";
 		private static final String Find_ALL = "select * from PRODUCT ";
 		private static final String Find_NAME = "select * from PRODUCT where pro_name like ?  and pro_state = '上架'";
 		private static final String CLASSLINK = "select * from PRODUCT where pc_id = ? and pro_state = '上架'";
@@ -47,14 +48,13 @@ public class ProductDAO implements ProductDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, productVO.getPro_id());
-			pstmt.setString(2, productVO.getStore_id());
-			pstmt.setString(3, productVO.getPro_name());
-			pstmt.setInt(4, (int)productVO.getPro_price());
-			pstmt.setString(5, productVO.getPro_state());
-			pstmt.setBytes(6, productVO.getPro_image());
-			pstmt.setString(7, productVO.getPc_id());
-			pstmt.setString(8, productVO.getPro_content());
+			pstmt.setString(1, productVO.getStore_id());
+			pstmt.setString(2, productVO.getPro_name());
+			pstmt.setInt(3, (int)productVO.getPro_price());
+			pstmt.setString(4, productVO.getPro_state());
+			pstmt.setBytes(5, productVO.getPro_image());
+			pstmt.setString(6, productVO.getPc_id());
+			pstmt.setString(7, productVO.getPro_content());
 
 			pstmt.executeUpdate();
 
@@ -87,12 +87,11 @@ public class ProductDAO implements ProductDAO_interface{
 			pstmt.setString(1, productVO.getStore_id());
 			pstmt.setString(2, productVO.getPro_name());
 			pstmt.setInt(3, (int)productVO.getPro_price());
-			pstmt.setInt(4, (int)productVO.getPro_total());
-			pstmt.setString(5, productVO.getPro_state());
-			pstmt.setBytes(6, productVO.getPro_image());
-			pstmt.setString(7, productVO.getPc_id());
-			pstmt.setString(8, productVO.getPro_content());
-			pstmt.setString(9, productVO.getPro_id());
+			pstmt.setString(4, productVO.getPro_state());
+			pstmt.setBytes(5, productVO.getPro_image());
+			pstmt.setString(6, productVO.getPc_id());
+			pstmt.setString(7, productVO.getPro_content());
+			pstmt.setString(8, productVO.getPro_id());
 
 			pstmt.executeUpdate();
 
@@ -153,7 +152,7 @@ public class ProductDAO implements ProductDAO_interface{
 
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(Find_by_PK);
+			pstmt = con.prepareStatement(Find_by_PK2);
 
 			pstmt.setString(1, pro_id);
 			rs = pstmt.executeQuery();
