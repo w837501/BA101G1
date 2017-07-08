@@ -382,14 +382,14 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		//新增
 		ProductVO productVO1=new ProductVO();
 		productVO1.setStore_id("STO-000004");
-		productVO1.setPro_name("賣相雞");
-		productVO1.setPro_price(60);
+		productVO1.setPro_name("大麥克");
+		productVO1.setPro_price(80);
 	
 		productVO1.setPro_state("上架");
-		byte[] pic = getPictureByteArray("C:/Users/glayk/git/BA101G1/BA101G1/WebContent/FakeInfo/McChicken.png");
+		byte[] pic = getPictureByteArray("C:/Users/glayk/git/BA101G1/BA101G1/WebContent/FakeInfo/Big-Mac.png");
 		productVO1.setPro_image(pic);
 		productVO1.setPc_id("0");
-		productVO1.setPro_content("GGGGBBBBB");
+		productVO1.setPro_content("BBBB");
 		
 		
 		productdao.insert(productVO1);
