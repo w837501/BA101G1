@@ -14,8 +14,6 @@
         <!-- CUSTOM STYLES-->
     <link href="<%=request.getContextPath() %>/backend/assets/css/custom.css" rel="stylesheet" />
     	<!-- LOGIN STYLES -->
-    <link href="<%=request.getContextPath() %>/backend/assets/css/login.css" rel="stylesheet" />
-    <script src="<%=request.getContextPath() %>/backend/assets/js/login.js"></script>
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>

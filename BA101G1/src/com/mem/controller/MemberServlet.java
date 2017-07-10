@@ -76,7 +76,6 @@ public class MemberServlet extends HttpServlet {
 				String mem_id=new String(req.getParameter("mem_id"));
 				MemberService memberSvc=new MemberService();
 				MemberVO memberVO=memberSvc.getOneMem(mem_id);
-				System.out.println("mem_id1:"+mem_id);
 				req.setAttribute("memberVO", memberVO);
 				
 				String url="/backend/mem/select_mem.jsp";
