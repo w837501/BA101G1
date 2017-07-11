@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.mem.model.*" %>
 <%
-	MemberVO memberVO=(MemberVO)request.getAttribute("memberVO");
+	MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -15,9 +15,7 @@
 <table border='1' cellpadding='5' cellspacing='0' width='600'>
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
 		<td>
-		<h3>員工資料 - ListOneEmp.jsp</h3>
-		<a href="select_mem.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
-		</td>
+		<h3><%=memberVO.getMem_name() %>的會員資料</h3>
 	</tr>
 </table>
 <table border='1' bordercolor='#ccf' width='600'>
@@ -25,8 +23,8 @@
 		<th>會員編號</th>
 		<th>會員姓名</th>
 		<th>會員電話</th>
-		<th>會員編密碼</th>
-		<th>會員編信箱</th>
+		<th>會員密碼</th>
+		<th>會員信箱</th>
 		
 	</tr>
 	<tr align='center' valign='middle'>
