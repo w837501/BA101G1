@@ -14,14 +14,12 @@ public class ProductService {
 		dao = new ProductDAO();
 	}
 	
-	public ProductVO addPro(String store_id, String pro_id, String pro_name, Number pro_price,Number pro_total, String pro_state, byte[] pro_image,String pc_id,String pro_content){
+	public ProductVO addPro(String store_id, String pro_name, Number pro_price, String pro_state, byte[] pro_image,String pc_id,String pro_content){
 		ProductVO proVO=new ProductVO();
 		
 		proVO.setStore_id(store_id);
-		proVO.setPro_id(pro_id);
 		proVO.setPro_name(pro_name);
 		proVO.setPro_price(pro_price);
-		proVO.setPro_total(pro_total);
 		proVO.setPro_state(pro_state);
 		proVO.setPro_image(pro_image);
 		proVO.setPc_id(pc_id);
@@ -32,14 +30,13 @@ public class ProductService {
 		return proVO;
 	}
 	
-	public ProductVO updatePro(String store_id, String pro_id, String pro_name, Number pro_price,Number pro_total, String pro_state, byte[] pro_image,String pc_id,String pro_content){
+	public ProductVO updatePro(String store_id, String pro_id, String pro_name, Number pro_price, String pro_state, byte[] pro_image,String pc_id,String pro_content){
 		ProductVO proVO=new ProductVO();
 		
 		proVO.setStore_id(store_id);
 		proVO.setPro_id(pro_id);
 		proVO.setPro_name(pro_name);
 		proVO.setPro_price(pro_price);
-		proVO.setPro_total(pro_total);
 		proVO.setPro_state(pro_state);
 		proVO.setPro_image(pro_image);
 		proVO.setPc_id(pc_id);
@@ -61,8 +58,8 @@ public class ProductService {
 	public List<ProductVO> getName(String pro_name) {
 		return dao.findName(pro_name);
 	}
-	public List<ProductVO> getProductClass(String sc_id) {
-		return dao.ClassLink(sc_id);
+	public List<ProductVO> getProductClass(String pc_id) {
+		return dao.ClassLink(pc_id);
 	}
 	public List<ProductVO> getProductByStore(String store_id){
 		return dao.findProductByStore_id(store_id);

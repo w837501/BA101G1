@@ -53,7 +53,7 @@ public class AdService {
 		return dao.findByPrimaryKey(ad_id);
 	}
 	public List<AdVO> getAll() {
-		return dao.getAll();
+		return dao.getAvailableAD();
 	}
 	public List<AdVO> getAvailableAD() {
 		return dao.getAvailableAD();

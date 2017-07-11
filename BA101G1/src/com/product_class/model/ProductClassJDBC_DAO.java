@@ -198,5 +198,49 @@ public class ProductClassJDBC_DAO implements ProductClassDAO_interface{
 		return baos.toByteArray();
 	}
 
+	@Override
+	public ProductClassVO getPCname(String pc_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ProductClassVO productclassVO = null;
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(getAllById);
+
+			pstmt.setString(1, pc_id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				productclassVO = new ProductClassVO();
+				productclassVO.setPc_name(rs.getString("pc_name"));
+				productclassVO.setPc_id(rs.getString("pc_id"));
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return productclassVO;
+	}
+
 	
 }

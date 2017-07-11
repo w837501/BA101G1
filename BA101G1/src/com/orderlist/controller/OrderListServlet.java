@@ -23,10 +23,9 @@ public class OrderListServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		
 		
-		if ("getOneOrder_For_DetailDisplay".equals(action)) { // 來自listOrderByMem_id.jsp的請求
+		if ("getOneOrder_For_DetailDisplay".equals(action)) { 
 			
 
-			System.out.println("Controller OrderList 第28行");
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -34,7 +33,6 @@ public class OrderListServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 
 				String str1 = req.getParameter("order_id");
 
@@ -48,26 +46,22 @@ public class OrderListServlet extends HttpServlet {
 				String order_id = req.getParameter("order_id");
 				System.out.println("order_id"+order_id);
 
-				/***************************2.開始查詢資料*****************************************/
 				OrderlistService orderSvc = new OrderlistService();
 				List<OrderlistVO> orderlistVO=new LinkedList<OrderlistVO>();
-				orderlistVO= orderSvc.getOrderlist(order_id);//DAO方法
-				System.out.println("第44行");
+				orderlistVO= orderSvc.getOrderlist(order_id);
 
 				
 			
 				
-				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("orderlistVO", orderlistVO); // 資料庫取出的empVO物件,存入req
+				req.setAttribute("orderlistVO", orderlistVO); 
 				
 				String url = "/frontend/selectOrder/orderDetail.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交listOneEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
-				/***************************其他可能的錯誤處理*************************************/
 			} catch (Exception e) {
 				
-				errorMsgs.add("無法取得資料:" + e.getMessage());
+				errorMsgs.add( e.getMessage());
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/frontend/selectOrder/listOrderByMem.jsp");
 				failureView.forward(req, res);

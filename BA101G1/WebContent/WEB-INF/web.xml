@@ -159,4 +159,33 @@
     <servlet-name>storereader</servlet-name>
     <url-pattern>/StoreReader</url-pattern>
   </servlet-mapping>
+	 <servlet>
+    <servlet-name>ProDBGifReader</servlet-name>
+    <servlet-class>com.product.controller.DBGifReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProDBGifReader</servlet-name>
+    <url-pattern>/ProDBGifReader</url-pattern>
+  </servlet-mapping>
+	 <servlet>
+    <servlet-name>MemberLoginHandler</servlet-name>
+    <servlet-class>com.mem.controller.MemberLoginHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberLoginHandler</servlet-name>
+    <url-pattern>/MemberLoginHandler</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <filter-name>MemberLoginFilter</filter-name>
+    <filter-class>com.mem.controller.MemberLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>MemberLoginFilter</filter-name>
+    <url-pattern>/frontend/mem/member_info.jsp</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+    <dispatcher>ASYNC</dispatcher>
+  </filter-mapping>
 </web-app>

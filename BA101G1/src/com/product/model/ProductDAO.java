@@ -30,15 +30,15 @@ public class ProductDAO implements ProductDAO_interface{
 			"INSERT INTO PRODUCT (PRO_ID,STORE_ID,PRO_NAME,PRO_PRICE,PRO_STATE,PRO_IMAGE,PC_ID,PRO_CONTENT) VALUES ('PRO'||'-'||LPAD(to_char(store_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?)";
 		private static final String DELETE = 
 			"DELETE FROM PRODUCT where pro_id = ?";
-		private static final String UPDATE_STMT = 
-			"UPDATE PRODUCT set store_id=?, pro_name=?, pro_price=?, pro_total=?, pro_state=?, pro_image=?, pc_id=?, pro_content=? where pro_id = ?";
-		private static final String Find_by_PK = "select * from PRODUCT where pro_id=? and pro_state = '上架'";;
+		private static final String UPDATE_STMT ="UPDATE PRODUCT set store_id=?, pro_name=?, pro_price=?, pro_total=?, pro_state=?, pro_image=?, pc_id=?, pro_content=? where pro_id = ?";
+		private static final String Find_by_PK = "select * from PRODUCT where pro_id=? and pro_state = '上架'";
+		private static final String Find_by_PK2 = "select * from PRODUCT where pro_id=? ";
 		private static final String Find_ALL = "select * from PRODUCT ";
 		private static final String Find_NAME = "select * from PRODUCT where pro_name like ?  and pro_state = '上架'";
-		private static final String CLASSLINK = "select * from PRODUCT where pc_id = ? and pro_state = '上架'";
+		private static final String CLASSLINK = "select c.pc_id, c.pc_name, p.pro_id, p.pro_name, p.pro_price, p.store_id from product p join product_class c on (p.pc_id = c.pc_id) where p.pc_id = ?";
 		private static final String Find_By_Store_id 
 		= "select pro_id, pro_name, pro_price, pro_content from product where store_id = ? and pro_state = '上架'";
-	
+
 	@Override
 	public void insert(ProductVO productVO) {
 		Connection con = null;
@@ -47,14 +47,13 @@ public class ProductDAO implements ProductDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, productVO.getPro_id());
-			pstmt.setString(2, productVO.getStore_id());
-			pstmt.setString(3, productVO.getPro_name());
-			pstmt.setInt(4, (int)productVO.getPro_price());
-			pstmt.setString(5, productVO.getPro_state());
-			pstmt.setBytes(6, productVO.getPro_image());
-			pstmt.setString(7, productVO.getPc_id());
-			pstmt.setString(8, productVO.getPro_content());
+			pstmt.setString(1, productVO.getStore_id());
+			pstmt.setString(2, productVO.getPro_name());
+			pstmt.setInt(3, (int)productVO.getPro_price());
+			pstmt.setString(4, productVO.getPro_state());
+			pstmt.setBytes(5, productVO.getPro_image());
+			pstmt.setString(6, productVO.getPc_id());
+			pstmt.setString(7, productVO.getPro_content());
 
 			pstmt.executeUpdate();
 
@@ -87,12 +86,11 @@ public class ProductDAO implements ProductDAO_interface{
 			pstmt.setString(1, productVO.getStore_id());
 			pstmt.setString(2, productVO.getPro_name());
 			pstmt.setInt(3, (int)productVO.getPro_price());
-			pstmt.setInt(4, (int)productVO.getPro_total());
-			pstmt.setString(5, productVO.getPro_state());
-			pstmt.setBytes(6, productVO.getPro_image());
-			pstmt.setString(7, productVO.getPc_id());
-			pstmt.setString(8, productVO.getPro_content());
-			pstmt.setString(9, productVO.getPro_id());
+			pstmt.setString(4, productVO.getPro_state());
+			pstmt.setBytes(5, productVO.getPro_image());
+			pstmt.setString(6, productVO.getPc_id());
+			pstmt.setString(7, productVO.getPro_content());
+			pstmt.setString(8, productVO.getPro_id());
 
 			pstmt.executeUpdate();
 
@@ -153,7 +151,7 @@ public class ProductDAO implements ProductDAO_interface{
 
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(Find_by_PK);
+			pstmt = con.prepareStatement(Find_by_PK2);
 
 			pstmt.setString(1, pro_id);
 			rs = pstmt.executeQuery();
@@ -322,15 +320,12 @@ public class ProductDAO implements ProductDAO_interface{
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				proVO=new ProductVO();
-				proVO.setStore_id(rs.getString("store_id"));
+				proVO.setPc_id(rs.getString("Pc_id"));
+				proVO.setPc_name(rs.getString("Pc_name"));
 				proVO.setPro_id(rs.getString("Pro_id"));
 				proVO.setPro_name(rs.getString("Pro_name"));
 				proVO.setPro_price(rs.getInt("Pro_price"));
-				proVO.setPro_total(rs.getInt("Pro_total"));
-				proVO.setPro_state(rs.getString("Pro_state"));
-				proVO.setPro_image(rs.getBytes("Pro_image"));
-				proVO.setPc_id(rs.getString("Pc_id"));
-				proVO.setPro_content(rs.getString("Pro_content"));
+				proVO.setStore_id(rs.getString("store_id"));
 				productlist.add(proVO);
 			}
 		} catch (SQLException e) {
@@ -360,6 +355,7 @@ public class ProductDAO implements ProductDAO_interface{
 		}
 		return productlist;
 	}
+	
 	@Override
 	public List<ProductVO> findProductByStore_id(String store_id) {
 		// TODO Auto-generated method stub
@@ -412,5 +408,4 @@ public class ProductDAO implements ProductDAO_interface{
 		}
 		return productlist;
 	}
-
 }
