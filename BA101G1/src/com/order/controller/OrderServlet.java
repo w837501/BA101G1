@@ -166,6 +166,7 @@ public class OrderServlet extends HttpServlet {
 						order_taketime, buylist);//insert order data and buylist
 				// req.setAttribute("orderVO", orderVO);
 				// req.setAttribute("orderlistVO", orderlistVO);
+				session.removeAttribute("shoppingcart");
 				String url = "/index.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
