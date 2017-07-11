@@ -54,11 +54,11 @@
 					<ul>
 						<c:forEach var="product" items="${productlist}">
 						<li class="box">
+							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do">
 							<IMG src="<%=request.getContextPath()%>/ProductClassReader?pro_id=${product.pro_id}" height="186" width="178">
 							<h3>${product.pro_name}</h3>
 							<span class="price">$ ${product.pro_price}</span>
 							<div>數量： <input type="text" name="quantity" size="3" value=1></div>
-							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do">
 								<input type="submit" value="加入購物車"> 
 							    <input type="hidden" name="pro_name" value="${product.pro_name}">
 							    <input type="hidden" name="pro_price" value="${product.pro_price}">

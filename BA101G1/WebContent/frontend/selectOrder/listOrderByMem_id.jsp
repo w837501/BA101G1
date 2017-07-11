@@ -4,9 +4,6 @@
 <%@ page import="com.store.model.*"%>
 <%@ page import="java.util.*"%>
 
-
-
-
 <html>
 <head>
 <title>­q³æ - listOneOrder.jsp</title>
