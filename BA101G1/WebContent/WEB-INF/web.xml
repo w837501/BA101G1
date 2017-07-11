@@ -86,7 +86,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>PushServlet</servlet-name>
-    <url-pattern>/backend/push/push.do</url-pattern>
+    <url-pattern>/push/push.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>MemberReportServlet</servlet-name>
@@ -94,7 +94,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>MemberReportServlet</servlet-name>
-    <url-pattern>/backend/memr/member_report.do</url-pattern>
+    <url-pattern>/member_report/member_report.do</url-pattern>
   </servlet-mapping>
     <servlet>
     <servlet-name>OrderListServlet</servlet-name>
@@ -119,7 +119,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>StoreReportServlet</servlet-name>
-    <url-pattern>/backend/str/store_report.do</url-pattern>
+    <url-pattern>/store_report/store_report.do</url-pattern>
   </servlet-mapping>
 
   

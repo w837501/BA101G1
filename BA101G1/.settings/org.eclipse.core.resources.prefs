@@ -1,8 +1,4 @@
 eclipse.preferences.version=1
 encoding//WebContent/backend/index.jsp=UTF-8
-
-encoding//WebContent/backend/mem/ListAllMem.jsp=UTF-8
-
 encoding//WebContent/css/style.css=UTF-8
-
 encoding//src/com/store/model/StoreJDBC_DAO.java=UTF-8

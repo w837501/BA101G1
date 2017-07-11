@@ -30,7 +30,7 @@ public class StoreReportServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "列出單一商家檢舉");    // 資料庫取出的set物件,存入request
+
 			try {
 			
 				String str = req.getParameter("sr_id");
@@ -70,7 +70,7 @@ public class StoreReportServlet extends HttpServlet {
 				}
 
 				req.setAttribute("srVO", srVO); 
-				String url = "/backend/str/selectPage.jsp";
+				String url = "/backend/str/listOneSR.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
@@ -87,7 +87,7 @@ public class StoreReportServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "修改單一商家檢舉");    // 資料庫取出的set物件,存入request
+
 			String requestURL = req.getParameter("requestURL"); 
 
 			try {
@@ -97,7 +97,7 @@ public class StoreReportServlet extends HttpServlet {
 				StoreReportVO srVO = srSvc.getOneStoreReport(sr_id);
 
 				req.setAttribute("srVO", srVO); 
-				String url = "/backend/str/selectPage.jsp";
+				String url = "/backend/str/update_sr_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
@@ -114,7 +114,7 @@ public class StoreReportServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "列出所有商家檢舉");    // 資料庫取出的set物件,存入request
+
 			String requestURL = req.getParameter("requestURL"); 
 
 			try {
@@ -174,8 +174,7 @@ public class StoreReportServlet extends HttpServlet {
 						sr_state, sr_result);
 
 
-//				String url = requestURL;
-				String url="/backend/str/selectPage.jsp";
+				String url = requestURL;
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
@@ -273,7 +272,7 @@ public class StoreReportServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "列出所有商家檢舉");    // 資料庫取出的set物件,存入request
+
 			String requestURL = req.getParameter("requestURL"); 
 
 			try {
@@ -287,8 +286,7 @@ public class StoreReportServlet extends HttpServlet {
 				// requestURL.equals("/dept/listAllDept.jsp"))
 				// req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(empVO.getDeptno()));
 				//
-//				String url = requestURL;
-				String url = "/backend/str/selectPage.jsp";
+				String url = requestURL;
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
@@ -297,13 +295,6 @@ public class StoreReportServlet extends HttpServlet {
 				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			}
-		}
-		if ("listAll".equals(action)) {
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("whichPage", "列出所有商家檢舉");    // 資料庫取出的set物件,存入request
-				String url = "/backend/str/selectPage.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
 		}
 	}
 
