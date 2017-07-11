@@ -22,7 +22,8 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 	private static final String DELETE = "DELETE FROM MEMBER where mem_id = ?";
 	private static final String Find_by_PK = "select * from MEMBER where mem_id=?";
 	private static final String Find_ALL = "select * from MEMBER ";
-	
+	private static final String Find_ACC = "select * from MEMBER where mem_mail=?";
+
 	@Override
 	public void insert(MemberVO memberVO) {
 		
@@ -288,5 +289,58 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 //			System.out.println(aMem.getMem_mail());
 //			System.out.println("---------------------");
 //		}
+	}
+
+	@Override
+	public MemberVO findAcc(String mem_mail) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberVO memberVO = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(Find_ACC);
+
+			pstmt.setString(1, mem_mail);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				memberVO=new MemberVO();
+				memberVO.setMem_name(rs.getString("mem_name"));
+				memberVO.setMem_phone(rs.getString("mem_phone"));
+				memberVO.setMem_pw(rs.getString("mem_pw"));
+				memberVO.setMem_mail(rs.getString("mem_mail"));
+				memberVO.setMem_id(rs.getString("mem_id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return memberVO;
 	}
 }

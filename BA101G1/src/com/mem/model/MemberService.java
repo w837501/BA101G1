@@ -46,4 +46,7 @@ private MemberDAO_interface dao;
 	public List<MemberVO> getAll() {
 		return dao.getAll();
 	}
+	public MemberVO getMem_Acc(String mem_mail) {
+		return dao.findAcc(mem_mail);
+	}
 }

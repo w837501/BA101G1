@@ -377,19 +377,19 @@ public class ProductServlet extends HttpServlet{
 
 		String pro_id = req.getParameter("pro_id");
 		String pro_name = req.getParameter("pro_name");
-		String pro_price = req.getParameter("pro_price");
+		Number pro_price = Integer.parseInt(req.getParameter("pro_price"));
 		String pro_content = req.getParameter("pro_content");
 		String store_id = req.getParameter("store_id");
-		String quantity = req.getParameter("quantity");
+		Number quantity =Integer.parseInt(req.getParameter("quantity"));
 
 		ProductVO productVO = new ProductVO();
 
 		productVO.setPro_id(pro_id);
 		productVO.setPro_name(pro_name);
-		productVO.setPro_price((new Integer(pro_price)).intValue());
+		productVO.setPro_price(pro_price);
 		productVO.setPro_content(pro_content);
 		productVO.setStore_id(store_id);
-		productVO.setQuantity((new Integer(quantity)).intValue());
+		productVO.setQuantity(quantity);
 		return productVO;
 	}
 	public static byte[] getPictureByteArrayFromWeb(Part part) throws IOException {
