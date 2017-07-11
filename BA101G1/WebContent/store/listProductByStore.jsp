@@ -15,7 +15,10 @@
 
 <%-- <%StoreVO storeVO = (StoreVO) request.getAttribute("storeVO");%> --%>
 
-
+<% 
+	StoreVO storeVO=(StoreVO)request.getAttribute("storeVO");
+	String avg=(String)request.getAttribute("avg");
+%>
 
 
 <jsp:useBean id="storeSvc" scope="page" class="com.store.model.StoreService" />
@@ -35,7 +38,6 @@
 			<div id="logo">
 				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
 				<span id="login"><a href="news.html">Login in</a></span>
-				<span id="login"><a href="news.html">購物車</a></span>
 			
 				<ul>
 					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
@@ -55,7 +57,7 @@
 						<c:forEach var="product" items="${productlist}">
 						<li class="box">
 							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do">
-							<IMG src="<%=request.getContextPath()%>/ProductClassReader?pro_id=${product.pro_id}" height="186" width="178">
+							<IMG src="<%=request.getContextPath()%>/ProDBGifReader?pro_id=${product.pro_id}" height="186" width="178">
 							<h3>${product.pro_name}</h3>
 							<span class="price">$ ${product.pro_price}</span>
 							<div>數量： <input type="text" name="quantity" size="3" value=1></div>
@@ -101,24 +103,28 @@
 					</c:forEach>
 					<br>
 					<br>
-					商店評價：<br>
-						<c:if test="${storeVO.store_star >= 0 && storeVO.store_star < 20}">
-		              		★☆☆☆☆
-	                    </c:if>
-	                    <c:if test="${storeVO.store_star >= 20 && storeVO.store_star < 40}">
-		              		★★☆☆☆
-	                    </c:if>
-	                    <c:if test="${storeVO.store_star >= 40 && storeVO.store_star < 60}">
-		              		★★★☆☆
-	                    </c:if>
-	                    <c:if test="${storeVO.store_star >= 60 && storeVO.store_star < 80}">
-		              		★★★★☆
-	                    </c:if>
-	                    <c:if test="${storeVO.store_star >= 80}">
-		              		★★★★★
-	                    </c:if>
+					商店評價：<%=avg %>
+							
+<%-- 						<c:if test="${storeVO.store_star >= 0 && storeVO.store_star < 20}"> --%>
+<!-- 		              		★☆☆☆☆ -->
+<%-- 	                    </c:if> --%>
+<%-- 	                    <c:if test="${storeVO.store_star >= 20 && storeVO.store_star < 40}"> --%>
+<!-- 		              		★★☆☆☆ -->
+<%-- 	                    </c:if> --%>
+<%-- 	                    <c:if test="${storeVO.store_star >= 40 && storeVO.store_star < 60}"> --%>
+<!-- 		              		★★★☆☆ -->
+<%-- 	                    </c:if> --%>
+<%-- 	                    <c:if test="${storeVO.store_star >= 60 && storeVO.store_star < 80}"> --%>
+<!-- 		              		★★★★☆ -->
+<%-- 	                    </c:if> --%>
+<%-- 	                    <c:if test="${storeVO.store_star >= 80}"> --%>
+<!-- 		              		★★★★★ -->
+<%-- 	                    </c:if> --%>
+					<br>
+					<a href="index.html">評論</a>&nbsp&nbsp&nbsp&nbsp<a href="index.html">檢舉</a>
 					</span>
 				</div>
+				
 			</div>
 		</div>
 		

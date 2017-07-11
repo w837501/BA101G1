@@ -14,8 +14,8 @@ public class StoreVO implements Serializable{
 	private String store_phone;
 	private String store_addr;
 	private Timestamp store_date;
-	private Number store_star;
-	private Number store_count;
+	private Double store_star;
+	private Double store_count;
 	private String store_state;
 	private byte[] store_image;
 	private Number store_report_count;
@@ -88,19 +88,19 @@ public class StoreVO implements Serializable{
 		this.store_date = store_date;
 	}
 
-	public Number getStore_star() {
+	public Double getStore_star() {
 		return store_star;
 	}
 
-	public void setStore_star(Number store_star) {
+	public void setStore_star(Double store_star) {
 		this.store_star = store_star;
 	}
 
-	public Number getStore_count() {
+	public Double getStore_count() {
 		return store_count;
 	}
 
-	public void setStore_count(Number store_count) {
+	public void setStore_count(Double store_count) {
 		this.store_count = store_count;
 	}
 

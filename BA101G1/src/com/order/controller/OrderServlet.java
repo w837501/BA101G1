@@ -80,7 +80,7 @@ public class OrderServlet extends HttpServlet {
 				 *************/
 				req.setAttribute("store_orderVO", store_orderVO); // 資料庫取出的empVO物件,存入req
 				// req.setAttribute("orderlistVO", orderlistVO);
-				String url = "/frontend/selectOrder/listOrderByMem_id.jsp";
+				String url = "/frontend/mem/member_info_order.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				System.out.println("successView" + successView);
 				// 成功轉交listOneEmp.jsp

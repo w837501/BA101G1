@@ -33,7 +33,7 @@
 						}
 
 						var emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
-						$("#mem_mail").blur(
+						$("#mem_mail").keydown(
 								function() {
 									console.log($(this).val());
 									if (emailRule.test($(this).val())) {
@@ -47,7 +47,7 @@
 									}
 								});
 						var pwRule = /^(?!.*[^a-zA-Z0-9])(?=.*\d)(?=.*[a-zA-Z]).{6,10}$/;
-						$("#mem_pw").blur(
+						$("#mem_pw").keydown(
 								function() {
 									console.log($(this).val());
 									if (pwRule.test($(this).val())) {
@@ -77,7 +77,7 @@
 									
 								});
 						var nameRule = /^[\u4e00-\u9fa5_a-zA-Z]{2,10}$/;
-						$("#mem_name").blur(
+						$("#mem_name").keydown(
 								function() {
 									console.log($(this).val());
 									if (nameRule.test($(this).val())) {
@@ -92,7 +92,7 @@
 									}
 								});
 						var phoneRule = /^09[0-9]{8}$/;
-						$("#mem_phone").blur(
+						$("#mem_phone").keydown(
 								function() {
 									console.log($(this).val());
 									if (phoneRule.test($(this).val())) {

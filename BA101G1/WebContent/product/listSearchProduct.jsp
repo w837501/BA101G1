@@ -30,7 +30,7 @@
 			<c:forEach var="productVO" items="${productlist}">
 			<li class="box">
 					<a href="<%=request.getContextPath()%>/store/store.do?action=getProduct_By_Store&store_id=${productVO.store_id}">
-						<IMG src="<%=request.getContextPath()%>/ProductClassReader?pro_id=${productVO.pro_id}" height="186" width="178">
+						<IMG src="<%=request.getContextPath()%>/ProDBGifReader?pro_id=${productVO.pro_id}" height="186" width="178">
 					</a>
 					<h3>${productVO.pro_name}</h3>
 					<span class="price">$ ${productVO.pro_price}</span><br>
