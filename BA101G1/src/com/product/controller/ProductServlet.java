@@ -337,7 +337,7 @@ public class ProductServlet extends HttpServlet{
 			}
 			
 			String amount = String.valueOf(total);
-			req.setAttribute("amount", amount);
+			session.setAttribute("amount", amount);
 			String url = "/frontend/shoppingcart/Checkout.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
@@ -353,13 +353,15 @@ public class ProductServlet extends HttpServlet{
 			}
 			
 			String amount = String.valueOf(total);
-			req.setAttribute("amount", amount);
+			session.setAttribute("amount", amount);
 			session.setAttribute("shoppingcart", buylist);
 			String url = "/frontend/shoppingcart/shoppingcart.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
 		}
 		System.out.println("action"+action);
+		
+		
 		if (action.equals("DELETE")) {
 			String del = req.getParameter("del");
 			System.out.println("del"+del);

@@ -182,6 +182,7 @@
   <filter-mapping>
     <filter-name>MemberLoginFilter</filter-name>
     <url-pattern>/frontend/mem/member_info.jsp</url-pattern>
+    <url-pattern>/frontend/shoppingcart/Checkout.jsp</url-pattern>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>

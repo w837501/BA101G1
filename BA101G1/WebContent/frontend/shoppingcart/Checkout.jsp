@@ -30,7 +30,7 @@
 	
 	<%
 		Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
-		String amount =  (String) request.getAttribute("amount");
+		String amount =  (String) session.getAttribute("amount");
 		Store_OrderVO orderVO = (Store_OrderVO) request.getAttribute("orderVO");
 	%>	
 	<%ProductVO productVO=new ProductVO(); %>

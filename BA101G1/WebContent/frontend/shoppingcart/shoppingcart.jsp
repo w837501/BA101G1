@@ -21,7 +21,7 @@
 <body>
 
 	<%
-		String amount =  (String) request.getAttribute("amount");
+		String amount =  (String) session.getAttribute("amount");
 		Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
 	%>
 	
