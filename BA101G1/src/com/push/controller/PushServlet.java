@@ -20,20 +20,16 @@ public class PushServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-System.out.println("action: " + action);
-		
-		
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			req.setAttribute("whichPage", "列出單一推播");    // 資料庫取出的set物件,存入request
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String str = req.getParameter("push_id");
-System.out.println("getParameter: " + str);
 				if (str == null || (str.trim()).length() == 0) {
 					errorMsgs.add("請輸入員工編號");
 				}
@@ -75,7 +71,7 @@ System.out.println("getParameter: " + str);
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("pushVO", pushVO); // 資料庫取出的pushVO物件,存入req
-				String url = "/backend/push/listOnePush.jsp";
+				String url = "/backend/push/selectPage.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交listOnePush.jsp
 				successView.forward(req, res);
 
@@ -95,7 +91,7 @@ System.out.println("getParameter: " + str);
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+			req.setAttribute("whichPage", "修改單一推播");    // 資料庫取出的set物件,存入request
 			try {
 				/***************************1.接收請求參數****************************************/
 				String push_id = new String(req.getParameter("push_id"));
@@ -106,7 +102,7 @@ System.out.println("getParameter: " + str);
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("pushVO", pushVO); // 資料庫取出的empVO物件,存入req
-				String url = "/backend/push/update_push_input.jsp";
+				String url = "/backend/push/selectPage.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交update_push_input.jsp
 				successView.forward(req, res);
 
@@ -123,7 +119,7 @@ System.out.println("getParameter: " + str);
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-		
+			req.setAttribute("whichPage", "列出所有推播");    // 資料庫取出的set物件,存入request
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String push_id = new String(req.getParameter("push_id").trim());
@@ -178,7 +174,7 @@ System.out.println("getParameter: " + str);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("pushVO", pushVO); // 資料庫update成功後,正確的的pushVO物件,存入req
-				String url = "/backend/push/listOnePush.jsp";
+				String url = "/backend/push/selectPage.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOnePush.jsp
 				successView.forward(req, res);
 
@@ -269,7 +265,7 @@ System.out.println("getParameter: " + str);
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+			req.setAttribute("whichPage", "列出所有推播");    // 資料庫取出的set物件,存入request
 			String requestURL = req.getParameter("requestURL"); // 送出刪除的來源網頁路徑: 可能為【/push/listAllPush.jsp】 或  【/dept/listEmps_ByDeptno.jsp】 或 【 /dept/listAllDept.jsp】
 	
 			try {
@@ -286,7 +282,8 @@ System.out.println("getParameter: " + str);
 				if(requestURL.equals("/dept/listEmps_ByDeptno.jsp") || requestURL.equals("/dept/listAllDept.jsp"))
 					req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(empVO.getDeptno())); // 資料庫取出的list物件,存入request
 */				
-				String url = requestURL;
+//				String url = requestURL;
+				String url = "/backend/push/selectPage.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 				
@@ -297,6 +294,13 @@ System.out.println("getParameter: " + str);
 						.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			}
+		}
+		if ("listAll".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("whichPage", "列出所有推播");    // 資料庫取出的set物件,存入request
+				String url = "/backend/push/selectPage.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
 		}
 	}
 }

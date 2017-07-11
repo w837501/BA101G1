@@ -30,7 +30,7 @@ public class MemberReportServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			req.setAttribute("whichPage", "列出單一會員檢舉");    // 資料庫取出的set物件,存入request
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String str = req.getParameter("mr_id");
@@ -40,7 +40,7 @@ public class MemberReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/memr/selectPage.jsp");
+							.getRequestDispatcher("/backend/memr/select_page.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -54,7 +54,7 @@ public class MemberReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/memr/selectPage.jsp");
+							.getRequestDispatcher("/backend/memr/select_page.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -68,14 +68,14 @@ public class MemberReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/memr/selectPage.jsp");
+							.getRequestDispatcher("/backend/memr/select_page.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("mrVO", mrVO); // 資料庫取出的empVO物件,存入req
-				String url = "/backend/memr/listOneMR.jsp";
+				String url = "/backend/memr/select_page.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交listOneEmp.jsp
 				successView.forward(req, res);
 
@@ -83,7 +83,7 @@ public class MemberReportServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/backend/memr/selectPage.jsp");
+						.getRequestDispatcher("/backend/memr/select_page.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -95,7 +95,7 @@ public class MemberReportServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+			req.setAttribute("whichPage", "修改單一會員檢舉");    // 資料庫取出的set物件,存入request
 			String requestURL = req.getParameter("requestURL"); // 送出修改的來源網頁路徑: 可能為【/emp/listAllEmp.jsp】 或  【/dept/listEmps_ByDeptno.jsp】 或 【 /dept/listAllDept.jsp】		
 			
 			try {
@@ -108,7 +108,7 @@ public class MemberReportServlet extends HttpServlet {
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("mrVO", mrVO); // 資料庫取出的empVO物件,存入req
-				String url = "/backend/memr/update_mr_input.jsp";
+				String url = "/backend/memr/select_page.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交update_emp_input.jsp
 				successView.forward(req, res);
 
@@ -128,7 +128,7 @@ public class MemberReportServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+			req.setAttribute("whichPage", "列出所有會員檢舉");    // 資料庫取出的set物件,存入request	
 			String requestURL = req.getParameter("requestURL"); // 送出修改的來源網頁路徑: 可能為【/emp/listAllEmp.jsp】 或  【/dept/listEmps_ByDeptno.jsp】 或 【 /dept/listAllDept.jsp】
 		
 			try {
@@ -191,7 +191,8 @@ public class MemberReportServlet extends HttpServlet {
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/				
 
-                String url = requestURL;
+//                String url = requestURL;
+                String url="/backend/memr/select_page.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);   // 修改成功後,轉交回送出修改的來源網頁
 				successView.forward(req, res);
 
@@ -302,7 +303,7 @@ public class MemberReportServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+			req.setAttribute("whichPage", "列出所有會員檢舉");    // 資料庫取出的set物件,存入request
 			String requestURL = req.getParameter("requestURL"); // 送出刪除的來源網頁路徑: 可能為【/emp/listAllEmp.jsp】 或  【/dept/listEmps_ByDeptno.jsp】 或 【 /dept/listAllDept.jsp】
 
 			try {
@@ -319,7 +320,8 @@ public class MemberReportServlet extends HttpServlet {
 //				if(requestURL.equals("/dept/listEmps_ByDeptno.jsp") || requestURL.equals("/dept/listAllDept.jsp"))
 //					req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(empVO.getDeptno())); // 資料庫取出的list物件,存入request
 //				
-				String url = requestURL;
+//				String url = requestURL;
+				String url = "/backend/memr/select_page.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 				
@@ -331,9 +333,13 @@ public class MemberReportServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		if ("listAll".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("whichPage", "列出所有會員檢舉");    // 資料庫取出的set物件,存入request
+				String url = "/backend/memr/select_page.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+		}
 	}
-	public static void encodingPic(){
-	}
-
 }
 
