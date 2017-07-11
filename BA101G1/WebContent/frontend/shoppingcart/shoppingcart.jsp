@@ -33,16 +33,16 @@
 				<a href="index.html"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
 			</div>
 		</div>
-		<div id="contents" style="background-color:white">
+		<div id="contents">
 			<div id="sidebar">
 				<h1>購物車</h1>
 			</div>
 
-				<div id="main02" >
+				<div id="main02" >   
 				<form action="index.html" method="post" id="cart">
 					<table frame="hsides">
 						<thead>
-							<tr bgcolor="white">
+							<tr bgcolor="#F5DEB3">
 								<th>商品名稱</th>
 								<th>價格</th>
 								<th>數量</th>
@@ -56,7 +56,7 @@
 	 							ProductVO productVO = buylist.get(index);
 						%>
 						<tbody>
-							<tr bgcolor="white">
+							<tr bgcolor=#F5DEB3>
 								<td><div class="frame">
 										<img src="<%=request.getContextPath()%>/ProDBGifReader?pro_id=<%= productVO.getPro_id()%>" alt="Img" height="80" width="87">
 									</div>
