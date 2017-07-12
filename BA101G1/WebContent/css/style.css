@@ -165,6 +165,16 @@ img {
 #logo div#login{
 	height:80px;
 }
+#logo div#login span{
+	float:right;
+	margin:5px 5px 5px 5px;
+}
+#logo div#login span.name{
+	margin:-20px 100px 0px 0px;
+	width:100px;
+	color:#000;
+	font-size: 15px;
+}
 #logo div#login span.login{
 	height:20px;
 	width:50px;
@@ -172,19 +182,14 @@ img {
 }
 #logo div#login li {
 	padding:5px 11px 5px 15px;
-
 }
+
 /** Navigation **/
 #navigation {
 	text-align: center;
 }
 #option{
 	padding-left: 100px;
-}
-
-#logo div#login span{
-	float:right;
-	margin:5px 5px 5px 5px;
 }
 
 #logo div#option ul {
@@ -217,6 +222,7 @@ img {
 	display: inline-block;
 	min-height: 950px;
 	width: 90%;
+	margin-top:30px;
 }
 #contentsHome p {
 	font-size: 12px;
@@ -254,6 +260,7 @@ img {
 	display: inline-block;
 	min-height: 950px;
 	width: 90%;
+	margin-top:30px;
 }
 #contents p {
 	font-size: 12px;
@@ -292,6 +299,7 @@ img {
 #classcontents {
 	display: inline-block;
 	min-height: 950px;
+	margin-top:30px;
 }
 #classcontents p {
 	font-size: 12px;
