@@ -1,7 +1,13 @@
-<%@ page contentType="text/html;charset=UTF-8"%>			
+<%@ page contentType="text/html;charset=UTF-8"%>	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.mem.model.*"%>
+<% 
+	MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+%>		
 <div id="logo">
 	<div id="login">
 			<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
+			<c:if test="${empty memberVO ||empty storeVO}">
 			<span class="login" onmouseover="switchMenu( this, 'SubMenu1', 'MouseOver' )" onmouseout="hideMenu()">Login
 			<div style="margin-left: -20px;">
 			<span style="font-size:9px;">&#9660;</span>
@@ -10,6 +16,7 @@
 					<li><a href="http://www.google.com.tw/" target="_blank">商家登入</a></li>
 				</ul>
 			</span>
+			</c:if>
 			
 	</div>
 </div>
