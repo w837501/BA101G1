@@ -14,7 +14,7 @@
 		<div id="header">
 			<div id="logo">
 				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
-				<span id="login"><a href="<%=request.getContextPath()%>/backend/mem/AddMem.jsp">Login in</a></span>
+				<span id="login"><a href="news.html">Login in</a></span>
 
 				<ul>
 					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
@@ -29,15 +29,13 @@
 		<div id="contents">
 
 			<!-- 餐廳類型  -->
-			<jsp:useBean id="scSvc" scope="page"
-				class="com.store_class.model.StoreClassService" />
+			<jsp:useBean id="scSvc" scope="page" class="com.store_class.model.StoreClassService" />
 			<div id="sidebar">
 				<h1>餐廳類型</h1>
 				<ul class="menu2">
 					<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
 					<c:forEach var="scVO" items="${scSvc.all}" varStatus="loop">
-						<li class="selected"><a
-							href='<%=request.getContextPath()%>/store/store.do?action=getStoreClass&sc_id=<c:out value="${loop.index}" />'>${scVO.sc_name}
+						<li class="selected"><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreClass&sc_id=<c:out value="${loop.index}" />'>${scVO.sc_name}
 						</a></li>
 					</c:forEach>
 				</ul>
@@ -69,8 +67,7 @@
 				<% String store_zone = (String) request.getAttribute("store_zone"); %>
 
 
-				<FORM METHOD="post"
-					ACTION="<%=request.getContextPath()%>/store/store.do">
+				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store/store.do">
 					<b>選擇地區 :</b> <select size="1" name="store_zone">
 						<option value="基隆市"
 							<c:if test="${store_zone.equals('基隆市') }"> selected</c:if>>基隆市

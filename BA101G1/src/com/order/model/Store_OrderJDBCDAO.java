@@ -18,40 +18,35 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
+import com.orderlist.model.OrderlistService;
+import com.product.model.ProductVO;
 
+public class Store_OrderJDBCDAO implements Store_OrderDAO_interface {
 
-public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
-	
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "BA101G1";
 	String passwd = "ba101g1";
-	
-	private static final String INSERT_STMT = 
-			"INSERT INTO STORE_order (order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, qrcode, order_note, order_taketime) "
-			         + "VALUES (to_char(sysdate,'YYYYmmdd')||'-'||LPAD(to_char(order_seq.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE = 
-			"UPDATE order set STORE_order_id=?, order_time=?, mem_id=?, store_id=?, order_state=?, totalprice=?, order_way=?, receive_address=?, qrcode=?, order_note=?, order_taketime=?";
-	private static final String DELETE = 
-			"DELETE FROM STORE_order where order_id = ?";
-	private static final String GET_ONE_STMT = 
-			"SELECT order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, qrcode, order_note, order_taketime from STORE_order where order_id = ?";
-	private static final String GET_ALL_STMT = 
-			"SELECT * from store_order";
-	
-	private static final String GET_ORDER_BY_MEM = 
-			"select order_id, store_id, totalprice, order_time, order_way, order_state, mem_id from store_order where mem_id = ? order by order_time desc";
-	private static final String GET_ORDER_BY_STATE=
-			"select mem_id, order_id, store_id, totalprice, order_time, order_way, receive_address,order_note, order_taketime ,order_state from  store_order where order_state=?";
-	private static final String CONFIRM_ORDER=
-			"Update store_order set order_state=? where order_id=?";
+
+	private static final String INSERT_STMT = "INSERT INTO STORE_order (order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, order_note, order_taketime) "
+			+ "VALUES (to_char(sysdate,'YYYYmmdd')||'-'||LPAD(to_char(order_seq.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?)";
+	private static final String UPDATE = "UPDATE order set STORE_order_id=?, order_time=?, mem_id=?, store_id=?, order_state=?, totalprice=?, order_way=?, receive_address=?, qrcode=?, order_note=?, order_taketime=?";
+	private static final String DELETE = "DELETE FROM STORE_order where order_id = ?";
+	private static final String GET_ONE_STMT = "SELECT order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, qrcode, order_note, order_taketime from STORE_order where order_id = ?";
+	private static final String GET_ALL_STMT = "SELECT * from store_order";
+
+	private static final String GET_ORDER_BY_MEM = "select order_id, store_id, totalprice, order_time, order_way, order_state, mem_id from store_order where mem_id = ? order by order_time desc";
+	private static final String GET_ORDER_BY_STATE = "select mem_id, order_id, store_id, totalprice, order_time, order_way, receive_address,order_note, order_taketime ,order_state from  store_order where order_state=?";
+	private static final String CONFIRM_ORDER = "Update store_order set order_state=? where order_id=?";
+
 	@Override
 	public void insert(Store_OrderVO orderVO) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 
 			Class.forName(driver);
@@ -65,19 +60,16 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 			pstmt.setInt(5, orderVO.getTotalprice());
 			pstmt.setString(6, orderVO.getOrder_way());
 			pstmt.setString(7, orderVO.getReceive_address());
-			pstmt.setBytes(8, orderVO.getQrcode());
-			pstmt.setString(9, orderVO.getOrder_note());
-			pstmt.setTimestamp(10, orderVO.getOrder_taketime());
+			pstmt.setString(8, orderVO.getOrder_note());
+			pstmt.setTimestamp(9, orderVO.getOrder_taketime());
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -102,7 +94,7 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 
 			Class.forName(driver);
@@ -117,20 +109,17 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 			pstmt.setInt(6, orderVO.getTotalprice());
 			pstmt.setString(7, orderVO.getOrder_way());
 			pstmt.setString(8, orderVO.getReceive_address());
-			pstmt.setBytes(9, orderVO.getQrcode());
-			pstmt.setString(10, orderVO.getOrder_note());
-			pstmt.setTimestamp(11, orderVO.getOrder_taketime());
+			pstmt.setString(9, orderVO.getOrder_note());
+			pstmt.setTimestamp(10, orderVO.getOrder_taketime());
 
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -155,7 +144,7 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 
 			Class.forName(driver);
@@ -168,12 +157,10 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -201,7 +188,7 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 
 			Class.forName(driver);
@@ -223,19 +210,16 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 				orderVO.setTotalprice(rs.getInt("totalprice"));
 				orderVO.setOrder_way(rs.getString("order_way"));
 				orderVO.setReceive_address(rs.getString("receive_address"));
-				orderVO.setQrcode(rs.getBytes("qrcode"));
 				orderVO.setOrder_note(rs.getString("order_note"));
 				orderVO.setOrder_taketime(rs.getTimestamp("order_taketime"));
 			}
 
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -260,7 +244,7 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 				}
 			}
 		}
-		
+
 		return orderVO;
 	}
 
@@ -273,7 +257,7 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 
 			Class.forName(driver);
@@ -289,24 +273,22 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 				orderVO.setMem_id(rs.getString("mem_id"));
 				orderVO.setStore_id(rs.getString("store_id"));
 				orderVO.setOrder_state(rs.getString("order_state"));
-//				orderVO.setTotalprice(rs.getInt("totalprice"));
-//				orderVO.setOrder_way(rs.getString("order_way"));
-//				orderVO.setReceive_address(rs.getString("receive_address"));
-//				orderVO.setQrcode(rs.getBytes("qrcode"));
-//				orderVO.setOrder_note(rs.getString("order_note"));
-//				orderVO.setOrder_taketime(rs.getTimestamp("order_taketime"));
-//				orderVO.setOrder_state(rs.getString("order_state"));
+				// orderVO.setTotalprice(rs.getInt("totalprice"));
+				// orderVO.setOrder_way(rs.getString("order_way"));
+				// orderVO.setReceive_address(rs.getString("receive_address"));
+				// orderVO.setQrcode(rs.getBytes("qrcode"));
+				// orderVO.setOrder_note(rs.getString("order_note"));
+				// orderVO.setOrder_taketime(rs.getTimestamp("order_taketime"));
+				// orderVO.setOrder_state(rs.getString("order_state"));
 				list.add(orderVO); // Store the row in the list
 			}
 
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -331,11 +313,10 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 				}
 			}
 		}
-		
+
 		return list;
 	}
-	
-	
+
 	@Override
 	public List<Store_OrderVO> findOrderByMem(String mem_id) {
 		// TODO Auto-generated method stub
@@ -344,7 +325,7 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 
 			Class.forName(driver);
@@ -370,12 +351,10 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -400,10 +379,10 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 				}
 			}
 		}
-		
+
 		return list;
 	}
-	
+
 	public static byte[] getPictureByteArray(String path) throws IOException {
 		File file = new File(path);
 		FileInputStream fis = new FileInputStream(file);
@@ -418,6 +397,7 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 
 		return baos.toByteArray();
 	}
+
 	@Override
 	public List<Store_OrderVO> findOrderByState(String state) {
 		List<Store_OrderVO> list = new LinkedList<Store_OrderVO>();
@@ -430,15 +410,15 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface{
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ORDER_BY_STATE);
-System.out.println(state);
+			System.out.println(state);
 
-pstmt.setString(1, state);
-rs = pstmt.executeQuery();
+			pstmt.setString(1, state);
+			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				// empVo 也稱為 Domain objects
 				orderVO = new Store_OrderVO();
-				orderVO.setMem_id(rs.getString("mem_id")); 
+				orderVO.setMem_id(rs.getString("mem_id"));
 				orderVO.setOrder_id(rs.getString("order_id"));
 				orderVO.setStore_id(rs.getString("store_id"));
 				orderVO.setTotalprice(rs.getInt("totalprice"));
@@ -453,8 +433,7 @@ rs = pstmt.executeQuery();
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -483,16 +462,15 @@ rs = pstmt.executeQuery();
 				}
 			}
 		}
-		
+
 		return list;
 	}
-	
 
 	@Override
 	public void confirm_order(String order_id, String order_state) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 
 			Class.forName(driver);
@@ -500,16 +478,15 @@ rs = pstmt.executeQuery();
 			pstmt = con.prepareStatement(CONFIRM_ORDER);
 			pstmt.setString(1, order_state);
 			pstmt.setString(2, order_id);
-			
+
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
-			
+		} finally {
+
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -526,7 +503,67 @@ rs = pstmt.executeQuery();
 			}
 		}
 	}
+
+	@Override
+	public void insertOrderandOrderList(Store_OrderVO orderVO, Vector<ProductVO> buylist) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
 		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			String[] cols = { "order_id" };
+			pstmt = con.prepareStatement(INSERT_STMT,cols);
+
+			pstmt.setString(1, orderVO.getMem_id());
+			pstmt.setString(2, orderVO.getStore_id());
+			pstmt.setInt(3, orderVO.getTotalprice());
+			pstmt.setString(4, orderVO.getOrder_way());
+			pstmt.setString(5, orderVO.getReceive_address());
+			pstmt.setString(6, orderVO.getOrder_note());
+			pstmt.setTimestamp(7, orderVO.getOrder_taketime());
+			
+			pstmt.executeUpdate();
+			String next_ord_id = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_ord_id = rs.getString(1);
+				System.out.println("自增主鍵值= " + next_ord_id +"(剛新增成功的訂單編號)");
+			} else {
+				System.out.println("未取得自增主鍵值");
+			}
+			rs.close();
+			
+			OrderlistService orderlistSvc=new OrderlistService();
+			for(ProductVO aaa:buylist){
+				orderlistSvc.addOrderlist(next_ord_id,aaa);
+			}
+			
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
 	
 	
 	public static void main(String[] args) throws IOException{
@@ -627,4 +664,3 @@ rs = pstmt.executeQuery();
 		System.out.println("123");
 	}
 }
-

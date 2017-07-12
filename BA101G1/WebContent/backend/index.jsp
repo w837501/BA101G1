@@ -153,11 +153,7 @@
         <div class="footer">
       
     
-            <div class="row">
-                <div class="col-lg-12" >
-                    &copy;  2014 yourdomain.com | More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
-                </div>
-            </div>
+        
         </div>
           
 

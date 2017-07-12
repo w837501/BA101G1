@@ -16,8 +16,8 @@ import javax.sql.DataSource;
 import com.store.model.StoreVO;
 import com.store_class.model.StoreClassVO;
 
-public class ProductClassDAO implements ProductClassDAO_interface{
-	
+public class ProductClassDAO implements ProductClassDAO_interface {
+
 	private static DataSource ds = null;
 	static {
 		try {
@@ -27,21 +27,21 @@ public class ProductClassDAO implements ProductClassDAO_interface{
 			e.printStackTrace();
 		}
 	}
-	
+
 	private static final String getAll = "select * from PRODUCT_CLASS";
 	private static final String getAllById = "select * from PRODUCT_CLASS where pc_id = ?";
-	
-	
+
 	@Override
 	public void update(ProductClassVO productclassVO) {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	@Override
 	public List<ProductClassVO> getAll() {
 		List<ProductClassVO> productclasslist = new ArrayList<ProductClassVO>();
 		ProductClassVO pcVO = null;
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -50,11 +50,11 @@ public class ProductClassDAO implements ProductClassDAO_interface{
 			pstmt = con.prepareStatement(getAll);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				pcVO= new ProductClassVO();
+				pcVO = new ProductClassVO();
 				pcVO.setPc_id(rs.getString("pc_id"));
 				pcVO.setPc_name(rs.getString("pc_name"));
 				pcVO.setPc_pic(rs.getBytes("pc_pic"));
-				productclasslist.add(pcVO); 
+				productclasslist.add(pcVO);
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("µo¥Í¿ù»~" + se.getMessage());
@@ -83,7 +83,7 @@ public class ProductClassDAO implements ProductClassDAO_interface{
 		}
 		return productclasslist;
 	}
-	
+
 	@Override
 	public List<ProductClassVO> getProductClassById(String pc_id) {
 
@@ -99,8 +99,8 @@ public class ProductClassDAO implements ProductClassDAO_interface{
 
 			pstmt.setString(1, pc_id);
 			rs = pstmt.executeQuery();
-			while(rs.next()){
-				productclassVO= new ProductClassVO();
+			while (rs.next()) {
+				productclassVO = new ProductClassVO();
 				productclassVO.setPc_id(rs.getString("pc_id"));
 				productclassVO.setPc_name(rs.getString("pc_name"));
 				productclassVO.setPc_pic(rs.getBytes("pc_pic"));
@@ -134,6 +134,44 @@ public class ProductClassDAO implements ProductClassDAO_interface{
 		return productclasslist;
 	}
 
-	
+	@Override
+	public ProductClassVO getPCname(String pc_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ProductClassVO productclassVO = null;
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(getAllById);
+
+			pstmt.setString(1, pc_id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				productclassVO = new ProductClassVO();
+				productclassVO.setPc_name(rs.getString("pc_name"));
+				productclassVO.setPc_id(rs.getString("pc_id"));
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return productclassVO;
+	}
 
 }
