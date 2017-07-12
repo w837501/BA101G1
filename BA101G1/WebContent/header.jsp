@@ -4,9 +4,11 @@
 <% 
 	MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 %>		
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 <div id="logo">
 	<div id="login">
 			<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
+			
 			<c:if test="${empty memberVO && empty storeVO}">
 			<span class="login" onmouseover="switchMenu( this, 'SubMenu1', 'MouseOver' )" onmouseout="hideMenu()">Login
 			<div style="margin-left: -20px;">
@@ -18,8 +20,11 @@
 			</span>
 			</c:if>
 			<c:if test="${not empty memberVO || not empty storeVO}">
+
 			<span class="login">
-						<a href="<%=request.getContextPath()%>/backend/mem/mem.do?action=logout">Logout</a>  
+			<div style="margin-left: -20px;">
+						
+						<a href="<%=request.getContextPath()%>/backend/mem/mem.do?action=logout" >	<%=memberVO.getMem_name() %>Logout</a>  
 			</span>
 			</c:if>
 			

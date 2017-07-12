@@ -50,7 +50,7 @@
 			</div>
 
 				<div id="main02" >   
-				<form action="index.html" method="post" id="cart">
+				<form action="<%=request.getContextPath()%>/product/product.do" method="post" id="cart">
 					<table frame="hsides">
 						<thead>
 							<tr bgcolor="#F5DEB3">
@@ -111,34 +111,7 @@
 		</div>
 	    <%}%>	
 		
-		<div id="footer">
-			<ul class="navigation">
-				<li>
-					<a href="index.html">Home</a>
-				</li>
-				<li>
-					<a href="news.html">Whats New</a>
-				</li>
-				<li class="selected">
-					<a href="cosmetics.html">Cosmetics</a>
-				</li>
-				<li>
-					<a href="skincare.html">Skincare</a>
-				</li>
-				<li>
-					<a href="fragrance.html">Fragrance</a>
-				</li>
-				<li>
-					<a href="about.html">About</a>
-				</li>
-				<li>
-					<a href="blogs.html">Blog</a>
-				</li>
-				<li>
-					<a href="contact.html">Contact</a>
-				</li>
-			</ul>
-		</div>
+		
 	</div>
 </body>
 </html>
