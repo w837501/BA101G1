@@ -321,6 +321,7 @@ public class ManServlet extends HttpServlet {
 			
 			session.setAttribute("errorMsgs", errorMsgs);
 			session.setAttribute("location" , req.getRequestURI());
+			session.setAttribute("loginUser" , account);
 			try {
 				if(account.isEmpty()){
 					errorMsgs.add("員工編號不能為空");
