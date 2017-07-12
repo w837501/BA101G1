@@ -1,6 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.product.model.*"%>
+<%@ page import="com.mem.model.*"%>
+
+<%
+MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+session.removeAttribute("shoppingcart");
+
+%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -14,7 +21,13 @@
 			<div id="header">
 				<div id="logo">
 					<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
-					<span id="login"><a href="news.html">Login in</a></span>
+					<span id="login">
+				<c:if test="${empty memberVO }">
+				<a href="<%=request.getContextPath()%>/frontend/mem/LoginAndAddMem.jsp">Login</a>
+				</c:if>
+				<c:if test="${not empty memberVO }">
+						<a href="<%=request.getContextPath()%>/backend/mem/mem.do?action=logout">Logout</a>  
+					</c:if></span>
 	
 					<ul>
 						<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>

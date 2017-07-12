@@ -107,7 +107,7 @@ public class OrderServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 			// String amountStr = (String) req.getAttribute("amount");
 			try {
-				String mem_id = "MEM-000001";
+				String mem_id =req.getParameter("mem_id");
 				String store_id = req.getParameter("store_id");
 				System.out.println("store_id" + store_id);
 				String amountStr = req.getParameter("amount").trim();

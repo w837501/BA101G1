@@ -52,7 +52,7 @@
 					</div>
 					
 					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/frontend/selectOrder/order.do?action=getOne_For_Display&mem_id=<%=memberVO.getMem_id() %> " class="list-group-item">查詢訂單</a>
+					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">查詢訂單</a>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-7" >

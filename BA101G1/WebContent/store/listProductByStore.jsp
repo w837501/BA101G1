@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ page import="com.product.model.*"%>
 <%@ page import="com.store.model.*"%>
+<%@ page import="com.mem.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -18,6 +19,7 @@
 <% 
 	StoreVO storeVO=(StoreVO)request.getAttribute("storeVO");
 	String avg=(String)request.getAttribute("avg");
+	MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 %>
 
 
@@ -37,7 +39,13 @@
 		<div id="header">
 			<div id="logo">
 				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
-				<span id="login"><a href="news.html">Login in</a></span>
+				<span id="login">
+				<c:if test="${empty memberVO }">
+				<a href="<%=request.getContextPath()%>/frontend/mem/LoginAndAddMem.jsp">Login</a>
+				</c:if>
+				<c:if test="${not empty memberVO }">
+						<a href="<%=request.getContextPath()%>/backend/mem/mem.do?action=logout">Logout</a>  
+					</c:if></span>
 			
 				<ul>
 					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>

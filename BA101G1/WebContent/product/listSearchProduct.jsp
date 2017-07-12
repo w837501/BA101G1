@@ -2,6 +2,7 @@
 <%@ page import="com.product.model.*"%>
 <%@ page import="com.store.model.*"%>
 <%@ page import="com.product_class.model.*"%>
+<%@ page import="com.mem.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -14,7 +15,9 @@
 <%-- 取出 Concroller EmpServlet.java已存入request的EmpVO物件--%>
 <%-- <%List<StoreVO> storeVO = (List) request.getAttribute("storelist");%> --%>
 
-
+<%
+MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+%>
 <jsp:useBean id="proSvc" scope="page" class="com.product.model.ProductService" />
 <jsp:useBean id="pcSvc" scope="page" class="com.product_class.model.ProductClassService" />
 <jsp:useBean id="storeSvc" scope="page" class="com.store.model.StoreService" />
