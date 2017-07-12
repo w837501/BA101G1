@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>¦Y­q§Ú½u¤W­qÀ\¨t²Î</title>
+<title>åƒè¨‚æˆ‘ç·šä¸Šè¨‚é¤ç³»çµ±</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 <script src="<%=request.getContextPath()%>/js/mobile.js" type="text/javascript"></script>
 </head>
@@ -26,39 +26,39 @@
 				<div id="adbox">
 					<img src="<%=request.getContextPath()%>/images/Cuisine.jpg" alt="Img">
 					<div class="info">
-						<h1>¿ï¾Ü¦a°Ï</h1>
+						<h1>é¸æ“‡åœ°å€</h1>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store/store.do">
 							<select size="1" name="store_zone">
-								<option value="°ò¶©¥«">°ò¶©¥«
-								<option value="»O¥_¥«">»O¥_¥«
-								<option value="·s¥_¥«">·s¥_¥«
-								<option value="®ç¶é¥«">®ç¶é¥«
-								<option value="·s¦Ë¥«">·s¦Ë¥«
-								<option value="·s¦Ë¿¤">·s¦Ë¿¤
-								<option value="­]®ß¿¤">­]®ß¿¤
-								<option value="»O¤¤¥«">»O¤¤¥«
-								<option value="¹ü¤Æ¿¤">¹ü¤Æ¿¤
-								<option value="«n§ë¿¤">«n§ë¿¤
-								<option value="¶³ªL¿¤">¶³ªL¿¤
-								<option value="¹Å¸q¥«">¹Å¸q¥«
-								<option value="¹Å¸q¿¤">¹Å¸q¿¤
-								<option value="»O«n¥«">»O«n¥«
-								<option value="°ª¶¯¥«">°ª¶¯¥«
-								<option value="«ÌªF¿¤">«ÌªF¿¤
-								<option value="»OªF¿¤">»OªF¿¤
-								<option value="ªá½¬¿¤">ªá½¬¿¤
-								<option value="©yÄõ¿¤">©yÄõ¿¤
+								<option value="åŸºéš†å¸‚">åŸºéš†å¸‚
+								<option value="è‡ºåŒ—å¸‚">è‡ºåŒ—å¸‚
+								<option value="æ–°åŒ—å¸‚">æ–°åŒ—å¸‚
+								<option value="æ¡ƒåœ’å¸‚">æ¡ƒåœ’å¸‚
+								<option value="æ–°ç«¹å¸‚">æ–°ç«¹å¸‚
+								<option value="æ–°ç«¹ç¸£">æ–°ç«¹ç¸£
+								<option value="è‹—æ —ç¸£">è‹—æ —ç¸£
+								<option value="è‡ºä¸­å¸‚">è‡ºä¸­å¸‚
+								<option value="å½°åŒ–ç¸£">å½°åŒ–ç¸£
+								<option value="å—æŠ•ç¸£">å—æŠ•ç¸£
+								<option value="é›²æž—ç¸£">é›²æž—ç¸£
+								<option value="å˜‰ç¾©å¸‚">å˜‰ç¾©å¸‚
+								<option value="å˜‰ç¾©ç¸£">å˜‰ç¾©ç¸£
+								<option value="è‡ºå—å¸‚">è‡ºå—å¸‚
+								<option value="é«˜é›„å¸‚">é«˜é›„å¸‚
+								<option value="å±æ±ç¸£">å±æ±ç¸£
+								<option value="è‡ºæ±ç¸£">è‡ºæ±ç¸£
+								<option value="èŠ±è“®ç¸£">èŠ±è“®ç¸£
+								<option value="å®œè˜­ç¸£">å®œè˜­ç¸£
 							</select>
-							<input type="submit" value="°e¥X"> <input type="hidden" name="action" value="get_zone">
+							<input type="submit" value="é€å‡º"> <input type="hidden" name="action" value="get_zone">
 						</FORM>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store/store.do">
-							<b>·j´M°Ó®a:</b>
+							<b>æœå°‹å•†å®¶:</b>
 							<input type="text" name="store_name">
-							<input type="submit" value="°e¥X">
+							<input type="submit" value="é€å‡º">
 							<input type="hidden" name="action" value="get_store_a">
 						</FORM>
 
-						<%-- ¿ù»~ªí¦C --%>
+						<%-- éŒ¯èª¤è¡¨åˆ— --%>
 						<c:if test="${not empty errorMsgs}">
 							<font color='red'>
 								<ul>
@@ -72,7 +72,7 @@
 					</div>
 				</div>
 
-				<!--¹Ï¤ù°Ï-->
+				<!--åœ–ç‰‡å€-->
 				<div id="carousel">
 					<li>
 						<div class="shop">
@@ -104,18 +104,18 @@
 					</li>
 				</div>
 
-				<!--¤p¶êÂI-->
+				<!--å°åœ“é»ž-->
 				<div id="ol">
 					<ul class="carousel-indicators" type="circle">
-						<li id="circle">¡³</li>
-						<li id="circle">¡³</li>
-						<li id="circle">¡³</li>
+						<li id="circle">â—‹</li>
+						<li id="circle">â—‹</li>
+						<li id="circle">â—‹</li>
 					</ul>
 				</div>
 
 
-				<!--¼s§i°Ï-->
-				<h2>¼s§i</h2>
+				<!--å»£å‘Šå€-->
+				<h2>å»£å‘Š</h2>
 				<ul id="promotions">
 					<li>
 						<div class="poster">
@@ -123,10 +123,10 @@
 								src="<%=request.getContextPath()%>/images/AD_01.jpg" alt="Img"
 								height="282" width="204"></a>
 						</div> <a href="fragrance.html">Shop</a>
-						<h2>§B®Ô¤À¨É¤é</h2>
-						<p>¶¼«~¶R¤@°e¤@ ¡i¬¡°Ê¤é´Á¡j¡G2016/2/1¡B2/8¡B2/15¡B2/22¡B2/29
-							¡i¬¡°Êªù¥«¡j¡G¥þªù¥«(³¡¥÷ªù¥«¬¡°Ê¤é¤£¦P¡A¸Ô°Ñª`·N¨Æ¶µ2¡B3¤§»¡©ú) ¡i¬¡°Ê¤º®e¡j¡G¤ZÁÊ¶R¶¼«~¥ô¤@ªM¡A¦AÃØ°e±z¶¼«~¤@ªM
-							¡A»P±z¦n¤Í¤À¨É©@°Ø­»(µ²±bª÷ÃB¥H°ª»ù«~­p)</p>
+						<h2>ä¼¯æœ—åˆ†äº«æ—¥</h2>
+						<p>é£²å“è²·ä¸€é€ä¸€ ã€æ´»å‹•æ—¥æœŸã€‘ï¼š2016/2/1ã€2/8ã€2/15ã€2/22ã€2/29
+							ã€æ´»å‹•é–€å¸‚ã€‘ï¼šå…¨é–€å¸‚(éƒ¨ä»½é–€å¸‚æ´»å‹•æ—¥ä¸åŒï¼Œè©³åƒæ³¨æ„äº‹é …2ã€3ä¹‹èªªæ˜Ž) ã€æ´»å‹•å…§å®¹ã€‘ï¼šå‡¡è³¼è²·é£²å“ä»»ä¸€æ¯ï¼Œå†è´ˆé€æ‚¨é£²å“ä¸€æ¯
+							ï¼Œèˆ‡æ‚¨å¥½å‹åˆ†äº«å’–å•¡é¦™(çµå¸³é‡‘é¡ä»¥é«˜åƒ¹å“è¨ˆ)</p>
 					</li>
 					<li>
 						<div class="poster">
@@ -134,10 +134,10 @@
 								src="<%=request.getContextPath()%>/images/AD_02.jpg" alt="Img"
 								height="282" width="204"></a>
 						</div> <a href="cosmetics.html">Shop</a>
-						<h2>¶g¥½¬£¹ïÀ\</h2>
+						<h2>é€±æœ«æ´¾å°é¤</h2>
 						<p>
-							21¥@¬ö­·¨ýÀ]«h¬O¤µ¦~ªº¨C¶g¤­¡B¤»¡B¤é¡A¥X¥Ü21¥@¬ö­·¨ýÀ]©xºôÀu´f°T®§(©ÎºI¹Ï)¡A§Y¥i¨É¦³¶g¥½¬£¹ïÀ\¡]21­»¯ó¯NÂû¡ÏÂA½­¨F©Ô¡Ï¤jÁ¦ÅQx2¡Ï¸Á»eºñ¯ù(L)x2¡^440¤¸¡A21­»¯ó¯NÂû³æÂIÀu´f»ù
-							315¤¸¡C¬¡°Ê¶È¨ì¤µ¦~ªº12¤ë18¤é¡C</p>
+							21ä¸–ç´€é¢¨å‘³é¤¨å‰‡æ˜¯ä»Šå¹´çš„æ¯é€±äº”ã€å…­ã€æ—¥ï¼Œå‡ºç¤º21ä¸–ç´€é¢¨å‘³é¤¨å®˜ç¶²å„ªæƒ è¨Šæ¯(æˆ–æˆªåœ–)ï¼Œå³å¯äº«æœ‰é€±æœ«æ´¾å°é¤ï¼ˆ21é¦™è‰çƒ¤é›žï¼‹é®®è”¬æ²™æ‹‰ï¼‹å¤§è–¯éœ¸x2ï¼‹èœ‚èœœç¶ èŒ¶(L)x2ï¼‰440å…ƒï¼Œ21é¦™è‰çƒ¤é›žå–®é»žå„ªæƒ åƒ¹
+							315å…ƒã€‚æ´»å‹•åƒ…åˆ°ä»Šå¹´çš„12æœˆ18æ—¥ã€‚</p>
 					</li>
 					<li>
 						<div class="poster">
@@ -145,10 +145,10 @@
 								src="<%=request.getContextPath()%>/images/AD_03.jpg" alt="Img"
 								height="282" width="204"></a> <span class="clearance"></span>
 						</div> <a href="skincare.html">Shop</a>
-						<h2>®L©]Âù¨É¨ü</h2>
-						<p>¥»¬¡°Ê´Á¶¡¬°§Y¤é°_¦Ü2015¦~9¤ë30¤é¤§¨C¤é©]¶¡21:00~­â±á00:00
-							¬¡°Ê´Á¶¡¤º¦Ü³Á·í³Ò®ø¶O¡A¤j¥]Á¦±ø²Ä¤G¥]$10
-							¦¹«P¾PÀu´f­­©ó³æÂI¤j¥]Á¦±ø®É¨Ï¥Î¡AÂIÁÊ®MÀ\¥[»ù¤É¯Å¤jÁ¦®É¤£¾A¥Î¡A¥ç¤£±o»P©±¤º¨ä¥LÀu´f¦X¨Ö¨Ï¥Î</p>
+						<h2>å¤å¤œé›™äº«å—</h2>
+						<p>æœ¬æ´»å‹•æœŸé–“ç‚ºå³æ—¥èµ·è‡³2015å¹´9æœˆ30æ—¥ä¹‹æ¯æ—¥å¤œé–“21:00~å‡Œæ™¨00:00
+							æ´»å‹•æœŸé–“å…§è‡³éº¥ç•¶å‹žæ¶ˆè²»ï¼Œå¤§åŒ…è–¯æ¢ç¬¬äºŒåŒ…$10
+							æ­¤ä¿ƒéŠ·å„ªæƒ é™æ–¼å–®é»žå¤§åŒ…è–¯æ¢æ™‚ä½¿ç”¨ï¼Œé»žè³¼å¥—é¤åŠ åƒ¹å‡ç´šå¤§è–¯æ™‚ä¸é©ç”¨ï¼Œäº¦ä¸å¾—èˆ‡åº—å…§å…¶ä»–å„ªæƒ åˆä½µä½¿ç”¨</p>
 					</li>
 				</ul>
 
@@ -156,7 +156,9 @@
 		</div>
 
 		<div id="footer">
+
 			<jsp:include page="/footer.jsp"/>
+
 		</div>
 
 	</div>
