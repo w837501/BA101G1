@@ -11,6 +11,7 @@
 	String mem_id=memberVO.getMem_id();
 	List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 	 store_orderVO=orderSvc.getOrderByMem_id(mem_id);
+	 pageContext.setAttribute("store_orderVO",store_orderVO);
 %>
 <html>
 <head>
@@ -56,7 +57,7 @@
 					</div>
 					
 					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/frontend/selectOrder/order.do?action=getOne_For_Display&mem_id=<%=memberVO.getMem_id() %> " class="list-group-item">查詢訂單</a>
+					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">查詢訂單</a>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-7" >
@@ -77,17 +78,17 @@
 		<th>取消訂單</th>
 		<th>檢舉商家</th>
 	</tr>
-	<c:forEach var="store_orderVO" items="${store_orderVO}" >
+	<c:forEach var="store_orderVO1" items="${store_orderVO}" >
 	<tr align='center' valign='middle'>
 		<td>
-			<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO.order_id}">${store_orderVO.order_id}</a>
+			<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO1.order_id}">${store_orderVO1.order_id}</a>
 		</td>
 
-		<td><fmt:formatDate  pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO.order_time }"/></td>
- 		<td>${store_orderVO.store_name }</td>
-		<td>${store_orderVO.totalprice }</td>
-		<td>${store_orderVO.order_way }</td>
-		<td>${store_orderVO.order_state }</td>
+		<td><fmt:formatDate  pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO1.order_time }"/></td>
+ 		<td>${store_orderVO1.store_name }</td>
+		<td>${store_orderVO1.totalprice }</td>
+		<td>${store_orderVO1.order_way }</td>
+		<td>${store_orderVO1.order_state }</td>
 		<td>取消</td>
 		<td>檢舉</td>
 	</tr>
