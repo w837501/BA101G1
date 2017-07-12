@@ -11,11 +11,12 @@ MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>¦Y­q§Ú½u¤W­qÀ\¨t²Î</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
+<script src="<%=request.getContextPath()%>/js/mobile.js" type="text/javascript"></script>
 </head>
 <body>
-
 	<div id="page">
 		<div id="header">
+<<<<<<< HEAD
 			<div id="logo">
 				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
 				<span id="login">
@@ -34,6 +35,9 @@ MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 					<li><a href="news.html">³Ì·s®ø®§</a></li>
 				</ul>
 			</div>
+=======
+			<jsp:include page="/header.jsp" />
+>>>>>>> branch 'ç¬¨' of https://github.com/w837501/BA101G1.git
 		</div>
 
 		<div id="contents">

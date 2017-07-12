@@ -11,10 +11,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>¦Y­q§Ú½u¤W­qÀ\¨t²Î</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
+<script src="<%=request.getContextPath()%>/js/mobile.js" type="text/javascript"></script>
 </head>
 <body>
 	<div id="page">
 		<div id="header">
+<<<<<<< HEAD
 			<div id="logo">
 				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
 				<span id="login">
@@ -33,7 +35,11 @@
 					
 				</ul>
 			</div>
+=======
+			<jsp:include page="/header.jsp" />
+>>>>>>> branch 'ç¬¨' of https://github.com/w837501/BA101G1.git
 		</div>
+	
 
 		<div id="contentsHome">
 			<div id="main">
@@ -170,14 +176,7 @@
 		</div>
 
 		<div id="footer">
-			<ul class="navigation">
-				<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-				<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>¼öªù°Ó®a</a></li>
-				<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>§ä°Ó®a</a></li>
-				<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>§ä°Ó«~</a></li>
-				<li><a href="news.html">³Ì·s®ø®§</a></li>
-			</ul>
-			<p id="footnote">Eternal Beauty Essentials 2012. All Rights Reserved.</p>
+			<jsp:include page="/footer.jsp"/>
 		</div>
 
 	</div>
