@@ -138,8 +138,6 @@
 					<a href="contact.html">Contact</a>
 				</li>
 			</ul>
-			<p id="footnote">
-			</p>
 		</div>
 	</div>
 </body>

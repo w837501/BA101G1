@@ -177,7 +177,6 @@
 				<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
 				<li><a href="news.html">最新消息</a></li>
 			</ul>
-			<p id="footnote">Eternal Beauty Essentials 2012. All Rights Reserved.</p>
 		</div>
 
 	</div>
