@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.product_class.model.ProductClassVO;
-import com.store.model.StoreJDBC_DAO;
 import com.store.model.StoreVO;
 
 public class StoreClassJDBC_DAO implements StoreClassDAO_interface {

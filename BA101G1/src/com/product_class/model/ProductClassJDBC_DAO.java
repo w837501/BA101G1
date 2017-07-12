@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.store.model.StoreJDBC_DAO;
 import com.store.model.StoreVO;
 import com.store_class.model.StoreClassVO;
 
