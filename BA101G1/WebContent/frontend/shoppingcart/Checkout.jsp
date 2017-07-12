@@ -2,8 +2,11 @@
 <%@ page import="java.util.* "%>
 <%@ page import="com.product.model.* "%>
 <%@ page import="com.order.model.* "%>
+<%@ page import="com.mem.model.* "%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%
+MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+%>
 <html>
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -19,7 +22,13 @@
 		<div id="header">
 			<div id="logo">
 				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
-				<span id="login"><a href="news.html">Login in</a></span>
+				<span id="login">
+				<c:if test="${empty memberVO }">
+				<a href="<%=request.getContextPath()%>/frontend/mem/LoginAndAddMem.jsp">Login</a>
+				</c:if>
+				<c:if test="${not empty memberVO }">
+						<a href="<%=request.getContextPath()%>/backend/mem/mem.do?action=logout">Logout</a>  
+					</c:if></span>
 
 				<ul>
 					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
@@ -44,7 +53,7 @@
 
 				<%
 					Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
-					String amount =  (String) request.getAttribute("amount");
+					String amount =  (String) session.getAttribute("amount");
 					Store_OrderVO orderVO = (Store_OrderVO) request.getAttribute("orderVO");
 				%>	
 				<%ProductVO productVO=new ProductVO(); %>
@@ -187,6 +196,7 @@
 									<input type="hidden"  value = "setOrder_Into" name="action">
 									<input type="hidden"  value = "<%=amount%> " name="amount">
 									<input type="hidden"  value = "<%=buylist%>" name="buylist">
+									<input type="hidden"  value = "<%=memberVO.getMem_id()%>" name="mem_id">
 									<input type="hidden"  value = "<%=productVO.getStore_id()%>" name="store_id">
 									<input type="submit" value="送出新增">
 								</div>
@@ -196,17 +206,16 @@
 						<a href="<%=request.getContextPath()%>/store/store.do?action=getProduct_By_Store&store_id=<%=productVO.getStore_id() %>&quentity=<%=productVO.getQuantity()%>">是否繼續購物</a>
 				</FORM>
 			</div>
+			</div>
 			<div id="footer">
 				<ul class="navigation">
 					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
 					<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
 					<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
 					<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
-					<li><a href="news.html">最新消息</a></li>
-				</ul>
-				<p id="footnote">Eternal Beauty Essentials 2012. All Rights Reserved.</p>
+					</ul>
 			</div>
-		</div>			
+					
 	</div>
 </body>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -214,7 +223,7 @@
 	<script>
 		$("#datepicker3").datepicker({
 			showOn : "button",
-			buttonImage : "../frontend/shoppingcart/images/calendar.gif",
+			buttonImage : "<%=request.getContextPath()%>/frontend/shoppingcart/images/calendar.gif",
 			buttonImageOnly : true,
 			changeMonth: true,
 			changeYear: true,

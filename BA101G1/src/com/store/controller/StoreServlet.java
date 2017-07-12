@@ -1,6 +1,7 @@
 package com.store.controller;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -240,6 +241,14 @@ public class StoreServlet extends HttpServlet {
 			StoreVO storeVO = storeSvc.getOneStore(str);
 			List<ProductVO> productlist = productSvc.getProductByStore(str);
 			
+			System.out.println(storeVO.getStore_star());
+			System.out.println(storeVO.getStore_count());
+
+			double avg1=(double)storeVO.getStore_star()/(double)storeVO.getStore_count();
+			DecimalFormat df=new DecimalFormat("#.#");
+			String avg=df.format(avg1);
+			System.out.println(avg);
+			req.setAttribute("avg", avg);
 			req.setAttribute("storeVO", storeVO);
 			req.setAttribute("productlist", productlist); // 資料庫取出的storeVO物件,存入req
 
@@ -254,7 +263,7 @@ public class StoreServlet extends HttpServlet {
 			int store_star = Integer.parseInt(str);
 			StoreService storeSvc = new StoreService();
 			
-			List<StoreVO> storelist = storeSvc.getHot(store_star);
+			List<StoreVO> storelist = storeSvc.getAll();
 			req.setAttribute("storelist", storelist);
 			
 			String url = "/store/store.jsp";

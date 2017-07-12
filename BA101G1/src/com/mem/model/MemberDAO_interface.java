@@ -8,4 +8,5 @@ public interface MemberDAO_interface {
     public void delete(String mem_id);
     public MemberVO findByPrimaryKey(String mem_id);
     public List<MemberVO> getAll();
+    public MemberVO findAcc(String mem_mail);
 }

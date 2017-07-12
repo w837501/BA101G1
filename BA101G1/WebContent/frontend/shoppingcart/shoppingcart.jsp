@@ -14,25 +14,36 @@
 	<!--[if IE]>
 		<link rel="stylesheet" href="css/ie.css" type="text/css" charset="utf-8">
 	<![endif]-->
-	
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
 	<%
-		String amount =  (String) request.getAttribute("amount");
+		String amount =  (String) session.getAttribute("amount");
 		Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
 	%>
-	
-
 	<div id="page">
-	<%if (buylist != null && (buylist.size() > 0)) {%>
-		<div id="header">
+	<div id="header">
 			<div id="logo">
-				<a href="index.html"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
+				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
+				<span id="login">
+				<c:if test="${empty memberVO }">
+				<a href="<%=request.getContextPath()%>/frontend/mem/LoginAndAddMem.jsp">Login</a>
+				</c:if>
+				<c:if test="${not empty memberVO }">
+						<a href="<%=request.getContextPath()%>/backend/mem/mem.do?action=logout">Logout</a>  
+					</c:if></span>
+
+				<ul>
+					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
+					<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
+					<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
+					<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
+					<li><a href="news.html">最新消息</a></li>
+				</ul>
 			</div>
 		</div>
+	<%if (buylist != null && (buylist.size() > 0)) {%>
 		<div id="contents">
 			<div id="sidebar">
 				<h1>購物車</h1>
@@ -127,8 +138,6 @@
 					<a href="contact.html">Contact</a>
 				</li>
 			</ul>
-			<p id="footnote">
-			</p>
 		</div>
 	</div>
 </body>

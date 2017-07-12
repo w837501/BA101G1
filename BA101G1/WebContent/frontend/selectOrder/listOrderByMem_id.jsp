@@ -3,7 +3,10 @@
 <%@ page import="com.order.model.*"%>
 <%@ page import="com.store.model.*"%>
 <%@ page import="java.util.*"%>
-
+<%@ page import="com.mem.model.*"%>
+<% 
+MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+%>
 <html>
 <head>
 <title>­q³æ - listOneOrder.jsp</title>

@@ -14,7 +14,9 @@
 <%--  <%List<ProductVO> productVO = (List) request.getAttribute("productlist");%>--%>
 <jsp:useBean id="storeSvc" scope="page" class="com.store.model.StoreService" />
 <jsp:useBean id="storeclassSvc" scope="page" class="com.store_class.model.StoreClassService" />
-
+<% 
+	StoreVO storeVO=(StoreVO)request.getAttribute("storeVO");
+%>
 <html>
 <head>
 <title>商家搜尋結果 - listSearchStore.jsp</title>

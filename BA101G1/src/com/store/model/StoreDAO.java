@@ -27,7 +27,7 @@ public class StoreDAO implements StoreDAO_interface {
 	private static final String UPDATE_STMT = "UPDATE STORE set sc_id=?, store_content=?, store_phone=?, store_addr=?, store_image=?, store_out=?, store_zone=?, store_pw=? where store_id = ?";
 	private static final String DELETE = "DELETE FROM STORE where store_id = ?";
 	private static final String Find_by_PK = "select * from STORE where store_id=? and store_state = '開店中'";
-	private static final String Find_ALL = "select * from STORE ";
+	private static final String Find_ALL = "select * from STORE order by store_star";
 	private static final String Find_NAME = "select * from STORE where store_name like ? and store_state = '開店中'";
 	private static final String Find_ZONE = "select * from STORE where store_zone = ? and store_state = '開店中'";
 	private static final String CLASSLINK = "select s.sc_id, s.store_id, s.store_name, s.store_addr, s.store_zone, t.sc_name from store s join store_class t on (s.sc_id = t.sc_id) where t.sc_id = ? and store_state = '開店中'";
@@ -161,8 +161,8 @@ public class StoreDAO implements StoreDAO_interface {
 				storeVO.setStore_phone(rs.getString("store_phone"));
 				storeVO.setStore_addr(rs.getString("store_addr"));
 				storeVO.setStore_date(rs.getTimestamp("store_date"));
-				storeVO.setStore_star(rs.getInt("store_star"));
-				storeVO.setStore_count(rs.getInt("store_count"));
+				storeVO.setStore_star(rs.getDouble("store_star"));
+				storeVO.setStore_count(rs.getDouble("store_count"));
 				storeVO.setStore_state(rs.getString("store_state"));
 				storeVO.setStore_image(rs.getBytes("store_image"));
 				storeVO.setStore_report_count(rs.getInt("store_report_count"));
@@ -224,8 +224,8 @@ public class StoreDAO implements StoreDAO_interface {
 				storeVO.setStore_phone(rs.getString("store_phone"));
 				storeVO.setStore_addr(rs.getString("store_addr"));
 				storeVO.setStore_date(rs.getTimestamp("store_date"));
-				storeVO.setStore_star(rs.getInt("store_star"));
-				storeVO.setStore_count(rs.getInt("store_count"));
+				storeVO.setStore_star(rs.getDouble("store_star"));
+				storeVO.setStore_count(rs.getDouble("store_count"));
 				storeVO.setStore_state(rs.getString("store_state"));
 				storeVO.setStore_image(rs.getBytes("store_image"));
 				storeVO.setStore_report_count(rs.getInt("store_report_count"));
@@ -287,8 +287,8 @@ public class StoreDAO implements StoreDAO_interface {
 				storeVO.setStore_phone(rs.getString("store_phone"));
 				storeVO.setStore_addr(rs.getString("store_addr"));
 				storeVO.setStore_date(rs.getTimestamp("store_date"));
-				storeVO.setStore_star(rs.getInt("store_star"));
-				storeVO.setStore_count(rs.getInt("store_count"));
+				storeVO.setStore_star(rs.getDouble("store_star"));
+				storeVO.setStore_count(rs.getDouble("store_count"));
 				storeVO.setStore_state(rs.getString("store_state"));
 				storeVO.setStore_image(rs.getBytes("store_image"));
 				storeVO.setStore_report_count(rs.getInt("store_report_count"));
@@ -351,8 +351,8 @@ public class StoreDAO implements StoreDAO_interface {
 				storeVO.setStore_phone(rs.getString("store_phone"));
 				storeVO.setStore_addr(rs.getString("store_addr"));
 				storeVO.setStore_date(rs.getTimestamp("store_date"));
-				storeVO.setStore_star(rs.getInt("store_star"));
-				storeVO.setStore_count(rs.getInt("store_count"));
+				storeVO.setStore_star(rs.getDouble("store_star"));
+				storeVO.setStore_count(rs.getDouble("store_count"));
 				storeVO.setStore_state(rs.getString("store_state"));
 				storeVO.setStore_image(rs.getBytes("store_image"));
 				storeVO.setStore_report_count(rs.getInt("store_report_count"));
@@ -500,8 +500,8 @@ public class StoreDAO implements StoreDAO_interface {
 				storeVO.setStore_phone(rs.getString("store_phone"));
 				storeVO.setStore_addr(rs.getString("store_addr"));
 				storeVO.setStore_date(rs.getTimestamp("store_date"));
-				storeVO.setStore_star(rs.getInt("store_star"));
-				storeVO.setStore_count(rs.getInt("store_count"));
+				storeVO.setStore_star(rs.getDouble("store_star"));
+				storeVO.setStore_count(rs.getDouble("store_count"));
 				storeVO.setStore_state(rs.getString("store_state"));
 				storeVO.setStore_image(rs.getBytes("store_image"));
 				storeVO.setStore_report_count(rs.getInt("store_report_count"));
