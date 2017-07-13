@@ -1,4 +1,4 @@
-package com.permission2.model;
+package com.permission_ability.model;
 
 import java.util.List;
 import javax.naming.Context;
@@ -6,12 +6,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import org.hibernate.*;
-
-import com.man.model.ManagerVO;
 import com.tools.HibernateUtil;
 
 
-public class PermissionDAO implements PermissionDAO_interface{
+public class PermissionAbilityDAO implements Permission_AbilityDAO_interface{
 	
 	private static DataSource ds = null;
 	static {
@@ -25,35 +23,37 @@ public class PermissionDAO implements PermissionDAO_interface{
 
 	private static final String GET_ALL_STMT = "from PermissionVO order by man_id desc";
 	@Override
-	public void insert(PermissionVO permissionVO) {
+	public void insert(Permission_AbilityVO paVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(permissionVO);
+			session.saveOrUpdate(paVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
+		
 	}
 
 
 	@Override
-	public void update(PermissionVO permissionVO) {
+	public void update(Permission_AbilityVO paVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(permissionVO);
+			session.saveOrUpdate(paVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
+		
 	}
 
 
 	@Override
-	public void delete(ManagerVO managerVO) {
+	public void delete(String pa_id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
@@ -64,9 +64,9 @@ public class PermissionDAO implements PermissionDAO_interface{
 //			System.out.println("刪除的筆數=" + query.executeUpdate());
 			
 //        【或此時多方(也)可採用去除關聯關係後，再刪除的方式】
-			PermissionVO permissionVO = new PermissionVO();
-			permissionVO.setManagerVO(managerVO);
-			session.delete(permissionVO);
+			Permission_AbilityVO paVO = new Permission_AbilityVO();
+			paVO.setPa_id(pa_id);
+			session.delete(paVO);
 			
 //        【此時多方不可(不宜)採用cascade聯級刪除】
 //        【多方emp2.hbm.xml如果設為 cascade="all"或 cascade="delete"將會刪除所有相關資料-包括所屬部門與同部門的其它員工將會一併被刪除】
@@ -80,26 +80,28 @@ public class PermissionDAO implements PermissionDAO_interface{
 		}
 	}
 	
+	
 	@Override
-	public PermissionVO findByPrimaryKey(ManagerVO managerVO) {
-		PermissionVO permissionVO = null;
+	public Permission_AbilityVO findByPrimaryKey(String pano) {
+		Permission_AbilityVO paVO = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			permissionVO = (PermissionVO) session.get(PermissionVO.class, managerVO);
+			paVO = (Permission_AbilityVO) session.get(Permission_AbilityVO.class, pano);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		return permissionVO;
+		return paVO;
 	}
 
 
 
+
 	@Override
-	public List<PermissionVO> getAll() {
-		List<PermissionVO> list = null;
+	public List<Permission_AbilityVO> getAll() {
+		List<Permission_AbilityVO> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
@@ -112,6 +114,11 @@ public class PermissionDAO implements PermissionDAO_interface{
 		}
 		return list;
 	}
+
+
+
+
+
 
 
 	

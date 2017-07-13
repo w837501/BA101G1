@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.permission_ability.model.Permission_AbilityVO" table="permission_ability" >
+        
+        <id name="pa_id" column="pa_id">
+            <generator class="sequence" >
+              <param name="sequence">PA_SEQ</param>
+            </generator>  
+        </id>
+        
+        <property name="pa_name" column="pa_name" />
+
+        
+        <set name="permission" table="permission" lazy="false" cascade="all" inverse="true" order-by="pa_id desc">
+            <key><column name="pa_id" /></key>
+            <one-to-many class="com.permission2.model.PermissionVO"/>
+        </set>
+        
+    </class>
+</hibernate-mapping>
+
