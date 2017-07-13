@@ -521,7 +521,7 @@
 									<input type="hidden" name="requestURL"
 									value="<%=request.getServletPath()%>" > <br> <br>
 								    <input type="hidden" name="action" value="insert">
-									<input type="submit" value="送出新增" id="input" >
+									<input type="submit" value="送出新增" id="input" disabled="disabled">
 								   </div>
 								</div>
 							</form>

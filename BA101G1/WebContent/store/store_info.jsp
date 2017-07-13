@@ -28,7 +28,16 @@
 					</div>
 					
 					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">琩高璹虫</a>
+					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">琩高┮Τ璹虫</a>
+					</div>
+					<div class="panel panel-info" style="width:200px;">
+					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">琩高ゼ絋粄璹虫</a>
+					</div>
+					<div class="panel panel-info" style="width:200px;">
+					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">琩高秈︽い璹虫</a>
+					</div>
+					<div class="panel panel-info" style="width:200px;">
+					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">琩高浪羭</a>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-7" >

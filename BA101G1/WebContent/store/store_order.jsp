@@ -42,7 +42,7 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 
 			
 				<div class="page-header"> 
-					  <h1>訂單資料</h1>
+					  <h1>所有訂單資料</h1>
  				</div> 
 				<table border='1' bordercolor='#CCCCFF' width='600'>
 					<tr>
@@ -52,7 +52,6 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 						<th>總金額</th>
 						<th>取餐方式</th>
 						<th>訂單狀態</th>
-						<th>檢舉商家</th>
 					</tr>
 					<c:forEach var="store_orderVO" items="${store_orderVO}" >
 					<tr align='center' valign='middle'>
@@ -65,7 +64,6 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 						<td>${store_orderVO.totalprice }</td>
 						<td>${store_orderVO.order_way }</td>
 						<td>${store_orderVO.order_state }</td>
-						<td>檢舉</td>
 					</tr>
 					</c:forEach>
 				

@@ -35,15 +35,41 @@
 						var emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 						$("#mem_mail").keydown(
 								function() {
+									console.log("123");
 									console.log($(this).val());
 									if (emailRule.test($(this).val())) {
-										$('.error1_mail').text('信箱格式正確');
-										$('.error1_mail').css("color", "blue");
-										$("#error_img_mail").attr("src","<%=request.getContextPath()%>/frontend/mem/image/images.jpg");
+										$('.error1_mail').text(' ');
+										$("#error_img_mail").removeAttr("src");
+										$('#correct_img_mail').attr("src","<%=request.getContextPath()%>/frontend/mem/image/images.jpg");
+										$('.correct_mail').text('信箱格式正確');
+										$('.correct_mail').css("color", "blue");
+										abc();
 									} else {
+										$('.correct_mail').text('');
+										$('#correct_img_mail').removeAttr("src");
 										$('.error1_mail').text('信箱格式不正確');
 										$('.error1_mail').css("color", "red");
 										$("#error_img_mail").attr("src","<%=request.getContextPath()%>/frontend/mem/image/error.png");
+										
+									}
+								});
+						$("#mem_mail").blur(
+								function() {
+									console.log($(this).val());
+									if (emailRule.test($(this).val())) {
+										$('.error1_mail').text(' ');
+										$("#error_img_mail").removeAttr("src");
+										$('#correct_img_mail').attr("src","<%=request.getContextPath()%>/frontend/mem/image/images.jpg");
+										$('.correct_mail').text('信箱格式正確');
+										$('.correct_mail').css("color", "blue");
+										abc();
+									} else {
+										$('.correct_mail').text('');
+										$('#correct_img_mail').removeAttr("src");
+										$('.error1_mail').text('信箱格式不正確');
+										$('.error1_mail').css("color", "red");
+										$("#error_img_mail").attr("src","<%=request.getContextPath()%>/frontend/mem/image/error.png");
+										
 									}
 								});
 						var pwRule = /^(?!.*[^a-zA-Z0-9])(?=.*\d)(?=.*[a-zA-Z]).{6,10}$/;
@@ -51,42 +77,91 @@
 								function() {
 									console.log($(this).val());
 									if (pwRule.test($(this).val())) {
-										$('.error1_pw').text('密碼格式正確');
-										$('.error1_pw')
-												.css("color", "blue");
-										$("#error_img_pw").attr("src","<%=request.getContextPath()%>/frontend/mem/image/images.jpg");
-									} else {
-										$('.error1_pw').text('密碼格式不正確');
-										$('.error1_pw').css("color", "red");
-										$("#error_img_pw").attr("src","<%=request.getContextPath()%>/frontend/mem/image/error.png");
-									}
+											$('.error1_pw').text(' ');
+											$("#error_img_pw").removeAttr("src");
+											$('#correct_img_pw').attr("src","<%=request.getContextPath()%>/frontend/mem/image/images.jpg");
+											$('.correct_pw').text('密碼格式正確');
+											$('.correct_pw').css("color", "blue");
+											abc();
+										} else {
+											$('.correct_pw').text('');
+											$('#correct_img_pw').removeAttr("src");
+											$('.error1_pw').text('密碼格式不正確');
+											$('.error1_pw').css("color", "red");
+											$("#error_img_pw").attr("src","<%=request.getContextPath()%>/frontend/mem/image/error.png");
+											
+										}
+								});
+						$("#mem_pw").blur(
+								function() {
+									console.log($(this).val());
+									if (pwRule.test($(this).val())) {
+											$('.error1_pw').text(' ');
+											$("#error_img_pw").removeAttr("src");
+											$('#correct_img_pw').attr("src","<%=request.getContextPath()%>/frontend/mem/image/images.jpg");
+											$('.correct_pw').text('密碼格式正確');
+											$('.correct_pw').css("color", "blue");
+											abc();
+										} else {
+											$('.correct_pw').text('');
+											$('#correct_img_pw').removeAttr("src");
+											$('.error1_pw').text('密碼格式不正確');
+											$('.error1_pw').css("color", "red");
+											$("#error_img_pw").attr("src","<%=request.getContextPath()%>/frontend/mem/image/error.png");
+											
+										}
 								});
 						$("#mem_pw1").blur(
 								function(){
 									console.log($(this).val());
 									if($(this).val()==$("#mem_pw").val()&&pwRule.test($(this).val())){
-											$('.error1_pw1').text('密碼正確');
-											$('.error1_pw1')
-													.css("color", "blue");
-											$("#error_img_pw1").attr("src","<%=request.getContextPath()%>/frontend/mem/image/images.jpg");
-									}else{
-										$('.error1_pw1').text('密碼不正確');
-										$("#error_img_pw1").attr("src","<%=request.getContextPath()%>/frontend/mem/image/error.png");
-										$('.error1_pw1').css("color", "red");
+											$('.error1_pw1').text(' ');
+											$("#error_img_pw1").removeAttr("src");
+											$('#correct_img_pw1').attr("src","<%=request.getContextPath()%>/frontend/mem/image/images.jpg");
+											$('.correct_pw1').text('密碼正確');
+											$('.correct_pw1').css("color", "blue");
+											abc();
+										}else{
+											$('.correct_pw1').text('');
+											$('#correct_img_pw1').removeAttr("src");
+											$('.error1_pw1').text('密碼不正確');
+											$('.error1_pw1').css("color", "red");
+											$("#error_img_pw1").attr("src","<%=request.getContextPath()%>/frontend/mem/image/error.png");
 										}
-									
 								});
 						var nameRule = /^[\u4e00-\u9fa5_a-zA-Z]{2,10}$/;
 						$("#mem_name").keydown(
 								function() {
 									console.log($(this).val());
 									if (nameRule.test($(this).val())) {
-										$('.error1_name').text('姓名格式正確');
-										$('.error1_name')
-												.css("color", "blue");
-										$("#error_img_name").attr("src","<%=request.getContextPath()%>/frontend/mem/image/images.jpg");
+										$('.error1_name').text(' ');
+										$("#error_img_name").removeAttr("src");
+										$('#correct_img_name').attr("src","<%=request.getContextPath()%>/frontend/mem/image/images.jpg");
+										$('.correct_name').text('名字正確');
+										$('.correct_name').css("color", "blue");
+										abc();
 									} else {
-										$('.error1_name').text('姓名格式不正確');
+										$('.correct_name').text('');
+										$('#correct_img_name').removeAttr("src");
+										$('.error1_name').text('名字不正確');
+										$('.error1_name').css("color", "red");
+										$("#error_img_name").attr("src","<%=request.getContextPath()%>/frontend/mem/image/error.png");
+									}
+								});
+						$("#mem_name").blur(
+								function() {
+									console.log($(this).val());
+									if (nameRule.test($(this).val())) {
+										$('.error1_name').text(' ');
+										$("#error_img_name").removeAttr("src");
+										$('#correct_img_name').attr("src","<%=request.getContextPath()%>/frontend/mem/image/images.jpg");
+										$('.correct_name').text('名字正確');
+										$('.correct_name').css("color", "blue");
+										abc();
+									} else {
+										$('.correct_name').text('');
+										$('#correct_img_name').removeAttr("src");
+										$('.error1_name').text('名字不正確');
 										$('.error1_name').css("color", "red");
 										$("#error_img_name").attr("src","<%=request.getContextPath()%>/frontend/mem/image/error.png");
 									}
@@ -96,16 +171,48 @@
 								function() {
 									console.log($(this).val());
 									if (phoneRule.test($(this).val())) {
-										$('.error1_phone').text('手機格式正確');
-										$('.error1_phone')
-												.css("color", "blue");
-										$("#error_img_phone").attr("src","<%=request.getContextPath()%>/frontend/mem/image/images.jpg");
-									} else {
-										$('.error1_phone').text('手機格式不正確');
-										$('.error1_phone').css("color", "red");
-										$("#error_img_phone").attr("src","<%=request.getContextPath()%>/frontend/mem/image/error.png");
-									}
+											$('.error1_phone').text(' ');
+											$("#error_img_phone").removeAttr("src");
+											$('#correct_img_phone').attr("src","<%=request.getContextPath()%>/frontend/mem/image/images.jpg");
+											$('.correct_phone').text('手機正確');
+											$('.correct_phone').css("color", "blue");
+											abc();
+										} else {
+											$('.correct_phone').text('');
+											$('#correct_img_phone').removeAttr("src");
+											$('.error1_phone').text('手機不正確');
+											$('.error1_phone').css("color", "red");
+											$("#error_img_phone").attr("src","<%=request.getContextPath()%>/frontend/mem/image/error.png");
+										}
 								});
+						$("#mem_phone").blur(
+								function() {
+									console.log($(this).val());
+									if (phoneRule.test($(this).val())) {
+											$('.error1_phone').text(' ');
+											$("#error_img_phone").removeAttr("src");
+											$('#correct_img_phone').attr("src","<%=request.getContextPath()%>/frontend/mem/image/images.jpg");
+											$('.correct_phone').text('手機正確');
+											$('.correct_phone').css("color", "blue");
+											abc();
+										} else {
+											$('.correct_phone').text('');
+											$('#correct_img_phone').removeAttr("src");
+											$('.error1_phone').text('手機不正確');
+											$('.error1_phone').css("color", "red");
+											$("#error_img_phone").attr("src","<%=request.getContextPath()%>/frontend/mem/image/error.png");
+										}
+								});
+						
+						function abc(){
+							if($('.error1_phone').text()==' '&&$('.error1_name').text()==' '&&$('.error1_pw1').text()==' '&&$('.error1_pw').text()==' '&&$('.error1_mail').text()==' '){
+								console.log($('.error1_phone').text()==' '&&$('.error1_name').text()==' '&&$('.error1_pw1').text()==' '&&$('.error1_pw').text()==' '&&$('.error1_mail').text()==' ');
+								$('#input').attr("disabled",false);
+							}else{
+								console.log($('.error1_phone').text()==' '&&$('.error1_name').text()==' '&&$('.error1_pw1').text()==' '&&$('.error1_pw').text()==' '&&$('.error1_mail').text()==' ');
+								$('#input').attr("disabled",true);
+							}
+						}
 					});
 </script>
 <style>
@@ -190,7 +297,9 @@
 								</div>
 								<div class="col-xs-12 col-sm-3">
 								<span class='error1_mail' style="margin-left:-100px;"></span> 
-								<img src="" id="error_img_mail"> 
+								<img src="" id="error_img_mail">
+								<span class='correct_mail' style="margin-left:-100px;"></span> 
+								<img src="" id="correct_img_mail"> 
 								</div>
 							</div>
 							<div class="form-group">
@@ -203,6 +312,8 @@
 								<div class="col-xs-12 col-sm-3">
 									<span class='error1_pw' style="margin-left:-100px;"></span>
 									<img src="" id="error_img_pw">
+									<span class='correct_pw' style="margin-left:-100px;"></span> 
+									<img src="" id="correct_img_pw"> 
 								</div>
 								</div>
 								<div class="form-group">
@@ -215,6 +326,8 @@
 									<div class="col-xs-12 col-sm-3">
 										<span class='error1_pw1'style="margin-left:-100px;"></span>
 										<img src="" id="error_img_pw1"> 
+										<span class='correct_pw1' style="margin-left:-100px;"></span> 
+										<img src="" id="correct_img_pw1"> 
 									</div>
 								</div>
 								<div class="form-group">
@@ -226,6 +339,8 @@
 									<div class="col-xs-12 col-sm-3">
 									<span class='error1_name'style="margin-left:-100px;" ></span> 
 									<img src="" id="error_img_name"> 
+									<span class='correct_name' style="margin-left:-100px;"></span> 
+									<img src="" id="correct_img_name"> 
 									</div>
 								</div>
 								<div class="form-group">
@@ -237,13 +352,15 @@
 									<div class="col-xs-12 col-sm-3">
 										<span class='error1_phone' style="margin-left:-100px;"></span> 
 										<img src="" id="error_img_phone"> 
+										<span class='correct_phone' style="margin-left:-100px;"></span> 
+										<img src="" id="correct_img_phone"> 
 									</div>
 								</div>
 									<div class="form-group">
 									<input type="hidden" name="requestURL"
 									value="<%=request.getServletPath()%>"> <br> <br>
 								    <input type="hidden" name="action" value="insert"> 
-								    <input type="submit" value="送出新增" id="input"> 
+								    <input type="submit" value="送出新增" id="input" disabled="disabled"> 
 								   </div>
 								    </div>
 							</form>
