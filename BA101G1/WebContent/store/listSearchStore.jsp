@@ -14,12 +14,9 @@
 <%--  <%List<ProductVO> productVO = (List) request.getAttribute("productlist");%>--%>
 <jsp:useBean id="storeSvc" scope="page" class="com.store.model.StoreService" />
 <jsp:useBean id="storeclassSvc" scope="page" class="com.store_class.model.StoreClassService" />
-<% 
-	StoreVO storeVO=(StoreVO)request.getAttribute("storeVO");
-%>
+
 <html>
 <head>
-<title>商家搜尋結果 - listSearchStore.jsp</title>
 </head>
 <body>
 	<div id="items">
@@ -33,7 +30,7 @@
 				</a>
 				<h3>${storeVO.store_name}</h3>
 				<span class="price">
-					<c:forEach var="sto  reclasslistVO" items="${storeclassSvc.all}">
+					<c:forEach var="storeclasslistVO" items="${storeclassSvc.all}">
 						<c:if test="${storeVO.sc_id==storeclasslistVO.sc_id}">
 		                    ${storeclasslistVO.sc_name}
 	                    </c:if>
