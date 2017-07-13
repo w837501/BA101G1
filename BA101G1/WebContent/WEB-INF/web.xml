@@ -205,9 +205,9 @@
   </filter>
   <filter-mapping>
     <filter-name>StoreLoginFilter</filter-name>
-    <url-pattern>/frontend/mem/member_info.jsp</url-pattern>
-    <url-pattern>/frontend/shoppingcart/Checkout.jsp</url-pattern>
-    <url-pattern>/frontend/mem/member_info_order.jsp</url-pattern>
+    <url-pattern>/store/store_info.jsp</url-pattern>
+    <url-pattern>/store/store_order.jsp</url-pattern>
+    <url-pattern>/store/store_update.jsp</url-pattern>
     <url-pattern>/frontend/mem/member_info_update.jsp</url-pattern>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>

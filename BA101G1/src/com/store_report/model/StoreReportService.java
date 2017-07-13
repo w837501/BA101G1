@@ -62,4 +62,7 @@ public class StoreReportService {
 	public List<StoreReportVO> getAll() {
 		return dao.getAll();
 	}
+	public List<StoreReportVO> getReportByStore_id(String store_id) {
+		return dao.getReportByStore_id(store_id);
+	}
 }
