@@ -59,6 +59,9 @@ public class StoreService {
 	public StoreVO getOneStore(String store_id) {
 		return dao.findByPrimaryKey(store_id);
 	}
+	public StoreVO getOneStoreByAcc(String store_acc) {
+		return dao.findByStoreAcc(store_acc);
+	}
 
 	public List<StoreVO> getAll() {
 		return dao.getAll();

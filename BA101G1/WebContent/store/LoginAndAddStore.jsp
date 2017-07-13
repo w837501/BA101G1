@@ -40,11 +40,31 @@
 								function() {
 									console.log($(this).val());
 									if (emailRule.test($(this).val())) {
-										$('.error1_acc').text('');
+										$('.error1_acc').text(' ');
 										$("#error_img_acc").removeAttr("src");
 										$('#correct_img_acc').attr("src","<%=request.getContextPath()%>/store/image/images.jpg");
 										$('.correct_acc').text('信箱格式正確');
 										$('.correct_acc').css("color", "blue");
+										abc();
+									} else {
+										$('.correct_acc').text('');
+										$('#correct_img_acc').removeAttr("src");
+										$('.error1_acc').text('信箱格式不正確');
+										$('.error1_acc').css("color", "red");
+										$("#error_img_acc").attr("src","<%=request.getContextPath()%>/store/image/error.png");
+										
+									}
+								});
+						$("#store_acc").blur(
+								function() {
+									console.log($(this).val());
+									if (emailRule.test($(this).val())) {
+										$('.error1_acc').text(' ');
+										$("#error_img_acc").removeAttr("src");
+										$('#correct_img_acc').attr("src","<%=request.getContextPath()%>/store/image/images.jpg");
+										$('.correct_acc').text('信箱格式正確');
+										$('.correct_acc').css("color", "blue");
+										abc();
 									} else {
 										$('.correct_acc').text('');
 										$('#correct_img_acc').removeAttr("src");
@@ -59,11 +79,31 @@
 								function() {
 									console.log($(this).val());
 									if (pwRule.test($(this).val())) {
-											$('.error1_pw').text('');
+											$('.error1_pw').text(' ');
 											$("#error_img_pw").removeAttr("src");
 											$('#correct_img_pw').attr("src","<%=request.getContextPath()%>/store/image/images.jpg");
 											$('.correct_pw').text('密碼格式正確');
 											$('.correct_pw').css("color", "blue");
+											abc();
+										} else {
+											$('.correct_pw').text('');
+											$('#correct_img_pw').removeAttr("src");
+											$('.error1_pw').text('密碼格式不正確');
+											$('.error1_pw').css("color", "red");
+											$("#error_img_pw").attr("src","<%=request.getContextPath()%>/store/image/error.png");
+											
+										}
+								});
+						$("#store_pw").blur(
+								function() {
+									console.log($(this).val());
+									if (pwRule.test($(this).val())) {
+											$('.error1_pw').text(' ');
+											$("#error_img_pw").removeAttr("src");
+											$('#correct_img_pw').attr("src","<%=request.getContextPath()%>/store/image/images.jpg");
+											$('.correct_pw').text('密碼格式正確');
+											$('.correct_pw').css("color", "blue");
+											abc();
 										} else {
 											$('.correct_pw').text('');
 											$('#correct_img_pw').removeAttr("src");
@@ -77,11 +117,12 @@
 								function(){
 									console.log($(this).val());
 									if($(this).val()==$("#store_pw").val()&&pwRule.test($(this).val())){
-											$('.error1_pw1').text('');
+											$('.error1_pw1').text(' ');
 											$("#error_img_pw1").removeAttr("src");
 											$('#correct_img_pw1').attr("src","<%=request.getContextPath()%>/store/image/images.jpg");
 											$('.correct_pw1').text('密碼正確');
 											$('.correct_pw1').css("color", "blue");
+											abc();
 										}else{
 											$('.correct_pw1').text('');
 											$('#correct_img_pw1').removeAttr("src");
@@ -95,11 +136,30 @@
 								function() {
 									console.log($(this).val());
 									if (nameRule.test($(this).val())) {
-										$('.error1_name').text('');
+										$('.error1_name').text(' ');
 										$("#error_img_name").removeAttr("src");
 										$('#correct_img_name').attr("src","<%=request.getContextPath()%>/store/image/images.jpg");
 										$('.correct_name').text('名字正確');
 										$('.correct_name').css("color", "blue");
+										abc();
+									} else {
+										$('.correct_name').text('');
+										$('#correct_img_name').removeAttr("src");
+										$('.error1_name').text('名字不正確');
+										$('.error1_name').css("color", "red");
+										$("#error_img_name").attr("src","<%=request.getContextPath()%>/store/image/error.png");
+									}
+								});
+						$("#store_name").blur(
+								function() {
+									console.log($(this).val());
+									if (nameRule.test($(this).val())) {
+										$('.error1_name').text(' ');
+										$("#error_img_name").removeAttr("src");
+										$('#correct_img_name').attr("src","<%=request.getContextPath()%>/store/image/images.jpg");
+										$('.correct_name').text('名字正確');
+										$('.correct_name').css("color", "blue");
+										abc();
 									} else {
 										$('.correct_name').text('');
 										$('#correct_img_name').removeAttr("src");
@@ -109,20 +169,87 @@
 									}
 								});
 						var phoneRule = /^09[0-9]{8}$/;
-						$("#mem_phone").keydown(
+						$("#store_phone").keydown(
 								function() {
 									console.log($(this).val());
 									if (phoneRule.test($(this).val())) {
-										$('.error1_phone').text('手機格式正確');
-										$('.error1_phone')
-												.css("color", "blue");
-										$("#error_img_phone").attr("src","<%=request.getContextPath()%>/frontend/mem/image/images.jpg");
-									} else {
-										$('.error1_phone').text('手機格式不正確');
-										$('.error1_phone').css("color", "red");
-										$("#error_img_phone").attr("src","<%=request.getContextPath()%>/frontend/mem/image/error.png");
-									}
+											$('.error1_phone').text(' ');
+											$("#error_img_phone").removeAttr("src");
+											$('#correct_img_phone').attr("src","<%=request.getContextPath()%>/store/image/images.jpg");
+											$('.correct_phone').text('手機正確');
+											$('.correct_phone').css("color", "blue");
+											abc();
+										} else {
+											$('.correct_phone').text('');
+											$('#correct_img_phone').removeAttr("src");
+											$('.error1_phone').text('手機不正確');
+											$('.error1_phone').css("color", "red");
+											$("#error_img_phone").attr("src","<%=request.getContextPath()%>/store/image/error.png");
+										}
 								});
+						$("#store_phone").blur(
+								function() {
+									console.log($(this).val());
+									if (phoneRule.test($(this).val())) {
+											$('.error1_phone').text(' ');
+											$("#error_img_phone").removeAttr("src");
+											$('#correct_img_phone').attr("src","<%=request.getContextPath()%>/store/image/images.jpg");
+											$('.correct_phone').text('手機正確');
+											$('.correct_phone').css("color", "blue");
+											abc();
+										} else {
+											$('.correct_phone').text('');
+											$('#correct_img_phone').removeAttr("src");
+											$('.error1_phone').text('手機不正確');
+											$('.error1_phone').css("color", "red");
+											$("#error_img_phone").attr("src","<%=request.getContextPath()%>/store/image/error.png");
+										}
+								});
+						$("#store_content").blur(
+								function() {
+									console.log($(this).val());
+									if ($(this).val()!="") {
+											$('.error1_content').text(' ');
+											$("#error_img_content").removeAttr("src");
+											$('#correct_img_content').attr("src","<%=request.getContextPath()%>/store/image/images.jpg");
+											$('.correct_content').css("color", "blue");
+											console.log($('.error1_content').text()==' ');
+											abc();
+										} else {
+											$('.correct_content').text('');
+											$('#correct_img_content').removeAttr("src");
+											$('.error1_content').text('不可空白');
+											$('.error1_content').css("color", "red");
+											$("#error_img_content").attr("src","<%=request.getContextPath()%>/store/image/error.png");
+										}
+								});
+						$("#store_addr").blur(
+								function() {
+									console.log($(this).val());
+									if ($(this).val()!="") {
+											$('.error1_addr').text(' ');
+											$("#error_img_addr").removeAttr("src");
+											$('#correct_img_addr').attr("src","<%=request.getContextPath()%>/store/image/images.jpg");
+											$('.correct_addr').css("color", "blue");
+											console.log($('.error1_addr').text()==' ');
+											abc();
+										} else {
+											$('.correct_addr').text('');
+											$('#correct_img_addr').removeAttr("src");
+											$('.error1_addr').text('不可空白');
+											$('.error1_addr').css("color", "red");
+											$("#error_img_addr").attr("src","<%=request.getContextPath()%>/store/image/error.png");
+										}
+								});
+						function abc(){
+							if($('.error1_content').text()==' '&&$('.error1_phone').text()==' '&&$('.error1_name').text()==' '&&$('.error1_pw1').text()==' '&&$('.error1_pw').text()==' '&&$('.error1_acc').text()==' '&&$('.error1_addr').text()==' '){
+								console.log($('.error1_content').text()==' '&&$('.error1_phone').text()==' '&&$('.error1_name').text()==' '&&$('.error1_pw1').text()==' '&&$('.error1_pw').text()==' '&&$('.error1_acc').text()==' ');
+								$('#input').attr("disabled",false);
+							}else{
+								console.log($('.error1_content').text()==' '&&$('.error1_phone').text()==' '&&$('.error1_name').text()==' '&&$('.error1_pw1').text()==' '&&$('.error1_pw').text()==' '&&$('.error1_acc').text()==' ');
+								$('#input').attr("disabled",true);
+							}
+						}
 					});
 </script>
 <style>
@@ -170,13 +297,13 @@
 								</font>
 							</c:if>
 							<form METHOD="post"
-								ACTION="<%=request.getContextPath()%>/MemberLoginHandler"
+								ACTION="<%=request.getContextPath()%>/StoreLoginHandler"
 								name="form2">
 
-								<label for="帳號">帳號</label> <input type="text" name="mem_acc"
-									id="帳號" placeholder="請輸入E-MAIL" value="wang@abc.com"> <br> <br> <label
-									for="密碼">密碼</label> <input type="password" name="mem_pw"
-									id="密碼" placeholder="請輸入密碼" value="group1"> <br> <br> <a
+								<label for="store_acc">帳號</label> <input type="text" name="store_acc"
+									id="store_acc" placeholder="請輸入E-MAIL" value="ABCABC50@abc.com"> <br> <br> <label
+									for="store_pw">密碼</label> <input type="password" name="store_pw"
+									id="store_pw" placeholder="請輸入密碼" value="505050"> <br> <br> <a
 									herf="">忘記密碼?</a> <br> <br> <input type=submit
 									value=" 登入 "><input type="hidden" name="requestURL"
 									value="<%=request.getServletPath()%>">
@@ -254,74 +381,82 @@
 									value="<%=(storeVO == null) ? "肯ㄐㄐ" : storeVO.getStore_name()%>" >
 								</div>
 								<div class="col-xs-12 col-sm-2">
-								<span class='error1_name' style="margin-left:-100px;"></span> 
+								<span class='error1_name' style="margin-left:-60px;"></span> 
+								<img src="" id="error_img_name"> 
 								</div>
 								<div class="col-xs-12 col-sm-2">
-								<img src="" id="error_img_name"> 
-								<span class='correct_name' style="margin-left:-100px;"></span> 
+								<span class='correct_name' style="margin-left:-80px;"></span> 
 								<img src="" id="correct_img_name"> 
 								</div>
 							</div>
 							<jsp:useBean id="storeclassSvc" scope="page" class="com.store_class.model.StoreClassService" />
 							<div class="form-group">
 								<label for="sc_id" class="col-xs-12 col-sm-3 control-label">商家類別</label>
-								<div class="col-xs-12 col-sm-6">
+								<div class="col-xs-12 col-sm-5">
 								<select size="1" name="sc_id">
 									<c:forEach var="StoreClassVO" items="${storeclassSvc.all}">
 									<option value="${StoreClassVO.sc_id}" ${(storeVO.sc_id==StoreClassVO.sc_id)? 'selected':'' } >${StoreClassVO.sc_name}
 									</c:forEach>
 								</select>
 								</div>
-								<div class="col-xs-12 col-sm-3">
-								<span class='error1_sc' style="margin-left:-100px;"></span> 
+								<div class="col-xs-12 col-sm-2">
+								<span class='error1_sc' style="margin-left:-60px;"></span> 
 								<img src="" id="error_img_sc"> 
-								<span class='correct_acc' style="margin-left:-100px;"></span> 
+								</div>
+								<div class="col-xs-12 col-sm-2">
+								<span class='correct_sc' style="margin-left:-80px;"></span> 
 								<img src="" id="correct_img_sc"> 
 								</div>
 							</div>
 								<div class="form-group">
 									<label	for="store_content" class="col-xs-12 col-sm-3 control-label">商家簡介</label> 
-									<div class="col-xs-12 col-sm-6">
+									<div class="col-xs-12 col-sm-5">
 									<input type="text"
 									name="store_content" id="store_content" placeholder="請輸入商家簡介"
 									value="<%=(storeVO == null) ? "好吃好吃好好吃" : storeVO.getStore_content()%>">
 									</div>
-									<div class="col-xs-12 col-sm-3">
-										<span class='error1_content'style="margin-left:-100px;"></span>
+									<div class="col-xs-12 col-sm-2">
+										<span class='error1_content'style="margin-left:-60px;"></span>
 										<img src="" id="error_img_content"> 
-										<span class='correct_content' style="margin-left:-100px;"></span> 
+									</div>
+									<div class="col-xs-12 col-sm-2">
+										<span class='correct_content' style="margin-left:-80px;"></span> 
 										<img src="" id="correct_img_content"> 
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="store_phone" class="col-xs-12 col-sm-3 control-label">商家電話</label> 
-									<div class="col-xs-12 col-sm-6">
+									<div class="col-xs-12 col-sm-5">
 									<input type="text" name="store_phone" id="store_phone" placeholder="請輸入電話10個字"
 									value="<%=(storeVO == null) ? "0912345678" : storeVO.getStore_phone()%>">
 									</div>
-									<div class="col-xs-12 col-sm-3">
-									<span class='error1_phone'style="margin-left:-100px;" ></span> 
+									<div class="col-xs-12 col-sm-2">
+									<span class='error1_phone'style="margin-left:-60px;" ></span> 
 									<img src="" id="error_img_phone"> 
-									<span class='correct_phone' style="margin-left:-100px;"></span> 
+									</div>
+									<div class="col-xs-12 col-sm-2">
+									<span class='correct_phone' style="margin-left:-80px;"></span> 
 									<img src="" id="correct_img_phone">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="store_addr" class="col-xs-12 col-sm-3 control-label">商家地址</label>
-									<div class="col-xs-12 col-sm-6">
+									<div class="col-xs-12 col-sm-5">
 										<input type="text" name="store_addr" id="store_addr"
 												placeholder="請輸入地址" value="<%=(storeVO == null) ? "我家隔壁" : storeVO.getStore_addr()%>">
 									</div>
-									<div class="col-xs-12 col-sm-3">
-										<span class='error1_addr' style="margin-left:-100px;"></span> 
+									<div class="col-xs-12 col-sm-2">
+										<span class='error1_addr' style="margin-left:-60px;"></span> 
 										<img src="" id="error_img_addr"> 
-										<span class='correct_addr' style="margin-left:-100px;"></span> 
+										</div>
+										<div class="col-xs-12 col-sm-2">
+										<span class='correct_addr' style="margin-left:-80px;"></span> 
 										<img src="" id="correct_img_addr">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="store_image" class="col-xs-12 col-sm-3 control-label">商家照片</label>
-									<div class="col-xs-12 col-sm-6">
+									<div class="col-xs-12 col-sm-5">
 									<input type="file" name="store_image" id="upfile1" >
 									<p>
 									<img id="image"  style="max-width: 150px; max-height: 150px;">
@@ -333,21 +468,23 @@
 								</div>
 								<div class="form-group">
 									<label for="store_out" class="col-xs-12 col-sm-3 control-label">商家是否外送</label>
-									<div class="col-xs-12 col-sm-6">
+									<div class="col-xs-12 col-sm-5">
 										<select name="store_out">
 											<option value='有外送'>有外送</option>
 											<option value='沒有外送'>沒有外送</option></select>
 			 						 </div>
-									<div class="col-xs-12 col-sm-3">
-										<span class='error1_out' style="margin-left:-100px;"></span> 
-										<img src="" id="error_img_out"> 
-										<span class='correct_out' style="margin-left:-100px;"></span> 
+									<div class="col-xs-12 col-sm-2">
+										<span class='error1_out' style="margin-left:-60px;"></span> 
+										<img src="" id="error_img_out">
+										</div>
+										<div class="col-xs-12 col-sm-2"> 
+										<span class='correct_out' style="margin-left:-80px;"></span> 
 										<img src="" id="correct_img_out">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="store_zone" class="col-xs-12 col-sm-3 control-label">商家地區</label>
-									<div class="col-xs-12 col-sm-6">
+									<div class="col-xs-12 col-sm-5">
 										<select size="1" name="store_zone">
 												<option value="基隆市">基隆市
 												<option value="臺北市">臺北市
@@ -370,18 +507,20 @@
 												<option value="宜蘭縣">宜蘭縣
 											</select>
 			 						 </div>
-									<div class="col-xs-12 col-sm-3">
-										<span class='error1_zone' style="margin-left:-100px;"></span> 
+									<div class="col-xs-12 col-sm-2">
+										<span class='error1_zone' style="margin-left:-60px;"></span> 
 										<img src="" id="error_img_zone"> 
-										<span class='correct_zone' style="margin-left:-100px;"></span> 
+										</div>
+										<div class="col-xs-12 col-sm-2">
+										<span class='correct_zone' style="margin-left:-80px;"></span> 
 										<img src="" id="correct_img_zone">
 									</div>
 								</div>
 									<div class="form-group">
 									<input type="hidden" name="requestURL"
-									value="<%=request.getServletPath()%>"> <br> <br>
+									value="<%=request.getServletPath()%>" > <br> <br>
 								    <input type="hidden" name="action" value="insert">
-									<input type="submit" value="送出新增">
+									<input type="submit" value="送出新增" id="input" >
 								   </div>
 								</div>
 							</form>

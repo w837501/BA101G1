@@ -284,6 +284,7 @@ public class StoreServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			String requestURL=req.getParameter("requestURL");
+			System.out.println(requestURL);
 			try {
 				String store_acc=req.getParameter("store_acc");
 				String store_name=req.getParameter("store_name");
@@ -298,7 +299,17 @@ public class StoreServlet extends HttpServlet {
 				
 				Part pic=req.getPart("store_image");
 				byte[] store_image=getPictureByteArrayFromWeb(pic);
-				
+				System.out.println(store_acc);
+				System.out.println(store_name);
+				System.out.println(sc_id);
+				System.out.println(store_content);
+				System.out.println(store_phone);
+				System.out.println(store_addr);
+				System.out.println(store_pw);
+				System.out.println(store_pw1);
+				System.out.println(store_out);
+				System.out.println(store_zone);
+				System.out.println(store_image);
 				if(store_acc.trim().isEmpty()||store_acc==null){
 					errorMsgs.add("請輸入商家帳號");
 				}
@@ -332,7 +343,7 @@ public class StoreServlet extends HttpServlet {
 				if(store_zone.trim().isEmpty()||store_zone==null){
 					errorMsgs.add("請輸入商家地區");
 				}
-				
+				System.out.println("汪汪汪");
 				StoreVO storeVO=new StoreVO();
 				storeVO.setStore_acc(store_acc);
 				storeVO.setStore_name(store_name);
@@ -351,18 +362,36 @@ public class StoreServlet extends HttpServlet {
 					res.sendRedirect("/BA101G1" + requestURL + "#tab2");
 					return;
 				}
-				
 				StoreService storeSvc=new StoreService();
 				storeSvc.addStore(sc_id, store_name, store_content, store_phone, store_addr, store_image, store_pw, store_acc, store_out, store_zone);
-				
 				String url="/index.jsp";
+				//String url="/store/ListAllStore.jsp";
 				RequestDispatcher successView=req.getRequestDispatcher(url);
 				successView.forward(req, res);
+				
 			}catch(Exception e){
-				res.sendRedirect("/BA101G1" + requestURL + "#tab2");
-				return;
+				errorMsgs.add("資料失敗" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
+				failureView.forward(req, res);
 			}
 		}
+		if ("logout".equals(action)) {
+
+			HttpSession session = req.getSession();
+			session.removeAttribute("storeVO");
+			try {
+				String location = (String) session.getAttribute("location");
+				if (location != null) {
+					session.removeAttribute("location"); // *工作2: 看看有無來源網頁
+															// (-->如有來源網頁:則重導至來源網頁)
+					res.sendRedirect(location);
+					return;
+				}
+			} catch (Exception ignored) {
+			}
+			res.sendRedirect(req.getContextPath() + "/index.jsp");
+		}
+		
 	}
 	public static byte[] getPictureByteArrayFromWeb(Part part) throws IOException {
 		InputStream is = part.getInputStream();
