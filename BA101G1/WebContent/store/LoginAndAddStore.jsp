@@ -36,8 +36,9 @@
 						}
 
 						var emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
-						$("#store_acc").keydown(
+						$("#store_acc1").keydown(
 								function() {
+									console.log("123");
 									console.log($(this).val());
 									if (emailRule.test($(this).val())) {
 										$('.error1_acc').text(' ');
@@ -55,7 +56,7 @@
 										
 									}
 								});
-						$("#store_acc").blur(
+						$("#store_acc1").blur(
 								function() {
 									console.log($(this).val());
 									if (emailRule.test($(this).val())) {
@@ -75,7 +76,7 @@
 									}
 								});
 						var pwRule = /^(?!.*[^a-zA-Z0-9])(?=.*\d)(?=.*[a-zA-Z]).{6,10}$/;
-						$("#store_pw").keydown(
+						$("#store_pw2").keydown(
 								function() {
 									console.log($(this).val());
 									if (pwRule.test($(this).val())) {
@@ -94,7 +95,7 @@
 											
 										}
 								});
-						$("#store_pw").blur(
+						$("#store_pw2").blur(
 								function() {
 									console.log($(this).val());
 									if (pwRule.test($(this).val())) {
@@ -116,7 +117,7 @@
 						$("#store_pw1").blur(
 								function(){
 									console.log($(this).val());
-									if($(this).val()==$("#store_pw").val()&&pwRule.test($(this).val())){
+									if($(this).val()==$("#store_pw2").val()&&pwRule.test($(this).val())){
 											$('.error1_pw1').text(' ');
 											$("#error_img_pw1").removeAttr("src");
 											$('#correct_img_pw1').attr("src","<%=request.getContextPath()%>/store/image/images.jpg");
@@ -329,7 +330,7 @@
 							<div class="form-group">
 								<label for="store_acc" class="col-xs-12 col-sm-3 control-label">會員帳號(信箱)</label>
 								<div class="col-xs-12 col-sm-5"> <input type="text"
-									name="store_acc" id="store_acc" placeholder="請輸入E-MAIL"
+									name="store_acc" id="store_acc1" placeholder="請輸入E-MAIL"
 									value="<%=(storeVO == null) ? "sadqwe" : storeVO.getStore_acc()%>" >
 								</div>
 								<div class="col-xs-12 col-sm-2">
@@ -345,7 +346,7 @@
 							<div class="form-group">
 								<br> <label for="store_pw" class="col-xs-12 col-sm-3 control-label">商家密碼</label> 
 								<div class="col-xs-12 col-sm-5">
-								<input type="password" name="store_pw" id="store_pw"
+								<input type="password" name="store_pw" id="store_pw2"
 									placeholder="請輸入密碼6~10碼"
 									value="<%=(storeVO == null) ? "1222212" : storeVO.getStore_pw()%>">
 								</div>
