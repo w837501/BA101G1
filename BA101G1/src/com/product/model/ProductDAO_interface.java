@@ -11,5 +11,6 @@ public interface ProductDAO_interface {
 	public List<ProductVO> findName(String pro_name);
 	public List<ProductVO> ClassLink(String pc_id);
 	public List<ProductVO> findProductByStore_id(String store_id);
+	public List<ProductVO> findAllProductByStore_id(String store_id);
 
 }
