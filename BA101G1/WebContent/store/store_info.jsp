@@ -37,6 +37,9 @@
 					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">查詢進行中訂單</a>
 					</div>
 					<div class="panel panel-info" style="width:200px;">
+					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">查詢已完成訂單</a>
+					</div>
+					<div class="panel panel-info" style="width:200px;">
 					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">查詢檢舉</a>
 					</div>
 					<div class="panel panel-info" style="width:200px;">

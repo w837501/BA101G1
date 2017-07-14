@@ -185,11 +185,11 @@ public class OrderServlet extends HttpServlet {
 
 			try {
 				String state = req.getParameter("order_state");
-
+				String store_id=req.getParameter("store_id");
 				if (state.equals("未確認")) {
 					Store_OrderService orderSvc = new Store_OrderService();
 					List<Store_OrderVO> orderList = new LinkedList<Store_OrderVO>();
-					orderList = orderSvc.getOrderByState(state);
+					orderList = orderSvc.getOrderByState(state,store_id);
 
 					if (orderList.isEmpty()) {
 						errorMsgs.add("查無資料");
@@ -209,7 +209,7 @@ public class OrderServlet extends HttpServlet {
 				} else if (state.equals("已確認")) {
 					Store_OrderService orderSvc = new Store_OrderService();
 					List<Store_OrderVO> orderList = new LinkedList<Store_OrderVO>();
-					orderList = orderSvc.getOrderByState(state);
+					orderList = orderSvc.getOrderByState(state,store_id);
 
 					if (orderList.isEmpty()) {
 						errorMsgs.add("查無資料");
@@ -228,7 +228,7 @@ public class OrderServlet extends HttpServlet {
 				} else if (state.equals("待取餐")) {
 					Store_OrderService orderSvc = new Store_OrderService();
 					List<Store_OrderVO> orderList = new LinkedList<Store_OrderVO>();
-					orderList = orderSvc.getOrderByState(state);
+					orderList = orderSvc.getOrderByState(state,store_id);
 
 					if (orderList.isEmpty()) {
 						errorMsgs.add("查無資料");
@@ -247,7 +247,7 @@ public class OrderServlet extends HttpServlet {
 				} else if (state.equals("已取餐")) {
 					Store_OrderService orderSvc = new Store_OrderService();
 					List<Store_OrderVO> orderList = new LinkedList<Store_OrderVO>();
-					orderList = orderSvc.getOrderByState(state);
+					orderList = orderSvc.getOrderByState(state,store_id);
 
 					if (orderList.isEmpty()) {
 						errorMsgs.add("查無資料");
@@ -266,7 +266,7 @@ public class OrderServlet extends HttpServlet {
 				} else if (state.equals("已取消")) {
 					Store_OrderService orderSvc = new Store_OrderService();
 					List<Store_OrderVO> orderList = new LinkedList<Store_OrderVO>();
-					orderList = orderSvc.getOrderByState(state);
+					orderList = orderSvc.getOrderByState(state,store_id);
 
 					if (orderList.isEmpty()) {
 						errorMsgs.add("查無資料");

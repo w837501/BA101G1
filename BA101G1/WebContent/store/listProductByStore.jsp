@@ -4,6 +4,7 @@
 <%@ page import="com.mem.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%-- 此頁練習採用 Script 的寫法取值 --%>
 <%--
@@ -111,7 +112,7 @@
 					</c:forEach>
 					<br>
 					<br>
-					商店評價： ${storeVO.store_star/storeVO.store_count}<br>
+					商店評價：<fmt:formatNumber type="number"  maxFractionDigits="1" value="${storeVO.store_star/storeVO.store_count}"/><br>
 							
 <%-- 						<c:if test="${storeVO.store_star >= 0 && storeVO.store_star < 20}"> --%>
 <!-- 		              		★☆☆☆☆ -->
