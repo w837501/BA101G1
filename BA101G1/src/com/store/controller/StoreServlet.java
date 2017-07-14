@@ -257,7 +257,6 @@ public class StoreServlet extends HttpServlet {
 			DecimalFormat df=new DecimalFormat("#.#");
 			String avg=df.format(avg1);
 			System.out.println(avg);
-			req.setAttribute("avg", avg);
 			req.setAttribute("storeVO", storeVO);
 			req.setAttribute("productlist", productlist); // 資料庫取出的storeVO物件,存入req
 

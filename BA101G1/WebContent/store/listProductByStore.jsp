@@ -19,7 +19,6 @@
 
 <% 
 	StoreVO storeVO=(StoreVO)request.getAttribute("storeVO");
-	String avg=(String)request.getAttribute("avg");
 	MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 %>
 
