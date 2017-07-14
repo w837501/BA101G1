@@ -32,7 +32,7 @@
 					<div style="margin-left: 0px;">
 				</span>
 				<span class="name">
-					你好，<%=memberVO.getMem_name() %>
+					<a href="<%=request.getContextPath()%>/frontend/mem/member_info.jsp">你好，<%=memberVO.getMem_name() %></a>
 				</span>
 				</c:if>
 				<c:if test="${not empty storeVO}">
@@ -42,7 +42,7 @@
 					<div style="margin-left: 0px;">
 				</span>
 				<span class="name">
-					你好，<%=storeVO.getStore_name() %>
+				<a href="<%=request.getContextPath()%>/store/store_info.jsp">你好，<%=storeVO.getStore_name() %></a>	
 				</span>
 				</c:if>
 			</c:if>

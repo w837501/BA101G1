@@ -69,8 +69,11 @@ public class Store_OrderService {
 	public List<Store_OrderVO> getOrderByStore_id(String store_id){
 		return dao.findOrderByStore_id(store_id);
 	}
-	public List<Store_OrderVO> getOrderByState(String state){
-		return dao.findOrderByState(state);
+	public List<Store_OrderVO> getOrderByStore_id_Handleing(String store_id){
+		return dao.findOrderByStateHandleing(store_id);
+	}
+	public List<Store_OrderVO> getOrderByState(String state ,String store_id){
+		return dao.findOrderByState(state,store_id);
 	}
 	public void confirm_order(String order_id,String order_state){
 		dao.confirm_order(order_id, order_state);

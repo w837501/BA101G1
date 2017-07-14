@@ -38,10 +38,12 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT * from store_order";
 
 	private static final String GET_ORDER_BY_MEM = "select order_id, store_id, totalprice, order_time, order_way, order_state, mem_id from store_order where mem_id = ? order by order_time desc";
-	private static final String GET_ORDER_BY_STATE = "select mem_id, order_id, store_id, totalprice, order_time, order_way, receive_address,order_note, order_taketime ,order_state from  store_order where order_state=?";
+	private static final String GET_ORDER_BY_STATE = "select mem_id, order_id, store_id, totalprice, order_time, order_way, receive_address,order_note, order_taketime ,order_state from  store_order where order_state=? and store_id=?";
 	private static final String CONFIRM_ORDER = "Update store_order set order_state=? where order_id=?";
 	private static final String GET_ORDER_BY_Store_id = 	"select * from store_order where store_id = ? order by order_time desc";
-;
+	private static final String GET_ORDER_BY_Store_id_Handleing= 
+			"select * from store_order where store_id = ? and order_sate in('已確認','待取餐')order by order_time desc";
+	
 
 	@Override
 	public void insert(Store_OrderVO orderVO) {
@@ -401,7 +403,7 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface {
 	}
 
 	@Override
-	public List<Store_OrderVO> findOrderByState(String state) {
+	public List<Store_OrderVO> findOrderByState(String state,String store_id) {
 		List<Store_OrderVO> list = new LinkedList<Store_OrderVO>();
 		Store_OrderVO orderVO = null;
 		Connection con = null;
@@ -415,6 +417,7 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface {
 			System.out.println(state);
 
 			pstmt.setString(1, state);
+			pstmt.setString(2, store_id);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -679,6 +682,72 @@ public class Store_OrderJDBCDAO implements Store_OrderDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ORDER_BY_Store_id);
+
+			pstmt.setString(1, store_id);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVo 也稱為 Domain objects
+				orderVO = new Store_OrderVO();
+				orderVO.setOrder_id(rs.getString("order_id"));
+				orderVO.setOrder_time(rs.getTimestamp("order_time"));
+				orderVO.setMem_id(rs.getString("mem_id"));
+				orderVO.setStore_id(rs.getString("store_id"));
+				orderVO.setOrder_state(rs.getString("order_state"));
+				orderVO.setTotalprice(rs.getInt("totalprice"));
+				orderVO.setOrder_way(rs.getString("order_way"));
+				list.add(orderVO);
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<Store_OrderVO> findOrderByStateHandleing(String store_id) {
+		List<Store_OrderVO> list = new LinkedList<Store_OrderVO>();
+		Store_OrderVO orderVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ORDER_BY_Store_id_Handleing );
 
 			pstmt.setString(1, store_id);
 
