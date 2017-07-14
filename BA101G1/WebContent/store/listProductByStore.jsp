@@ -111,7 +111,7 @@
 					</c:forEach>
 					<br>
 					<br>
-					商店評價：<%=avg %>
+					商店評價： ${storeVO.store_star/storeVO.store_count}<br>
 							
 <%-- 						<c:if test="${storeVO.store_star >= 0 && storeVO.store_star < 20}"> --%>
 <!-- 		              		★☆☆☆☆ -->

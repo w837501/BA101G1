@@ -34,6 +34,7 @@ public class StoreServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
+		HttpSession session=req.getSession();
 		// 來自index.jsp的請求 來自store.jsp的請求
 		if ("get_store_a".equals(action) || "get_store_b".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
@@ -126,7 +127,7 @@ public class StoreServlet extends HttpServlet {
 
 			List<StoreVO> storelist = storeSvc.getStoreClass(str);
 			req.setAttribute("storelist", storelist); // 資料庫取出的storeVO物件,存入req
-			 
+			 session.removeAttribute("shoppingcart");
 			String url = "/store/store.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交store.jsp
 			System.out.println(successView);
@@ -160,6 +161,7 @@ public class StoreServlet extends HttpServlet {
 				/***************************
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 ************/
+				
 				req.setAttribute("storeVO", storeVO); // 資料庫取出的empVO物件,存入req
 				System.out.println("storeVO=" + storeVO);
 				String url = "/backend/store/update_store_input.jsp";
@@ -270,7 +272,7 @@ public class StoreServlet extends HttpServlet {
 			int store_star = Integer.parseInt(str);
 			StoreService storeSvc = new StoreService();
 			
-			List<StoreVO> storelist = storeSvc.getAll();
+			List<StoreVO> storelist = storeSvc.getHot(store_star);
 			req.setAttribute("storelist", storelist);
 			
 			String url = "/store/store.jsp";
@@ -356,7 +358,6 @@ public class StoreServlet extends HttpServlet {
 				storeVO.setStore_zone(store_zone);
 				storeVO.setStore_image(store_image);
 				if(!errorMsgs.isEmpty()){
-					HttpSession session = req.getSession();
 					session.setAttribute("errorMsgs", errorMsgs);
 					session.setAttribute("storeVO", storeVO);
 					res.sendRedirect("/BA101G1" + requestURL + "#tab2");
@@ -377,7 +378,6 @@ public class StoreServlet extends HttpServlet {
 		}
 		if ("logout".equals(action)) {
 
-			HttpSession session = req.getSession();
 			session.removeAttribute("storeVO");
 			try {
 				String location = (String) session.getAttribute("location");
