@@ -49,7 +49,7 @@
 										$('#correct_img_mail').removeAttr("src");
 										$('.error1_mail').text('信箱格式不正確');
 										$('.error1_mail').css("color", "red");
-										$("#error_img_mail").attr("src","<%=request.getContextPath()%>/frontend/mem/image/error.png");
+										$('#error_img_mail').attr("src","<%=request.getContextPath()%>/frontend/mem/image/error.png");
 										
 									}
 								});
@@ -68,7 +68,7 @@
 										$('#correct_img_mail').removeAttr("src");
 										$('.error1_mail').text('信箱格式不正確');
 										$('.error1_mail').css("color", "red");
-										$("#error_img_mail").attr("src","<%=request.getContextPath()%>/frontend/mem/image/error.png");
+										$('#error_img_mail').attr("src","<%=request.getContextPath()%>/frontend/mem/image/error.png");
 										
 									}
 								});
@@ -310,26 +310,13 @@
 									value="<%=(memberVO == null) ? "1222212" : memberVO.getMem_pw()%>">
 								</div>
 								<div class="col-xs-12 col-sm-3">
-									<span class='error1_pw' style="margin-left:-100px;"></span>
+									<span class='error1_pw' style="margin-left:-60px;"></span>
 									<img src="" id="error_img_pw">
 									<span class='correct_pw' style="margin-left:-100px;"></span> 
 									<img src="" id="correct_img_pw"> 
 								</div>
 								</div>
-								<div class="form-group">
-									<label	for="mem_pw1" class="col-xs-12 col-sm-3 control-label">確認密碼</label> 
-									<div class="col-xs-12 col-sm-6">
-									<input type="password"
-									name="mem_pw1" id="mem_pw1" placeholder="再輸入一次密碼"
-									value="<%=(memberVO == null) ? "1222212" : memberVO.getMem_pw()%>">
-									</div>
-									<div class="col-xs-12 col-sm-3">
-										<span class='error1_pw1'style="margin-left:-100px;"></span>
-										<img src="" id="error_img_pw1"> 
-										<span class='correct_pw1' style="margin-left:-100px;"></span> 
-										<img src="" id="correct_img_pw1"> 
-									</div>
-								</div>
+								 
 								<div class="form-group">
 									<label for="mem_name" class="col-xs-12 col-sm-3 control-label"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp姓名</label> 
 									<div class="col-xs-12 col-sm-6">

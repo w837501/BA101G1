@@ -223,6 +223,7 @@
     <url-pattern>/store/store_info.jsp</url-pattern>
     <url-pattern>/store/store_order.jsp</url-pattern>
     <url-pattern>/store/store_update.jsp</url-pattern>
+    <url-pattern>/store/store_report.jsp</url-pattern>
     <url-pattern>/frontend/mem/member_info_update.jsp</url-pattern>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
