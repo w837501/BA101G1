@@ -13,16 +13,6 @@ import com.tools.HibernateUtil;
 
 public class PermissionDAO implements PermissionDAO_interface{
 	
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA101G1");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
-
 	private static final String GET_ALL_STMT = "from PermissionVO order by man_id desc";
 	@Override
 	public void insert(PermissionVO permissionVO) {

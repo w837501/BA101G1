@@ -6,7 +6,12 @@
 	<class name="com.permission2.model.PermissionVO" table="permission">
 
 		<composite-id>
-			<key-many-to-one name=""></key-many-to-one>
+			<key-many-to-one name="paVO" class="com.permission_ability.model.Permission_AbilityVO" lazy="false">
+				<column name="pa_id"></column>
+			</key-many-to-one>
+			<key-many-to-one name="managerVO" class="com.man.model.ManagerVO" lazy="false">
+				<column name="man_id"></column>
+			</key-many-to-one>
 		</composite-id>
 
 	</class>
