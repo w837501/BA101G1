@@ -23,7 +23,7 @@ public class StoreVO implements Serializable{
 	private Timestamp store_end_time;
 	private String store_pw;
 	private String store_acc;
-	private Number store_out;
+	private String store_out;
 	private String store_zone;
 	private String sc_name;
 	
@@ -160,11 +160,11 @@ public class StoreVO implements Serializable{
 		this.store_acc = store_acc;
 	}
 
-	public Number getStore_out() {
+	public String getStore_out() {
 		return store_out;
 	}
 
-	public void setStore_out(Number store_out) {
+	public void setStore_out(String store_out) {
 		this.store_out = store_out;
 	}
 

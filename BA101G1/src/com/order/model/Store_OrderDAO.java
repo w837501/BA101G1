@@ -48,6 +48,9 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 	private static final String GET_ORDER_BY_MEM = 
 			"select mem_id, order_id, store_id, totalprice, order_time, order_way, order_state from store_order where mem_id = ? order by order_time desc";
 	
+	private static final String GET_ORDER_BY_Store_id= 
+			"select * from store_order where store_id = ? order by order_time desc";
+	
 	private static final String GET_ORDER_BY_MEM2 = 
 			"select o.mem_id, o.order_id, o.store_id, o.totalprice, o.order_time, o.order_way, o.order_state ,s.store_name from store_order o join store s on o.store_id = s.store_id where mem_id = ? order by order_time desc";
 	private static final String GET_ORDER_BY_STATE=
@@ -532,5 +535,67 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 				}
 			}
 		}
+	}
+
+	@Override
+	public List<Store_OrderVO> findOrderByStore_id(String store_id) {
+		List<Store_OrderVO> list = new LinkedList<Store_OrderVO>();
+		Store_OrderVO orderVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ORDER_BY_Store_id);
+
+			pstmt.setString(1, store_id);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVo ¤]ºÙ¬° Domain objects
+				orderVO = new Store_OrderVO();
+				orderVO.setOrder_id(rs.getString("order_id"));
+				orderVO.setOrder_time(rs.getTimestamp("order_time"));
+				orderVO.setMem_id(rs.getString("mem_id"));
+				orderVO.setStore_id(rs.getString("store_id"));
+				orderVO.setOrder_state(rs.getString("order_state"));
+				orderVO.setTotalprice(rs.getInt("totalprice"));
+				orderVO.setOrder_way(rs.getString("order_way"));
+				list.add(orderVO);
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		return list;
 	}
 }

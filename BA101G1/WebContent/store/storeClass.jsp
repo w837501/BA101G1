@@ -1,11 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.store_class.model.*"%>
-<%@ page import="com.mem.model.*"%>
+<%@ page import="com.store.model.*"%>
 <%
-MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
-session.removeAttribute("shoppingcart");
-
+StoreVO storeVO=(StoreVO)session.getAttribute("storeVO");
 %>
 <html>
 <head>
@@ -14,29 +12,14 @@ session.removeAttribute("shoppingcart");
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>吃訂我線上訂餐系統</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
+<script src="<%=request.getContextPath()%>/js/mobile.js" type="text/javascript"></script>
 </head>
-<body bgcolor='white'>
+<body>
 	<div id="page">
 		<div id="header">
-			<div id="logo">
-				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
-				<span id="login">
-				<c:if test="${empty memberVO }">
-				<a href="<%=request.getContextPath()%>/frontend/mem/LoginAndAddMem.jsp">Login</a>
-				</c:if>
-				<c:if test="${not empty memberVO }">
-						<a href="<%=request.getContextPath()%>/backend/mem/mem.do?action=logout">Logout</a>  
-					</c:if></span>
-
-				<ul>
-					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
-					<li><a href="news.html">最新消息</a></li>
-				</ul>
-			</div>
+			<jsp:include page="/header.jsp" />
 		</div>
+		
 		<div id="classcontents">
 			<!-- 搜尋商家&地區 -->
 			<div id="main">
@@ -59,13 +42,10 @@ session.removeAttribute("shoppingcart");
 					</font>
 				</c:if>
 
-				<%
-					String store_zone = (String) request.getAttribute("store_zone");
-				%>
+				<% String store_zone = (String) request.getAttribute("store_zone"); %>
 
 
-				<FORM METHOD="post"
-					ACTION="<%=request.getContextPath()%>/store/store.do">
+				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store/store.do">
 					<b>選擇地區 :</b> <select size="1" name="store_zone">
 						<option value="基隆市"<c:if test="${store_zone.equals('基隆市') }"> selected</c:if>>基隆市
 						<option value="臺北市"<c:if test="${store_zone.equals('臺北市') }"> selected</c:if>>臺北市
@@ -87,8 +67,7 @@ session.removeAttribute("shoppingcart");
 						<option value="花蓮縣"<c:if test="${store_zone.equals('花蓮縣') }"> selected</c:if>>花蓮縣
 						<option value="宜蘭縣"<c:if test="${store_zone.equals('宜蘭縣') }"> selected</c:if>>宜蘭縣
 						
-					</select> <input type="submit" value="送出"> <input type="hidden"
-						name="action" value="get_zone">
+					</select> <input type="submit" value="送出"> <input type="hidden" name="action" value="get_zone">
 				</FORM>
 
 			</div>
@@ -99,7 +78,6 @@ session.removeAttribute("shoppingcart");
 						<c:forEach var="scVO" items="${scSvc.all}" varStatus="loop">
 						<li>
 							<h3><IMG src="<%=request.getContextPath()%>/StoreClassReader?sc_id=${scVO.sc_id}" height="200"></h3>						
-							<h3>${scVO.sc_id}</h3>
 							<h3>
 								<a href='<%=request.getContextPath()%>/store/store.do?action=getStoreClass&sc_id=<c:out value="${loop.index}" />'>${scVO.sc_name}</a>
 							</h3>
@@ -107,19 +85,12 @@ session.removeAttribute("shoppingcart");
 						</c:forEach>
 					</ul>
 			</div>
-			
-			
-			<div id="footer">
-				<ul class="navigation">
-					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
-					<li><a href="news.html">最新消息</a></li>
-				</ul>
-				<p id="footnote">Eternal Beauty Essentials 2012. All Rights Reserved.</p>
-			</div>
 		</div>
+		
+		<div id="footer">
+			<jsp:include page="/footer.jsp"/>
+		</div>
+		
 	</div>
 </body>
 </html>

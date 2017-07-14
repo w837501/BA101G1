@@ -27,6 +27,7 @@ public class StoreDAO implements StoreDAO_interface {
 	private static final String UPDATE_STMT = "UPDATE STORE set sc_id=?, store_content=?, store_phone=?, store_addr=?, store_image=?, store_out=?, store_zone=?, store_pw=? where store_id = ?";
 	private static final String DELETE = "DELETE FROM STORE where store_id = ?";
 	private static final String Find_by_PK = "select * from STORE where store_id=? and store_state = '開店中'";
+	private static final String Find_by_Store_Acc = "select * from STORE where store_acc=? ";
 	private static final String Find_ALL = "select * from STORE order by store_star";
 	private static final String Find_NAME = "select * from STORE where store_name like ? and store_state = '開店中'";
 	private static final String Find_ZONE = "select * from STORE where store_zone = ? and store_state = '開店中'";
@@ -50,7 +51,7 @@ public class StoreDAO implements StoreDAO_interface {
 			pstmt.setBytes(6, storeVO.getStore_image());
 			pstmt.setString(7, storeVO.getStore_pw());
 			pstmt.setString(8, storeVO.getStore_acc());
-			pstmt.setInt(9, (int) storeVO.getStore_out());
+			pstmt.setString(9, storeVO.getStore_out());
 			pstmt.setString(10, storeVO.getStore_zone());
 
 			pstmt.executeUpdate();
@@ -85,7 +86,7 @@ public class StoreDAO implements StoreDAO_interface {
 			pstmt.setString(3, storeVO.getStore_phone());
 			pstmt.setString(4, storeVO.getStore_addr());
 			pstmt.setBytes(5, storeVO.getStore_image());
-			pstmt.setInt(6, (int) storeVO.getStore_out());
+			pstmt.setString(6,  storeVO.getStore_out());
 			pstmt.setString(7, storeVO.getStore_zone());
 			pstmt.setString(8, storeVO.getStore_pw());
 			pstmt.setString(9, storeVO.getStore_id());
@@ -170,7 +171,7 @@ public class StoreDAO implements StoreDAO_interface {
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getInt("store_out"));
+				storeVO.setStore_out(rs.getString("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 				storelist.add(storeVO);
 			}
@@ -233,7 +234,7 @@ public class StoreDAO implements StoreDAO_interface {
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getInt("store_out"));
+				storeVO.setStore_out(rs.getString("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 			}
 		} catch (SQLException e) {
@@ -296,7 +297,7 @@ public class StoreDAO implements StoreDAO_interface {
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getInt("store_out"));
+				storeVO.setStore_out(rs.getString("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 				storelist.add(storeVO);
 			}
@@ -360,7 +361,7 @@ public class StoreDAO implements StoreDAO_interface {
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getInt("store_out"));
+				storeVO.setStore_out(rs.getString("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 				storelist.add(storeVO);
 			}
@@ -509,7 +510,7 @@ public class StoreDAO implements StoreDAO_interface {
 				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
 				storeVO.setStore_pw(rs.getString("store_pw"));
 				storeVO.setStore_acc(rs.getString("store_acc"));
-				storeVO.setStore_out(rs.getInt("store_out"));
+				storeVO.setStore_out(rs.getString("store_out"));
 				storeVO.setStore_zone(rs.getString("store_zone"));
 				storelist.add(storeVO);
 			}
@@ -539,6 +540,68 @@ public class StoreDAO implements StoreDAO_interface {
 			}
 		}
 		return storelist;
+	}
+
+	@Override
+	public StoreVO findByStoreAcc(String store_acc) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StoreVO storeVO = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(Find_by_Store_Acc);
+
+			pstmt.setString(1, store_acc);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				storeVO = new StoreVO();
+				storeVO.setStore_id(rs.getString("store_id"));
+				storeVO.setSc_id(rs.getInt("Sc_id"));
+				storeVO.setStore_name(rs.getString("store_name"));
+				storeVO.setStore_content(rs.getString("store_content"));
+				storeVO.setStore_phone(rs.getString("store_phone"));
+				storeVO.setStore_addr(rs.getString("store_addr"));
+				storeVO.setStore_date(rs.getTimestamp("store_date"));
+				storeVO.setStore_star(rs.getDouble("store_star"));
+				storeVO.setStore_count(rs.getDouble("store_count"));
+				storeVO.setStore_state(rs.getString("store_state"));
+				storeVO.setStore_image(rs.getBytes("store_image"));
+				storeVO.setStore_report_count(rs.getInt("store_report_count"));
+				storeVO.setStore_start_time(rs.getTimestamp("store_start_time"));
+				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
+				storeVO.setStore_pw(rs.getString("store_pw"));
+				storeVO.setStore_acc(rs.getString("store_acc"));
+				storeVO.setStore_out(rs.getString("store_out"));
+				storeVO.setStore_zone(rs.getString("store_zone"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return storeVO;
 	}
 
 }

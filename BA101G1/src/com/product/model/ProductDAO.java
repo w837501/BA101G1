@@ -35,7 +35,7 @@ public class ProductDAO implements ProductDAO_interface{
 		private static final String Find_by_PK2 = "select * from PRODUCT where pro_id=? ";
 		private static final String Find_ALL = "select * from PRODUCT ";
 		private static final String Find_NAME = "select * from PRODUCT where pro_name like ?  and pro_state = '¤W¬['";
-		private static final String CLASSLINK = "select c.pc_id, c.pc_name, p.pro_id, p.pro_name, p.pro_price, p.store_id from product p join product_class c on (p.pc_id = c.pc_id) where p.pc_id = ?";
+		private static final String CLASSLINK = "select c.pc_id, c.pc_name, p.pro_id, p.pro_name, p.pro_price, p.store_id from product p join product_class c on (p.pc_id = c.pc_id) where p.pc_id = ?  and pro_state = '¤W¬['";
 		private static final String Find_By_Store_id 
 		= "select pro_id, pro_name, pro_price, pro_content from product where store_id = ? and pro_state = '¤W¬['";
 

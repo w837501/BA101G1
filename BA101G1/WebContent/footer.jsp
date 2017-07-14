@@ -1,10 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
-			
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="Big5"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <ul class="navigation">
 	<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-	<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>ç†±é–€å•†å®¶</a></li>
-	<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>æ‰¾å•†å®¶</a></li>
-	<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>æ‰¾å•†å“</a></li>
-	<li><a href="news.html">æœ€æ–°æ¶ˆæ¯</a></li>
+	<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>¼öªù°Ó®a</a></li>
+	<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>§ä°Ó®a</a></li>
+	<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>§ä°Ó«~</a></li>
+	<li><a href="news.html">³Ì·s®ø®§</a></li>
 </ul>
 <p id="footnote">Eternal Beauty Essentials 2012. All Rights Reserved.</p>

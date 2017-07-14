@@ -20,6 +20,7 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 		"DELETE FROM STORE_REPORT where sr_id = ?";
 	private static final String UPDATE = 
 		"UPDATE STORE_REPORT set store_id=?, sc_id=?, order_id=?, man_id=?, sr_content=?, sr_image=?, sr_time=?, sr_state=?, sr_result=?  where sr_id = ?";
+	private static final String GET_BY_STORE_ID = "select *  FROM STORE_REPORT where store_id=?";
 
 	@Override
 	public void insert(StoreReportVO srVO) {
@@ -310,51 +311,51 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 		StoreReportJDBCDAO dao = new StoreReportJDBCDAO();
 
 		// 新增
-		StoreReportVO srVO1 = new StoreReportVO();
-		srVO1.setStore_id("STO-000002");
-		srVO1.setSc_id("SC-000003");
-		srVO1.setOrder_id(null);
-		srVO1.setMan_id(new String("MAN-000003"));
-		srVO1.setSr_content(new String("新垣結衣我老婆"));
-		srVO1.setSr_image(new byte[0]);
-		srVO1.setSr_time(java.sql.Timestamp.valueOf("2003-03-31 03:33:33"));
-		srVO1.setSr_state("已審核");
-		srVO1.setSr_result("成立");
-		dao.insert(srVO1);
-
-		// 修改
-		StoreReportVO srVO2 = new StoreReportVO();
-		srVO2.setSr_id("SR-000001");
-		srVO2.setStore_id("STO-000003");
-		srVO2.setSc_id(null);
-		srVO2.setOrder_id("20170614-000002");
-		srVO2.setMan_id(new String("MAN-000002"));
-		srVO2.setSr_content(new String("吳永志吳永志"));
-		srVO2.setSr_image(null);
-		srVO2.setSr_time(java.sql.Timestamp.valueOf("2001-01-01 11:11:11"));
-		srVO2.setSr_state("已審核");
-		srVO2.setSr_result("不成立");
-		dao.update(srVO2);
-
-		// 刪除
-		dao.delete("SR-000004");
+//		StoreReportVO srVO1 = new StoreReportVO();
+//		srVO1.setStore_id("STO-000002");
+//		srVO1.setSc_id("SC-000003");
+//		srVO1.setOrder_id(null);
+//		srVO1.setMan_id(new String("MAN-000003"));
+//		srVO1.setSr_content(new String("新垣結衣我老婆"));
+//		srVO1.setSr_image(new byte[0]);
+//		srVO1.setSr_time(java.sql.Timestamp.valueOf("2003-03-31 03:33:33"));
+//		srVO1.setSr_state("已審核");
+//		srVO1.setSr_result("成立");
+//		dao.insert(srVO1);
+//
+//		// 修改
+//		StoreReportVO srVO2 = new StoreReportVO();
+//		srVO2.setSr_id("SR-000001");
+//		srVO2.setStore_id("STO-000003");
+//		srVO2.setSc_id(null);
+//		srVO2.setOrder_id("20170614-000002");
+//		srVO2.setMan_id(new String("MAN-000002"));
+//		srVO2.setSr_content(new String("吳永志吳永志"));
+//		srVO2.setSr_image(null);
+//		srVO2.setSr_time(java.sql.Timestamp.valueOf("2001-01-01 11:11:11"));
+//		srVO2.setSr_state("已審核");
+//		srVO2.setSr_result("不成立");
+//		dao.update(srVO2);
+//
+//		// 刪除
+//		dao.delete("SR-000004");
+//
+//		// 查詢
+//		StoreReportVO srVO3 = dao.findPrimaryKey("SR-000002");
+//		System.out.print(srVO3.getSr_id() + ",");
+//		System.out.print(srVO3.getStore_id() + ",");
+//		System.out.print(srVO3.getSc_id() + ",");
+//		System.out.print(srVO3.getOrder_id() + ",");
+//		System.out.print(srVO3.getMan_id() + ",");
+//		System.out.print(srVO3.getSr_content() + ",");
+//		System.out.print(srVO3.getSr_image() + ",");
+//		System.out.print(srVO3.getSr_time() + ",");
+//		System.out.print(srVO3.getSr_state() + ",");
+//		System.out.print(srVO3.getSr_result() + ",");
+//		System.out.println("---------------------");
 
 		// 查詢
-		StoreReportVO srVO3 = dao.findPrimaryKey("SR-000002");
-		System.out.print(srVO3.getSr_id() + ",");
-		System.out.print(srVO3.getStore_id() + ",");
-		System.out.print(srVO3.getSc_id() + ",");
-		System.out.print(srVO3.getOrder_id() + ",");
-		System.out.print(srVO3.getMan_id() + ",");
-		System.out.print(srVO3.getSr_content() + ",");
-		System.out.print(srVO3.getSr_image() + ",");
-		System.out.print(srVO3.getSr_time() + ",");
-		System.out.print(srVO3.getSr_state() + ",");
-		System.out.print(srVO3.getSr_result() + ",");
-		System.out.println("---------------------");
-
-		// 查詢
-		List<StoreReportVO> list = dao.getAll();
+		List<StoreReportVO> list = dao.getReportByStore_id("STO-000001");
 		for (StoreReportVO aSR : list) {
 			System.out.print(aSR.getSr_id() + ",");
 			System.out.print(aSR.getStore_id() + ",");
@@ -368,5 +369,73 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 			System.out.print(aSR.getSr_result() + ",");
 			System.out.println();
 		}
+	}
+
+	@Override
+	public List<StoreReportVO> getReportByStore_id(String store_id) {
+		List<StoreReportVO> list = new ArrayList<StoreReportVO>();
+		StoreReportVO srVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_BY_STORE_ID);
+			pstmt.setString(1, store_id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				srVO = new StoreReportVO();
+				srVO.setSr_id(rs.getString("sr_id"));
+				srVO.setStore_id(rs.getString("store_id"));
+				srVO.setSc_id(rs.getString("sc_id"));
+				srVO.setOrder_id(rs.getString("order_id"));
+				srVO.setMan_id(rs.getString("man_id"));
+				srVO.setSr_content(rs.getString("sr_content"));
+				srVO.setSr_image(rs.getBytes("sr_image"));
+				srVO.setSr_time(rs.getTimestamp("sr_time"));
+				srVO.setSr_state(rs.getString("sr_state"));
+				srVO.setSr_result(rs.getString("sr_result"));
+				list.add(srVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 }

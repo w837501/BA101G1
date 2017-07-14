@@ -1,8 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.mem.model.*"%>
+<%@ page import="com.store.model.*"%>
 <% 
 	MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+	StoreVO storeVO=(StoreVO)session.getAttribute("storeVO");
 %>
 <html>
 <head>
@@ -156,7 +158,8 @@
 		</div>
 
 		<div id="footer">
-			<jsp:include page="/footer.jsp"/>
+						<jsp:include page="/footer.jsp"/>
+			
 		</div>
 
 	</div>

@@ -71,9 +71,9 @@ StoreVO storeVO=(StoreVO)request.getAttribute("storeVO");
   		</td>
 	</tr>
 	<tr>
-		<td>商家帳號:<font color=red><b>*</b></font></td>
+		<td>商家信箱:<font color=red><b>*</b></font></td>
 		<td><input type="TEXT" name="store_acc" size="45" 
-			  value="<%= (storeVO==null)? "ab123456" :storeVO.getStore_acc() %>"></td>
+			  value="<%= (storeVO==null)? "ab123456@abc.com" :storeVO.getStore_acc() %>"></td>
 	</tr>
 	<tr>
 		<td>商家密碼:<font color=red><b>*</b></font></td>

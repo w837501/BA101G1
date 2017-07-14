@@ -117,7 +117,7 @@ public class ProductServlet extends HttpServlet{
 
 			List<ProductVO> productlist = proSvc.getProductClass(str);
 			req.setAttribute("productlist", productlist); // 資料庫取出的empVO物件,存入req
-
+session.removeAttribute("shoppingcart");
 			String url = "/product/product.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交select_page.jsp
 			System.out.println(successView);
