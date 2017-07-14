@@ -291,37 +291,39 @@
 							<div class="form-horizontal">
 							<div class="form-group">
 								<label for="mem_mail" class="col-xs-12 col-sm-3 control-label">會員信箱</label>
-								<div class="col-xs-12 col-sm-6"> <input type="text"
-									name="mem_mail" id="mem_mail" placeholder="請輸入E-MAIL"
+								<div class="col-xs-12 col-sm-6"> 
+								<input type="text" name="mem_mail" id="mem_mail" 
+									placeholder="請輸入E-MAIL"
 									value="<%=(memberVO == null) ? "sadqwe" : memberVO.getMem_mail()%>" >
 								</div>
 								<div class="col-xs-12 col-sm-3">
-								<span class='error1_mail' style="margin-left:-100px;"></span> 
+								<span class='error1_mail' style="margin-left:-90px;"></span> 
 								<img src="" id="error_img_mail">
-								<span class='correct_mail' style="margin-left:-100px;"></span> 
+								<span class='correct_mail' style="margin-left:-90px;"></span> 
 								<img src="" id="correct_img_mail"> 
 								</div>
 							</div>
 							<div class="form-group">
-								<br> <label for="mem_pw" class="col-xs-12 col-sm-3 control-label">會員密碼</label> 
+								<br><label for="mem_pw" class="col-xs-12 col-sm-3 control-label">會員密碼</label> 
 								<div class="col-xs-12 col-sm-6">
 								<input type="password" name="mem_pw" id="mem_pw"
 									placeholder="請輸入密碼6~10碼"
-									value="<%=(memberVO == null) ? "1222212" : memberVO.getMem_pw()%>">
+									value="<%=(memberVO == null) ? "222212" : memberVO.getMem_pw()%>">
 								</div>
 								<div class="col-xs-12 col-sm-3">
-									<span class='error1_pw' style="margin-left:-60px;"></span>
+									<span class='error1_pw' style="margin-left:-90px;"></span>
 									<img src="" id="error_img_pw">
-									<span class='correct_pw' style="margin-left:-100px;"></span> 
+									<span class='correct_pw' style="margin-left:-90px;"></span> 
 									<img src="" id="correct_img_pw"> 
 								</div>
-								</div>
+							</div>
 								 
 								<div class="form-group">
 									<label for="mem_name" class="col-xs-12 col-sm-3 control-label"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp姓名</label> 
 									<div class="col-xs-12 col-sm-6">
-									<input type="text" name="mem_name" id="mem_name" placeholder="請輸入姓名2~10個字"
-									value="<%=(memberVO == null) ? "老王" : memberVO.getMem_name()%>">
+									<input type="text" name="mem_name" id="mem_name" 
+										placeholder="請輸入姓名2~10個字"
+										value="<%=(memberVO == null) ? "a" : memberVO.getMem_name()%>">
 									</div>
 									<div class="col-xs-12 col-sm-3">
 									<span class='error1_name'style="margin-left:-100px;" ></span> 
@@ -334,7 +336,8 @@
 									<label for="mem_phone" class="col-xs-12 col-sm-3 control-label"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp手機</label>
 									<div class="col-xs-12 col-sm-6">
 										<input type="text" name="mem_phone" id="mem_phone"
-												placeholder="請輸入手機號碼" value="<%=(memberVO == null) ? "123" : memberVO.getMem_phone()%>">
+										placeholder="請輸入手機號碼" 
+										value="<%=(memberVO == null) ? "123" : memberVO.getMem_phone()%>">
 									</div>
 									<div class="col-xs-12 col-sm-3">
 										<span class='error1_phone' style="margin-left:-100px;"></span> 
@@ -348,7 +351,7 @@
 									value="<%=request.getServletPath()%>"> <br> <br>
 								    <input type="hidden" name="action" value="insert"> 
 								    <input type="submit" value="送出新增" id="input" disabled="disabled"> 
-								   </div>
+								    </div>
 								    </div>
 							</form>
 						</div>
@@ -358,7 +361,6 @@
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
