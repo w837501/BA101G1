@@ -4,13 +4,12 @@
 <%@ page import="com.store.model.*"%>
 <%@ page import="com.order.model.*"%>
 <%@ page import="java.util.*"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% 
 StoreVO storeVO=(StoreVO)session.getAttribute("storeVO");
 Store_OrderService orderSvc=new Store_OrderService();
 String store_id=storeVO.getStore_id();
 List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
- store_orderVO=orderSvc.getOrderByStore_id(store_id);
+ store_orderVO=orderSvc.getOrderByState("¤w¨úÀ\", store_id);
  pageContext.setAttribute("store_orderVO",store_orderVO);
 %>
 <html>
@@ -78,10 +77,10 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 							<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO.order_id}">${store_orderVO.order_id}</a>
 						</td>
 				
-						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO.order_time }"/></td>
-						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO.order_taketime }"/></td>
+						<td>${store_orderVO.order_time }</td>
 						<td>${store_orderVO.totalprice }</td>
 						<td>${store_orderVO.order_way }</td>
+						<td>${store_orderVO.order_taketime }</td>
 						<td>${store_orderVO.order_state }</td>
 					</tr>
 					</c:forEach>

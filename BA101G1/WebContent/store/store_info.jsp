@@ -24,33 +24,36 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-3">
 					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath() %>/frontend/mem/member_info_update.jsp" class="list-group-item">修改資料</a>
+					    <a href="<%=request.getContextPath() %>/store/store_update.jsp" class="list-group-item">修改資料</a>
 					</div>
 					
 					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">查詢所有訂單</a>
+					    <a href="<%=request.getContextPath()%>/store/store_order.jsp " class="list-group-item">查詢所有訂單</a>
 					</div>
 					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">查詢未確認訂單</a>
+					    <a href="<%=request.getContextPath()%>/store/store_order_notconfirm.jsp " class="list-group-item">查詢未確認訂單</a>
 					</div>
 					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">查詢進行中訂單</a>
+					    <a href="<%=request.getContextPath()%>/store/store_order_handleing.jsp " class="list-group-item">查詢進行中訂單</a>
 					</div>
 					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">查詢檢舉</a>
+					    <a href="<%=request.getContextPath()%>/store/store_order_finish.jsp " class="list-group-item">查詢已完成訂單</a>
 					</div>
 					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">商品新增</a>
+					    <a href="<%=request.getContextPath()%>/store/store_report.jsp " class="list-group-item">查詢檢舉</a>
 					</div>
 					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">商品修改</a>
+					    <a href="<%=request.getContextPath()%>/store/store_insert_product.jsp " class="list-group-item">商品新增</a>
+					</div>
+					<div class="panel panel-info" style="width:200px;">
+					    <a href="<%=request.getContextPath()%>/store/store_update_product.jsp " class="list-group-item">商品修改</a>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-7" >
 
 			
 				<div class="page-header"> 
-					  <h1>會員資料</h1>
+					  <h1>商家資料</h1>
  				</div> 
 				
 				 
