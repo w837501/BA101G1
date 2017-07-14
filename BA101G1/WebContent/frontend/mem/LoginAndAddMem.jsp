@@ -317,6 +317,20 @@
 									<img src="" id="correct_img_pw"> 
 								</div>
 							</div>
+							<div class="form-group">
+								<br><label for="mem_pw1" class="col-xs-12 col-sm-3 control-label">½T»{±K½X</label> 
+								<div class="col-xs-12 col-sm-6">
+								<input type="password" name="mem_pw1" id="mem_pw1"
+									placeholder="½Ð¿é¤J±K½X6~10½X"
+									value="<%=(memberVO == null) ? "222212" : memberVO.getMem_pw()%>">
+								</div>
+								<div class="col-xs-12 col-sm-3">
+									<span class='error1_pw1' style="margin-left:-90px;"></span>
+									<img src="" id="error_img_pw1">
+									<span class='correct_pw1' style="margin-left:-90px;"></span> 
+									<img src="" id="correct_img_pw1"> 
+								</div>
+							</div>
 								 
 								<div class="form-group">
 									<label for="mem_name" class="col-xs-12 col-sm-3 control-label"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp©m¦W</label> 
