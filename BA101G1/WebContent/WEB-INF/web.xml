@@ -227,6 +227,7 @@
     <url-pattern>/store/store_order_notconfirm.jsp</url-pattern>
     <url-pattern>/store/store_update.jsp</url-pattern>
     <url-pattern>/store/store_report.jsp</url-pattern>
+    <url-pattern>/store/store_insert_product.jsp</url-pattern>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>

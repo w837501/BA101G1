@@ -30,11 +30,29 @@ ProductVO productVO=(ProductVO)request.getAttribute("productVO");
 			<div class="row">
 				<div class="col-xs-12 col-sm-3">
 					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath() %>/frontend/mem/member_info_update.jsp" class="list-group-item">修改資料</a>
+					    <a href="<%=request.getContextPath() %>/store/store_update.jsp" class="list-group-item">修改資料</a>
 					</div>
 					
 					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">查詢訂單</a>
+					    <a href="<%=request.getContextPath()%>/store/store_order.jsp " class="list-group-item">查詢所有訂單</a>
+					</div>
+					<div class="panel panel-info" style="width:200px;">
+					    <a href="<%=request.getContextPath()%>/store/store_order_notconfirm.jsp " class="list-group-item">查詢未確認訂單</a>
+					</div>
+					<div class="panel panel-info" style="width:200px;">
+					    <a href="<%=request.getContextPath()%>/store/store_order_handleing.jsp " class="list-group-item">查詢進行中訂單</a>
+					</div>
+					<div class="panel panel-info" style="width:200px;">
+					    <a href="<%=request.getContextPath()%>/store/store_order_finish.jsp " class="list-group-item">查詢已完成訂單</a>
+					</div>
+					<div class="panel panel-info" style="width:200px;">
+					    <a href="<%=request.getContextPath()%>/store/store_report.jsp " class="list-group-item">查詢檢舉</a>
+					</div>
+					<div class="panel panel-info" style="width:200px;">
+					    <a href="<%=request.getContextPath()%>/store/store_insert_product.jsp " class="list-group-item">商品新增</a>
+					</div>
+					<div class="panel panel-info" style="width:200px;">
+					    <a href="<%=request.getContextPath()%>/store/store_update_product.jsp " class="list-group-item">商品修改</a>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-7" >
@@ -89,15 +107,7 @@ ProductVO productVO=(ProductVO)request.getAttribute("productVO");
 						<img src="" id="correct_img_price"> 
 					</div>
 				</div>
-				<div class="form-group">
-					<br> <label for="pro_image" class="col-xs-12 col-sm-3 control-label">商品照片</label> 
-					<div class="col-xs-12 col-sm-9">
-					<input type="file" name="pro_image" id="upfile1" >
-					<p>
-						<img id="image"  style="max-width: 200px; max-height: 200px;">
-					</p>
-					</div>
-				</div>
+				
 				<div class="form-group">
 					<br> <label for="pro_content" class="col-xs-12 col-sm-3 control-label">商品狀態</label> 
 					<div class="col-xs-12 col-sm-6">
@@ -118,6 +128,15 @@ ProductVO productVO=(ProductVO)request.getAttribute("productVO");
 						<img src="" id="error_img_content">
 						<span class='correct_content' style="margin-left:-100px;"></span> 
 						<img src="" id="correct_img_content"> 
+					</div>
+				</div>
+				<div class="form-group">
+					<br> <label for="pro_image" class="col-xs-12 col-sm-3 control-label">商品照片</label> 
+					<div class="col-xs-12 col-sm-9">
+					<input type="file" name="pro_image" id="upfile1" >
+					<p>
+						<img id="image"  style="max-width: 200px; max-height: 200px;">
+					</p>
 					</div>
 				</div>
 				<br>
