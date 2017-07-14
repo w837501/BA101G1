@@ -7,15 +7,12 @@
 <!-- Website template by freewebsitetemplates.com -->
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Shopping Cart - Eternal Beauty Essentials Website Template</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<!--[if IE]>
-		<link rel="stylesheet" href="css/ie.css" type="text/css" charset="utf-8">
-	<![endif]-->
-	<script src="https://code.jquery.com/jquery.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>吃訂我線上訂餐系統</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
+<script src="<%=request.getContextPath()%>/js/mobile.js" type="text/javascript"></script>
 </head>
 <body>
 	<%
@@ -23,25 +20,8 @@
 		Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
 	%>
 	<div id="page">
-	<div id="header">
-			<div id="logo">
-				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
-				<span id="login">
-				<c:if test="${empty memberVO }">
-				<a href="<%=request.getContextPath()%>/frontend/mem/LoginAndAddMem.jsp">Login</a>
-				</c:if>
-				<c:if test="${not empty memberVO }">
-						<a href="<%=request.getContextPath()%>/backend/mem/mem.do?action=logout">Logout</a>  
-					</c:if></span>
-
-				<ul>
-					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
-					<li><a href="news.html">最新消息</a></li>
-				</ul>
-			</div>
+		<div id="header">
+				<jsp:include page="/header.jsp" />
 		</div>
 	<%if (buylist != null && (buylist.size() > 0)) {%>
 		<div id="contents">
@@ -49,7 +29,7 @@
 				<h1>購物車</h1>
 			</div>
 
-				<div id="main02" >   
+				<div id="main02" style="padding-left:100px;">   
 				<form action="<%=request.getContextPath()%>/product/product.do" method="post" id="cart">
 					<table frame="hsides">
 						<thead>
@@ -97,21 +77,24 @@
 						</tfoot>
 					</table>
 					
-					<div class="col-xs-12 col-sm-8"></div>
-					<div class="col-xs-12 col-sm-4">
 					
-					<a href="<%=request.getContextPath()%>/store/store.do?action=getProduct_By_Store&store_id=<%=productVO1.getStore_id() %>" class="btn btn-info"><i class="glyphicon glyphicon-ok"></i>繼續購物</a>
-					<form name="checkoutForm" action="<%=request.getContextPath()%>/product/product.do" method="POST">
-              		<input type="hidden" name="action"	value="Checkout"> 
-              		<input type="submit" value="付款結帳">
-          			</form>
+					<div style="float:right;">
+						<form name="checkoutForm" action="<%=request.getContextPath()%>/product/product.do" method="POST">
+		              		<input type="hidden" name="action"	value="Checkout"> 
+		              		<input type="submit" value="付款結帳">
+	          			</form>
           			</div>
+					<div style="float:right; padding-right:30px;">
+						<a href="<%=request.getContextPath()%>/store/store.do?action=getProduct_By_Store&store_id=<%=productVO1.getStore_id() %>">繼續購物</a>
+					</div>
 				</form>
 				</div>
 		</div>
 	    <%}%>	
 		
-		
+		<div id="footer">
+			<jsp:include page="/footer.jsp"/>
+		</div>
 	</div>
 </body>
 </html>
