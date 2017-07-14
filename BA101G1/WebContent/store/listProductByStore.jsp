@@ -34,27 +34,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>吃訂我線上訂餐系統</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
+<script src="<%=request.getContextPath()%>/js/mobile.js" type="text/javascript"></script>
 </head>
 <body>
 	<div id="page">
 		<div id="header">
 			<div id="logo">
-				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
-				<span id="login">
-				<c:if test="${empty memberVO }">
-				<a href="<%=request.getContextPath()%>/frontend/mem/LoginAndAddMem.jsp">Login</a>
-				</c:if>
-				<c:if test="${not empty memberVO }">
-						<a href="<%=request.getContextPath()%>/backend/mem/mem.do?action=logout">Logout</a>  
-					</c:if></span>
+				<div id="login">
+						<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
+						
+						<c:if test="${empty memberVO && empty storeVO}">
 			
-				<ul>
-					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
-					<li><a href="news.html">最新消息</a></li>
-				</ul>
+							<span class="login" onmouseover="switchMenu( this, 'SubMenu1', 'MouseOver' )" onmouseout="hideMenu()">Login
+								<div style="margin-left: -20px;">
+								<span style="font-size:9px;">&#9660;</span>
+								<ul id="SubMenu1" class="sub-menu" style="display:none;">
+								    <li><a href="<%=request.getContextPath()%>/frontend/mem/LoginAndAddMem.jsp" target="_blank">會員登入</a></li>
+									<li><a href="<%=request.getContextPath()%>/store/LoginAndAddStore.jsp" target="_blank">商家登入</a></li>
+								</ul>
+							</span>
+			
+						</c:if>
+						
+						<c:if test="${not empty memberVO || not empty storeVO}">
+							<c:if test="${not empty memberVO}">
+							<span class="login">
+							
+								<a href="<%=request.getContextPath()%>/backend/mem/mem.do?action=logout">Logout</a>  
+								<div style="margin-left: 0px;">
+							</span>
+							<span class="name">
+								你好，<%=memberVO.getMem_name() %>
+							</span>
+							</c:if>
+							<c:if test="${not empty storeVO}">
+							<span class="login">
+							
+								<a href="<%=request.getContextPath()%>/store/store.do?action=logout">Logout</a>  
+								<div style="margin-left: 0px;">
+							</span>
+							<span class="name">
+								你好，<%=storeVO.getStore_name() %>
+							</span>
+							</c:if>
+						</c:if>
+						
+				</div>
+			</div>
+					
+			<div id="option">
+				<ul class="navigation">
+				<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
+				<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
+				<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
+				<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
+				<li><a href="news.html">最新消息</a></li>
+			</ul>
 			</div>
 		</div>
 		
