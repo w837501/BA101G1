@@ -2,15 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.store.model.*"%>
-<%@ page import="com.order.model.*"%>
+<%@ page import="com.member_report.model.*"%>
 <%@ page import="java.util.*"%>
 <% 
-StoreVO storeVO=(StoreVO)session.getAttribute("storeVO");
-Store_OrderService orderSvc=new Store_OrderService();
-String store_id=storeVO.getStore_id();
-List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
- store_orderVO=orderSvc.getOrderByState("未確認", store_id);
- pageContext.setAttribute("store_orderVO",store_orderVO);
+MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+MemberReportService memberreportSvc=new MemberReportService();
+String mem_id=memberVO.getMem_id();
+List<MemberReportVO> memberreportVO=new LinkedList<MemberReportVO>();
+memberreportVO=memberreportSvc.getMemberReportByMem_id(mem_id);
+ pageContext.setAttribute("memberreportVO",memberreportVO);
 %>
 <html>
 <head>
@@ -56,47 +56,39 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 					    <a href="<%=request.getContextPath()%>/store/store_update_product.jsp " class="list-group-item">商品修改</a>
 					</div>
 				</div>
+				
+				
 				<div class="col-xs-12 col-sm-7" >
 
 			
 				<div class="page-header"> 
-					  <h1>所有訂單資料</h1>
+					  <h1>商家檢舉資訊</h1>
  				</div> 
 				<table border='1' bordercolor='#CCCCFF' width='600'>
 					<tr>
+						<th>會員檢舉單號</th>
 						<th>訂單編號</th>
-						<th>訂餐時間</th>
-						<th>取餐時間</th>
-						<th>總金額</th>
-						<th>取餐方式</th>
-						<th>訂單狀態</th>
-						<th>確認</th>
-						
+						<th>評論編號</th>
+						<th>檢舉內容</th>
+						<th>檢舉圖片</th>
+						<th>檢舉時間</th>
+						<th>檢舉審核狀態</th>
+						<th>檢舉結果</th>
 					</tr>
-					<c:forEach var="store_orderVO" items="${store_orderVO}" >
-					<tr align='center' valign='middle'>
-						<td>
-							<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO.order_id}">${store_orderVO.order_id}</a>
-						</td>
-				
-						<td>${store_orderVO.order_time }</td>
-						<td>${store_orderVO.totalprice }</td>
-						<td>${store_orderVO.order_way }</td>
-						<td>${store_orderVO.order_taketime }</td>
-						<td>${store_orderVO.order_state }</td>
-						<td>
-						<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
-							<input type="submit" value="確認訂單">
-							<input type="hidden" name="order_id" value="${store_orderVO.order_id}">
-							<input type="hidden" name="store_id" value="${storeVO.store_id}">
-							<input type="hidden" name="action" value="Confirm_Order">
-						</form>
-						</td>
+				 <c:forEach var="member_reportVO" items="${memberreportVO}" >
+					<tr align='center' valign='middle'${(member_reportVO.mr_id==param.mr_id)?'bgcolor=#CCCCFF':'' }>
+						<td>${member_reportVO.mr_id }</td>
+						<td>${member_reportVO.order_id }</td>
+						<td>${member_reportVO.sc_id }</td>
+						<td>${member_reportVO.mr_content}</td>
+						<td>${member_reportVO.mr_image }</td>
+						<td>${member_reportVO.mr_time }</td>
+						<td>${member_reportVO.mr_state }</td>
+						<td>${member_reportVO.mr_result }</td>
 					</tr>
 					</c:forEach>
 				
 				</table>
-				 
 					
 
 				</div>

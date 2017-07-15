@@ -19,8 +19,22 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <title>吃訂我線上訂餐系統</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
+<script type="text/javascript">
+$(document).ready(
+		function() {
+			
+			
+			
+			
+			
+		});
+
+
+</script>
+
 </head>
 <body>
 	<div id="page">
@@ -74,7 +88,7 @@
 		<th>檢舉商家</th>
 	</tr>
 	<c:forEach var="store_orderVO1" items="${store_orderVO}" >
-	<tr align='center' valign='middle'>
+	<tr align='center' valign='middle' ${(store_orderVO1.order_id==param.order_id) ? 'bgcolor=#CCCCFF':''}>
 		<td>
 			<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO1.order_id}">${store_orderVO1.order_id}</a>
 		</td>
@@ -84,7 +98,16 @@
 		<td>${store_orderVO1.totalprice }</td>
 		<td>${store_orderVO1.order_way }</td>
 		<td>${store_orderVO1.order_state }</td>
-		<td>取消</td>
+		<td><c:if test="${store_orderVO1.order_state eq '未確認'}">
+			<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
+							<input type="submit" value="取消訂單">
+							<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
+							<input type="hidden" name="store_id" value="${store_orderVO1.store_id}">
+							<input type="hidden" name="action" value="Cancel">
+						</form>
+			</c:if>
+			<c:if test="${store_orderVO1.order_state != '未確認'}">無法取消</c:if>
+		</td>
 		<td>檢舉</td>
 	</tr>
 	</c:forEach>

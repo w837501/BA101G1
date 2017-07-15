@@ -33,10 +33,10 @@ public class StoreService {
 		return storeVO;
 	}
 
-	public StoreVO updateStore(Number sc_id, String store_content, String store_phone, String store_addr,
+	public StoreVO updateStore(String store_name,Number sc_id, String store_content, String store_phone, String store_addr,
 			byte[] store_image, String store_out, String store_zone, String store_pw, String store_id) {
 		StoreVO storeVO = new StoreVO();
-
+		storeVO.setStore_name(store_name);
 		storeVO.setSc_id(sc_id);
 		storeVO.setStore_content(store_content);
 		storeVO.setStore_phone(store_phone);
@@ -58,6 +58,9 @@ public class StoreService {
 
 	public StoreVO getOneStore(String store_id) {
 		return dao.findByPrimaryKey(store_id);
+	}
+	public StoreVO getOneStore1(String store_id) {
+		return dao.findByPrimaryKey1(store_id);
 	}
 	public StoreVO getOneStoreByAcc(String store_acc) {
 		return dao.findByStoreAcc(store_acc);

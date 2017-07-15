@@ -192,32 +192,49 @@ public class StoreServlet extends HttpServlet {
 				/***************************
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 **********************/
-				String store_id = new String(req.getParameter("store_id").trim());
+				String store_acc=req.getParameter("store_acc");
+				String store_id = req.getParameter("store_id").trim();
 				String store_name = req.getParameter("store_name").trim();
 				String store_addr = req.getParameter("store_addr").trim();
+				String store_phone = req.getParameter("store_phone").trim();
+				String store_state = req.getParameter("store_state");
+				String store_content = req.getParameter("store_content").trim();
+				String store_pw = req.getParameter("store_pw").trim();
+				String store_out = req.getParameter("store_out").trim();
+				String store_zone = req.getParameter("store_zone").trim();
+				Number sc_id=Integer.parseInt(req.getParameter("sc_id"));
+				Part pic=req.getPart("store_image");
+				byte[] store_image=getPictureByteArrayFromWeb(pic);
 				System.out.println(store_id);
 				System.out.println(store_name);
 				System.out.println(store_addr);
-				String store_phone = null;
-				try {
-					store_phone = new String(req.getParameter("store_phone").trim());
-				} catch (NumberFormatException e) {
-					errorMsgs.add("電話請填數字.");
-				}
-
 				System.out.println(store_phone);
-				String store_state = req.getParameter("store_state");
+				System.out.println(store_state);
+				System.out.println(store_content);
+				System.out.println(store_pw);
+				System.out.println(store_out);
+				System.out.println(store_zone);
+				System.out.println(sc_id);
+				System.out.println(store_image);
 
-				StoreVO storeVO = new StoreVO();
-				storeVO.setStore_id(store_id);
-				storeVO.setStore_name(store_name);
-				storeVO.setStore_addr(store_addr);
-				storeVO.setStore_phone(store_phone);
-				storeVO.setStore_state(store_state);
+				StoreVO storeVO1 = new StoreVO();
+				storeVO1.setStore_id(store_id);
+				storeVO1.setStore_name(store_name);
+				storeVO1.setStore_addr(store_addr);
+				storeVO1.setStore_phone(store_phone);
+				storeVO1.setStore_state(store_state);
+				storeVO1.setStore_content(store_content);
+				storeVO1.setStore_pw(store_pw);
+				storeVO1.setStore_out(store_out);
+				storeVO1.setStore_zone(store_zone);
+				storeVO1.setSc_id(sc_id);
+				storeVO1.setStore_image(store_image);
+				System.out.println("123????");
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("storeVO", storeVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					System.out.println("?????");
+					req.setAttribute("storeVO", storeVO1); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req.getRequestDispatcher("/backend/store/update_store_input.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
@@ -225,12 +242,22 @@ public class StoreServlet extends HttpServlet {
 
 				/*************************** 2.開始修改資料 *****************************************/
 				StoreService storeSvc = new StoreService();
-				storeVO = storeSvc.updateStore2(store_phone, store_addr, store_name, store_state, store_id);
+				byte[] defaultpic=storeSvc.getOneStore1(store_id).getStore_image();
+				System.out.println(defaultpic);
+				if (getFileNameFromPart(pic) != null) 
+					storeVO1=storeSvc.updateStore(store_name,sc_id, store_content, store_phone, store_addr, store_image, store_out, store_zone, store_pw, store_id);
+				else
+					storeVO1=storeSvc.updateStore(store_name, sc_id, store_content, store_phone, store_addr, defaultpic, store_out, store_zone, store_pw, store_id);
 				System.out.println("XXXXXXXXXXXX");
+				
+				StoreVO storeVO=storeSvc.getOneStoreByAcc(store_acc);
+				session.removeAttribute("storeVO");
+				session.setAttribute("storeVO", storeVO);
 				/**************************** 3.修改完成,準備轉交(Send the Success view)*************/
 
-				String url = "/backend/store/ListAllStore.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
+			//	String url = "/backend/store/ListAllStore.jsp";
+				System.out.println(requestURL);
+				RequestDispatcher successView = req.getRequestDispatcher("/store/store_info.jsp"); // 修改成功後,轉交回送出修改的來源網頁
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 *************************************/

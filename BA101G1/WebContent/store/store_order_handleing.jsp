@@ -70,9 +70,10 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 						<th>總金額</th>
 						<th>取餐方式</th>
 						<th>訂單狀態</th>
+						<th>確認</th>
 					</tr>
 					<c:forEach var="store_orderVO" items="${store_orderVO}" >
-					<tr align='center' valign='middle'>
+					<tr align='center' valign='middle'${(store_orderVO.order_id==param.order_id) ? 'bgcolor=#CCCCFF':''}>
 						<td>
 							<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO.order_id}">${store_orderVO.order_id}</a>
 						</td>
@@ -82,6 +83,25 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 						<td>${store_orderVO.order_way }</td>
 						<td>${store_orderVO.order_taketime }</td>
 						<td>${store_orderVO.order_state }</td>
+						<td>
+							<c:if test="${store_orderVO.order_state eq '已確認'}">
+							<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
+							<input type="submit" value="確認訂單">
+							<input type="hidden" name="order_id" value="${store_orderVO.order_id}">
+							<input type="hidden" name="store_id" value="${storeVO.store_id}">
+							<input type="hidden" name="action" value="Change_Order_To_Take">
+						</form>	
+						</c:if>	
+						
+						<c:if test="${store_orderVO.order_state eq '待取餐'}">
+							<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
+							<input type="submit" value="確認訂單">
+							<input type="hidden" name="order_id" value="${store_orderVO.order_id}">
+							<input type="hidden" name="store_id" value="${storeVO.store_id}">
+							<input type="hidden" name="action" value="Change_Order_To_Finish">
+						</form>	
+						</c:if>					
+						</td>
 					</tr>
 					</c:forEach>
 				

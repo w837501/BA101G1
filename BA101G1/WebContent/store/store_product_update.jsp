@@ -108,6 +108,9 @@
 	</tr>
 				
 				 </table>
+				<input type="hidden" name="action" value="update">
+				<input type="hidden" name="pro_id" value="<%=productVO.getPro_id() %>">
+				<input type="submit" value="°e¥X­×§ï">
 				 </FORM>
 					
 

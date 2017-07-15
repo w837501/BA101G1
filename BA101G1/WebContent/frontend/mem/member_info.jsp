@@ -46,6 +46,9 @@
 					<div class="panel panel-info" style="width:200px;">
 					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">查詢訂單</a>
 					</div>
+					<div class="panel panel-info" style="width:200px;">
+					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">查詢檢舉</a>
+					</div>
 				</div>
 				<div class="col-xs-12 col-sm-7" >
 

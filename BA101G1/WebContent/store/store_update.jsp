@@ -12,6 +12,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <title>吃訂我線上訂餐系統</title>
+<script language="JavaScript" src="js/pic_preview.js"></script>
+
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 </head>
 <body>
@@ -57,7 +59,7 @@
 				<div class="page-header"> 
 					  <h1>商家資料修改</h1>
  				</div> 
-				<FORM METHOD="post" ACTION="store.do" name="form1" enctype="multipart/form-data">
+				<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/store/store.do" name="form1" enctype="multipart/form-data">
 <table border="0">
 <tr>
 		<td>商家編號:<font color=red><b>*</b></font></td>
@@ -100,7 +102,7 @@
 	</tr>
 	<tr>
 		<td>商家帳號:<font color=red><b>*</b></font></td>
-		<td><input type="text" name="store_acc" size="45" value="<%=storeVO.getStore_acc()%>" />
+		<td><%=storeVO.getStore_acc() %></td>
 	</tr>
 	<tr>
 		<td>商家密碼:<font color=red><b>*</b></font></td>
@@ -148,6 +150,8 @@
 	<br>
 			<input type="hidden" name="action" value="update">
 			<input type="hidden" name="store_id" value="<%=storeVO.getStore_id() %>">
+			<input type="hidden" name="store_acc" value="<%=storeVO.getStore_acc() %>">
+			<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			<input type="submit" value="送出修改"></FORM>
 				 
 					
