@@ -12,7 +12,7 @@
 <body>
 	<div id="page">
 		<div id="header">
-			<jsp:include page="/header.jsp" />
+			<jsp:include page="/header_member.jsp"></jsp:include>
 		</div>
 
 		<div id="contents">

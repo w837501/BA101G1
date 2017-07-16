@@ -15,14 +15,13 @@ public class StoreCommitService {
 	}
 	
 	public StoreCommitVO addStoreCommit(String store_id , String mem_id , 
-			String sc_content, Timestamp sc_time , String sc_state){
+			String sc_content, Integer sc_score){
 
 		StoreCommitVO scVO = new StoreCommitVO();
 		scVO.setStore_id(store_id);
 		scVO.setMem_id(mem_id);
 		scVO.setSc_content(sc_content);
-		scVO.setSc_time(sc_time);
-		scVO.setSc_state(sc_state);
+		scVO.setSc_score(sc_score);
 		dao.insert(scVO);
 		
 		return scVO;

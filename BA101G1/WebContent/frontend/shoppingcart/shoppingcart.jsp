@@ -21,9 +21,10 @@
 	%>
 	<div id="page">
 		<div id="header">
-				<jsp:include page="/header.jsp" />
+				<jsp:include page="/header_member.jsp"></jsp:include>
 		</div>
-	<%if (buylist != null && (buylist.size() > 0)) {%>
+		<%if (buylist != null && (buylist.size() > 0)) {%>
+	
 		<div id="contents">
 			<div id="sidebar">
 				<h1>購物車</h1>
@@ -90,7 +91,11 @@
 				</form>
 				</div>
 		</div>
-	    <%}%>	
+	   <%}%>
+	   <%if (buylist.size() == 0) {%>
+	    	
+		<a href="<%=request.getContextPath()%>/store/storeClass.jsp">購物車已無東西，請點擊繼續購買商品</a>
+		<%} %>
 		
 		<div id="footer">
 			<jsp:include page="/footer.jsp"/>

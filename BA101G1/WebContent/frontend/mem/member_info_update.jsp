@@ -20,27 +20,12 @@
 <body>
 	<div id="page">
 		<div id="header">
-			<div id="logo">
-				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
-				<span id="login"><c:if test="${empty memberVO }">
-				<a href="<%=request.getContextPath()%>/frontend/mem/LoginAndAddMem.jsp">Login</a>
-				</c:if>
-				<c:if test="${not empty memberVO }">
-						<a href="<%=request.getContextPath()%>/backend/mem/mem.do?action=logout">Logout</a>  
-					</c:if></span>
-				<ul>
-					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
-					<li><a href="<%=request.getContextPath()%>/backend/mem/ListOneMem.jsp">最新消息</a></li>
-					
-				</ul>
-			</div>
+			<jsp:include page="/header_member.jsp"></jsp:include>
 		</div>
 
 		<div class="container" style="margin-bottom:180px;">
 			<div class="row">
+				<div class="col-xs-12 col-sm-3">
 				<div class="panel panel-info" style="width:200px;">
 					    <a href="<%=request.getContextPath() %>/frontend/mem/member_info_update.jsp" class="list-group-item">修改資料</a>
 					</div>
@@ -51,6 +36,7 @@
 					<div class="panel panel-info" style="width:200px;">
 					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">查詢檢舉</a>
 					</div>
+				</div>
 				<div class="col-xs-12 col-sm-7" >
 
 

@@ -35,7 +35,7 @@ public class StoreDAO implements StoreDAO_interface {
 	private static final String CLASSLINK = "select s.sc_id, s.store_id, s.store_name, s.store_addr, s.store_zone, t.sc_name from store s join store_class t on (s.sc_id = t.sc_id) where t.sc_id = ? and store_state = '開店中'";
 	private static final String UPDATE_STMT2 = "UPDATE STORE set store_phone=?, store_addr=?, store_name=?, store_state=? where store_id = ?";
 	private static final String Find_HOT = "select * from store where store_star > ? and store_state = '開店中' order by store_star desc";
-	
+	private static final String UPDATE_START="UPDATE STORE set store_star=? , store_count=? where store_id=?";
 	@Override
 	public void insert(StoreVO storeVO) {
 		Connection con = null;
@@ -164,8 +164,8 @@ public class StoreDAO implements StoreDAO_interface {
 				storeVO.setStore_phone(rs.getString("store_phone"));
 				storeVO.setStore_addr(rs.getString("store_addr"));
 				storeVO.setStore_date(rs.getTimestamp("store_date"));
-				storeVO.setStore_star(rs.getDouble("store_star"));
-				storeVO.setStore_count(rs.getDouble("store_count"));
+				storeVO.setStore_star(rs.getInt("store_star"));
+				storeVO.setStore_count(rs.getInt("store_count"));
 				storeVO.setStore_state(rs.getString("store_state"));
 				storeVO.setStore_image(rs.getBytes("store_image"));
 				storeVO.setStore_report_count(rs.getInt("store_report_count"));
@@ -227,8 +227,8 @@ public class StoreDAO implements StoreDAO_interface {
 				storeVO.setStore_phone(rs.getString("store_phone"));
 				storeVO.setStore_addr(rs.getString("store_addr"));
 				storeVO.setStore_date(rs.getTimestamp("store_date"));
-				storeVO.setStore_star(rs.getDouble("store_star"));
-				storeVO.setStore_count(rs.getDouble("store_count"));
+				storeVO.setStore_star(rs.getInt("store_star"));
+				storeVO.setStore_count(rs.getInt("store_count"));
 				storeVO.setStore_state(rs.getString("store_state"));
 				storeVO.setStore_image(rs.getBytes("store_image"));
 				storeVO.setStore_report_count(rs.getInt("store_report_count"));
@@ -290,8 +290,8 @@ public class StoreDAO implements StoreDAO_interface {
 				storeVO.setStore_phone(rs.getString("store_phone"));
 				storeVO.setStore_addr(rs.getString("store_addr"));
 				storeVO.setStore_date(rs.getTimestamp("store_date"));
-				storeVO.setStore_star(rs.getDouble("store_star"));
-				storeVO.setStore_count(rs.getDouble("store_count"));
+				storeVO.setStore_star(rs.getInt("store_star"));
+				storeVO.setStore_count(rs.getInt("store_count"));
 				storeVO.setStore_state(rs.getString("store_state"));
 				storeVO.setStore_image(rs.getBytes("store_image"));
 				storeVO.setStore_report_count(rs.getInt("store_report_count"));
@@ -354,8 +354,8 @@ public class StoreDAO implements StoreDAO_interface {
 				storeVO.setStore_phone(rs.getString("store_phone"));
 				storeVO.setStore_addr(rs.getString("store_addr"));
 				storeVO.setStore_date(rs.getTimestamp("store_date"));
-				storeVO.setStore_star(rs.getDouble("store_star"));
-				storeVO.setStore_count(rs.getDouble("store_count"));
+				storeVO.setStore_star(rs.getInt("store_star"));
+				storeVO.setStore_count(rs.getInt("store_count"));
 				storeVO.setStore_state(rs.getString("store_state"));
 				storeVO.setStore_image(rs.getBytes("store_image"));
 				storeVO.setStore_report_count(rs.getInt("store_report_count"));
@@ -503,8 +503,8 @@ public class StoreDAO implements StoreDAO_interface {
 				storeVO.setStore_phone(rs.getString("store_phone"));
 				storeVO.setStore_addr(rs.getString("store_addr"));
 				storeVO.setStore_date(rs.getTimestamp("store_date"));
-				storeVO.setStore_star(rs.getDouble("store_star"));
-				storeVO.setStore_count(rs.getDouble("store_count"));
+				storeVO.setStore_star(rs.getInt("store_star"));
+				storeVO.setStore_count(rs.getInt("store_count"));
 				storeVO.setStore_state(rs.getString("store_state"));
 				storeVO.setStore_image(rs.getBytes("store_image"));
 				storeVO.setStore_report_count(rs.getInt("store_report_count"));
@@ -566,8 +566,8 @@ public class StoreDAO implements StoreDAO_interface {
 				storeVO.setStore_phone(rs.getString("store_phone"));
 				storeVO.setStore_addr(rs.getString("store_addr"));
 				storeVO.setStore_date(rs.getTimestamp("store_date"));
-				storeVO.setStore_star(rs.getDouble("store_star"));
-				storeVO.setStore_count(rs.getDouble("store_count"));
+				storeVO.setStore_star(rs.getInt("store_star"));
+				storeVO.setStore_count(rs.getInt("store_count"));
 				storeVO.setStore_state(rs.getString("store_state"));
 				storeVO.setStore_image(rs.getBytes("store_image"));
 				storeVO.setStore_report_count(rs.getInt("store_report_count"));
@@ -628,8 +628,8 @@ public class StoreDAO implements StoreDAO_interface {
 				storeVO.setStore_phone(rs.getString("store_phone"));
 				storeVO.setStore_addr(rs.getString("store_addr"));
 				storeVO.setStore_date(rs.getTimestamp("store_date"));
-				storeVO.setStore_star(rs.getDouble("store_star"));
-				storeVO.setStore_count(rs.getDouble("store_count"));
+				storeVO.setStore_star(rs.getInt("store_star"));
+				storeVO.setStore_count(rs.getInt("store_count"));
 				storeVO.setStore_state(rs.getString("store_state"));
 				storeVO.setStore_image(rs.getBytes("store_image"));
 				storeVO.setStore_report_count(rs.getInt("store_report_count"));
@@ -666,6 +666,37 @@ public class StoreDAO implements StoreDAO_interface {
 			}
 		}
 		return storeVO;
+	}
+
+	@Override
+	public void updateStoreStar(StoreVO storeVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_START );
+
+			pstmt.setInt(1, storeVO.getStore_star());
+			pstmt.setInt(2, storeVO.getStore_count());
+			pstmt.setString(3, storeVO.getStore_id());
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
 	}
 
 }

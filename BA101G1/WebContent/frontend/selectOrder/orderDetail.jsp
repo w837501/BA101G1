@@ -20,18 +20,18 @@
 		</td>
 	</tr>
 </table>
-
+<jsp:useBean id="productSvc" scope="page" class="com.product.model.ProductService"></jsp:useBean>
 <table border='1' bordercolor='#CCCCFF' width='800'>
 	<tr>
 		<th>訂單編號</th>
-		<th>商品編號</th>
+		<th>商品名稱</th>
 		<th>數量</th>
 		<th>單價</th>
 	</tr>
 	<c:forEach var="orderlistVO" items="${orderlistVO}" >
 	<tr align='center' valign='middle'>
 		<td>${orderlistVO.order_id}</td>
-		<td>${orderlistVO.pro_id}</td>		
+		<td>${productSvc.getOnePro(orderlistVO.pro_id).pro_name}</td>		
 		<td>${orderlistVO.order_amount}</td>
  		<td>${orderlistVO.price}</td>
 	</tr>

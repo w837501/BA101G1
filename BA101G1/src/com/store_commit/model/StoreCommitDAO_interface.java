@@ -14,6 +14,4 @@ public interface StoreCommitDAO_interface {
 	public List<StoreCommitVO> getAll(); 
 	
 	
-
-	
 }

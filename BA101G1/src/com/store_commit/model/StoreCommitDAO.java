@@ -20,21 +20,21 @@ public class StoreCommitDAO implements StoreCommitDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/servlet/BA101G1");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA101G1");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private static final String INSERT = "insert into store_commit(sc_id ,store_id ,mem_id , sc_content ,sc_time ,sc_state)values('SC'||'-'||LPAD(to_char(sc_seq.NEXTVAL),6,'0'),?,?,?,?,?)";
+	private static final String INSERT = "insert into store_commit(sc_id ,store_id ,mem_id , sc_content ,sc_score)values('SC'||'-'||LPAD(to_char(sc_seq.NEXTVAL),6,'0'),?,?,?,?)";
 	
 	private static final String UPDATE = "UPDATE store_commit set getSc_state=? , mem_id=?";
 	
     private static final String DELETE = "delete from store_commit where sc_id=? ";
 	
-	private static final String GET_ONE = "SELECT sc_id , store_id , mem_id , sc_content , sc_time , sc_state FROM store_commit where SC_ID = ?";
+	private static final String GET_ONE = "SELECT * FROM store_commit where SC_ID = ?";
 	
-	private static final String GET_ALL = "SELECT sc_id , store_id , mem_id , sc_content , sc_time , sc_state from store_commit order by sc_id";
+	private static final String GET_ALL = "SELECT * from store_commit order by sc_id";
 	
 
 
@@ -48,8 +48,7 @@ public class StoreCommitDAO implements StoreCommitDAO_interface {
 			 pstmt.setString(1,storecommit.getStore_id());
 			 pstmt.setString(2,storecommit.getMem_id());
 			 pstmt.setString(3,storecommit.getSc_content());
-			 pstmt.setTimestamp(4,storecommit.getSc_time());
-			 pstmt.setString(5,storecommit.getSc_state());
+			 pstmt.setInt(4,storecommit.getSc_score());
 			 pstmt.executeUpdate();
 		} catch (SQLException se) {
 			throw new RuntimeException("發生錯誤" + se.getMessage());
@@ -160,6 +159,7 @@ public class StoreCommitDAO implements StoreCommitDAO_interface {
 				scVO.setSc_content(rs.getString("sc_content"));
 				scVO.setSc_time(rs.getTimestamp("sc_time"));
 				scVO.setSc_state(rs.getString("sc_state"));
+				scVO.setSc_score(rs.getInt("sc_score"));
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("發生錯誤" + se.getMessage());
@@ -210,6 +210,7 @@ public class StoreCommitDAO implements StoreCommitDAO_interface {
 				scvo.setSc_content(rs.getString("sc_content"));
 				scvo.setSc_time(rs.getTimestamp("sc_time"));
 				scvo.setSc_state(rs.getString("sc_state"));
+				scvo.setSc_score(rs.getInt("sc_score"));
 				list.add(scvo);
 				}
 		} catch (SQLException se) {
