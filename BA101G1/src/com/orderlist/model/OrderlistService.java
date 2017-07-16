@@ -16,6 +16,7 @@ private OrderlistDAO_interface dao;
 		
 		OrderlistVO orderlistVO = new OrderlistVO();
 		orderlistVO.setOrder_id(order_id);
+		orderlistVO.setPro_name(buylist.getPro_name());
 		orderlistVO.setPro_id(buylist.getPro_id());
 		orderlistVO.setOrder_amount((Integer) buylist.getQuantity());;
 		orderlistVO.setPrice((Integer) buylist.getPro_price());

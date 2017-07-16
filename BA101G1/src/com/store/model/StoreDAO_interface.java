@@ -19,4 +19,5 @@ public interface StoreDAO_interface {
 	public List<StoreVO> ClassLink(String sc_name);
 	public void update2(StoreVO storeVO);
 	public List<StoreVO> findHot(Number store_star);
+	public void updateStoreStar(StoreVO storeVO);
 }

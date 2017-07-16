@@ -19,7 +19,7 @@
 	<div id="page">
 		<div id="header">
 			
-			<jsp:include page="/header.jsp" />
+			<jsp:include page="/header_both.jsp" />
 		</div>
 	
 

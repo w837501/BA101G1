@@ -24,7 +24,7 @@ memberreportVO=memberreportSvc.getMemberReportByMem_id(mem_id);
 <body>
 	<div id="page">
 		<div id="header">
-			<jsp:include page="/header.jsp"></jsp:include>
+			<jsp:include page="/header_member.jsp"></jsp:include>
 		</div>
 
 		<div class="container" style="margin-bottom:180px;">

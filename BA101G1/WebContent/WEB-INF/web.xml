@@ -56,6 +56,14 @@
     <url-pattern>/backend/mem/mem.do</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>store_commit</servlet-name>
+    <servlet-class>com.store_commit.controller.StoreCommitServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>store_commit</servlet-name>
+    <url-pattern>/storecommit.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>RevenueServlet</servlet-name>
     <servlet-class>com.rev.controller.RevenueServlet</servlet-class>
   </servlet>

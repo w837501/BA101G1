@@ -99,4 +99,12 @@ public class StoreService {
 	public List<StoreVO> getHot(Number store_star) {
 		return dao.findHot(store_star);
 	}
+	public StoreVO updateStar(Integer store_star,Integer store_count,String store_id){
+		StoreVO storeVO=new StoreVO();
+		storeVO.setStore_star(store_star);
+		storeVO.setStore_count(store_count);
+		storeVO.setStore_id(store_id);
+		dao.updateStoreStar(storeVO);
+		return storeVO;
+	}
 }

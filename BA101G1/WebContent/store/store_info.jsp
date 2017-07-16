@@ -17,7 +17,7 @@
 <body>
 	<div id="page">
 		<div id="header">
-			<jsp:include page="/header.jsp"></jsp:include>
+			<jsp:include page="/header_store.jsp"></jsp:include>
 		</div>
 
 		<div class="container" style="margin-bottom:180px;">
@@ -26,7 +26,9 @@
 					<div class="panel panel-info" style="width:200px;">
 					    <a href="<%=request.getContextPath() %>/store/store_update.jsp" class="list-group-item">修改資料</a>
 					</div>
-					
+					<div class="panel panel-info" style="width:200px;">
+					    <a href="<%=request.getContextPath()%>/store/store_list_all_product.jsp " class="list-group-item">查詢所有商品</a>
+					</div>
 					<div class="panel panel-info" style="width:200px;">
 					    <a href="<%=request.getContextPath()%>/store/store_order.jsp " class="list-group-item">查詢所有訂單</a>
 					</div>

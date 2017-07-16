@@ -2,14 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.store.model.*"%>
-<%@ page import="com.product.model.*"%>
-<%@ page import="java.util.*" %>
 <% 
 	StoreVO storeVO=(StoreVO)session.getAttribute("storeVO");
-	ProductService proSvc=new ProductService();
-	List<ProductVO> productlist=new LinkedList<ProductVO>();
-	productlist=proSvc.getAllProductByStore(storeVO.getStore_id());
-	pageContext.setAttribute("productlist", productlist);
 %>
 <html>
 <head>
@@ -61,23 +55,10 @@
 
 			
 				<div class="page-header"> 
-					  <h1>全部商品列表</h1>
+					  <h1>所有評論</h1>
  				</div> 
- 				<div id="contents">
-					<div id="main">
-						<div id="items">
-							<c:forEach var="product" items="${productlist}">
-						<li class="box">
-							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do">
-							<a href="<%=request.getContextPath()%>/store/store_product_update.jsp?pro_id=${product.pro_id}"><IMG src="<%=request.getContextPath()%>/ProDBGifReader?pro_id=${product.pro_id}" height="186" width="178"></a>
-							<h3>${product.pro_name}</h3>
-							</FORM>
-							</li>
-							</c:forEach>
-				 </div>
-				 </div>
-					</div>
-
+ 				<div class="col-xs-12 col-sm-7" >
+ 				
 				</div>
 			</div>
 		</div>
