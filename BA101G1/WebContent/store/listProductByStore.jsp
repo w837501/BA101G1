@@ -113,7 +113,7 @@
 <!-- 		              		¡¹¡¹¡¹¡¹¡¹ -->
 <%-- 	                    </c:if> --%>
 					<br>
-					<a href="index.html">µû½×</a>&nbsp&nbsp&nbsp&nbsp
+					<a href="<%=request.getContextPath()%>/backend/store_commit/listStoreCommitByStore_id.jsp?store_id=${storeVO.store_id}">µû½×</a>&nbsp&nbsp&nbsp&nbsp
 					<form method="post" action="<%=request.getContextPath()%>/frontend/mem/member_addMR.jsp">
 							<input type="submit" value="ÀËÁ|">
 							<input type="hidden" name="store_id" value="${storeVO.store_id}">

@@ -55,10 +55,9 @@ public class StoreCommitService {
 		return dao.getAll();
 	}
 	
-	//0401·s¼W
-//	public Set<StoreVO> getStoresBySc_id(String sc_id){
-//		return dao.getStoresBySc_id(sc_id);
-//	}
+	public List<StoreCommitVO> getAllByStore_id(String store_id){
+		return dao.getAllByStore_id(store_id);
+	}
 	
 	
 	

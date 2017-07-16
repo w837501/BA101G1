@@ -36,6 +36,7 @@ public class StoreCommitDAO implements StoreCommitDAO_interface {
 	
 	private static final String GET_ALL = "SELECT * from store_commit order by sc_id";
 	
+	private static final String GET_ALL_BY_STORE_ID="select * from store_commit where store_id=?";
 
 
 	@Override
@@ -201,6 +202,58 @@ public class StoreCommitDAO implements StoreCommitDAO_interface {
 		try{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				scvo = new StoreCommitVO();
+				scvo.setSc_id(rs.getString("sc_id"));
+				scvo.setStore_id(rs.getString("store_id"));
+				scvo.setMem_id(rs.getString("mem_id"));
+				scvo.setSc_content(rs.getString("sc_content"));
+				scvo.setSc_time(rs.getTimestamp("sc_time"));
+				scvo.setSc_state(rs.getString("sc_state"));
+				scvo.setSc_score(rs.getInt("sc_score"));
+				list.add(scvo);
+				}
+		} catch (SQLException se) {
+			throw new RuntimeException("µo¥Í¿ù»~" + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<StoreCommitVO> getAllByStore_id(String store_id) {
+		List<StoreCommitVO> list = new ArrayList<StoreCommitVO>();
+		StoreCommitVO scvo = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_BY_STORE_ID );
+			pstmt.setString(1, store_id);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				scvo = new StoreCommitVO();

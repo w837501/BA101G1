@@ -12,6 +12,6 @@ public interface StoreCommitDAO_interface {
 	public void delete(String sc_id);
 	public StoreCommitVO findByPrimaryKey(String sc_id);
 	public List<StoreCommitVO> getAll(); 
-	
+	public List<StoreCommitVO> getAllByStore_id(String store_id);
 	
 }
