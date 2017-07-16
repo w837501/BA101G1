@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.store.model.*"%>
 <%@ page import="com.order.model.*"%>
@@ -78,10 +79,10 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 							<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO.order_id}">${store_orderVO.order_id}</a>
 						</td>
 				
-						<td>${store_orderVO.order_time }</td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO.order_time }"/></td>
 						<td>${store_orderVO.totalprice }</td>
 						<td>${store_orderVO.order_way }</td>
-						<td>${store_orderVO.order_taketime }</td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO.order_taketime }"/></td>
 						<td>${store_orderVO.order_state }</td>
 						<td>
 							<c:if test="${store_orderVO.order_state eq '¤w½T»{'}">

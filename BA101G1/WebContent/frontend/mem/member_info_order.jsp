@@ -106,9 +106,23 @@ $(document).ready(
 							<input type="hidden" name="action" value="Cancel">
 						</form>
 			</c:if>
-			<c:if test="${store_orderVO1.order_state != '未確認'}">無法取消</c:if>
+<%-- 			<c:if test="${store_orderVO1.order_state != '未確認'}">無法取消</c:if> --%>
 		</td>
-		<td>檢舉</td>
+		<td><c:if test="${store_orderVO1.order_state eq '已取消'}">
+			<form method="post" action="<%=request.getContextPath()%>/frontend/mem/member_addMR.jsp">
+							<input type="submit" value="檢舉">
+							<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
+						</form>
+		</c:if>
+			<c:if test="${store_orderVO1.order_state eq '已取餐'}">
+				<form method="post" action="<%=request.getContextPath()%>/frontend/mem/member_addMR.jsp">
+								<input type="submit" value="檢舉">
+								<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
+				</form>
+			</c:if>
+			
+<%-- 			<c:if test="${store_orderVO1.order_state != '已取消' &&store_orderVO1.order_state != '已取餐'}">無法檢舉</c:if> --%>
+		</td>
 	</tr>
 	</c:forEach>
 

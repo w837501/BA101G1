@@ -2,16 +2,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.member_report.model.*"%>
+<%@ page import="com.store_report.model.*"%>
 <%@ page import="com.mem.model.*"%>
+<%@ page import="com.store.model.*"%>
 <%
-MemberReportVO mrVO = (MemberReportVO) request.getAttribute("mrVO");
-MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+StoreReportVO srVO = (StoreReportVO) request.getAttribute("srVO");
+StoreVO storeVO=(StoreVO)session.getAttribute("storeVO");
 String order_id=request.getParameter("order_id");
 pageContext.setAttribute("order_id", order_id);
 String sc_id=request.getParameter("sc_id");
 pageContext.setAttribute("sc_id", sc_id);
-String store_id=request.getParameter("store_id");
-pageContext.setAttribute("store_id", store_id);
+
 
 %>
 
@@ -33,11 +34,8 @@ pageContext.setAttribute("store_id", store_id);
 <table border='1' cellpadding='5' cellspacing='0' width='400'>
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
 		<td>
-		<h3>會員檢舉資料新增 - addMR.jsp</h3>
+		<h3>商家檢舉資料新增 - addMR.jsp</h3>
 		</td>
-		<td>
-		   <a href="<%=request.getContextPath()%>/backend/memr/select_page.jsp"><img src="images/tomcat.gif" width="100" height="100" border="1">回首頁</a>
-	    </td>
 	</tr>
 </table>
 
@@ -53,12 +51,12 @@ pageContext.setAttribute("store_id", store_id);
 	</font>
 </c:if>
 
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member_report/member_report.do" name="form1" enctype="multipart/form-data">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store_report/store_report.do" name="form1" enctype="multipart/form-data">
 <table border="0">
 
 	<tr>
-		<td>會員編號:</td>
-		<td><%=memberVO.getMem_id() %></td>
+		<td>商家編號:</td>
+		<td><%=storeVO.getStore_id() %></td>
 	</tr>
 	<c:if test="${ not empty order_id}">
 	<tr>
@@ -67,12 +65,7 @@ pageContext.setAttribute("store_id", store_id);
 		</td>
 	</tr>
 	</c:if>
-	<c:if test="${not empty store_id  }">
-	<tr>
-		<td>商家編號:</td>
-		<td><%=store_id %></td>
-	</tr>
-	</c:if>
+	
 	<c:if test="${not empty sc_id  }">
 	<tr>
 		<td>評論編號:</td>
@@ -83,14 +76,14 @@ pageContext.setAttribute("store_id", store_id);
 	
 	<tr>
 		<td>檢舉內容:</td>
-		<td><input type="TEXT" name="mr_content" size="45"
+		<td><input type="TEXT" name="sr_content" size="45"
 			value="" /></td>
 	</tr>
 	<tr>
 		<td>檢舉圖片:</td>
 		<td>			
 		<div id="demo">
-	        <input id="upfile1" type="file"  name="mr_image"/>
+	        <input id="upfile1" type="file"  name="sr_image"/>
 	        <p>
 	            <img id="image"  style="max-width: 150px; max-height: 150px;">
 	        </p>
@@ -102,17 +95,13 @@ pageContext.setAttribute("store_id", store_id);
 </table>
 <br>
 <input type="hidden" name="action" value="insert">
-<input type="hidden" name="mem_id" value="${memberVO.mem_id }">
-
-<c:if test="${order_id !=null }">
-<input type="hidden" name="order_id" value="<%=order_id %>"></c:if>
-
-<c:if test="${store_id !=null }">
-<input type="hidden" name="store_id" value="<%=store_id %>"></c:if>
-
-<c:if test="${sc_id !=null }">
-<input type="hidden" name="sc_id" value="<%=sc_id %>"></c:if>
-
+<input type="hidden" name="store_id" value="${storeVO.store_id }">
+<c:if test="${ order_id != null}">
+	<input type="hidden" name="order_id" value="<%=order_id %>">
+</c:if>
+<c:if test="${ sc_id !=null}">
+	<input type="hidden" name="sc_id" value="<%=sc_id %>">
+</c:if>
 <input type="submit" value="送出新增"></FORM>
 </body>
 

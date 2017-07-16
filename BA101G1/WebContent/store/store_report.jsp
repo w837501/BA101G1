@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.store.model.*"%>
 <%@ page import="com.store_report.model.*"%>
@@ -85,8 +86,9 @@ storereportVO=storereportSvc.getReportByStore_id(store_id);
 						<td>${store_reportVO.order_id }</td>
 						<td>${store_reportVO.man_id }</td>
 						<td>${store_reportVO.sr_content}</td>
-						<td>${store_reportVO.sr_time }</td>
+						
 						<td>${store_reportVO.sr_image }</td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_reportVO.sr_time }"/></td>
 						<td>${store_reportVO.sr_state }</td>
 						<td>${store_reportVO.sr_result }</td>
 					</tr>

@@ -66,16 +66,16 @@
 								你好，<%=memberVO.getMem_name() %>
 							</span>
 							</c:if>
-							<c:if test="${not empty storeVO}">
-							<span class="login">
+<%-- 							<c:if test="${not empty storeVO}"> --%>
+<!-- 							<span class="login"> -->
 							
-								<a href="<%=request.getContextPath()%>/store/store.do?action=logout">Logout</a>  
-								<div style="margin-left: 0px;">
-							</span>
-							<span class="name">
-								你好，<%=storeVO.getStore_name() %>
-							</span>
-							</c:if>
+<%-- 								<a href="<%=request.getContextPath()%>/store/store.do?action=logout">Logout</a>   --%>
+<!-- 								<div style="margin-left: 0px;"> -->
+<!-- 							</span> -->
+<!-- 							<span class="name"> -->
+<%-- 								你好，<%=storeVO.getStore_name() %> --%>
+<!-- 							</span> -->
+<%-- 							</c:if> --%>
 						</c:if>
 						
 				</div>
@@ -164,7 +164,11 @@
 <!-- 		              		★★★★★ -->
 <%-- 	                    </c:if> --%>
 					<br>
-					<a href="index.html">評論</a>&nbsp&nbsp&nbsp&nbsp<a href="index.html">檢舉</a>
+					<a href="index.html">評論</a>&nbsp&nbsp&nbsp&nbsp
+					<form method="post" action="<%=request.getContextPath()%>/frontend/mem/member_addMR.jsp">
+							<input type="submit" value="檢舉">
+							<input type="hidden" name="store_id" value="${storeVO.store_id}">
+					</form>
 					</span>
 				</div>
 				
