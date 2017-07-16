@@ -20,7 +20,7 @@ public class MemberReportJNDIDAO implements MemberReportDAO_interface {
 		}
 	}
 	private static final String INSERT_STMT = "INSERT INTO MEMBER_REPORT (mr_id,mem_id,order_id,sc_id,man_id,mr_content,mr_image,mr_time,mr_state,mr_result) VALUES ('MR'||'-'||LPAD(to_char(mr_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String GET_ALL_STMT = "SELECT* FROM MEMBER_REPORT order by mr_id";
+	private static final String GET_ALL_STMT = "SELECT * FROM MEMBER_REPORT order by mr_id";
 	private static final String GET_ONE_STMT = "SELECT mr_id,mem_id,order_id,sc_id,man_id,mr_content,mr_image,mr_time,mr_state,mr_result FROM MEMBER_REPORT where mr_id = ?";
 	private static final String DELETE = "DELETE FROM MEMBER_REPORT where mr_id = ?";
 	private static final String UPDATE = "UPDATE MEMBER_REPORT set mem_id=?, order_id=?, sc_id=?, man_id=?, mr_content=?, mr_image=?, mr_time=?, mr_state=?, mr_result=?  where mr_id = ?";

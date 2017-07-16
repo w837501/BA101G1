@@ -1,87 +1,101 @@
 package com.permission_ability.model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import org.hibernate.*;
+
+import com.member_report.model.MemberReportVO;
+import com.permission.model.PermissionVO;
 import com.tools.HibernateUtil;
 
 
 public class PermissionAbilityDAO implements Permission_AbilityDAO_interface{
 	
-	private static final String GET_ALL_STMT = "from PermissionVO order by man_id desc";
+//	private static final String GET_ALL_STMT = "from PermissionVO order by man_id desc";
+	private static final String GET_ALL_STMT = "SELECT * FROM permission_ability order by pa_id desc";
+	private static final String GET_ONE_STMT = "SELECT * where pa_id = ?";
+	
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA101G1");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public void insert(Permission_AbilityVO paVO) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			session.saveOrUpdate(paVO);
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
-		
 	}
-
 
 	@Override
 	public void update(Permission_AbilityVO paVO) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			session.saveOrUpdate(paVO);
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
+		// TODO Auto-generated method stub
 		
 	}
 
-
 	@Override
-	public void delete(String pa_id) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			
-//        【此時多方(宜)可採用HQL刪除】
-//			Query query = session.createQuery("delete EmpVO where empno=?");
-//			query.setParameter(0, empno);
-//			System.out.println("刪除的筆數=" + query.executeUpdate());
-			
-//        【或此時多方(也)可採用去除關聯關係後，再刪除的方式】
-			Permission_AbilityVO paVO = new Permission_AbilityVO();
-			paVO.setPa_id(pa_id);
-			session.delete(paVO);
-			
-//        【此時多方不可(不宜)採用cascade聯級刪除】
-//        【多方emp2.hbm.xml如果設為 cascade="all"或 cascade="delete"將會刪除所有相關資料-包括所屬部門與同部門的其它員工將會一併被刪除】
-//			EmpVO empVO = (EmpVO) session.get(EmpVO.class, empno);
-//			session.delete(empVO);
-			
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
+	public void delete(String pano) {
+		// TODO Auto-generated method stub
+		
 	}
-	
-	
 	@Override
 	public Permission_AbilityVO findByPrimaryKey(String pano) {
+
 		Permission_AbilityVO paVO = null;
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
 		try {
-			session.beginTransaction();
-			paVO = (Permission_AbilityVO) session.get(Permission_AbilityVO.class, pano);
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_STMT);
+
+			pstmt.setString(1, pano);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVo 也稱為 Domain objects
+				paVO = new Permission_AbilityVO();
+				paVO.setPa_id(rs.getString("mr_id"));
+				paVO.setPa_name(rs.getString("mem_id"));
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
 		}
 		return paVO;
 	}
@@ -91,19 +105,57 @@ public class PermissionAbilityDAO implements Permission_AbilityDAO_interface{
 
 	@Override
 	public List<Permission_AbilityVO> getAll() {
-		List<Permission_AbilityVO> list = null;
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<Permission_AbilityVO> list = new ArrayList<Permission_AbilityVO>();
+		Permission_AbilityVO paVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
 		try {
-			session.beginTransaction();
-			Query query = session.createQuery(GET_ALL_STMT);
-			list = query.list();
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_STMT);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				paVO = new Permission_AbilityVO();
+				paVO.setPa_id(rs.getString("pa_id"));
+				paVO.setPa_name(rs.getString("pa_name"));
+				list.add(paVO); // Store the row in the list
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
 		}
 		return list;
 	}
+
+
 
 
 

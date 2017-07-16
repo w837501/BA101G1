@@ -1,6 +1,8 @@
 package com.store_report.controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import com.store_report.model.StoreReportService;
 import com.store_report.model.StoreReportVO;
@@ -23,7 +27,7 @@ public class StoreReportServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-
+		HttpSession session=req.getSession();
 		if ("getOne_For_Display".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -268,7 +272,7 @@ public class StoreReportServlet extends HttpServlet {
 		}
 
 		if ("delete".equals(action)) { 
-
+			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -304,6 +308,44 @@ public class StoreReportServlet extends HttpServlet {
 				String url = "/backend/str/selectPage.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
+		}
+		if ("listAll3".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			String requestURL=req.getParameter("requestURL");
+			String aa = req.getParameter("judge");
+			if("tab2".equals(aa)){
+				session.setAttribute("whichTab", "審核中");    // 資料庫取出的set物件,存入request
+			}
+			else if("tab3".equals(aa)){
+				session.setAttribute("whichTab", "已審核");    // 資料庫取出的set物件,存入request
+			}else{
+				session.setAttribute("whichTab", "未審核");    // 資料庫取出的set物件,存入request
+				
+			}
+			
+			
+//			byte[] mr_image = req.getParameter("mr_image").trim().getBytes();
+/*******************************圖片寫入DB************************************************/
+//			Part addPic = req.getPart("mr_image");
+//			InputStream in = addPic.getInputStream();
+//			ByteArrayOutputStream baos =  new ByteArrayOutputStream();
+//			byte[] mr_image = new byte[8 * 1024];
+//			int i;
+//			while((i = in.read(mr_image)) != -1){
+//				baos.write(mr_image, 0, i);
+//			}
+//			baos.close();
+//			in.close();
+//			mr_image = baos.toByteArray();
+
+/*******************************圖片寫入DB************************************************/
+			
+//			String url = "/backend/str/select_str.jsp";
+//			RequestDispatcher successView = req.getRequestDispatcher(url);
+//			successView.forward(req, res);
+			System.out.println(requestURL);
+			res.sendRedirect("/BA101G1" + requestURL );
+			return;
 		}
 	}
 

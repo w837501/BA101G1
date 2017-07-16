@@ -93,7 +93,7 @@
                         <a href="<%=request.getContextPath() %>/backend/man/select_man.jsp"><i class="fa fa-bar-chart-o"></i>管理員管理</a>
                     </li>
                     <li>
-                        <a href="<%=request.getContextPath() %>/backend/man/select_man.jsp"><i class="fa fa-bar-chart-o"></i>權限管理</a>
+                        <a href="<%=request.getContextPath() %>/backend/per/select_per.jsp"><i class="fa fa-bar-chart-o"></i>權限管理</a>
                     </li>
 
 

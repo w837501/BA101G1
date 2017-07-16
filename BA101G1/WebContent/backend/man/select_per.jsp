@@ -186,19 +186,7 @@
 <!-- ******************select_man.jsp原先內容********************* -->
 
                 </div>
-<!-- *********************include頁面******************* -->
-<%if ("列出所有管理員"==request.getAttribute("whichPage")){%>
-       <jsp:include page="ListAllMan.jsp" />
-<%} %>
-<%if ("列出單一管理員"==request.getAttribute("whichPage")){%>
-       <jsp:include page="ListOneMan.jsp" />
-<%} %>
 
-<%if ("修改單一管理員"==request.getAttribute("whichPage")){%>
-       <jsp:include page="UpdateMan.jsp" />
-<%} %>
-
-<!-- *********************include頁面******************* -->
                   <!-- /. ROW  --> 
             </div>   
         </div>             
@@ -207,7 +195,7 @@
     
             <div class="row">
                 <div class="col-lg-12" >
-                    &copy;  2014 yourdomain.com | More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+                    &copy;  2017 yourdomain.com | More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
                 </div>
             </div>
         </div>
