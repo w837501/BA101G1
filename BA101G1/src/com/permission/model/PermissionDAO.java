@@ -35,7 +35,7 @@ public class PermissionDAO implements PermissionDAO_interface{
 	private static final String GET_ONE_STMT = 
 			"SELECT man_id, pa_id from permission where man_id = ?";
 	private static final String GET_ALL_STMT = 
-			"SELECT  man_id, pa_id from permisson order by man_id";
+			"SELECT man_id, pa_id from permission order by man_id";
 	
 	@Override
 	public void insert(PermissionVO permissionVO) {

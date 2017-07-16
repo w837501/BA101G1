@@ -112,14 +112,14 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-lg-12">
-                     	<h2>後端管理者平台</h2>   
+                     	<h2>會員檢舉資料</h2>   
                     </div>
                 </div>              
                  <!-- /. ROW  -->
                   <hr />
                 <div class="row">
                 <!-- ******************select_man.jsp原先內容********************* -->
-<body bgcolor='white'>
+
 
 <table border='1' cellpadding='5' cellspacing='0' width='400'>
   <tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>

@@ -2,6 +2,7 @@ package com.permission2.model;
 
 import java.util.List;
 
+import com.man.model.ManagerVO;
 import com.permission_ability.model.Permission_AbilityVO;
 
 public class PermissionService {
@@ -12,21 +13,21 @@ public class PermissionService {
 		dao = new PermissionDAO();
 	}
 	
-	public PermissionVO addPermission(String man_id, Permission_AbilityVO pa_id){
+	public PermissionVO addPermission(ManagerVO managerVO, Permission_AbilityVO pa_id){
 		
 		PermissionVO permissionVO = new PermissionVO();
 		
-		permissionVO.setMan_id(man_id);
+		permissionVO.setManagerVO(managerVO);
 		permissionVO.setPaVO(pa_id);
 		dao.insert(permissionVO);
 		
 		return permissionVO;
 	}
 	
-	public PermissionVO updatePermission(String man_id, Permission_AbilityVO pa_id){
+	public PermissionVO updatePermission(ManagerVO managerVO, Permission_AbilityVO pa_id){
 		PermissionVO permissionVO = new PermissionVO();
 		
-		permissionVO.setMan_id(man_id);
+		permissionVO.setManagerVO(managerVO);
 		permissionVO.setPaVO(pa_id);
 		dao.update(permissionVO);
 		
@@ -34,12 +35,12 @@ public class PermissionService {
 		
 	}
 	
-	public void deletePermission(String man_id){
-		dao.delete(man_id);
+	public void deletePermission(ManagerVO managerVO){
+		dao.delete(managerVO);
 	}
 	
-	public PermissionVO getOneRecord(String man_id){
-		return dao.findByPrimaryKey(man_id);
+	public PermissionVO getOneRecord(ManagerVO managerVO){
+		return dao.findByPrimaryKey(managerVO);
 	}
 	
 	public List<PermissionVO>getAll(){
