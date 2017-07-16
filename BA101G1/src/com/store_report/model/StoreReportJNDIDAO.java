@@ -20,7 +20,7 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 		}
 	}
 	private static final String INSERT_STMT = 
-		"INSERT INTO STORE_REPORT (sr_id,store_id,sc_id,order_id,man_id,sr_content,sr_image,sr_time,sr_state,sr_result) VALUES ('SR'||'-'||LPAD(to_char(sr_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		"INSERT INTO STORE_REPORT (sr_id,store_id,sc_id,order_id,sr_content,sr_image) VALUES ('SR'||'-'||LPAD(to_char(sr_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
 		"SELECT * FROM STORE_REPORT order by sr_id";
 	private static final String GET_ONE_STMT = 
@@ -44,17 +44,14 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 			pstmt.setString(1, srVO.getStore_id());
 			pstmt.setString(2, srVO.getSc_id());
 			pstmt.setString(3, srVO.getOrder_id());
-			pstmt.setString(4, srVO.getMan_id());
-			pstmt.setString(5, srVO.getSr_content());
-			pstmt.setBytes(6, srVO.getSr_image());
-			pstmt.setTimestamp(7, srVO.getSr_time());
-			pstmt.setString(8, srVO.getSr_state());
-			pstmt.setString(9, srVO.getSr_result());
-
+			pstmt.setString(4, srVO.getSr_content());
+			pstmt.setBytes(5, srVO.getSr_image());
+System.out.println( srVO.getOrder_id());
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
+			se.printStackTrace();
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources

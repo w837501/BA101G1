@@ -71,6 +71,7 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 						<th>總金額</th>
 						<th>取餐方式</th>
 						<th>訂單狀態</th>
+					 	<th>檢舉</th>
 					</tr>
 					<c:forEach var="store_orderVO" items="${store_orderVO}" >
 					<tr align='center' valign='middle'>
@@ -83,6 +84,14 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 						<td>${store_orderVO.totalprice }</td>
 						<td>${store_orderVO.order_way }</td>
 						<td>${store_orderVO.order_state }</td>
+						<td>
+							<c:if test="${store_orderVO.order_state eq '已取消'||store_orderVO.order_state eq'已取餐' }">
+								<form method="post" action="<%=request.getContextPath()%>/store/store_addSR.jsp">
+								<input type="submit" value="檢舉">
+								<input type="hidden" name="order_id" value="${store_orderVO.order_id}">
+							</form>							
+							</c:if>
+						</td>
 					</tr>
 					</c:forEach>
 				

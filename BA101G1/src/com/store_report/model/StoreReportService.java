@@ -10,21 +10,16 @@ public class StoreReportService {
 		dao = new StoreReportJNDIDAO();
 	}
 
-	public StoreReportVO addStoreReport(String store_id, String sc_id, String order_id,
-			String man_id, String sr_content, byte[] sr_image, java.sql.Timestamp sr_time, 
-			String sr_state, String sr_result) {
+	public StoreReportVO addStoreReport(String store_id, String sc_id, String order_id, String sr_content, byte[] sr_image) {
 
 		StoreReportVO srVO = new StoreReportVO();
 
 		srVO.setStore_id(store_id);
 		srVO.setSc_id(sc_id);
 		srVO.setOrder_id(order_id);
-		srVO.setMan_id(man_id);
 		srVO.setSr_content(sr_content);
 		srVO.setSr_image(sr_image);
-		srVO.setSr_time(sr_time);
-		srVO.setSr_state(sr_state);
-		srVO.setSr_result(sr_result);
+
 		dao.insert(srVO);
 
 		return srVO;
