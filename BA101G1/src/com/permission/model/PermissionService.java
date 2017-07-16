@@ -40,7 +40,7 @@ public class PermissionService {
 		return dao.findByPrimaryKey(man_id);
 	}
 	
-	public List<PermissionVO>getAll(){
+	public List<PermissionVO> getAll(){
 		return dao.getAll();
 	}
 }

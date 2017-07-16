@@ -136,6 +136,15 @@
     <servlet-name>StoreReportServlet</servlet-name>
     <url-pattern>/store_report/store_report.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>PServlet</servlet-name>
+    <servlet-class>com.permission2.controller.PServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PServlet</servlet-name>
+    <url-pattern>/backend/man/p.do</url-pattern>
+  </servlet-mapping>
 
   
 
@@ -181,6 +190,14 @@
   <servlet-mapping>
     <servlet-name>ProDBGifReader</servlet-name>
     <url-pattern>/ProDBGifReader</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MRDBGifReader</servlet-name>
+    <servlet-class>com.member_report.controller.MR_DBGifReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MRDBGifReader</servlet-name>
+    <url-pattern>/MRDBGifReader</url-pattern>
   </servlet-mapping>
 	 <servlet>
     <servlet-name>MemberLoginHandler</servlet-name>

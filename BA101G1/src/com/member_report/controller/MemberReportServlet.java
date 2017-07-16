@@ -1,7 +1,11 @@
 package com.member_report.controller;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.*;
+import java.util.Base64;
 
 import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
@@ -21,7 +25,7 @@ public class MemberReportServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
+		System.out.println("aaaaaaa"+action);
 		
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -86,6 +90,15 @@ public class MemberReportServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		if ("listAll3".equals(action)) {
+			System.out.println("bbbbb"+req.getParameter("action"));
+//			req.setAttribute("whichPage", "tab1");    // 資料庫取出的set物件,存入request
+			
+			String url = "/backend/memr/select_memr.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
+		
 		
 		
 		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp 或  /dept/listEmps_ByDeptno.jsp 的請求
@@ -209,6 +222,7 @@ public class MemberReportServlet extends HttpServlet {
 
 		try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
+
 				String mem_id = req.getParameter("mem_id");
 				System.out.println(mem_id);
 				String order_id = req.getParameter("order_id");
@@ -236,6 +250,11 @@ System.out.println("1");
 				memberreportVO.setMan_id(mr_content);
 				memberreportVO.setMr_image(mr_image);
 System.out.println("2");
+			
+				
+				
+
+				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("memberreportVO", memberreportVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
@@ -257,7 +276,6 @@ System.out.println("2");
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);				
 			} catch (Exception e) {
-				errorMsgs.add(e.getMessage()+"第280行");
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/frontend/mem/member_addMR.jsp");
 				failureView.forward(req, res);

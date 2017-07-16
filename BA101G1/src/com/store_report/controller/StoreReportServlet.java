@@ -13,6 +13,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.store_report.model.StoreReportService;
@@ -28,7 +29,7 @@ public class StoreReportServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-
+		HttpSession session=req.getSession();
 		if ("getOne_For_Display".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -239,7 +240,7 @@ public class StoreReportServlet extends HttpServlet {
 		}
 
 		if ("delete".equals(action)) { 
-
+			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -267,6 +268,31 @@ public class StoreReportServlet extends HttpServlet {
 				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			}
+		}
+
+
+		if ("listAll".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("whichPage", "列出所有商家檢舉");    // 資料庫取出的set物件,存入request
+				String url = "/backend/str/selectPage.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+		}
+		if ("listAll3".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			String requestURL=req.getParameter("requestURL");
+			String aa = req.getParameter("judge");
+			if("tab2".equals(aa)){
+				session.setAttribute("whichTab", "審核中");    // 資料庫取出的set物件,存入request
+			}
+			else if("tab3".equals(aa)){
+				session.setAttribute("whichTab", "已審核");    // 資料庫取出的set物件,存入request
+			}else{
+				session.setAttribute("whichTab", "未審核");    // 資料庫取出的set物件,存入request
+				
+			}
+			res.sendRedirect("/BA101G1" + requestURL );
+			return;
 		}
 	}
 	public static byte[] getPictureByteArrayFromWeb(Part part) throws IOException {
