@@ -357,43 +357,6 @@ public class ManServlet extends HttpServlet {
 			HttpSession sessionId = req.getSession();
 			sessionId.setAttribute("account", account);
 			/****************transferID***********************/
-			
-			/******************權限*********************/
-//			PermissionService pSvc = new PermissionService();
-//			PermissionVO pVO = pSvc.getOneRecord(managerVO);           ///////////////////////////問題
-//			System.out.println(pVO);
-			/******************權限*********************/
-				/*String str = req.getParameter("man_id");
-				if (str == null || (str.trim().length() == 0)) {
-					errorMsgs.add("請輸入員工編號");
-				}
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
-					failureView.forward(req, res);
-					return;
-				}
-				
-
-				try {
-					man_id = new String(str);
-				} catch (Exception e) {
-					errorMsgs.add("輸入格式錯誤");
-				}
-
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
-					failureView.forward(req, res);
-					return;
-				}
-
-				if (managerVO == null) {
-					errorMsgs.add("查無資料");
-				}
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
-					failureView.forward(req, res);
-					return;
-				}*/
 				errorMsgs.removeAll(errorMsgs);
 				req.getSession().setAttribute("manVO", managerVO);
 				String url = "/backend/index.jsp";

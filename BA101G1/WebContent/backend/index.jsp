@@ -69,10 +69,10 @@
                         <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>訂單管理  <span class="badge">Included</span></a>
                     </li>
                     <li>
-                        <a href="<%=request.getContextPath() %>/backend/memr/select_page.jsp"><i class="glyphicon glyphicon-thumbs-down"></i>會員檢舉  <span class="badge">Included</span></a>
+                        <a href="<%=request.getContextPath() %>/backend/memr/select_memr.jsp"><i class="glyphicon glyphicon-thumbs-down"></i>會員檢舉  <span class="badge">Included</span></a>
                     </li>
                     <li>
-                        <a href="<%=request.getContextPath() %>/backend/str/selectPage.jsp"><i class="	glyphicon glyphicon-hand-down "></i>商家檢舉  <span class="badge">Included</span></a>
+                        <a href="<%=request.getContextPath() %>/backend/str/select_str.jsp"><i class="	glyphicon glyphicon-hand-down "></i>商家檢舉  <span class="badge">Included</span></a>
                     </li>
 
                     <li>
@@ -93,7 +93,7 @@
                         <a href="<%=request.getContextPath() %>/backend/man/select_man.jsp"><i class="fa fa-bar-chart-o"></i>管理員管理</a>
                     </li>
                     <li>
-                        <a href="<%=request.getContextPath() %>/backend/per/select_per.jsp"><i class="fa fa-bar-chart-o"></i>權限管理</a>
+                        <a href="<%=request.getContextPath() %>/backend/per/ListAllPer.jsp"><i class="fa fa-bar-chart-o"></i>權限管理</a>
                     </li>
 
 

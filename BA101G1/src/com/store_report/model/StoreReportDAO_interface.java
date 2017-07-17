@@ -8,4 +8,5 @@ public interface StoreReportDAO_interface {
 	public void delete(String sr_id);
 	public StoreReportVO findPrimaryKey(String sr_id);
 	public List<StoreReportVO> getAll();
+	public List<StoreReportVO> findBySR_state(String sr_state);
 }

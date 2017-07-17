@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.*;
-import java.util.Base64;
 
 import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
@@ -26,7 +25,6 @@ public class MemberReportServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		System.out.println("aaaaaaa"+action);
 		
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -345,32 +343,39 @@ public class MemberReportServlet extends HttpServlet {
 				successView.forward(req, res);
 		}
 		if ("listAll3".equals(action)) {
-			System.out.println("bbbbb"+req.getParameter("action"));
 //			req.setAttribute("whichPage", "tab1");    // 資料庫取出的set物件,存入request
-			
+			MemberReportService mrSvc = new MemberReportService();
+			List<MemberReportVO> mrList = null;
+			String whichTab = req.getParameter("whichTab");
+			if(whichTab.equals("tab1")){
+				mrList = mrSvc.findByMR_state("未審核");
+			}
+			if(whichTab.equals("tab2")){
+				mrList = mrSvc.findByMR_state("審核中");
+			}
+			if(whichTab.equals("tab3")){
+				mrList = mrSvc.findByMR_state("已審核");
+			}
+			req.setAttribute("list3", mrList);
+			System.out.println("whichTab : "+whichTab+" list " + mrList);
 			String url = "/backend/memr/select_memr.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
 		
 		if ("readPic".equals(action)) {
-			System.out.println("cccccc"+req.getParameter("action"));
-
 //			req.setAttribute("whichPage", "tab1");    // 資料庫取出的set物件,存入request
 			/******************************read img*********************************************/
-			res.setContentType("image/gif");
+			res.setContentType("image/gif");  // 與27行互相衝突，SL314 P.90頁
 			ServletOutputStream out = res.getOutputStream();
 			String mr_id = req.getParameter("mr_id");
 			req.setCharacterEncoding("UTF-8");
 //			String mr_id2 = new String(mr_id.getBytes("ISO-8859-1"),"UTF-8");
-			System.out.println("355  "+mr_id);
 			try {
 				Connection con = null;
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(
 					"SELECT mr_image FROM member_report WHERE mr_id ='" + mr_id + "'" );
-				
-
 				if (rs.next()) {
 					BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("mr_image"));//欄位
 					byte[] buf = new byte[4 * 1024]; // 4K buffer

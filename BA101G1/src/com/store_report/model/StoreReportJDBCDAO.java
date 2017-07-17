@@ -369,4 +369,10 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 			System.out.println();
 		}
 	}
+
+	@Override
+	public List<StoreReportVO> findBySR_state(String sr_state) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

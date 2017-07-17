@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.member_report.model.MemberReportService;
+import com.member_report.model.MemberReportVO;
 import com.store_report.model.StoreReportService;
 import com.store_report.model.StoreReportVO;
 
@@ -310,42 +312,23 @@ public class StoreReportServlet extends HttpServlet {
 				successView.forward(req, res);
 		}
 		if ("listAll3".equals(action)) {
-			List<String> errorMsgs = new LinkedList<String>();
-			String requestURL=req.getParameter("requestURL");
-			String aa = req.getParameter("judge");
-			if("tab2".equals(aa)){
-				session.setAttribute("whichTab", "審核中");    // 資料庫取出的set物件,存入request
+			StoreReportService srSvc = new StoreReportService();
+			List<StoreReportVO> srList = null;
+			String whichTab = req.getParameter("whichTab");
+			if(whichTab.equals("tab1")){
+				srList = srSvc.findBySR_state("未審核");
 			}
-			else if("tab3".equals(aa)){
-				session.setAttribute("whichTab", "已審核");    // 資料庫取出的set物件,存入request
-			}else{
-				session.setAttribute("whichTab", "未審核");    // 資料庫取出的set物件,存入request
-				
+			if(whichTab.equals("tab2")){
+				srList = srSvc.findBySR_state("審核中");
 			}
-			
-			
-//			byte[] mr_image = req.getParameter("mr_image").trim().getBytes();
-/*******************************圖片寫入DB************************************************/
-//			Part addPic = req.getPart("mr_image");
-//			InputStream in = addPic.getInputStream();
-//			ByteArrayOutputStream baos =  new ByteArrayOutputStream();
-//			byte[] mr_image = new byte[8 * 1024];
-//			int i;
-//			while((i = in.read(mr_image)) != -1){
-//				baos.write(mr_image, 0, i);
-//			}
-//			baos.close();
-//			in.close();
-//			mr_image = baos.toByteArray();
-
-/*******************************圖片寫入DB************************************************/
-			
-//			String url = "/backend/str/select_str.jsp";
-//			RequestDispatcher successView = req.getRequestDispatcher(url);
-//			successView.forward(req, res);
-			System.out.println(requestURL);
-			res.sendRedirect("/BA101G1" + requestURL );
-			return;
+			if(whichTab.equals("tab3")){
+				srList = srSvc.findBySR_state("已審核");
+			}
+			req.setAttribute("list4", srList);
+			System.out.println("whichTab : "+whichTab+" list " + srList);
+			String url = "/backend/str/select_str.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
 		}
 	}
 

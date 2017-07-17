@@ -24,12 +24,25 @@ public class MR_DBGifReader extends HttpServlet {
 		ServletOutputStream out = res.getOutputStream();
 
 		try {
-			String mr_id=req.getParameter("mr_id");
-			String mr_id2=new String(mr_id.getBytes("ISO-8859-1"),"UTF-8");
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(
-				"SELECT mr_image FROM member_report WHERE mr_id ='"+mr_id2+"'");
+			String whichImg = req.getParameter("whichImg");
+			String id = req.getParameter("id");
+			String pk = new String(id.getBytes("ISO-8859-1"),"UTF-8");
+			System.out.println("whichImg "+whichImg+" id "+id);
+			String sql;
+			switch(whichImg.toLowerCase()){
+				case "memr":
+					sql = "SELECT mr_image FROM member_report WHERE mr_id ='"+ pk + "'";
+					break;
+				case "str":
+					sql = "SELECT sr_image FROM store_report WHERE sr_id = '" + pk + "'";
+					break;
 
+				default:
+					sql = "";
+					break;
+			}
+			ResultSet rs = stmt.executeQuery(sql);
 			if (rs.next()) {
 				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream(1));
 				byte[] buf = new byte[4 * 1024]; // 4K buffer

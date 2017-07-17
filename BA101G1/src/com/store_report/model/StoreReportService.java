@@ -62,4 +62,7 @@ public class StoreReportService {
 	public List<StoreReportVO> getAll() {
 		return dao.getAll();
 	}
+	public List<StoreReportVO> findBySR_state(String sr_state) {
+		return dao.findBySR_state(sr_state);
+	}
 }

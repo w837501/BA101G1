@@ -64,4 +64,8 @@ public class MemberReportService {
 	public List<MemberReportVO> getAll() {
 		return dao.getAll();
 	}
+	
+	public List<MemberReportVO> findByMR_state(String mr_state) {
+		return dao.findByMR_state(mr_state);
+	}
 }

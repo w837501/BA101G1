@@ -368,4 +368,10 @@ public class MemberReportJDBCDAO implements MemberReportDAO_interface {
 			System.out.println();
 		}
 	}
+
+	@Override
+	public List<MemberReportVO> findByMR_state(String mrState) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
