@@ -1,17 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.store.model.*"%>
 <%@ page import="com.order.model.*"%>
+<%@ page import="com.ad.model.*"%>
 <%@ page import="java.util.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% 
 StoreVO storeVO=(StoreVO)session.getAttribute("storeVO");
-Store_OrderService orderSvc=new Store_OrderService();
-String store_id=storeVO.getStore_id();
-List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
- store_orderVO=orderSvc.getOrderByState("已取餐", store_id);
- pageContext.setAttribute("store_orderVO",store_orderVO);
+AdVO adVO=(AdVO)request.getAttribute("adVO");
 %>
 <html>
 <head>
@@ -19,7 +16,10 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script language="JavaScript" src="js/pic_preview.js"></script>
+<link rel="stylesheet" type="text/css" href="js/calendar.css">
+<script language="JavaScript" src="js/calendarcode.js"></script>
+<div id="popupcalendar" class="text"></div>
 <title>吃訂我線上訂餐系統</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 </head>
@@ -62,45 +62,53 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 
 			
 				<div class="page-header"> 
-					  <h1>完成訂單資料</h1>
+					  <h1>廣告 新增</h1>
  				</div> 
-				<table border='1' bordercolor='#CCCCFF' width='600'>
-					<tr>
-						<th width="16%">訂單編號</th>
-						<th width="16%">訂餐時間</th>
-						<th width="16%">取餐時間</th>
-						<th width="16%">總金額</th>
-						<th width="16%">取餐方式</th>
-						<th width="16%">訂單狀態</th>
-					</tr>
-				</table>
-					<c:forEach var="store_orderVO" items="${store_orderVO}" >
-				<table border='1' bordercolor='#CCCCFF' width='600'>
-					<tr align='center' valign='middle'>
-						<td width="16%">
-							<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO.order_id}">${store_orderVO.order_id}</a>
-						</td>
-				
-						<td width="16%"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO.order_time }"/></td>
-						<td width="16%"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO.order_taketime }"/></td>
-						<td width="16%">${store_orderVO.totalprice }</td>
-						<td width="16%">${store_orderVO.order_way }</td>
-						<td width="16%">${store_orderVO.order_state }</td>
-						<td>
-							<input type="button" value="Show" class="abc" ></Button>
-						</td>
-					</tr>
-					<jsp:useBean id="orderlistSvc" scope="page" class="com.orderlist.model.OrderlistService"></jsp:useBean>
-					<jsp:useBean id="productSvc" scope="page" class="com.product.model.ProductService"></jsp:useBean>
-					<c:forEach var="orderlistVO" items="${orderlistSvc.getOrderlist(store_orderVO.order_id)}" >
-					<tr style="display: none;">
-						<td>${productSvc.getOnePro(orderlistVO.pro_id).pro_name}</td>		
-						<td>${orderlistVO.order_amount}</td>
-				 		<td>${orderlistVO.price}</td>
-					</tr>
-					</c:forEach>
-				</table>
-					</c:forEach>
+ 				<FORM METHOD="post" ACTION= "<%=request.getContextPath()%>/frontend/advertisement/ad.do" name="form1" enctype="multipart/form-data">
+<table border="0">
+
+	<tr>
+		<td>商店編號:</td>
+		<td><%=storeVO.getStore_id() %></td>
+		
+	</tr>
+	<tr>
+		<td>廣告名字:<font color=red><b>*</b></font></td>
+		<td><input type="TEXT" name="ad_name" size="45"
+			 value="<%= (adVO==null)? "肚子餓" :adVO.getAd_name() %>" /></td>
+	</tr>
+	<tr>
+		<td>廣告內容:<font color=red><b>*</b></font></td>
+		<td><input type="TEXT" name="ad_content" size="45"
+			 value="<%= (adVO==null)? "快來吃唷唷唷唷唷" :adVO.getAd_content() %>" /></td>
+	</tr>
+	<tr>
+		<td>廣告圖片:<font color=red><b>*</b></font></td>
+		<td><input type="file" name="upfile1" id="upfile1" >
+		 <p>
+    	<img id="image"   style="max-width: 150px; max-height: 150px;">
+			</p>
+  		</td>
+		</tr>
+	<tr>
+		<td>廣告時間: </td>
+		<td><input class="cal-TextBox"
+			onFocus="this.blur()" size="9" readonly type="text" name="ad_time" value="1981-11-17">
+			<a class="so-BtnLink"
+			href="javascript:calClick();return false;"
+			onmouseover="calSwapImg('BTN_date', 'img_Date_OVER',true);"
+			onmouseout="calSwapImg('BTN_date', 'img_Date_UP',true);"
+			onclick="calSwapImg('BTN_date', 'img_Date_DOWN');showCalendar('form1','ad_time','BTN_date');return false;">
+		    <img align="middle" border="0" name="BTN_date"	src="<%=request.getContextPath() %>/frontend/advertisement/images/btn_date_up.gif" width="22" height="17" alt="開始日期"></a>
+		   </td>     
+		</tr>
+</table>
+<br>
+<input type="hidden" name="action" value="insert">
+<input type="hidden" name="store_id" value="<%=storeVO.getStore_id() %>">
+<input type="submit" value="送出新增"></FORM>
+
+				 </div>
 				</div>
 			</div>
 		</div>
@@ -108,16 +116,7 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 			<jsp:include page="/footer.jsp"></jsp:include>
 		</div>
 
-	</div>
 	<script src="https://code.jquery.com/jquery.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
-<script type="text/javascript">
-$(".abc").on('click',function(){
-	console.log($(".abc").index(this))
-	var father=$(".abc").eq($(".abc").index(this)).parent().parent().siblings();
-	father.toggle();
-})
- 
-</script>

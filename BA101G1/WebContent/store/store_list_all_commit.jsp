@@ -1,9 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.store.model.*"%>
+<%@ page import="com.store_commit.model.*"%>
+<%@ page import="java.util.*"%>
 <% 
 	StoreVO storeVO=(StoreVO)session.getAttribute("storeVO");
+	StoreCommitService scSvc = new StoreCommitService();
+	String store_id=storeVO.getStore_id();
+	List<StoreCommitVO> list = scSvc.getAllByStore_id(store_id);
+	pageContext.setAttribute("list", list);
+
 %>
 <html>
 <head>
@@ -13,6 +21,31 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <title>吃訂我線上訂餐系統</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
+<style>
+table{
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+tr{
+/*   border: 1px solid #E0607E; */
+}
+td{
+  border: 1px solid #607ee0;
+  padding: 10px 30px;
+  background-color: #E0607E;
+/*   border-radius: 10px; */
+  color: #FFF;
+}
+td:first-child{
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+td:last-child{
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+</style>
 </head>
 <body>
 	<div id="page">
@@ -56,6 +89,16 @@
 					  <h1>所有評論</h1>
  				</div> 
  				<div class="col-xs-12 col-sm-7" >
+ 				<c:forEach var="scVO" items="${list}">
+				<table border='0'>
+						<tr align='center' valign='middle'>
+							<td>${scVO.mem_id}</td>
+							<td>${scVO.sc_score}</td>
+							<td>${scVO.sc_content}</td>
+							<td><fmt:formatDate  pattern="yyyy-MM-dd HH:mm:ss" value="${scVO.sc_time}"/></td>
+						</tr>
+				</table>
+					</c:forEach>
  				
 				</div>
 			</div>

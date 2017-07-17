@@ -129,17 +129,11 @@ public class OrderServlet extends HttpServlet {
 				String order_taketime2 = req.getParameter("order_taketime2").trim();
 				String order_taketime3 = order_taketime1 + " " + order_taketime2 + ":00";
 				System.out.println(order_taketime3);
-				// SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd
-				// HH:mm");
-				// Timestamp aaa=(Timestamp) fmt.parse(order_taketime3);
 				java.sql.Timestamp order_taketime = null;
-				// java.sql.Timestamp order_taketime2 = null;
 				try {
 					order_taketime = java.sql.Timestamp.valueOf(order_taketime3);
-					// order_taketime = aaa;
 				} catch (IllegalArgumentException e) {
 					order_taketime = new java.sql.Timestamp(System.currentTimeMillis());
-					// errorMsgs.add("請輸入日期!");
 				}
 				System.out.println("order_taketime" + order_taketime);
 				Store_OrderVO orderVO = new Store_OrderVO();

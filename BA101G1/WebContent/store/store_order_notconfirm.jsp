@@ -61,7 +61,7 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 
 			
 				<div class="page-header"> 
-					  <h1>所有訂單資料</h1>
+					  <h1>未確認訂單資料</h1>
  				</div> 
 				<table border='1' bordercolor='#CCCCFF' width='600'>
 					<tr>
