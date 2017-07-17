@@ -47,7 +47,7 @@ public class PServlet extends HttpServlet {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				String man_id = req.getParameter("man_id").trim();
 				String pa_id = req.getParameter("pa_id").trim();
-				
+				System.out.println("man_id "+man_id+" pa_id "+pa_id);
 				PermissionVO paVO = new PermissionVO();
 				paVO.setMan_id(man_id);
 				paVO.setPa_id(pa_id);
@@ -67,13 +67,13 @@ public class PServlet extends HttpServlet {
 
 				/***************************1.接收請求參數***************************************/
 				String man_id = new String(req.getParameter("man_id"));
-				
+				String pa_id = new String(req.getParameter("pa_id"));
+				System.out.println("man_id "+man_id+" pa_id "+pa_id);
 				/***************************2.開始刪除資料***************************************/
 				PermissionService pSvc = new PermissionService();
-				PermissionVO pVO = pSvc.getOneRecord(man_id);
-				pSvc.deletePermission(man_id);
+				pSvc.deletePermission(man_id , pa_id);
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/
-				String url = "/backend/memr/select_page.jsp";
+				String url = "/backend/per/ListAllPer.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 				

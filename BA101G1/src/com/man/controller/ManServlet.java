@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import com.man.model.ManagerService;
 import com.man.model.ManagerVO;
+import com.permission.model.PermissionService;
+import com.permission.model.PermissionVO;
 import com.tools.Send;
 
 import java.util.Properties;
@@ -271,13 +273,12 @@ public class ManServlet extends HttpServlet {
 		if ("delete".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "列出所有管理員");    // 資料庫取出的set物件,存入request
 			try {
 				String man_id = new String(req.getParameter("man_id"));
 
 				ManagerService manSvc = new ManagerService();
 				manSvc.deleteMan(man_id);
-				String url = "/backend/man/select_man.jsp";
+				String url = "/backend/man/ListAllMan.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
@@ -353,9 +354,14 @@ public class ManServlet extends HttpServlet {
 				/******************我新增的帳密條件判斷*********************/
 			String man_id = account;
 			ManagerVO managerVO = manSvc.getOneMan(man_id);
+			PermissionService pSvc = new PermissionService();
+			List<PermissionVO> permList = null;
+			permList = pSvc.findByManId(man_id);
+			System.out.println(permList.toString());
 			/****************transferID***********************/
 			HttpSession sessionId = req.getSession();
 			sessionId.setAttribute("account", account);
+			sessionId.setAttribute("permList", permList);
 			/****************transferID***********************/
 				errorMsgs.removeAll(errorMsgs);
 				req.getSession().setAttribute("manVO", managerVO);

@@ -1,6 +1,10 @@
-<%@page import="com.mem.model.MemberService"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.man.model.*"%>
+<%
+//	ManagerVO managerVO = (ManagerVO)request.getAttribute("managerVO");
+//	session.setAttribute("manVO" , managerVO);
+%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -14,11 +18,13 @@
         <!-- CUSTOM STYLES-->
     <link href="<%=request.getContextPath() %>/backend/assets/css/custom.css" rel="stylesheet" />
     	<!-- LOGIN STYLES -->
+    <link href="<%=request.getContextPath() %>/backend/assets/css/login.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
-      
+     
+           
           
     <div id="wrapper">
          <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #ccc;">
@@ -37,7 +43,9 @@
                 </div>
                 
                 <span class="logout-spn" >
-					${manVO.man_id} ${manVO.man_name}
+<%--                 		<%=managerVO.getMan_id() %> --%>
+<%-- 						<%=managerVO.getMan_name() %> --%>
+						${manVO.man_id} ${manVO.man_name}
                   <a href="<%=request.getContextPath() %>/backend/man/login_man.jsp">登出</a>
                 </span>
                 
@@ -52,68 +60,41 @@
                  
 
 
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '0'}">
                     <li class="active-link">
                         <a href="<%=request.getContextPath() %>/backend/mem/select_mem.jsp" ><i class="fa fa-desktop "></i>會員管理 <span class="badge">Included</span></a>
                     </li>
-                 </c:if>
-			</c:forEach>
+                   
 
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '7'}">
                     <li>
                         <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>訂單管理  <span class="badge">Included</span></a>
                     </li>
-               </c:if>
-			</c:forEach>
-			
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '9'}">
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/memr/select_memr.jsp"><i class="glyphicon glyphicon-thumbs-down"></i>會員檢舉  <span class="badge">Included</span></a>
                     </li>
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/str/select_str.jsp"><i class="	glyphicon glyphicon-hand-down "></i>商家檢舉  <span class="badge">Included</span></a>
                     </li>
-                </c:if>
-			</c:forEach>
 
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '10'}">
                     <li>
                         <a href="#"><i class="fa fa-qrcode "></i>審核管理<span class="badge">要連結哪個?</span></a>
                     </li>
-                </c:if>
-			</c:forEach>
-			
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '3'}">
+
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/push/selectPage.jsp"><i class="fa fa-edit "></i>推播管理 </a>
                     </li>
-                </c:if>
-			</c:forEach>
 
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '5'}">
+                     <li>
+                        <a href="#"><i class="fa fa-edit "></i>個人資料</a>
+                    </li>
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/rev/Select_Rev.jsp"><i class="fa fa-bar-chart-o"></i>商家月結算</a>
                     </li>
-                </c:if>
-			</c:forEach>
-                    
-            <c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '8'}">
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/man/ListAllMan.jsp"><i class="fa fa-bar-chart-o"></i>管理員管理</a>
                     </li>
-                    
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/per/ListAllPer.jsp"><i class="fa fa-bar-chart-o"></i>權限管理</a>
                     </li>
-                </c:if>
-			</c:forEach>
 
 
 
@@ -131,109 +112,20 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-lg-12">
-                     	<h2>後端管理者平台</h2>   
+                     	<h2>你沒有此權限喔</h2>   
                     </div>
+                    <img src="https://s2.imgs.cc/img/qLf59uG.jpeg"></a>
                 </div>              
-                 <!-- /. ROW  -->
-                  <hr />
-                <div class="row">
-                <!-- ******************select_man.jsp原先內容********************* -->
-					<body bgcolor='white'>
-					<table border='1' cellpadding='5' cellspacing='0' width='400'>
-					  <tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-					    <td><h3>Group1 Member: Home</h3><font color=red>( MVC )</font></td>
-					  </tr>
-					</table>
-					
-					<p>This is the Home page for Group1 Man: Home</p>
-					
-					<h3>查詢</h3>
-					<c:if test="${not empty errorMsgs }">
-						<font color='red'>修正以下錯誤
-						<ul>
-							<c:forEach var="message" items="${errorMsgs}">
-								<li>${message}</li>
-							</c:forEach>
-						</ul>
-						</font>
-						</c:if>
-						
-					<ul>
-						<li>
-							<form action="mem.do" method="post">
-    							<a href="javascript:;" onclick="parentNode.submit();">List</a>
-    							<input type="hidden" name="action" value="listAll">
-							</form>
-						</li>
-						
-						<li>
-							<form action="mem.do" method="post">
-								<b>輸入會員編號(MEM-000001):</b>
-								<input type="text" name="mem_id">
-								<input type="submit" value="送出">
-								<input type="hidden" name="action" value="getOne_For_Display">
-							</form>
-						</li>
-					
-						<jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemberService"></jsp:useBean>
-					
-						<li>
-							<form action="mem.do" method="post">
-								<b>選擇會員編號:</b>
-								<select size="1" name="mem_id">
-									<c:forEach var="MemberVO" items="${memSvc.all }">
-										<option value="${MemberVO.mem_id }">${MemberVO.mem_id }</option>
-									</c:forEach>
-								</select>
-								<input type="submit" value="送出">
-								<input type="hidden" name="action" value="getOne_For_Display">
-							</form>
-						</li>
-						
-						<li>
-							<form method="post" action="mem.do">
-								<b>選擇員工姓名:</b>
-								<select size="1" name="mem_id">
-									<c:forEach var="MemberVO" items="${memSvc.all }">
-										<option value="${MemberVO.mem_id }">${MemberVO.mem_name}</option>
-									</c:forEach>
-								</select>
-								<input type="submit" value="送出">
-								<input type="hidden" name="action" value="getOne_For_Display">
-							</form>
-						</li>
-					</ul>	
-						<h3>會員管理</h3>
-							<ul>
-								<li><a href="AddMem.jsp">ADD</a> a new Mem</li>
-							</ul>
-				<!-- ******************select_man.jsp原先內容********************* -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
 
-                </div>
-<!-- *********************include頁面******************* -->
-<%if ("列出所有會員"==request.getAttribute("whichPage")){%>
-       <jsp:include page="ListAllMem.jsp" />
-<%} %>
-<%if ("列出單一會員"==request.getAttribute("whichPage")){%>
-       <jsp:include page="ListOneMem.jsp" />
-<%} %>
-
-<%if ("修改單一會員"==request.getAttribute("whichPage")){%>
-       <jsp:include page="Update_mem.jsp" />
-<%} %>
-
-<!-- *********************include頁面******************* -->
                   <!-- /. ROW  --> 
             </div>   
         </div>             
         <div class="footer">
       
     
-            <div class="row">
-                <div class="col-lg-12" >
-                    &copy;  2014 yourdomain.com | More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
-                </div>
-            </div>
+        
         </div>
           
 
@@ -246,7 +138,8 @@
       <!-- CUSTOM SCRIPTS -->
     <script src="<%=request.getContextPath() %>/backend/assets/js/custom.js"></script>
     
- 
+    
 </body>
 </html>
+
 
