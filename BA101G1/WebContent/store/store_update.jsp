@@ -49,9 +49,7 @@
 					<div class="panel panel-info" style="width:200px;">
 					    <a href="<%=request.getContextPath()%>/store/store_insert_product.jsp " class="list-group-item">商品新增</a>
 					</div>
-					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/store/store_update_product.jsp " class="list-group-item">商品修改</a>
-					</div>
+					
 				</div>
 				
 				

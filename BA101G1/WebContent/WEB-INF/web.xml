@@ -227,6 +227,7 @@
     <url-pattern>/frontend/mem/member_info_update.jsp</url-pattern>
     <url-pattern>/frontend/mem/member_report.jsp</url-pattern>
     <url-pattern>/frontend/mem/member_addMR.jsp</url-pattern>
+    <url-pattern>/backend/store_commit/addStoreCommit.jsp</url-pattern>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>
@@ -257,6 +258,7 @@
     <url-pattern>/store/store_addSR.jsp</url-pattern>
     <url-pattern>/store/store_insert_product.jsp</url-pattern>
     <url-pattern>/store/store_list_all_product.jsp</url-pattern>
+    <url-pattern>/store/store_list_all_commit.jsp</url-pattern>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>

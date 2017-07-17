@@ -24,7 +24,7 @@
 
 			</c:if>
 			
-			<
+			
 				<c:if test="${not empty storeVO}">
 				<span class="login">
 				
