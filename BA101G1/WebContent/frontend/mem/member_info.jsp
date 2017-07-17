@@ -47,17 +47,11 @@
 			</div>
 		</div>
 		<div id="footer">
-			<ul class="navigation">
-				<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-				<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
-				<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
-				<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
-				<li><a href="news.html">最新消息</a></li>
-			</ul>
+			<jsp:include page="/footer.jsp"/>
 		</div>
 
 	</div>
 	<script src="https://code.jquery.com/jquery.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

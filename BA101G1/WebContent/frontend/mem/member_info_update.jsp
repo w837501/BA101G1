@@ -44,34 +44,34 @@
 					  <h1>會員資料修改</h1>
  				</div> 
 				<form action="<%=request.getContextPath()%>/backend/mem/mem.do" method='post' name='form1'>
-<table border='0'>
-	<tr>
-		<td>會員編號:<font color='red'><b>*</b></font></td>
-		<td><%=memberVO.getMem_id() %></td>
-	</tr>
-	<tr>
-		<td>會員姓名:</td>
-		<td><input type="TEXT" name="mem_name" size="45" value="<%=memberVO.getMem_name() %>"/></td>
-	</tr>
-	<tr>
-		<td>會員電話:</td>
-		<td><input type="TEXT" name="mem_phone" size="45" value="<%=memberVO.getMem_phone() %>"/></td>
-	</tr>
-	<tr>
-		<td>會員密碼:</td>
-		<td><input type="TEXT" name="mem_pw" size="45" value="<%=memberVO.getMem_pw() %>"/></td>
-	</tr>
-	<tr>
-		<td>會員信箱:</td>
-		<td><input type="TEXT" name="mem_mail" size="45" value="<%=memberVO.getMem_mail() %>"/></td>
-	</tr>
-</table>
-<br>
-<input type="hidden" name="action" value="update">
-<input type="hidden" name="mem_id" value="<%=memberVO.getMem_id()%>">
-<input type="submit"  value="送出修改">
-
-</form>
+				<table border='0'>
+					<tr>
+						<td>會員編號:<font color='red'><b>*</b></font></td>
+						<td><%=memberVO.getMem_id() %></td>
+					</tr>
+					<tr>
+						<td>會員姓名:</td>
+						<td><input type="TEXT" name="mem_name" size="45" value="<%=memberVO.getMem_name() %>"/></td>
+					</tr>
+					<tr>
+						<td>會員電話:</td>
+						<td><input type="TEXT" name="mem_phone" size="45" value="<%=memberVO.getMem_phone() %>"/></td>
+					</tr>
+					<tr>
+						<td>會員密碼:</td>
+						<td><input type="TEXT" name="mem_pw" size="45" value="<%=memberVO.getMem_pw() %>"/></td>
+					</tr>
+					<tr>
+						<td>會員信箱:</td>
+						<td><input type="TEXT" name="mem_mail" size="45" value="<%=memberVO.getMem_mail() %>"/></td>
+					</tr>
+				</table>
+				<br>
+				<input type="hidden" name="action" value="update">
+				<input type="hidden" name="mem_id" value="<%=memberVO.getMem_id()%>">
+				<input type="submit"  value="送出修改">
+				
+				</form>
 					
 
 
@@ -79,13 +79,7 @@
 			</div>
 		</div>
 		<div id="footer">
-			<ul class="navigation">
-				<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-				<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
-				<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
-				<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
-				<li><a href="news.html">最新消息</a></li>
-			</ul>
+			<jsp:include page="/footer.jsp"/>
 		</div>
 
 	</div>
