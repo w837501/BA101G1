@@ -14,12 +14,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>Title Page</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<!--[if lt IE 9]>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
 </head>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css" type="text/css">
@@ -219,25 +215,27 @@
 .aa {
 	margin-top: 150px;
 }
+
+#contents p a {
+	color: #D6656A;
+}
+
 </style>
 
 <body>
-
-
-	<div class="col-xs-12 col-sm-4 ">
-		<center>
-			<a href="<%=request.getContextPath()%>/index.jsp"> <img
-				src="/images/logo.png" width="150px" height="150px">
-			</a> <br> <br> <br>
-			<p font-size="100px">
-				<b> <a href="<%=request.getContextPath()%>/index.jsp">
-						吃定我線上訂餐</a> > LogIn
-				</b>
-			</p>
-		</center>
-	</div>
-
-	<div class="col-xs-12 col-sm-8">
+	<div id="page">
+		<div id="contents">
+			<div class="col-xs-12 col-sm-4 ">
+				<center>
+					<a href="<%=request.getContextPath()%>/index.jsp"> <img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO" width="150px" height="150px"></a><br><br><br>
+					<p>
+						<b> <a href="<%=request.getContextPath()%>/index.jsp">吃定我線上訂餐</a> > LogIn</b>
+					</p>
+				</center>
+			</div>
+		
+		
+			<div class="col-xs-12 col-sm-8">
 		<div class="col-xs-12 col-sm-5 aa">
 			<div role="tabpanel" style="margin-left:-60px;">
 
@@ -251,12 +249,10 @@
 					<div role="tabpanel" class="tab-pane active" id="tab1">
 						<div class="well" align="center"  style="width:600px;">
 							<c:if test="${not empty errorMsgs_Login}">
-								<font color='red'>請修正以下錯誤:
-									<ul>
+								<font color='red'>
 										<c:forEach var="message" items="${errorMsgs_Login}">
-											<li>${message}</li>
+											${message}
 										</c:forEach>
-									</ul>
 								</font>
 							</c:if>
 							<form METHOD="post"
@@ -276,12 +272,10 @@
 					<div role="tabpanel" class="tab-pane" id="tab2">
 						<div class="well" align="center" style="width:600px;">
 							<c:if test="${not empty errorMsgs}">
-								<font color='red'>請修正以下錯誤:
-									<ul>
+								<font color='red'>
 										<c:forEach var="message" items="${errorMsgs}">
-											<li>${message}</li>
+											${message}
 										</c:forEach>
-									</ul>
 								</font>
 							</c:if>
 							<%
@@ -325,9 +319,9 @@
 									value="<%=(memberVO == null) ? "222212" : memberVO.getMem_pw()%>">
 								</div>
 								<div class="col-xs-12 col-sm-3">
-									<span class='error1_pw1' style="margin-left:-90px;"></span>
+									<span class='error1_pw1' style="margin-left:-100px;"></span>
 									<img src="" id="error_img_pw1">
-									<span class='correct_pw1' style="margin-left:-90px;"></span> 
+									<span class='correct_pw1' style="margin-left:-100px;"></span> 
 									<img src="" id="correct_img_pw1"> 
 								</div>
 							</div>
@@ -372,6 +366,8 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery.js"></script>
