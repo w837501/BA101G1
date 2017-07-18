@@ -102,8 +102,7 @@ MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 						</td>
 					</tr>
 				</table>
-
-
+%>
 				<FORM METHOD = "post" ACTION = "<%=request.getContextPath()%>/frontend/selectOrder/order.do" name = "checkform" >
 					<div>
 						<h1 id="title">ÂIÀ\³]©w</h1>
