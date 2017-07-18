@@ -75,7 +75,7 @@ $(document).ready(
 						</a>
 				</div>
 				
-				<div style="float:right;margin-right:50px;">
+				<div style="float:right;margin-top:20px;margin-right:50px;">
 					<div class="page-header"> 
 						<h3>·|­û­q³æ¬ö¿ý</h3>
 			 		</div> 

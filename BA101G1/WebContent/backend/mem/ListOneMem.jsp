@@ -12,12 +12,22 @@
 <title>會員資料</title>
 </head>
 <body>
-	<ul>
-		<li>會員編號：<%=memberVO.getMem_id() %></li>
-		<li>會員姓名：<%=memberVO.getMem_name() %></li>
-		<li>會員電話：<%=memberVO.getMem_phone() %></li>
-		<li>會員密碼：<%=memberVO.getMem_pw() %></li>
-		<li>會員信箱：<%=memberVO.getMem_mail() %></li>
-	</ul>
+	<table>
+		<tr>
+			<td>會員編號：<%=memberVO.getMem_id() %></td>
+		</tr>
+		<tr>
+			<td>會員姓名：<%=memberVO.getMem_name() %></td>
+		</tr>
+		<tr>	
+			<td>會員電話：<%=memberVO.getMem_phone() %></td>
+		</tr>	
+		<tr>	
+			<td>會員密碼：<%=memberVO.getMem_pw() %></td>
+		</tr>	
+		<tr>	
+			<td>會員信箱：<%=memberVO.getMem_mail() %></td>
+		</tr>
+	</table>
 </body>
 </html>
