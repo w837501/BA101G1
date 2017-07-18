@@ -45,7 +45,7 @@ public class StoreReportServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/selectPage.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/select_str.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -58,7 +58,7 @@ public class StoreReportServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/selectPage.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/select_str.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -70,19 +70,19 @@ public class StoreReportServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/selectPage.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/select_str.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 
 				req.setAttribute("srVO", srVO); 
-				String url = "/backend/str/selectPage.jsp";
+				String url = "/backend/str/select_str.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/selectPage.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/select_str.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -103,7 +103,7 @@ public class StoreReportServlet extends HttpServlet {
 				StoreReportVO srVO = srSvc.getOneStoreReport(sr_id);
 
 				req.setAttribute("srVO", srVO); 
-				String url = "/backend/str/selectPage.jsp";
+				String url = "/backend/str/select_str.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
@@ -125,13 +125,17 @@ public class StoreReportServlet extends HttpServlet {
 
 			try {
 				String sr_id = new String(req.getParameter("sr_id").trim());
-				String store_id = req.getParameter("mem_id").trim();
+				String store_id = req.getParameter("store_id").trim();
 				String sc_id = req.getParameter("sc_id").trim();
 				String order_id = req.getParameter("order_id").trim();
 				String man_id = req.getParameter("man_id").trim();
 				String sr_content = req.getParameter("sr_content").trim();
-				byte[] sr_image = req.getParameter("sr_image").trim().getBytes();
+//				byte[] sr_image = req.getParameter("sr_image").trim().getBytes();
 
+				StoreReportService srSvc = new StoreReportService();
+				StoreReportVO srVO = srSvc.getOneStoreReport(sr_id);
+				byte[] sr_image = srVO.getSr_image();
+				
 				java.sql.Timestamp sr_time = null;
 				try {
 					sr_time = java.sql.Timestamp.valueOf(req.getParameter("sr_time").trim());
@@ -142,7 +146,8 @@ public class StoreReportServlet extends HttpServlet {
 
 				String sr_state = null;
 				try {
-					sr_state = req.getParameter("sr_state").trim();
+//					sr_state = req.getParameter("sr_state").trim();
+					sr_state = "已審核";
 				} catch (Exception e) {
 					errorMsgs.add("請輸入狀態");
 
@@ -151,11 +156,13 @@ public class StoreReportServlet extends HttpServlet {
 				String sr_result = null;
 				try {
 					sr_result = req.getParameter("sr_result").trim();
+					if(sr_state.isEmpty()){
+						sr_state = "未審核";
+					}
 				} catch (Exception e) {
 					errorMsgs.add("請輸入結果");
 				}
 
-				StoreReportVO srVO = new StoreReportVO();
 				srVO.setSr_id(sr_id);
 				srVO.setStore_id(store_id);
 				srVO.setSc_id(sc_id);
@@ -170,24 +177,23 @@ public class StoreReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("srVO", srVO); 
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/update_sr_input.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/select_str.jsp");
 					failureView.forward(req, res);
 					return; 
 				}
 
-				StoreReportService srSvc = new StoreReportService();
 				srVO = srSvc.updateStoreReport(sr_id, store_id, sc_id, order_id, man_id, sr_content, sr_image, sr_time,
 						sr_state, sr_result);
 
 
 //				String url = requestURL;
-				String url="/backend/str/selectPage.jsp";
+				String url="/backend/str/select_str.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
 			} catch (Exception e) {
 				errorMsgs.add( e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/update_sr_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/select_str.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -262,7 +268,7 @@ public class StoreReportServlet extends HttpServlet {
 				srVO = srSvc.addStoreReport(store_id, sc_id, order_id, man_id, sr_content, sr_image, sr_time, sr_state,
 						sr_result);
 
-				String url = "/backend/str/listAllSR.jsp";
+				String url = "/backend/str/select_str.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
@@ -294,7 +300,7 @@ public class StoreReportServlet extends HttpServlet {
 				// req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(empVO.getDeptno()));
 				//
 //				String url = requestURL;
-				String url = "/backend/str/selectPage.jsp";
+				String url = "/backend/str/select_str.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
@@ -307,7 +313,7 @@ public class StoreReportServlet extends HttpServlet {
 		if ("listAll".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("whichPage", "列出所有商家檢舉");    // 資料庫取出的set物件,存入request
-				String url = "/backend/str/selectPage.jsp";
+				String url = "/backend/str/select_str.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 		}

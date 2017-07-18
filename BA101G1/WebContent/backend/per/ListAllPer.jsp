@@ -76,15 +76,6 @@
                     </li>
                  </c:if>
 			</c:forEach>
-
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '7'}">
-                    <li>
-                        <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>訂單管理  <span class="badge">Included</span></a>
-                    </li>
-               </c:if>
-			</c:forEach>
-			
 			<c:forEach var="perm" items="${permList}">
 				<c:if test="${perm.pa_id eq '9'}">
                     <li>
@@ -104,28 +95,15 @@
                 </c:if>
 			</c:forEach>
 			
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '3'}">
                     <li>
-                        <a href="<%=request.getContextPath() %>/backend/push/selectPage.jsp"><i class="fa fa-edit "></i>推播管理 </a>
+                        <a href="<%=request.getContextPath() %>/backend/man/noPer.jsp"><i class="fa fa-edit "></i>假推播錯誤頁面 </a>
                     </li>
-                </c:if>
-			</c:forEach>
-
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '5'}">
-                    <li>
-                        <a href="<%=request.getContextPath() %>/backend/rev/Select_Rev.jsp"><i class="fa fa-bar-chart-o"></i>商家月結算</a>
-                    </li>
-                </c:if>
-			</c:forEach>
                     
             <c:forEach var="perm" items="${permList}">
 				<c:if test="${perm.pa_id eq '8'}">
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/man/ListAllMan.jsp"><i class="fa fa-bar-chart-o"></i>管理員管理</a>
                     </li>
-                    
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/per/ListAllPer.jsp"><i class="fa fa-bar-chart-o"></i>權限管理</a>
                     </li>

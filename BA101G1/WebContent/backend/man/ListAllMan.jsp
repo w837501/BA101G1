@@ -78,15 +78,6 @@
                     </li>
                  </c:if>
 			</c:forEach>
-
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '7'}">
-                    <li>
-                        <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>訂單管理  <span class="badge">Included</span></a>
-                    </li>
-               </c:if>
-			</c:forEach>
-			
 			<c:forEach var="perm" items="${permList}">
 				<c:if test="${perm.pa_id eq '9'}">
                     <li>
@@ -106,28 +97,15 @@
                 </c:if>
 			</c:forEach>
 			
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '3'}">
                     <li>
-                        <a href="<%=request.getContextPath() %>/backend/push/selectPage.jsp"><i class="fa fa-edit "></i>推播管理 </a>
+                        <a href="<%=request.getContextPath() %>/backend/man/noPer.jsp"><i class="fa fa-edit "></i>假推播錯誤頁面 </a>
                     </li>
-                </c:if>
-			</c:forEach>
-
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '5'}">
-                    <li>
-                        <a href="<%=request.getContextPath() %>/backend/rev/Select_Rev.jsp"><i class="fa fa-bar-chart-o"></i>商家月結算</a>
-                    </li>
-                </c:if>
-			</c:forEach>
                     
             <c:forEach var="perm" items="${permList}">
 				<c:if test="${perm.pa_id eq '8'}">
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/man/ListAllMan.jsp"><i class="fa fa-bar-chart-o"></i>管理員管理</a>
                     </li>
-                    
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/per/ListAllPer.jsp"><i class="fa fa-bar-chart-o"></i>權限管理</a>
                     </li>
@@ -163,8 +141,7 @@
 						<th>管理員電話</th>
 						<th>密碼</th>
 						<th>信箱</th>
-						<th></th>
-						<th></th>
+						<th>無效刪除because fk</th>
 					</tr>
 					<c:forEach var="ManagerVO" items="${list}">
 						<tr align='center' valign='middle'>
@@ -173,13 +150,6 @@
 						    <td>${ManagerVO.man_phone }</td>
 						    <td>${ManagerVO.man_pw }</td>
 						    <td>${ManagerVO.man_mail }</td>
-							<td>
-								<form method="post" action="<%=request.getContextPath()%>/backend/man/man.do">
-									<input type="submit" value="修改">
-									<input type="hidden" name="man_id" value="${ManagerVO.man_id }">
-									<input type="hidden" name="action" value="getOne_For_Update">
-								</form>	
-							</td>
 							<td>
 								<form method="post" action="<%=request.getContextPath()%>/backend/man/man.do">
 									<input type="submit" value="刪除">

@@ -42,7 +42,7 @@ public class MemberReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/memr/select_page.jsp");
+							.getRequestDispatcher("/backend/memr/select_memr.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -56,7 +56,7 @@ public class MemberReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/memr/select_page.jsp");
+							.getRequestDispatcher("/backend/memr/select_memr.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -70,14 +70,14 @@ public class MemberReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/memr/select_page.jsp");
+							.getRequestDispatcher("/backend/memr/select_memr.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("mrVO", mrVO); // 資料庫取出的empVO物件,存入req
-				String url = "/backend/memr/select_page.jsp";
+				String url = "/backend/memr/select_memr.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交listOneEmp.jsp
 				successView.forward(req, res);
 
@@ -85,7 +85,7 @@ public class MemberReportServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/backend/memr/select_page.jsp");
+						.getRequestDispatcher("/backend/memr/select_memr.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -110,7 +110,7 @@ public class MemberReportServlet extends HttpServlet {
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("mrVO", mrVO); // 資料庫取出的empVO物件,存入req
-				String url = "/backend/memr/select_page.jsp";
+				String url = "/backend/memr/select_memr.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交update_emp_input.jsp
 				successView.forward(req, res);
 
@@ -141,8 +141,12 @@ public class MemberReportServlet extends HttpServlet {
 				String sc_id = req.getParameter("sc_id").trim();
 				String man_id = req.getParameter("man_id").trim();
 				String mr_content = req.getParameter("mr_content").trim();
-				byte[] mr_image = req.getParameter("mr_image").trim().getBytes();
 				
+				MemberReportService mrSvc = new MemberReportService();
+				MemberReportVO mrVO = mrSvc.getOneMemberReport(mr_id);
+				byte[] mr_image = mrVO.getMr_image();
+
+
 				java.sql.Timestamp mr_time = null;
 				try {
 					mr_time = java.sql.Timestamp.valueOf(req.getParameter("mr_time").trim());
@@ -153,7 +157,7 @@ public class MemberReportServlet extends HttpServlet {
 
 				String mr_state = null;
 				try {
-					mr_state = req.getParameter("mr_state").trim();
+					mr_state = "已審核";
 				} catch (Exception e) {
 					errorMsgs.add("請輸入會員檢舉狀態");
 				}
@@ -161,19 +165,21 @@ public class MemberReportServlet extends HttpServlet {
 				String mr_result = null;
 				try {
 					mr_result = req.getParameter("mr_result").trim();
+					if(mr_state.isEmpty()){
+						mr_state = "未審核";
+					}
 				} catch (Exception e) {
 					errorMsgs.add("會員檢舉狀態請填數字01.");
 				}
 
 
-				MemberReportVO mrVO = new MemberReportVO();
 				mrVO.setMr_id(mr_id);
 				mrVO.setMem_id(mem_id);
 				mrVO.setOrder_id(order_id);
 				mrVO.setSc_id(sc_id);
 				mrVO.setMan_id(man_id);
 				mrVO.setMr_content(mr_content);
-				mrVO.setMr_image(null);
+				mrVO.setMr_image(mr_image);
 				mrVO.setMr_time(mr_time);
 				mrVO.setMr_state(mr_state);
 				mrVO.setMr_result(mr_result);
@@ -188,13 +194,12 @@ public class MemberReportServlet extends HttpServlet {
 				}
 				
 				/***************************2.開始修改資料*****************************************/
-				MemberReportService mrSvc = new MemberReportService();
 				mrVO = mrSvc.updateMemberReport(mr_id , mem_id, order_id, sc_id, man_id, mr_content,mr_image,mr_time,mr_state,mr_result);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/				
 
 //                String url = requestURL;
-                String url="/backend/memr/select_page.jsp";
+                String url="/backend/memr/select_memr.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);   // 修改成功後,轉交回送出修改的來源網頁
 				successView.forward(req, res);
 

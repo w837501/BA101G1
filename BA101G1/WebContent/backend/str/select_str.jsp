@@ -79,15 +79,6 @@
                     </li>
                  </c:if>
 			</c:forEach>
-
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '7'}">
-                    <li>
-                        <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>訂單管理  <span class="badge">Included</span></a>
-                    </li>
-               </c:if>
-			</c:forEach>
-			
 			<c:forEach var="perm" items="${permList}">
 				<c:if test="${perm.pa_id eq '9'}">
                     <li>
@@ -107,34 +98,20 @@
                 </c:if>
 			</c:forEach>
 			
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '3'}">
                     <li>
-                        <a href="<%=request.getContextPath() %>/backend/push/selectPage.jsp"><i class="fa fa-edit "></i>推播管理 </a>
+                        <a href="<%=request.getContextPath() %>/backend/man/noPer.jsp"><i class="fa fa-edit "></i>假推播錯誤頁面 </a>
                     </li>
-                </c:if>
-			</c:forEach>
-
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '5'}">
-                    <li>
-                        <a href="<%=request.getContextPath() %>/backend/rev/Select_Rev.jsp"><i class="fa fa-bar-chart-o"></i>商家月結算</a>
-                    </li>
-                </c:if>
-			</c:forEach>
                     
             <c:forEach var="perm" items="${permList}">
 				<c:if test="${perm.pa_id eq '8'}">
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/man/ListAllMan.jsp"><i class="fa fa-bar-chart-o"></i>管理員管理</a>
                     </li>
-                    
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/per/ListAllPer.jsp"><i class="fa fa-bar-chart-o"></i>權限管理</a>
                     </li>
                 </c:if>
 			</c:forEach>
-
 
 
 
@@ -172,13 +149,7 @@
 											<input type="hidden" name="whichTab" value="tab1">
 										</form> 
 							        </li>
-							        <li role="presentation">
-							        	<form action="<%=request.getContextPath()%>/backend/str/store_report.do" method="post">
-											<a href="#tab2" onclick="parentNode.submit();" aria-controls="tab2" role="tab" data-toggle="tab">審核中&nbsp;&nbsp;</a>
-											<input type="hidden" name="action" value="listAll3">
-											<input type="hidden" name="whichTab" value="tab2">
-										</form> 
-							        </li>
+
 							        <li role="presentation">
 							        	<form action="<%=request.getContextPath()%>/backend/str/store_report.do" method="post">
 											<a href="#tab3" onclick="parentNode.submit();" aria-controls="tab3" role="tab" data-toggle="tab">已審核&nbsp;&nbsp;</a>
@@ -222,19 +193,26 @@
 														</td>
 														<td>${srVO.sr_time}</td>
 														<td>${srVO.sr_state}</td>
-														<td>${srVO.sr_result}</td>			
+														 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/str/store_report.do">
+														<td>
+															<div data-toggle="buttons">
+													          <label class="btn btn-default btn-circle btn-lg"><input type="radio" name="sr_result" value="成立" id="good" ${(srVO.sr_result == '成立')? 'checked' : '' }><i class="glyphicon glyphicon-ok"></i></label>
+													          <label class="btn btn-default btn-circle btn-lg"><input type="radio" name="sr_result" value="不成立" id="bad" ${(srVO.sr_result == '不成立')? 'checked' : ''}><i class="glyphicon glyphicon-remove"></i></label>
+													        </div>
+														</td>			
 											
 														<td>
-														  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/str/store_report.do">
-														     <input type="submit" value="修改"> 
+														  	 <input type="submit" value="確認修改"> 
 														     <input type="hidden" name="sr_id" value="${srVO.sr_id}">
-														     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-														</td>
-														<td>
-														  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/str/store_report.do">
-														    <input type="submit" value="刪除">
-														    <input type="hidden" name="sr_id" value="${srVO.sr_id}">
-														    <input type="hidden" name="action"value="delete"></FORM>
+														     <input type="hidden" name="store_id" value="${srVO.store_id}">
+														     <input type="hidden" name="sc_id" value="${srVO.order_id}">
+														     <input type="hidden" name="order_id" value="${srVO.sc_id}">
+														     <input type="hidden" name="man_id" value="${srVO.man_id}">
+														     <input type="hidden" name="sr_content" value="${srVO.sr_content}">
+														     <input type="hidden" name="sr_time" value="${srVO.sr_time}">
+														     <input type="hidden" name="sr_state" value="${srVO.sr_state}">
+														     <input type="hidden" name="action"	value="update">
+														  </FORM>
 														</td>
 													</tr>
 											</c:forEach>
@@ -277,5 +255,28 @@
 
 </body>
 </html>
+<style type="text/css">
+      body{margin:40px;}
+      .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+      }
+      .btn-circle.btn-lg {
+        width: 50px;
+        height: 50px;
+        padding: 13px 13px;
+        font-size: 18px;
+        line-height: 1.33;
+        border-radius: 25px;
+      }
+      .radio-toolbar label + input[type="radio"]:checked { 
+    	background:gray !important;
+	}
 
+</style>
 

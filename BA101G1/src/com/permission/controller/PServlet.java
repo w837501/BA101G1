@@ -48,6 +48,7 @@ public class PServlet extends HttpServlet {
 				String man_id = req.getParameter("man_id").trim();
 				String pa_id = req.getParameter("pa_id").trim();
 				System.out.println("man_id "+man_id+" pa_id "+pa_id);
+			try{
 				PermissionVO paVO = new PermissionVO();
 				paVO.setMan_id(man_id);
 				paVO.setPa_id(pa_id);
@@ -56,10 +57,24 @@ public class PServlet extends HttpServlet {
 				PermissionService pSvc = new PermissionService();
 				paVO = pSvc.addPermission(man_id, pa_id);
 				
+				/*************************** new Session for permission ***********/
+				List<PermissionVO> permList = null;
+				permList = pSvc.findByManId(man_id);
+				System.out.println(permList.toString());
+				HttpSession sessionId = req.getSession();
+				sessionId.setAttribute("permList", permList);
+				/*************************** new Session for permission ***********/
+				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/backend/memr/listAllMR.jsp";
+				String url = "/backend/per/ListAllPer.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);				
+				}catch(Exception e){
+					String url = "/backend/per/ListAllPer.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+					successView.forward(req, res);
+				}
+			
 		}
 		
        
@@ -70,14 +85,28 @@ public class PServlet extends HttpServlet {
 				String pa_id = new String(req.getParameter("pa_id"));
 				System.out.println("man_id "+man_id+" pa_id "+pa_id);
 				/***************************2.開始刪除資料***************************************/
+				try{
 				PermissionService pSvc = new PermissionService();
 				pSvc.deletePermission(man_id , pa_id);
+				
+				/*************************** new Session for permission ***********/
+				List<PermissionVO> permList = null;
+				permList = pSvc.findByManId(man_id);
+				System.out.println(permList.toString());
+				HttpSession sessionId = req.getSession();
+				sessionId.setAttribute("permList", permList);
+				/*************************** new Session for permission ***********/
+				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/
 				String url = "/backend/per/ListAllPer.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
-				
 				/***************************其他可能的錯誤處理**********************************/
+				}catch(Exception e){
+					String url = "/backend/per/ListAllPer.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+					successView.forward(req, res);
+				}
 		}
 		if ("listAll".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
