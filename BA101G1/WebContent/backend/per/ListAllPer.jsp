@@ -12,6 +12,7 @@
 	ManagerService mSvc = new ManagerService();
 	List<ManagerVO> listman = mSvc.getAll();
 	pageContext.setAttribute("listman", listman);
+	
 %>
 <jsp:useBean id="paSvc" scope="page" class="com.permission_ability.model.PermissionAbilityDAO" />
 <!DOCTYPE html>
@@ -220,8 +221,8 @@
 											<select size="1" name="pa_id" id="class">
 <%-- 												<c:forEach var="PermissionVO" items="${list}"> --%>
 													<c:forEach var="Permission_AbilityVO" items="${paSvc.all}">
-<%-- 									                    <c:if test="${PermissionVO.pa_id eq Permission_AbilityVO.pa_id}"> --%>
-									                    	<option value="${PermissionVO.pa_id}" ${(Permission_AbilityVO.pa_id==PermissionVO.pa_id)? 'selected':'' } >
+<%-- 										                <c:if test="${Permission_AbilityVO.pa_id eq pVOList.pa_id}"> --%>
+									                    	<option value="${Permission_AbilityVO.pa_id}" ${(Permission_AbilityVO.pa_id==PermissionVO.pa_id)? 'selected':'' } >
 										                    	【${Permission_AbilityVO.pa_id } - ${Permission_AbilityVO.pa_name}】
 <%-- 									                    </c:if> --%>
 									                </c:forEach>
@@ -270,49 +271,49 @@
 </body>
 </html>
 <script type="text/javascript">
-// $(document).ready(function (){
-// 	 $('#grade').change(function(){
-// 		 $.ajax({
-// 			 type:"GET",
-// 			 url:"jsonRSP.do",
-// 			 data:creatQueryString($(this).val(),""),
-// 			 dataType:"json",
-// 			 success:function (data){
-// 				 selectCreate(data,'class');
-// 		     },
-//              error:function(){alert("error")}
-//          })
-// 	 })
-// })
-// function creatQueryString(paramGrade,paramClass){
-// 	var queryString={"action":"getSelect","grade":paramGrade,"classId":paramClass};
-// 	return queryString;
-// }
+$(document).ready(function (){
+	 $('#grade').change(function(){
+		 $.ajax({
+			 type:"GET",
+			 url:"jsonRSP.do",
+			 data:creatQueryString($(this).val(),""),
+			 dataType:"json",
+			 success:function (data){
+				 selectCreate(data,'class');
+		     },
+             error:function(){alert("error")}
+         })
+	 })
+})
+function creatQueryString(paramGrade,paramClass){
+	var queryString={"action":"getSelect","grade":paramGrade,"classId":paramClass};
+	return queryString;
+}
 
-// function selectCreate(oJson,targetId){
-// 	$('#'+targetId).empty();
-// 	var i=0;
-// 	$.each(oJson,function(){
-// 		$('#'+targetId).append("<option value='"+oJson[i].classId+"'>"+oJson[i].className+"</option>");
-// 		i++;
-// 	});
-// 	$('#'+targetId).change(function(){
-// 		$.ajax({
-// 			 type:"GET",
-<%-- 			 url:"<%=request.getContextPath() %>/jsonRSP.do", --%>
-// 			 data:creatQueryString($('#grade').val(),$(this).val()),
-// 			 dataType:"json",
-// 			 success:function (data){
-// 				 $('#name').empty();
-// 				 var j=0;
-// 				 $.each(data,function(){
-// 					 $('#name').append("<option value='"+data[j].name+"'>"+data[j].name+"</option>");
-// 					 j++;
-// 				 })
-// 		     },
-//             error:function(){alert("error")}
-//         })
-// 	})
-// }
+function selectCreate(oJson,targetId){
+	$('#'+targetId).empty();
+	var i=0;
+	$.each(oJson,function(){
+		$('#'+targetId).append("<option value='"+oJson[i].classId+"'>"+oJson[i].className+"</option>");
+		i++;
+	});
+	$('#'+targetId).change(function(){
+		$.ajax({
+			 type:"GET",
+			 url:"<%=request.getContextPath() %>/jsonRSP.do",
+			 data:creatQueryString($('#grade').val(),$(this).val()),
+			 dataType:"json",
+			 success:function (data){
+				 $('#name').empty();
+				 var j=0;
+				 $.each(data,function(){
+					 $('#name').append("<option value='"+data[j].name+"'>"+data[j].name+"</option>");
+					 j++;
+				 })
+		     },
+            error:function(){alert("error")}
+        })
+	})
+}
 </script>
 
