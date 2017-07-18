@@ -170,7 +170,6 @@ public class MemberReportJNDIDAO implements MemberReportDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo ¤]ºÙ¬° Domain objects
 				mrVO = new MemberReportVO();
 				mrVO.setMr_id(rs.getString("mr_id"));
 				mrVO.setMem_id(rs.getString("mem_id"));
@@ -229,7 +228,6 @@ public class MemberReportJNDIDAO implements MemberReportDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO ¤]ºÙ¬° Domain objects
 				mrVO = new MemberReportVO();
 				mrVO.setMr_id(rs.getString("mr_id"));
 				mrVO.setMem_id(rs.getString("mem_id"));
@@ -288,7 +286,50 @@ public class MemberReportJNDIDAO implements MemberReportDAO_interface {
 			pstmt = con.prepareStatement(GET_ONE_STMT_MRSTATE);
 			pstmt.setString(1, mr_state);
 			rs = pstmt.executeQuery();
-			
+	while (rs.next()) {
+				
+				mrVO = new MemberReportVO();
+				mrVO.setMr_id(rs.getString("mr_id"));
+				mrVO.setMem_id(rs.getString("mem_id"));
+				mrVO.setOrder_id(rs.getString("order_id"));
+				mrVO.setSc_id(rs.getString("sc_id"));
+				mrVO.setMan_id(rs.getString("man_id"));
+				mrVO.setMr_content(rs.getString("mr_content"));
+				mrVO.setMr_image(rs.getBytes("mr_image"));
+				mrVO.setMr_time(rs.getTimestamp("mr_time"));
+				mrVO.setMr_state(rs.getString("mr_state"));
+				mrVO.setMr_result(rs.getString("mr_result"));
+				list.add(mrVO); // Store the row in the list
+			}
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 
 
 	@Override
@@ -308,7 +349,7 @@ public class MemberReportJNDIDAO implements MemberReportDAO_interface {
 
 
 			while (rs.next()) {
-				// empVO ¤]ºÙ¬° Domain objects
+				
 				mrVO = new MemberReportVO();
 				mrVO.setMr_id(rs.getString("mr_id"));
 				mrVO.setMem_id(rs.getString("mem_id"));

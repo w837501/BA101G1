@@ -186,7 +186,7 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo ‰πüÁ®±ÁÇ∫ Domain objects
+				// empVo §]∫Ÿ¨∞ Domain objects
 				srVO = new StoreReportVO();
 				srVO.setSr_id(rs.getString("sr_id"));
 				srVO.setStore_id(rs.getString("store_id"));
@@ -252,7 +252,7 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO ‰πüÁ®±ÁÇ∫ Domain objects
+				// empVO §]∫Ÿ¨∞ Domain objects
 				srVO = new StoreReportVO();
 				srVO.setSr_id(rs.getString("sr_id"));
 				srVO.setStore_id(rs.getString("store_id"));
@@ -306,37 +306,37 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 
 		StoreReportJDBCDAO dao = new StoreReportJDBCDAO();
 
-		// Êñ∞Â¢û
+		// ∑sºW
 //		StoreReportVO srVO1 = new StoreReportVO();
 //		srVO1.setStore_id("STO-000002");
 //		srVO1.setSc_id("SC-000003");
 //		srVO1.setOrder_id(null);
 //		srVO1.setMan_id(new String("MAN-000003"));
-//		srVO1.setSr_content(new String("Êñ∞Âû£ÁµêË°£ÊàëËÄÅÂ©Ü"));
+//		srVO1.setSr_content(new String("∑s´Æµ≤¶Áß⁄¶—±C"));
 //		srVO1.setSr_image(new byte[0]);
 //		srVO1.setSr_time(java.sql.Timestamp.valueOf("2003-03-31 03:33:33"));
-//		srVO1.setSr_state("Â∑≤ÂØ©Ê†∏");
-//		srVO1.setSr_result("ÊàêÁ´ã");
+//		srVO1.setSr_state("§wºfÆ÷");
+//		srVO1.setSr_result("¶®•ﬂ");
 //		dao.insert(srVO1);
 //
-//		// ‰øÆÊîπ
+//		// ≠◊ßÔ
 //		StoreReportVO srVO2 = new StoreReportVO();
 //		srVO2.setSr_id("SR-000001");
 //		srVO2.setStore_id("STO-000003");
 //		srVO2.setSc_id(null);
 //		srVO2.setOrder_id("20170614-000002");
 //		srVO2.setMan_id(new String("MAN-000002"));
-//		srVO2.setSr_content(new String("Âê≥Ê∞∏ÂøóÂê≥Ê∞∏Âøó"));
+//		srVO2.setSr_content(new String("ßd•√ß”ßd•√ß”"));
 //		srVO2.setSr_image(null);
 //		srVO2.setSr_time(java.sql.Timestamp.valueOf("2001-01-01 11:11:11"));
-//		srVO2.setSr_state("Â∑≤ÂØ©Ê†∏");
-//		srVO2.setSr_result("‰∏çÊàêÁ´ã");
+//		srVO2.setSr_state("§wºfÆ÷");
+//		srVO2.setSr_result("§£¶®•ﬂ");
 //		dao.update(srVO2);
 //
-//		// Âà™Èô§
+//		// ßR∞£
 //		dao.delete("SR-000004");
 //
-//		// Êü•Ë©¢
+//		// ¨d∏ﬂ
 //		StoreReportVO srVO3 = dao.findPrimaryKey("SR-000002");
 //		System.out.print(srVO3.getSr_id() + ",");
 //		System.out.print(srVO3.getStore_id() + ",");
@@ -350,7 +350,7 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 //		System.out.print(srVO3.getSr_result() + ",");
 //		System.out.println("---------------------");
 
-		// Êü•Ë©¢
+		// ¨d∏ﬂ
 		List<StoreReportVO> list = dao.getReportByStore_id("STO-000001");
 		for (StoreReportVO aSR : list) {
 			System.out.print(aSR.getSr_id() + ",");
@@ -370,9 +370,72 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 	@Override
 
 	public List<StoreReportVO> findBySR_state(String sr_state) {
-		// TODO Auto-generated method stub
-		return null;
+		List<StoreReportVO> list = new ArrayList<StoreReportVO>();
+		StoreReportVO srVO = null;
 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_BY_STORE_ID);
+			pstmt.setString(1, sr_state);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO §]∫Ÿ¨∞ Domain objects
+				srVO = new StoreReportVO();
+				srVO.setSr_id(rs.getString("sr_id"));
+				srVO.setStore_id(rs.getString("store_id"));
+				srVO.setSc_id(rs.getString("sc_id"));
+				srVO.setOrder_id(rs.getString("order_id"));
+				srVO.setMan_id(rs.getString("man_id"));
+				srVO.setSr_content(rs.getString("sr_content"));
+				srVO.setSr_image(rs.getBytes("sr_image"));
+				srVO.setSr_time(rs.getTimestamp("sr_time"));
+				srVO.setSr_state(rs.getString("sr_state"));
+				srVO.setSr_result(rs.getString("sr_result"));
+				list.add(srVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+
+	}
 	public List<StoreReportVO> getReportByStore_id(String store_id) {
 		List<StoreReportVO> list = new ArrayList<StoreReportVO>();
 		StoreReportVO srVO = null;
@@ -390,7 +453,7 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO ‰πüÁ®±ÁÇ∫ Domain objects
+				// empVO §]∫Ÿ¨∞ Domain objects
 				srVO = new StoreReportVO();
 				srVO.setSr_id(rs.getString("sr_id"));
 				srVO.setStore_id(rs.getString("store_id"));

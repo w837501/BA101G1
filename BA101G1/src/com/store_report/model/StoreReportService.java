@@ -60,7 +60,7 @@ public class StoreReportService {
 
 	public List<StoreReportVO> findBySR_state(String sr_state) {
 		return dao.findBySR_state(sr_state);
-
+	}
 	public List<StoreReportVO> getReportByStore_id(String store_id) {
 		return dao.getReportByStore_id(store_id);
 

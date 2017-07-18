@@ -43,7 +43,7 @@ public class StoreReportServlet extends HttpServlet {
 			
 				String str = req.getParameter("sr_id");
 				if (str == null || (str.trim()).length() == 0) {
-					errorMsgs.add("è«‹è¼¸å…¥æª¢èˆ‰ç·¨è™Ÿ");
+					errorMsgs.add("½Ğ¿é¤JÀËÁ|½s¸¹");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -56,7 +56,7 @@ public class StoreReportServlet extends HttpServlet {
 				try {
 					sr_id = new String(str);
 				} catch (Exception e) {
-					errorMsgs.add("æ ¼å¼ä¸æ­£ç¢º");
+					errorMsgs.add("®æ¦¡¤£¥¿½T");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -68,7 +68,7 @@ public class StoreReportServlet extends HttpServlet {
 				StoreReportService srSvc = new StoreReportService();
 				StoreReportVO srVO = srSvc.getOneStoreReport(sr_id);
 				if (srVO == null) {
-					errorMsgs.add("æŸ¥ç„¡è³‡æ–™");
+					errorMsgs.add("¬dµL¸ê®Æ");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -147,15 +147,15 @@ public class StoreReportServlet extends HttpServlet {
 					sr_time = java.sql.Timestamp.valueOf(req.getParameter("sr_time").trim());
 				} catch (IllegalArgumentException e) {
 					sr_time = new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsgs.add("è¼¸å…¥éŒ¯èª¤");
+					errorMsgs.add("¿é¤J¿ù»~");
 				}
 
 				String sr_state = null;
 				try {
 //					sr_state = req.getParameter("sr_state").trim();
-					sr_state = "å·²å¯©æ ¸";
+					sr_state = "¤w¼f®Ö";
 				} catch (Exception e) {
-					errorMsgs.add("è«‹è¼¸å…¥ç‹€æ…‹");
+					errorMsgs.add("½Ğ¿é¤Jª¬ºA");
 
 				}
 
@@ -163,10 +163,10 @@ public class StoreReportServlet extends HttpServlet {
 				try {
 					sr_result = req.getParameter("sr_result").trim();
 					if(sr_state.isEmpty()){
-						sr_state = "æœªå¯©æ ¸";
+						sr_state = "¥¼¼f®Ö";
 					}
 				} catch (Exception e) {
-					errorMsgs.add("è«‹è¼¸å…¥çµæœ");
+					errorMsgs.add("½Ğ¿é¤Jµ²ªG");
 				}
 
 				srVO.setSr_id(sr_id);
@@ -241,7 +241,7 @@ public class StoreReportServlet extends HttpServlet {
 				srVO = srSvc.addStoreReport(store_id, sc_id, order_id,  sr_content, sr_image);
 
 
-				String url = "/backend/str/select_str.jsp";
+				String url = "/store/store_report.jsp";
 
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
@@ -291,7 +291,7 @@ public class StoreReportServlet extends HttpServlet {
 
 		if ("listAll".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("whichPage", "åˆ—å‡ºæ‰€æœ‰å•†å®¶æª¢èˆ‰");    // è³‡æ–™åº«å–å‡ºçš„setç‰©ä»¶,å­˜å…¥request
+			req.setAttribute("whichPage", "¦C¥X©Ò¦³°Ó®aÀËÁ|");    // ¸ê®Æ®w¨ú¥Xªºsetª«¥ó,¦s¤Jrequest
 				String url = "/backend/str/select_str.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -301,14 +301,14 @@ public class StoreReportServlet extends HttpServlet {
 			List<StoreReportVO> srList = null;
 			String whichTab = req.getParameter("whichTab");
 			if(whichTab.equals("tab1")){
-				srList = srSvc.findBySR_state("æœªå¯©æ ¸");
+				srList = srSvc.findBySR_state("¥¼¼f®Ö");
 			}
 			if(whichTab.equals("tab2")){
-				srList = srSvc.findBySR_state("å¯©æ ¸ä¸­");
+				srList = srSvc.findBySR_state("¼f®Ö¤¤");
 			}
 
 			if(whichTab.equals("tab3")){
-				srList = srSvc.findBySR_state("å·²å¯©æ ¸");
+				srList = srSvc.findBySR_state("¤w¼f®Ö");
 			}
 			req.setAttribute("list4", srList);
 			System.out.println("whichTab : "+whichTab+" list " + srList);
@@ -332,9 +332,9 @@ public class StoreReportServlet extends HttpServlet {
 	}
 	public String getFileNameFromPart(Part part) {
 		String header = part.getHeader("content-disposition");
-		System.out.println("header=" + header); // æ¸¬è©¦ç”¨
+		System.out.println("header=" + header); // ´ú¸Õ¥Î
 		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
-		System.out.println("filename=" + filename); // æ¸¬è©¦ç”¨
+		System.out.println("filename=" + filename); // ´ú¸Õ¥Î
 		if (filename.length() == 0) {
 			return null;
 		}
