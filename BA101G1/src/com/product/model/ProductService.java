@@ -64,4 +64,7 @@ public class ProductService {
 	public List<ProductVO> getProductByStore(String store_id){
 		return dao.findProductByStore_id(store_id);
 	}
+	public List<ProductVO> getAllProductByStore(String store_id){
+		return dao.findAllProductByStore_id(store_id);
+	}
 }

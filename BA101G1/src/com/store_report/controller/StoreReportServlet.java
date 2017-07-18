@@ -1,18 +1,24 @@
 package com.store_report.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import com.store_report.model.StoreReportService;
 import com.store_report.model.StoreReportVO;
-
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class StoreReportServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -23,7 +29,7 @@ public class StoreReportServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-
+		HttpSession session=req.getSession();
 		if ("getOne_For_Display".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -193,55 +199,22 @@ public class StoreReportServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				String store_id = req.getParameter("store_id").trim();
-				String sc_id = req.getParameter("sc_id").trim();
-				String order_id = req.getParameter("order_id").trim().equals("null") ? null
-						: req.getParameter("order_id").trim();
-				// System.out.println("order_id: " + order_id);
-				// System.out.println("order_id == 'null' " + (order_id.trim()
-				// == "null"));
-				String man_id = req.getParameter("man_id").trim();
-				String sr_content = req.getParameter("sr_content").trim();
-				byte[] sr_image = req.getParameter("sr_image").trim().getBytes();
+				String store_id = req.getParameter("store_id");
+				String sc_id = req.getParameter("sc_id");
+				String order_id = req.getParameter("order_id");
+			System.out.println(order_id);
+				String sr_content = req.getParameter("sr_content");
+				Part pic=req.getPart("sr_image");
+				byte[] sr_image = getPictureByteArrayFromWeb(pic);
 
-				java.sql.Timestamp sr_time = null;
-				try {
-					System.out.println("req.getParameter('sr_time'): " + req.getParameter("sr_time"));
-					sr_time = java.sql.Timestamp.valueOf(req.getParameter("sr_time").trim() + " 11:12:13");
-					System.out.println("sr_time: " + sr_time);
-				} catch (IllegalArgumentException e) {
-					sr_time = new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsgs.add("格式不正確");
-				}
-
-				String sr_state = null;
-				try {
-					System.out.println("req.getParameter('sr_state'): " + req.getParameter("sr_state"));
-					sr_state = req.getParameter("sr_state").trim();
-					System.out.println("sr_state: " + sr_state);
-				} catch (Exception e) {
-					errorMsgs.add("請輸入狀態");
-				}
-
-				String sr_result = null;
-				try {
-					System.out.println("req.getParameter('sr_result'): " + req.getParameter("sr_result"));
-					sr_result =req.getParameter("sr_result").trim();
-					System.out.println("sr_result: " + sr_result);
-				} catch (Exception e) {
-					errorMsgs.add("請輸入結果");
-				}
 
 				StoreReportVO srVO = new StoreReportVO();
 				srVO.setStore_id(store_id);
 				srVO.setSc_id(sc_id);
 				srVO.setOrder_id(order_id);
-				srVO.setMan_id(man_id);
 				srVO.setSr_content(sr_content);
 				srVO.setSr_image(sr_image);
-				srVO.setSr_time(sr_time);
-				srVO.setSr_state(sr_state);
-				srVO.setSr_result(sr_result);
+
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -252,22 +225,22 @@ public class StoreReportServlet extends HttpServlet {
 				}
 
 				StoreReportService srSvc = new StoreReportService();
-				srVO = srSvc.addStoreReport(store_id, sc_id, order_id, man_id, sr_content, sr_image, sr_time, sr_state,
-						sr_result);
+				srVO = srSvc.addStoreReport(store_id, sc_id, order_id,  sr_content, sr_image);
 
-				String url = "/backend/str/listAllSR.jsp";
+				String url = "/store/store_report.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
+				e.printStackTrace();
 				RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/addSR.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
 		if ("delete".equals(action)) { 
-
+			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -296,6 +269,52 @@ public class StoreReportServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-	}
 
+
+		if ("listAll".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("whichPage", "列出所有商家檢舉");    // 資料庫取出的set物件,存入request
+				String url = "/backend/str/selectPage.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+		}
+		if ("listAll3".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			String requestURL=req.getParameter("requestURL");
+			String aa = req.getParameter("judge");
+			if("tab2".equals(aa)){
+				session.setAttribute("whichTab", "審核中");    // 資料庫取出的set物件,存入request
+			}
+			else if("tab3".equals(aa)){
+				session.setAttribute("whichTab", "已審核");    // 資料庫取出的set物件,存入request
+			}else{
+				session.setAttribute("whichTab", "未審核");    // 資料庫取出的set物件,存入request
+				
+			}
+			res.sendRedirect("/BA101G1" + requestURL );
+			return;
+		}
+	}
+	public static byte[] getPictureByteArrayFromWeb(Part part) throws IOException {
+		InputStream is = part.getInputStream();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] buffer = new byte[8192];
+		int i;
+		while ((i = is.read(buffer)) != -1) {
+			baos.write(buffer, 0, i);
+		}
+		baos.close();
+		is.close();
+		return baos.toByteArray();
+	}
+	public String getFileNameFromPart(Part part) {
+		String header = part.getHeader("content-disposition");
+		System.out.println("header=" + header); // 測試用
+		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
+		System.out.println("filename=" + filename); // 測試用
+		if (filename.length() == 0) {
+			return null;
+		}
+		return filename;
+	}
 }

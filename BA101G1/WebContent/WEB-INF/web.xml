@@ -56,6 +56,14 @@
     <url-pattern>/backend/mem/mem.do</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>store_commit</servlet-name>
+    <servlet-class>com.store_commit.controller.StoreCommitServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>store_commit</servlet-name>
+    <url-pattern>/storecommit.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>RevenueServlet</servlet-name>
     <servlet-class>com.rev.controller.RevenueServlet</servlet-class>
   </servlet>
@@ -136,6 +144,15 @@
     <servlet-name>StoreReportServlet</servlet-name>
     <url-pattern>/store_report/store_report.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>PServlet</servlet-name>
+    <servlet-class>com.permission2.controller.PServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PServlet</servlet-name>
+    <url-pattern>/backend/man/p.do</url-pattern>
+  </servlet-mapping>
 
   
 
@@ -182,6 +199,14 @@
     <servlet-name>ProDBGifReader</servlet-name>
     <url-pattern>/ProDBGifReader</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>MRDBGifReader</servlet-name>
+    <servlet-class>com.member_report.controller.MR_DBGifReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MRDBGifReader</servlet-name>
+    <url-pattern>/MRDBGifReader</url-pattern>
+  </servlet-mapping>
 	 <servlet>
     <servlet-name>MemberLoginHandler</servlet-name>
     <servlet-class>com.mem.controller.MemberLoginHandler</servlet-class>
@@ -200,6 +225,9 @@
     <url-pattern>/frontend/shoppingcart/Checkout.jsp</url-pattern>
     <url-pattern>/frontend/mem/member_info_order.jsp</url-pattern>
     <url-pattern>/frontend/mem/member_info_update.jsp</url-pattern>
+    <url-pattern>/frontend/mem/member_report.jsp</url-pattern>
+    <url-pattern>/frontend/mem/member_addMR.jsp</url-pattern>
+    <url-pattern>/backend/store_commit/addStoreCommit.jsp</url-pattern>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>
@@ -227,7 +255,10 @@
     <url-pattern>/store/store_order_notconfirm.jsp</url-pattern>
     <url-pattern>/store/store_update.jsp</url-pattern>
     <url-pattern>/store/store_report.jsp</url-pattern>
+    <url-pattern>/store/store_addSR.jsp</url-pattern>
     <url-pattern>/store/store_insert_product.jsp</url-pattern>
+    <url-pattern>/store/store_list_all_product.jsp</url-pattern>
+    <url-pattern>/store/store_list_all_commit.jsp</url-pattern>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>

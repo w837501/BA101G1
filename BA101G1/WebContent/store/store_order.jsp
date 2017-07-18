@@ -25,7 +25,7 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 <body>
 	<div id="page">
 		<div id="header">
-			<jsp:include page="/header.jsp"></jsp:include>
+			<jsp:include page="/header_store.jsp"></jsp:include>
 		</div>
 
 		<div class="container" style="margin-bottom:180px;">
@@ -34,7 +34,9 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 					<div class="panel panel-info" style="width:200px;">
 					    <a href="<%=request.getContextPath() %>/store/store_update.jsp" class="list-group-item">修改資料</a>
 					</div>
-					
+					<div class="panel panel-info" style="width:200px;">
+					    <a href="<%=request.getContextPath()%>/store/store_list_all_product.jsp " class="list-group-item">查詢所有商品</a>
+					</div>
 					<div class="panel panel-info" style="width:200px;">
 					    <a href="<%=request.getContextPath()%>/store/store_order.jsp " class="list-group-item">查詢所有訂單</a>
 					</div>
@@ -53,9 +55,7 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 					<div class="panel panel-info" style="width:200px;">
 					    <a href="<%=request.getContextPath()%>/store/store_insert_product.jsp " class="list-group-item">商品新增</a>
 					</div>
-					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/store/store_update_product.jsp " class="list-group-item">商品修改</a>
-					</div>
+					
 				</div>
 				<div class="col-xs-12 col-sm-7" >
 
@@ -71,6 +71,7 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 						<th>總金額</th>
 						<th>取餐方式</th>
 						<th>訂單狀態</th>
+					 	<th>檢舉</th>
 					</tr>
 					<c:forEach var="store_orderVO" items="${store_orderVO}" >
 					<tr align='center' valign='middle'>
@@ -83,6 +84,14 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 						<td>${store_orderVO.totalprice }</td>
 						<td>${store_orderVO.order_way }</td>
 						<td>${store_orderVO.order_state }</td>
+						<td>
+							<c:if test="${store_orderVO.order_state eq '已取消'||store_orderVO.order_state eq'已取餐' }">
+								<form method="post" action="<%=request.getContextPath()%>/store/store_addSR.jsp">
+								<input type="submit" value="檢舉">
+								<input type="hidden" name="order_id" value="${store_orderVO.order_id}">
+							</form>							
+							</c:if>
+						</td>
 					</tr>
 					</c:forEach>
 				

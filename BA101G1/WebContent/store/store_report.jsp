@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.store.model.*"%>
 <%@ page import="com.store_report.model.*"%>
@@ -24,7 +25,7 @@ storereportVO=storereportSvc.getReportByStore_id(store_id);
 <body>
 	<div id="page">
 		<div id="header">
-			<jsp:include page="/header.jsp"></jsp:include>
+			<jsp:include page="/header_store.jsp"></jsp:include>
 		</div>
 
 		<div class="container" style="margin-bottom:180px;">
@@ -33,7 +34,9 @@ storereportVO=storereportSvc.getReportByStore_id(store_id);
 					<div class="panel panel-info" style="width:200px;">
 					    <a href="<%=request.getContextPath() %>/store/store_update.jsp" class="list-group-item">修改資料</a>
 					</div>
-					
+					<div class="panel panel-info" style="width:200px;">
+					    <a href="<%=request.getContextPath()%>/store/store_list_all_product.jsp " class="list-group-item">查詢所有商品</a>
+					</div>
 					<div class="panel panel-info" style="width:200px;">
 					    <a href="<%=request.getContextPath()%>/store/store_order.jsp " class="list-group-item">查詢所有訂單</a>
 					</div>
@@ -52,9 +55,7 @@ storereportVO=storereportSvc.getReportByStore_id(store_id);
 					<div class="panel panel-info" style="width:200px;">
 					    <a href="<%=request.getContextPath()%>/store/store_insert_product.jsp " class="list-group-item">商品新增</a>
 					</div>
-					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/store/store_update_product.jsp " class="list-group-item">商品修改</a>
-					</div>
+					
 				</div>
 				
 				
@@ -85,8 +86,9 @@ storereportVO=storereportSvc.getReportByStore_id(store_id);
 						<td>${store_reportVO.order_id }</td>
 						<td>${store_reportVO.man_id }</td>
 						<td>${store_reportVO.sr_content}</td>
-						<td>${store_reportVO.sr_time }</td>
+						
 						<td>${store_reportVO.sr_image }</td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_reportVO.sr_time }"/></td>
 						<td>${store_reportVO.sr_state }</td>
 						<td>${store_reportVO.sr_result }</td>
 					</tr>

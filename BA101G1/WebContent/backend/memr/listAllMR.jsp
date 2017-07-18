@@ -51,8 +51,7 @@ MemberReportService mrSvc = new MemberReportService();
 		<th>修改</th>
 		<th>刪除</th>
 	</tr>
-	<%@ include file="pages/page1.file" %> 
-	<c:forEach var="mrVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+	<c:forEach var="mrVO" items="${list}" >
 		<tr align='center' valign='middle' ${(mrVO.mr_id==param.mr_id) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
 			<td>${mrVO.mr_id}</td>
 			<td>${mrVO.mem_id}</td>
@@ -70,7 +69,6 @@ MemberReportService mrSvc = new MemberReportService();
 			     <input type="submit" value="修改"> 
 			     <input type="hidden" name="mr_id" value="${mrVO.mr_id}">
 			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-			    <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
@@ -78,13 +76,11 @@ MemberReportService mrSvc = new MemberReportService();
 			    <input type="submit" value="刪除">
 			    <input type="hidden" name="mr_id" value="${mrVO.mr_id}">
 			    <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-			    <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
 			    <input type="hidden" name="action"value="delete"></FORM>
 			</td>
 		</tr>
 	</c:forEach>
 </table>
-<%@ include file="pages/page2.file" %>
 
 <br>本網頁的路徑:<br><b>
    <font color=blue>request.getServletPath():</font> <%= request.getServletPath()%><br>

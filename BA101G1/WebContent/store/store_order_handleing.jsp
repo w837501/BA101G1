@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.store.model.*"%>
 <%@ page import="com.order.model.*"%>
@@ -24,7 +25,7 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 <body>
 	<div id="page">
 		<div id="header">
-			<jsp:include page="/header.jsp"></jsp:include>
+			<jsp:include page="/header_store.jsp"></jsp:include>
 		</div>
 
 		<div class="container" style="margin-bottom:180px;">
@@ -33,7 +34,9 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 					<div class="panel panel-info" style="width:200px;">
 					    <a href="<%=request.getContextPath() %>/store/store_update.jsp" class="list-group-item">修改資料</a>
 					</div>
-					
+					<div class="panel panel-info" style="width:200px;">
+					    <a href="<%=request.getContextPath()%>/store/store_list_all_product.jsp " class="list-group-item">查詢所有商品</a>
+					</div>
 					<div class="panel panel-info" style="width:200px;">
 					    <a href="<%=request.getContextPath()%>/store/store_order.jsp " class="list-group-item">查詢所有訂單</a>
 					</div>
@@ -52,43 +55,73 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 					<div class="panel panel-info" style="width:200px;">
 					    <a href="<%=request.getContextPath()%>/store/store_insert_product.jsp " class="list-group-item">商品新增</a>
 					</div>
-					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/store/store_update_product.jsp " class="list-group-item">商品修改</a>
-					</div>
+					
 				</div>
 				<div class="col-xs-12 col-sm-7" >
 
 			
 				<div class="page-header"> 
-					  <h1>所有訂單資料</h1>
+					  <h1>進行中訂單資料</h1>
  				</div> 
 				<table border='1' bordercolor='#CCCCFF' width='600'>
 					<tr>
-						<th>訂單編號</th>
-						<th>訂餐時間</th>
-						<th>取餐時間</th>
-						<th>總金額</th>
-						<th>取餐方式</th>
-						<th>訂單狀態</th>
+						<th width="20%">訂單編號</th>
+						<th width="20%">訂餐時間</th>
+						<th width="20%">取餐時間</th>
+						<th width="8%">金額</th>
+						<th width="8%">取餐方式</th>
+						<th width="8%">訂單狀態</th>
+						<th width="8%">確認</th>
+						<th width="8%">顯示</th>
 					</tr>
+				</table>
 					<c:forEach var="store_orderVO" items="${store_orderVO}" >
-					<tr align='center' valign='middle'>
-						<td>
+					<table border='1' bordercolor='#CCCCFF' width='600'>
+					<tr align='center' valign='middle'${(store_orderVO.order_id==param.order_id) ? 'bgcolor=#CCCCFF':''}>
+						<td width="20%">
 							<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO.order_id}">${store_orderVO.order_id}</a>
 						</td>
 				
-						<td>${store_orderVO.order_time }</td>
-						<td>${store_orderVO.totalprice }</td>
-						<td>${store_orderVO.order_way }</td>
-						<td>${store_orderVO.order_taketime }</td>
-						<td>${store_orderVO.order_state }</td>
+						<td width="20%"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO.order_time }"/></td>
+						<td width="20%"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO.order_taketime }"/></td>
+						<td width="8%">${store_orderVO.totalprice }</td>
+						<td width="8%">${store_orderVO.order_way }</td>
+						<td width="8%">${store_orderVO.order_state }</td>
+						<td width="8%">
+							<c:if test="${store_orderVO.order_state eq '已確認'}">
+							<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
+							<input type="submit" value="確認">
+							<input type="hidden" name="order_id" value="${store_orderVO.order_id}">
+							<input type="hidden" name="store_id" value="${storeVO.store_id}">
+							<input type="hidden" name="action" value="Change_Order_To_Take">
+						</form>	
+						</c:if>	
+						
+						<c:if test="${store_orderVO.order_state eq '待取餐'}">
+							<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
+							<input type="submit" value="確認">
+							<input type="hidden" name="order_id" value="${store_orderVO.order_id}">
+							<input type="hidden" name="store_id" value="${storeVO.store_id}">
+							<input type="hidden" name="action" value="Change_Order_To_Finish">
+						</form>	
+						</c:if>					
+						</td>
+						<td width="8%">
+							<input type="button" value="顯示" class="abc" ></Button>
+						</td>
+					</tr>
+					<tr>
+					<jsp:useBean id="orderlistSvc" scope="page" class="com.orderlist.model.OrderlistService"></jsp:useBean>
+					<jsp:useBean id="productSvc" scope="page" class="com.product.model.ProductService"></jsp:useBean>
+					<c:forEach var="orderlistVO" items="${orderlistSvc.getOrderlist(store_orderVO.order_id)}" >
+					<tr style="display: none;">
+						<td>${productSvc.getOnePro(orderlistVO.pro_id).pro_name}</td>		
+						<td>${orderlistVO.order_amount}</td>
+				 		<td>${orderlistVO.price}</td>
 					</tr>
 					</c:forEach>
-				
 				</table>
-				 
-					
-
+				 </c:forEach>
 				</div>
 			</div>
 		</div>
@@ -101,3 +134,11 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
+<script type="text/javascript">
+$(".abc").on('click',function(){
+	console.log($(".abc").index(this))
+	var father=$(".abc").eq($(".abc").index(this)).parent().parent().siblings();
+	father.toggle();
+})
+ 
+</script>

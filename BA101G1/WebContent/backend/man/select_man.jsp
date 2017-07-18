@@ -92,13 +92,6 @@
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/man/select_man.jsp"><i class="fa fa-bar-chart-o"></i>管理員管理</a>
                     </li>
-
-
-
-
-
-
-                    
                 </ul>
               </div>
 

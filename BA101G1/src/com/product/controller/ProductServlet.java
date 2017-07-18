@@ -295,6 +295,7 @@ session.removeAttribute("shoppingcart");
 		if ("getOne_In_ShoppingCart".equals(action)) { // 來自select_page.jsp的請求
 			
 			String str = req.getParameter("store_id");
+			String pro_name=req.getParameter("pro_name");
 			StoreService storeSvc = new StoreService();
 			StoreVO storeVO = storeSvc.getOneStore(str);
 			ProductService productSvc = new ProductService();
@@ -335,6 +336,9 @@ session.removeAttribute("shoppingcart");
 			}
 			
 			session.setAttribute("shoppingcart", buylist);
+			for(ProductVO abc:buylist){
+				System.out.println(abc.getPro_name());
+			}
 			String url ="/store/listProductByStore.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交store.jsp
 			System.out.println(successView);

@@ -129,17 +129,11 @@ public class OrderServlet extends HttpServlet {
 				String order_taketime2 = req.getParameter("order_taketime2").trim();
 				String order_taketime3 = order_taketime1 + " " + order_taketime2 + ":00";
 				System.out.println(order_taketime3);
-				// SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd
-				// HH:mm");
-				// Timestamp aaa=(Timestamp) fmt.parse(order_taketime3);
 				java.sql.Timestamp order_taketime = null;
-				// java.sql.Timestamp order_taketime2 = null;
 				try {
 					order_taketime = java.sql.Timestamp.valueOf(order_taketime3);
-					// order_taketime = aaa;
 				} catch (IllegalArgumentException e) {
 					order_taketime = new java.sql.Timestamp(System.currentTimeMillis());
-					// errorMsgs.add("請輸入日期!");
 				}
 				System.out.println("order_taketime" + order_taketime);
 				Store_OrderVO orderVO = new Store_OrderVO();
@@ -207,42 +201,45 @@ public class OrderServlet extends HttpServlet {
 					successView.forward(req, res);
 
 				} else if (state.equals("已確認")) {
+					System.out.println("已確認");
 					Store_OrderService orderSvc = new Store_OrderService();
-					List<Store_OrderVO> orderList = new LinkedList<Store_OrderVO>();
-					orderList = orderSvc.getOrderByState(state,store_id);
-
-					if (orderList.isEmpty()) {
-						errorMsgs.add("查無資料");
-						return;
-					}
-
-					if (!errorMsgs.isEmpty()) {
-						RequestDispatcher failureView = req
-								.getRequestDispatcher("/frontend/selectOrder/selectOrder.jsp");
-						failureView.forward(req, res);
-					}
-					req.setAttribute("orderList", orderList);
+					List<Store_OrderVO> store_orderVO1 = new LinkedList<Store_OrderVO>();
+					store_orderVO1= orderSvc.getOrderByState(state,store_id);
+//
+//					if (store_orderVO.isEmpty()) {
+//						errorMsgs.add("查無資料");
+//						return;
+//					}
+//
+//					if (!errorMsgs.isEmpty()) {
+//					System.out.println("??????????????");
+//						RequestDispatcher failureView = req
+//								.getRequestDispatcher("/frontend/selectOrder/selectOrder.jsp");
+//						failureView.forward(req, res);
+//					}
+					System.out.println("12313213");
+					req.setAttribute("store_orderVO1", store_orderVO1);
 					RequestDispatcher successView = req
-							.getRequestDispatcher("/frontend/selectOrder/ListOrderState_confirm.jsp");
+							.getRequestDispatcher("/store/store_order_handleing.jsp");
 					successView.forward(req, res);
 				} else if (state.equals("待取餐")) {
 					Store_OrderService orderSvc = new Store_OrderService();
 					List<Store_OrderVO> orderList = new LinkedList<Store_OrderVO>();
 					orderList = orderSvc.getOrderByState(state,store_id);
-
-					if (orderList.isEmpty()) {
-						errorMsgs.add("查無資料");
-						return;
-					}
-
-					if (!errorMsgs.isEmpty()) {
-						RequestDispatcher failureView = req
-								.getRequestDispatcher("/frontend/selectOrder/selectOrder.jsp");
-						failureView.forward(req, res);
-					}
+//
+//					if (orderList.isEmpty()) {
+//						errorMsgs.add("查無資料");
+//						return;
+//					}
+//
+//					if (!errorMsgs.isEmpty()) {
+//						RequestDispatcher failureView = req
+//								.getRequestDispatcher("/store/store_order_handleing.jsp");
+//						failureView.forward(req, res);
+//					}
 					req.setAttribute("orderList", orderList);
 					RequestDispatcher successView = req
-							.getRequestDispatcher("/frontend/selectOrder/ListOrderState_nottake.jsp");
+							.getRequestDispatcher("/store/store_order_handleing.jsp");
 					successView.forward(req, res);
 				} else if (state.equals("已取餐")) {
 					Store_OrderService orderSvc = new Store_OrderService();
@@ -256,12 +253,12 @@ public class OrderServlet extends HttpServlet {
 
 					if (!errorMsgs.isEmpty()) {
 						RequestDispatcher failureView = req
-								.getRequestDispatcher("/frontend/selectOrder/selectOrder.jsp");
+								.getRequestDispatcher("/store/store_order_handleing.jsp");
 						failureView.forward(req, res);
 					}
 					req.setAttribute("orderList", orderList);
 					RequestDispatcher successView = req
-							.getRequestDispatcher("/frontend/selectOrder/ListOrderState_finish.jsp");
+							.getRequestDispatcher("/store/store_order_finish.jsp");
 					successView.forward(req, res);
 				} else if (state.equals("已取消")) {
 					Store_OrderService orderSvc = new Store_OrderService();
@@ -280,7 +277,7 @@ public class OrderServlet extends HttpServlet {
 					}
 					req.setAttribute("orderList", orderList);
 					RequestDispatcher successView = req
-							.getRequestDispatcher("/frontend/selectOrder/ListOrderState_cancel.jsp");
+							.getRequestDispatcher("/frontend/mem/member_info_order.jsp");
 					successView.forward(req, res);
 				}
 			} catch (Exception e) {
@@ -298,7 +295,7 @@ public class OrderServlet extends HttpServlet {
 				store_orderSvc.confirm_order(order_id, "已確認");
 
 				RequestDispatcher successView = req
-						.getRequestDispatcher("order.do?action=getOrder_State&order_state=已確認");
+						.getRequestDispatcher("/frontend/selectOrder/order.do?action=getOrder_State&order_state=已確認");
 				successView.forward(req, res);
 			} catch (Exception e) {
 				e.printStackTrace();

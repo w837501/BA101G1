@@ -6,21 +6,13 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import org.hibernate.*;
+
+import com.man.model.ManagerVO;
 import com.tools.HibernateUtil;
 
 
 public class PermissionDAO implements PermissionDAO_interface{
 	
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA101G1");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
-
 	private static final String GET_ALL_STMT = "from PermissionVO order by man_id desc";
 	@Override
 	public void insert(PermissionVO permissionVO) {
@@ -51,7 +43,7 @@ public class PermissionDAO implements PermissionDAO_interface{
 
 
 	@Override
-	public void delete(String man_id) {
+	public void delete(ManagerVO managerVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
@@ -63,7 +55,7 @@ public class PermissionDAO implements PermissionDAO_interface{
 			
 //        【或此時多方(也)可採用去除關聯關係後，再刪除的方式】
 			PermissionVO permissionVO = new PermissionVO();
-			permissionVO.setMan_id(man_id);
+			permissionVO.setManagerVO(managerVO);
 			session.delete(permissionVO);
 			
 //        【此時多方不可(不宜)採用cascade聯級刪除】
@@ -79,12 +71,12 @@ public class PermissionDAO implements PermissionDAO_interface{
 	}
 	
 	@Override
-	public PermissionVO findByPrimaryKey(String man_id) {
+	public PermissionVO findByPrimaryKey(ManagerVO managerVO) {
 		PermissionVO permissionVO = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			permissionVO = (PermissionVO) session.get(PermissionVO.class, man_id);
+			permissionVO = (PermissionVO) session.get(PermissionVO.class, managerVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
