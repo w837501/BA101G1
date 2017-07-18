@@ -429,4 +429,10 @@ public class MemberReportJDBCDAO implements MemberReportDAO_interface {
 		}
 		return list;
 	}
+
+	@Override
+	public List<MemberReportVO> findByMR_state(String mrState) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

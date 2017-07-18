@@ -1,5 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ page import="com.man.model.*"%>
+<%@ page import="com.permission.model.*" %>   
+<%
+//	ManagerVO managerVO = (ManagerVO)request.getAttribute("managerVO");
+//	session.setAttribute("manVO" , managerVO);
+%>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -51,10 +59,30 @@
                 <ul class="nav" id="main-menu">
                  
 
+	
 
+			<c:forEach var="perm" items="${permList}">
+				<c:if test="${perm.pa_id eq '0'}">
                     <li class="active-link">
                         <a href="<%=request.getContextPath() %>/backend/mem/select_mem.jsp" ><i class="fa fa-desktop "></i>會員管理 <span class="badge">Included</span></a>
                     </li>
+
+                 </c:if>
+			</c:forEach>
+			<c:forEach var="perm" items="${permList}">
+				<c:if test="${perm.pa_id eq '9'}">
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/memr/select_memr.jsp"><i class="glyphicon glyphicon-thumbs-down"></i>會員檢舉  <span class="badge">Included</span></a>
+                    </li>
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/str/select_str.jsp"><i class="	glyphicon glyphicon-hand-down "></i>商家檢舉  <span class="badge">Included</span></a>
+                    </li>
+                </c:if>
+			</c:forEach>
+
+			<c:forEach var="perm" items="${permList}">
+				<c:if test="${perm.pa_id eq '10'}">
+
                    
 
                     <li>
@@ -76,26 +104,27 @@
                       </div>                   
                     </li>
 <!-- ================================== -->
+
                     <li>
                         <a href="#"><i class="fa fa-qrcode "></i>審核管理<span class="badge">要連結哪個?</span></a>
                     </li>
-
+                </c:if>
+			</c:forEach>
+			
                     <li>
-                        <a href="<%=request.getContextPath() %>/backend/push/selectPage.jsp"><i class="fa fa-edit "></i>推播管理 </a>
+                        <a href="<%=request.getContextPath() %>/backend/man/noPer.jsp"><i class="fa fa-edit "></i>假推播錯誤頁面 </a>
                     </li>
-
-                     <li>
-                        <a href="#"><i class="fa fa-edit "></i>個人資料</a>
-                    </li>
+                    
+            <c:forEach var="perm" items="${permList}">
+				<c:if test="${perm.pa_id eq '8'}">
                     <li>
-                        <a href="<%=request.getContextPath() %>/backend/rev/Select_Rev.jsp"><i class="fa fa-bar-chart-o"></i>商家月結算</a>
-                    </li>
-                    <li>
-                        <a href="<%=request.getContextPath() %>/backend/man/select_man.jsp"><i class="fa fa-bar-chart-o"></i>管理員管理</a>
+                        <a href="<%=request.getContextPath() %>/backend/man/ListAllMan.jsp"><i class="fa fa-bar-chart-o"></i>管理員管理</a>
                     </li>
                     <li>
-                        <a href="<%=request.getContextPath() %>/backend/per/select_per.jsp"><i class="fa fa-bar-chart-o"></i>權限管理</a>
+                        <a href="<%=request.getContextPath() %>/backend/per/ListAllPer.jsp"><i class="fa fa-bar-chart-o"></i>權限管理</a>
                     </li>
+                </c:if>
+			</c:forEach>
 
 
 

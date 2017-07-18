@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.*;
-import java.util.Base64;
 
 import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
@@ -25,9 +24,8 @@ public class MemberReportServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		System.out.println("aaaaaaa"+action);
 		
-		if ("getOne_For_Display".equals(action)) { // ¨Ó¦Ûselect_page.jspªº½Ğ¨D
+		if ("getOne_For_Display".equals(action)) { // ä¾†è‡ªselect_page.jspçš„è«‹æ±‚
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -35,64 +33,70 @@ public class MemberReportServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z**********************/
+				/***************************1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç†**********************/
 				String str = req.getParameter("mr_id");
 				if (str == null || (str.trim()).length() == 0) {
-					errorMsgs.add("½Ğ¿é¤J·|­ûÀËÁ|½s¸¹");
+					errorMsgs.add("è«‹è¼¸å…¥æœƒå“¡æª¢èˆ‰ç·¨è™Ÿ");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/memr/selectPage.jsp");
+
+							.getRequestDispatcher("/backend/memr/select_memr.jsp");
+
 					failureView.forward(req, res);
-					return;//µ{¦¡¤¤Â_
+					return;//ç¨‹å¼ä¸­æ–·
 				}
 				
 				String mr_id = null;
 				try {
 					mr_id = new String(str);
 				} catch (Exception e) {
-					errorMsgs.add("·|­ûÀËÁ|½s¸¹®æ¦¡¤£¥¿½T");
+					errorMsgs.add("æœƒå“¡æª¢èˆ‰ç·¨è™Ÿæ ¼å¼ä¸æ­£ç¢º");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/memr/selectPage.jsp");
+							.getRequestDispatcher("/backend/memr/select_memr.jsp");
+
 					failureView.forward(req, res);
-					return;//µ{¦¡¤¤Â_
+					return;//ç¨‹å¼ä¸­æ–·
 				}
 				
-				/***************************2.¶}©l¬d¸ß¸ê®Æ*****************************************/
+				/***************************2.é–‹å§‹æŸ¥è©¢è³‡æ–™*****************************************/
 				MemberReportService mrSvc = new MemberReportService();
 				MemberReportVO mrVO = mrSvc.getOneMemberReport(mr_id);
 				if (mrVO == null) {
-					errorMsgs.add("¬dµL¸ê®Æ");
+					errorMsgs.add("æŸ¥ç„¡è³‡æ–™");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backend/memr/selectPage.jsp");
+							.getRequestDispatcher("/backend/memr/select_memr.jsp");
+
 					failureView.forward(req, res);
-					return;//µ{¦¡¤¤Â_
+					return;//ç¨‹å¼ä¸­æ–·
 				}
 				
-				/***************************3.¬d¸ß§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)*************/
-				req.setAttribute("mrVO", mrVO); // ¸ê®Æ®w¨ú¥XªºempVOª«¥ó,¦s¤Jreq
-				String url = "/backend/memr/listOneMR.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // ¦¨¥\Âà¥ælistOneEmp.jsp
+				/***************************3.æŸ¥è©¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view)*************/
+				req.setAttribute("mrVO", mrVO); // è³‡æ–™åº«å–å‡ºçš„empVOç‰©ä»¶,å­˜å…¥req
+				String url = "/backend/memr/select_memr.jsp";
+
+				RequestDispatcher successView = req.getRequestDispatcher(url); // æˆåŠŸè½‰äº¤listOneEmp.jsp
 				successView.forward(req, res);
 
-				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z*************************************/
+				/***************************å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç†*************************************/
 			} catch (Exception e) {
-				errorMsgs.add("µLªk¨ú±o¸ê®Æ:" + e.getMessage());
+				errorMsgs.add("ç„¡æ³•å–å¾—è³‡æ–™:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/backend/memr/selectPage.jsp");
+						.getRequestDispatcher("/backend/memr/select_memr.jsp");
+
 				failureView.forward(req, res);
 			}
 		}
 		if ("listAll3".equals(action)) {
 			System.out.println("bbbbb"+req.getParameter("action"));
-//			req.setAttribute("whichPage", "tab1");    // ¸ê®Æ®w¨ú¥Xªºsetª«¥ó,¦s¤Jrequest
+//			req.setAttribute("whichPage", "tab1");    // è³‡æ–™åº«å–å‡ºçš„setç‰©ä»¶,å­˜å…¥request
 			
 			String url = "/backend/memr/select_memr.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
@@ -101,32 +105,33 @@ public class MemberReportServlet extends HttpServlet {
 		
 		
 		
-		if ("getOne_For_Update".equals(action)) { // ¨Ó¦ÛlistAllEmp.jsp ©Î  /dept/listEmps_ByDeptno.jsp ªº½Ğ¨D
+		if ("getOne_For_Update".equals(action)) { // ä¾†è‡ªlistAllEmp.jsp æˆ–  /dept/listEmps_ByDeptno.jsp çš„è«‹æ±‚
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 			
-			String requestURL = req.getParameter("requestURL"); // °e¥X­×§ïªº¨Ó·½ºô­¶¸ô®|: ¥i¯à¬°¡i/emp/listAllEmp.jsp¡j ©Î  ¡i/dept/listEmps_ByDeptno.jsp¡j ©Î ¡i /dept/listAllDept.jsp¡j		
+			String requestURL = req.getParameter("requestURL"); // é€å‡ºä¿®æ”¹çš„ä¾†æºç¶²é è·¯å¾‘: å¯èƒ½ç‚ºã€/emp/listAllEmp.jspã€‘ æˆ–  ã€/dept/listEmps_ByDeptno.jspã€‘ æˆ– ã€ /dept/listAllDept.jspã€‘		
 			
 			try {
-				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ****************************************/
+				/***************************1.æ¥æ”¶è«‹æ±‚åƒæ•¸****************************************/
 				String mr_id = new String(req.getParameter("mr_id"));
 				
-				/***************************2.¶}©l¬d¸ß¸ê®Æ****************************************/
+				/***************************2.é–‹å§‹æŸ¥è©¢è³‡æ–™****************************************/
 				MemberReportService mrSvc = new MemberReportService();
 				MemberReportVO mrVO = mrSvc.getOneMemberReport(mr_id);
 								
-				/***************************3.¬d¸ß§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)************/
-				req.setAttribute("mrVO", mrVO); // ¸ê®Æ®w¨ú¥XªºempVOª«¥ó,¦s¤Jreq
-				String url = "/backend/memr/update_mr_input.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // ¦¨¥\Âà¥æupdate_emp_input.jsp
+				/***************************3.æŸ¥è©¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view)************/
+				req.setAttribute("mrVO", mrVO); // è³‡æ–™åº«å–å‡ºçš„empVOç‰©ä»¶,å­˜å…¥req
+				String url = "/backend/memr/select_memr.jsp";
+
+				RequestDispatcher successView = req.getRequestDispatcher(url); // æˆåŠŸè½‰äº¤update_emp_input.jsp
 				successView.forward(req, res);
 
-				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z************************************/
+				/***************************å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç†************************************/
 			} catch (Exception e) {
-				errorMsgs.add("­×§ï¸ê®Æ¨ú¥X®É¥¢±Ñ:"+e.getMessage());
+				errorMsgs.add("ä¿®æ”¹è³‡æ–™å–å‡ºæ™‚å¤±æ•—:"+e.getMessage());
 				RequestDispatcher failureView = req
 						.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
@@ -134,94 +139,104 @@ public class MemberReportServlet extends HttpServlet {
 		}
 		
 		
-		if ("update".equals(action)) { // ¨Ó¦Ûupdate_emp_input.jspªº½Ğ¨D
+		if ("update".equals(action)) { // ä¾†è‡ªupdate_emp_input.jspçš„è«‹æ±‚
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 			
-			String requestURL = req.getParameter("requestURL"); // °e¥X­×§ïªº¨Ó·½ºô­¶¸ô®|: ¥i¯à¬°¡i/emp/listAllEmp.jsp¡j ©Î  ¡i/dept/listEmps_ByDeptno.jsp¡j ©Î ¡i /dept/listAllDept.jsp¡j
+			String requestURL = req.getParameter("requestURL"); // é€å‡ºä¿®æ”¹çš„ä¾†æºç¶²é è·¯å¾‘: å¯èƒ½ç‚ºã€/emp/listAllEmp.jspã€‘ æˆ–  ã€/dept/listEmps_ByDeptno.jspã€‘ æˆ– ã€ /dept/listAllDept.jspã€‘
 		
 			try {
-				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z**********************/
+				/***************************1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç†**********************/
 				String mr_id = new String(req.getParameter("mr_id").trim());
 				String mem_id = req.getParameter("mem_id").trim();
 				String order_id = req.getParameter("order_id").trim();
 				String sc_id = req.getParameter("sc_id").trim();
 				String man_id = req.getParameter("man_id").trim();
 				String mr_content = req.getParameter("mr_content").trim();
-				byte[] mr_image = req.getParameter("mr_image").trim().getBytes();
 				
+				MemberReportService mrSvc = new MemberReportService();
+				MemberReportVO mrVO = mrSvc.getOneMemberReport(mr_id);
+				byte[] mr_image = mrVO.getMr_image();
+
+
 				java.sql.Timestamp mr_time = null;
 				try {
 					mr_time = java.sql.Timestamp.valueOf(req.getParameter("mr_time").trim());
 				} catch (IllegalArgumentException e) {
 					mr_time = new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsgs.add("½Ğ¿é¤J¤é´Á87!");
+					errorMsgs.add("è«‹è¼¸å…¥æ—¥æœŸ87!");
 				}
 
 				String mr_state = null;
 				try {
-					mr_state = req.getParameter("mr_state").trim();
+					mr_state = "å·²å¯©æ ¸";
 				} catch (Exception e) {
-					errorMsgs.add("½Ğ¿é¤J·|­ûÀËÁ|ª¬ºA");
+					errorMsgs.add("è«‹è¼¸å…¥æœƒå“¡æª¢èˆ‰ç‹€æ…‹");
 				}
 
 				String mr_result = null;
 				try {
 					mr_result = req.getParameter("mr_result").trim();
+					if(mr_state.isEmpty()){
+						mr_state = "æœªå¯©æ ¸";
+					}
 				} catch (Exception e) {
-					errorMsgs.add("·|­ûÀËÁ|ª¬ºA½Ğ¶ñ¼Æ¦r01.");
+					errorMsgs.add("æœƒå“¡æª¢èˆ‰ç‹€æ…‹è«‹å¡«æ•¸å­—01.");
 				}
 
 
-				MemberReportVO mrVO = new MemberReportVO();
 				mrVO.setMr_id(mr_id);
 				mrVO.setMem_id(mem_id);
 				mrVO.setOrder_id(order_id);
 				mrVO.setSc_id(sc_id);
 				mrVO.setMan_id(man_id);
 				mrVO.setMr_content(mr_content);
-				mrVO.setMr_image(null);
+				mrVO.setMr_image(mr_image);
 				mrVO.setMr_time(mr_time);
 				mrVO.setMr_state(mr_state);
 				mrVO.setMr_result(mr_result);
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("mrVO", mrVO); // §t¦³¿é¤J®æ¦¡¿ù»~ªºmrVOª«¥ó,¤]¦s¤Jreq
+					req.setAttribute("mrVO", mrVO); // å«æœ‰è¼¸å…¥æ ¼å¼éŒ¯èª¤çš„mrVOç‰©ä»¶,ä¹Ÿå­˜å…¥req
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/backend/memr/update_mr_input.jsp");
 					failureView.forward(req, res);
-					return; //µ{¦¡¤¤Â_
+					return; //ç¨‹å¼ä¸­æ–·
 				}
 				
+
 				MemberReportService mrSvc = new MemberReportService();
+
 				mrVO = mrSvc.updateMemberReport(mr_id , mem_id, order_id, sc_id, man_id, mr_content,mr_image,mr_time,mr_state,mr_result);
 				
 
-                String url = requestURL;
-				RequestDispatcher successView = req.getRequestDispatcher(url);   // ­×§ï¦¨¥\«á,Âà¥æ¦^°e¥X­×§ïªº¨Ó·½ºô­¶
+
+                String url="/backend/memr/select_memr.jsp";
+
+				RequestDispatcher successView = req.getRequestDispatcher(url);   // ä¿®æ”¹æˆåŠŸå¾Œ,è½‰äº¤å›é€å‡ºä¿®æ”¹çš„ä¾†æºç¶²é 
 				successView.forward(req, res);
 
 			} catch (Exception e) {
-				errorMsgs.add("­×§ï¸ê®Æ¥¢±Ñ:"+e.getMessage());
+				errorMsgs.add("ä¿®æ”¹è³‡æ–™å¤±æ•—:"+e.getMessage());
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/backend/memr/update_mr_input.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
-        if ("insert".equals(action)) { // ¨Ó¦ÛaddEmp.jspªº½Ğ¨D  
-			System.out.println("¦w¦w ");
+        if ("insert".equals(action)) { // ä¾†è‡ªaddEmp.jspçš„è«‹æ±‚  
+			System.out.println("å®‰å®‰ ");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 		try {
-				/***********************1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z*************************/
+				/***********************1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç†*************************/
 
 				String mem_id = req.getParameter("mem_id");
 				System.out.println(mem_id);
@@ -256,7 +271,7 @@ System.out.println("2");
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("memberreportVO", memberreportVO); // §t¦³¿é¤J®æ¦¡¿ù»~ªºempVOª«¥ó,¤]¦s¤Jreq
+					req.setAttribute("memberreportVO", memberreportVO); // å«æœ‰è¼¸å…¥æ ¼å¼éŒ¯èª¤çš„empVOç‰©ä»¶,ä¹Ÿå­˜å…¥req
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/frontend/mem/member_addMR.jsp");
 					failureView.forward(req, res);
@@ -273,7 +288,7 @@ System.out.println("2");
 				System.out.println("4");
 				req.setAttribute("memberreportVO", memberreportVO);
 				String url = "/frontend/mem/member_report.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // ·s¼W¦¨¥\«áÂà¥ælistAllEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // æ–°å¢æˆåŠŸå¾Œè½‰äº¤listAllEmp.jsp
 				successView.forward(req, res);				
 			} catch (Exception e) {
 				RequestDispatcher failureView = req
@@ -283,41 +298,102 @@ System.out.println("2");
 		}
 		
        
-		if ("delete".equals(action)) { // ¨Ó¦ÛlistAllEmp.jsp ©Î  /dept/listEmps_ByDeptno.jspªº½Ğ¨D
+		if ("delete".equals(action)) { // ä¾†è‡ªlistAllEmp.jsp æˆ–  /dept/listEmps_ByDeptno.jspçš„è«‹æ±‚
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 			
-			String requestURL = req.getParameter("requestURL"); // °e¥X§R°£ªº¨Ó·½ºô­¶¸ô®|: ¥i¯à¬°¡i/emp/listAllEmp.jsp¡j ©Î  ¡i/dept/listEmps_ByDeptno.jsp¡j ©Î ¡i /dept/listAllDept.jsp¡j
+			String requestURL = req.getParameter("requestURL"); // é€å‡ºåˆªé™¤çš„ä¾†æºç¶²é è·¯å¾‘: å¯èƒ½ç‚ºã€/emp/listAllEmp.jspã€‘ æˆ–  ã€/dept/listEmps_ByDeptno.jspã€‘ æˆ– ã€ /dept/listAllDept.jspã€‘
 
 			try {
-				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ***************************************/
+				/***************************1.æ¥æ”¶è«‹æ±‚åƒæ•¸***************************************/
 				String mr_id = new String(req.getParameter("mr_id"));
 				
-				/***************************2.¶}©l§R°£¸ê®Æ***************************************/
+				/***************************2.é–‹å§‹åˆªé™¤è³‡æ–™***************************************/
 				MemberReportService mrSvc = new MemberReportService();
 				MemberReportVO mrVO = mrSvc.getOneMemberReport(mr_id);
 				mrSvc.deleteMemberReport(mr_id);
 				
-				/***************************3.§R°£§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)***********/
+				/***************************3.åˆªé™¤å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view)***********/
 //				DeptService deptSvc = new DeptService();
 //				if(requestURL.equals("/dept/listEmps_ByDeptno.jsp") || requestURL.equals("/dept/listAllDept.jsp"))
-//					req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(empVO.getDeptno())); // ¸ê®Æ®w¨ú¥Xªºlistª«¥ó,¦s¤Jrequest
+//					req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(empVO.getDeptno())); // è³‡æ–™åº«å–å‡ºçš„listç‰©ä»¶,å­˜å…¥request
 //				
 				String url = requestURL;
-				RequestDispatcher successView = req.getRequestDispatcher(url); // §R°£¦¨¥\«á,Âà¥æ¦^°e¥X§R°£ªº¨Ó·½ºô­¶
+				RequestDispatcher successView = req.getRequestDispatcher(url); // åˆªé™¤æˆåŠŸå¾Œ,è½‰äº¤å›é€å‡ºåˆªé™¤çš„ä¾†æºç¶²é 
 				successView.forward(req, res);
 				
-				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z**********************************/
+				/***************************å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç†**********************************/
 			} catch (Exception e) {
-				errorMsgs.add("§R°£¸ê®Æ¥¢±Ñ:"+e.getMessage());
+				errorMsgs.add("åˆªé™¤è³‡æ–™å¤±æ•—:"+e.getMessage());
 				RequestDispatcher failureView = req
 						.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			}
 		}
+
+		if ("listAll".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("whichPage", "åˆ—å‡ºæ‰€æœ‰æœƒå“¡æª¢èˆ‰");    // è³‡æ–™åº«å–å‡ºçš„setç‰©ä»¶,å­˜å…¥request
+				String url = "/backend/memr/select_page.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+		}
+		if ("listAll3".equals(action)) {
+//			req.setAttribute("whichPage", "tab1");    // è³‡æ–™åº«å–å‡ºçš„setç‰©ä»¶,å­˜å…¥request
+			MemberReportService mrSvc = new MemberReportService();
+			List<MemberReportVO> mrList = null;
+			String whichTab = req.getParameter("whichTab");
+			if(whichTab.equals("tab1")){
+				mrList = mrSvc.findByMR_state("æœªå¯©æ ¸");
+			}
+			if(whichTab.equals("tab2")){
+				mrList = mrSvc.findByMR_state("å¯©æ ¸ä¸­");
+			}
+			if(whichTab.equals("tab3")){
+				mrList = mrSvc.findByMR_state("å·²å¯©æ ¸");
+			}
+			req.setAttribute("list3", mrList);
+			System.out.println("whichTab : "+whichTab+" list " + mrList);
+			String url = "/backend/memr/select_memr.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
+		
+		if ("readPic".equals(action)) {
+//			req.setAttribute("whichPage", "tab1");    // è³‡æ–™åº«å–å‡ºçš„setç‰©ä»¶,å­˜å…¥request
+			/******************************read img*********************************************/
+			res.setContentType("image/gif");  // èˆ‡27è¡Œäº’ç›¸è¡çªï¼ŒSL314 P.90é 
+			ServletOutputStream out = res.getOutputStream();
+			String mr_id = req.getParameter("mr_id");
+			req.setCharacterEncoding("UTF-8");
+//			String mr_id2 = new String(mr_id.getBytes("ISO-8859-1"),"UTF-8");
+			try {
+				Connection con = null;
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(
+					"SELECT mr_image FROM member_report WHERE mr_id ='" + mr_id + "'" );
+				if (rs.next()) {
+					BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("mr_image"));//æ¬„ä½
+					byte[] buf = new byte[4 * 1024]; // 4K buffer
+					int len;
+					while ((len = in.read(buf)) != -1) {
+						out.write(buf, 0, len);
+					}
+					in.close();
+				}
+				rs.close();
+				stmt.close();
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+/******************************read img*********************************************/
+			String url = "/backend/memr/select_memr.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+
 	}
 	public static byte[] getPictureByteArrayFromWeb(Part part) throws IOException {
 		InputStream is = part.getInputStream();
@@ -333,11 +409,12 @@ System.out.println("2");
 	}
 	public String getFileNameFromPart(Part part) {
 		String header = part.getHeader("content-disposition");
-		System.out.println("header=" + header); // ´ú¸Õ¥Î
+		System.out.println("header=" + header); // æ¸¬è©¦ç”¨
 		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
-		System.out.println("filename=" + filename); // ´ú¸Õ¥Î
+		System.out.println("filename=" + filename); // æ¸¬è©¦ç”¨
 		if (filename.length() == 0) {
 			return null;
+
 		}
 		return filename;
 	}
