@@ -56,6 +56,14 @@
     <url-pattern>/backend/mem/mem.do</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>store_commit</servlet-name>
+    <servlet-class>com.store_commit.controller.StoreCommitServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>store_commit</servlet-name>
+    <url-pattern>/storecommit.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>RevenueServlet</servlet-name>
     <servlet-class>com.rev.controller.RevenueServlet</servlet-class>
   </servlet>
@@ -101,7 +109,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>PushServlet</servlet-name>
-    <url-pattern>/backend/push/push.do</url-pattern>
+    <url-pattern>/push/push.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>MemberReportServlet</servlet-name>
@@ -109,7 +117,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>MemberReportServlet</servlet-name>
-    <url-pattern>/backend/memr/member_report.do</url-pattern>
+    <url-pattern>/member_report/member_report.do</url-pattern>
   </servlet-mapping>
     <servlet>
     <servlet-name>OrderListServlet</servlet-name>
@@ -134,7 +142,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>StoreReportServlet</servlet-name>
-    <url-pattern>/backend/str/store_report.do</url-pattern>
+    <url-pattern>/store_report/store_report.do</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -214,6 +222,43 @@
   <filter-mapping>
     <filter-name>MemberLoginFilter</filter-name>
     <url-pattern>/frontend/mem/member_info.jsp</url-pattern>
+    <url-pattern>/frontend/shoppingcart/Checkout.jsp</url-pattern>
+    <url-pattern>/frontend/mem/member_info_order.jsp</url-pattern>
+    <url-pattern>/frontend/mem/member_info_update.jsp</url-pattern>
+    <url-pattern>/frontend/mem/member_report.jsp</url-pattern>
+    <url-pattern>/frontend/mem/member_addMR.jsp</url-pattern>
+    <url-pattern>/backend/store_commit/addStoreCommit.jsp</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+    <dispatcher>ASYNC</dispatcher>
+  </filter-mapping>
+   <servlet>
+    <servlet-name>StoreLoginHandler</servlet-name>
+    <servlet-class>com.store.controller.StoreLoginHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StoreLoginHandler</servlet-name>
+    <url-pattern>/StoreLoginHandler</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <filter-name>StoreLoginFilter</filter-name>
+    <filter-class>com.store.controller.StoreLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>StoreLoginFilter</filter-name>
+    <url-pattern>/store/store_info.jsp</url-pattern>
+    <url-pattern>/store/store_order.jsp</url-pattern>
+    <url-pattern>/store/store_order_finish.jsp</url-pattern>
+    <url-pattern>/store/store_order_handleing.jsp</url-pattern>
+    <url-pattern>/store/store_order_notconfirm.jsp</url-pattern>
+    <url-pattern>/store/store_update.jsp</url-pattern>
+    <url-pattern>/store/store_report.jsp</url-pattern>
+    <url-pattern>/store/store_addSR.jsp</url-pattern>
+    <url-pattern>/store/store_insert_product.jsp</url-pattern>
+    <url-pattern>/store/store_list_all_product.jsp</url-pattern>
+    <url-pattern>/store/store_list_all_commit.jsp</url-pattern>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>

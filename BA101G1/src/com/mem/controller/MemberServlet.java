@@ -25,7 +25,7 @@ public class MemberServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
+		HttpSession session=req.getSession();
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
@@ -36,7 +36,7 @@ public class MemberServlet extends HttpServlet {
 			try {
 				String mem_id = req.getParameter("mem_id");
 				if (mem_id == null || mem_id.trim().isEmpty()) {
-					errorMsgs.add("è«‹è¼¸å…¥æœƒå“¡ç·¨è™Ÿ");
+					errorMsgs.add("½Ğ¿é¤J·|­û½s¸¹");
 				}
 				System.out.println("mem_id" + mem_id);
 				if (!errorMsgs.isEmpty()) {
@@ -47,7 +47,7 @@ public class MemberServlet extends HttpServlet {
 				MemberService memSvc = new MemberService();
 				MemberVO memberVO = memSvc.getOneMem(mem_id);
 				if (memberVO == null) {
-					errorMsgs.add("æŸ¥ç„¡è³‡æ–™");
+					errorMsgs.add("¬dµL¸ê®Æ");
 				}
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/backend/mem/select_mem.jsp");
@@ -60,30 +60,29 @@ public class MemberServlet extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
-				errorMsgs.add("ç„¡æ³•å–å¾—è³‡æ–™:" + e.getMessage());
+				errorMsgs.add("µLªk¨ú±o¸ê®Æ:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/backend/mem/select_mem.jsp");
 				failureView.forward(req, res);
 			}
 
 		}
-		// ä¿®æ”¹
+		// ­×§ï
 		if ("getOne_For_Update".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			req.setAttribute("whichPage", "ä¿®æ”¹å–®ä¸€æœƒå“¡");    // è³‡æ–™åº«å–å‡ºçš„setç‰©ä»¶,å­˜å…¥request
-			try{
-				String mem_id=new String(req.getParameter("mem_id"));
-				MemberService memberSvc=new MemberService();
-				MemberVO memberVO=memberSvc.getOneMem(mem_id);
+			try {
+				String mem_id = new String(req.getParameter("mem_id"));
+				MemberService memberSvc = new MemberService();
+				MemberVO memberVO = memberSvc.getOneMem(mem_id);
+				System.out.println("mem_id1:" + mem_id);
 				req.setAttribute("memberVO", memberVO);
-				
-				String url="/backend/mem/select_mem.jsp";
-				RequestDispatcher successView=req.getRequestDispatcher(url);
 
+				String url = "/backend/mem/Update_mem.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
-				errorMsgs.add("ç„¡æ³•å–å¾—è¦ä¿®æ”¹çš„è³‡æ–™:" + e.getMessage());
+				errorMsgs.add("µLªk¨ú±o­n­×§ïªº¸ê®Æ:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/listAllMem.jsp");
 				failureView.forward(req, res);
 			}
@@ -91,32 +90,32 @@ public class MemberServlet extends HttpServlet {
 		if ("update".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "åˆ—å‡ºæ‰€æœ‰æœƒå“¡");    // è³‡æ–™åº«å–å‡ºçš„setç‰©ä»¶,å­˜å…¥request
-			try{
-				String mem_id=req.getParameter("mem_id");
-				
-				String mem_name=req.getParameter("mem_name");
-				String mem_phone=req.getParameter("mem_phone");
-				String mem_pw=req.getParameter("mem_pw");
-				String mem_mail=req.getParameter("mem_mail");
-				
-				if (mem_name == null ||mem_name.trim().isEmpty()) {
-					errorMsgs.add("è«‹è¼¸å…¥åå­—");
+
+			try {
+				String mem_id = req.getParameter("mem_id");
+
+				String mem_name = req.getParameter("mem_name");
+				String mem_phone = req.getParameter("mem_phone");
+				String mem_pw = req.getParameter("mem_pw");
+				String mem_mail = req.getParameter("mem_mail");
+
+				if (mem_name == null || mem_name.trim().isEmpty()) {
+					errorMsgs.add("½Ğ¿é¤J¦W¦r");
 				} else {
 					mem_name = req.getParameter("mem_name");
 				}
 				if (mem_phone == null || mem_phone.trim().isEmpty()) {
-					errorMsgs.add("è«‹è¼¸å…¥é›»è©±");
+					errorMsgs.add("½Ğ¿é¤J¹q¸Ü");
 				} else {
 					mem_phone = req.getParameter("mem_phone");
 				}
 				if (mem_pw == null || mem_pw.trim().isEmpty()) {
-					errorMsgs.add("è«‹è¼¸å…¥å¯†ç¢¼");
+					errorMsgs.add("½Ğ¿é¤J±K½X");
 				} else {
 					mem_pw = req.getParameter("mem_pw");
 				}
 				if (mem_mail == null || mem_mail.trim().isEmpty()) {
-					errorMsgs.add("è«‹è¼¸å…¥ä¿¡ç®±");
+					errorMsgs.add("½Ğ¿é¤J«H½c");
 				} else {
 					mem_mail = req.getParameter("mem_mail");
 				}
@@ -140,12 +139,13 @@ public class MemberServlet extends HttpServlet {
 				memberVO = memberSvc.updateMem(mem_id, mem_name, mem_phone, mem_pw, mem_mail);
 
 				req.setAttribute("memberVO", memberVO);
-				String url="/backend/mem/select_mem.jsp";
-				RequestDispatcher successView=req.getRequestDispatcher(url);
-
+				session.removeAttribute("memberVO");
+				session.setAttribute("memberVO", memberVO);
+				String url = "/frontend/mem/member_info.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
-				errorMsgs.add("ä¿®æ”¹å¤±æ•—:" + e.getMessage());
+				errorMsgs.add("­×§ï¥¢±Ñ:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/backend/mem/Update_mem.jsp");
 				failureView.forward(req, res);
 			}
@@ -165,39 +165,39 @@ public class MemberServlet extends HttpServlet {
 				String tab = req.getParameter("tab");
 
 				if (req.getParameter("mem_name") == null || req.getParameter("mem_name").trim().isEmpty()) {
-					errorMsgs.add("è«‹è¼¸å…¥åå­—");
+					errorMsgs.add("½Ğ¿é¤J¦W¦r");
 				} else {
 					mem_name = req.getParameter("mem_name");
 				}
 				if (req.getParameter("mem_phone") == null || req.getParameter("mem_phone").trim().isEmpty()) {
-					errorMsgs.add("è«‹è¼¸å…¥é›»è©±");
+					errorMsgs.add("½Ğ¿é¤J¹q¸Ü");
 				} else {
 					mem_phone = req.getParameter("mem_phone");
 				}
 
 				if (req.getParameter("mem_pw") == null || req.getParameter("mem_pw").trim().isEmpty()) {
-					errorMsgs.add("è«‹è¼¸å…¥å¯†ç¢¼");
+					errorMsgs.add("½Ğ¿é¤J±K½X");
 				} else {
 					mem_pw = req.getParameter("mem_pw");
 				}
 				if (req.getParameter("mem_pw1") == null || req.getParameter("mem_pw1").trim().isEmpty()) {
-					errorMsgs.add("è«‹è¼¸å…¥å¯†ç¢¼");
+					errorMsgs.add("½Ğ¿é¤J±K½X");
 				} else {
 					mem_pw1 = req.getParameter("mem_pw1");
 				}
 				if (req.getParameter("mem_mail") == null || req.getParameter("mem_mail").trim().isEmpty()) {
-					errorMsgs.add("è«‹è¼¸å…¥ä¿¡ç®±");
+					errorMsgs.add("½Ğ¿é¤J«H½c");
 				} else {
 					mem_mail = req.getParameter("mem_mail");
 				}
 				if (!mem_pw.equals(mem_pw1)) {
-					errorMsgs.add("å¯†ç¢¼ä¸ç›¸ç¬¦");
+					errorMsgs.add("±K½X¤£¬Û²Å");
 				}
 				MemberService memberSvc = new MemberService();
 				List<MemberVO> all = memberSvc.getAll();
 				for (MemberVO a : all) {
 					if (a.getMem_mail().equals(mem_mail)) {
-						errorMsgs.add("ä¿¡ç®±å·²æœ‰è¨»å†Š");
+						errorMsgs.add("«H½c¤w¦³µù¥U");
 					}
 				}
 
@@ -208,7 +208,6 @@ public class MemberServlet extends HttpServlet {
 				memberVO.setMem_mail(mem_mail);
 
 				if (!errorMsgs.isEmpty()) {
-					HttpSession session = req.getSession();
 					session.setAttribute("errorMsgs", errorMsgs);
 					session.setAttribute("memberVO", memberVO);
 					// String tab=URLEncoder.encode("#tab2","UTF-8");
@@ -238,31 +237,29 @@ public class MemberServlet extends HttpServlet {
 		if ("delete".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "åˆ—å‡ºæ‰€æœ‰æœƒå“¡");    // è³‡æ–™åº«å–å‡ºçš„setç‰©ä»¶,å­˜å…¥request
+
 			try {
-				String mem_id = req.getParameter("mem_id") ;
+				String mem_id = new String(req.getParameter("mem_id"));
 
 				MemberService memSvc = new MemberService();
 				memSvc.deleteMem(mem_id);
-				String url = "/backend/mem/select_mem.jsp";
+				String url = "/backend/mem/ListAllMem.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
-				errorMsgs.add("åˆªé™¤è³‡æ–™å¤±æ•—" + e.getMessage());
+				errorMsgs.add("§R°£¸ê®Æ¥¢±Ñ" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/backend/mem/ListAllMem.jsp");
 				failureView.forward(req, res);
 			}
 		}
-
 		if ("logout".equals(action)) {
 
-			HttpSession session = req.getSession();
 			session.removeAttribute("memberVO");
 			try {
 				String location = (String) session.getAttribute("location");
 				if (location != null) {
-					session.removeAttribute("location"); // *å·¥ä½œ2: çœ‹çœ‹æœ‰ç„¡ä¾†æºç¶²é 
-															// (-->å¦‚æœ‰ä¾†æºç¶²é :å‰‡é‡å°è‡³ä¾†æºç¶²é )
+					session.removeAttribute("location"); // *¤u§@2: ¬İ¬İ¦³µL¨Ó·½ºô­¶
+															// (-->¦p¦³¨Ó·½ºô­¶:«h­«¾É¦Ü¨Ó·½ºô­¶)
 					res.sendRedirect(location);
 					return;
 				}

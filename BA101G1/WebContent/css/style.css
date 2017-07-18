@@ -162,24 +162,50 @@ img {
 	text-shadow: none;
 	vertical-align: middle;
 }
+#logo div#login{
+	height:80px;
+}
+#logo div#login span{
+	float:right;
+	margin:5px 5px 5px 5px;
+}
+#logo div#login span.name{
+	margin:-20px 100px 0px 0px;
+	width:100px;
+	color:#000;
+	font-size: 15px;
+}
+#logo div#login span.login{
+	height:20px;
+	width:50px;
+	padding:5px 15px 5px 25px; 
+}
+#logo div#login li {
+	padding:5px 11px 5px 15px;
+}
+
 /** Navigation **/
 #navigation {
 	text-align: center;
 }
-#logo ul {
+#option{
+	padding-left: 100px;
+}
+
+#logo div#option ul {
 	display: inline-block;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
-#logo li {
+#logo div#option  li {
 	float: left;
 	margin-left: 52px;
 }
-#logo li:first-child {
+#logo div#option  li:first-child {
 	margin-left: 150px;
 }
-#logo li a {
+#logo div#option  li a {
 	color: #000;
 	font-size: 14px;
 	font-weight: bold;
@@ -188,7 +214,7 @@ img {
 	text-decoration: none;
 	text-transform: uppercase;
 }
-#logo li a:hover, #logo li.selected a {
+#logo div#option li a:hover, #logo div#option  li.selected a {
 	color: #D6656A;
 }
 /*------------------------------ CONTENTS HOME------------------------------*/
@@ -196,6 +222,7 @@ img {
 	display: inline-block;
 	min-height: 950px;
 	width: 90%;
+	margin-top:30px;
 }
 #contentsHome p {
 	font-size: 12px;
@@ -233,6 +260,7 @@ img {
 	display: inline-block;
 	min-height: 950px;
 	width: 90%;
+	margin-top:30px;
 }
 #contents p {
 	font-size: 12px;
@@ -271,6 +299,7 @@ img {
 #classcontents {
 	display: inline-block;
 	min-height: 950px;
+	margin-top:30px;
 }
 #classcontents p {
 	font-size: 12px;
@@ -1300,3 +1329,14 @@ form#cart table thead th {
 	font-size: 11px;
 	margin: 0;
 }
+
+
+.login { color:#FFFFFF; background-color:#D6656A; padding:5px; margin:0px; cursor:pointer; display:inline-block; } 
+/* 主選單的樣式 */
+/**.main-menu:hover { background-color:#b9315a; }**/
+.sub-menu { color:#FFFFFF; background-color:#D6656A; margin:5px -5px; padding:0px; list-style-type:none; position:absolute; }
+/* 下拉清單的樣式 */
+.sub-menu li { padding: 3px 5px; text-align:left; } /* 下拉清單每一列的樣式 */
+/**.login li:hover { color:#FFFFFF; background-color:#b9315a; }**/
+.sub-menu a { text-align:left; display:block; text-decoration:none; color:#FFFFFF; }
+/**.login a:hover { color:#FFFFFF; background-color:#b9315a; text-decoration:none; }**/

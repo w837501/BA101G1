@@ -72,7 +72,7 @@ public class AdServlet extends HttpServlet {
 				System.out.println("upfile1"+pic);
 				byte[] ad_image=getPictureByteArrayFromWeb(pic);
 				
-				String ad_push_content=req.getParameter("ad_push_content");
+				//String ad_push_content=req.getParameter("ad_push_content");
 				
 				java.sql.Timestamp ad_time=null;
 				SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
@@ -109,9 +109,13 @@ public class AdServlet extends HttpServlet {
 				adVO.setAd_name(ad_name);
 				adVO.setAd_content(ad_content);
 				adVO.setAd_time(ad_time);
-				adVO.setAd_push_content(ad_push_content);
+				adVO.setAd_push_content(null);
 				adVO.setAd_image(ad_image);
-				
+				System.out.println(store_id);
+				System.out.println(ad_name);
+				System.out.println(ad_content);
+				System.out.println(ad_time);
+				System.out.println(ad_image);
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("adVO", adVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/advertisement/Add_Ad.jsp");
@@ -119,7 +123,7 @@ public class AdServlet extends HttpServlet {
 					return;
 				}
 				AdService adSvc = new AdService();
-				adVO = adSvc.addAd(store_id, ad_name, ad_content, ad_image, ad_time, ad_push_content);
+				adVO = adSvc.addAd(store_id, ad_name, ad_content, ad_image, ad_time, null);
 				
 				String url = "/frontend/advertisement/browseAD.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);

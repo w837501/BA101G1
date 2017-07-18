@@ -41,16 +41,16 @@ public class ManServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		// ¬d¸ß
+		// æŸ¥è©¢
 		if ("getOne_For_Display".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "¦C¥X³æ¤@ºŞ²z­û");    // ¸ê®Æ®w¨ú¥Xªºsetª«¥ó,¦s¤Jrequest
+			req.setAttribute("whichPage", "åˆ—å‡ºå–®ä¸€ç®¡ç†å“¡");    // è³‡æ–™åº«å–å‡ºçš„setç‰©ä»¶,å­˜å…¥request
 			try {
 				String str = req.getParameter("man_id");
 				if (str == null || (str.trim().length() == 0)) {
-					errorMsgs.add("½Ğ¿é¤J­û¤u½s¸¹");
+					errorMsgs.add("è«‹è¼¸å…¥å“¡å·¥ç·¨è™Ÿ");
 				}
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
@@ -62,7 +62,7 @@ public class ManServlet extends HttpServlet {
 				try {
 					man_id = new String(str);
 				} catch (Exception e) {
-					errorMsgs.add("¿é¤J®æ¦¡¿ù»~");
+					errorMsgs.add("è¼¸å…¥æ ¼å¼éŒ¯èª¤");
 				}
 
 				if (!errorMsgs.isEmpty()) {
@@ -74,7 +74,7 @@ public class ManServlet extends HttpServlet {
 				ManagerService manSvc = new ManagerService();
 				ManagerVO managerVO = manSvc.getOneMan(man_id);
 				if (managerVO == null) {
-					errorMsgs.add("¬dµL¸ê®Æ");
+					errorMsgs.add("æŸ¥ç„¡è³‡æ–™");
 				}
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
@@ -86,17 +86,17 @@ public class ManServlet extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
-				errorMsgs.add("µLªk¨ú±o¸ê®Æ" + e.getMessage());
+				errorMsgs.add("ç„¡æ³•å–å¾—è³‡æ–™" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
 				failureView.forward(req, res);
 			}
 
 		}
-		// ­×§ï
+		// ä¿®æ”¹
 		if ("getOne_For_Update".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "­×§ï³æ¤@ºŞ²z­û");    // ¸ê®Æ®w¨ú¥Xªºsetª«¥ó,¦s¤Jrequest
+			req.setAttribute("whichPage", "ä¿®æ”¹å–®ä¸€ç®¡ç†å“¡");    // è³‡æ–™åº«å–å‡ºçš„setç‰©ä»¶,å­˜å…¥request
 			try {
 				String man_id = new String(req.getParameter("man_id"));
 				ManagerService managerSvc = new ManagerService();
@@ -107,7 +107,7 @@ public class ManServlet extends HttpServlet {
 				successView.forward(req, res);
 
 			} catch (Exception e) {
-				errorMsgs.add("µLªk¨ú±o­n­×§ïªº¸ê®Æ:" + e.getMessage());
+				errorMsgs.add("ç„¡æ³•å–å¾—è¦ä¿®æ”¹çš„è³‡æ–™:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/listAllMan.jsp");
 				failureView.forward(req, res);
 			}
@@ -116,7 +116,7 @@ public class ManServlet extends HttpServlet {
 		if ("update".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "¦C¥X©Ò¦³ºŞ²z­û");    // ¸ê®Æ®w¨ú¥Xªºsetª«¥ó,¦s¤Jrequest
+			req.setAttribute("whichPage", "åˆ—å‡ºæ‰€æœ‰ç®¡ç†å“¡");    // è³‡æ–™åº«å–å‡ºçš„setç‰©ä»¶,å­˜å…¥request
 			try {
 				String man_id = new String(req.getParameter("man_id"));
 
@@ -126,22 +126,22 @@ public class ManServlet extends HttpServlet {
 				String man_mail = req.getParameter("man_mail");
 
 				if (req.getParameter("man_name") == null || req.getParameter("man_name").trim().isEmpty()) {
-					errorMsgs.add("½Ğ¿é¤J¦W¦r");
+					errorMsgs.add("è«‹è¼¸å…¥åå­—");
 				} else {
 					man_name = req.getParameter("man_name");
 				}
 				if (req.getParameter("man_phone") == null || req.getParameter("man_phone").trim().isEmpty()) {
-					errorMsgs.add("½Ğ¿é¤J¹q¸Ü");
+					errorMsgs.add("è«‹è¼¸å…¥é›»è©±");
 				} else {
 					man_phone = req.getParameter("man_phone");
 				}
 				if (req.getParameter("man_pw") == null || req.getParameter("man_pw").trim().isEmpty()) {
-					errorMsgs.add("½Ğ¿é¤J±K½X");
+					errorMsgs.add("è«‹è¼¸å…¥å¯†ç¢¼");
 				} else {
 					man_pw = req.getParameter("man_pw");
 				}
 				if (req.getParameter("man_mail") == null || req.getParameter("man_mail").trim().isEmpty()) {
-					errorMsgs.add("½Ğ¿é¤J«H½c");
+					errorMsgs.add("è«‹è¼¸å…¥ä¿¡ç®±");
 				} else {
 					man_mail = req.getParameter("man_mail");
 				}
@@ -168,12 +168,12 @@ public class ManServlet extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
-				errorMsgs.add("­×§ï¥¢±Ñ" + e.getMessage());
+				errorMsgs.add("ä¿®æ”¹å¤±æ•—" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/UpdateMan.jsp");
 				failureView.forward(req, res);
 			}
 		}
-		// ·s¼W
+		// æ–°å¢
 
 		if ("insert".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
@@ -184,21 +184,21 @@ public class ManServlet extends HttpServlet {
 				 man_name=req.getParameter("man_name").trim();
 				 }catch(Exception e){
 				 man_name="";
-				 errorMsgs.add("½Ğ¿é¤J¦W¦r");
+				 errorMsgs.add("è«‹è¼¸å…¥åå­—");
 				 }
 				 String man_phone="";
 				 try{
 				 man_phone=new String(req.getParameter("man_phone").trim());
 				 }catch (Exception e) {
 				 man_phone="";
-				 errorMsgs.add("½Ğ¿é¤J¹q¸Ü");
+				 errorMsgs.add("è«‹è¼¸å…¥é›»è©±");
 				 }
 				 String man_pw=null;
 				 try{
 				 man_pw=new String(req.getParameter("man_pw").trim());
 				 }catch (Exception e) {
 				 man_pw="";
-				 errorMsgs.add("½Ğ¿é¤J±K½X");
+				 errorMsgs.add("è«‹è¼¸å…¥å¯†ç¢¼");
 				 }
 				
 				 String man_mail=null;
@@ -206,7 +206,7 @@ public class ManServlet extends HttpServlet {
 				 man_mail=new String(req.getParameter("man_mail").trim());
 				 }catch (Exception e) {
 				 man_mail="";
-				 errorMsgs.add("½Ğ¿é¤J«H½c");
+				 errorMsgs.add("è«‹è¼¸å…¥ä¿¡ç®±");
 				 }*/
 
 				String man_name = req.getParameter("man_name");
@@ -214,19 +214,19 @@ public class ManServlet extends HttpServlet {
 				String man_mail = req.getParameter("man_mail");
 
 				if (req.getParameter("man_name") == null || req.getParameter("man_name").trim().isEmpty()) {
-					errorMsgs.add("½Ğ¿é¤J¦W¦r");
+					errorMsgs.add("è«‹è¼¸å…¥åå­—");
 				}
 				if (req.getParameter("man_phone") == null || req.getParameter("man_phone").trim().isEmpty()) {
-					errorMsgs.add("½Ğ¿é¤J¹q¸Ü");
+					errorMsgs.add("è«‹è¼¸å…¥é›»è©±");
 				}
 				if (req.getParameter("man_mail") == null || req.getParameter("man_mail").trim().isEmpty()) {
-					errorMsgs.add("½Ğ¿é¤J«H½c");
+					errorMsgs.add("è«‹è¼¸å…¥ä¿¡ç®±");
 				}
-				/**********¶Ã¼Æ±K½X*****************************/
+				/**********äº‚æ•¸å¯†ç¢¼*****************************/
 				int a = (int)(Math.random()*(999-100+1))+100;
 				String man_pw = String.valueOf(a);
-				System.out.println("¶Ã¼Æ±K½X222¦æ "+man_pw);
-				/**********¶Ã¼Æ±K½X*****************************/
+				System.out.println("äº‚æ•¸å¯†ç¢¼222è¡Œ "+man_pw);
+				/**********äº‚æ•¸å¯†ç¢¼*****************************/
 				ManagerVO managerVO = new ManagerVO();
 				managerVO.setMan_name(man_name);
 				managerVO.setMan_phone(man_phone);
@@ -243,20 +243,20 @@ public class ManServlet extends HttpServlet {
 				ManagerService manSvc = new ManagerService();
 				managerVO = manSvc.addMan(man_name, man_phone, man_pw, man_mail);
 				req.setAttribute("managerVO", managerVO);
-		/**************±H°email********************************************/
+		/**************å¯„é€mail********************************************/
 				String to = man_mail;
-			    String subject = "®¥³ß±z¤w¸g¦¨¬°<<¦Y­q§Ú>>¥­¥xºŞ²z­û¤F³á";
+			    String subject = "æ­å–œæ‚¨å·²ç¶“æˆç‚º<<åƒè¨‚æˆ‘>>å¹³å°ç®¡ç†å“¡äº†å–”";
 			    String ch_name = man_name;
 			    String passRandom = man_pw;
-			    String messageText = "Hello! " + ch_name + " ½ĞÂÔ°O¦¹±K½X: " + passRandom + "\n" +" (¤w¸g±Ò¥Î¤F³á)"; 
+			    String messageText = "Hello! " + ch_name + " è«‹è¬¹è¨˜æ­¤å¯†ç¢¼: " + passRandom + "\n" +" (å·²ç¶“å•Ÿç”¨äº†å–”)"; 
 			    sendMail(to, subject, messageText);
-		/**************±H°e¦Ü¤â¾÷********************************************/
-		/**************±H°e¦Ü¤â¾÷********************************************/
+		/**************å¯„é€è‡³æ‰‹æ©Ÿ********************************************/
+		/**************å¯„é€è‡³æ‰‹æ©Ÿ********************************************/
 			 	Send se = new Send();
 			 	String[] tel ={man_phone};
-			 	String message = man_name+"¥ı¥Í§A¦n¡A³o¸Ì¬O¦Y­q§Ú½u¤W¥­¥x¨t²Î¡A®¥³ß§Aµù¥UÅo¡A±K½X¤w°e¦Ü«H½c¡A¤w¸g¥i¥Hµn¤JÅo";
+			 	String message = man_name+"å…ˆç”Ÿä½ å¥½ï¼Œé€™è£¡æ˜¯åƒè¨‚æˆ‘ç·šä¸Šå¹³å°ç³»çµ±ï¼Œæ­å–œä½ è¨»å†Šå›‰ï¼Œå¯†ç¢¼å·²é€è‡³ä¿¡ç®±ï¼Œå·²ç¶“å¯ä»¥ç™»å…¥å›‰";
 			 	se.sendMessage(tel , message);
-		/**************±H°email********************************************/
+		/**************å¯„é€mail********************************************/
 	
 				String url = "/backend/man/login_man.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
@@ -268,7 +268,7 @@ public class ManServlet extends HttpServlet {
 			}
 
 		}
-		// §R°£
+		// åˆªé™¤
 
 		if ("delete".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
@@ -282,17 +282,17 @@ public class ManServlet extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
-				errorMsgs.add("§R°£¸ê®Æ¥¢±Ñ" + e.getMessage());
+				errorMsgs.add("åˆªé™¤è³‡æ–™å¤±æ•—" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/ListAllMan.jsp");
 				failureView.forward(req, res);
 			}
 		}
-		// ¦C¥X©Ò¦³ºŞ²z­ûinclude
+		// åˆ—å‡ºæ‰€æœ‰ç®¡ç†å“¡include
 		
 		if ("listAll".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 //			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "¦C¥X©Ò¦³ºŞ²z­û");    // ¸ê®Æ®w¨ú¥Xªºsetª«¥ó,¦s¤Jrequest
+			req.setAttribute("whichPage", "åˆ—å‡ºæ‰€æœ‰ç®¡ç†å“¡");    // è³‡æ–™åº«å–å‡ºçš„setç‰©ä»¶,å­˜å…¥request
 //			try {
 //				String man_id = new String(req.getParameter("man_id"));
 //				
@@ -302,19 +302,19 @@ public class ManServlet extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 //			} catch (Exception e) {
-//				errorMsgs.add("§R°£¸ê®Æ¥¢±Ñ" + e.getMessage());
+//				errorMsgs.add("åˆªé™¤è³‡æ–™å¤±æ•—" + e.getMessage());
 //				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
 //				failureView.forward(req, res);
 //			}
 		}
-		// login µn¤JÀË¬d
+		// login ç™»å…¥æª¢æŸ¥
 		if ("loginCHK".equals(action)) {
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 			errorMsgs.add("");
-			/******************§Ú·s¼Wªº±b±K±ø¥ó§PÂ_*********************/
+			/******************æˆ‘æ–°å¢çš„å¸³å¯†æ¢ä»¶åˆ¤æ–·*********************/
 			String account = req.getParameter("loginUser").trim();
 			String password = req.getParameter("loginPwd").trim();
 			HttpSession session = req.getSession();
@@ -327,50 +327,52 @@ public class ManServlet extends HttpServlet {
 			session.setAttribute("loginUser" , account);
 			try {
 				if(account.isEmpty()){
-					errorMsgs.add("­û¤u½s¸¹¤£¯à¬°ªÅ");
+					errorMsgs.add("å“¡å·¥ç·¨è™Ÿä¸èƒ½ç‚ºç©º");
 					res.sendRedirect(req.getContextPath()+"/backend/man/login_man.jsp");
 					return;
 				}
 				if(manSvc.getOneMan(account)==null){
 					res.sendRedirect(req.getContextPath()+"/backend/man/login_man.jsp");
-					errorMsgs.add("½Ğ¿é¤J¥¿½T­û¤u½s¸¹");
+					errorMsgs.add("è«‹è¼¸å…¥æ­£ç¢ºå“¡å·¥ç·¨è™Ÿ");
 					return;
 				}
 				if(manSvc.getOneMan(account).getMan_id()==null){
 					res.sendRedirect(req.getContextPath()+"/backend/man/login_man.jsp");
-					errorMsgs.add("½Ğ¿é¤J¥¿½T­û¤u½s¸¹");
+					errorMsgs.add("è«‹è¼¸å…¥æ­£ç¢ºå“¡å·¥ç·¨è™Ÿ");
 					return;
 				}
 				if(password.isEmpty()){
 					res.sendRedirect(req.getContextPath()+"/backend/man/login_man.jsp");
-					errorMsgs.add("±K½X¤£¯à¬°ªÅ");
+					errorMsgs.add("å¯†ç¢¼ä¸èƒ½ç‚ºç©º");
 					return;
 				}
 				if(!manSvc.getOneMan(account).getMan_pw().equals(password)){
 					res.sendRedirect(req.getContextPath()+"/backend/man/login_man.jsp");
-					errorMsgs.add("½Ğ¿é¤J¥¿½T±K½X");
+					errorMsgs.add("è«‹è¼¸å…¥æ­£ç¢ºå¯†ç¢¼");
 					return;
 				}
-				/******************§Ú·s¼Wªº±b±K±ø¥ó§PÂ_*********************/
-			String man_id = account;
+				/******************æˆ‘æ–°å¢çš„å¸³å¯†æ¢ä»¶åˆ¤æ–·*********************/
+			String man_id = null;
 			ManagerVO managerVO = manSvc.getOneMan(man_id);
+
 			PermissionService pSvc = new PermissionService();
 			List<PermissionVO> permList = null;
 			permList = pSvc.findByManId(man_id);
 			System.out.println(permList.toString());
+
 			/****************transferID***********************/
 			HttpSession sessionId = req.getSession();
 			sessionId.setAttribute("account", account);
 			sessionId.setAttribute("permList", permList);
 			/****************transferID***********************/
 				errorMsgs.removeAll(errorMsgs);
-				req.getSession().setAttribute("manVO", managerVO);
-				String url = "/backend/index.jsp";
+				req.setAttribute("managerVO", managerVO);
+				String url = "/backend/man/select_man.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
-				errorMsgs.add("µLªk¨ú±o¸ê®Æ" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/login_man.jsp");
+				errorMsgs.add("ç„¡æ³•å–å¾—è³‡æ–™" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
 				failureView.forward(req, res);
 			}
 
@@ -378,11 +380,11 @@ public class ManServlet extends HttpServlet {
 		
 	}
 	
-	/**************************** ³]©w¶Ç°e¶l¥ó:¦Ü¦¬«H¤HªºEmail«H½c,Email¥D¦®,Email¤º®e************************/
+	/**************************** è¨­å®šå‚³é€éƒµä»¶:è‡³æ”¶ä¿¡äººçš„Emailä¿¡ç®±,Emailä¸»æ—¨,Emailå…§å®¹************************/
 		public void sendMail(String to, String subject, String messageText) {
 				
 		   try {
-			   // ³]©w¨Ï¥ÎSSL³s½u¦Ü Gmail smtp Server
+			   // è¨­å®šä½¿ç”¨SSLé€£ç·šè‡³ Gmail smtp Server
 			   Properties props = new Properties();
 			   props.put("mail.smtp.host", "smtp.gmail.com");
 			   props.put("mail.smtp.socketFactory.port", "465");
@@ -390,8 +392,8 @@ public class ManServlet extends HttpServlet {
 			   props.put("mail.smtp.auth", "true");
 			   props.put("mail.smtp.port", "465");
 
-	       // ¡´³]©w gmail ªº±b¸¹ & ±K½X (±NÂÇ¥Ñ§AªºGmail¨Ó¶Ç°eEmail)
-	       // ¡´¶·±NmyGmailªº¡i¦w¥ş©Ê¸û§CªºÀ³¥Îµ{¦¡¦s¨úÅv¡j¥´¶}
+	       // â—è¨­å®š gmail çš„å¸³è™Ÿ & å¯†ç¢¼ (å°‡è—‰ç”±ä½ çš„Gmailä¾†å‚³é€Email)
+	       // â—é ˆå°‡myGmailçš„ã€å®‰å…¨æ€§è¼ƒä½çš„æ‡‰ç”¨ç¨‹å¼å­˜å–æ¬Šã€‘æ‰“é–‹
 		     final String myGmail = "ixlogic.wu@gmail.com";
 		     final String myGmail_password = "AAA45678";
 			   Session session = Session.getInstance(props, new Authenticator() {
@@ -404,15 +406,15 @@ public class ManServlet extends HttpServlet {
 			   message.setFrom(new InternetAddress(myGmail));
 			   message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(to));
 			  
-			   //³]©w«H¤¤ªº¥D¦®  
+			   //è¨­å®šä¿¡ä¸­çš„ä¸»æ—¨  
 			   message.setSubject(subject);
-			   //³]©w«H¤¤ªº¤º®e 
+			   //è¨­å®šä¿¡ä¸­çš„å…§å®¹ 
 			   message.setText(messageText);
 
 			   Transport.send(message);
-			   System.out.println("¶Ç°e¦¨¥\!");
+			   System.out.println("å‚³é€æˆåŠŸ!");
 	     }catch (MessagingException e){
-		     System.out.println("¶Ç°e¥¢±Ñ!");
+		     System.out.println("å‚³é€å¤±æ•—!");
 		     e.printStackTrace();
 	     }
 	   }

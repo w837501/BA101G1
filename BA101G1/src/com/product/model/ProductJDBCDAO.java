@@ -28,6 +28,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 	private static final String Find_ALL = "select * from PRODUCT ";
 	private static final String Find_NAME = "select * from PRODUCT where pro_name like ?";
 	private static final String CLASSLINK = "select * from PRODUCT where pc_id = ?";
+	private static final String Find_All_By_Store_id ="select * from product where store_id = ?";
 	
 
 	@Override
@@ -479,6 +480,64 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		baos.close();
 		fis.close();	
 		return baos.toByteArray();
+	}
+
+	@Override
+	public List<ProductVO> findAllProductByStore_id(String store_id) {
+		List<ProductVO> productlist = new ArrayList<ProductVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ProductVO proVO = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(Find_All_By_Store_id);
+			pstmt.setString(1, store_id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				proVO = new ProductVO();
+				proVO.setStore_id(rs.getString("store_id"));
+				proVO.setPro_id(rs.getString("Pro_id"));
+				proVO.setPro_name(rs.getString("Pro_name"));
+				proVO.setPro_price(rs.getInt("Pro_price"));
+				proVO.setPro_total(rs.getInt("Pro_total"));
+				proVO.setPro_state(rs.getString("Pro_state"));
+				proVO.setPro_image(rs.getBytes("Pro_image"));
+				proVO.setPc_id(rs.getString("Pc_id"));
+				proVO.setPro_content(rs.getString("Pro_content"));
+				productlist.add(proVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return productlist;
 	}
 
 }

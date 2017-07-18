@@ -75,17 +75,6 @@
 		    <img align="middle" border="0" name="BTN_date"	src="<%=request.getContextPath() %>/frontend/advertisement/images/btn_date_up.gif" width="22" height="17" alt="開始日期"></a>
 		   </td>     
 		</tr>
-	<tr>
-		<td>是否推播:<font color=red><b>*</b></font></td>
-		<td><select id="push_select" onclick=selectChange()>
-			<option value='1'>是</option>
-			
-			<option value='2'>否</option>
-		</select>
-		<input type="TEXT" id="ad_push_content" name="ad_push_content" size="45" value="<%= (adVO==null)? "4654" :adVO.getAd_push_content() %>" /></td></td>
-	</tr>
-
-
 </table>
 <br>
 <input type="hidden" name="action" value="insert">

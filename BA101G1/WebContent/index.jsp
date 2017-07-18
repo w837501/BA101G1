@@ -1,8 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.mem.model.*"%>
+<%@ page import="com.store.model.*"%>
 <% 
 	MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+	StoreVO storeVO=(StoreVO)session.getAttribute("storeVO");
 %>
 <html>
 <head>
@@ -11,33 +13,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>吃訂我線上訂餐系統</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
+<script src="<%=request.getContextPath()%>/js/mobile.js" type="text/javascript"></script>
 </head>
 <body>
 	<div id="page">
 		<div id="header">
-			<div id="logo">
-				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
-				<span id="login"><a href="<%=request.getContextPath()%>/frontend/mem/LoginAndAddMem.jsp">Login in</a></span>
-				<% boolean flag=true; %>
-				<ul>
-					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
-					<li><a href="<%=request.getContextPath()%>/backend/mem/ListOneMem.jsp">最新消息</a></li>
-					<li>
-					<c:if test="${not empty memberVO }">
-						<a href="<%=request.getContextPath()%>/backend/mem/mem.do?action=logout">登出</a>  
-						<% flag=false;%>
-					</c:if>
-					<c:if test="${empty memberVO}">
-					<a href="<%=request.getContextPath()%>/frontend/mem/LoginAndAddMem.jsp">login</a> 
-					<% flag=true;%>
-					</c:if>
-					 </li>
-				</ul>
-			</div>
+			
+			<jsp:include page="/header_both.jsp" />
 		</div>
+	
 
 		<div id="contentsHome">
 			<div id="main">
@@ -174,14 +158,7 @@
 		</div>
 
 		<div id="footer">
-			<ul class="navigation">
-				<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-				<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
-				<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
-				<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
-				<li><a href="news.html">最新消息</a></li>
-			</ul>
-			<p id="footnote">Eternal Beauty Essentials 2012. All Rights Reserved.</p>
+			<jsp:include page="/footer.jsp"/>
 		</div>
 
 	</div>

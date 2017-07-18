@@ -15,14 +15,13 @@ public class StoreCommitService {
 	}
 	
 	public StoreCommitVO addStoreCommit(String store_id , String mem_id , 
-			String sc_content, Timestamp sc_time , String sc_state){
+			String sc_content, Integer sc_score){
 
 		StoreCommitVO scVO = new StoreCommitVO();
 		scVO.setStore_id(store_id);
 		scVO.setMem_id(mem_id);
 		scVO.setSc_content(sc_content);
-		scVO.setSc_time(sc_time);
-		scVO.setSc_state(sc_state);
+		scVO.setSc_score(sc_score);
 		dao.insert(scVO);
 		
 		return scVO;
@@ -56,10 +55,9 @@ public class StoreCommitService {
 		return dao.getAll();
 	}
 	
-	//0401·s¼W
-//	public Set<StoreVO> getStoresBySc_id(String sc_id){
-//		return dao.getStoresBySc_id(sc_id);
-//	}
+	public List<StoreCommitVO> getAllByStore_id(String store_id){
+		return dao.getAllByStore_id(store_id);
+	}
 	
 	
 	

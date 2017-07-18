@@ -12,7 +12,6 @@
         <td><A href="<%=request.getRequestURI()%>?whichPage=<%=pageNumber%>">至最後一頁</A>&nbsp;</td>
     <%}%>
   <%}%>  
-  
  </tr>
 </table>    
 <%if ( pageNumber > 1) {%>

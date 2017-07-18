@@ -11,6 +11,7 @@ import java.util.Vector;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,7 @@ import com.store.model.StoreVO;
 
 @MultipartConfig(fileSizeThreshold = 5 * 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024
 * 1024)
+@WebServlet("/xxx.do")
 public class ProductServlet extends HttpServlet{
 	
 
@@ -117,7 +119,7 @@ public class ProductServlet extends HttpServlet{
 
 			List<ProductVO> productlist = proSvc.getProductClass(str);
 			req.setAttribute("productlist", productlist); // 資料庫取出的empVO物件,存入req
-
+session.removeAttribute("shoppingcart");
 			String url = "/product/product.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交select_page.jsp
 			System.out.println(successView);
@@ -130,33 +132,48 @@ public class ProductServlet extends HttpServlet{
 			req.setAttribute("errorMsgs", errorMsgs);
 			String requestURL=req.getParameter("requestURL");
 			try {
-				String store_id=(String)session.getAttribute("store_id");
+				String store_id=req.getParameter("store_id");
 				System.out.println(store_id);
 				String pro_name=req.getParameter("pro_name");
+				System.out.println("456");
 				String pc_id=req.getParameter("pc_id");
+				System.out.println("789");
 				Number pro_price=Integer.parseInt(req.getParameter("pro_price"));
+				System.out.println("1");
 				String pro_state=req.getParameter("pro_state");
+				System.out.println("12");
 				String pro_content=req.getParameter("pro_content");
-				
+				System.out.println("123");
 				Part pic=req.getPart("pro_image");
 				byte[] pro_image=getPictureByteArrayFromWeb(pic);
-				
+				System.out.println(pro_image);
+				System.out.println(store_id);
+				System.out.println(pro_name);
+				System.out.println(pc_id);
+				System.out.println(pro_price);
+				System.out.println(pro_state);
+				System.out.println(pro_content);
 				if(pro_name.trim().isEmpty()||pro_name==null){
 					errorMsgs.add("請輸入商品名稱");
 				}
 				if(pc_id.trim().isEmpty()||pc_id==null){
 					errorMsgs.add("請輸入商品類別");
 				}
-				if(pro_price==null){
-					errorMsgs.add("請輸入商品價格");
-				}
+				
 				if(pro_state.trim().isEmpty()||pro_state==null){
 					errorMsgs.add("請輸入商品狀態");
 				}
 				if(pro_content.trim().isEmpty()||pro_content==null){
 					errorMsgs.add("請輸入商品說明");
 				}
-				
+				System.out.println(store_id);
+				System.out.println(pro_name);
+				System.out.println(pc_id);
+				System.out.println(pro_price);
+				System.out.println(pro_state);
+				System.out.println(pro_content);
+				System.out.println(pro_image);
+				System.out.println();
 				ProductVO productVO=new ProductVO();
 				productVO.setStore_id(store_id);
 				productVO.setPro_name(pro_name);
@@ -231,9 +248,7 @@ public class ProductServlet extends HttpServlet{
 				if(pc_id.trim().isEmpty()||pc_id==null){
 					errorMsgs.add("請輸入類別");
 				}
-				if(pro_price==null){
-					errorMsgs.add("請輸入商品單價");
-				}
+				
 				if(pro_state.trim().isEmpty()||pro_state==null){
 					errorMsgs.add("請輸入商品狀態");
 				}
@@ -280,6 +295,7 @@ public class ProductServlet extends HttpServlet{
 		if ("getOne_In_ShoppingCart".equals(action)) { // 來自select_page.jsp的請求
 			
 			String str = req.getParameter("store_id");
+			String pro_name=req.getParameter("pro_name");
 			StoreService storeSvc = new StoreService();
 			StoreVO storeVO = storeSvc.getOneStore(str);
 			ProductService productSvc = new ProductService();
@@ -320,6 +336,9 @@ public class ProductServlet extends HttpServlet{
 			}
 			
 			session.setAttribute("shoppingcart", buylist);
+			for(ProductVO abc:buylist){
+				System.out.println(abc.getPro_name());
+			}
 			String url ="/store/listProductByStore.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交store.jsp
 			System.out.println(successView);
@@ -337,7 +356,6 @@ public class ProductServlet extends HttpServlet{
 			}
 			
 			String amount = String.valueOf(total);
-			req.setAttribute("amount", amount);
 			String url = "/frontend/shoppingcart/Checkout.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
@@ -353,19 +371,32 @@ public class ProductServlet extends HttpServlet{
 			}
 			
 			String amount = String.valueOf(total);
-			req.setAttribute("amount", amount);
+			session.setAttribute("amount", amount);
 			session.setAttribute("shoppingcart", buylist);
 			String url = "/frontend/shoppingcart/shoppingcart.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
 		}
 		System.out.println("action"+action);
+		
+		
 		if (action.equals("DELETE")) {
 			String del = req.getParameter("del");
 			System.out.println("del"+del);
 			int d = Integer.parseInt(del);
+			System.out.println(d);
 			buylist.removeElementAt(d);
+			int total = 0;
+			for(int i = 0; i< buylist.size();i++){
+				ProductVO productVO = buylist.get(i);
+				int price  = (int) productVO.getPro_price();
+				int quantity = (int)productVO.getQuantity();
+				total += (price*quantity);
+			}
+			String amount = String.valueOf(total);
 			session.setAttribute("shoppingcart", buylist);
+			session.setAttribute("amount", amount);
+			
 			String url = "/frontend/shoppingcart/shoppingcart.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);

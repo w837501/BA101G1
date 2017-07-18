@@ -21,7 +21,6 @@
 
 <html>
 <head>
-<title>商品搜尋結果 - listSearchProduct.jsp</title>
 </head>
 <body>
 	<div id="items">

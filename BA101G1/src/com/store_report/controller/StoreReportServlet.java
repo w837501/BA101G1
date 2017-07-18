@@ -1,6 +1,7 @@
 package com.store_report.controller;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
@@ -8,6 +9,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +20,7 @@ import com.member_report.model.MemberReportService;
 import com.member_report.model.MemberReportVO;
 import com.store_report.model.StoreReportService;
 import com.store_report.model.StoreReportVO;
-
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class StoreReportServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -36,12 +38,12 @@ public class StoreReportServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "¦C¥X³æ¤@°Ó®aÀËÁ|");    // ¸ê®Æ®w¨ú¥Xªºsetª«¥ó,¦s¤Jrequest
+
 			try {
 			
 				String str = req.getParameter("sr_id");
 				if (str == null || (str.trim()).length() == 0) {
-					errorMsgs.add("½Ğ¿é¤JÀËÁ|½s¸¹");
+					errorMsgs.add("è«‹è¼¸å…¥æª¢èˆ‰ç·¨è™Ÿ");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -54,7 +56,7 @@ public class StoreReportServlet extends HttpServlet {
 				try {
 					sr_id = new String(str);
 				} catch (Exception e) {
-					errorMsgs.add("®æ¦¡¤£¥¿½T");
+					errorMsgs.add("æ ¼å¼ä¸æ­£ç¢º");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -66,7 +68,7 @@ public class StoreReportServlet extends HttpServlet {
 				StoreReportService srSvc = new StoreReportService();
 				StoreReportVO srVO = srSvc.getOneStoreReport(sr_id);
 				if (srVO == null) {
-					errorMsgs.add("¬dµL¸ê®Æ");
+					errorMsgs.add("æŸ¥ç„¡è³‡æ–™");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -76,7 +78,9 @@ public class StoreReportServlet extends HttpServlet {
 				}
 
 				req.setAttribute("srVO", srVO); 
+
 				String url = "/backend/str/select_str.jsp";
+
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
@@ -93,7 +97,7 @@ public class StoreReportServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "­×§ï³æ¤@°Ó®aÀËÁ|");    // ¸ê®Æ®w¨ú¥Xªºsetª«¥ó,¦s¤Jrequest
+
 			String requestURL = req.getParameter("requestURL"); 
 
 			try {
@@ -103,7 +107,9 @@ public class StoreReportServlet extends HttpServlet {
 				StoreReportVO srVO = srSvc.getOneStoreReport(sr_id);
 
 				req.setAttribute("srVO", srVO); 
+
 				String url = "/backend/str/select_str.jsp";
+
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
@@ -120,7 +126,7 @@ public class StoreReportServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "¦C¥X©Ò¦³°Ó®aÀËÁ|");    // ¸ê®Æ®w¨ú¥Xªºsetª«¥ó,¦s¤Jrequest
+
 			String requestURL = req.getParameter("requestURL"); 
 
 			try {
@@ -141,15 +147,15 @@ public class StoreReportServlet extends HttpServlet {
 					sr_time = java.sql.Timestamp.valueOf(req.getParameter("sr_time").trim());
 				} catch (IllegalArgumentException e) {
 					sr_time = new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsgs.add("¿é¤J¿ù»~");
+					errorMsgs.add("è¼¸å…¥éŒ¯èª¤");
 				}
 
 				String sr_state = null;
 				try {
 //					sr_state = req.getParameter("sr_state").trim();
-					sr_state = "¤w¼f®Ö";
+					sr_state = "å·²å¯©æ ¸";
 				} catch (Exception e) {
-					errorMsgs.add("½Ğ¿é¤Jª¬ºA");
+					errorMsgs.add("è«‹è¼¸å…¥ç‹€æ…‹");
 
 				}
 
@@ -157,10 +163,10 @@ public class StoreReportServlet extends HttpServlet {
 				try {
 					sr_result = req.getParameter("sr_result").trim();
 					if(sr_state.isEmpty()){
-						sr_state = "¥¼¼f®Ö";
+						sr_state = "æœªå¯©æ ¸";
 					}
 				} catch (Exception e) {
-					errorMsgs.add("½Ğ¿é¤Jµ²ªG");
+					errorMsgs.add("è«‹è¼¸å…¥çµæœ");
 				}
 
 				srVO.setSr_id(sr_id);
@@ -185,9 +191,9 @@ public class StoreReportServlet extends HttpServlet {
 				srVO = srSvc.updateStoreReport(sr_id, store_id, sc_id, order_id, man_id, sr_content, sr_image, sr_time,
 						sr_state, sr_result);
 
-
 //				String url = requestURL;
 				String url="/backend/str/select_str.jsp";
+
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
@@ -206,55 +212,22 @@ public class StoreReportServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				String store_id = req.getParameter("store_id").trim();
-				String sc_id = req.getParameter("sc_id").trim();
-				String order_id = req.getParameter("order_id").trim().equals("null") ? null
-						: req.getParameter("order_id").trim();
-				// System.out.println("order_id: " + order_id);
-				// System.out.println("order_id == 'null' " + (order_id.trim()
-				// == "null"));
-				String man_id = req.getParameter("man_id").trim();
-				String sr_content = req.getParameter("sr_content").trim();
-				byte[] sr_image = req.getParameter("sr_image").trim().getBytes();
+				String store_id = req.getParameter("store_id");
+				String sc_id = req.getParameter("sc_id");
+				String order_id = req.getParameter("order_id");
+			System.out.println(order_id);
+				String sr_content = req.getParameter("sr_content");
+				Part pic=req.getPart("sr_image");
+				byte[] sr_image = getPictureByteArrayFromWeb(pic);
 
-				java.sql.Timestamp sr_time = null;
-				try {
-					System.out.println("req.getParameter('sr_time'): " + req.getParameter("sr_time"));
-					sr_time = java.sql.Timestamp.valueOf(req.getParameter("sr_time").trim() + " 11:12:13");
-					System.out.println("sr_time: " + sr_time);
-				} catch (IllegalArgumentException e) {
-					sr_time = new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsgs.add("®æ¦¡¤£¥¿½T");
-				}
-
-				String sr_state = null;
-				try {
-					System.out.println("req.getParameter('sr_state'): " + req.getParameter("sr_state"));
-					sr_state = req.getParameter("sr_state").trim();
-					System.out.println("sr_state: " + sr_state);
-				} catch (Exception e) {
-					errorMsgs.add("½Ğ¿é¤Jª¬ºA");
-				}
-
-				String sr_result = null;
-				try {
-					System.out.println("req.getParameter('sr_result'): " + req.getParameter("sr_result"));
-					sr_result =req.getParameter("sr_result").trim();
-					System.out.println("sr_result: " + sr_result);
-				} catch (Exception e) {
-					errorMsgs.add("½Ğ¿é¤Jµ²ªG");
-				}
 
 				StoreReportVO srVO = new StoreReportVO();
 				srVO.setStore_id(store_id);
 				srVO.setSc_id(sc_id);
 				srVO.setOrder_id(order_id);
-				srVO.setMan_id(man_id);
 				srVO.setSr_content(sr_content);
 				srVO.setSr_image(sr_image);
-				srVO.setSr_time(sr_time);
-				srVO.setSr_state(sr_state);
-				srVO.setSr_result(sr_result);
+
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -265,15 +238,17 @@ public class StoreReportServlet extends HttpServlet {
 				}
 
 				StoreReportService srSvc = new StoreReportService();
-				srVO = srSvc.addStoreReport(store_id, sc_id, order_id, man_id, sr_content, sr_image, sr_time, sr_state,
-						sr_result);
+				srVO = srSvc.addStoreReport(store_id, sc_id, order_id,  sr_content, sr_image);
+
 
 				String url = "/backend/str/select_str.jsp";
+
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
+				e.printStackTrace();
 				RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/addSR.jsp");
 				failureView.forward(req, res);
 			}
@@ -285,7 +260,7 @@ public class StoreReportServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "¦C¥X©Ò¦³°Ó®aÀËÁ|");    // ¸ê®Æ®w¨ú¥Xªºsetª«¥ó,¦s¤Jrequest
+
 			String requestURL = req.getParameter("requestURL"); 
 
 			try {
@@ -299,8 +274,10 @@ public class StoreReportServlet extends HttpServlet {
 				// requestURL.equals("/dept/listAllDept.jsp"))
 				// req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(empVO.getDeptno()));
 				//
+
 //				String url = requestURL;
 				String url = "/backend/str/select_str.jsp";
+
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
@@ -310,9 +287,11 @@ public class StoreReportServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+
+
 		if ("listAll".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("whichPage", "¦C¥X©Ò¦³°Ó®aÀËÁ|");    // ¸ê®Æ®w¨ú¥Xªºsetª«¥ó,¦s¤Jrequest
+			req.setAttribute("whichPage", "åˆ—å‡ºæ‰€æœ‰å•†å®¶æª¢èˆ‰");    // è³‡æ–™åº«å–å‡ºçš„setç‰©ä»¶,å­˜å…¥request
 				String url = "/backend/str/select_str.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -322,20 +301,43 @@ public class StoreReportServlet extends HttpServlet {
 			List<StoreReportVO> srList = null;
 			String whichTab = req.getParameter("whichTab");
 			if(whichTab.equals("tab1")){
-				srList = srSvc.findBySR_state("¥¼¼f®Ö");
+				srList = srSvc.findBySR_state("æœªå¯©æ ¸");
 			}
 			if(whichTab.equals("tab2")){
-				srList = srSvc.findBySR_state("¼f®Ö¤¤");
+				srList = srSvc.findBySR_state("å¯©æ ¸ä¸­");
 			}
+
 			if(whichTab.equals("tab3")){
-				srList = srSvc.findBySR_state("¤w¼f®Ö");
+				srList = srSvc.findBySR_state("å·²å¯©æ ¸");
 			}
 			req.setAttribute("list4", srList);
 			System.out.println("whichTab : "+whichTab+" list " + srList);
 			String url = "/backend/str/select_str.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
+
 		}
 	}
-
+	public static byte[] getPictureByteArrayFromWeb(Part part) throws IOException {
+		InputStream is = part.getInputStream();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] buffer = new byte[8192];
+		int i;
+		while ((i = is.read(buffer)) != -1) {
+			baos.write(buffer, 0, i);
+		}
+		baos.close();
+		is.close();
+		return baos.toByteArray();
+	}
+	public String getFileNameFromPart(Part part) {
+		String header = part.getHeader("content-disposition");
+		System.out.println("header=" + header); // æ¸¬è©¦ç”¨
+		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
+		System.out.println("filename=" + filename); // æ¸¬è©¦ç”¨
+		if (filename.length() == 0) {
+			return null;
+		}
+		return filename;
+	}
 }

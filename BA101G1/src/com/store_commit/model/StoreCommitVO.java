@@ -11,6 +11,7 @@ public class StoreCommitVO implements Serializable {
 	private String sc_content;
 	private Timestamp sc_time;
 	private String sc_state;
+	private int sc_score;
 	
 	public StoreCommitVO(){
 		
@@ -53,9 +54,15 @@ public class StoreCommitVO implements Serializable {
 	public void setSc_state(String sc_state) {
 		this.sc_state = sc_state;
 	}
-	
-	
-	
-	
+
+
+	public int getSc_score() {
+		return sc_score;
+	}
+
+
+	public void setSc_score(int sc_score) {
+		this.sc_score = sc_score;
+	}
 
 }

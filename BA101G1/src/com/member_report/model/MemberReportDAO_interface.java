@@ -9,4 +9,5 @@ public interface MemberReportDAO_interface {
 	public MemberReportVO findPrimaryKey(String mrId);
 	public List<MemberReportVO> findByMR_state(String mrState);
 	public List<MemberReportVO> getAll();
+	public List<MemberReportVO> findbyMem_id(String mem_id);
 }

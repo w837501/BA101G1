@@ -20,7 +20,7 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 		}
 	}
 	private static final String INSERT_STMT = 
-		"INSERT INTO STORE_REPORT (sr_id,store_id,sc_id,order_id,man_id,sr_content,sr_image,sr_time,sr_state,sr_result) VALUES ('SR'||'-'||LPAD(to_char(sr_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		"INSERT INTO STORE_REPORT (sr_id,store_id,sc_id,order_id,sr_content,sr_image) VALUES ('SR'||'-'||LPAD(to_char(sr_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
 		"SELECT * FROM STORE_REPORT order by sr_id";
 	private static final String GET_ONE_STMT = 
@@ -31,6 +31,8 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 		"UPDATE STORE_REPORT set store_id=?, sc_id=?, order_id=?, man_id=?, sr_content=?, sr_image=?, sr_time=?, sr_state=?, sr_result=?  where sr_id = ?";
 	private static final String GET_SOME_STMT_BY_SR_STATE = 
 			"SELECT sr_id,store_id,sc_id,order_id,man_id,sr_content,sr_image,sr_time,sr_state,sr_result FROM STORE_REPORT where sr_state = ?";
+	private static final String GET_BY_STORE_ID = "select * from STORE_REPORT where store_id = ? ";
+
 	@Override
 	public void insert(StoreReportVO srVO) {
 
@@ -44,17 +46,14 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 			pstmt.setString(1, srVO.getStore_id());
 			pstmt.setString(2, srVO.getSc_id());
 			pstmt.setString(3, srVO.getOrder_id());
-			pstmt.setString(4, srVO.getMan_id());
-			pstmt.setString(5, srVO.getSr_content());
-			pstmt.setBytes(6, srVO.getSr_image());
-			pstmt.setTimestamp(7, srVO.getSr_time());
-			pstmt.setString(8, srVO.getSr_state());
-			pstmt.setString(9, srVO.getSr_result());
-
+			pstmt.setString(4, srVO.getSr_content());
+			pstmt.setBytes(5, srVO.getSr_image());
+System.out.println( srVO.getOrder_id());
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
+			se.printStackTrace();
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
@@ -181,7 +180,7 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo §]∫Ÿ¨∞ Domain objects
+				// empVo ‰πüÁ®±ÁÇ∫ Domain objects
 				srVO = new StoreReportVO();
 				srVO.setSr_id(rs.getString("sr_id"));
 				srVO.setStore_id(rs.getString("store_id"));
@@ -241,7 +240,7 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO §]∫Ÿ¨∞ Domain objects
+				// empVO ‰πüÁ®±ÁÇ∫ Domain objects
 				srVO = new StoreReportVO();
 				srVO.setSr_id(rs.getString("sr_id"));
 				srVO.setStore_id(rs.getString("store_id"));
@@ -288,7 +287,70 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 	}
 
 	@Override
+
 	public List<StoreReportVO> findBySR_state(String sr_state) {
+    
+L ist<StoreReportVO> list = new ArrayList<StoreReportVO>();
+		StoreReportVO srVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+    try{
+      
+      con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_SOME_STMT_BY_SR_STATE);
+			pstmt.setString(1, sr_state);
+      rs = pstmt.executeQuery();
+      
+      
+			while (rs.next()) {
+				// empVO ‰πüÁ®±ÁÇ∫ Domain objects
+				srVO = new StoreReportVO();
+				srVO.setSr_id(rs.getString("sr_id"));
+				srVO.setStore_id(rs.getString("store_id"));
+				srVO.setSc_id(rs.getString("sc_id"));
+				srVO.setOrder_id(rs.getString("order_id"));
+				srVO.setMan_id(rs.getString("man_id"));
+				srVO.setSr_content(rs.getString("sr_content"));
+				srVO.setSr_image(rs.getBytes("sr_image"));
+				srVO.setSr_time(rs.getTimestamp("sr_time"));
+				srVO.setSr_state(rs.getString("sr_state"));
+				srVO.setSr_result(rs.getString("sr_result"));
+				list.add(srVO); // Store the row in the list
+			}
+    } catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+      
+	public List<StoreReportVO> getReportByStore_id(String store_id) {
+
 		List<StoreReportVO> list = new ArrayList<StoreReportVO>();
 		StoreReportVO srVO = null;
 
@@ -298,12 +360,13 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_SOME_STMT_BY_SR_STATE);
-			pstmt.setString(1, sr_state);
+			pstmt = con.prepareStatement(GET_BY_STORE_ID);
+			pstmt.setString(1, store_id);
+
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO §]∫Ÿ¨∞ Domain objects
+				// empVO ‰πüÁ®±ÁÇ∫ Domain objects
 				srVO = new StoreReportVO();
 				srVO.setSr_id(rs.getString("sr_id"));
 				srVO.setStore_id(rs.getString("store_id"));
@@ -318,7 +381,6 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 				list.add(srVO); // Store the row in the list
 			}
 
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -353,37 +415,37 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 
 		StoreReportJDBCDAO dao = new StoreReportJDBCDAO();
 
-		// ∑sºW
+		// Êñ∞Â¢û
 		StoreReportVO srVO1 = new StoreReportVO();
 		srVO1.setStore_id("STO-000002");
 		srVO1.setSc_id("SC-000003");
 		srVO1.setOrd_id(null);
 		srVO1.setMan_id(new String("MAN-000003"));
-		srVO1.setSr_content(new String("∑s´Æµ≤¶Áß⁄¶—±C"));
+		srVO1.setSr_content(new String("Êñ∞Âû£ÁµêË°£ÊàëËÄÅÂ©Ü"));
 		srVO1.setSr_image(new byte[0]);
 		srVO1.setSr_time(java.sql.Timestamp.valueOf("2003-03-31 03:33:33"));
 		srVO1.setSr_state(new Integer(0));
 		srVO1.setSr_result(new Integer(0));
 		dao.insert(srVO1);
 
-		// ≠◊ßÔ
+		// ‰øÆÊîπ
 		StoreReportVO srVO2 = new StoreReportVO();
 		srVO2.setSr_id("SR-000001");
 		srVO2.setStore_id("STO-000003");
 		srVO2.setSc_id(null);
 		srVO2.setOrd_id("20170614-000002");
 		srVO2.setMan_id(new String("MAN-000002"));
-		srVO2.setSr_content(new String("ßd•√ß”ßd•√ß”"));
+		srVO2.setSr_content(new String("Âê≥Ê∞∏ÂøóÂê≥Ê∞∏Âøó"));
 		srVO2.setSr_image(null);
 		srVO2.setSr_time(java.sql.Timestamp.valueOf("2001-01-01 11:11:11"));
 		srVO2.setSr_state(1);
 		srVO2.setSr_result(1);
 		dao.update(srVO2);
 
-		// ßR∞£
+		// Âà™Èô§
 		dao.delete("SR-000004");
 
-		// ¨d∏ﬂ
+		// Êü•Ë©¢
 		StoreReportVO srVO3 = dao.findPrimaryKey("SR-000002");
 		System.out.print(srVO3.getSr_id() + ",");
 		System.out.print(srVO3.getStore_id() + ",");
@@ -397,7 +459,7 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 		System.out.print(srVO3.getSr_result() + ",");
 		System.out.println("---------------------");
 
-		// ¨d∏ﬂ
+		// Êü•Ë©¢
 		List<StoreReportVO> list = dao.getAll();
 		for (StoreReportVO aSR : list) {
 			System.out.print(aSR.getSr_id() + ",");

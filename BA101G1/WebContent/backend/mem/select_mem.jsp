@@ -14,11 +14,14 @@
         <!-- CUSTOM STYLES-->
     <link href="<%=request.getContextPath() %>/backend/assets/css/custom.css" rel="stylesheet" />
     	<!-- LOGIN STYLES -->
+    <link href="<%=request.getContextPath() %>/backend/assets/css/login.css" rel="stylesheet" />
+    <script src="<%=request.getContextPath() %>/backend/assets/js/login.js"></script>
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
-      
+     
+           
           
     <div id="wrapper">
          <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #ccc;">
@@ -37,8 +40,7 @@
                 </div>
                 
                 <span class="logout-spn" >
-					${manVO.man_id} ${manVO.man_name}
-                  <a href="<%=request.getContextPath() %>/backend/man/login_man.jsp">登出</a>
+                  <a href="#" data-toggle="modal" data-target="#login-modal">登入</a>  
                 </span>
                 
                 
@@ -57,6 +59,7 @@
                     <li class="active-link">
                         <a href="<%=request.getContextPath() %>/backend/mem/select_mem.jsp" ><i class="fa fa-desktop "></i>會員管理 <span class="badge">Included</span></a>
                     </li>
+
                  </c:if>
 			</c:forEach>
 			<c:forEach var="perm" items="${permList}">
@@ -72,6 +75,29 @@
 
 			<c:forEach var="perm" items="${permList}">
 				<c:if test="${perm.pa_id eq '10'}">
+
+                   
+
+                    <li>
+                        <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>訂單管理  <span class="badge">Included</span></a>
+                    </li>
+
+ <!-- 收合式清單====檢舉管理============================== -->
+                    <li class="panel panel-default panel-heading" role="tab" id="panel1">
+     
+                      <a href="#aaa" data-parent="#accordion2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="aaa">
+                        <i class="fa fa-edit "></i>檢舉管理  <span class="badge">Included</span>
+                      </a>
+                    
+                      <div id="aaa" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="panel1">
+                        <div class="list-group">
+                          <a href="<%=request.getContextPath() %>/backend/memr/select_page.jsp" class="list-group-item">會員檢舉</a>
+                          <a href="<%=request.getContextPath() %>/backend/str/selectPage.jsp" class="list-group-item">商家檢舉</a>                       
+                        </div>
+                      </div>                   
+                    </li>
+<!-- ================================== -->
+
                     <li>
                         <a href="#"><i class="fa fa-qrcode "></i>審核管理<span class="badge">要連結哪個?</span></a>
                     </li>
@@ -137,12 +163,7 @@
 						</c:if>
 						
 					<ul>
-						<li>
-							<form action="mem.do" method="post">
-    							<a href="javascript:;" onclick="parentNode.submit();">List</a>
-    							<input type="hidden" name="action" value="listAll">
-							</form>
-						</li>
+						<li><a href="ListAllMem.jsp">List</a> all Manager</li><br><br>
 						
 						<li>
 							<form action="mem.do" method="post">
@@ -188,19 +209,7 @@
 				<!-- ******************select_man.jsp原先內容********************* -->
 
                 </div>
-<!-- *********************include頁面******************* -->
-<%if ("列出所有會員"==request.getAttribute("whichPage")){%>
-       <jsp:include page="ListAllMem.jsp" />
-<%} %>
-<%if ("列出單一會員"==request.getAttribute("whichPage")){%>
-       <jsp:include page="ListOneMem.jsp" />
-<%} %>
 
-<%if ("修改單一會員"==request.getAttribute("whichPage")){%>
-       <jsp:include page="Update_mem.jsp" />
-<%} %>
-
-<!-- *********************include頁面******************* -->
                   <!-- /. ROW  --> 
             </div>   
         </div>             
@@ -224,7 +233,24 @@
       <!-- CUSTOM SCRIPTS -->
     <script src="<%=request.getContextPath() %>/backend/assets/js/custom.js"></script>
     
- 
+<!-- ***************************Login***************************** -->              
+	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+   	  <div class="modal-dialog">
+			<div class="loginmodal-container">
+				<h1>Login to Your Account</h1><br>
+			  <form>
+				<input type="text" name="user" placeholder="Username">
+				<input type="password" name="pass" placeholder="Password">
+				<input type="submit" name="login" class="login loginmodal-submit" value="Login">
+			  </form>
+				
+			  <div class="login-help">
+				<a href="#">Register</a> - <a href="#">Forgot Password</a>
+			  </div>
+			</div>
+		</div>
+	 </div>
+<!-- ***************************Login***************************** -->    
 </body>
 </html>
 

@@ -11,31 +11,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>會員資料</title>
 </head>
-<body bgcolor="white">
-<table border='1' cellpadding='5' cellspacing='0' width='600'>
-	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-		<td>
-		<h3><%=memberVO.getMem_name() %>的會員資料</h3>
-	</tr>
-</table>
-<table border='1' bordercolor='#ccf' width='600'>
-	<tr>
-		<th>會員編號</th>
-		<th>會員姓名</th>
-		<th>會員電話</th>
-		<th>會員密碼</th>
-		<th>會員信箱</th>
-		
-	</tr>
-	<tr align='center' valign='middle'>
-			<td><%=memberVO.getMem_id() %> </td>
-			<td><%=memberVO.getMem_name() %></td>
-			<td><%=memberVO.getMem_phone() %></td>
-			<td><%=memberVO.getMem_pw() %></td>
-			<td><%=memberVO.getMem_mail() %></td>
-	</tr>
-</table>
-
-
+<body>
+	<table>
+		<tr>
+			<td>會員編號：<%=memberVO.getMem_id() %></td>
+		</tr>
+		<tr>
+			<td>會員姓名：<%=memberVO.getMem_name() %></td>
+		</tr>
+		<tr>	
+			<td>會員電話：<%=memberVO.getMem_phone() %></td>
+		</tr>	
+		<tr>	
+			<td>會員密碼：<%=memberVO.getMem_pw() %></td>
+		</tr>	
+		<tr>	
+			<td>會員信箱：<%=memberVO.getMem_mail() %></td>
+		</tr>
+	</table>
 </body>
 </html>

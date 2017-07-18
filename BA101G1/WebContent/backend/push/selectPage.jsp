@@ -40,8 +40,7 @@
                 </div>
                 
                 <span class="logout-spn" >
-                  ${manVO.man_id} ${manVO.man_name}
-                  <a href="<%=request.getContextPath() %>/backend/man/login_man.jsp">登出</a>
+                  <a href="#" data-toggle="modal" data-target="#login-modal">登入</a>  
                 </span>
                 
                 
@@ -68,6 +67,7 @@
                     <li>
                         <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>訂單管理  <span class="badge">Included</span></a>
                     </li>
+
                </c:if>
 			</c:forEach>
 			
@@ -84,6 +84,24 @@
 
 			<c:forEach var="perm" items="${permList}">
 				<c:if test="${perm.pa_id eq '10'}">
+
+
+ <!-- 收合式清單====檢舉管理============================== -->
+                    <li class="panel panel-default panel-heading" role="tab" id="panel1">
+     
+                      <a href="#aaa" data-parent="#accordion2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="aaa">
+                        <i class="fa fa-edit "></i>檢舉管理  <span class="badge">Included</span>
+                      </a>
+                    
+                      <div id="aaa" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="panel1">
+                        <div class="list-group">
+                          <a href="<%=request.getContextPath() %>/backend/memr/select_page.jsp" class="list-group-item">會員檢舉</a>
+                          <a href="<%=request.getContextPath() %>/backend/str/selectPage.jsp" class="list-group-item">商家檢舉</a>                       
+                        </div>
+                      </div>                   
+                    </li>
+<!-- ================================== -->
+
                     <li>
                         <a href="#"><i class="fa fa-qrcode "></i>審核管理<span class="badge">要連結哪個?</span></a>
                     </li>
@@ -164,15 +182,10 @@
 					</c:if>
 					
 					<ul>
-					  <li> 
-					  	<form action="push.do" method="post">
-    						<a href="javascript:;" onclick="parentNode.submit();">List</a>
-    						<input type="hidden" name="action" value="listAll">
-						</form>
-					  </li>
+					  <li><a href='<%=request.getContextPath()%>/backend/push/ListAllPush.jsp'>List</a> all Pushes. </li> <br><br>
 					  
 					  <li>
-					    <FORM METHOD="post" ACTION="push.do" >
+					    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/push/push.do" >
 					        <b>輸入推播編號 (如PUS-000001):</b>
 					        <input type="text" name="push_id">
 					        <input type="submit" value="送出">
@@ -183,7 +196,7 @@
 					  <jsp:useBean id="pushSvc" scope="page" class="com.push.model.PushService" />
 					   
 					  <li>
-					     <FORM METHOD="post" ACTION="push.do" >
+					     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/push/push.do" >
 					       <b>選擇推播編號:</b>
 					       <select size="1" name="push_id">
 					         <c:forEach var="pushVO" items="${pushSvc.all}" > 
@@ -195,7 +208,21 @@
 					    </FORM>
 					  </li>
 					  
-
+					  <li>
+					     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/push/push.do" >
+					       <b>選擇管理員編號:</b>
+					       <select size="1" name="push_id">
+					         <c:forEach var="pushVO" items="${pushSvc.all}" > 
+					          <option value="${pushVO.man_id}">${pushVO.man_id}
+					         </c:forEach>   
+					       </select>
+					       <input type="submit" value="送出">
+					       <input type="hidden" name="action" value="getOne_For_Display">
+					       
+					       <p>尚未增加 選擇管理員編號 此功能</p>
+					     </FORM>
+					  </li>
+					  
 					</ul>
 					
 					
@@ -208,19 +235,7 @@
 				<!-- ******************select_man.jsp原先內容********************* -->
 
                 </div>
-<!-- *********************include頁面******************* -->
-<%if ("列出所有推播"==request.getAttribute("whichPage")){%>
-       <jsp:include page="ListAllPush.jsp" />
-<%} %>
-<%if ("列出單一推播"==request.getAttribute("whichPage")){%>
-       <jsp:include page="listOnePush.jsp" />
-<%} %>
 
-<%if ("修改單一推播"==request.getAttribute("whichPage")){%>
-       <jsp:include page="update_push_input.jsp" />
-<%} %>
-
-<!-- *********************include頁面******************* -->
                   <!-- /. ROW  --> 
             </div>   
         </div>             
@@ -243,7 +258,25 @@
     <script src="<%=request.getContextPath() %>/backend/assets/js/bootstrap.min.js"></script>
       <!-- CUSTOM SCRIPTS -->
     <script src="<%=request.getContextPath() %>/backend/assets/js/custom.js"></script>
-
+    
+<!-- ***************************Login***************************** -->              
+	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+   	  <div class="modal-dialog">
+			<div class="loginmodal-container">
+				<h1>Login to Your Account</h1><br>
+			  <form>
+				<input type="text" name="user" placeholder="Username">
+				<input type="password" name="pass" placeholder="Password">
+				<input type="submit" name="login" class="login loginmodal-submit" value="Login">
+			  </form>
+				
+			  <div class="login-help">
+				<a href="#">Register</a> - <a href="#">Forgot Password</a>
+			  </div>
+			</div>
+		</div>
+	 </div>
+<!-- ***************************Login***************************** -->    
 </body>
 </html>
 
