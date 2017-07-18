@@ -25,7 +25,7 @@ public class MemberServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
+		HttpSession session=req.getSession();
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
@@ -139,7 +139,9 @@ public class MemberServlet extends HttpServlet {
 				memberVO = memberSvc.updateMem(mem_id, mem_name, mem_phone, mem_pw, mem_mail);
 
 				req.setAttribute("memberVO", memberVO);
-				String url = "/backend/mem/ListAllMem.jsp";
+				session.removeAttribute("memberVO");
+				session.setAttribute("memberVO", memberVO);
+				String url = "/frontend/mem/member_info.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
@@ -206,7 +208,6 @@ public class MemberServlet extends HttpServlet {
 				memberVO.setMem_mail(mem_mail);
 
 				if (!errorMsgs.isEmpty()) {
-					HttpSession session = req.getSession();
 					session.setAttribute("errorMsgs", errorMsgs);
 					session.setAttribute("memberVO", memberVO);
 					// String tab=URLEncoder.encode("#tab2","UTF-8");
@@ -253,7 +254,6 @@ public class MemberServlet extends HttpServlet {
 		}
 		if ("logout".equals(action)) {
 
-			HttpSession session = req.getSession();
 			session.removeAttribute("memberVO");
 			try {
 				String location = (String) session.getAttribute("location");

@@ -139,13 +139,6 @@
 							
 					</select></td>
 	</tr>
-	<tr>
-				<td>商家狀態:<font color=red><b>*</b></font></td>
-				<td><select name="store_state">
-					<option value='審核中' ${(storeVO.store_state=='審核中') ? 'selected':''}>審核中</option>
-					<option value='開店中' ${(storeVO.store_state=='開店中') ? 'selected':''}>開店中</option>
-					<option value='停業中' ${(storeVO.store_state=='停業中') ? 'selected':''}>停業中</option></select> </td>
-	</tr>
 	</table>
 	<br>
 			<input type="hidden" name="action" value="update">

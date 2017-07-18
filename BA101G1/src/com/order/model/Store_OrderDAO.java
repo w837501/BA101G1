@@ -54,7 +54,7 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 			"select * from store_order where store_id = ? and order_state in('¤w½T»{','«Ý¨úÀ\')order by order_time desc";
 	
 	private static final String GET_ORDER_BY_MEM2 = 
-			"select o.mem_id, o.order_id, o.store_id, o.totalprice, o.order_time, o.order_way, o.order_state ,s.store_name from store_order o join store s on o.store_id = s.store_id where mem_id = ? order by order_time desc";
+			"select o.mem_id, o.order_id, o.store_id, o.totalprice, o.order_time,o.order_taketime, o.order_way, o.order_state ,s.store_name from store_order o join store s on o.store_id = s.store_id where mem_id = ? order by order_time desc";
 	private static final String GET_ORDER_BY_STATE=
 			"select mem_id, order_id, store_id, totalprice, order_time, order_way, receive_address,order_note, order_taketime ,order_state from  store_order where order_state=? and store_id=?";	
 	private static final String CONFIRM_ORDER=
@@ -339,6 +339,7 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 				orderVO = new Store_OrderVO();
 				orderVO.setOrder_id(rs.getString("order_id"));
 				orderVO.setOrder_time(rs.getTimestamp("order_time"));
+				orderVO.setOrder_taketime(rs.getTimestamp("order_taketime"));
 				orderVO.setMem_id(rs.getString("mem_id"));
 				orderVO.setStore_id(rs.getString("store_id"));
 				orderVO.setOrder_state(rs.getString("order_state"));

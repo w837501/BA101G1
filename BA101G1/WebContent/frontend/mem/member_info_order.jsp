@@ -59,28 +59,33 @@ $(document).ready(
  				</div> 
 				
 				 <table border='1' bordercolor='#CCCCFF' width='600'>
-	<tr>
-		<th>訂單編號</th>
-		<th>訂餐時間</th>
-		<th>店家名稱</th>
-		<th>總金額</th>
-		<th>取餐方式</th>
-		<th>訂單狀態</th>
-		<th>取消訂單</th>
-		<th>檢舉商家</th>
-	</tr>
+					<tr>
+						<th width="10%">訂單編號</th>
+						<th width="10%">訂餐時間</th>
+						<th width="10%">取餐時間</th>
+						<th width="10%">店家名稱</th>
+						<th width="10%">總金額</th>
+						<th width="10%">取餐方式</th>
+						<th width="10%">訂單狀態</th>
+						<th width="10%">取消訂單</th>
+						<th width="10%">檢舉商家</th>
+						<th width="10%">顯示</th>
+					</tr>
+					</table>
 	<c:forEach var="store_orderVO1" items="${store_orderVO}" >
+	<table border='1' bordercolor='#CCCCFF' width='600'>
 	<tr align='center' valign='middle' ${(store_orderVO1.order_id==param.order_id) ? 'bgcolor=#CCCCFF':''}>
-		<td>
+		<td width="10%">
 			<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO1.order_id}">${store_orderVO1.order_id}</a>
 		</td>
 
-		<td><fmt:formatDate  pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO1.order_time }"/></td>
- 		<td>${store_orderVO1.store_name }</td>
-		<td>${store_orderVO1.totalprice }</td>
-		<td>${store_orderVO1.order_way }</td>
-		<td>${store_orderVO1.order_state }</td>
-		<td><c:if test="${store_orderVO1.order_state eq '未確認'}">
+		<td width="10%"><fmt:formatDate  pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO1.order_time }"/></td>
+		<td width="10%"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO1.order_taketime }"/></td>
+ 		<td width="10%">${store_orderVO1.store_name }</td>
+		<td width="10%">${store_orderVO1.totalprice }</td>
+		<td width="10%">${store_orderVO1.order_way }</td>
+		<td width="10%">${store_orderVO1.order_state }</td>
+		<td width="10%"><c:if test="${store_orderVO1.order_state eq '未確認'}">
 			<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
 							<input type="submit" value="取消訂單">
 							<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
@@ -90,28 +95,29 @@ $(document).ready(
 			</c:if>
 <%-- 			<c:if test="${store_orderVO1.order_state != '未確認'}">無法取消</c:if> --%>
 		</td>
-		<td><c:if test="${store_orderVO1.order_state eq '已取消'}">
+		<td width="10%"><c:if test="${store_orderVO1.order_state eq '已取消' || store_orderVO1.order_state eq '已取餐'}">
 			<form method="post" action="<%=request.getContextPath()%>/frontend/mem/member_addMR.jsp">
 							<input type="submit" value="檢舉">
 							<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
 						</form>
 		</c:if>
-			<c:if test="${store_orderVO1.order_state eq '已取餐'}">
-				<form method="post" action="<%=request.getContextPath()%>/frontend/mem/member_addMR.jsp">
-								<input type="submit" value="檢舉">
-								<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
-				</form>
-			</c:if>
-			
 <%-- 			<c:if test="${store_orderVO1.order_state != '已取消' &&store_orderVO1.order_state != '已取餐'}">無法檢舉</c:if> --%>
 		</td>
+		<td width="10%">
+			<input type="button" value="顯示" class="abc" >
+		</td>
 	</tr>
-	</c:forEach>
-
+		<jsp:useBean id="orderlistSvc" scope="page" class="com.orderlist.model.OrderlistService"></jsp:useBean>
+		<jsp:useBean id="productSvc" scope="page" class="com.product.model.ProductService"></jsp:useBean>
+		<c:forEach var="orderlistVO" items="${orderlistSvc.getOrderlist(store_orderVO1.order_id)}" >
+			<tr style="display: none;">
+				<td>${productSvc.getOnePro(orderlistVO.pro_id).pro_name}</td>		
+				<td>${orderlistVO.order_amount}</td>
+				<td>${orderlistVO.price}</td>
+			</tr>
+		</c:forEach>
 </table>
-					
-
-
+	</c:forEach>
 				</div>
 			</div>
 		</div>
@@ -124,3 +130,11 @@ $(document).ready(
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
+<script type="text/javascript">
+$(".abc").on('click',function(){
+	console.log($(".abc").index(this))
+	var father=$(".abc").eq($(".abc").index(this)).parent().parent().siblings();
+	father.toggle();
+})
+ 
+</script>

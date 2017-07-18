@@ -46,7 +46,7 @@
 				<form action="<%=request.getContextPath()%>/backend/mem/mem.do" method='post' name='form1'>
 				<table border='0'>
 					<tr>
-						<td>會員編號:<font color='red'><b>*</b></font></td>
+						<td>會員編號:</td>
 						<td><%=memberVO.getMem_id() %></td>
 					</tr>
 					<tr>
@@ -63,12 +63,13 @@
 					</tr>
 					<tr>
 						<td>會員信箱:</td>
-						<td><input type="TEXT" name="mem_mail" size="45" value="<%=memberVO.getMem_mail() %>"/></td>
+						<td><%=memberVO.getMem_mail() %></td>
 					</tr>
 				</table>
 				<br>
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="mem_id" value="<%=memberVO.getMem_id()%>">
+				<input type="hidden" name="mem_mail" value="<%=memberVO.getMem_mail()%>">
 				<input type="submit"  value="送出修改">
 				
 				</form>
