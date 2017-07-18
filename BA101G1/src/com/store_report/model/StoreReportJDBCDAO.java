@@ -368,6 +368,74 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 	}
 
 	@Override
+
+	public List<StoreReportVO> findBySR_state(String sr_state) {
+		List<StoreReportVO> list = new ArrayList<StoreReportVO>();
+		StoreReportVO srVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_BY_STORE_ID);
+			pstmt.setString(1, sr_state);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO ¤]ºÙ¬° Domain objects
+				srVO = new StoreReportVO();
+				srVO.setSr_id(rs.getString("sr_id"));
+				srVO.setStore_id(rs.getString("store_id"));
+				srVO.setSc_id(rs.getString("sc_id"));
+				srVO.setOrder_id(rs.getString("order_id"));
+				srVO.setMan_id(rs.getString("man_id"));
+				srVO.setSr_content(rs.getString("sr_content"));
+				srVO.setSr_image(rs.getBytes("sr_image"));
+				srVO.setSr_time(rs.getTimestamp("sr_time"));
+				srVO.setSr_state(rs.getString("sr_state"));
+				srVO.setSr_result(rs.getString("sr_result"));
+				list.add(srVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+
+	}
 	public List<StoreReportVO> getReportByStore_id(String store_id) {
 		List<StoreReportVO> list = new ArrayList<StoreReportVO>();
 		StoreReportVO srVO = null;
@@ -433,5 +501,6 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 			}
 		}
 		return list;
+
 	}
 }

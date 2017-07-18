@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.member_report.model.MemberReportService;
+import com.member_report.model.MemberReportVO;
 import com.store_report.model.StoreReportService;
 import com.store_report.model.StoreReportVO;
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
@@ -45,7 +47,7 @@ public class StoreReportServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/selectPage.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/select_str.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -58,7 +60,7 @@ public class StoreReportServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/selectPage.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/select_str.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -70,19 +72,21 @@ public class StoreReportServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/selectPage.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/select_str.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 
 				req.setAttribute("srVO", srVO); 
-				String url = "/backend/str/listOneSR.jsp";
+
+				String url = "/backend/str/select_str.jsp";
+
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/selectPage.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/select_str.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -103,7 +107,9 @@ public class StoreReportServlet extends HttpServlet {
 				StoreReportVO srVO = srSvc.getOneStoreReport(sr_id);
 
 				req.setAttribute("srVO", srVO); 
-				String url = "/backend/str/update_sr_input.jsp";
+
+				String url = "/backend/str/select_str.jsp";
+
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
@@ -125,13 +131,17 @@ public class StoreReportServlet extends HttpServlet {
 
 			try {
 				String sr_id = new String(req.getParameter("sr_id").trim());
-				String store_id = req.getParameter("mem_id").trim();
+				String store_id = req.getParameter("store_id").trim();
 				String sc_id = req.getParameter("sc_id").trim();
 				String order_id = req.getParameter("order_id").trim();
 				String man_id = req.getParameter("man_id").trim();
 				String sr_content = req.getParameter("sr_content").trim();
-				byte[] sr_image = req.getParameter("sr_image").trim().getBytes();
+//				byte[] sr_image = req.getParameter("sr_image").trim().getBytes();
 
+				StoreReportService srSvc = new StoreReportService();
+				StoreReportVO srVO = srSvc.getOneStoreReport(sr_id);
+				byte[] sr_image = srVO.getSr_image();
+				
 				java.sql.Timestamp sr_time = null;
 				try {
 					sr_time = java.sql.Timestamp.valueOf(req.getParameter("sr_time").trim());
@@ -142,7 +152,8 @@ public class StoreReportServlet extends HttpServlet {
 
 				String sr_state = null;
 				try {
-					sr_state = req.getParameter("sr_state").trim();
+//					sr_state = req.getParameter("sr_state").trim();
+					sr_state = "已審核";
 				} catch (Exception e) {
 					errorMsgs.add("請輸入狀態");
 
@@ -151,11 +162,13 @@ public class StoreReportServlet extends HttpServlet {
 				String sr_result = null;
 				try {
 					sr_result = req.getParameter("sr_result").trim();
+					if(sr_state.isEmpty()){
+						sr_state = "未審核";
+					}
 				} catch (Exception e) {
 					errorMsgs.add("請輸入結果");
 				}
 
-				StoreReportVO srVO = new StoreReportVO();
 				srVO.setSr_id(sr_id);
 				srVO.setStore_id(store_id);
 				srVO.setSc_id(sc_id);
@@ -170,23 +183,23 @@ public class StoreReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("srVO", srVO); 
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/update_sr_input.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/select_str.jsp");
 					failureView.forward(req, res);
 					return; 
 				}
 
-				StoreReportService srSvc = new StoreReportService();
 				srVO = srSvc.updateStoreReport(sr_id, store_id, sc_id, order_id, man_id, sr_content, sr_image, sr_time,
 						sr_state, sr_result);
 
+//				String url = requestURL;
+				String url="/backend/str/select_str.jsp";
 
-				String url = requestURL;
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
 			} catch (Exception e) {
 				errorMsgs.add( e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/update_sr_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/str/select_str.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -227,7 +240,9 @@ public class StoreReportServlet extends HttpServlet {
 				StoreReportService srSvc = new StoreReportService();
 				srVO = srSvc.addStoreReport(store_id, sc_id, order_id,  sr_content, sr_image);
 
+
 				String url = "/store/store_report.jsp";
+
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
@@ -259,7 +274,10 @@ public class StoreReportServlet extends HttpServlet {
 				// requestURL.equals("/dept/listAllDept.jsp"))
 				// req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(empVO.getDeptno()));
 				//
-				String url = requestURL;
+
+//				String url = requestURL;
+				String url = "/backend/str/select_str.jsp";
+
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
@@ -274,25 +292,30 @@ public class StoreReportServlet extends HttpServlet {
 		if ("listAll".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("whichPage", "列出所有商家檢舉");    // 資料庫取出的set物件,存入request
-				String url = "/backend/str/selectPage.jsp";
+				String url = "/backend/str/select_str.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 		}
 		if ("listAll3".equals(action)) {
-			List<String> errorMsgs = new LinkedList<String>();
-			String requestURL=req.getParameter("requestURL");
-			String aa = req.getParameter("judge");
-			if("tab2".equals(aa)){
-				session.setAttribute("whichTab", "審核中");    // 資料庫取出的set物件,存入request
+			StoreReportService srSvc = new StoreReportService();
+			List<StoreReportVO> srList = null;
+			String whichTab = req.getParameter("whichTab");
+			if(whichTab.equals("tab1")){
+				srList = srSvc.findBySR_state("未審核");
 			}
-			else if("tab3".equals(aa)){
-				session.setAttribute("whichTab", "已審核");    // 資料庫取出的set物件,存入request
-			}else{
-				session.setAttribute("whichTab", "未審核");    // 資料庫取出的set物件,存入request
-				
+			if(whichTab.equals("tab2")){
+				srList = srSvc.findBySR_state("審核中");
 			}
-			res.sendRedirect("/BA101G1" + requestURL );
-			return;
+
+			if(whichTab.equals("tab3")){
+				srList = srSvc.findBySR_state("已審核");
+			}
+			req.setAttribute("list4", srList);
+			System.out.println("whichTab : "+whichTab+" list " + srList);
+			String url = "/backend/str/select_str.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+
 		}
 	}
 	public static byte[] getPictureByteArrayFromWeb(Part part) throws IOException {
