@@ -46,7 +46,7 @@
 
 		<div class="container" style="margin-bottom:180px;">
 			<div class="row">
-				<div class="col-xs-12 col-sm-3">
+				<div id="sidebar">
 					<div class="panel panel-info" style="width:200px;">
 					    <a href="<%=request.getContextPath() %>/frontend/mem/member_info_update.jsp" class="list-group-item">修改資料</a>
 					</div>
@@ -55,7 +55,7 @@
 					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">查詢訂單</a>
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-7" >
+				<div id="main">
 
 
 				<div class="page-header"> 
