@@ -7,9 +7,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%
 	StoreReportService srSvc = new StoreReportService();
-	List<StoreReportVO> list = srSvc.getAll();
+	List<StoreReportVO> list = (List<StoreReportVO>) request.getAttribute("list4");
 	pageContext.setAttribute("list",list);
-	session.getAttribute("whichTab");
 %>
 
 <head>
@@ -73,39 +72,46 @@
                  
 
 
+			<c:forEach var="perm" items="${permList}">
+				<c:if test="${perm.pa_id eq '0'}">
                     <li class="active-link">
                         <a href="<%=request.getContextPath() %>/backend/mem/select_mem.jsp" ><i class="fa fa-desktop "></i>會員管理 <span class="badge">Included</span></a>
                     </li>
-                   
+                 </c:if>
+			</c:forEach>
+			<c:forEach var="perm" items="${permList}">
+				<c:if test="${perm.pa_id eq '9'}">
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/memr/select_memr.jsp"><i class="glyphicon glyphicon-thumbs-down"></i>會員檢舉  <span class="badge">Included</span></a>
+                    </li>
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/str/select_str.jsp"><i class="	glyphicon glyphicon-hand-down "></i>商家檢舉  <span class="badge">Included</span></a>
+                    </li>
+                </c:if>
+			</c:forEach>
 
-                    <li>
-                        <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>訂單管理  <span class="badge">Included</span></a>
-                    </li>
-                    <li>
-                        <a href="<%=request.getContextPath() %>/backend/memr/select_page.jsp"><i class="glyphicon glyphicon-thumbs-down"></i>會員檢舉  <span class="badge">Included</span></a>
-                    </li>
-                    <li>
-                        <a href="<%=request.getContextPath() %>/backend/str/selectPage.jsp"><i class="	glyphicon glyphicon-hand-down "></i>商家檢舉  <span class="badge">Included</span></a>
-                    </li>
-
+			<c:forEach var="perm" items="${permList}">
+				<c:if test="${perm.pa_id eq '10'}">
                     <li>
                         <a href="#"><i class="fa fa-qrcode "></i>審核管理<span class="badge">要連結哪個?</span></a>
                     </li>
-
+                </c:if>
+			</c:forEach>
+			
                     <li>
-                        <a href="<%=request.getContextPath() %>/backend/push/selectPage.jsp"><i class="fa fa-edit "></i>推播管理 </a>
+                        <a href="<%=request.getContextPath() %>/backend/man/noPer.jsp"><i class="fa fa-edit "></i>假推播錯誤頁面 </a>
                     </li>
-
-                     <li>
-                        <a href="#"><i class="fa fa-edit "></i>個人資料</a>
+                    
+            <c:forEach var="perm" items="${permList}">
+				<c:if test="${perm.pa_id eq '8'}">
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/man/ListAllMan.jsp"><i class="fa fa-bar-chart-o"></i>管理員管理</a>
                     </li>
                     <li>
-                        <a href="<%=request.getContextPath() %>/backend/rev/Select_Rev.jsp"><i class="fa fa-bar-chart-o"></i>商家月結算</a>
+                        <a href="<%=request.getContextPath() %>/backend/per/ListAllPer.jsp"><i class="fa fa-bar-chart-o"></i>權限管理</a>
                     </li>
-                    <li>
-                        <a href="<%=request.getContextPath() %>/backend/man/select_man.jsp"><i class="fa fa-bar-chart-o"></i>管理員管理</a>
-                    </li>
-
+                </c:if>
+			</c:forEach>
 
 
 
@@ -130,200 +136,95 @@
                 <div class="row">
                 <!-- ******************select_man.jsp原先內容********************* -->
 
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12">
+							<div role="tabpanel">
+							    <!-- 標籤面板：標籤區 -->
+							    <ul class="nav nav-tabs" role="tablist">
+							        <li role="presentation" class="active">
+							        	<form action="<%=request.getContextPath()%>/backend/str/store_report.do" method="post">
+											<a href="#tab1" onclick="parentNode.submit();" aria-controls="tab1" role="tab" data-toggle="tab">未審核&nbsp;&nbsp;</a>
+											<input type="hidden" name="action" value="listAll3">
+											<input type="hidden" name="whichTab" value="tab1">
+										</form> 
+							        </li>
 
-					
-					  
-					<div class="container">
-						<div class="row">
-							<div class="col-xs-12 col-sm-12">
-								<div role="tabpanel">
-								    <!-- 標籤面板：標籤區 -->
-								    <ul class="nav nav-tabs" role="tablist">
-								        <li role="presentation" class="active">
-									  		<form action="store_report.do" method="post">
-												<a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab" onclick="parentNode.submit();">待審核&nbsp;&nbsp; </a>
-												<input type="hidden" name="action" value="listAll3">
-												<input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>">
-												<input type="hidden" name="judge" value="tab1">
-											</form>
-								        </li>
-								        <li role="presentation">
-									  		<form action="store_report.do" method="post">
-												<a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab" onclick="parentNode.submit();">審核中&nbsp;&nbsp; </a>
-												<input type="hidden" name="action" value="listAll3">
-												<input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>">
-												<input type="hidden" name="judge" value="tab2">
-											</form>
-								        </li>
-								        <li role="presentation">
-									  		<form action="store_report.do" method="post">
-												<a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab" onclick="parentNode.submit();">已審核&nbsp;&nbsp; </a>
-												<input type="hidden" name="action" value="listAll3">
-												<input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>">
-												<input type="hidden" name="judge" value="tab3">
-											</form>
-								        </li>
-								    </ul>
-								
-								    <!-- 標籤面板：內容區 -->
-								    <div class="tab-content">
-								        <div role="tabpanel" class="tab-pane active" id="tab1" href="javascript:;">
-											<table border='1' bordercolor='#CCCCFF' width='1000'>
-												<tr>
-													<th>商家檢舉單號</th>
-													<th>商家編號</th>
-													<th>評論編號</th>
-													<th>訂單編號</th>
-													<th>管理員編號</th>
-													<th>檢舉內容</th>
-													<th>檢舉圖片</th>
-													<th>檢舉時間</th>
-													<th>檢舉審核狀態</th>
-													<th>檢舉結果</th>
-													<th>修改</th>
-													<th>刪除</th>
-												</tr>
-													<c:forEach var="srVO" items="${list}">
-														<tr align='center' valign='middle' ${(srVO.sr_id==param.sr_id) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
-															<c:set var="a1" value="${srVO.sr_state}"></c:set>
-															<c:if test="${(whichTab eq '未審核') && (srVO.sr_state eq '未審核')}">
-																<td>${srVO.sr_id}</td>
-																<td>${srVO.store_id}</td>
-																<td>${srVO.sc_id}</td>
-																<td>${srVO.order_id}</td>
-																<td>${srVO.man_id}</td>
-																<td>${srVO.sr_content}</td>			
-																<td>
-																	${srVO.sr_image}
-																</td>			
-																<td>${srVO.sr_time}</td>			
-																<td>${srVO.sr_state}</td>			
-																<td>${srVO.sr_result}</td>			
-													
-																<td>
-																  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store_report/store_report.do">
-																     <input type="submit" value="修改"> 
-																     <input type="hidden" name="sr_id" value="${srVO.sr_id}">
-																     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-																     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-																</td>
-																<td>
-																  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store_report/store_report.do">
-																    <input type="submit" value="刪除">
-																    <input type="hidden" name="sr_id" value="${srVO.sr_id}">
-																    <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-																    <input type="hidden" name="action"value="delete"></FORM>
-																</td>
-															</c:if>
-														</tr>
-													</c:forEach>
-											</table>
-										</div>
-		
-								        <div role="tabpanel" class="tab-pane" id="tab2">
-								        	<table border='1' bordercolor='#CCCCFF' width='1000'>
-												<tr>
-													<th>商家檢舉單號</th>
-													<th>商家編號</th>
-													<th>評論編號</th>
-													<th>訂單編號</th>
-													<th>管理員編號</th>
-													<th>檢舉內容</th>
-													<th>檢舉圖片</th>
-													<th>檢舉時間</th>
-													<th>檢舉審核狀態</th>
-													<th>檢舉結果</th>
-													<th>修改</th>
-													<th>刪除</th>
-												</tr>
-												<c:forEach var="srVO" items="${list}">
-													<c:if test="${(whichTab eq '審核中')&& (srVO.sr_state eq '審核中')}">
-														<tr align='center' valign='middle' ${(srVO.sr_id==param.sr_id) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
-															<td>${srVO.sr_id}</td>
-															<td>${srVO.store_id}</td>
-															<td>${srVO.sc_id}</td>
-															<td>${srVO.order_id}</td>
-															<td>${srVO.man_id}</td>
-															<td>${srVO.sr_content}</td>			
-															<td>${srVO.sr_image}</td>			
-															<td>${srVO.sr_time}</td>			
-															<td>${srVO.sr_state}</td>			
-															<td>${srVO.sr_result}</td>			
-												
-															<td>
-															  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store_report/store_report.do">
-															     <input type="submit" value="修改"> 
-															     <input type="hidden" name="sr_id" value="${srVO.sr_id}">
-															     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-															     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-															</td>
-															<td>
-															  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store_report/store_report.do">
-															    <input type="submit" value="刪除">
-															    <input type="hidden" name="sr_id" value="${srVO.sr_id}">
-															    <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-															    <input type="hidden" name="action"value="delete"></FORM>
-															</td>
-														</tr>
-													</c:if>
-												</c:forEach>
-											</table>
-										</div>
-								        <div role="tabpanel" class="tab-pane" id="tab3">
-								        	<table border='1' bordercolor='#CCCCFF' width='1000'>
-												<tr>
-													<th>商家檢舉單號</th>
-													<th>商家編號</th>
-													<th>評論編號</th>
-													<th>訂單編號</th>
-													<th>管理員編號</th>
-													<th>檢舉內容</th>
-													<th>檢舉圖片</th>
-													<th>檢舉時間</th>
-													<th>檢舉審核狀態</th>
-													<th>檢舉結果</th>
-													<th>修改</th>
-													<th>刪除</th>
-												</tr>
-												<c:forEach var="srVO" items="${list}">
-													<c:if test="${(whichTab eq '已審核')&& (srVO.sr_state eq '已審核')}">
-														<tr align='center' valign='middle' ${(srVO.sr_id==param.sr_id) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
-															<td>${srVO.sr_id}</td>
-															<td>${srVO.store_id}</td>
-															<td>${srVO.sc_id}</td>
-															<td>${srVO.order_id}</td>
-															<td>${srVO.man_id}</td>
-															<td>${srVO.sr_content}</td>			
-															<td>${srVO.sr_image}</td>			
-															<td>${srVO.sr_time}</td>			
-															<td>${srVO.sr_state}</td>			
-															<td>${srVO.sr_result}</td>			
-												
-															<td>
-															  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store_report/store_report.do">
-															     <input type="submit" value="修改"> 
-															     <input type="hidden" name="sr_id" value="${srVO.sr_id}">
-															     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-															     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-															</td>
-															<td>
-															  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store_report/store_report.do">
-															    <input type="submit" value="刪除">
-															    <input type="hidden" name="sr_id" value="${srVO.sr_id}">
-															    <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-															    <input type="hidden" name="action"value="delete"></FORM>
-															</td>
-														</tr>
-													</c:if>
-												</c:forEach>
-											</table>
-								        </div>
-								    </div>
-								</div>
+							        <li role="presentation">
+							        	<form action="<%=request.getContextPath()%>/backend/str/store_report.do" method="post">
+											<a href="#tab3" onclick="parentNode.submit();" aria-controls="tab3" role="tab" data-toggle="tab">已審核&nbsp;&nbsp;</a>
+											<input type="hidden" name="action" value="listAll3">
+											<input type="hidden" name="whichTab" value="tab3">
+										</form> 
+							        </li>
+							    </ul>
+							    <!-- 標籤面板：內容區 -->
+							    <div class="tab-content">
+							        <div role="tabpanel" class="tab-pane active" id="tab1">
+										<table class="table table-hover">
+											<thead>
+											<tr>
+												<th>商家檢舉單號</th>
+												<th>商家編號</th>
+												<th>訂單編號</th>
+												<th>評論編號</th>
+												<th>管理員編號</th>
+												<th>檢舉內容</th>
+												<th>檢舉圖片</th>
+												<th>檢舉時間</th>
+												<th>審核狀態</th>
+												<th>檢舉結果</th>
+												<th>修改</th>
+												<th>刪除</th>
+											</tr>
+											</thead>
+											<tbody>
+											<c:forEach var="srVO" items="${list}" >
+													<tr align='center' valign='middle' ${(srVO.sr_id==param.sr_id) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
+														<td>${srVO.sr_id}</td>
+														<td>${srVO.store_id}</td>
+														<td>${srVO.sc_id}</td>
+														<td>${srVO.order_id}</td>
+														<td>${srVO.man_id}</td>
+														<td>${srVO.sr_content}</td>
+
+														<td>
+															<img src="<%=request.getContextPath() %>/MRDBGifReader?whichImg=str&id=${srVO.sr_id}" width="100">
+														</td>
+														<td>${srVO.sr_time}</td>
+														<td>${srVO.sr_state}</td>
+														 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/str/store_report.do">
+														<td>
+															<div data-toggle="buttons">
+													          <label class="btn btn-default btn-circle btn-lg"><input type="radio" name="sr_result" value="成立" id="good" ${(srVO.sr_result == '成立')? 'checked' : '' }><i class="glyphicon glyphicon-ok"></i></label>
+													          <label class="btn btn-default btn-circle btn-lg"><input type="radio" name="sr_result" value="不成立" id="bad" ${(srVO.sr_result == '不成立')? 'checked' : ''}><i class="glyphicon glyphicon-remove"></i></label>
+													        </div>
+														</td>			
+											
+														<td>
+														  	 <input type="submit" value="確認修改"> 
+														     <input type="hidden" name="sr_id" value="${srVO.sr_id}">
+														     <input type="hidden" name="store_id" value="${srVO.store_id}">
+														     <input type="hidden" name="sc_id" value="${srVO.order_id}">
+														     <input type="hidden" name="order_id" value="${srVO.sc_id}">
+														     <input type="hidden" name="man_id" value="${srVO.man_id}">
+														     <input type="hidden" name="sr_content" value="${srVO.sr_content}">
+														     <input type="hidden" name="sr_time" value="${srVO.sr_time}">
+														     <input type="hidden" name="sr_state" value="${srVO.sr_state}">
+														     <input type="hidden" name="action"	value="update">
+														  </FORM>
+														</td>
+													</tr>
+											</c:forEach>
+											</tbody>
+										</table>
+									</div>
+							        
+							    </div>
 							</div>
 						</div>
 					</div>
-
+				</div>
 				<!-- ******************select_man.jsp原先內容********************* -->
 
                 </div>
@@ -354,5 +255,28 @@
 
 </body>
 </html>
+<style type="text/css">
+      body{margin:40px;}
+      .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+      }
+      .btn-circle.btn-lg {
+        width: 50px;
+        height: 50px;
+        padding: 13px 13px;
+        font-size: 18px;
+        line-height: 1.33;
+        border-radius: 25px;
+      }
+      .radio-toolbar label + input[type="radio"]:checked { 
+    	background:gray !important;
+	}
 
+</style>
 

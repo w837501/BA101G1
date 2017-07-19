@@ -32,8 +32,8 @@ public class PermissionService {
 		
 	}
 	
-	public void deletePermission(String man_id){
-		dao.delete(man_id);
+	public void deletePermission(String man_id , String pa_id){
+		dao.delete(man_id , pa_id);
 	}
 	
 	public PermissionVO getOneRecord(String man_id){
@@ -42,5 +42,8 @@ public class PermissionService {
 	
 	public List<PermissionVO> getAll(){
 		return dao.getAll();
+	}
+	public List<PermissionVO> findByManId(String man_id){
+		return dao.findByManId(man_id);
 	}
 }
