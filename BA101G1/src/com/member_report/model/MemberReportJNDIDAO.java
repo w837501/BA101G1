@@ -286,8 +286,10 @@ public class MemberReportJNDIDAO implements MemberReportDAO_interface {
 			pstmt = con.prepareStatement(GET_ONE_STMT_MRSTATE);
 			pstmt.setString(1, mr_state);
 			rs = pstmt.executeQuery();
-	while (rs.next()) {
-				
+
+			
+			while (rs.next()) {
+
 				mrVO = new MemberReportVO();
 				mrVO.setMr_id(rs.getString("mr_id"));
 				mrVO.setMem_id(rs.getString("mem_id"));
@@ -301,6 +303,7 @@ public class MemberReportJNDIDAO implements MemberReportDAO_interface {
 				mrVO.setMr_result(rs.getString("mr_result"));
 				list.add(mrVO); // Store the row in the list
 			}
+
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -331,7 +334,6 @@ public class MemberReportJNDIDAO implements MemberReportDAO_interface {
 		return list;
 	}
 
-
 	@Override
 	public List<MemberReportVO> findbyMem_id(String mem_id) {
 		List<MemberReportVO> list = new ArrayList<MemberReportVO>();
@@ -349,7 +351,7 @@ public class MemberReportJNDIDAO implements MemberReportDAO_interface {
 
 
 			while (rs.next()) {
-				
+
 				mrVO = new MemberReportVO();
 				mrVO.setMr_id(rs.getString("mr_id"));
 				mrVO.setMem_id(rs.getString("mem_id"));

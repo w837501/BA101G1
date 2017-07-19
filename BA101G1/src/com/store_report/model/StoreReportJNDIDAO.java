@@ -180,7 +180,6 @@ System.out.println( srVO.getOrder_id());
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo ¤]ºÙ¬° Domain objects
 				srVO = new StoreReportVO();
 				srVO.setSr_id(rs.getString("sr_id"));
 				srVO.setStore_id(rs.getString("store_id"));
@@ -240,7 +239,7 @@ System.out.println( srVO.getOrder_id());
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO ¤]ºÙ¬° Domain objects
+
 				srVO = new StoreReportVO();
 				srVO.setSr_id(rs.getString("sr_id"));
 				srVO.setStore_id(rs.getString("store_id"));
@@ -290,7 +289,9 @@ System.out.println( srVO.getOrder_id());
 
 	public List<StoreReportVO> findBySR_state(String sr_state) {
     
+
  List<StoreReportVO> list = new ArrayList<StoreReportVO>();
+
 		StoreReportVO srVO = null;
 
 		Connection con = null;
@@ -305,7 +306,7 @@ System.out.println( srVO.getOrder_id());
       
       
 			while (rs.next()) {
-				// empVO ¤]ºÙ¬° Domain objects
+
 				srVO = new StoreReportVO();
 				srVO.setSr_id(rs.getString("sr_id"));
 				srVO.setStore_id(rs.getString("store_id"));
@@ -366,7 +367,7 @@ System.out.println( srVO.getOrder_id());
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO ¤]ºÙ¬° Domain objects
+
 				srVO = new StoreReportVO();
 				srVO.setSr_id(rs.getString("sr_id"));
 				srVO.setStore_id(rs.getString("store_id"));
@@ -410,4 +411,5 @@ System.out.println( srVO.getOrder_id());
 		}
 		return list;
 	}
+
 }
