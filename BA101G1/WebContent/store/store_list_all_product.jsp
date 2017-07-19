@@ -92,7 +92,7 @@
 				<div> 
 					<h3>全部商品列表</h3>
  				</div> 
-				<table border="1" cellpadding="10px" width="650px";>
+				<table border="1" bordercolor='#CCCCFF' cellpadding="10px" width="650px";>
 				<tr>
 					<th width="10%">圖片</th>
 					<th>商品名稱</th>
