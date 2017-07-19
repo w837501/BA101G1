@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.news.model.*" %>
+<%@ page import="com.news.model.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
 	NewsService newsSvc = new NewsService();
@@ -14,7 +15,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-		<title>�Y�q�ڽu�W�q�\�t��</title>
+		<title>吃訂我線上訂餐系統</title>
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 	</head>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
@@ -28,7 +29,7 @@
 
 		<p>
 			<font size = "500px">
-				<b>�̷s����</b>
+				<b>最新消息</b>
 			</font>
 		</p>
 
@@ -42,9 +43,10 @@
 					width="170px" height="170px" vspace="10px" style="display:block; margin:auto;border-radius: 25%;"></a>
 					<br>
 					<p>
-					${newsVO.news_name}<br>
-					${newsVO.news_time}<br>
-					${newsVO.news_id}    
+
+					<h3>${newsVO.news_name}</h3>
+					<fmt:formatDate value="${newsVO.news_time}" pattern="yyyy-MM-dd"/>  
+
 					</p>
             	</li>
             	</c:forEach>

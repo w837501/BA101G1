@@ -2,6 +2,7 @@
 <%@ page import="com.product.model.*"%>
 <%@ page import="com.store.model.*"%>
 <%@ page import="com.mem.model.*"%>
+<%@ page import="com.store_commit.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -20,6 +21,7 @@
 <% 
 	StoreVO storeVO=(StoreVO)request.getAttribute("storeVO");
 	MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
+	
 %>
 
 
@@ -65,12 +67,36 @@
 						</c:forEach>
 					</ul>
 				</div>
-				
+				<c:if test="${shoppingcart !=null }">
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do">
 						<input type="submit" value="前往購物車" >
 						<input type="hidden" name="action"	value="goto_ShoppingCart">
-				</FORM>
+				</FORM></c:if>
+			
+			
+			<%
+				StoreCommitService scSvc=new StoreCommitService();
+				String store_id=storeVO.getStore_id();
+				List<StoreCommitVO> list=scSvc.getAllByStore_id(store_id);
+				pageContext.setAttribute("list",list);
+			%>
+			<jsp:useBean id="memberSvc" scope="page" class="com.mem.model.MemberService"></jsp:useBean>
+			<c:forEach var="scVO" items="${list}" begin="0" end="1" step="1">
+			<table align="left" border="1" width=300px cellspacing="0" style="margin-left:10px;">
+				<tr >
+				<td>${memberSvc.getOneMem(scVO.mem_id).mem_name}</td></tr>
+				<tr>
+				<td>${scVO.sc_score}</td></tr>
+				<tr>
+				<td>${scVO.sc_content}</td></tr>
+				<tr>
+				<td><fmt:formatDate  pattern="yyyy-MM-dd HH:mm:ss" value="${scVO.sc_time}"/></td>
+			</table>
+			
+			</c:forEach>
+			
 			</div>
+		
 			<div id="store_sidebar">
 				<div class="store_logo">
 					<IMG src="<%=request.getContextPath()%>/StoreReader?store_id=${storeVO.store_id}" height="186" width="178">
@@ -87,6 +113,7 @@
 					</div>
 					<span>地址：${storeVO.store_addr} <br>
 					電話：${storeVO.store_phone} <br>
+					有無外送:${storeVO.store_out }<br>
 					餐廳類型：
 					<c:forEach var="storeclasslistVO" items="${storeclassSvc.all}">
 						<c:if test="${storeVO.sc_id==storeclasslistVO.sc_id}">
