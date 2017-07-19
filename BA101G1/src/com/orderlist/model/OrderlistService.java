@@ -55,4 +55,8 @@ private OrderlistDAO_interface dao;
 	public String getDetailProIdByOrderId(String order_id){
 		return dao.getDetailProIdByOrderId(order_id);
 	}
+	
+	public List<ProductVO> getProDetail(String pro_id){
+		return dao.getProDetailByProId(pro_id);
+	}
 }

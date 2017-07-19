@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.news.model.*" %>
+<%@ page import="com.news.model.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
 	NewsService newsSvc = new NewsService();
@@ -51,9 +52,8 @@
 					width="170px" height="170px" vspace="10px" style="display:block; margin:auto;border-radius: 25%;"></a>
 					<br>
 					<p>
-					${newsVO.news_name}<br>
-					${newsVO.news_time}
-					${newsVO.news_id}    
+					<h3>${newsVO.news_name}</h3>
+					<fmt:formatDate value="${newsVO.news_time}" pattern="yyyy-MM-dd"/>  
 					</p>
             	</li>
             	</c:forEach>
