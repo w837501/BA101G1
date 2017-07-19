@@ -34,7 +34,7 @@ private NewsDAO_interface dao;
 	public void deleteRev(String news_id) {
 		dao.delete(news_id);
 	}
-	public NewsVO getOneEmp(String news_id, String man_id) {
+	public NewsVO getOneEmp(String news_id) {
 		return dao.findByPrimaryKey(news_id);
 	}
 	public List<NewsVO> getAll() {

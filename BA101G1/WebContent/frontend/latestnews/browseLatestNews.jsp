@@ -43,7 +43,7 @@
 					<br>
 					<p>
 					${newsVO.news_name}<br>
-					${newsVO.news_time}
+					${newsVO.news_time}<br>
 					${newsVO.news_id}    
 					</p>
             	</li>

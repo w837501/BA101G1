@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.news.model.NewsDAO;
+import com.news.model.NewsService;
 import com.news.model.NewsVO;
 
 
@@ -32,8 +33,11 @@ public class NewsServlet extends HttpServlet {
 			try{	
 				String news_id = new String(req.getParameter("news_id"));
 				System.out.println(news_id);
-				NewsDAO dao =  new NewsDAO();
-				NewsVO newsVO = dao.findByPrimaryKey(news_id);
+				
+				NewsService newSvc = new NewsService();
+				NewsVO newsVO = newSvc.getOneEmp(news_id);
+/*				NewsDAO dao =  new NewsDAO();
+				NewsVO newsVO = dao.findByPrimaryKey(news_id);*/
 			
 				req.setAttribute("newsVO", newsVO);
 				

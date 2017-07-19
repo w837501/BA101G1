@@ -6,6 +6,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.news.model.*"%>
 <%-- <%NewsVO newsVO = (NewsVO) request.getAttribute("newsVO"); %>  --%>
+<%
+	NewsService newsSvc = new NewsService();
+	NewsVO newsVO = (NewsVO) request.getAttribute("newsVO"); 
+	pageContext.setAttribute("newsVO", newsVO);
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -47,12 +52,22 @@
 					<hr style="border-color: red;">
 				</td>
 			</tr>
+
+			
 			</table>	
 		</div>
-		
-			<div id="content">
-				${newsVO.news_content} 
+			<h2 align="center">${newsVO.news_id}</h2><br>
+			<div>
+				<img src="<%=request.getContextPath() %>/MRDBGifReader?whichImg=latn&id=${newsVO.news_id}"
+				width="170px" height="170px" vspace="10px" style="display:block; margin:auto;border-radius: 25%;">
+				
 			</div>
+		
+			<div id="content" align="center">
+				${newsVO.news_content} 
+			</div><br>
+			<div align="center">${newsVO.news_time}</div><br>
+			<div align="center">${newsVO.news_push_content}</div><br>
 		</div>
 		</div>
 		<div id="footer">
