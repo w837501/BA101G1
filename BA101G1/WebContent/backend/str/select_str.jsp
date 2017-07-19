@@ -20,12 +20,13 @@
      <!-- FONTAWESOME STYLES-->
     <link href="<%=request.getContextPath() %>/backend/assets/css/font-awesome.css" rel="stylesheet" />
         <!-- CUSTOM STYLES-->
-    <link href="<%=request.getContextPath() %>/backend/assets/css/custom.css" rel="stylesheet" />
     	<!-- LOGIN STYLES -->
     <link href="<%=request.getContextPath() %>/backend/assets/css/login.css" rel="stylesheet" />
     <script src="<%=request.getContextPath() %>/backend/assets/js/login.js"></script>
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="<%=request.getContextPath() %>/backend/assets/css/custom.css" rel="stylesheet" />
    <script type="text/javascript">
 	$(document)
 			.ready(
@@ -37,11 +38,8 @@
 	</script>
 </head>
 <body>
-     
-           
-          
     <div id="wrapper">
-         <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #ccc;">
+         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="adjust-nav">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -51,17 +49,13 @@
                     </button>
                     <a class="" href="<%=request.getContextPath() %>/backend/index.jsp">
                         <img src="<%=request.getContextPath() %>/backend/assets/img/LOGO_2.png" style="width: 180px;"/>
-
                     </a>
-                    
                 </div>
-                
                 <span class="logout-spn" >
-                  ${manVO.man_id} ${manVO.man_name}
+
+                        ${manVO.man_id} ${manVO.man_name}
                   <a href="<%=request.getContextPath() %>/backend/man/login_man.jsp">登出</a>
                 </span>
-                
-                
             </div>
         </div>
         </div>
@@ -69,73 +63,92 @@
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-                 
-
-
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '0'}">
-                    <li class="active-link">
-                        <a href="<%=request.getContextPath() %>/backend/mem/select_mem.jsp" ><i class="fa fa-desktop "></i>會員管理 <span class="badge">Included</span></a>
-                    </li>
-                 </c:if>
-			</c:forEach>
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '9'}">
-                    <li>
-                        <a href="<%=request.getContextPath() %>/backend/memr/select_memr.jsp"><i class="glyphicon glyphicon-thumbs-down"></i>會員檢舉  <span class="badge">Included</span></a>
-                    </li>
-                    <li>
-                        <a href="<%=request.getContextPath() %>/backend/str/select_str.jsp"><i class="	glyphicon glyphicon-hand-down "></i>商家檢舉  <span class="badge">Included</span></a>
-                    </li>
-                </c:if>
-			</c:forEach>
-
-			<c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '10'}">
-                    <li>
-                        <a href="#"><i class="fa fa-qrcode "></i>審核管理<span class="badge">要連結哪個?</span></a>
-                    </li>
-                </c:if>
-			</c:forEach>
-			
-                    <li>
-                        <a href="<%=request.getContextPath() %>/backend/man/noPer.jsp"><i class="fa fa-edit "></i>假推播錯誤頁面 </a>
-                    </li>
+                    <c:forEach var="perm" items="${permList}">
+                        <c:if test="${perm.pa_id eq '0'}">
+                            <li class="active-link">
+                                <a href="<%=request.getContextPath() %>/backend/member/select_mem.jsp" ><i class="fa fa-desktop "></i>會員管理 </a>
+                            </li>
+                        </c:if>
+                    </c:forEach>
                     
-            <c:forEach var="perm" items="${permList}">
-				<c:if test="${perm.pa_id eq '8'}">
-                    <li>
-                        <a href="<%=request.getContextPath() %>/backend/man/ListAllMan.jsp"><i class="fa fa-bar-chart-o"></i>管理員管理</a>
-                    </li>
-                    <li>
-                        <a href="<%=request.getContextPath() %>/backend/per/ListAllPer.jsp"><i class="fa fa-bar-chart-o"></i>權限管理</a>
-                    </li>
-                </c:if>
-			</c:forEach>
-
-
-
-
-
+                    <c:forEach var="perm" items="${permList}">
+                        <c:if test="${perm.pa_id eq '1'}">
+                            <li>
+                                    <a href="<%=request.getContextPath() %>/backend/store/store_index.jsp"><i class="fa fa-bar-chart-o"></i>商家會員管理</a>
+                            </li>   
+                        </c:if>
+                    </c:forEach>
                     
+                    <c:forEach var="perm" items="${permList}">
+                        <c:if test="${perm.pa_id eq '8'}">
+                            <li>
+                                <a href="<%=request.getContextPath() %>/backend/man/ListAllMan.jsp"><i class="fa fa-bar-chart-o"></i>管理員管理</a>
+                            </li> 
+                       </c:if>
+                    </c:forEach>
+                         
+                    <c:forEach var="perm" items="${permList}">
+                        <c:if test="${perm.pa_id eq '9'}"> 
+                                                     
+                            <li>
+                                <a href="<%=request.getContextPath() %>/backend/memr/select_memr.jsp"><i class="fa fa-bar-chart-o"></i>會員檢舉 </a>
+                            </li>
+                            <li>
+                                <a href="<%=request.getContextPath() %>/backend/str/select_str.jsp"><i class="fa fa-bar-chart-o"></i>商家檢舉</a>
+                            </li>
+                            
+                         </c:if>
+                    </c:forEach>
+                            
+                   <c:forEach var="perm" items="${permList}">
+                        <c:if test="${perm.pa_id eq '3'}">                                  
+                            <li>
+                                <a href="<%=request.getContextPath() %>/backend/news/news_index.jsp"><i class="fa fa-bar-chart-o"></i>刊登最新消息</a>
+                            </li>
+                        </c:if>
+                    </c:forEach>
+                    
+                    <c:forEach var="perm" items="${permList}">
+                        <c:if test="${perm.pa_id eq '4'}">
+                            <li>
+                                <a href="<%=request.getContextPath() %>/backend/ad/listAllAd.jsp"><i class="fa fa-bar-chart-o"></i>廣告管理</a>
+                            </li>
+                        </c:if>
+                    </c:forEach>
+                    
+                    <c:forEach var="perm" items="${permList}">
+                        <c:if test="${perm.pa_id eq '8'}">
+                            <li>
+                                <a href="<%=request.getContextPath() %>/backend/per/ListAllPer.jsp"><i class="fa fa-bar-chart-o"></i>權限管理</a>
+                            </li>
+                        </c:if>
+                    </c:forEach>
+                    
+                    <c:forEach var="perm" items="${permList}">
+                        <c:if test="${perm.pa_id eq '10'}">
+                            <li>
+                                <a href="<%=request.getContextPath() %>/backend/store_commit/store_commit_index.jsp"><i class="fa fa-bar-chart-o"></i>商家評價管理</a>
+                            </li>
+                         </c:if>
+                    </c:forEach>
+                                   
                 </ul>
               </div>
 
         </nav>
         <!-- /. NAV SIDE  -->
-        <div class="copyrights">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
         <div id="page-wrapper" >
             <div id="page-inner">
                 <div class="row">
                     <div class="col-lg-12">
-                     	<h2>後端管理者平台</h2>   
+                        <!-- <h2></h2>  內頁標題  -->
                     </div>
                 </div>              
-                 <!-- /. ROW  -->
-                  <hr />
-                <div class="row">
-                <!-- ******************select_man.jsp原先內容********************* -->
+                    <div class="col-lg-12 ">
 
+                    </div>
+                    
+<!-- ****************內頁************************ -->
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-12 col-sm-12">
@@ -143,7 +156,7 @@
 							    <!-- 標籤面板：標籤區 -->
 							    <ul class="nav nav-tabs" role="tablist">
 							        <li role="presentation" class="active">
-							        	<form action="<%=request.getContextPath()%>/backend/str/store_report.do" method="post">
+							        	<form action="<%=request.getContextPath()%>/store_report/store_report.do" method="post">
 											<a href="#tab1" onclick="parentNode.submit();" aria-controls="tab1" role="tab" data-toggle="tab">未審核&nbsp;&nbsp;</a>
 											<input type="hidden" name="action" value="listAll3">
 											<input type="hidden" name="whichTab" value="tab1">
@@ -151,7 +164,7 @@
 							        </li>
 
 							        <li role="presentation">
-							        	<form action="<%=request.getContextPath()%>/backend/str/store_report.do" method="post">
+							        	<form action="<%=request.getContextPath()%>/store_report/store_report.do" method="post">
 											<a href="#tab3" onclick="parentNode.submit();" aria-controls="tab3" role="tab" data-toggle="tab">已審核&nbsp;&nbsp;</a>
 											<input type="hidden" name="action" value="listAll3">
 											<input type="hidden" name="whichTab" value="tab3">
@@ -175,7 +188,6 @@
 												<th>審核狀態</th>
 												<th>檢舉結果</th>
 												<th>修改</th>
-												<th>刪除</th>
 											</tr>
 											</thead>
 											<tbody>
@@ -193,11 +205,12 @@
 														</td>
 														<td>${srVO.sr_time}</td>
 														<td>${srVO.sr_state}</td>
-														 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/str/store_report.do">
+														 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store_report/store_report.do">
 														<td>
+															<div class="well">${srVO.sr_result}</div>
 															<div data-toggle="buttons">
-													          <label class="btn btn-default btn-circle btn-lg"><input type="radio" name="sr_result" value="成立" id="good" ${(srVO.sr_result == '成立')? 'checked' : '' }><i class="glyphicon glyphicon-ok"></i></label>
-													          <label class="btn btn-default btn-circle btn-lg"><input type="radio" name="sr_result" value="不成立" id="bad" ${(srVO.sr_result == '不成立')? 'checked' : ''}><i class="glyphicon glyphicon-remove"></i></label>
+													          <label class="btn btn-default btn-circle btn-lg good"><input type="radio" name="sr_result" value="成立" ${(srVO.sr_result == '成立')? 'checked' : '' }><i class="glyphicon glyphicon-ok"></i></label>
+													          <label class="btn btn-default btn-circle btn-lg bad"><input type="radio" name="sr_result" value="不成立" ${(srVO.sr_result == '不成立')? 'checked' : ''}><i class="glyphicon glyphicon-remove"></i></label>
 													        </div>
 														</td>			
 											
@@ -225,34 +238,27 @@
 						</div>
 					</div>
 				</div>
-				<!-- ******************select_man.jsp原先內容********************* -->
+<!-- ****************內頁************************ -->
 
-                </div>
+        </div>
+        <!-- /. PAGE WRAPPER  -->
 
                   <!-- /. ROW  --> 
             </div>   
         </div>             
         <div class="footer">
-      
-    
-            <div class="row">
-                <div class="col-lg-12" >
-                    &copy;  2014 yourdomain.com | More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
-                </div>
-            </div>
         </div>
-          
-
      <!-- /. WRAPPER  -->
-    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+
     <!-- JQUERY SCRIPTS -->
     <script src="<%=request.getContextPath() %>/backend/assets/js/jquery-1.10.2.js"></script>
       <!-- BOOTSTRAP SCRIPTS -->
     <script src="<%=request.getContextPath() %>/backend/assets/js/bootstrap.min.js"></script>
       <!-- CUSTOM SCRIPTS -->
     <script src="<%=request.getContextPath() %>/backend/assets/js/custom.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
     
-
+    
 </body>
 </html>
 <style type="text/css">
@@ -279,4 +285,13 @@
 	}
 
 </style>
-
+<script>
+$(".good").on('click',function(){   //選取id為demo的元素，並且綁定onclick事件。
+	   $(this).css("background-color","yellowgreen");  //將id為demo的元素，其背景顏色設為紅色。
+	   $(".bad").css("background-color","white");  //將id為demo的元素，其背景顏色設為紅色。
+});
+$(".bad").on('click',function(){   //選取id為demo的元素，並且綁定onclick事件。
+	   $(this).css("background-color","yellowgreen");  //將id為demo的元素，其背景顏色設為紅色。
+	   $(".good").css("background-color","white");  //將id為demo的元素，其背景顏色設為紅色。
+});
+</script>

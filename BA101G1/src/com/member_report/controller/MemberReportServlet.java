@@ -11,7 +11,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import com.member_report.model.*;
-@WebServlet("/BA101G1/member_report/member_report.do")
+@WebServlet("/BA101G1/member_report/member_report")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class MemberReportServlet extends HttpServlet {
 
