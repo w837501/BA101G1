@@ -8,6 +8,7 @@ import javax.servlet.http.*;
 
 import com.orderlist.model.OrderlistService;
 import com.orderlist.model.OrderlistVO;
+import com.product.model.ProductVO;
 
 public class OrderListServlet extends HttpServlet {
 
@@ -35,25 +36,18 @@ public class OrderListServlet extends HttpServlet {
 			try {
 
 				String str1 = req.getParameter("order_id");
-
 				String str2 = req.getParameter("pro_id");
 				String str3 = req.getParameter("quentity");
-
-				System.out.println(str1+" "+str2+" "+str3);
-
-				System.out.println(str1+" "+str2);
-
 				String order_id = req.getParameter("order_id");
-				System.out.println("order_id"+order_id);
-
+System.out.println("XXX"+str2);
 				OrderlistService orderSvc = new OrderlistService();
 				List<OrderlistVO> orderlistVO=new LinkedList<OrderlistVO>();
+//				List<ProductVO> productVO=new LinkedList<ProductVO>();
 				orderlistVO= orderSvc.getOrderlist(order_id);
+//				productVO= orderSvc.getProDetail(str2);
 
-				
-			
-				
-				req.setAttribute("orderlistVO", orderlistVO); 
+				req.setAttribute("orderlistVO", orderlistVO);
+//				req.setAttribute("productVO", productVO);
 				
 				String url = "/frontend/selectOrder/orderDetail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 

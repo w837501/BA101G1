@@ -74,7 +74,6 @@ $(document).ready(
 		<td>
 			<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO1.order_id}">${store_orderVO1.order_id}</a>
 		</td>
-
 		<td><fmt:formatDate  pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO1.order_time }"/></td>
  		<td>${store_orderVO1.store_name }</td>
 		<td>${store_orderVO1.totalprice }</td>
