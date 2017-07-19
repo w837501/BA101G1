@@ -199,6 +199,14 @@
     <servlet-name>ProDBGifReader</servlet-name>
     <url-pattern>/ProDBGifReader</url-pattern>
   </servlet-mapping>
+	 <servlet>
+    <servlet-name>SR_DBGifReader</servlet-name>
+    <servlet-class>com.store_report.controller.SR_DBGifReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SR_DBGifReader</servlet-name>
+    <url-pattern>/SR_DBGifReader</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>MRDBGifReader</servlet-name>
     <servlet-class>com.member_report.controller.MR_DBGifReader</servlet-class>
