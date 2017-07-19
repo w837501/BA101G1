@@ -18,7 +18,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>åƒè¨‚æˆ‘ç·šä¸Šè¨‚é¤ç³»çµ±</title>
+<title>¦Y­q§Ú½u¤W­qÀ\¨t²Î</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 
 <script type="text/javascript">
@@ -63,36 +63,36 @@ $(document).ready(
 		<div class="contents" style="margin-top:30px;margin-bottom:900px;">
 				<div id="mem-button" style="margin-left:50px;float:left;">
 						
-						<h1>æˆ‘çš„å¸³æˆ¶</h1><br>
+						<h1>§Úªº±b¤á</h1><br>
 						
 						<a href="<%=request.getContextPath() %>/frontend/mem/member_info_update.jsp" class="list-group-item">
-							<div>ä¿®æ”¹è³‡æ–™</div>
+							<div>­×§ï¸ê®Æ</div>
 						</a>
 						<a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">
-							<div>æŸ¥è©¢è¨‚å–®</div>
+							<div>¬d¸ß­q³æ</div>
 						</a>
 						<a href="<%=request.getContextPath()%>/frontend/mem/member_report.jsp " class="list-group-item">
-							<div>æŸ¥è©¢æª¢èˆ‰</div>
+							<div>¬d¸ßÀËÁ|</div>
 						</a>
 				</div>
 				
 				<div style="float:right;margin-top:20px;margin-right:50px;">
 					<div class="page-header"> 
-						<h3>æœƒå“¡è¨‚å–®ç´€éŒ„</h3>
+						<h3>·|­û­q³æ¬ö¿ý</h3>
 			 		</div> 
 							
 					<table border='1' bordercolor='#CCCCFF' width='680' bgcolor='#FFBB66'>
 						<tr>
-							<th width="11%"><font size="2">è¨‚å–®ç·¨è™Ÿ</font></th>
-							<th width="10%"><font size="2">è¨‚é¤æ™‚é–“</font></th>
-							<th width="10%"><font size="2">å–é¤æ™‚é–“</font></th>
-							<th width="10%"><font size="2">åº—å®¶åç¨±</font></th>
-							<th width="10%"><font size="2">ç¸½é‡‘é¡</font></th>
-							<th width="10%"><font size="2">å–é¤æ–¹å¼</font></th>
-							<th width="10%"><font size="2">è¨‚å–®ç‹€æ…‹</font></th>
-							<th width="10%"><font size="2">å–æ¶ˆè¨‚å–®</font></th>
-							<th width="10%"><font size="2">æª¢èˆ‰å•†å®¶</font></th>
-							<th width="10%"><font size="2">æ˜Žç´°</font></th>
+							<th width="11%"><font size="2">­q³æ½s¸¹</font></th>
+							<th width="10%"><font size="2">­qÀ\®É¶¡</font></th>
+							<th width="10%"><font size="2">¨úÀ\®É¶¡</font></th>
+							<th width="10%"><font size="2">©±®a¦WºÙ</font></th>
+							<th width="10%"><font size="2">Á`ª÷ÃB</font></th>
+							<th width="10%"><font size="2">¨úÀ\¤è¦¡</font></th>
+							<th width="10%"><font size="2">­q³æª¬ºA</font></th>
+							<th width="10%"><font size="2">¨ú®ø­q³æ</font></th>
+							<th width="10%"><font size="2">ÀËÁ|°Ó®a</font></th>
+							<th width="10%"><font size="2">©ú²Ó</font></th>
 						</tr>
 					</table>
 
@@ -110,29 +110,29 @@ $(document).ready(
 						<td width="10%"><font size="2">${store_orderVO1.order_way }</font></td>
 						<td width="10%"><font size="2">${store_orderVO1.order_state }</font></td>
 						<td width="10%"><font size="2">
-							<c:if test="${store_orderVO1.order_state eq 'æœªç¢ºèª'}">
+							<c:if test="${store_orderVO1.order_state eq '¥¼½T»{'}">
 								<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
-									<input type="submit" value="å–æ¶ˆè¨‚å–®">
+									<input type="submit" value="¨ú®ø­q³æ">
 									<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
 									<input type="hidden" name="store_id" value="${store_orderVO1.store_id}">
 									<input type="hidden" name="action" value="Cancel">
 								</form>
 							</c:if>
-				<%-- 			<c:if test="${store_orderVO1.order_state != 'æœªç¢ºèª'}">ç„¡æ³•å–æ¶ˆ</c:if> --%>
+				<%-- 			<c:if test="${store_orderVO1.order_state != '¥¼½T»{'}">µLªk¨ú®ø</c:if> --%>
 						</font>
 						</td>
 						<td width="10%"><font size="2">
-							<c:if test="${store_orderVO1.order_state eq 'å·²å–æ¶ˆ' || store_orderVO1.order_state eq 'å·²å–é¤'}">
+							<c:if test="${store_orderVO1.order_state eq '¤w¨ú®ø' || store_orderVO1.order_state eq '¤w¨úÀ\'}">
 								<form method="post" action="<%=request.getContextPath()%>/frontend/mem/member_addMR.jsp">
-									<input type="submit" value="æª¢èˆ‰">
+									<input type="submit" value="ÀËÁ|">
 									<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
 								</form>
 							</c:if>
-				<%-- 			<c:if test="${store_orderVO1.order_state != 'å·²å–æ¶ˆ' &&store_orderVO1.order_state != 'å·²å–é¤'}">ç„¡æ³•æª¢èˆ‰</c:if> --%>
+				<%-- 			<c:if test="${store_orderVO1.order_state != '¤w¨ú®ø' &&store_orderVO1.order_state != '¤w¨úÀ\'}">µLªkÀËÁ|</c:if> --%>
 						</font>
 						</td>
 						<td width="10%">
-							<input type="button" value="é¡¯ç¤º" class="abc" >
+							<input type="button" value="Åã¥Ü" class="abc" >
 						</td>
 					</tr>
 					
@@ -140,9 +140,9 @@ $(document).ready(
 					<jsp:useBean id="productSvc" scope="page" class="com.product.model.ProductService"></jsp:useBean>
 						<tr style="display: none;">
 							<td colspan="4"></td>
-							<td colspan="2" bgcolor="#FFBB66">å•†å“åç¨±</td>		
-							<td colspan="2" bgcolor="#FFBB66">æ•¸é‡</td>
-							<td colspan="2" bgcolor="#FFBB66">ç¸½é‡‘é¡</td>
+							<td colspan="2" bgcolor="#FFBB66">°Ó«~¦WºÙ</td>		
+							<td colspan="2" bgcolor="#FFBB66">¼Æ¶q</td>
+							<td colspan="2" bgcolor="#FFBB66">Á`ª÷ÃB</td>
 						</tr>
 					<c:forEach var="orderlistVO" items="${orderlistSvc.getOrderlist(store_orderVO1.order_id)}" >
 						<tr style="display: none;">
