@@ -18,108 +18,161 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<title>¦Y­q§Ú½u¤W­qÀ\¨t²Î</title>
+<title>åƒè¨‚æˆ‘ç·šä¸Šè¨‚é¤ç³»çµ±</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
+
 <script type="text/javascript">
 $(document).ready(
 		function() {
 		});
-
-
 </script>
 
 </head>
+<style>
+	#mem-button{
+		display:table-cell;
+		vertical-align: middle;
+	}
+	#mem-button div{
+		border-width:2px;
+		border-style:solid;
+		border-color:#fff;
+		width:150px;
+		height:40px;
+		margin:0 auto;
+		color:#fff;
+		font-size:15px;
+		line-height: 40px;
+		text-align: center;
+		background: #D6656A;
+		border-radius: 5px;
+		margin-bottom: 30px;
+	}
+	a{
+		text-decoration:none;
+	}
+	
+</style>
 <body>
 	<div id="page">
 		<div id="header">
 			<jsp:include page="/header_member.jsp"></jsp:include>
 		</div>
 
-		<div class="container" style="margin-bottom:180px;">
-			<div class="row">
-				<div id="sidebar">
-					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath() %>/frontend/mem/member_info_update.jsp" class="list-group-item">­×§ï¸ê®Æ</a>
-					</div>
-					
-					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">¬d¸ß­q³æ</a>
-					</div>
-					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/frontend/mem/member_report.jsp " class="list-group-item">¬d¸ßÀËÁ|</a>
-					</div>
+
+		<div class="contents" style="margin-top:30px;margin-bottom:900px;">
+				<div id="mem-button" style="margin-left:50px;float:left;">
+						
+						<h1>æˆ‘çš„å¸³æˆ¶</h1><br>
+						
+						<a href="<%=request.getContextPath() %>/frontend/mem/member_info_update.jsp" class="list-group-item">
+							<div>ä¿®æ”¹è³‡æ–™</div>
+						</a>
+						<a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">
+							<div>æŸ¥è©¢è¨‚å–®</div>
+						</a>
+						<a href="<%=request.getContextPath()%>/frontend/mem/member_report.jsp " class="list-group-item">
+							<div>æŸ¥è©¢æª¢èˆ‰</div>
+						</a>
 				</div>
-				<div id="main">
-
-
-				<div class="page-header"> 
-					  <h1>·|­û­q³æ¬ö¿ı</h1>
- 				</div> 
 				
-				 <table border='1' bordercolor='#CCCCFF' width='600'>
-	<tr>
-		<th>­q³æ½s¸¹</th>
-		<th>­qÀ\®É¶¡</th>
-		<th>©±®a¦WºÙ</th>
-		<th>Á`ª÷ÃB</th>
-		<th>¨úÀ\¤è¦¡</th>
-		<th>­q³æª¬ºA</th>
-		<th>¨ú®ø­q³æ</th>
-		<th>ÀËÁ|°Ó®a</th>
-	</tr>
-	<c:forEach var="store_orderVO1" items="${store_orderVO}" >
-	<tr align='center' valign='middle' ${(store_orderVO1.order_id==param.order_id) ? 'bgcolor=#CCCCFF':''}>
-		<td>
-			<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO1.order_id}">${store_orderVO1.order_id}</a>
-		</td>
-		<td><fmt:formatDate  pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO1.order_time }"/></td>
- 		<td>${store_orderVO1.store_name }</td>
-		<td>${store_orderVO1.totalprice }</td>
-		<td>${store_orderVO1.order_way }</td>
-		<td>${store_orderVO1.order_state }</td>
-		<td><c:if test="${store_orderVO1.order_state eq '¥¼½T»{'}">
-			<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
-							<input type="submit" value="¨ú®ø­q³æ">
-							<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
-							<input type="hidden" name="store_id" value="${store_orderVO1.store_id}">
-							<input type="hidden" name="action" value="Cancel">
-						</form>
-			</c:if>
-<%-- 			<c:if test="${store_orderVO1.order_state != '¥¼½T»{'}">µLªk¨ú®ø</c:if> --%>
-		</td>
-		<td><c:if test="${store_orderVO1.order_state eq '¤w¨ú®ø'}">
-			<form method="post" action="<%=request.getContextPath()%>/frontend/mem/member_addMR.jsp">
-							<input type="submit" value="ÀËÁ|">
-							<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
-						</form>
-		</c:if>
-			<c:if test="${store_orderVO1.order_state eq '¤w¨úÀ\'}">
-				<form method="post" action="<%=request.getContextPath()%>/frontend/mem/member_addMR.jsp">
-								<input type="submit" value="ÀËÁ|">
-								<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
-				</form>
-			</c:if>
-			
-<%-- 			<c:if test="${store_orderVO1.order_state != '¤w¨ú®ø' &&store_orderVO1.order_state != '¤w¨úÀ\'}">µLªkÀËÁ|</c:if> --%>
-		</td>
-	</tr>
-	</c:forEach>
+				<div style="float:right;margin-top:20px;margin-right:50px;">
+					<div class="page-header"> 
+						<h3>æœƒå“¡è¨‚å–®ç´€éŒ„</h3>
+			 		</div> 
+							
+					<table border='1' bordercolor='#CCCCFF' width='680' bgcolor='#FFBB66'>
+						<tr>
+							<th width="11%"><font size="2">è¨‚å–®ç·¨è™Ÿ</font></th>
+							<th width="10%"><font size="2">è¨‚é¤æ™‚é–“</font></th>
+							<th width="10%"><font size="2">å–é¤æ™‚é–“</font></th>
+							<th width="10%"><font size="2">åº—å®¶åç¨±</font></th>
+							<th width="10%"><font size="2">ç¸½é‡‘é¡</font></th>
+							<th width="10%"><font size="2">å–é¤æ–¹å¼</font></th>
+							<th width="10%"><font size="2">è¨‚å–®ç‹€æ…‹</font></th>
+							<th width="10%"><font size="2">å–æ¶ˆè¨‚å–®</font></th>
+							<th width="10%"><font size="2">æª¢èˆ‰å•†å®¶</font></th>
+							<th width="10%"><font size="2">æ˜ç´°</font></th>
+						</tr>
+					</table>
 
-</table>
 					
-
-
+				<c:forEach var="store_orderVO1" items="${store_orderVO}" >
+				<table border='1' bordercolor='#CCCCFF' width='680'>
+					<tr align='center' valign='middle' ${(store_orderVO1.order_id==param.order_id) ? 'bgcolor=#CCCCFF':''}>
+						<td width="11%"><font size="2">
+							<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO1.order_id}">${store_orderVO1.order_id}</a>
+						</td>
+						<td width="10%"><font size="2"><fmt:formatDate  pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO1.order_time }"/></font></td>
+						<td width="10%"><font size="2"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO1.order_taketime }"/></font></td>
+				 		<td width="10%"><font size="2">${store_orderVO1.store_name }</font></td>
+						<td width="10%"><font size="2">${store_orderVO1.totalprice }</font></td>
+						<td width="10%"><font size="2">${store_orderVO1.order_way }</font></td>
+						<td width="10%"><font size="2">${store_orderVO1.order_state }</font></td>
+						<td width="10%"><font size="2">
+							<c:if test="${store_orderVO1.order_state eq 'æœªç¢ºèª'}">
+								<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
+									<input type="submit" value="å–æ¶ˆè¨‚å–®">
+									<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
+									<input type="hidden" name="store_id" value="${store_orderVO1.store_id}">
+									<input type="hidden" name="action" value="Cancel">
+								</form>
+							</c:if>
+				<%-- 			<c:if test="${store_orderVO1.order_state != 'æœªç¢ºèª'}">ç„¡æ³•å–æ¶ˆ</c:if> --%>
+						</font>
+						</td>
+						<td width="10%"><font size="2">
+							<c:if test="${store_orderVO1.order_state eq 'å·²å–æ¶ˆ' || store_orderVO1.order_state eq 'å·²å–é¤'}">
+								<form method="post" action="<%=request.getContextPath()%>/frontend/mem/member_addMR.jsp">
+									<input type="submit" value="æª¢èˆ‰">
+									<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
+								</form>
+							</c:if>
+				<%-- 			<c:if test="${store_orderVO1.order_state != 'å·²å–æ¶ˆ' &&store_orderVO1.order_state != 'å·²å–é¤'}">ç„¡æ³•æª¢èˆ‰</c:if> --%>
+						</font>
+						</td>
+						<td width="10%">
+							<input type="button" value="é¡¯ç¤º" class="abc" >
+						</td>
+					</tr>
+					
+					<jsp:useBean id="orderlistSvc" scope="page" class="com.orderlist.model.OrderlistService"></jsp:useBean>
+					<jsp:useBean id="productSvc" scope="page" class="com.product.model.ProductService"></jsp:useBean>
+						<tr style="display: none;">
+							<td colspan="4"></td>
+							<td colspan="2" bgcolor="#FFBB66">å•†å“åç¨±</td>		
+							<td colspan="2" bgcolor="#FFBB66">æ•¸é‡</td>
+							<td colspan="2" bgcolor="#FFBB66">ç¸½é‡‘é¡</td>
+						</tr>
+					<c:forEach var="orderlistVO" items="${orderlistSvc.getOrderlist(store_orderVO1.order_id)}" >
+						<tr style="display: none;">
+							<td colspan="4"></td>
+							<td colspan="2">${productSvc.getOnePro(orderlistVO.pro_id).pro_name}</td>		
+							<td colspan="2">${orderlistVO.order_amount}</td>
+							<td colspan="2">${orderlistVO.price}</td>
+						</tr>
+					</c:forEach>
+				</table>
+				</c:forEach>
 				</div>
-			</div>
+			
 		</div>
+		
 		<div id="footer">
 			<jsp:include page="/footer.jsp"/>
 		</div>
 
 	</div>
+	
 	<script src="https://code.jquery.com/jquery.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
+<script type="text/javascript">
+$(".abc").on('click',function(){
+	console.log($(".abc").index(this))
+	var father=$(".abc").eq($(".abc").index(this)).parent().parent().siblings();
+	father.toggle();
+})
+ 
+</script>

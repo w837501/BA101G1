@@ -17,68 +17,92 @@ memberreportVO=memberreportSvc.getMemberReportByMem_id(mem_id);
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <title>吃訂我線上訂餐系統</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 </head>
+
+<style>
+	#mem-button{
+		display:table-cell;
+		vertical-align: middle;
+	}
+	#mem-button div{
+		border-width:2px;
+		border-style:solid;
+		border-color:#fff;
+		width:150px;
+		height:40px;
+		margin:0 auto;
+		color:#fff;
+		font-size:15px;
+		line-height: 40px;
+		text-align: center;
+		background: #D6656A;
+		border-radius: 5px;
+		margin-bottom: 30px;
+	}
+
+	a{
+		text-decoration:none;
+	}
+	
+</style>
+
 <body>
 	<div id="page">
 		<div id="header">
 			<jsp:include page="/header_member.jsp"></jsp:include>
 		</div>
 
-		<div class="container" style="margin-bottom:180px;">
-			<div class="row">
-				<div class="col-xs-12 col-sm-3">
-					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath() %>/frontend/mem/member_info_update.jsp" class="list-group-item">修改資料</a>
-					</div>
-					
-					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">查詢訂單</a>
-					</div>
-					<div class="panel panel-info" style="width:200px;">
-					    <a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">查詢檢舉</a>
-					</div>
-				</div>
-				
-				
-				<div class="col-xs-12 col-sm-7" >
-
+		<div class="contents" style="margin-top:30px;margin-bottom:500px;">
 			
-				<div class="page-header"> 
-					  <h1>會員檢舉紀錄</h1>
- 				</div> 
-				<table border='1' bordercolor='#CCCCFF' width='600'>
-					<tr>
-						<th>會員檢舉單號</th>
-						<th>訂單編號</th>
-						<th>評論編號</th>
-						<th>檢舉內容</th>
-						<th>檢舉圖片</th>
-						<th>檢舉時間</th>
-						<th>檢舉審核狀態</th>
-						<th>檢舉結果</th>
-					</tr>
-				 <c:forEach var="member_reportVO" items="${memberreportVO}" >
-					<tr align='center' valign='middle'${(member_reportVO.mr_id==param.mr_id)?'bgcolor=#CCCCFF':'' }>
-						<td>${member_reportVO.mr_id }</td>
-						<td>${member_reportVO.order_id }</td>
-						<td>${member_reportVO.sc_id }</td>
-						<td>${member_reportVO.mr_content}</td>
-						<td>${member_reportVO.mr_image }</td>
-						<td>${member_reportVO.mr_time }</td>
-						<td>${member_reportVO.mr_state }</td>
-						<td>${member_reportVO.mr_result }</td>
-					</tr>
-					</c:forEach>
-				
-				</table>
-					
-
+				<div id="mem-button" style="margin-left:50px;float:left;">
+						
+						<h1>我的帳戶</h1><br>
+						
+						<a href="<%=request.getContextPath() %>/frontend/mem/member_info_update.jsp" class="list-group-item">
+							<div>修改資料</div>
+						</a>
+						<a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">
+							<div>查詢訂單</div>
+						</a>
+						<a href="<%=request.getContextPath()%>/frontend/mem/member_report.jsp " class="list-group-item">
+							<div>查詢檢舉</div>
+						</a>
 				</div>
-			</div>
+				
+				
+				<div style="float:right;margin-top:20px;margin-right:50px;">
+					<div> 
+						  <h3>會員檢舉紀錄</h3>
+	 				</div> 
+					<table border='1' bordercolor='#CCCCFF' width='680'>
+						<tr bgcolor='#FFBB66'>
+							<th width="11%"><font size="2">會員檢舉單號</font></th>
+							<th width="10%"><font size="2">訂單編號</font></th>
+							<th width="10%"><font size="2">評論編號</font></th>
+							<th width="10%"><font size="2">檢舉內容</font></th>
+							<th width="10%"><font size="2">檢舉圖片</font></th>
+							<th width="10%"><font size="2">檢舉時間</font></th>
+							<th width="10%"><font size="2">檢舉審核狀態</font></th>
+							<th width="10%"><font size="2">檢舉結果</font></th>
+						</tr>
+						<c:forEach var="member_reportVO" items="${memberreportVO}" >
+						<tr align='center' valign='middle'${(member_reportVO.mr_id==param.mr_id)?'bgcolor=#CCCCFF':'' }>
+							<td width="11%"><font size="2">${member_reportVO.mr_id }</font></td>
+							<td width="10%"><font size="2">${member_reportVO.order_id }</font></td>
+							<td width="10%"><font size="2">${member_reportVO.sc_id }</font></td>
+							<td width="10%"><font size="2">${member_reportVO.mr_content}</font></td>
+							<td width="10%"><font size="2">${member_reportVO.mr_image }</font></td>
+							<td width="10%"><font size="2">${member_reportVO.mr_time }</font></td>
+							<td width="10%"><font size="2">${member_reportVO.mr_state }</font></td>
+							<td width="10%"><font size="2">${member_reportVO.mr_result }</font></td>
+						</tr>
+						</c:forEach>
+					</table>
+				</div>
 		</div>
+		
 		<div id="footer">
 			<jsp:include page="/footer.jsp"></jsp:include>
 		</div>

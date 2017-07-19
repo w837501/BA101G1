@@ -118,7 +118,7 @@ public class PermissionJDBCDAO implements PermissionDAO_interface{
 		
 	}
 	@Override
-	public void delete(String man_id) {
+	public void delete(String man_id , String pa_id) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -310,4 +310,9 @@ public static void main(String[] args){
 //			System.out.println("---------------------");	
 //		}
 	}
+@Override
+public List<PermissionVO> findByManId(String man_id) {
+	// TODO Auto-generated method stub
+	return null;
+}
 }

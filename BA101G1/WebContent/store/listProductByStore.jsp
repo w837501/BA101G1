@@ -65,11 +65,11 @@
 						</c:forEach>
 					</ul>
 				</div>
-				
+				<c:if test="${shoppingcart !=null }">
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do">
 						<input type="submit" value="前往購物車" >
 						<input type="hidden" name="action"	value="goto_ShoppingCart">
-				</FORM>
+				</FORM></c:if>
 			</div>
 			<div id="store_sidebar">
 				<div class="store_logo">

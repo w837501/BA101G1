@@ -96,10 +96,9 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 						</form>
 						</td>
 						<td width="8%">
-							<input type="button" value="顯示" class="abc" ></Button>
+							<input type="button" value="顯示" class="abc" >
 						</td>
 					</tr>
-					<tr>
 					<jsp:useBean id="orderlistSvc" scope="page" class="com.orderlist.model.OrderlistService"></jsp:useBean>
 					<jsp:useBean id="productSvc" scope="page" class="com.product.model.ProductService"></jsp:useBean>
 					<c:forEach var="orderlistVO" items="${orderlistSvc.getOrderlist(store_orderVO.order_id)}" >

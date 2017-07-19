@@ -147,11 +147,11 @@
   
   <servlet>
     <servlet-name>PServlet</servlet-name>
-    <servlet-class>com.permission2.controller.PServlet</servlet-class>
+    <servlet-class>com.permission.controller.PServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>PServlet</servlet-name>
-    <url-pattern>/backend/man/p.do</url-pattern>
+    <url-pattern>/backend/per/p.do</url-pattern>
   </servlet-mapping>
 
   
@@ -265,4 +265,15 @@
     <dispatcher>ERROR</dispatcher>
     <dispatcher>ASYNC</dispatcher>
   </filter-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>jsonRSP</display-name>
+    <servlet-name>jsonRSP</servlet-name>
+    <servlet-class>com.tools.JsonResponse</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>jsonRSP</servlet-name>
+    <url-pattern>/jsonRSP.do</url-pattern>
+  </servlet-mapping>
 </web-app>
