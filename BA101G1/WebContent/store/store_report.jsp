@@ -93,29 +93,27 @@ storereportVO=storereportSvc.getReportByStore_id(store_id);
  				</div> 
 				<table border="1" bordercolor='#CCCCFF' cellpadding="5px" width="650px";>
 					<tr>
-						<th><font size="1">商家檢舉單號</font></th>
-						<th><font size="1">商家編號</font></th>
-						<th><font size="1">評論編號</font></th>
-						<th><font size="1">訂單編號</font></th>
-						<th><font size="1">管理員編號</font></th>
-						<th><font size="1">檢舉內容</font></th>
-						<th><font size="1">檢舉圖片</font></th>
-						<th><font size="1">檢舉時間</font></th>
-						<th><font size="1">檢舉審核狀態</font></th>
-						<th><font size="1">檢舉結果</font></th>	
+						<th><font size="2">商家檢舉單號</font></th>
+						<th><font size="2">評論編號</font></th>
+						<th><font size="2">訂單編號</font></th>
+						<th><font size="2">管理員編號</font></th>
+						<th><font size="2">檢舉內容</font></th>
+						<th><font size="2">檢舉圖片</font></th>
+						<th><font size="2">檢舉時間</font></th>
+						<th><font size="2">檢舉審核狀態</font></th>
+						<th><font size="2">檢舉結果</font></th>	
 					</tr>
 				 <c:forEach var="store_reportVO" items="${storereportVO}" >
 					<tr align='center' valign='middle'>
-						<td><font size="1">${store_reportVO.sr_id }</font></td>
-				 		<td><font size="1">${store_reportVO.store_id }</font></td>
-						<td><font size="1">${store_reportVO.sc_id }</font></td>
-						<td><font size="1">${store_reportVO.order_id }</font></td>
-						<td><font size="1">${store_reportVO.man_id }</font></td>
-						<td><font size="1">${store_reportVO.sr_content}</font></td>
-						<td><font size="1">${store_reportVO.sr_image }</font></td>
-						<td><font size="1"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_reportVO.sr_time }"/></font></td>
-						<td><font size="1">${store_reportVO.sr_state }</font></td>
-						<td><font size="1">${store_reportVO.sr_result }</font></td>
+						<td><font size="2">${store_reportVO.sr_id }</font></td>
+						<td><font size="2">${store_reportVO.sc_id }</font></td>
+						<td><font size="2">${store_reportVO.order_id }</font></td>
+						<td><font size="2">${store_reportVO.man_id }</font></td>
+						<td><font size="2">${store_reportVO.sr_content}</font></td>
+						<td><font size="2">${store_reportVO.sr_image }</font></td>
+						<td><font size="2"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_reportVO.sr_time }"/></font></td>
+						<td><font size="2">${store_reportVO.sr_state }</font></td>
+						<td><font size="2">${store_reportVO.sr_result }</font></td>
 					</tr>	
 				</c:forEach>
 				</table>
