@@ -180,7 +180,6 @@ System.out.println( srVO.getOrder_id());
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO‚º Domain objects
 				srVO = new StoreReportVO();
 				srVO.setSr_id(rs.getString("sr_id"));
 				srVO.setStore_id(rs.getString("store_id"));
@@ -240,6 +239,7 @@ System.out.println( srVO.getOrder_id());
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
+
 				srVO = new StoreReportVO();
 				srVO.setSr_id(rs.getString("sr_id"));
 				srVO.setStore_id(rs.getString("store_id"));
@@ -289,7 +289,9 @@ System.out.println( srVO.getOrder_id());
 
 	public List<StoreReportVO> findBySR_state(String sr_state) {
     
-		List<StoreReportVO> list = new ArrayList<StoreReportVO>();
+
+ List<StoreReportVO> list = new ArrayList<StoreReportVO>();
+
 		StoreReportVO srVO = null;
 
 		Connection con = null;
@@ -304,7 +306,7 @@ System.out.println( srVO.getOrder_id());
       
       
 			while (rs.next()) {
-				// empVO Domain objects
+
 				srVO = new StoreReportVO();
 				srVO.setSr_id(rs.getString("sr_id"));
 				srVO.setStore_id(rs.getString("store_id"));
@@ -365,7 +367,7 @@ System.out.println( srVO.getOrder_id());
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO‚º Domain objects
+
 				srVO = new StoreReportVO();
 				srVO.setSr_id(rs.getString("sr_id"));
 				srVO.setStore_id(rs.getString("store_id"));
@@ -410,63 +412,4 @@ System.out.println( srVO.getOrder_id());
 		return list;
 	}
 
-	/*public static void main(String[] args) {
-
-		StoreReportJDBCDAO dao = new StoreReportJDBCDAO();
-
-		StoreReportVO srVO1 = new StoreReportVO();
-		srVO1.setStore_id("STO-000002");
-		srVO1.setSc_id("SC-000003");
-		srVO1.setOrd_id(null);
-		srVO1.setMan_id(new String("MAN-000003"));
-		srVO1.setSr_content(new String("xxx"));
-		srVO1.setSr_image(new byte[0]);
-		srVO1.setSr_time(java.sql.Timestamp.valueOf("2003-03-31 03:33:33"));
-		srVO1.setSr_state(new Integer(0));
-		srVO1.setSr_result(new Integer(0));
-		dao.insert(srVO1);
-
-		StoreReportVO srVO2 = new StoreReportVO();
-		srVO2.setSr_id("SR-000001");
-		srVO2.setStore_id("STO-000003");
-		srVO2.setSc_id(null);
-		srVO2.setOrd_id("20170614-000002");
-		srVO2.setMan_id(new String("MAN-000002"));
-		srVO2.setSr_content(new String("xxx"));
-		srVO2.setSr_image(null);
-		srVO2.setSr_time(java.sql.Timestamp.valueOf("2001-01-01 11:11:11"));
-		srVO2.setSr_state(1);
-		srVO2.setSr_result(1);
-		dao.update(srVO2);
-
-		dao.delete("SR-000004");
-
-		StoreReportVO srVO3 = dao.findPrimaryKey("SR-000002");
-		System.out.print(srVO3.getSr_id() + ",");
-		System.out.print(srVO3.getStore_id() + ",");
-		System.out.print(srVO3.getSc_id() + ",");
-		System.out.print(srVO3.getOrder_id() + ",");
-		System.out.print(srVO3.getMan_id() + ",");
-		System.out.print(srVO3.getSr_content() + ",");
-		System.out.print(srVO3.getSr_image() + ",");
-		System.out.print(srVO3.getSr_time() + ",");
-		System.out.print(srVO3.getSr_state() + ",");
-		System.out.print(srVO3.getSr_result() + ",");
-		System.out.println("---------------------");
-
-		List<StoreReportVO> list = dao.getAll();
-		for (StoreReportVO aSR : list) {
-			System.out.print(aSR.getSr_id() + ",");
-			System.out.print(aSR.getStore_id() + ",");
-			System.out.print(aSR.getSc_id() + ",");
-			System.out.print(aSR.getOrd_id() + ",");
-			System.out.print(aSR.getMan_id() + ",");
-			System.out.print(aSR.getSr_content() + ",");
-			System.out.print(aSR.getSr_image() + ",");
-			System.out.print(aSR.getSr_time() + ",");
-			System.out.print(aSR.getSr_state() + ",");
-			System.out.print(aSR.getSr_result() + ",");
-			System.out.println();
-		}
-	}*/
 }
