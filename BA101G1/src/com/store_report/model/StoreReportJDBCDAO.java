@@ -186,7 +186,6 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo 也稱為 Domain objects
 				srVO = new StoreReportVO();
 				srVO.setSr_id(rs.getString("sr_id"));
 				srVO.setStore_id(rs.getString("store_id"));
@@ -252,7 +251,6 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO 也稱為 Domain objects
 				srVO = new StoreReportVO();
 				srVO.setSr_id(rs.getString("sr_id"));
 				srVO.setStore_id(rs.getString("store_id"));
@@ -306,37 +304,34 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 
 		StoreReportJDBCDAO dao = new StoreReportJDBCDAO();
 
-		// 新增
 //		StoreReportVO srVO1 = new StoreReportVO();
 //		srVO1.setStore_id("STO-000002");
 //		srVO1.setSc_id("SC-000003");
 //		srVO1.setOrder_id(null);
 //		srVO1.setMan_id(new String("MAN-000003"));
-//		srVO1.setSr_content(new String("新垣結衣我老婆"));
+//		srVO1.setSr_content(new String("ppp"));
 //		srVO1.setSr_image(new byte[0]);
 //		srVO1.setSr_time(java.sql.Timestamp.valueOf("2003-03-31 03:33:33"));
-//		srVO1.setSr_state("已審核");
-//		srVO1.setSr_result("成立");
+//		srVO1.setSr_state("ppp");
+//		srVO1.setSr_result("ppp");
 //		dao.insert(srVO1);
 //
-//		// 修改
+//		// p��
 //		StoreReportVO srVO2 = new StoreReportVO();
 //		srVO2.setSr_id("SR-000001");
 //		srVO2.setStore_id("STO-000003");
 //		srVO2.setSc_id(null);
 //		srVO2.setOrder_id("20170614-000002");
 //		srVO2.setMan_id(new String("MAN-000002"));
-//		srVO2.setSr_content(new String("吳永志吳永志"));
+//		srVO2.setSr_content(new String("ppp"));
 //		srVO2.setSr_image(null);
 //		srVO2.setSr_time(java.sql.Timestamp.valueOf("2001-01-01 11:11:11"));
-//		srVO2.setSr_state("已審核");
-//		srVO2.setSr_result("不成立");
+//		srVO2.setSr_state(ppp");
+//		srVO2.setSr_result("ppp");
 //		dao.update(srVO2);
 //
-//		// 刪除
 //		dao.delete("SR-000004");
 //
-//		// 查詢
 //		StoreReportVO srVO3 = dao.findPrimaryKey("SR-000002");
 //		System.out.print(srVO3.getSr_id() + ",");
 //		System.out.print(srVO3.getStore_id() + ",");
@@ -350,7 +345,6 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 //		System.out.print(srVO3.getSr_result() + ",");
 //		System.out.println("---------------------");
 
-		// 查詢
 		List<StoreReportVO> list = dao.getReportByStore_id("STO-000001");
 		for (StoreReportVO aSR : list) {
 			System.out.print(aSR.getSr_id() + ",");
@@ -368,10 +362,9 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 	}
 
 	@Override
-
 	public List<StoreReportVO> findBySR_state(String sr_state) {
-		// TODO Auto-generated method stub
 		return null;
+	}
 
 	public List<StoreReportVO> getReportByStore_id(String store_id) {
 		List<StoreReportVO> list = new ArrayList<StoreReportVO>();
@@ -390,7 +383,6 @@ public class StoreReportJDBCDAO implements StoreReportDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO 也稱為 Domain objects
 				srVO = new StoreReportVO();
 				srVO.setSr_id(rs.getString("sr_id"));
 				srVO.setStore_id(rs.getString("store_id"));
