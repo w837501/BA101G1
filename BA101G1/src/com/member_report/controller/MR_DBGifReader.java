@@ -37,6 +37,9 @@ public class MR_DBGifReader extends HttpServlet {
 				case "str":
 					sql = "SELECT sr_image FROM store_report WHERE sr_id = '" + pk + "'";
 					break;
+				case "latn":
+					sql = "SELECT news_image FROM news WHERE news_id = '" + pk + "'";
+					break;
 
 				default:
 					sql = "";

@@ -6,6 +6,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.news.model.*"%>
 <%-- <%NewsVO newsVO = (NewsVO) request.getAttribute("newsVO"); %>  --%>
+<%
+	NewsService newsSvc = new NewsService();
+	NewsVO newsVO = (NewsVO) request.getAttribute("newsVO"); 
+	pageContext.setAttribute("newsVO", newsVO);
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -21,26 +26,16 @@
 			}
 		</style>
 	</head>
-
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
+<script src="<%=request.getContextPath()%>/js/mobile.js" type="text/javascript"></script>
 	<body>
 	<div id="page">
 		<div id="header">
-			<div id="logo">
-				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
-				<span id="login"><a href="news.html">Login in</a></span>
-
-				<ul>
-					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
-					<li><a href="news.html">最新消息</a></li>
-				</ul>
-			</div>	
+			<jsp:include page="/header_both.jsp" />
 		</div>
 
 		<p><font size = "500px">
-		<b style ="display:inline-block;">最新消息 > 內容 </b>
+		<b style ="display:inline-block;"><a href="<%=request.getContextPath()%>/frontend/latestnews/browseLatestNews.jsp">最新消息</a> > 內容 </b>
 		</font></p>
 		
 		<br>	
@@ -57,23 +52,26 @@
 					<hr style="border-color: red;">
 				</td>
 			</tr>
+
+			
 			</table>	
 		</div>
-		
-			<div id="content">
-				${newsVO.news_content} 
+			<h2 align="center">${newsVO.news_id}</h2><br>
+			<div>
+				<img src="<%=request.getContextPath() %>/MRDBGifReader?whichImg=latn&id=${newsVO.news_id}"
+				width="170px" height="170px" vspace="10px" style="display:block; margin:auto;border-radius: 25%;">
+				
 			</div>
+		
+			<div id="content" align="center">
+				${newsVO.news_content} 
+			</div><br>
+			<div align="center">${newsVO.news_time}</div><br>
+			<div align="center">${newsVO.news_push_content}</div><br>
 		</div>
 		</div>
 		<div id="footer">
-				<ul class="navigation">
-					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
-					<li><a href="news.html">最新消息</a></li>
-				</ul>
-				<p id="footnote">Eternal Beauty Essentials 2012. All Rights Reserved.</p>
+			<jsp:include page="/footer.jsp"/>
 		</div>
 	</div>		
 	</div>
