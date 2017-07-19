@@ -72,7 +72,7 @@ $(document).ready(
 	<c:forEach var="store_orderVO1" items="${store_orderVO}" >
 	<tr align='center' valign='middle' ${(store_orderVO1.order_id==param.order_id) ? 'bgcolor=#CCCCFF':''}>
 		<td>
-			<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO1.order_id}">${store_orderVO1.order_id}</a>
+			<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO1.order_id}&totalprice=${store_orderVO1.totalprice }">${store_orderVO1.order_id}</a>
 		</td>
 		<td><fmt:formatDate  pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO1.order_time }"/></td>
  		<td>${store_orderVO1.store_name }</td>

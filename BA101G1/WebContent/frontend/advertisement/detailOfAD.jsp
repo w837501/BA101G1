@@ -24,6 +24,10 @@ AdVO adVO=adSvc.getOneAd(ad_id);
 				font-size:25px;
 				width:800px;
 			}
+			#content{
+				padding-right:50px;
+				padding-left:50px;
+			}
 		</style>
 	</head>
 
@@ -32,18 +36,7 @@ AdVO adVO=adSvc.getOneAd(ad_id);
 	
 	<div id="page">
 		<div id="header">
-			<div id="logo">
-				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
-				<span id="login"><a href="news.html">Login in</a></span>
-
-				<ul>
-					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
-					<li><a href="news.html">最新消息</a></li>
-				</ul>
-			</div>
+			<jsp:include page="/header_member.jsp"></jsp:include>
 		</div>
 	
 		<p><font size = "10px">
@@ -51,7 +44,7 @@ AdVO adVO=adSvc.getOneAd(ad_id);
 		</font></p>
 		
 		<br>
-		<div id="classcontents">
+<!-- 		<div id="classcontents"> -->
 		<div id="items">
 		<div id="ad" align="center">
 			<table>
@@ -66,11 +59,12 @@ AdVO adVO=adSvc.getOneAd(ad_id);
 			</tr>
 			</table>		
 			<img src="<%=request.getContextPath()%>/advertisement/DBGifReader.do?ad_id=${adVO.ad_id}"style="max-width: 250px; max-height: 250px;"></img>
+		</div>
 			<div id="content">
 				<h3>${adVO.ad_content}</h3>
 			</div>
 		</div>
-		</div>
+<!-- 		</div> -->
 		<div id="footer">
 				<ul class="navigation">
 					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
@@ -81,7 +75,7 @@ AdVO adVO=adSvc.getOneAd(ad_id);
 				</ul>
 				<p id="footnote">Eternal Beauty Essentials 2012. All Rights Reserved.</p>
 		</div>
-		</div>
+		
 	</div>
 	</body>
 </html>

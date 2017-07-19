@@ -95,6 +95,14 @@
     <servlet-name>DBGifReader</servlet-name>
     <url-pattern>/advertisement/DBGifReader.do</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>DBGifReader1</servlet-name>
+    <servlet-class>com.news.controller.DBGifReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBGifReader1</servlet-name>
+    <url-pattern>/latestnews/DBGifReader.do</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>OrderServlet</servlet-name>
     <servlet-class>com.order.controller.OrderServlet</servlet-class>

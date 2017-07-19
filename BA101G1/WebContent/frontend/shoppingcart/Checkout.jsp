@@ -120,7 +120,7 @@ MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 									取餐時間
 										<input type="text" id="datepicker3" name="order_taketime1" value="<%= (orderVO==null)? " ": orderVO.getOrder_taketime()%>">
             							<label for="SearchTime">
-            								<span><em  class="moreSpace">時</em> 間</span>:&nbsp;
+            								<span>時間</span>:&nbsp;
             							</label>
             						<select id="SearchTime" name="order_taketime2" style="width: 85px;">
             							<option value="">請選擇</option>
@@ -210,6 +210,8 @@ MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 			buttonImageOnly : true,
 			changeMonth: true,
 			changeYear: true,
+			minDate:0,
+			maxDate:"1M+10D",
 			dateFormat:'yy-mm-dd'
 		});
 	</script>
