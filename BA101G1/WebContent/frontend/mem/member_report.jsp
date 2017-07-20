@@ -82,24 +82,31 @@ memberreportVO=memberreportSvc.getMemberReportByMem_id(mem_id);
 							<th width="10%"><font size="2">訂單編號</font></th>
 							<th width="10%"><font size="2">評論編號</font></th>
 							<th width="10%"><font size="2">檢舉內容</font></th>
-							<th width="10%"><font size="2">檢舉圖片</font></th>
 							<th width="10%"><font size="2">檢舉時間</font></th>
 							<th width="10%"><font size="2">檢舉審核狀態</font></th>
 							<th width="10%"><font size="2">檢舉結果</font></th>
+							<th width="10%"><font size="2">顯示</font></th>
 						</tr>
+					</table>
 						<c:forEach var="member_reportVO" items="${memberreportVO}" >
+						<table border='1' bordercolor='#CCCCFF' width='680'>
 						<tr align='center' valign='middle'${(member_reportVO.mr_id==param.mr_id)?'bgcolor=#CCCCFF':'' }>
 							<td width="11%"><font size="2">${member_reportVO.mr_id }</font></td>
 							<td width="10%"><font size="2">${member_reportVO.order_id }</font></td>
 							<td width="10%"><font size="2">${member_reportVO.sc_id }</font></td>
 							<td width="10%"><font size="2">${member_reportVO.mr_content}</font></td>
-							<td width="10%"><font size="2">${member_reportVO.mr_image }</font></td>
 							<td width="10%"><font size="2">${member_reportVO.mr_time }</font></td>
 							<td width="10%"><font size="2">${member_reportVO.mr_state }</font></td>
 							<td width="10%"><font size="2">${member_reportVO.mr_result }</font></td>
+							<td width="10%">
+							<input type="button" value="Show" class="abc" >
+						</td>
 						</tr>
-						</c:forEach>
+						<tr style="display: none;">
+						<td><img src="<%=request.getContextPath() %>/MRDBGifReader?whichImg=memr&id=${member_reportVO.mr_id }"style="max-width: 150px; max-height: 150px;"></td>
+						</tr>
 					</table>
+						</c:forEach>
 				</div>
 		</div>
 		
@@ -112,3 +119,11 @@ memberreportVO=memberreportSvc.getMemberReportByMem_id(mem_id);
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
+<script type="text/javascript">
+$(".abc").on('click',function(){
+	console.log($(".abc").index(this))
+	var father=$(".abc").eq($(".abc").index(this)).parent().parent().siblings();
+	father.toggle();
+})
+ 
+</script>

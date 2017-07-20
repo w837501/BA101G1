@@ -154,14 +154,4 @@ public class PermissionAbilityDAO implements Permission_AbilityDAO_interface{
 		}
 		return list;
 	}
-
-
-
-
-
-
-
-
-
-	
 }

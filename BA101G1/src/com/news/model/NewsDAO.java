@@ -26,8 +26,8 @@ public class NewsDAO implements NewsDAO_interface{
 		}
 	}
 	
-	private static final String INSERT_STMT = "INSERT into NEWS VALUES(?,?,?,?,?,?,?)";
-	private static final String UPDATE_STMT = "UPDATE NEWS set news_name=?, news_content=?, news_image=?, news_time=?, news_push_content=? where news_id=?";
+	private static final String INSERT_STMT = "INSERT into NEWS(news_id , man_id , news_name , news_content , news_image , news_time ) VALUES('NEWS'||'-'||LPAD(to_char(NEWS_SEQ.NEXTVAL),5,'0'),?,?,?,?,?)";
+	private static final String UPDATE_STMT = "UPDATE NEWS set man_id=? , news_name=?, news_content=?, news_image=? where news_id=?";
 	private static final String DELETE = "DELETE FROM NEWS where news_id = ?";
 	private static final String Find_by_PK = "select * from NEWS where news_id=?";
 	private static final String Find_ALL = "select * from NEWS order by news_time desc";
@@ -40,13 +40,11 @@ public class NewsDAO implements NewsDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, newsVO.getNews_id());
-			pstmt.setString(2, newsVO.getMan_id());
-			pstmt.setString(3, newsVO.getNews_name());
-			pstmt.setString(4, newsVO.getNews_content());
-			pstmt.setBytes(5, newsVO.getNews_image());
-			pstmt.setTimestamp(6, newsVO.getNews_time());
-			pstmt.setString(7, newsVO.getNews_push_content());
+			pstmt.setString(1, newsVO.getMan_id());
+			pstmt.setString(2, newsVO.getNews_name());
+			pstmt.setString(3, newsVO.getNews_content());
+			pstmt.setBytes(4, newsVO.getNews_image());
+			pstmt.setTimestamp(5, newsVO.getNews_time());
 
 			pstmt.executeUpdate();
 
@@ -74,12 +72,11 @@ public class NewsDAO implements NewsDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			
-			pstmt.setString(1, newsVO.getNews_name());
-			pstmt.setString(2, newsVO.getNews_content());
-			pstmt.setBytes(3, newsVO.getNews_image());
-			pstmt.setTimestamp(4, newsVO.getNews_time());
-			pstmt.setString(5, newsVO.getNews_push_content());
-			pstmt.setString(6, newsVO.getNews_id());
+			pstmt.setString(1, newsVO.getMan_id());
+			pstmt.setString(2, newsVO.getNews_name());
+			pstmt.setString(3, newsVO.getNews_content());
+			pstmt.setBytes(4, newsVO.getNews_image());
+			pstmt.setString(5, newsVO.getNews_id());
 
 			pstmt.executeUpdate();
 

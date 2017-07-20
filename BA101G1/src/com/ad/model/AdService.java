@@ -58,4 +58,15 @@ public class AdService {
 	public List<AdVO> getAvailableAD() {
 		return dao.getAvailableAD();
 	}
+	public AdVO updateAdState(String ad_state ,String ad_id){
+		AdVO adVO = new AdVO();
+		adVO.setAd_state(ad_state);
+		adVO.setAd_id(ad_id);
+		dao.updateAdState( ad_state ,ad_id);
+		return adVO;
+	}
+	public List<AdVO> getAllUncheckedAd() {
+		return dao.getAllUncheckedAd();
+	}	
+	
 }

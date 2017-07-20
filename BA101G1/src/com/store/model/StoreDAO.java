@@ -5,11 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import com.store_commit.model.StoreCommitVO;
+import com.tools.StoreCompositeQuery;
 
 public class StoreDAO implements StoreDAO_interface {
 
@@ -36,6 +43,12 @@ public class StoreDAO implements StoreDAO_interface {
 	private static final String UPDATE_STMT2 = "UPDATE STORE set store_phone=?, store_addr=?, store_name=?, store_state=? where store_id = ?";
 	private static final String Find_HOT = "select * from store where store_star > ? and store_state = '¶}©±¤¤' order by store_star desc";
 	private static final String UPDATE_START="UPDATE STORE set store_star=? , store_count=? where store_id=?";
+private static final String GET_STORE_COMMIT_BYSTORE_ID ="select sc_id , store_id , mem_id , sc_content , sc_time , sc_state from store_commit where store_id = ? order by sc_id";
+	
+	private static final String UPDATE_STORE_STATE = "update store set store_state=? where store_id = ?";
+	
+	private static final String GET_ALL_UNCHECKED_STORE = "select count(*) from store where store_state = '¼f®Ö¤¤'";
+	
 	@Override
 	public void insert(StoreVO storeVO) {
 		Connection con = null;
@@ -697,6 +710,200 @@ public class StoreDAO implements StoreDAO_interface {
 			}
 
 		}
+	}
+
+	@Override
+	public Set<StoreCommitVO> getStoreCommitsByStore_id(String store_id) {
+		Set<StoreCommitVO> set = new LinkedHashSet<StoreCommitVO>();
+		StoreCommitVO scVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_STORE_COMMIT_BYSTORE_ID);
+			pstmt.setString(1, store_id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				scVO = new StoreCommitVO();
+				scVO.setSc_id(rs.getString("sc_id"));
+				scVO.setStore_id(rs.getString("store_id"));
+				scVO.setMem_id(rs.getString("mem_id"));
+				scVO.setSc_content(rs.getString("sc_content"));
+				scVO.setSc_time(rs.getTimestamp("sc_time"));
+				scVO.setSc_state(rs.getString("sc_state"));
+				set.add(scVO);
+			}
+			
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
+	}
+
+	@Override
+	public List<StoreVO> getAll(Map<String, String[]> map) {
+		
+		List<StoreVO> list = new ArrayList<StoreVO>();
+		StoreVO storeVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try{
+			con = ds.getConnection();
+			String finalSQL =  "Select * from store "
+					+ StoreCompositeQuery.getWhereCondition(map)
+					+ "order by store_id";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println(finalSQL);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				storeVO= new StoreVO();
+				storeVO.setStore_id(rs.getString("store_id"));
+				storeVO.setSc_id(rs.getInt("Sc_id"));
+				storeVO.setStore_name(rs.getString("store_name"));
+				storeVO.setStore_content(rs.getString("store_content"));
+				storeVO.setStore_phone(rs.getString("store_phone"));
+				storeVO.setStore_addr(rs.getString("store_addr"));
+				storeVO.setStore_date(rs.getTimestamp("store_date"));
+				storeVO.setStore_star(rs.getInt("store_star"));
+				storeVO.setStore_count(rs.getInt("store_count"));
+				storeVO.setStore_state(rs.getString("store_state"));
+				storeVO.setStore_image(rs.getBytes("store_image"));
+				storeVO.setStore_report_count(rs.getInt("store_report_count"));
+				storeVO.setStore_start_time(rs.getTimestamp("store_start_time"));
+				storeVO.setStore_end_time(rs.getTimestamp("store_end_time"));
+				storeVO.setStore_pw(rs.getString("store_pw"));
+				storeVO.setStore_acc(rs.getString("store_acc"));
+				storeVO.setStore_out(rs.getString("store_out"));
+				storeVO.setStore_zone(rs.getString("store_zone"));
+				list.add(storeVO); 
+			}
+			
+		} catch (Exception se) { //SQLException
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public void updateStoreState(String store_state, String store_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_STORE_STATE);
+			pstmt.setString(1, store_state);
+			pstmt.setString(2, store_id);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+		
+	}
+
+	@Override
+	public Integer getAllUncheckedCount() {
+			Integer count  = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(GET_ALL_UNCHECKED_STORE);
+				rs = pstmt.executeQuery();
+				if(rs.next())
+					count =  rs.getInt(1);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			return count;
 	}
 
 }

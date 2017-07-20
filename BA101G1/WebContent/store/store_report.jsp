@@ -92,31 +92,36 @@ storereportVO=storereportSvc.getReportByStore_id(store_id);
 					<h3>商家檢舉資訊</h3>
  				</div> 
 				<table border="1" bordercolor='#CCCCFF' cellpadding="5px" width="650px";>
-					<tr>
-						<th><font size="2">商家檢舉單號</font></th>
-						<th><font size="2">評論編號</font></th>
-						<th><font size="2">訂單編號</font></th>
-						<th><font size="2">管理員編號</font></th>
-						<th><font size="2">檢舉內容</font></th>
-						<th><font size="2">檢舉圖片</font></th>
-						<th><font size="2">檢舉時間</font></th>
-						<th><font size="2">檢舉審核狀態</font></th>
-						<th><font size="2">檢舉結果</font></th>	
+					<tr bgcolor='#FFBB66'>
+						<th width="11%"><font size="2">商家檢舉單號</font></th>
+						<th width="10%"><font size="2">評論編號</font></th>
+						<th width="10%"><font size="2">訂單編號</font></th>
+						<th width="10%"><font size="2">檢舉內容</font></th>
+						<th width="10%"><font size="2">檢舉時間</font></th>
+						<th width="10%"><font size="2">檢舉審核狀態</font></th>
+						<th width="10%"><font size="2">檢舉結果</font></th>	
+						<th width="10%"><font size="2">顯示</font></th>	
 					</tr>
+					</table>
 				 <c:forEach var="store_reportVO" items="${storereportVO}" >
+					<table border="1" bordercolor='#CCCCFF' cellpadding="5px" width="650px";>
 					<tr align='center' valign='middle'>
-						<td><font size="2">${store_reportVO.sr_id }</font></td>
-						<td><font size="2">${store_reportVO.sc_id }</font></td>
-						<td><font size="2">${store_reportVO.order_id }</font></td>
-						<td><font size="2">${store_reportVO.man_id }</font></td>
-						<td><font size="2">${store_reportVO.sr_content}</font></td>
-						<td><font size="2">${store_reportVO.sr_image }</font></td>
-						<td><font size="2"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_reportVO.sr_time }"/></font></td>
-						<td><font size="2">${store_reportVO.sr_state }</font></td>
-						<td><font size="2">${store_reportVO.sr_result }</font></td>
+						<td width="11%"><font size="2">${store_reportVO.sr_id }</font></td>
+						<td width="10%"><font size="2">${store_reportVO.sc_id }</font></td>
+						<td width="10%"><font size="2">${store_reportVO.order_id }</font></td>
+						<td width="10%"><font size="2">${store_reportVO.sr_content}</font></td>
+						<td width="10%"><font size="2"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_reportVO.sr_time }"/></font></td>
+						<td width="10%"><font size="2">${store_reportVO.sr_state }</font></td>
+						<td width="10%"><font size="2">${store_reportVO.sr_result }</font></td>
+						<td width="10%">
+							<input type="button" value="Show" class="abc" >
+						</td>
 					</tr>	
-				</c:forEach>
+					<tr style="display: none;">
+					<td><img src="<%=request.getContextPath() %>/SR_DBGifReader?sr_id=${store_reportVO.sr_id }"style="max-width: 150px; max-height: 150px;"></td>
+					</tr>
 				</table>
+				</c:forEach>
 			</div>
 		</div>
 		<div id="footer">
@@ -128,3 +133,11 @@ storereportVO=storereportSvc.getReportByStore_id(store_id);
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
+<script type="text/javascript">
+$(".abc").on('click',function(){
+	console.log($(".abc").index(this))
+	var father=$(".abc").eq($(".abc").index(this)).parent().parent().siblings();
+	father.toggle();
+})
+ 
+</script>
