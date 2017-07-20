@@ -205,8 +205,7 @@ System.out.println("a");
 			System.out.println(store_count);
 			storeVO=new StoreService().updateStar(store_star, store_count, store_id);
 //3.修改完成,準備轉交
-			System.out.println("99999");
-			String url = "/index.jsp";
+			String url = "/backend/store_commit/listStoreCommitByStore_id.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 //其他可能的錯誤處理			

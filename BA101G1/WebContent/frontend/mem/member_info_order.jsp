@@ -59,6 +59,7 @@ $(document).ready(
 			<jsp:include page="/header_member.jsp"></jsp:include>
 		</div>
 
+
 		<div class="contents" style="margin-top:30px;margin-bottom:900px;">
 				<div id="mem-button" style="margin-left:50px;float:left;">
 						
@@ -94,6 +95,7 @@ $(document).ready(
 							<th width="10%"><font size="2">明細</font></th>
 						</tr>
 					</table>
+
 					
 				<c:forEach var="store_orderVO1" items="${store_orderVO}" >
 				<table border='1' bordercolor='#CCCCFF' width='680'>
@@ -110,7 +112,9 @@ $(document).ready(
 						<td width="10%"><font size="2">
 							<c:if test="${store_orderVO1.order_state eq '未確認'}">
 								<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
+
 									<input type="submit" value="取消訂單">
+
 									<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
 									<input type="hidden" name="store_id" value="${store_orderVO1.store_id}">
 									<input type="hidden" name="action" value="Cancel">

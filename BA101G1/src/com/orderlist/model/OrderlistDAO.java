@@ -14,6 +14,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.orderlist.model.OrderlistVO;
+import com.product.model.ProductVO;
 import com.sun.org.apache.xpath.internal.operations.Or;
 
 public class OrderlistDAO implements OrderlistDAO_interface{
@@ -45,6 +46,9 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 		/*******************OrderDetailByOrderIdªº from OrderListServlet.java********************************/
 		private static final String GET_DETAIL_PROID_BY_ORDER_ID = 
 			"select pro_id from orderlist where order_id=?";
+		
+		private static final String GET_NAME_AND_IMAGE_BY_PRO_ID =
+			"select pro_name from product where pro_id = ?";
 	@Override
 	public void insert(OrderlistVO orderlistVO) {
 		// TODO Auto-generated method stub
@@ -191,7 +195,62 @@ public class OrderlistDAO implements OrderlistDAO_interface{
 				orderlistVO.setPro_id(rs.getString("pro_id"));
 				orderlistVO.setOrder_amount(rs.getInt("order_amount"));
 				orderlistVO.setPrice(rs.getInt("price"));
+//				orderlistVO.setPro_name(rs.getString("pro_name"));
 				list.add(orderlistVO);
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<ProductVO> getProDetailByProId(String pro_id) {
+		// TODO Auto-generated method stub
+		ProductVO productVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<ProductVO> list=new LinkedList<ProductVO>();
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_NAME_AND_IMAGE_BY_PRO_ID);
+
+			pstmt.setString(1,pro_id);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				productVO = new ProductVO();
+				productVO.setPro_name(rs.getString("pro_name"));
+				list.add(productVO);
 			}
 
 			// Handle any driver errors

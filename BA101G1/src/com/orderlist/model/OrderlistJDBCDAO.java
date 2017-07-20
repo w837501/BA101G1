@@ -11,6 +11,7 @@ import java.util.List;
 
 import com.permission.model.PermissionJDBCDAO;
 import com.permission.model.PermissionVO;
+import com.product.model.ProductVO;
 
 public class OrderlistJDBCDAO implements OrderlistDAO_interface{
 	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -340,6 +341,12 @@ public String getDetailProIdByOrderId(String order_id) {
 	
 	
 	/*½Ð°Ñ¦ÒJDBC*/
+	return null;
+}
+
+@Override
+public List<ProductVO> getProDetailByProId(String pro_id) {
+	// TODO Auto-generated method stub
 	return null;
 }
 }
