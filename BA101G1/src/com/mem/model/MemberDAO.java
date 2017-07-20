@@ -31,7 +31,10 @@ public class MemberDAO implements MemberDAO_interface {
 	private static final String Find_by_PK = "select * from MEMBER where mem_id=?";
 	private static final String Find_ALL = "select * from MEMBER ";
 	private static final String Find_ACC = "select * from MEMBER where mem_mail=?";
-
+//	private static final String FIND_ALL_UNCHECKED_MEMBER = "SELECT  FROM MEMBER WHERE ";
+	private static final String UPDATE_MEMBER_STATE ="UPDATE MEMBER SET MEM_STATE=? WHERE MEM_ID = ?";
+	private static final String GET_ALL_UNCHECKED_COUNT = "select count(*) from member where mem_state = '•ºª{√“' order by nlssort(mem_state,'NLS_SORT=TCHINESE_STROKE_M')";
+	
 	@Override
 	public void insert(MemberVO memberVO) {
 
@@ -278,6 +281,81 @@ public class MemberDAO implements MemberDAO_interface {
 			}
 		}
 		return memberVO;
+	}
+
+	@Override
+	public List<MemberVO> getAllUncheckedMember() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void updateMemberState(String mem_state, String mem_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_MEMBER_STATE);
+			pstmt.setString(1, mem_state);
+			pstmt.setString(2, mem_id);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+	}
+
+	@Override
+	public Integer getAllUncheckedCount() {
+		Integer count  = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_UNCHECKED_COUNT);
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				count =  rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return count;
+	
 	}
 
 }

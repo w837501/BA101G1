@@ -25,15 +25,16 @@ public class MemberReportServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
-		if ("getOne_For_Display".equals(action)) { 
+
+		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "列出單一會員檢舉");
+
+			req.setAttribute("whichPage", "列出單一會員檢舉");    // 資料庫取出的set物件,存入request
 			try {
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+
 				String str = req.getParameter("mr_id");
 				if (str == null || (str.trim()).length() == 0) {
 					errorMsgs.add("請輸入會員檢舉編號");
@@ -43,7 +44,9 @@ public class MemberReportServlet extends HttpServlet {
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/backend/memr/select_memr.jsp");
 					failureView.forward(req, res);
+
 					return;
+
 				}
 				
 				String mr_id = null;
@@ -57,9 +60,10 @@ public class MemberReportServlet extends HttpServlet {
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/backend/memr/select_memr.jsp");
 					failureView.forward(req, res);
-					return;
+
+					return;//程式中斷
 				}
-				
+
 				MemberReportService mrSvc = new MemberReportService();
 				MemberReportVO mrVO = mrSvc.getOneMemberReport(mr_id);
 				if (mrVO == null) {
@@ -70,15 +74,18 @@ public class MemberReportServlet extends HttpServlet {
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/backend/memr/select_memr.jsp");
 					failureView.forward(req, res);
-					return;
+
+					return;//程式中斷
 				}
 				
-				req.setAttribute("mrVO", mrVO); 
+				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+				req.setAttribute("mrVO", mrVO); // 資料庫取出的empVO物件,存入req
 				String url = "/backend/memr/select_memr.jsp";
 
-				RequestDispatcher successView = req.getRequestDispatcher(url); // ����漱listOneEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交listOneEmp.jsp
 				successView.forward(req, res);
 
+				/***************************其他可能的錯誤處理*************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
@@ -88,29 +95,36 @@ public class MemberReportServlet extends HttpServlet {
 		}
 
 
-		if ("getOne_For_Update".equals(action)) { 
+
+		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp 或  /dept/listEmps_ByDeptno.jsp 的請求
+
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			req.setAttribute("whichPage", "修改單一會員檢舉");
 
-			String requestURL = req.getParameter("requestURL");		
+			req.setAttribute("whichPage", "修改單一會員檢舉");    // 資料庫取出的set物件,存入request
+
+			String requestURL = req.getParameter("requestURL"); // 送出修改的來源網頁路徑: 可能為【/emp/listAllEmp.jsp】 或  【/dept/listEmps_ByDeptno.jsp】 或 【 /dept/listAllDept.jsp】		
 			
 			try {
+				/***************************1.接收請求參數****************************************/
 				String mr_id = new String(req.getParameter("mr_id"));
 				
+				/***************************2.開始查詢資料****************************************/
 				MemberReportService mrSvc = new MemberReportService();
 				MemberReportVO mrVO = mrSvc.getOneMemberReport(mr_id);
 								
-				req.setAttribute("mrVO", mrVO);
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				req.setAttribute("mrVO", mrVO); // 資料庫取出的empVO物件,存入req
 				String url = "/backend/memr/select_memr.jsp";
 
-				RequestDispatcher successView = req.getRequestDispatcher(url);
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交update_emp_input.jsp
 				successView.forward(req, res);
 
+				/***************************其他可能的錯誤處理************************************/
 			} catch (Exception e) {
 				errorMsgs.add("修改資料取出時失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
@@ -120,19 +134,21 @@ public class MemberReportServlet extends HttpServlet {
 		}
 		
 		
-		if ("update".equals(action)) { 
-			
+
+		if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
+
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-
-			req.setAttribute("whichPage", "列出所有會員檢舉"); 	
-			String requestURL = req.getParameter("requestURL");
+			req.setAttribute("whichPage", "列出所有會員檢舉");    // 資料庫取出的set物件,存入request	
+			String requestURL = req.getParameter("requestURL"); // 送出修改的來源網頁路徑: 可能為【/emp/listAllEmp.jsp】 或  【/dept/listEmps_ByDeptno.jsp】 或 【 /dept/listAllDept.jsp】
 
 
 			try {
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+
 				String mr_id = new String(req.getParameter("mr_id").trim());
 				String mem_id = req.getParameter("mem_id").trim();
 				String order_id = req.getParameter("order_id").trim();
@@ -151,8 +167,8 @@ public class MemberReportServlet extends HttpServlet {
 				} catch (IllegalArgumentException e) {
 					mr_time = new java.sql.Timestamp(System.currentTimeMillis());
 
+					errorMsgs.add("請輸入日期!");
 
-					errorMsgs.add("請輸入日期");
 				}
 
 				String mr_state = null;
@@ -171,10 +187,9 @@ public class MemberReportServlet extends HttpServlet {
 					}
 				} catch (Exception e) {
 
-					errorMsgs.add("會員檢舉狀態請輸入");
+					errorMsgs.add("會員檢舉狀態請填數字.");
 
 				}
-
 
 				mrVO.setMr_id(mr_id);
 				mrVO.setMem_id(mem_id);
@@ -189,21 +204,25 @@ public class MemberReportServlet extends HttpServlet {
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("mrVO", mrVO);
+
+					req.setAttribute("mrVO", mrVO); // 含有輸入格式錯誤的mrVO物件,也存入req
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/backend/memr/update_mr_input.jsp");
 					failureView.forward(req, res);
-					return;
+					return; //程式中斷
 				}
 				
+				/***************************2.開始修改資料*****************************************/
 				mrVO = mrSvc.updateMemberReport(mr_id , mem_id, order_id, sc_id, man_id, mr_content,mr_image,mr_time,mr_state,mr_result);
 				
-
-
+				/***************************3.修改完成,準備轉交(Send the Success view)*************/				
                 String url="/backend/memr/select_memr.jsp";
 
-				RequestDispatcher successView = req.getRequestDispatcher(url);   // 靽格�����,頧漱���靽格����雯���
+
+				RequestDispatcher successView = req.getRequestDispatcher(url);   // 修改成功後,轉交回送出修改的來源網頁
 				successView.forward(req, res);
+
+				/***************************其他可能的錯誤處理*************************************/
 
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:"+e.getMessage());
@@ -214,14 +233,16 @@ public class MemberReportServlet extends HttpServlet {
 		}
 
 
- if ("insert".equals(action)) {  
+
+ if ("insert".equals(action)) { // 來自addEmp.jsp的請求  
+			System.out.println("安安 ");
+
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 		try {
-
 				String mem_id = req.getParameter("mem_id");
 				System.out.println(mem_id);
 				String order_id = req.getParameter("order_id");
@@ -268,13 +289,11 @@ System.out.println("1");
 				memberreportVO.setMan_id(mr_content);
 				memberreportVO.setMr_image(mr_image);
 System.out.println("2");
-			
-				
-				
-
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("memberreportVO", memberreportVO);
+
+					req.setAttribute("memberreportVO", memberreportVO); // 含有輸入格式錯誤的empVO物件,也存入req
+
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/frontend/mem/member_addMR.jsp");
 					failureView.forward(req, res);
@@ -291,7 +310,9 @@ System.out.println("2");
 				System.out.println("4");
 				req.setAttribute("memberreportVO", memberreportVO);
 				String url = "/frontend/mem/member_report.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); 
+
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+
 				successView.forward(req, res);				
 			} catch (Exception e) {
 				RequestDispatcher failureView = req
@@ -301,35 +322,41 @@ System.out.println("2");
 		}
 		
        
-		if ("delete".equals(action)) { 
+
+		if ("delete".equals(action)) { // 來自listAllEmp.jsp 或  /dept/listEmps_ByDeptno.jsp的請求
+
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			req.setAttribute("whichPage", "列出所有會員檢舉");
-
-			String requestURL = req.getParameter("requestURL"); 
+			req.setAttribute("whichPage", "列出所有會員檢舉");    // 資料庫取出的set物件,存入request
+			String requestURL = req.getParameter("requestURL"); // 送出刪除的來源網頁路徑: 可能為【/emp/listAllEmp.jsp】 或  【/dept/listEmps_ByDeptno.jsp】 或 【 /dept/listAllDept.jsp】
 
 			try {
-				/***************************1.��隢��***************************************/
+				/***************************1.接收請求參數***************************************/
 				String mr_id = new String(req.getParameter("mr_id"));
 				
-				/***************************2.����鞈��***************************************/
+				/***************************2.開始刪除資料***************************************/
+
 				MemberReportService mrSvc = new MemberReportService();
 				MemberReportVO mrVO = mrSvc.getOneMemberReport(mr_id);
 				mrSvc.deleteMemberReport(mr_id);
 				
-				/***************************3.��摰��,皞��漱(Send the Success view)***********/
+
+				/***************************3.刪除完成,準備轉交(Send the Success view)***********/
 //				DeptService deptSvc = new DeptService();
 //				if(requestURL.equals("/dept/listEmps_ByDeptno.jsp") || requestURL.equals("/dept/listAllDept.jsp"))
+//					req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(empVO.getDeptno())); // 資料庫取出的list物件,存入request
 //				
 //				String url = requestURL;
 				String url = "/backend/memr/select_page.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); 
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 				
+				/***************************其他可能的錯誤處理**********************************/
+
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
@@ -340,13 +367,18 @@ System.out.println("2");
 		if ("listAll".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 
-			req.setAttribute("whichPage", "列出所有會員檢舉");
+
+			req.setAttribute("whichPage", "列出所有會員檢舉");    // 資料庫取出的set物件,存入request
+
 
 				String url = "/backend/memr/select_page.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 		}
 		if ("listAll3".equals(action)) {
+
+//			req.setAttribute("whichPage", "tab1");    // 資料庫取出的set物件,存入request
+
 			MemberReportService mrSvc = new MemberReportService();
 			List<MemberReportVO> mrList = null;
 			String whichTab = req.getParameter("whichTab");
@@ -367,8 +399,11 @@ System.out.println("2");
 		}
 		
 		if ("readPic".equals(action)) {
+
+//			req.setAttribute("whichPage", "tab1");    // 資料庫取出的set物件,存入request
 			/******************************read img*********************************************/
-			res.setContentType("image/gif"); 
+			res.setContentType("image/gif");  // 與27行互相衝突，SL314 P.90頁
+
 			ServletOutputStream out = res.getOutputStream();
 			String mr_id = req.getParameter("mr_id");
 			req.setCharacterEncoding("UTF-8");
@@ -379,7 +414,9 @@ System.out.println("2");
 				ResultSet rs = stmt.executeQuery(
 					"SELECT mr_image FROM member_report WHERE mr_id ='" + mr_id + "'" );
 				if (rs.next()) {
-					BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("mr_image"));
+
+					BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("mr_image"));//欄位
+
 					byte[] buf = new byte[4 * 1024]; // 4K buffer
 					int len;
 					while ((len = in.read(buf)) != -1) {
@@ -400,19 +437,27 @@ System.out.println("2");
 	}
 
 
-
-
-
+	public static byte[] getPictureByteArrayFromWeb(Part part) throws IOException {
+		InputStream is = part.getInputStream();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] buffer = new byte[8192];
+		int i;
+		while ((i = is.read(buffer)) != -1) {
+			baos.write(buffer, 0, i);
+		}
+		baos.close();
+		is.close();
+		return baos.toByteArray();
+	}
 	public String getFileNameFromPart(Part part) {
 		String header = part.getHeader("content-disposition");
-		System.out.println("header=" + header); 
+		System.out.println("header=" + header); // 測試用
 		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
-		System.out.println("filename=" + filename);
+		System.out.println("filename=" + filename); // 測試用
+
 		if (filename.length() == 0) {
 			return null;
-
 		}
 		return filename;
 	}
 }
-

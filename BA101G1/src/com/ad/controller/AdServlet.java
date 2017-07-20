@@ -25,10 +25,11 @@ import com.ad.model.AdService;
 import com.ad.model.AdVO;
 import com.man.model.ManagerService;
 import com.rev.model.RevenueVO;
+import com.tools.Send;
 
 @MultipartConfig(fileSizeThreshold = 5 * 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024
 		* 1024)
-// @WebServlet("/AdServlet")
+@WebServlet("/Ad")
 public class AdServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -233,6 +234,58 @@ public class AdServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		if("updateAdState".equals(action) || "updateUnckeckedAdState".equals(action)){
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			try{
+				String ad_id =req.getParameter("ad_id");
+				String ad_state =req.getParameter("ad_state");
+				AdVO adVO=new AdVO();
+				adVO.setAd_id(ad_id);
+				adVO.setAd_state(ad_state);
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("adVO", adVO);
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/ad/listAllAd.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				
+				AdService adSvc = new AdService();
+				adVO = adSvc.updateAdState(ad_state, ad_id);
+				
+				
+				//====================== 寄簡訊
+				if(ad_state.equals("刊登中")){
+					Send send = new Send();
+					String tel = req.getParameter("store_phone");
+					String[] store_phone = new String[1];
+					store_phone[0] = tel;
+					send.sendMessage(store_phone, "您的廣告已經刊登成功囉!!!");
+				}else if(ad_state.equals("下架")){
+					Send send = new Send();
+					String tel = req.getParameter("store_phone");
+					String[] store_phone = new String[1];
+					store_phone[0] = tel;
+					send.sendMessage(store_phone, "刊登失敗QQ");
+				}
+				//======================
+				
+				req.setAttribute("adVO", adVO);
+				String url = null;
+				if("updateAdState".equals(action)){
+					url = "/backend/ad/listAllAd.jsp";
+				}else if("updateUnckeckedAdState".equals(action)){
+					url ="/backend/ad/listAllUncheckedAd.jsp";
+				}
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			}catch(Exception e){
+				errorMsgs.add("修改失敗" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/ad/listAllAd.jsp");
+				failureView.forward(req, res);
+			}
+		}		
+	
 	}
 
 	public static byte[] getPictureByteArrayFromWeb(Part part) throws IOException {
