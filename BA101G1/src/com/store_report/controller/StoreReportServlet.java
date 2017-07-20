@@ -143,10 +143,12 @@ public class StoreReportServlet extends HttpServlet {
 				byte[] sr_image = srVO.getSr_image();
 				if(sr_image == null){
 					sr_image = null;
+					System.out.println("146 "+ sr_image);
 				}else{
 					sr_image = srVO.getSr_image();
+					System.out.println("149 "+ sr_image);
 				}
-				
+				System.out.println("151 "+ sr_image+"AAAAAAAAAAAAAA");
 				java.sql.Timestamp sr_time = null;
 				try {
 					sr_time = java.sql.Timestamp.valueOf(req.getParameter("sr_time").trim());
