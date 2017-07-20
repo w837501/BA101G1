@@ -15,7 +15,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-		<title>åƒè¨‚æˆ‘ç·šä¸Šè¨‚é¤ç³»çµ±</title>
+		<title>¦Y­q§Ú½u¤W­qÀ\¨t²Î</title>
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 	</head>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
@@ -29,7 +29,7 @@
 
 		<p>
 			<font size = "500px">
-				<b>æœ€æ–°æ¶ˆæ¯</b>
+				<b>³Ì·s®ø®§</b>
 			</font>
 		</p>
 
@@ -37,17 +37,16 @@
 			<%@ include file="pages/page1.file" %> 
             <ul>
             	<c:forEach var="newsVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1 %>">
-            	<li>
+            	<li style="text-align:center;line-height:100px;">
             		<a href="news.do?news_name=${newsVO.news_name}&news_time=${newsVO.news_time}&news_id=${newsVO.news_id}&action=getOne_For_Display">
 					<img src="<%=request.getContextPath() %>/MRDBGifReader?whichImg=latn&id=${newsVO.news_id}"
 					width="170px" height="170px" vspace="10px" style="display:block; margin:auto;border-radius: 25%;"></a>
-					<br>
-					<p>
-
-					<h3>${newsVO.news_name}</h3>
-					<fmt:formatDate value="${newsVO.news_time}" pattern="yyyy-MM-dd"/>  
-
-					</p>
+					<div style="font-family:¼Ð·¢Åé;font-size:25px;color:blue;">
+						${newsVO.news_name}
+					</div>
+					<div style="font-family:¼Ð·¢Åé;font-size:20px;color:maroon;margin-top:-20px;">
+						<fmt:formatDate value="${newsVO.news_time}" pattern="yyyy-MM-dd"/>
+					</div>
             	</li>
             	</c:forEach>
             </ul>
