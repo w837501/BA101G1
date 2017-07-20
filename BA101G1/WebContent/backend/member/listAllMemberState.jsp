@@ -43,6 +43,7 @@
 		<th>會員編密碼</th>
 		<th>會員編信箱</th>
 		<th>會員狀態</th>
+		
 	</tr>
 	
 	<c:forEach var="MemberVO" items="${list}" >
@@ -53,11 +54,11 @@
 			<td>${MemberVO.mem_pw }</td>
 			<td>${MemberVO.mem_mail }</td>
             <td width="30">
-               <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/member/member.do" name="form1">
+               <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/mem/mem.do" name="form1">
                    <select size="1" name="mem_state">
-                      <option value="未認證" ${(MemberVO.mem_state=="未認證")?'selected':'' } >未認證
-                      <option value="已認證" ${(MemberVO.mem_state=="已認證")?'selected':'' } >已認證
-                      <option value="停權中" ${(MemberVO.mem_state=="停權中")?'selected':'' } >停權中
+                      <option value="未認證" ${(MemberVO.mem_state eq'未認證')?'selected':'' } >未認證
+                      <option value="已認證" ${(MemberVO.mem_state eq'已認證')?'selected':'' } >已認證
+                      <option value="停權中" ${(MemberVO.mem_state eq'停權中')?'selected':'' } >停權中
                    </select>
                    <input type="submit" value="送出">
                    <input type="hidden" name="mem_id" value="${MemberVO.mem_id}">

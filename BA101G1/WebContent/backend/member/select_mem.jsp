@@ -35,7 +35,8 @@
                 </div>
                 
                 <span class="logout-spn" >
-                  <a href="#" data-toggle="modal" data-target="#login-modal">登入</a>  
+                  ${manVO.man_id} ${manVO.man_name}
+                  <a href="<%=request.getContextPath() %>/backend/man/login_man.jsp">登出</a> 
                 </span>
                 
                 
@@ -84,9 +85,6 @@
 					</c:forEach>
 					
                     <li>
-                        <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>一般訂單查詢</a>
-                    </li>  
-                    <li>
                         <a href="<%=request.getContextPath() %>/backend/news/news_index.jsp"><i class="fa fa-bar-chart-o"></i>刊登最新消息</a>
                     </li>
                     <li>
@@ -112,15 +110,7 @@
         <div class="copyrights">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
         <div id="page-wrapper" >
             <div id="page-inner">
-                <div class="row">
-                    <div class="col-lg-12">
-                     	<h2>後端管理者平台</h2>   
-                    </div>
-                </div>              
-                 <!-- /. ROW  -->
-                  <hr />
-                <div class="row">
-                <!-- ******************select_man.jsp原先內容********************* -->
+                
 
 					<body bgcolor='white'>
 					<table border='1' cellpadding='5' cellspacing='0' width='400'>

@@ -16,14 +16,14 @@ private NewsDAO_interface dao;
 		dao = new NewsDAO();
 	}
 	
-	public NewsVO addNews( String man_id, String news_name, String news_content, byte[] news_image, Timestamp news_time){
+	public NewsVO addNews( String man_id, String news_name, String news_content, byte[] news_image){
 		
 		NewsVO newsVO=new NewsVO();
 		newsVO.setMan_id(man_id);
 		newsVO.setNews_name(news_name);
 		newsVO.setNews_content(news_content);
 		newsVO.setNews_image(news_image);
-		newsVO.setNews_time(news_time);
+//		newsVO.setNews_time(news_time);
 		dao.insert(newsVO);
 		
 		return newsVO;
