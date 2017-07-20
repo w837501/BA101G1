@@ -162,9 +162,8 @@ public class NewsServlet extends HttpServlet {
 			in.read(news_image);
 			in.close();
 			
-			java.sql.Time currentTime = new java.sql.Time(System.currentTimeMillis());
-			java.sql.Timestamp news_time = java.sql.Timestamp.valueOf(req.getParameter("news_time").trim() +" "+ currentTime.toString());			
-			String news_push_content = req.getParameter("news_push_content").trim();
+//			java.sql.Time currentTime = new java.sql.Time(System.currentTimeMillis());
+//			java.sql.Timestamp news_time = java.sql.Timestamp.valueOf(req.getParameter("news_time").trim() +" "+ currentTime.toString());			
 			
 			
 			NewsVO newsVO = new NewsVO();
@@ -172,8 +171,7 @@ public class NewsServlet extends HttpServlet {
 			newsVO.setNews_name(news_name);
 			newsVO.setNews_content(news_content);
 			newsVO.setNews_image(news_image);
-			newsVO.setNews_time(news_time);
-			newsVO.setNews_push_content(news_push_content);
+			//newsVO.setNews_time(news_time);
 			
 			
 			
@@ -187,7 +185,7 @@ public class NewsServlet extends HttpServlet {
 			
 //2.開始修改資料		
 			NewsService newsSvc = new NewsService();
-			newsVO = newsSvc.addNews(man_id  , news_name , news_content , news_image , news_time );
+			newsVO = newsSvc.addNews(man_id  , news_name , news_content , news_image  );
 //3.修改完成,準備轉交
 			String url = "/backend/news/listAllNews.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);   

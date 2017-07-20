@@ -143,31 +143,7 @@
                     
 <br>                  
  <ul>
-       <li><a href='<%=request.getContextPath()%>/backend/store/listAllStore.jsp'>列出全部商家</a> </li> <br>
-
-  
-
- <jsp:useBean id="storeSvc" scope="page" class="com.store.model.StoreService" />
- 
- 
- 
-  <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store/store.do" >
-       <b>選擇商家編號</b>
-       <select size="1" name="store_id">                                        
-         <c:forEach var="storeVO" items="${storeSvc.all}" >
-          <option value="${storeVO.store_id}">${storeVO.store_id}
-         </c:forEach>   
-       </select>
-       <input type="submit" value="送出">
-       <input type="hidden" name="action" value="getOne_For_Display">                                       
-    </FORM>
-  </li>
- 
-
-   <jsp:useBean id="scsSvc" scope="page" class="com.store_class.model.StoreClassService" />
-
- 
+      <jsp:include page="/backend/store/listAllStoreState.jsp"></jsp:include>
 </ul>
 
 

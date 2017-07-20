@@ -203,6 +203,7 @@ public class MemberDAO implements MemberDAO_interface {
 				memVO.setMem_pw(rs.getString("mem_pw"));
 				memVO.setMem_mail(rs.getString("mem_mail"));
 				memVO.setMem_id(rs.getString("mem_id"));
+				memVO.setMem_state(rs.getString("mem_state"));
 				memberlist.add(memVO);
 			}
 		} catch (SQLException e) {
