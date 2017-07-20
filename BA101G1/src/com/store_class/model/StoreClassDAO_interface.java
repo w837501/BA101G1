@@ -6,7 +6,12 @@ import java.util.Set;
 import com.store.model.StoreVO;
 
 public interface StoreClassDAO_interface {
-	public void update (StoreClassVO storeclassVO);
+	
+	public StoreClassVO findByPrimaryKey(Integer sc_id);
+	
+	
 	public List<StoreClassVO> getAll();
-	public StoreClassVO getSCname(Number sc_id);
+	
+	
+	public Set<StoreVO> getStoresBySc_id(Integer sc_id);
 }

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
-<%  int rowsPerPage = 3;  //–掸计    
+<%  int rowsPerPage = 10;  //–掸计    
     int rowNumber=0;      //羆掸计
     int pageNumber=0;     //羆计      
     int whichPage=1;      //材碭

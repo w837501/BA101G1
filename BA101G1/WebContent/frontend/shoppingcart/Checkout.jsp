@@ -17,7 +17,7 @@ MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 <title>吃訂我線上訂餐系統</title>
 
 </head>
-<body bgcolor='white'>
+<body bgcolor='white' onload="connect();" onunload="disconnect();">
 	<div id="page">
 		<div id="header">
 			<jsp:include page="/header_member.jsp"></jsp:include>
@@ -103,7 +103,6 @@ MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 					</tr>
 				</table>
 
-
 				<FORM METHOD = "post" ACTION = "<%=request.getContextPath()%>/frontend/selectOrder/order.do" name = "checkform" >
 						<h1 id="title">點餐設定</h1>
 								<div id="getWay">
@@ -168,6 +167,7 @@ MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 										<option value="23:00">23:00</option>
 										<option value="23:30">23:30</option>
 									</select> 
+<<<<<<< HEAD
   									</td>
   									</tr>
 									<tr>
@@ -177,6 +177,11 @@ MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 									</td>
 									</tr>
 								</table>			
+=======
+									<br>
+									備註
+										<textarea name="order_note" id="note" cols="30" rows="3" value="123"></textarea>	
+>>>>>>> branch 'master' of https://github.com/w837501/BA101G1.git
 								</div>
 		
 								<div class="col-xs-12 col-sm-8">
@@ -188,12 +193,16 @@ MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 									<input type="hidden"  value = "setOrder_Into" name="action">
 									<input type="hidden"  value = "<%=amount%> " name="amount">
 									<input type="hidden"  value = "<%=buylist%>" name="buylist">
+									<input type="hidden"  value = "現金" name="pay">
 									<input type="hidden"  value = "<%=memberVO.getMem_id()%>" name="mem_id">
 									<input type="hidden"  value = "<%=productVO.getStore_id()%>" name="store_id">
 									<input type="submit"  value="送出新增">
 								</div>
 									<br>
-						<a href="<%=request.getContextPath()%>/store/store.do?action=getProduct_By_Store&store_id=<%=productVO.getStore_id() %>&quentity=<%=productVO.getQuantity()%>">是否繼續購物</a>
+
+					</div>
+						<a href="<%=request.getContextPath()%>/store/store.do?action=getProduct_By_Store&store_id=<%=productVO.getStore_id() %>&quentity=<%=productVO.getQuantity()%>">繼續購物</a>
+
 				</FORM>
 			</div>
 			</div>

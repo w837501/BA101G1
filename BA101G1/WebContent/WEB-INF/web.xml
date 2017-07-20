@@ -56,13 +56,17 @@
     <url-pattern>/backend/mem/mem.do</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>store_commit</servlet-name>
+    <servlet-name>StoreCommitServlet</servlet-name>
     <servlet-class>com.store_commit.controller.StoreCommitServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>store_commit</servlet-name>
+    <servlet-name>StoreCommitServlet</servlet-name>
     <url-pattern>/storecommit.do</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+		<servlet-name>StoreCommitServlet</servlet-name>
+		<url-pattern>/backend/store_commit/store_commit.do</url-pattern>
+	</servlet-mapping>
   <servlet>
     <servlet-name>RevenueServlet</servlet-name>
     <servlet-class>com.rev.controller.RevenueServlet</servlet-class>
@@ -71,6 +75,30 @@
     <servlet-name>RevenueServlet</servlet-name>
     <url-pattern>/backend/rev/rev.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+		<servlet-name>PicReader</servlet-name>
+		<servlet-class>com.tools.PicReader</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PicReader</servlet-name>
+		<url-pattern>/store</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>NewsPicReader</servlet-name>
+		<servlet-class>com.tools.NewsPicReader</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NewsPicReader</servlet-name>
+		<url-pattern>/news</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>AdPicReader</servlet-name>
+		<servlet-class>com.tools.AdPicReader</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdPicReader</servlet-name>
+		<url-pattern>/ad</url-pattern>
+	</servlet-mapping>	
   <servlet>
     <servlet-name>NewsServlet</servlet-name>
     <servlet-class>com.news.controller.NewsServlet</servlet-class>
@@ -127,6 +155,10 @@
     <servlet-name>MemberReportServlet</servlet-name>
     <url-pattern>/member_report/member_report.do</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MemberReportServlet</servlet-name>
+    <url-pattern>/backend/memr/member_report.do</url-pattern>
+  </servlet-mapping>
     <servlet>
     <servlet-name>OrderListServlet</servlet-name>
     <servlet-class>com.orderlist.controller.OrderListServlet</servlet-class>
@@ -143,7 +175,14 @@
   		<servlet-name>StoreServlet</servlet-name>
   		<url-pattern>/store/store.do</url-pattern>
   </servlet-mapping>
-
+<servlet>
+		<servlet-name>StoreClassServlet</servlet-name>
+		<servlet-class>com.store_class.controller.StoreClassServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StoreClassServlet</servlet-name>
+		<url-pattern>/backend/store_class/store_class.do</url-pattern>
+	</servlet-mapping>	
   <servlet>
     <servlet-name>StoreReportServlet</servlet-name>
     <servlet-class>com.store_report.controller.StoreReportServlet</servlet-class>
@@ -152,14 +191,18 @@
     <servlet-name>StoreReportServlet</servlet-name>
     <url-pattern>/store_report/store_report.do</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StoreReportServlet</servlet-name>
+    <url-pattern>/backend/str/store_report.do</url-pattern>
+  </servlet-mapping>
   
   <servlet>
     <servlet-name>PServlet</servlet-name>
-    <servlet-class>com.permission2.controller.PServlet</servlet-class>
+    <servlet-class>com.permission.controller.PServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>PServlet</servlet-name>
-    <url-pattern>/backend/man/p.do</url-pattern>
+    <url-pattern>/backend/per/p.do</url-pattern>
   </servlet-mapping>
 
   
@@ -206,6 +249,14 @@
   <servlet-mapping>
     <servlet-name>ProDBGifReader</servlet-name>
     <url-pattern>/ProDBGifReader</url-pattern>
+  </servlet-mapping>
+	 <servlet>
+    <servlet-name>SR_DBGifReader</servlet-name>
+    <servlet-class>com.store_report.controller.SR_DBGifReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SR_DBGifReader</servlet-name>
+    <url-pattern>/SR_DBGifReader</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>MRDBGifReader</servlet-name>
@@ -273,4 +324,15 @@
     <dispatcher>ERROR</dispatcher>
     <dispatcher>ASYNC</dispatcher>
   </filter-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>jsonRSP</display-name>
+    <servlet-name>jsonRSP</servlet-name>
+    <servlet-class>com.tools.JsonResponse</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>jsonRSP</servlet-name>
+    <url-pattern>/jsonRSP.do</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -18,26 +18,18 @@ pageContext.setAttribute("sc_id", sc_id);
 
 <html>
 <head>
-<title>會員檢舉資料新增 - addMR.jsp</title></head>
-<link rel="stylesheet" type="text/css" href="js/calendar.css">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>吃訂我線上訂餐系統</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
+<script src="<%=request.getContextPath()%>/js/mobile.js" type="text/javascript"></script>
+</head>
 <script language="JavaScript" src="js/pic_preview.js"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <link rel="stylesheet" href="js/timepicker.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script type="text/javascript" src="js/timepicker.js"></script>
-
-
 <body bgcolor='white'>
 
-<table border='1' cellpadding='5' cellspacing='0' width='400'>
-	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-		<td>
 		<h3>商家檢舉資料新增 - addMR.jsp</h3>
-		</td>
-	</tr>
-</table>
+
 
 <h3>會員檢舉資料:</h3>
 <%-- 錯誤表列 --%>

@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,6 +23,8 @@ import com.product.model.ProductService;
 import com.product.model.ProductVO;
 import com.store.model.StoreService;
 import com.store.model.StoreVO;
+import com.store_commit.model.StoreCommitVO;
+import com.tools.MailService;
 @MultipartConfig(fileSizeThreshold = 5 * 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024
 * 1024)
 public class StoreServlet extends HttpServlet {
@@ -417,6 +421,149 @@ public class StoreServlet extends HttpServlet {
 			}
 			res.sendRedirect(req.getContextPath() + "/index.jsp");
 		}
+		if("updateStoreState".equals(action)){
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			try{
+				String store_state = req.getParameter("store_state");
+				String store_id = req.getParameter("store_id");
+				StoreVO storeVO = new StoreVO();
+				storeVO.setStore_state(store_state);
+				storeVO.setStore_id(store_id);
+				StoreService storeSvc = new StoreService();
+				storeSvc.updateStoreState(store_state, store_id);
+				
+				//==============寄MAIL
+				
+				if(req.getParameter("store_state").equals("開店中")){
+					System.out.println("asdasdasdasd");
+					MailService mailSvc = new MailService();
+					mailSvc.sendMail(req.getParameter("store_acc"), "很抱歉您未通過認證", "aaaaaaaa");
+					
+				}else if(req.getParameter("store_state").equals("審核中")){
+					MailService mailSvc = new MailService();
+					mailSvc.sendMail(req.getParameter("store_acc"), "恭喜您已通過認證", "bbbbbbbbb");
+					
+				}else{
+					MailService mailSvc = new MailService();
+					mailSvc.sendMail(req.getParameter("store_acc"), "目前停業中", "ccccccccccccc");
+				}
+				//==============				
+				
+				req.setAttribute("storeVO", storeVO);
+				String url = "/backend/store/listAllStoreState.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			}catch(Exception e){
+				errorMsgs.add("修改失敗" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/store/listAllStoreState.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		if("getStoreCommitsByStore_id".equals(action)){
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			try{
+//1.接收請求參數					
+				String store_id = req.getParameter("store_id");
+//2.開始查詢資料
+				StoreService storeSvc = new StoreService();
+				Set<StoreCommitVO> set = storeSvc.getStoreCommitsByStore_id(store_id);
+//3.查詢完成,準備轉交	
+				req.setAttribute("listStoreCommit_ByStore_id", set);
+				String url = "/backend/store/listStoreCommit_ByStore_id.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);				
+//其他可能的錯誤處理				
+				
+			} catch (Exception e) {
+				throw new ServletException(e);
+			}
+		}
+		
+		if("listStoresByCompositeQuery".equals(action)){
+			List<String>errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs",errorMsgs);
+			try{
+//1.將輸入資料轉為Map
+				//String 全部的input標籤的name屬性(table欄位名稱)
+				//String[] 全部的value
+				Map<String , String[]> map = req.getParameterMap();
+//2.開始複合查詢		
+				StoreService storeSvc = new StoreService();
+				List<StoreVO> list = storeSvc.getAll(map);
+//3.查詢完成,準備轉交	
+				req.setAttribute("listStoresByCompositeQuery", list);
+				RequestDispatcher successView = req.getRequestDispatcher("/backend/store/listStoresByCompositeQuery.jsp");
+				successView.forward(req, res);
+//其他可能的錯誤處理				
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/backend/store_index.jsp");
+				failureView.forward(req, res);
+			}
+		  }	
+	if("getOne_For_Display".equals(action)){ 
+			
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			
+			req.setAttribute("errorMsgs", errorMsgs);
+			try{
+//1.接收請求參數 - 輸入格式的錯誤處理
+				String str = req.getParameter("store_id");
+				if(str == null || (str.trim()).length() == 0){
+					errorMsgs.add("請輸入商家編號(store_id)");
+				}
+				if(!errorMsgs.isEmpty()){
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/backend/store_index.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				String store_id = null;
+				try{
+					store_id = new String(str);
+				}catch(Exception e){
+					errorMsgs.add("商家編號(store_id)格式不正確");
+				}
+				if(!errorMsgs.isEmpty()){
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/backend/store_index.jsp");
+					failureView.forward(req, res);
+					return;				
+				}
+				
+//2.開始查詢資料
+				StoreService storeSvc = new StoreService();
+				StoreVO storeVO = storeSvc.getOneStore(store_id);
+				if(storeVO == null){
+					errorMsgs.add("查無資料");
+				}
+				if(!errorMsgs.isEmpty()){
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/backend/store_index.jsp");
+					failureView.forward(req, res);
+					return;				
+				}
+//3.查詢完成,準備轉交				
+				req.setAttribute("storeVO", storeVO);
+				String url = "/backend/store/listOneStore.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				
+				
+//其他可能的錯誤處理				
+			}catch(Exception e){
+				errorMsgs.add("無法取得資料 :" + e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/backend/store_index.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
 		
 	}
 	public static byte[] getPictureByteArrayFromWeb(Part part) throws IOException {

@@ -1,75 +1,192 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@page import="com.man.model.ManagerService"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.*" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
+<%@ page import="java.util.*"%>
 <%@ page import="com.man.model.*" %>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 <%
 	ManagerService manSvc=new ManagerService();
 	List<ManagerVO> list=manSvc.getAll();
 	pageContext.setAttribute("list", list);
 %>
-
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>List All Man</title>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>åƒè¨‚æˆ‘EatMe</title>
+	<!-- BOOTSTRAP STYLES-->
+    <link href="<%=request.getContextPath() %>/backend/assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FONTAWESOME STYLES-->
+    <link href="<%=request.getContextPath() %>/backend/assets/css/font-awesome.css" rel="stylesheet" />
+        <!-- CUSTOM STYLES-->
+    <link href="<%=request.getContextPath() %>/backend/assets/css/custom.css" rel="stylesheet" />
+    	<!-- LOGIN STYLES -->
+    <link href="<%=request.getContextPath() %>/backend/assets/css/login.css" rel="stylesheet" />
+    <script src="<%=request.getContextPath() %>/backend/assets/js/login.js"></script>
+     <!-- GOOGLE FONTS-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						if (window.location.hash != "") {
+							$('a[href="' + window.location.hash + '"]').click()
+						}
+					});
+	</script>
 </head>
+<body>
+    <div id="wrapper">
+         <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="adjust-nav">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="" href="<%=request.getContextPath() %>/backend/index.jsp">
+                        <img src="<%=request.getContextPath() %>/backend/assets/img/LOGO_2.png" style="width: 180px;"/>
+                    </a>
+                </div>
+                <span class="logout-spn" >
 
-<body bgcolor='white'>
-<b><font color=red>EL</font></b>
-<table border='1' cellpadding='5' cellspacing='0' width='800'>
-	<tr bgcolor='#ccf' align='center' valign='middle' height='20'>
-		<td>
-		<h3>©Ò¦³ºŞ²z­û¸ê®Æ-ListAllMan</h3>
-		<a href="select_man.jsp"><img src="images/back1.gif" width="100" height="32" border="0">¦^­º­¶</a>
-		</td>
-	</tr>
-</table>
+                        ${manVO.man_id} ${manVO.man_name}
+                  <a href="<%=request.getContextPath() %>/backend/man/login_man.jsp">ç™»å‡º</a>
+                </span>
+            </div>
+        </div>
+        </div>
+        <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <c:forEach var="perm" items="${permList}">
+                        <c:if test="${perm.pa_id eq '0'}">
+                            <li class="active-link">
+                                <a href="<%=request.getContextPath() %>/backend/member/select_mem.jsp" ><i class="fa fa-desktop "></i>æœƒå“¡ç®¡ç† </a>
+                            </li>
+                        </c:if>
+                    </c:forEach>
+                    
+                    <c:forEach var="perm" items="${permList}">
+                        <c:if test="${perm.pa_id eq '1'}">
+                            <li>
+                                    <a href="<%=request.getContextPath() %>/backend/store/store_index.jsp"><i class="fa fa-bar-chart-o"></i>å•†å®¶æœƒå“¡ç®¡ç†</a>
+                            </li>   
+                        </c:if>
+                    </c:forEach>
+                    
+                    <c:forEach var="perm" items="${permList}">
+                        <c:if test="${perm.pa_id eq '8'}">
+                            <li>
+                                <a href="<%=request.getContextPath() %>/backend/man/ListAllMan.jsp"><i class="fa fa-bar-chart-o"></i>ç®¡ç†å“¡ç®¡ç†</a>
+                            </li> 
+                       </c:if>
+                    </c:forEach>
+                         
+                    <c:forEach var="perm" items="${permList}">
+                        <c:if test="${perm.pa_id eq '9'}"> 
+                                                     
+                            <li>
+                                <a href="<%=request.getContextPath() %>/backend/memr/select_memr.jsp"><i class="fa fa-bar-chart-o"></i>æœƒå“¡æª¢èˆ‰ </a>
+                            </li>
+                            <li>
+                                <a href="<%=request.getContextPath() %>/backend/str/select_str.jsp"><i class="fa fa-bar-chart-o"></i>å•†å®¶æª¢èˆ‰</a>
+                            </li>
+                            
+                         </c:if>
+                    </c:forEach>
+                            
+                   <c:forEach var="perm" items="${permList}">
+                        <c:if test="${perm.pa_id eq '3'}">                                  
+                            <li>
+                                <a href="<%=request.getContextPath() %>/backend/news/news_index.jsp"><i class="fa fa-bar-chart-o"></i>åˆŠç™»æœ€æ–°æ¶ˆæ¯</a>
+                            </li>
+                        </c:if>
+                    </c:forEach>
+                    
+                    <c:forEach var="perm" items="${permList}">
+                        <c:if test="${perm.pa_id eq '4'}">
+                            <li>
+                                <a href="<%=request.getContextPath() %>/backend/ad/listAllAd.jsp"><i class="fa fa-bar-chart-o"></i>å»£å‘Šç®¡ç†</a>
+                            </li>
+                        </c:if>
+                    </c:forEach>
+                    
+                    <c:forEach var="perm" items="${permList}">
+                        <c:if test="${perm.pa_id eq '8'}">
+                            <li>
+                                <a href="<%=request.getContextPath() %>/backend/per/ListAllPer.jsp"><i class="fa fa-bar-chart-o"></i>æ¬Šé™ç®¡ç†</a>
+                            </li>
+                        </c:if>
+                    </c:forEach>
+                    
+                    <c:forEach var="perm" items="${permList}">
+                        <c:if test="${perm.pa_id eq '10'}">
+                            <li>
+                                <a href="<%=request.getContextPath() %>/backend/store_commit/store_commit_index.jsp"><i class="fa fa-bar-chart-o"></i>å•†å®¶è©•åƒ¹ç®¡ç†</a>
+                            </li>
+                         </c:if>
+                    </c:forEach>
+                                   
+                </ul>
+              </div>
 
-<c:if test="${not empty errorMsgs }">
-	<font color='red'>¥H¤U¿ù»~:
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li>${message }</li>
-		</c:forEach>
-	</ul>
-	</font>
-</c:if>
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- <h2></h2>  å…§é æ¨™é¡Œ  -->
+                    </div>
+                </div>              
+                    <div class="col-lg-12 ">
 
-<table border='1' bordercolor='#CCF' width='800'>
-	<tr>
-		<th>ºŞ²z­û½s¸¹</th>
-		<th>ºŞ²z­û¦W¦r</th>
-		<th>ºŞ²z­û¹q¸Ü</th>
-		<th>±K½X</th>
-		<th>«H½c</th>
-	</tr>
-	<%@ include file="page1.file" %>
-	<c:forEach var="ManagerVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1 %>">
-		<tr align='center' valign='middle' ${(ManagerVO.man_id==param.man_id) ? 'style="background-color:#84d8d1;"':''}}>
-			<td>${ManagerVO.man_id }</td>
-			<td>${ManagerVO.man_name }</td>
-		    <td>${ManagerVO.man_phone }</td>
-		    <td>${ManagerVO.man_pw }</td>
-		    <td>${ManagerVO.man_mail }</td>
-			<td>
-				<form method="post" action="<%=request.getContextPath()%>/backend/man/man.do">
-					<input type="submit" value="­×§ï">
-					<input type="hidden" name="man_id" value="${ManagerVO.man_id }">
-					<input type="hidden" name="action" value="getOne_For_Update">
-				</form>	
-			</td>
-			<td>
-				<form method="post" action="<%=request.getContextPath()%>/backend/man/man.do">
-					<input type="submit" value="§R°£">
-					<input type="hidden" name="man_id" value="${ManagerVO.man_id }">
-					<input type="hidden" name="action" value="delete">
-				</form>	
-			</td>
-			</tr>
-	</c:forEach>
-</table>
-	<%@ include file="page2.file" %>
+                    </div>
+                    
+<!-- ****************å…§é ************************ -->
+<br>
+				<table  class="table table-hover">
+					<tr>
+						<th>ç®¡ç†å“¡ç·¨è™Ÿ</th>
+						<th>ç®¡ç†å“¡åå­—</th>
+						<th>ç®¡ç†å“¡é›»è©±</th>
+						<th>å¯†ç¢¼</th>
+						<th>ä¿¡ç®±</th>
+					</tr>
+					<c:forEach var="ManagerVO" items="${list}">
+						<tr align='center' valign='middle'>
+							<td>${ManagerVO.man_id }</td>
+							<td>${ManagerVO.man_name }</td>
+						    <td>${ManagerVO.man_phone }</td>
+						    <td>${ManagerVO.man_pw }</td>
+						    <td>${ManagerVO.man_mail }</td>
+							</tr>
+					</c:forEach>
+				</table>
+<!-- ****************å…§é ************************ -->
 
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+
+                  <!-- /. ROW  --> 
+            </div>   
+        </div>             
+        <div class="footer">
+        </div>
+     <!-- /. WRAPPER  -->
+
+    <!-- JQUERY SCRIPTS -->
+    <script src="<%=request.getContextPath() %>/backend/assets/js/jquery-1.10.2.js"></script>
+      <!-- BOOTSTRAP SCRIPTS -->
+    <script src="<%=request.getContextPath() %>/backend/assets/js/bootstrap.min.js"></script>
+      <!-- CUSTOM SCRIPTS -->
+    <script src="<%=request.getContextPath() %>/backend/assets/js/custom.js"></script>
+    
+    
 </body>
 </html>
+
+

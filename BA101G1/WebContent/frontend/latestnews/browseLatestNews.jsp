@@ -18,11 +18,16 @@
 		<title>吃訂我線上訂餐系統</title>
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 	</head>
-
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
+<script src="<%=request.getContextPath()%>/js/mobile.js" type="text/javascript"></script>
 	<body>
 	<div id="page">
 		<div id="header">
+<<<<<<< HEAD
 			<jsp:include page="/header_member.jsp"></jsp:include>
+=======
+			<jsp:include page="/header_both.jsp" />
+>>>>>>> branch 'master' of https://github.com/w837501/BA101G1.git
 		</div>
 	    <div id="classcontents">
 
@@ -38,28 +43,23 @@
             	<c:forEach var="newsVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1 %>">
             	<li>
             		<a href="news.do?news_name=${newsVO.news_name}&news_time=${newsVO.news_time}&news_id=${newsVO.news_id}&action=getOne_For_Display">
-					<img src="<%=request.getContextPath()%>/latestnews/DBGifReader.do?news_id=${newsVO.news_id}"style="max-width: 150px; max-height: 150px;"></a>
+
+					<img src="<%=request.getContextPath() %>/MRDBGifReader?whichImg=latn&id=${newsVO.news_id}"
+					width="170px" height="170px" vspace="10px" style="display:block; margin:auto;border-radius: 25%;"></a>
 					<br>
-					<div style="width:150px">
-					<h3>${newsVO.news_name}</h3></div>
+					<p>
+
+					<h3>${newsVO.news_name}</h3>
 					<fmt:formatDate value="${newsVO.news_time}" pattern="yyyy-MM-dd"/>  
-					
             	</li>
             	</c:forEach>
             </ul>   
 	    </div>
 	    	<%@ include file="pages/page2.file" %>
+		<div id="footer">
+			<jsp:include page="/footer.jsp"/>
 		</div>
-	    <div id="footer">
-				<ul class="navigation">         
-					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
-					<li><a href="news.html">最新消息</a></li>
-				</ul>
-				<p id="footnote">Eternal Beauty Essentials 2012. All Rights Reserved.</p>
-		</div>	
+		</div>
 	</div>
 </body>
 </html>

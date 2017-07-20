@@ -67,7 +67,7 @@ public class StoreCommitServlet extends HttpServlet {
 				}
 //3.查詢完成,準備轉交				
 				req.setAttribute("scVO", scVO);
-				String url = "/store_commit/listOneStoreCommit.jsp";
+				String url = "/backend/store_commit/listOneStoreCommit.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 //其他可能的錯誤處理				
@@ -89,20 +89,20 @@ public class StoreCommitServlet extends HttpServlet {
 			
 			try{
 //1.接收請求參數				
-				String store_id = new String(req.getParameter("store_id"));
+				String sc_id = new String(req.getParameter("sc_id"));
 //2.開始查詢資料				
 				StoreService storeSvc = new StoreService();
-				StoreVO storeVO = storeSvc.getOneStore(store_id);
+				StoreVO storeVO = storeSvc.getOneStore(sc_id);
 //3.查詢完成,準備轉交				
 				req.setAttribute("storeVO", storeVO);
-				String url = "/store_commit/updateStoreCommitInput.jsp";
+				String url = "/backend/store_commit/updateStoreCommitInput.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 //其他可能的錯誤處理				
 			}catch(Exception e){
 				errorMsgs.add("無法取得要修改的資料 :" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/store_commit/listAllStoreCommit.jsp");
+						.getRequestDispatcher("/backend/store_commit/listAllStoreCommit.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -164,7 +164,6 @@ public class StoreCommitServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 		try{
 //1.接收請求參數 - 輸入格式的錯誤處理	
-//			String sc_id = new String(req.getParameter("sc_id").trim());
 			String store_id =req.getParameter("store_id").trim();
 			String mem_id = req.getParameter("mem_id").trim();
 			String sc_content = req.getParameter("sc_content").trim();
@@ -205,8 +204,7 @@ System.out.println("a");
 			System.out.println(store_count);
 			storeVO=new StoreService().updateStar(store_star, store_count, store_id);
 //3.修改完成,準備轉交
-			System.out.println("99999");
-			String url = "/index.jsp";
+			String url = "/backend/store_commit/listStoreCommitByStore_id.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 //其他可能的錯誤處理			
@@ -225,24 +223,28 @@ System.out.println("a");
 		if ("delete".equals(action)) { 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-	
+			String requestURL = req.getParameter("requestURL");
 			try {
-				/***************************1.接收請求參數***************************************/
+//1.接收請求參數
 				String sc_id = new String(req.getParameter("sc_id"));
-				/***************************2.開始刪除資料***************************************/
+//2.開始刪除資料
 				StoreCommitService scSvc = new StoreCommitService();
+				StoreCommitVO scVO = scSvc.getOneStoreCommit(sc_id); 
 				scSvc.deleteStoreCommit(sc_id);
-				System.out.println(sc_id + "wwwwwwwwwwwwwwwwww");
-				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/store_commit/listAllStoreCommit.jsp";
+//3.刪除完成,準備轉交		
+				StoreService storeSvc = new StoreService();
+				if(requestURL.equals("/backend/store/listStoreCommits_ByScId.jsp") || requestURL.equals("/backend/store/listAllStore.jsp"))
+					req.setAttribute("listStoreCommits_ByStore_id", storeSvc.getStoreCommitsByStore_id(scVO.getSc_id()));
+				
+				String url = requestURL;
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
-				/***************************其他可能的錯誤處理**********************************/
+//其他可能的錯誤處理
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/store_commit/listAllStoreCommit.jsp");
+						.getRequestDispatcher("/backend/store_commit/listAllStoreCommit.jsp");
 				failureView.forward(req, res);
 			}
 		}

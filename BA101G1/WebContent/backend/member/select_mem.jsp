@@ -4,27 +4,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-      <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>吃訂我EatMe</title>
+  <title>吃訂我EatMe</title>
 	<!-- BOOTSTRAP STYLES-->
     <link href="<%=request.getContextPath() %>/backend/assets/css/bootstrap.css" rel="stylesheet" />
-     <!-- FONTAWESOME STYLES-->
-    <link href="<%=request.getContextPath() %>/backend/assets/css/font-awesome.css" rel="stylesheet" />
         <!-- CUSTOM STYLES-->
     <link href="<%=request.getContextPath() %>/backend/assets/css/custom.css" rel="stylesheet" />
     	<!-- LOGIN STYLES -->
     <link href="<%=request.getContextPath() %>/backend/assets/css/login.css" rel="stylesheet" />
-    <script src="<%=request.getContextPath() %>/backend/assets/js/login.js"></script>
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
      
-           
+       
           
     <div id="wrapper">
-         <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #ccc;">
+         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="adjust-nav">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -48,60 +43,82 @@
         </div>
         </div>
         <!-- /. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">
+         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-                 
-
-
-                    <li class="active-link">
-                        <a href="<%=request.getContextPath() %>/backend/mem/select_mem.jsp" ><i class="fa fa-desktop "></i>會員管理 <span class="badge">Included</span></a>
-                    </li>
-                   
-
+	                <c:forEach var="perm" items="${permList}">
+						<c:if test="${perm.pa_id eq '0'}">
+		                    <li class="active-link">
+		                        <a href="<%=request.getContextPath() %>/backend/member/select_mem.jsp" ><i class="fa fa-desktop "></i>會員管理 </a>
+		                    </li>
+		                </c:if>
+					</c:forEach>
+					
+					<c:forEach var="perm" items="${permList}">
+						<c:if test="${perm.pa_id eq '1'}">
+			                <li>
+			                        <a href="<%=request.getContextPath() %>/backend/store/store_index.jsp"><i class="fa fa-bar-chart-o"></i>商家會員管理</a>
+			                </li>   
+	                    </c:if>
+					</c:forEach>
+					
+					<c:forEach var="perm" items="${permList}">
+						<c:if test="${perm.pa_id eq '8'}">
+		                    <li>
+		                        <a href="<%=request.getContextPath() %>/backend/man/ListAllMan.jsp"><i class="fa fa-bar-chart-o"></i>管理員管理</a>
+		                    </li> 
+		               </c:if>
+					</c:forEach>
+                         
+		           	<c:forEach var="perm" items="${permList}">
+						<c:if test="${perm.pa_id eq '9'}"> 
+						                             
+		                    <li>
+		                        <a href="<%=request.getContextPath() %>/backend/memr/select_page.jsp"><i class="fa fa-bar-chart-o"></i>會員檢舉  </a>
+		                    </li>
+		                    <li>
+		                        <a href="<%=request.getContextPath() %>/backend/str/selectPage.jsp"><i class="fa fa-bar-chart-o "></i>商家檢舉 </a>
+		                    </li>
+		                    
+		                 </c:if>
+					</c:forEach>
+					
                     <li>
-                        <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>訂單管理  <span class="badge">Included</span></a>
-                    </li>
-
- <!-- 收合式清單====檢舉管理============================== -->
-                    <li class="panel panel-default panel-heading" role="tab" id="panel1">
-     
-                      <a href="#aaa" data-parent="#accordion2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="aaa">
-                        <i class="fa fa-edit "></i>檢舉管理  <span class="badge">Included</span>
-                      </a>
-                    
-                      <div id="aaa" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="panel1">
-                        <div class="list-group">
-                          <a href="<%=request.getContextPath() %>/backend/memr/select_page.jsp" class="list-group-item">會員檢舉</a>
-                          <a href="<%=request.getContextPath() %>/backend/str/selectPage.jsp" class="list-group-item">商家檢舉</a>                       
-                        </div>
-                      </div>                   
-                    </li>
-<!-- ================================== -->
+                        <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>一般訂單查詢</a>
+                    </li>  
                     <li>
-                        <a href="#"><i class="fa fa-qrcode "></i>審核管理<span class="badge">要連結哪個?</span></a>
+                        <a href="#"><i class="fa fa-qrcode "></i>管理儲值交易no</a>
                     </li>
-
                     <li>
-                        <a href="<%=request.getContextPath() %>/backend/push/selectPage.jsp"><i class="fa fa-edit "></i>推播管理 </a>
+                        <a href="#"><i class="fa fa-qrcode "></i>銷售/統計no</a>
+                    </li>      
+                    <li>
+                        <a href="#"><i class="fa fa-qrcode "></i>錢包管理no</a>
+                    </li>                                                                      
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/push/selectPage.jsp"><i class="fa fa-edit "></i>推播</a>
+                    </li>                  
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/news/news_index.jsp"><i class="fa fa-bar-chart-o"></i>刊登最新消息</a>
                     </li>
-
-                     <li>
-                        <a href="#"><i class="fa fa-edit "></i>個人資料</a>
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/ad/listAllAd.jsp"><i class="fa fa-bar-chart-o"></i>廣告管理</a>
                     </li>
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/rev/Select_Rev.jsp"><i class="fa fa-bar-chart-o"></i>商家月結算</a>
                     </li>
+            <c:forEach var="perm" items="${permList}">
+				<c:if test="${perm.pa_id eq '8'}">
+
                     <li>
-                        <a href="<%=request.getContextPath() %>/backend/man/select_man.jsp"><i class="fa fa-bar-chart-o"></i>管理員管理</a>
+                        <a href="<%=request.getContextPath() %>/backend/per/ListAllPer.jsp"><i class="fa fa-bar-chart-o"></i>權限管理</a>
                     </li>
-
-
-
-
-
-
-                    
+                </c:if>
+			</c:forEach>
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/store_commit/store_commit_index.jsp"><i class="fa fa-bar-chart-o"></i>商家評價管理</a>
+                    </li>
+                                        
                 </ul>
               </div>
 
@@ -119,6 +136,7 @@
                   <hr />
                 <div class="row">
                 <!-- ******************select_man.jsp原先內容********************* -->
+
 					<body bgcolor='white'>
 					<table border='1' cellpadding='5' cellspacing='0' width='400'>
 					  <tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
@@ -140,10 +158,12 @@
 						</c:if>
 						
 					<ul>
-						<li><a href="ListAllMem.jsp">List</a> all Manager</li><br><br>
+						<li><a href="<%=request.getContextPath()%>/backend/member/listAllMember.jsp">List</a> all Manager</li><br><br>
+                        
+                        <a href="<%=request.getContextPath() %>/backend/member/listAllMemberState.jsp" ></i>列出全部待審核會員 </a>						
 						
 						<li>
-							<form action="mem.do" method="post">
+							<form action="<%=request.getContextPath()%>/backend/member/member.do" method="post">
 								<b>輸入會員編號(MEM-000001):</b>
 								<input type="text" name="mem_id">
 								<input type="submit" value="送出">
@@ -154,7 +174,7 @@
 						<jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemberService"></jsp:useBean>
 					
 						<li>
-							<form action="mem.do" method="post">
+							<form action="<%=request.getContextPath()%>/backend/member/member.do" method="post">
 								<b>選擇會員編號:</b>
 								<select size="1" name="mem_id">
 									<c:forEach var="MemberVO" items="${memSvc.all }">
@@ -167,7 +187,7 @@
 						</li>
 						
 						<li>
-							<form method="post" action="mem.do">
+							<form method="post" action="<%=request.getContextPath()%>/backend/member/member.do">
 								<b>選擇員工姓名:</b>
 								<select size="1" name="mem_id">
 									<c:forEach var="MemberVO" items="${memSvc.all }">
@@ -181,7 +201,7 @@
 					</ul>	
 						<h3>會員管理</h3>
 							<ul>
-								<li><a href="AddMem.jsp">ADD</a> a new Mem</li>
+								<li><a href="<%=request.getContextPath()%>/backend/member/addMember.jsp">ADD</a> a new Mem</li>
 							</ul>
 				<!-- ******************select_man.jsp原先內容********************* -->
 

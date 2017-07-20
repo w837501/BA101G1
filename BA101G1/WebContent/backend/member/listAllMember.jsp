@@ -1,4 +1,4 @@
-j<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.mem.model.*" %>
@@ -12,10 +12,18 @@ j<%@ page language="java" contentType="text/html; charset=UTF-8"
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>所有員工資料</title>
 </head>
 <body bgcolor='white'>
+
+<a href="<%=request.getContextPath()%>/backend/member/select_mem.jsp">會員</a>
+<a href="<%=request.getContextPath()%>/backend/news/news_index.jsp">最新消息</a>
+<a href="<%=request.getContextPath()%>/backend/rev/Select_Rev.jsp">商家月結</a>
+<a href="<%=request.getContextPath()%>/backend/store/store_index.jsp">商家</a>
+<a href='<%=request.getContextPath()%>/backend/store_class/listAllStoreClass.jsp'>商家類別</a> 
+<a href="<%=request.getContextPath()%>/backend/store_commit/store_commit_index.jsp">商家評價</a>
+<a href="<%=request.getContextPath() %>/backend/member/listAllMemberState.jsp" ></i>列出全部待審核會員 </a>
+
 <table border='1' cellpadding='5' cellspacing='0' width='800'>
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
 		<td>
@@ -54,14 +62,14 @@ j<%@ page language="java" contentType="text/html; charset=UTF-8"
 			<td>${MemberVO.mem_pw }</td>
 			<td>${MemberVO.mem_mail }</td>
 			<td>
-				<form method="post" action="<%=request.getContextPath() %>/backend/mem/mem.do">
+				<form method="post" action="<%=request.getContextPath() %>/backend/member/member.do">
 					<input type="submit" value="修改">
 					<input type="hidden" name="mem_id" value="${MemberVO.mem_id }">
 					<input type="hidden" name="action" value="getOne_For_Update">
 				</form>
 			</td>
 			<td>
-				<form method="post" action="<%=request.getContextPath() %>/backend/mem/mem.do">
+				<form method="post" action="<%=request.getContextPath() %>/backend/member/member.do">
 					<input type="submit" value="刪除">
 					<input type="hidden" name="mem_id" value="${MemberVO.mem_id }">
 					<input type="hidden" name="action" value="delete">

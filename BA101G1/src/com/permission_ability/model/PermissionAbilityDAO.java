@@ -20,7 +20,7 @@ import com.tools.HibernateUtil;
 public class PermissionAbilityDAO implements Permission_AbilityDAO_interface{
 	
 //	private static final String GET_ALL_STMT = "from PermissionVO order by man_id desc";
-	private static final String GET_ALL_STMT = "SELECT * FROM permission_ability order by pa_id desc";
+	private static final String GET_ALL_STMT = "SELECT * FROM permission_ability";
 	private static final String GET_ONE_STMT = "SELECT * where pa_id = ?";
 	
 	private static DataSource ds = null;
@@ -154,14 +154,4 @@ public class PermissionAbilityDAO implements Permission_AbilityDAO_interface{
 		}
 		return list;
 	}
-
-
-
-
-
-
-
-
-
-	
 }

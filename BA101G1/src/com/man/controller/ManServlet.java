@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import com.man.model.ManagerService;
 import com.man.model.ManagerVO;
+import com.permission.model.PermissionService;
+import com.permission.model.PermissionVO;
 import com.tools.Send;
 
 import java.util.Properties;
@@ -271,13 +273,12 @@ public class ManServlet extends HttpServlet {
 		if ("delete".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "列出所有管理員");    // 資料庫取出的set物件,存入request
 			try {
 				String man_id = new String(req.getParameter("man_id"));
 
 				ManagerService manSvc = new ManagerService();
 				manSvc.deleteMan(man_id);
-				String url = "/backend/man/select_man.jsp";
+				String url = "/backend/man/ListAllMan.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
@@ -351,60 +352,25 @@ public class ManServlet extends HttpServlet {
 					return;
 				}
 				/******************我新增的帳密條件判斷*********************/
-			String man_id = null;
+			String man_id = account;
 			ManagerVO managerVO = manSvc.getOneMan(man_id);
-
-			
-
+			PermissionService pSvc = new PermissionService();
+			List<PermissionVO> permList = null;
+			permList = pSvc.findByManId(man_id);
+			System.out.println(permList.toString());
 			/****************transferID***********************/
 			HttpSession sessionId = req.getSession();
 			sessionId.setAttribute("account", account);
+			sessionId.setAttribute("permList", permList);
 			/****************transferID***********************/
-			
-			/******************權限*********************/
-//			PermissionService pSvc = new PermissionService();
-//			PermissionVO pVO = pSvc.getOneRecord(managerVO);           ///////////////////////////問題
-//			System.out.println(pVO);
-			/******************權限*********************/
-				/*String str = req.getParameter("man_id");
-				if (str == null || (str.trim().length() == 0)) {
-					errorMsgs.add("請輸入員工編號");
-				}
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
-					failureView.forward(req, res);
-					return;
-				}
-				
-
-				try {
-					man_id = new String(str);
-				} catch (Exception e) {
-					errorMsgs.add("輸入格式錯誤");
-				}
-
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
-					failureView.forward(req, res);
-					return;
-				}
-
-				if (managerVO == null) {
-					errorMsgs.add("查無資料");
-				}
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
-					failureView.forward(req, res);
-					return;
-				}*/
 				errorMsgs.removeAll(errorMsgs);
-				req.setAttribute("managerVO", managerVO);
-				String url = "/backend/man/select_man.jsp";
+				req.getSession().setAttribute("manVO", managerVO);
+				String url = "/backend/index.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/login_man.jsp");
 				failureView.forward(req, res);
 			}
 

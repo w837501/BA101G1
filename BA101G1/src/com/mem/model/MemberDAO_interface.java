@@ -9,4 +9,9 @@ public interface MemberDAO_interface {
     public MemberVO findByPrimaryKey(String mem_id);
     public List<MemberVO> getAll();
     public MemberVO findAcc(String mem_mail);
+    
+    public List<MemberVO> getAllUncheckedMember();
+    public void updateMemberState(String mem_state , String mem_id);
+    
+    public Integer getAllUncheckedCount();
 }

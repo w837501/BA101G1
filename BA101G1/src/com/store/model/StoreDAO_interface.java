@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 import com.store_class.model.StoreClassVO;
+import com.store_commit.model.StoreCommitVO;
 
 public interface StoreDAO_interface {
 	
@@ -20,4 +21,12 @@ public interface StoreDAO_interface {
 	public void update2(StoreVO storeVO);
 	public List<StoreVO> findHot(Number store_star);
 	public void updateStoreStar(StoreVO storeVO);
+	
+	public Set<StoreCommitVO> getStoreCommitsByStore_id(String store_id); 
+	
+	public List<StoreVO> getAll(Map<String , String[]> map);
+	public void updateStoreState(String store_state , String store_id);
+	
+	public Integer getAllUncheckedCount();
+	
 }

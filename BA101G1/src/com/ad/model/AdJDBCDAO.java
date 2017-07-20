@@ -28,7 +28,9 @@ public class AdJDBCDAO implements AdDAO_interface {
 	private static final String Find_ALL = "select * from AD";
 	
 	private static final String AD_Available ="select * from Ad where ad_state = '¥Zµn¤¤' order by ad_time";
-
+	private static final String FIND_ALL_UNCHECKED_AD = "SELECT * FROM AD  WHERE AD_STATE NOT LIKE '%¥Zµn¤¤%' AND AD_STATE NOT LIKE '%¤U¬[%' ";
+	private static final String UPDATE_AD_STATE = "UPDATE AD SET AD_STATE= ? WHERE AD_ID = ?";
+	
 	@Override
 	public void insert(AdVO adVO) {
 		Connection con = null;
@@ -389,5 +391,17 @@ public class AdJDBCDAO implements AdDAO_interface {
 		 fis.close();
 
 		 return baos.toByteArray();
+	}
+
+	@Override
+	public List<AdVO> getAllUncheckedAd() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateAdState(String ad_state, String ad_id) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -1,21 +1,17 @@
 <%@page import="com.mem.model.MemberService"%>
+<%@ page import="com.man.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-      <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>吃訂我EatMe</title>
+  <title>吃訂我EatMe</title>
 	<!-- BOOTSTRAP STYLES-->
     <link href="<%=request.getContextPath() %>/backend/assets/css/bootstrap.css" rel="stylesheet" />
-     <!-- FONTAWESOME STYLES-->
-    <link href="<%=request.getContextPath() %>/backend/assets/css/font-awesome.css" rel="stylesheet" />
         <!-- CUSTOM STYLES-->
     <link href="<%=request.getContextPath() %>/backend/assets/css/custom.css" rel="stylesheet" />
     	<!-- LOGIN STYLES -->
     <link href="<%=request.getContextPath() %>/backend/assets/css/login.css" rel="stylesheet" />
-    <script src="<%=request.getContextPath() %>/backend/assets/js/login.js"></script>
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
@@ -24,7 +20,7 @@
            
           
     <div id="wrapper">
-         <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #ccc;">
+         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="adjust-nav">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -40,7 +36,8 @@
                 </div>
                 
                 <span class="logout-spn" >
-                  <a href="#" data-toggle="modal" data-target="#login-modal">登入</a>  
+                	${manVO.man_id} ${manVO.man_name}
+                  <a href="<%=request.getContextPath() %>/backend/man/login_man.jsp">登出</a>  
                 </span>
                 
                 
@@ -53,41 +50,44 @@
                 <ul class="nav" id="main-menu">
                  
 
-
                     <li class="active-link">
-                        <a href="<%=request.getContextPath() %>/backend/mem/select_mem.jsp" ><i class="fa fa-desktop "></i>會員管理 <span class="badge">Included</span></a>
+                        <a href="<%=request.getContextPath() %>/backend/member/select_mem.jsp" ><i class="fa fa-desktop "></i>會員管理 </a>
                     </li>
-                   
-
                     <li>
-                        <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>訂單管理  <span class="badge">Included</span></a>
-                    </li>
-
- <!-- 收合式清單====檢舉管理============================== -->
-                    <li class="panel panel-default panel-heading" role="tab" id="panel1">
-     
-                      <a href="#aaa" data-parent="#accordion2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="aaa">
-                        <i class="fa fa-edit "></i>檢舉管理  <span class="badge">Included</span>
-                      </a>
-                    
-                      <div id="aaa" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="panel1">
-                        <div class="list-group">
-                          <a href="<%=request.getContextPath() %>/backend/memr/select_page.jsp" class="list-group-item">會員檢舉</a>
-                          <a href="<%=request.getContextPath() %>/backend/str/selectPage.jsp" class="list-group-item">商家檢舉</a>                       
-                        </div>
-                      </div>                   
-                    </li>
-<!-- ================================== -->
+                        <a href="<%=request.getContextPath() %>/backend/store/store_index.jsp"><i class="fa fa-bar-chart-o"></i>商家會員管理</a>
+                    </li>      
                     <li>
-                        <a href="#"><i class="fa fa-qrcode "></i>審核管理<span class="badge">要連結哪個?</span></a>
-                    </li>
-
+                        <a href="<%=request.getContextPath() %>/backend/store/store_index.jsp"><i class="fa fa-bar-chart-o"></i>員工管理no</a>
+                    </li>                                    
                     <li>
-                        <a href="<%=request.getContextPath() %>/backend/push/selectPage.jsp"><i class="fa fa-edit "></i>推播管理 </a>
+                        <a href="<%=request.getContextPath() %>/backend/memr/select_page.jsp"><i class="fa fa-bar-chart-o"></i>會員檢舉  </a>
                     </li>
-
-                     <li>
-                        <a href="#"><i class="fa fa-edit "></i>個人資料</a>
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/str/selectPage.jsp"><i class="fa fa-bar-chart-o "></i>商家檢舉 </a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-qrcode "></i>審核商家no</a>
+                    </li>     
+                    <li>
+                        <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>一般訂單查詢</a>
+                    </li>  
+                    <li>
+                        <a href="#"><i class="fa fa-qrcode "></i>管理儲值交易no</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-qrcode "></i>銷售/統計no</a>
+                    </li>      
+                    <li>
+                        <a href="#"><i class="fa fa-qrcode "></i>錢包管理no</a>
+                    </li>                                                                      
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/push/selectPage.jsp"><i class="fa fa-edit "></i>推播</a>
+                    </li>                  
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/news/news_index.jsp"><i class="fa fa-bar-chart-o"></i>刊登最新消息</a>
+                    </li>
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/ad/listAllUncheckedAd.jsp"><i class="fa fa-bar-chart-o"></i>廣告管理</a>
                     </li>
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/rev/Select_Rev.jsp"><i class="fa fa-bar-chart-o"></i>商家月結算</a>
@@ -95,7 +95,12 @@
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/man/select_man.jsp"><i class="fa fa-bar-chart-o"></i>管理員管理</a>
                     </li>
-
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/man/select_man.jsp"><i class="fa fa-bar-chart-o"></i>權限管理</a>
+                    </li>
+                    <li>
+                        <a href="<%=request.getContextPath() %>/backend/store_commit/store_commit_index.jsp"><i class="fa fa-bar-chart-o"></i>商家評價管理</a>
+                    </li>
 
 
 
@@ -112,14 +117,14 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-lg-12">
-                     	<h2>會員檢舉資料</h2>   
+                     	<h2>後端管理者平台</h2>   
                     </div>
                 </div>              
                  <!-- /. ROW  -->
                   <hr />
                 <div class="row">
                 <!-- ******************select_man.jsp原先內容********************* -->
-
+<body bgcolor='white'>
 
 <table border='1' cellpadding='5' cellspacing='0' width='400'>
   <tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
@@ -142,10 +147,15 @@
 </c:if>
 
 <ul>
-  <li><a href='<%=request.getContextPath()%>/backend/memr/listAllMR.jsp'>List</a> all Member_Reports. </li> <br><br>
+  <li>
+	<form action="member_report.do" method="post">
+		<a href="javascript:;" onclick="parentNode.submit();">List</a>
+		<input type="hidden" name="action" value="listAll">
+	</form> 
+  </li>
   
   <li>
-    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member_report/member_report.do" >
+    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/memr/member_report.do" >
         <b>輸入會員檢舉單號 (如MR-000001):</b>
         <input type="text" name="mr_id">
         <input type="submit" value="送出">
@@ -156,7 +166,7 @@
   <jsp:useBean id="mrSvc" scope="page" class="com.member_report.model.MemberReportService" />
    
   <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member_report/member_report.do" >
+     <FORM METHOD="post" ACTION="member_report.do" >
        <b>選擇會員編號:</b>
        <select size="1" name="mr_id">
          <c:forEach var="mrVO" items="${mrSvc.all}" > 
@@ -169,11 +179,11 @@
   </li>
   
   <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member_report/member_report.do" >
+     <FORM METHOD="post" ACTION="member_report.do" >
        <b>選擇會員檢舉單號:</b>
        <select size="1" name="mr_id">
          <c:forEach var="mrVO" items="${mrSvc.all}" > 
-          <option value="${mrVO.mr_id}">${mrVO.mr_id}
+          	<option value="${mrVO.mr_id}">${mrVO.mr_id}
          </c:forEach>   
        </select>
        <input type="submit" value="送出">
@@ -207,6 +217,19 @@
 				<!-- ******************select_man.jsp原先內容********************* -->
 
                 </div>
+<!-- *********************include頁面******************* -->
+<%if ("列出所有會員檢舉"==request.getAttribute("whichPage")){%>
+       <jsp:include page="listAllMR.jsp" />
+<%} %>
+<%if ("列出單一會員檢舉"==request.getAttribute("whichPage")){%>
+       <jsp:include page="listOneMR.jsp" />
+<%} %>
+
+<%if ("修改單一會員檢舉"==request.getAttribute("whichPage")){%>
+       <jsp:include page="update_mr_input.jsp" />
+<%} %>
+
+<!-- *********************include頁面******************* -->
 
                   <!-- /. ROW  --> 
             </div>   
@@ -231,24 +254,7 @@
       <!-- CUSTOM SCRIPTS -->
     <script src="<%=request.getContextPath() %>/backend/assets/js/custom.js"></script>
     
-<!-- ***************************Login***************************** -->              
-	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-   	  <div class="modal-dialog">
-			<div class="loginmodal-container">
-				<h1>Login to Your Account</h1><br>
-			  <form>
-				<input type="text" name="user" placeholder="Username">
-				<input type="password" name="pass" placeholder="Password">
-				<input type="submit" name="login" class="login loginmodal-submit" value="Login">
-			  </form>
-				
-			  <div class="login-help">
-				<a href="#">Register</a> - <a href="#">Forgot Password</a>
-			  </div>
-			</div>
-		</div>
-	 </div>
-<!-- ***************************Login***************************** -->    
+
 </body>
 </html>
 
