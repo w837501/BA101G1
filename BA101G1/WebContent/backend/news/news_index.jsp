@@ -166,15 +166,6 @@
     </FORM>
   </li>
 
-
-  <li>
-    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/man/man.do">
-        <b>輸入管理員編號(如MAN-000001)找出所有消息</b>
-        <input type="text" name="man_id">
-        <input type="submit" value="送出">
-        <input type="hidden" name="action" value="getAllByManagerID">
-    </FORM>
-  </li>
 </ul>   
   
 <ul>

@@ -15,7 +15,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-		<title>吃訂我線上訂餐系統</title>
+		<title>�Y�q�ڽu�W�q�\�t��</title>
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 	</head>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
@@ -29,7 +29,7 @@
 
 		<p>
 			<font size = "500px">
-				<b>最新消息</b>
+				<b>�̷s����</b>
 			</font>
 		</p>
 

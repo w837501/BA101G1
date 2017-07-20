@@ -184,17 +184,8 @@
 	</tr>	
 	<tr>
 		<td>消息時間</td>
-		<td><input type="date" name="news_time" size="45" 
-			value="<%= (newsVO==null)? "" : newsVO.getNews_time()%>" /></td>
+		<td><%= newsVO.getNews_time()%></td>
 	</tr>	
-	<tr>
-		<td>消息推播內容</td>
-		<td><input type="TEXT" name="news_push_content" size="45"	value="<%=newsVO.getNews_push_content()%>" /></td>
-	</tr>	
-	
-	
-	
-
 </table>
 <br>
                 <input type="hidden" name="action" value="update">

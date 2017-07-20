@@ -161,7 +161,6 @@
                                         <th>消息內文</th>
                                         <th>消息圖片</th>
                                         <th>消息時間</th>
-                                        <th>消息推播內容</th>
                                     </tr>
                                     <br>
                                     <jsp:useBean id="managerSvc" scope="page" class="com.man.model.ManagerService" />
@@ -177,7 +176,6 @@
                                                 <td>
                                                     <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${newsVO.news_time}" />
                                                 </td> 
-                                                <td>${newsVO.news_push_content}</td>
                                                 <td width="30">
                                                     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/news/news.do">
                                                         <input type="submit" value="修改">
