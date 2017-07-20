@@ -422,8 +422,10 @@ public class StoreServlet extends HttpServlet {
 			res.sendRedirect(req.getContextPath() + "/index.jsp");
 		}
 		if("updateStoreState".equals(action)){
+			System.out.println("123");
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			String requestURL=req.getParameter("requestURL");
 			try{
 				String store_state = req.getParameter("store_state");
 				String store_id = req.getParameter("store_id");
@@ -452,7 +454,7 @@ public class StoreServlet extends HttpServlet {
 				
 				req.setAttribute("storeVO", storeVO);
 				String url = "/backend/store/listAllStoreState.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
+				RequestDispatcher successView = req.getRequestDispatcher(requestURL);
 				successView.forward(req, res);
 			}catch(Exception e){
 				errorMsgs.add("­×§ï¥¢±Ñ" + e.getMessage());

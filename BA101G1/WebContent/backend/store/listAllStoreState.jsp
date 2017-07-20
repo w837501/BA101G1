@@ -182,7 +182,7 @@
                                                 <td><img src='<%=request.getContextPath()%>/store?store_id=${storeVO.store_id}'   height="70"></td>
                                                 <td>${storeVO.store_zone}</td>
                                                 <td width="30">
-                                                    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/store/store.do" name="form1">
+                                                    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store/store.do" name="form1">
                                                         <select size="1" name="store_state">
                                                            <option value="審核中" ${(storeVO.store_state=="審核中")?'selected':'' } >審核中
                                                            <option value="開店中" ${(storeVO.store_state=="開店中")?'selected':'' } >開店中
@@ -192,6 +192,7 @@
                                                         <input type="hidden" name="store_acc" value="${storeVO.store_acc}">
                                                         <input type="hidden" name="store_id" value="${storeVO.store_id}">
                                                         <input type="hidden" name="action" value="updateStoreState">      
+                                                        <input type="hidden" name="requestURL" value="<%=request.getServletPath() %>">      
                                                      </FORM>
                                                  </td>                                                
                                             </tr>
