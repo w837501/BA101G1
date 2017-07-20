@@ -22,7 +22,7 @@
 		<div class="container">
 			<div class="login-container">
             	<div id="output"></div>
-            	<div class="avatar"><img src="<%=request.getContextPath() %>/backend/assets/img/logo.png" style="width: 120px;"/></div>
+            	<div class="avatar"><img src="<%=request.getContextPath()%>/backend/assets/img/logo.png" style="width: 120px;"/></div>
             	<div class="form-box">
 	                <form action="<%=request.getContextPath() %>/backend/man/man.do" method="post">
 	                    <input type="text" name="loginUser" placeholder="username" id="loginAcc">

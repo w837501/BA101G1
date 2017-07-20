@@ -15,7 +15,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-		<title>¦Y­q§Ú½u¤W­qÀ\¨t²Î</title>
+		<title>îš¿ç’¹Ğ¸çµ¬î—½ç’¹ç¹ºâ•°å‚</title>
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 	</head>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
@@ -23,17 +23,15 @@
 	<body>
 	<div id="page">
 		<div id="header">
-<<<<<<< HEAD
+
 			<jsp:include page="/header_member.jsp"></jsp:include>
-=======
-			<jsp:include page="/header_both.jsp" />
->>>>>>> branch 'master' of https://github.com/w837501/BA101G1.git
+
 		</div>
 	    <div id="classcontents">
 
 		<p>
 			<font size = "500px">
-				<b>³Ì·s®ø®§</b>
+				<b>ç¨‹ç©î‡î…¾</b>
 			</font>
 		</p>
 
@@ -41,16 +39,18 @@
 			<%@ include file="pages/page1.file" %> 
             <ul>
             	<c:forEach var="newsVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1 %>">
-            	<li>
+            	<li style="text-align:center;line-height:100px;">
             		<a href="news.do?news_name=${newsVO.news_name}&news_time=${newsVO.news_time}&news_id=${newsVO.news_id}&action=getOne_For_Display">
 
 					<img src="<%=request.getContextPath() %>/MRDBGifReader?whichImg=latn&id=${newsVO.news_id}"
 					width="170px" height="170px" vspace="10px" style="display:block; margin:auto;border-radius: 25%;"></a>
+
 					<br>
 					<p>
 
 					<h3>${newsVO.news_name}</h3>
 					<fmt:formatDate value="${newsVO.news_time}" pattern="yyyy-MM-dd"/>  
+
             	</li>
             	</c:forEach>
             </ul>   

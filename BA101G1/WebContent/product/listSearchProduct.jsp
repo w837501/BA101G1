@@ -5,13 +5,13 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%-- ¦¹­¶½m²ß±Ä¥Î Script ªº¼gªk¨ú­È --%>
+<%-- æ­¤é ç·´ç¿’æŽ¡ç”¨ Script çš„å¯«æ³•å–å€¼ --%>
 <%--
 	StoreService storeSvc = new StoreService();
 	String store_id = (String)request.getAttribute("store_id");
 	List<StoreVO> list = storeSvc.getOneStore(store_id);
  --%>
-<%-- ¨ú¥X Concroller EmpServlet.java¤w¦s¤JrequestªºEmpVOª«¥ó--%>
+<%-- å–å‡º Concroller EmpServlet.javaå·²å­˜å…¥requestçš„EmpVOç‰©ä»¶--%>
 <%-- <%List<StoreVO> storeVO = (List) request.getAttribute("storelist");%> --%>
 
 
@@ -24,12 +24,14 @@
 </head>
 <body>
 	<div id="items">
-	<h3>°Ó«~·j´Mµ²ªG</h3>
+	<h3>å•†å“æœå°‹çµæžœ</h3>
 		<ul>
 			<c:forEach var="productVO" items="${productlist}">
 			<li class="box">
 					<a href="<%=request.getContextPath()%>/store/store.do?action=getProduct_By_Store&store_id=${productVO.store_id}">
+
 						<IMG src="<%=request.getContextPath()%>/ProDBGifReader?pro_id=${productVO.pro_id}" height="186" width="178">
+
 					</a>
 					<h3>${productVO.pro_name}</h3>
 					<span class="price">$ ${productVO.pro_price}</span><br>

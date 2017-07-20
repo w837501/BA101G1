@@ -53,7 +53,7 @@ public class ManServlet extends HttpServlet {
 					errorMsgs.add("請輸入員工編號");
 				}
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/ListAllMan.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -66,7 +66,7 @@ public class ManServlet extends HttpServlet {
 				}
 
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/ListAllMan.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -77,17 +77,17 @@ public class ManServlet extends HttpServlet {
 					errorMsgs.add("查無資料");
 				}
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/ListAllMan.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 				req.setAttribute("managerVO", managerVO);
-				String url = "/backend/man/select_man.jsp";
+				String url = "/backend/man/ListAllMan.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/select_man.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/ListAllMan.jsp");
 				failureView.forward(req, res);
 			}
 
@@ -102,7 +102,7 @@ public class ManServlet extends HttpServlet {
 				ManagerService managerSvc = new ManagerService();
 				ManagerVO managerVO = managerSvc.getOneMan(man_id);
 				req.setAttribute("managerVO", managerVO);
-				String url = "/backend/man/select_man.jsp";
+				String url = "/backend/man/ListAllMan.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 

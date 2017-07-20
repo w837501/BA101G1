@@ -5,10 +5,6 @@
 <%@ page import="com.news.model.*"%>
 <%@ page import="com.man.model.*"%>
 
-
-<a href="<%=request.getContextPath()%>/backend/news/news_index.jsp">回消息首頁</a>
-<a href="<%=request.getContextPath()%>/backend/news/listAllNews.jsp">列出全部消息</a>
-
 <html>
 <head>
   <title>吃訂我EatMe</title>

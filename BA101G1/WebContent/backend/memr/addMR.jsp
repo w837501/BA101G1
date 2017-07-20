@@ -54,71 +54,71 @@ MemberReportVO mrVO = (MemberReportVO) request.getAttribute("mrVO");
 </c:if>
 
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member_report/member_report.do" name="form1" enctype="multipart/form-data">
-<table border="0">
-
-	<tr>
-		<td>會員編號:</td>
-		<td><input type="TEXT" name="mem_id" size="45" 
-			value="<%= (mrVO==null)? "MEM-000001" : mrVO.getMem_id()%>" /></td>
-	</tr>
-	<tr>
-		<td>訂單編號:</td>
-		<td><input type="TEXT" name="order_id" size="45"
-			value="<%= (mrVO==null)? "20170627-000001" : mrVO.getOrder_id()%>" /></td>
-	</tr>
-	<tr>
-		<td>評論編號:</td>
-		<td><input type="TEXT" name="sc_id" size="45"
-			value="<%= (mrVO==null)? "" : mrVO.getSc_id()%>" /></td>
-	</tr>
-	<tr>
-		<td>管理員編號:</td>
-		<td><input type="TEXT" name="man_id" size="45"
-			value="<%= (mrVO==null)? "MAN-000001" : mrVO.getMan_id()%>" /></td>
-	</tr>
-	<tr>
-		<td>檢舉內容:</td>
-		<td><input type="TEXT" name="mr_content" size="45"
-			value="<%= (mrVO==null)? "風馬牛不相及" : mrVO.getMr_content()%>" /></td>
-	</tr>
-	<tr>
-		<td>檢舉圖片:</td>
-		<td>			
-		<div id="demo">
-	        <input id="file_upload" type="file"  name="mr_image"/>
-	            <img id="preview" style="width:200px;display: none;">
-	        
-	    </div>
-		</td>
-	</tr>
+	<table border="0">
 	
-
-	
-	<tr>
-		<% java.sql.Timestamp date_SQL = new java.sql.Timestamp(System.currentTimeMillis());%>
-		<td>檢舉時間:</td>
+		<tr>
+			<td>會員編號:</td>
+			<td><input type="TEXT" name="mem_id" size="45" 
+				value="<%= (mrVO==null)? "MEM-000001" : mrVO.getMem_id()%>" /></td>
+		</tr>
+		<tr>
+			<td>訂單編號:</td>
+			<td><input type="TEXT" name="order_id" size="45"
+				value="<%= (mrVO==null)? "20170627-000001" : mrVO.getOrder_id()%>" /></td>
+		</tr>
+		<tr>
+			<td>評論編號:</td>
+			<td><input type="TEXT" name="sc_id" size="45"
+				value="<%= (mrVO==null)? "" : mrVO.getSc_id()%>" /></td>
+		</tr>
+		<tr>
+			<td>管理員編號:</td>
+			<td><input type="TEXT" name="man_id" size="45"
+				value="<%= (mrVO==null)? "MAN-000001" : mrVO.getMan_id()%>" /></td>
+		</tr>
+		<tr>
+			<td>檢舉內容:</td>
+			<td><input type="TEXT" name="mr_content" size="45"
+				value="<%= (mrVO==null)? "風馬牛不相及" : mrVO.getMr_content()%>" /></td>
+		</tr>
+		<tr>
+			<td>檢舉圖片:</td>
+			<td>			
+			<div id="demo">
+		        <input id="file_upload" type="file"  name="mr_image"/>
+		            <img id="preview" style="width:200px;display: none;">
+		        
+		    </div>
+			</td>
+		</tr>
 		
-		<td bgcolor="#CCCCFF">
-			<input type="text" id="mydate" name="mr_time" value="<%= (mrVO==null)? date_SQL : mrVO.getMr_time()%>">
+	
+		
+		<tr>
+			<% java.sql.Timestamp date_SQL = new java.sql.Timestamp(System.currentTimeMillis());%>
+			<td>檢舉時間:</td>
 			
-		    
-		</td>
-	</tr>
-	<tr>
-		<td>審核狀態:</td>
-		<td><input type="TEXT" name="mr_state" size="45"
-			value="<%= (mrVO==null)? "0" : mrVO.getMr_state()%>" /></td>
-	</tr>
-	<tr>
-		<td>檢舉結果:</td>
-		<td><input type="TEXT" name="mr_result" size="45"
-			value="<%= (mrVO==null)? "null" : mrVO.getMr_result()%>" /></td>
-	</tr>
-
-</table>
-<br>
-<input type="hidden" name="action" value="insert">
-<input type="submit" value="送出新增"></FORM>
+			<td bgcolor="#CCCCFF">
+				<input type="text" id="mydate" name="mr_time" value="<%= (mrVO==null)? date_SQL : mrVO.getMr_time()%>">
+				
+			    
+			</td>
+		</tr>
+		<tr>
+			<td>審核狀態:</td>
+			<td><input type="TEXT" name="mr_state" size="45"
+				value="<%= (mrVO==null)? "0" : mrVO.getMr_state()%>" /></td>
+		</tr>
+		<tr>
+			<td>檢舉結果:</td>
+			<td><input type="TEXT" name="mr_result" size="45"
+				value="<%= (mrVO==null)? "null" : mrVO.getMr_result()%>" /></td>
+		</tr>
+	
+	</table>
+	<input type="hidden" name="action" value="insert">
+	<input type="submit" value="送出新增">
+</FORM>
 
 
 <form id="form1">

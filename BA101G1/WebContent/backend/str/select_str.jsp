@@ -154,10 +154,10 @@
 						<div class="col-xs-12 col-sm-12">
 							<div role="tabpanel">
 							    <!-- 標籤面板：標籤區 -->
-							    <ul class="nav nav-tabs" role="tablist">
+							    <ul class="nav nav-tabs" role="tablist" style="margin-top : 10px;">
 							        <li role="presentation" class="active">
 							        	<form action="<%=request.getContextPath()%>/store_report/store_report.do" method="post">
-											<a href="#tab1" onclick="parentNode.submit();" aria-controls="tab1" role="tab" data-toggle="tab">未審核&nbsp;&nbsp;</a>
+											<a href="#tab1" onclick="parentNode.submit();" aria-controls="tab1" role="tab" data-toggle="tab"  class="btn btn-large btn-primary">未審核</a>&nbsp;&nbsp;&nbsp;&nbsp;
 											<input type="hidden" name="action" value="listAll3">
 											<input type="hidden" name="whichTab" value="tab1">
 										</form> 
@@ -165,7 +165,7 @@
 
 							        <li role="presentation">
 							        	<form action="<%=request.getContextPath()%>/store_report/store_report.do" method="post">
-											<a href="#tab3" onclick="parentNode.submit();" aria-controls="tab3" role="tab" data-toggle="tab">已審核&nbsp;&nbsp;</a>
+											<a href="#tab3" onclick="parentNode.submit();" aria-controls="tab3" role="tab" data-toggle="tab" class="btn btn-large btn-primary">已審核</a>&nbsp;&nbsp;&nbsp;&nbsp;
 											<input type="hidden" name="action" value="listAll3">
 											<input type="hidden" name="whichTab" value="tab3">
 										</form> 
@@ -174,7 +174,7 @@
 							    <!-- 標籤面板：內容區 -->
 							    <div class="tab-content">
 							        <div role="tabpanel" class="tab-pane active" id="tab1">
-										<table class="table table-hover">
+										<table class="table table-hover" style="margin-top : 10px;">
 											<thead>
 											<tr>
 												<th>商家檢舉單號</th>
@@ -215,16 +215,16 @@
 														</td>			
 											
 														<td>
-														  	 <input type="submit" value="確認修改"> 
 														     <input type="hidden" name="sr_id" value="${srVO.sr_id}">
 														     <input type="hidden" name="store_id" value="${srVO.store_id}">
-														     <input type="hidden" name="sc_id" value="${srVO.order_id}">
-														     <input type="hidden" name="order_id" value="${srVO.sc_id}">
+														     <input type="hidden" name="sc_id" value="${srVO.sc_id}">
+														     <input type="hidden" name="order_id" value="${srVO.order_id}">
 														     <input type="hidden" name="man_id" value="${srVO.man_id}">
 														     <input type="hidden" name="sr_content" value="${srVO.sr_content}">
 														     <input type="hidden" name="sr_time" value="${srVO.sr_time}">
 														     <input type="hidden" name="sr_state" value="${srVO.sr_state}">
 														     <input type="hidden" name="action"	value="update">
+														  	 <input type="submit" value="確認修改"> 
 														  </FORM>
 														</td>
 													</tr>
@@ -262,7 +262,7 @@
 </body>
 </html>
 <style type="text/css">
-      body{margin:40px;}
+      body{margin:0px;}
       .btn-circle {
         width: 30px;
         height: 30px;

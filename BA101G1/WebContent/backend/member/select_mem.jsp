@@ -87,25 +87,10 @@
                         <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>一般訂單查詢</a>
                     </li>  
                     <li>
-                        <a href="#"><i class="fa fa-qrcode "></i>管理儲值交易no</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-qrcode "></i>銷售/統計no</a>
-                    </li>      
-                    <li>
-                        <a href="#"><i class="fa fa-qrcode "></i>錢包管理no</a>
-                    </li>                                                                      
-                    <li>
-                        <a href="<%=request.getContextPath() %>/backend/push/selectPage.jsp"><i class="fa fa-edit "></i>推播</a>
-                    </li>                  
-                    <li>
                         <a href="<%=request.getContextPath() %>/backend/news/news_index.jsp"><i class="fa fa-bar-chart-o"></i>刊登最新消息</a>
                     </li>
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/ad/listAllAd.jsp"><i class="fa fa-bar-chart-o"></i>廣告管理</a>
-                    </li>
-                    <li>
-                        <a href="<%=request.getContextPath() %>/backend/rev/Select_Rev.jsp"><i class="fa fa-bar-chart-o"></i>商家月結算</a>
                     </li>
             <c:forEach var="perm" items="${permList}">
 				<c:if test="${perm.pa_id eq '8'}">

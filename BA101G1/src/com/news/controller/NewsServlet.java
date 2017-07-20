@@ -1,5 +1,7 @@
 package com.news.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
@@ -90,19 +92,17 @@ public class NewsServlet extends HttpServlet {
 			System.out.println("news_id from servlet="+news_id);
 			String news_name = req.getParameter("news_name").trim();
 			String news_content = req.getParameter("news_content").trim();
-			
+			System.out.println("1");
 			Part part = req.getPart("news_image");
-			InputStream in = part.getInputStream();
-			byte[] news_image = new byte[in.available()];
-			in.read(news_image);
-			in.close();
+			byte[] news_image=getPictureByteArrayFromWeb(part);
+			System.out.println("2");
 			
-			
-			java.sql.Time currentTime = new java.sql.Time(System.currentTimeMillis());
-			java.sql.Timestamp news_time = java.sql.Timestamp.valueOf(req.getParameter("news_time").trim() +" "+ currentTime.toString());			
-			String news_push_content = req.getParameter("news_push_content").trim();
-			
-			
+			System.out.println("3");
+			System.out.println(man_id);
+			System.out.println(news_id);
+			System.out.println(news_name);
+			System.out.println(news_content);
+			System.out.println(news_image);
 			
 			NewsVO newsVO = new NewsVO();
 			newsVO.setMan_id(man_id);
@@ -110,8 +110,6 @@ public class NewsServlet extends HttpServlet {
 			newsVO.setNews_name(news_name);
 			newsVO.setNews_content(news_content);
 			newsVO.setNews_image(news_image);
-			newsVO.setNews_time(news_time);
-			newsVO.setNews_push_content(news_push_content);
 			
 			
 			if(!errorMsgs.isEmpty()){
@@ -122,10 +120,15 @@ public class NewsServlet extends HttpServlet {
 				return;
 			}
 			
-			
 //2.開始新增資料		
 			NewsService newsSvc = new NewsService();
-			newsVO = newsSvc.updateNews(man_id , news_id , news_name , news_content , news_image , news_time , news_push_content);
+			NewsVO newsVO1=newsSvc.getOneNews(news_id,man_id);
+			byte[] defaultpic=newsVO1.getNews_image();
+			if(getFileNameFromPart(part) != null)
+				newsVO = newsSvc.updateNews(man_id , news_id , news_name , news_content , news_image);
+			else
+				newsVO = newsSvc.updateNews(man_id , news_id , news_name , news_content , defaultpic);
+
 //3.新增完成,準備轉交
 			String url = "/backend/news/listAllNews.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);   
@@ -184,7 +187,7 @@ public class NewsServlet extends HttpServlet {
 			
 //2.開始修改資料		
 			NewsService newsSvc = new NewsService();
-			newsVO = newsSvc.addNews(man_id  , news_name , news_content , news_image , news_time , news_push_content);
+			newsVO = newsSvc.addNews(man_id  , news_name , news_content , news_image , news_time );
 //3.修改完成,準備轉交
 			String url = "/backend/news/listAllNews.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);   
@@ -234,5 +237,27 @@ public class NewsServlet extends HttpServlet {
 			}
 		}
 		
+	}
+	public static byte[] getPictureByteArrayFromWeb(Part part) throws IOException {
+		InputStream is = part.getInputStream();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] buffer = new byte[8192];
+		int i;
+		while ((i = is.read(buffer)) != -1) {
+			baos.write(buffer, 0, i);
+		}
+		baos.close();
+		is.close();
+		return baos.toByteArray();
+	}
+	public String getFileNameFromPart(Part part) {
+		String header = part.getHeader("content-disposition");
+		System.out.println("header=" + header); // 測試用
+		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
+		System.out.println("filename=" + filename); // 測試用
+		if (filename.length() == 0) {
+			return null;
+		}
+		return filename;
 	}
 }

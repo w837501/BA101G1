@@ -32,7 +32,6 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 	private static final String GET_SOME_STMT_BY_SR_STATE = 
 			"SELECT sr_id,store_id,sc_id,order_id,man_id,sr_content,sr_image,sr_time,sr_state,sr_result FROM STORE_REPORT where sr_state = ?";
 	private static final String GET_BY_STORE_ID = "select * from STORE_REPORT where store_id = ? ";
-
 	@Override
 	public void insert(StoreReportVO srVO) {
 
@@ -187,7 +186,7 @@ System.out.println( srVO.getOrder_id());
 				srVO.setOrder_id(rs.getString("order_id"));
 				srVO.setMan_id(rs.getString("man_id"));
 				srVO.setSr_content(rs.getString("sr_content"));
-				srVO.setSr_image(null);
+				srVO.setSr_image(rs.getBytes("sr_image"));
 				srVO.setSr_time(rs.getTimestamp("sr_time"));
 				srVO.setSr_state(rs.getString("sr_state"));
 				srVO.setSr_result(rs.getString("sr_result"));

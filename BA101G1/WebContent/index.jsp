@@ -12,6 +12,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>吃訂我線上訂餐系統</title>
+
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 <script src="<%=request.getContextPath()%>/js/mobile.js" type="text/javascript"></script>
 </head>
@@ -79,33 +80,33 @@
 					<li>
 						<div class="shop">
 							<a href="skincare.html"> <img
-								src="<%=request.getContextPath()%>/images/mos.png" alt="Img"
-								height="160" width="160"></a>
+								src="<%=request.getContextPath()%>/images/mos.png" alt="摩斯"
+								height="160" width="160">
+								</a>
 						</div>
 					</li>
 					<li>
 						<div class="shop">
 							<a href="skincare.html"> <img
 								src="<%=request.getContextPath()%>/images/Hamburgers01.jpg"
-								alt="Img" height="160" width="160"></a>
+								alt="麥香雞" height="160" width="160"></a>
 						</div>
 					</li>
 					<li>
 						<div class="shop">
 							<a href="skincare.html"> <img
 								src="<%=request.getContextPath()%>/images/Hamburgers02.jpg"
-								alt="Img" height="160" width="160"></a>
+								alt="麥香魚" height="160" width="160"></a>
 						</div>
 					</li>
 					<li>
 						<div class="shop">
 							<a href="skincare.html"> <img
 								src="<%=request.getContextPath()%>/images/Hamburgers03.jpg"
-								alt="Img" height="160" width="160"></a>
+								alt="麥香豬" height="160" width="160"></a>
 						</div>
 					</li>
 				</div>
-
 				<!--小圓點-->
 				<div id="ol">
 					<ul class="carousel-indicators" type="circle">
@@ -114,7 +115,6 @@
 						<li id="circle">○</li>
 					</ul>
 				</div>
-
 
 				<!--廣告區-->
 				<h2>廣告</h2>

@@ -16,7 +16,7 @@ private NewsDAO_interface dao;
 		dao = new NewsDAO();
 	}
 	
-	public NewsVO addNews( String man_id, String news_name, String news_content, byte[] news_image, Timestamp news_time, String news_push_content){
+	public NewsVO addNews( String man_id, String news_name, String news_content, byte[] news_image, Timestamp news_time){
 		
 		NewsVO newsVO=new NewsVO();
 		newsVO.setMan_id(man_id);
@@ -24,13 +24,12 @@ private NewsDAO_interface dao;
 		newsVO.setNews_content(news_content);
 		newsVO.setNews_image(news_image);
 		newsVO.setNews_time(news_time);
-		newsVO.setNews_push_content(news_push_content);
 		dao.insert(newsVO);
 		
 		return newsVO;
 	}
 	public NewsVO updateNews(String man_id ,String news_id ,String news_name ,String news_content ,
-			byte[] news_image ,Timestamp news_time ,String news_push_content) throws IOException{
+			byte[] news_image ) throws IOException{
 		NewsVO newsVO = new NewsVO();
 		
 		newsVO.setMan_id(man_id);
@@ -38,8 +37,6 @@ private NewsDAO_interface dao;
 		newsVO.setNews_name(news_name);
 		newsVO.setNews_content(news_content);
 		newsVO.setNews_image(news_image);
-		newsVO.setNews_time(news_time);
-		newsVO.setNews_push_content(news_push_content);
 		dao.update(newsVO);
 		
 		return newsVO ;

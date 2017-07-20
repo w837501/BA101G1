@@ -28,7 +28,7 @@ public class MR_DBGifReader extends HttpServlet {
 			String whichImg = req.getParameter("whichImg");
 			String id = req.getParameter("id");
 			String pk = new String(id.getBytes("ISO-8859-1"),"UTF-8");
-			System.out.println("whichImg "+whichImg+" id "+id);
+			System.out.println("whichImg "+whichImg+" id "+id+" pk "+pk);
 			String sql;
 			switch(whichImg.toLowerCase()){
 				case "memr":
@@ -39,6 +39,9 @@ public class MR_DBGifReader extends HttpServlet {
 					break;
 				case "latn":
 					sql = "SELECT news_image FROM news WHERE news_id = '" + pk + "'";
+					break;
+				case "listsearchpro":
+					sql = "SELECT pro_image FROM product WHERE pro_id = '" + pk + "'";
 					break;
 
 				default:
