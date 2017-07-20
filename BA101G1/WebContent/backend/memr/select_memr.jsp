@@ -202,20 +202,23 @@
 													          <label class="btn btn-default btn-circle btn-lg good"><input type="radio" name="mr_result" value="成立" ${(mrVO.mr_result == '成立')? 'checked' : '' } onchange="handleChange1()"><i class="glyphicon glyphicon-ok"></i></label>
 													          <label class="btn btn-default btn-circle btn-lg bad" ><input type="radio" name="mr_result" value="不成立" ${(mrVO.mr_result == '不成立')? 'checked' : ''} onchange="handleChange1()"><i class="glyphicon glyphicon-remove" ></i></label>
 													        </div>
-														</td>			
-														<td>
-														     <input type="hidden" name="mr_id" value="${mrVO.mr_id}">
-														     <input type="hidden" name="mem_id" value="${mrVO.mem_id}">
-														     <input type="hidden" name="order_id" value="${mrVO.order_id}">
-														     <input type="hidden" name="sc_id" value="${mrVO.sc_id}">
-														     <input type="hidden" name="man_id" value="${mrVO.man_id}">
-														     <input type="hidden" name="mr_content" value="${mrVO.mr_content}">
-														     <input type="hidden" name="mr_time" value="${mrVO.mr_time}">
-														     <input type="hidden" name="mr_state" value="${mrVO.mr_state}">
-														     <input type="hidden" name="action"	value="update">
-														     <input type="submit" value="確認修改"> 
-														  </FORM>
-														 </td>
+														</td>
+															
+															
+															<td>
+															     <input type="hidden" name="mr_id" value="${mrVO.mr_id}">
+															     <input type="hidden" name="mem_id" value="${mrVO.mem_id}">
+															     <input type="hidden" name="order_id" value="${mrVO.order_id}">
+															     <input type="hidden" name="sc_id" value="${mrVO.sc_id}">
+															     <input type="hidden" name="man_id" value="${mrVO.man_id}">
+															     <input type="hidden" name="mr_content" value="${mrVO.mr_content}">
+															     <input type="hidden" name="mr_time" value="${mrVO.mr_time}">
+															     <input type="hidden" name="mr_state" value="${mrVO.mr_state}">
+															     <input type="hidden" name="action"	value="update">
+															     <input type="submit" value="確認修改" disabled="${(mrVO.mr_state eq '已審核') ? 'disabled' : ''}"> 
+															  </FORM>
+															 </td>
+														 
 													</tr>
 											</c:forEach>
 										</table>
