@@ -22,7 +22,7 @@ public class OrderListServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
+		HttpSession session = req.getSession();
 		
 		if ("getOneOrder_For_DetailDisplay".equals(action)) { 
 			
@@ -45,9 +45,11 @@ System.out.println("XXX"+str2);
 //				List<ProductVO> productVO=new LinkedList<ProductVO>();
 				orderlistVO= orderSvc.getOrderlist(order_id);
 //				productVO= orderSvc.getProDetail(str2);
-
+				
+				String amount1 = req.getParameter("totalprice");
+				System.out.println(amount1);
 				req.setAttribute("orderlistVO", orderlistVO);
-//				req.setAttribute("productVO", productVO);
+				session.setAttribute("amount1", amount1);
 				
 				String url = "/frontend/selectOrder/orderDetail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 

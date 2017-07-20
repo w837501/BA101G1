@@ -54,7 +54,21 @@
 							<IMG src="<%=request.getContextPath()%>/ProDBGifReader?pro_id=${product.pro_id}" height="186" width="178">
 							<h3>${product.pro_name}</h3>
 							<span class="price">$ ${product.pro_price}</span>
-							<div>數量： <input type="text" name="quantity" size="3" value=1></div>
+<!-- 							<div>數量： <input type="text" name="quantity" size="3" value=1></div> -->
+								<select id="quantity" name="quantity" style="width: 85px;">
+            							<option value="">請選擇</option>
+										<option selected="selected" value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+									</select> 
+								
 								<input type="submit" value="加入購物車"> 
 							    <input type="hidden" name="pro_name" value="${product.pro_name}">
 							    <input type="hidden" name="pro_price" value="${product.pro_price}">

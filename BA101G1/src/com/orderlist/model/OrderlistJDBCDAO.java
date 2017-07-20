@@ -14,7 +14,7 @@ import com.permission.model.PermissionVO;
 import com.product.model.ProductVO;
 
 public class OrderlistJDBCDAO implements OrderlistDAO_interface{
-	String driver = "oracle.jdbc.driver.OracleDriver";
+	String driver = "oracle.jdbc.driver.OracleDriver";  
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "BA101G1";
 	String passwd = "ba101g1";

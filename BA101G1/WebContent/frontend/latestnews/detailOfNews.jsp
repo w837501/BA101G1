@@ -31,6 +31,7 @@
 	<body>
 	<div id="page">
 		<div id="header">
+
 			<jsp:include page="/header_both.jsp" />
 		</div>
 
@@ -55,24 +56,31 @@
 
 			
 			</table>	
+
 		</div>
 			<h2 align="center">${newsVO.news_id}</h2><br>
 			<div>
 				<img src="<%=request.getContextPath() %>/MRDBGifReader?whichImg=latn&id=${newsVO.news_id}"
 				width="170px" height="170px" vspace="10px" style="display:block; margin:auto;border-radius: 25%;">
 				
+
 			</div>
+
+		</div>
+
 		
 			<div id="content" align="center">
 				${newsVO.news_content} 
 			</div><br>
 			<div align="center">${newsVO.news_time}</div><br>
 			<div align="center">${newsVO.news_push_content}</div><br>
+
 		</div>
 		</div>
 		<div id="footer">
 			<jsp:include page="/footer.jsp"/>
 		</div>
+		
 	</div>		
 	</div>
 	</body>

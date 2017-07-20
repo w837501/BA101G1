@@ -42,6 +42,9 @@
 </style>
 </head>
 <body>
+	<%
+		String amount1 =  (String) session.getAttribute("amount1");
+	%>
 	<div id="page">
 		<div id="header">
 			<jsp:include page="/header_member.jsp"></jsp:include>
@@ -87,9 +90,17 @@
                     		<td>${productSvc.getOnePro(orderlistVO.pro_id).pro_name}</td>
 							<td>${orderlistVO.order_amount}</td>
                     		<td>${orderlistVO.price}</td>
+                    		<td></td>
+                    		
                     	</tr>
                     	</c:forEach>
-                    </table>			
+							<tr>
+								<td></td>
+								<td></td>
+								<td>Subtotal:</td>
+								<td>$<%=amount1%></td>   
+							</tr>
+                    </table>		
 				</div>
 			</div>			
 		</div>	
