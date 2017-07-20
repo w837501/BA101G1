@@ -1,6 +1,9 @@
 package com.store_class.model;
 
 import java.util.List;
+import java.util.Set;
+
+import com.store.model.StoreVO;
 
 public class StoreClassService {
 	
@@ -13,7 +16,10 @@ public class StoreClassService {
 	public List<StoreClassVO> getAll(){
 		return dao.getAll();
 	}
-	public StoreClassVO  getSC_name(Number sc_id){
-		return dao.getSCname(sc_id);
+	public StoreClassVO getOneStoreClass(Integer sc_id){
+		return dao.findByPrimaryKey(sc_id);
+	}
+	public Set<StoreVO> getStoresBySc_id(Integer sc_id){
+		return dao.getStoresBySc_id(sc_id);
 	}
 }

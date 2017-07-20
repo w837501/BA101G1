@@ -29,8 +29,6 @@ public class MemberReportServlet extends HttpServlet {
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 			req.setAttribute("whichPage", "列出單一會員檢舉");    // 資料庫取出的set物件,存入request
 			try {
@@ -91,15 +89,6 @@ public class MemberReportServlet extends HttpServlet {
 			}
 		}
 
-		if ("listAll3".equals(action)) {
-			System.out.println("bbbbb"+req.getParameter("action"));
-//			req.setAttribute("whichPage", "tab1");    // 資料庫取出的set物件,存入request
-			
-			String url = "/backend/memr/select_memr.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url);
-			successView.forward(req, res);
-		}
-
 
 		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp 或  /dept/listEmps_ByDeptno.jsp 的請求
 
@@ -143,8 +132,6 @@ public class MemberReportServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
-
 			req.setAttribute("whichPage", "列出所有會員檢舉");    // 資料庫取出的set物件,存入request	
 			String requestURL = req.getParameter("requestURL"); // 送出修改的來源網頁路徑: 可能為【/emp/listAllEmp.jsp】 或  【/dept/listEmps_ByDeptno.jsp】 或 【 /dept/listAllDept.jsp】
 
@@ -168,8 +155,6 @@ public class MemberReportServlet extends HttpServlet {
 					mr_time = java.sql.Timestamp.valueOf(req.getParameter("mr_time").trim());
 				} catch (IllegalArgumentException e) {
 					mr_time = new java.sql.Timestamp(System.currentTimeMillis());
-
-
 					errorMsgs.add("請輸入日期!");
 				}
 
@@ -187,11 +172,8 @@ public class MemberReportServlet extends HttpServlet {
 						mr_state = "未審核";
 					}
 				} catch (Exception e) {
-
 					errorMsgs.add("會員檢舉狀態請填數字.");
-
 				}
-
 
 				mrVO.setMr_id(mr_id);
 				mrVO.setMem_id(mem_id);
@@ -271,10 +253,6 @@ System.out.println("1");
 				memberreportVO.setMan_id(mr_content);
 				memberreportVO.setMr_image(mr_image);
 System.out.println("2");
-			
-				
-				
-
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("memberreportVO", memberreportVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -310,9 +288,7 @@ System.out.println("2");
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
 			req.setAttribute("whichPage", "列出所有會員檢舉");    // 資料庫取出的set物件,存入request
-
 			String requestURL = req.getParameter("requestURL"); // 送出刪除的來源網頁路徑: 可能為【/emp/listAllEmp.jsp】 或  【/dept/listEmps_ByDeptno.jsp】 或 【 /dept/listAllDept.jsp】
 
 			try {

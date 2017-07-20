@@ -155,7 +155,6 @@
 						<th>管理員電話</th>
 						<th>密碼</th>
 						<th>信箱</th>
-						<th>無效刪除because fk</th>
 					</tr>
 					<c:forEach var="ManagerVO" items="${list}">
 						<tr align='center' valign='middle'>
@@ -164,13 +163,6 @@
 						    <td>${ManagerVO.man_phone }</td>
 						    <td>${ManagerVO.man_pw }</td>
 						    <td>${ManagerVO.man_mail }</td>
-							<td>
-								<form method="post" action="<%=request.getContextPath()%>/backend/man/man.do">
-									<input type="submit" value="刪除">
-									<input type="hidden" name="man_id" value="${ManagerVO.man_id }">
-									<input type="hidden" name="action" value="delete">
-								</form>	
-							</td>
 							</tr>
 					</c:forEach>
 				</table>

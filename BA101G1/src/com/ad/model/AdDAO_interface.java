@@ -10,4 +10,7 @@ public interface AdDAO_interface {
     public AdVO findByPrimaryKey(String ad_id);
     public List<AdVO> getAll();
     public List<AdVO> getAvailableAD();
+    
+    public List<AdVO> getAllUncheckedAd();
+    public void updateAdState(String ad_state ,String ad_id);
 }

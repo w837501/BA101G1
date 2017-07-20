@@ -68,7 +68,7 @@
 						<h3>會員資料</h3>
 						<hr color="#FFFFFF">
 	 				</div> 
-					 <jsp:include page="/backend/mem/ListOneMem.jsp" />
+					 <jsp:include page="/frontend/mem/ListOneMem.jsp" />
 				</div>
 			
 		</div>

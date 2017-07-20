@@ -1,5 +1,6 @@
 package com.news.model;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -15,26 +16,40 @@ private NewsDAO_interface dao;
 		dao = new NewsDAO();
 	}
 	
-	public NewsVO addRev(String news_id, String man_id, String news_name, String news_content, byte[] news_image, Timestamp news_time, String news_push_content){
-		NewsVO newsVO=new NewsVO();
+	public NewsVO addNews( String man_id, String news_name, String news_content, byte[] news_image, Timestamp news_time, String news_push_content){
 		
-		newsVO.setNews_id(news_id);
+		NewsVO newsVO=new NewsVO();
 		newsVO.setMan_id(man_id);
 		newsVO.setNews_name(news_name);
 		newsVO.setNews_content(news_content);
 		newsVO.setNews_image(news_image);
 		newsVO.setNews_time(news_time);
 		newsVO.setNews_push_content(news_push_content);
-		
 		dao.insert(newsVO);
 		
 		return newsVO;
 	}
+	public NewsVO updateNews(String man_id ,String news_id ,String news_name ,String news_content ,
+			byte[] news_image ,Timestamp news_time ,String news_push_content) throws IOException{
+		NewsVO newsVO = new NewsVO();
+		
+		newsVO.setMan_id(man_id);
+		newsVO.setNews_id(news_id);
+		newsVO.setNews_name(news_name);
+		newsVO.setNews_content(news_content);
+		newsVO.setNews_image(news_image);
+		newsVO.setNews_time(news_time);
+		newsVO.setNews_push_content(news_push_content);
+		dao.update(newsVO);
+		
+		return newsVO ;
+	}
 	
-	public void deleteRev(String news_id) {
+	
+	public void deleteNews(String news_id) {
 		dao.delete(news_id);
 	}
-	public NewsVO getOneEmp(String news_id) {
+	public NewsVO getOneNews(String news_id, String man_id) {
 		return dao.findByPrimaryKey(news_id);
 	}
 	public List<NewsVO> getAll() {

@@ -28,7 +28,7 @@ public class StoreCommitDAO implements StoreCommitDAO_interface {
 	
 	private static final String INSERT = "insert into store_commit(sc_id ,store_id ,mem_id , sc_content ,sc_score)values('SC'||'-'||LPAD(to_char(sc_seq.NEXTVAL),6,'0'),?,?,?,?)";
 	
-	private static final String UPDATE = "UPDATE store_commit set getSc_state=? , mem_id=?";
+	private static final String UPDATE = "UPDATE store_commit set store_id = ? ,mem_id=? , sc_content=? , sc_time=? , sc_state=? where sc_id = ?";
 	
     private static final String DELETE = "delete from store_commit where sc_id=? ";
 	
@@ -37,6 +37,7 @@ public class StoreCommitDAO implements StoreCommitDAO_interface {
 	private static final String GET_ALL = "SELECT * from store_commit order by sc_id";
 	
 	private static final String GET_ALL_BY_STORE_ID="select * from store_commit where store_id=?";
+    private static final String DELETE_STORE_COMMIT = "delete from store_commit where sc_id=? ";
 
 
 	@Override
@@ -84,6 +85,8 @@ public class StoreCommitDAO implements StoreCommitDAO_interface {
 			 pstmt.setString(3,storecommit.getSc_content());
 			 pstmt.setTimestamp(4,storecommit.getSc_time());
 			 pstmt.setString(5,storecommit.getSc_state());
+				pstmt.setString(6,storecommit.getSc_id());
+
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
 			throw new RuntimeException("發生錯誤" + se.getMessage());
@@ -115,9 +118,7 @@ public class StoreCommitDAO implements StoreCommitDAO_interface {
 			 con = ds.getConnection();
 			 pstmt = con.prepareStatement(DELETE);
              pstmt.setString(1, sc_id);
-             System.out.println(sc_id + "mmmmmmmmmmmmmmmmmm");
              pstmt.executeUpdate();
-             System.out.println(sc_id + "wwwwwwwwwwwwwwwwww");			 
 			} catch (SQLException se) {
 				throw new RuntimeException("發生錯誤" + se.getMessage());
 				
