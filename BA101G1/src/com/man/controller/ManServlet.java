@@ -155,7 +155,7 @@ public class ManServlet extends HttpServlet {
 
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("managerVO", managerVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/UpdateMan.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/ListAllMan.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -169,7 +169,7 @@ public class ManServlet extends HttpServlet {
 				successView.forward(req, res);
 			} catch (Exception e) {
 				errorMsgs.add("­×§ï¥¢±Ñ" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/UpdateMan.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/man/ListAllMan.jsp");
 				failureView.forward(req, res);
 			}
 		}
