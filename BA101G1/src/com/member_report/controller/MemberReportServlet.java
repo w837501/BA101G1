@@ -26,65 +26,61 @@ public class MemberReportServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-		if ("getOne_For_Display".equals(action)) { // 靘select_page.jsp�����
+		if ("getOne_For_Display".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			req.setAttribute("whichPage", "���銝���瑼Ｚ��");    // 鞈�澈����et�隞�,摮request
+			req.setAttribute("whichPage", "列出單一會員檢舉");
 			try {
-				/***************************1.��隢�� - 頛詨�撘�隤方���**********************/
 				String str = req.getParameter("mr_id");
 				if (str == null || (str.trim()).length() == 0) {
-					errorMsgs.add("隢撓���瑼Ｚ�楊���");
+					errorMsgs.add("請輸入會員檢舉編號");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/backend/memr/select_memr.jsp");
 					failureView.forward(req, res);
-					return;//蝔�葉�
+					return;
 				}
 				
 				String mr_id = null;
 				try {
 					mr_id = new String(str);
 				} catch (Exception e) {
-					errorMsgs.add("��瑼Ｚ�楊��撘�迤蝣�");
+					errorMsgs.add("會員檢舉編號格式不正確");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/backend/memr/select_memr.jsp");
 					failureView.forward(req, res);
-					return;//蝔�葉�
+					return;
 				}
 				
-				/***************************2.���閰Ｚ���*****************************************/
 				MemberReportService mrSvc = new MemberReportService();
 				MemberReportVO mrVO = mrSvc.getOneMemberReport(mr_id);
 				if (mrVO == null) {
-					errorMsgs.add("��鞈��");
+					errorMsgs.add("查無資料");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/backend/memr/select_memr.jsp");
 					failureView.forward(req, res);
-					return;//蝔�葉�
+					return;
 				}
 				
-				/***************************3.�閰Ｗ���,皞��漱(Send the Success view)*************/
-				req.setAttribute("mrVO", mrVO); // 鞈�澈����mpVO�隞�,摮req
+				req.setAttribute("mrVO", mrVO); 
 				String url = "/backend/memr/select_memr.jsp";
 
 				RequestDispatcher successView = req.getRequestDispatcher(url); // ����漱listOneEmp.jsp
 				successView.forward(req, res);
 
-				/***************************�隞���隤方���*************************************/
 			} catch (Exception e) {
-				errorMsgs.add("�瘜�����:" + e.getMessage());
+				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/backend/memr/select_memr.jsp");
 				failureView.forward(req, res);
@@ -93,7 +89,6 @@ public class MemberReportServlet extends HttpServlet {
 
 		if ("listAll3".equals(action)) {
 			System.out.println("bbbbb"+req.getParameter("action"));
-//			req.setAttribute("whichPage", "tab1");    // 鞈�澈����et�隞�,摮request
 			
 			String url = "/backend/memr/select_memr.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
@@ -101,35 +96,31 @@ public class MemberReportServlet extends HttpServlet {
 		}
 
 
-		if ("getOne_For_Update".equals(action)) { // 靘listAllEmp.jsp ���  /dept/listEmps_ByDeptno.jsp �����
+		if ("getOne_For_Update".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			req.setAttribute("whichPage", "靽格�銝���瑼Ｚ��");    // 鞈�澈����et�隞�,摮request
+			req.setAttribute("whichPage", "修改單一會員檢舉");
 
-			String requestURL = req.getParameter("requestURL"); // �靽格����雯��楝敺�: �����/emp/listAllEmp.jsp�� ���  ��/dept/listEmps_ByDeptno.jsp�� ��� �� /dept/listAllDept.jsp��		
+			String requestURL = req.getParameter("requestURL");		
 			
 			try {
-				/***************************1.��隢��****************************************/
 				String mr_id = new String(req.getParameter("mr_id"));
 				
-				/***************************2.���閰Ｚ���****************************************/
 				MemberReportService mrSvc = new MemberReportService();
 				MemberReportVO mrVO = mrSvc.getOneMemberReport(mr_id);
 								
-				/***************************3.�閰Ｗ���,皞��漱(Send the Success view)************/
-				req.setAttribute("mrVO", mrVO); // 鞈�澈����mpVO�隞�,摮req
+				req.setAttribute("mrVO", mrVO);
 				String url = "/backend/memr/select_memr.jsp";
 
-				RequestDispatcher successView = req.getRequestDispatcher(url); // ����漱update_emp_input.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
-				/***************************�隞���隤方���************************************/
 			} catch (Exception e) {
-				errorMsgs.add("靽格鞈����仃���:"+e.getMessage());
+				errorMsgs.add("修改資料取出時失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
 						.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
@@ -137,7 +128,7 @@ public class MemberReportServlet extends HttpServlet {
 		}
 		
 		
-		if ("update".equals(action)) { // 靘update_emp_input.jsp�����
+		if ("update".equals(action)) { 
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -145,12 +136,11 @@ public class MemberReportServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 
-			req.setAttribute("whichPage", "�������瑼Ｚ��");    // 鞈�澈����et�隞�,摮request	
-			String requestURL = req.getParameter("requestURL"); // �靽格����雯��楝敺�: �����/emp/listAllEmp.jsp�� ���  ��/dept/listEmps_ByDeptno.jsp�� ��� �� /dept/listAllDept.jsp��
+			req.setAttribute("whichPage", "列出所有會員檢舉"); 	
+			String requestURL = req.getParameter("requestURL");
 
 
 			try {
-				/***************************1.��隢�� - 頛詨�撘�隤方���**********************/
 				String mr_id = new String(req.getParameter("mr_id").trim());
 				String mem_id = req.getParameter("mem_id").trim();
 				String order_id = req.getParameter("order_id").trim();
@@ -170,25 +160,25 @@ public class MemberReportServlet extends HttpServlet {
 					mr_time = new java.sql.Timestamp(System.currentTimeMillis());
 
 
-					errorMsgs.add("隢撓�����!");
+					errorMsgs.add("請輸入日期");
 				}
 
 				String mr_state = null;
 				try {
-					mr_state = "撌脣祟�";
+					mr_state = "已審核";
 				} catch (Exception e) {
-					errorMsgs.add("隢撓���瑼Ｚ�����");
+					errorMsgs.add("請輸入會員檢舉狀態");
 				}
 
 				String mr_result = null;
 				try {
 					mr_result = req.getParameter("mr_result").trim();
 					if(mr_state.isEmpty()){
-						mr_state = "�撖拇";
+						mr_state = "未審核";
 					}
 				} catch (Exception e) {
 
-					errorMsgs.add("��瑼Ｚ�����‵�摮�.");
+					errorMsgs.add("會員檢舉狀態請輸入");
 
 				}
 
@@ -206,17 +196,15 @@ public class MemberReportServlet extends HttpServlet {
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("mrVO", mrVO); // ���撓��撘隤斤�rVO�隞�,銋�req
+					req.setAttribute("mrVO", mrVO);
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/backend/memr/update_mr_input.jsp");
 					failureView.forward(req, res);
-					return; //蝔�葉�
+					return;
 				}
 				
-				/***************************2.���耨�鞈��*****************************************/
 				mrVO = mrSvc.updateMemberReport(mr_id , mem_id, order_id, sc_id, man_id, mr_content,mr_image,mr_time,mr_state,mr_result);
 				
-				/***************************3.靽格摰��,皞��漱(Send the Success view)*************/				
 
 
                 String url="/backend/memr/select_memr.jsp";
@@ -224,9 +212,8 @@ public class MemberReportServlet extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url);   // 靽格�����,頧漱���靽格����雯���
 				successView.forward(req, res);
 
-				/***************************�隞���隤方���*************************************/
 			} catch (Exception e) {
-				errorMsgs.add("靽格鞈�仃���:"+e.getMessage());
+				errorMsgs.add("修改資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/backend/memr/update_mr_input.jsp");
 				failureView.forward(req, res);
@@ -234,15 +221,13 @@ public class MemberReportServlet extends HttpServlet {
 		}
 
 
- if ("insert".equals(action)) { // 靘addEmp.jsp�����  
-			System.out.println("摰�� ");
+ if ("insert".equals(action)) {  
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 		try {
-				/***********************1.��隢�� - 頛詨�撘�隤方���*************************/
 
 				String mem_id = req.getParameter("mem_id");
 				System.out.println(mem_id);
@@ -254,7 +239,7 @@ public class MemberReportServlet extends HttpServlet {
 //				Part pic = req.getPart("mr_image");
 //				byte[] mr_image = null;
 //				byte[] mr_image = getPictureByteArrayFromWeb(pic);
-				/*******************************圖片寫入DB************************************************/
+				/*******************************************************************************/
 				
 				Part addPic = req.getPart("mr_image");
 				if(addPic == null){
@@ -271,7 +256,7 @@ public class MemberReportServlet extends HttpServlet {
 				in.close();
 				mr_image = baos.toByteArray();
 
-				/*******************************圖片寫入DB************************************************/
+				/******************************************************************************/
 			if(order_id==null){
 				order_id=null;
 			}
@@ -296,7 +281,7 @@ System.out.println("2");
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("memberreportVO", memberreportVO); // ���撓��撘隤斤�mpVO�隞�,銋�req
+					req.setAttribute("memberreportVO", memberreportVO);
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/frontend/mem/member_addMR.jsp");
 					failureView.forward(req, res);
@@ -313,7 +298,7 @@ System.out.println("2");
 				System.out.println("4");
 				req.setAttribute("memberreportVO", memberreportVO);
 				String url = "/frontend/mem/member_report.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // �憓����漱listAllEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);				
 			} catch (Exception e) {
 				RequestDispatcher failureView = req
@@ -323,16 +308,16 @@ System.out.println("2");
 		}
 		
        
-		if ("delete".equals(action)) { // 靘listAllEmp.jsp ���  /dept/listEmps_ByDeptno.jsp�����
+		if ("delete".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			req.setAttribute("whichPage", "�������瑼Ｚ��");    // 鞈�澈����et�隞�,摮request
+			req.setAttribute("whichPage", "列出所有會員檢舉");
 
-			String requestURL = req.getParameter("requestURL"); // �������雯��楝敺�: �����/emp/listAllEmp.jsp�� ���  ��/dept/listEmps_ByDeptno.jsp�� ��� �� /dept/listAllDept.jsp��
+			String requestURL = req.getParameter("requestURL"); 
 
 			try {
 				/***************************1.��隢��***************************************/
@@ -346,16 +331,14 @@ System.out.println("2");
 				/***************************3.��摰��,皞��漱(Send the Success view)***********/
 //				DeptService deptSvc = new DeptService();
 //				if(requestURL.equals("/dept/listEmps_ByDeptno.jsp") || requestURL.equals("/dept/listAllDept.jsp"))
-//					req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(empVO.getDeptno())); // 鞈�澈����ist�隞�,摮request
 //				
 //				String url = requestURL;
 				String url = "/backend/memr/select_page.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // �������,頧漱���������雯���
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 				
-				/***************************�隞���隤方���**********************************/
 			} catch (Exception e) {
-				errorMsgs.add("��鞈�仃���:"+e.getMessage());
+				errorMsgs.add("刪除資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
 						.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
@@ -364,25 +347,24 @@ System.out.println("2");
 		if ("listAll".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 
-			req.setAttribute("whichPage", "�������瑼Ｚ��");    // 鞈�澈����et�隞�,摮request
+			req.setAttribute("whichPage", "列出所有會員檢舉");
 
 				String url = "/backend/memr/select_page.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 		}
 		if ("listAll3".equals(action)) {
-//			req.setAttribute("whichPage", "tab1");    // 鞈�澈����et�隞�,摮request
 			MemberReportService mrSvc = new MemberReportService();
 			List<MemberReportVO> mrList = null;
 			String whichTab = req.getParameter("whichTab");
 			if(whichTab.equals("tab1")){
-				mrList = mrSvc.findByMR_state("�撖拇");
+				mrList = mrSvc.findByMR_state("未審核");
 			}
 			if(whichTab.equals("tab2")){
-				mrList = mrSvc.findByMR_state("撖拇銝�");
+				mrList = mrSvc.findByMR_state("審核中");
 			}
 			if(whichTab.equals("tab3")){
-				mrList = mrSvc.findByMR_state("撌脣祟�");
+				mrList = mrSvc.findByMR_state("已審核");
 			}
 			req.setAttribute("list3", mrList);
 			System.out.println("whichTab : "+whichTab+" list " + mrList);
@@ -392,9 +374,8 @@ System.out.println("2");
 		}
 		
 		if ("readPic".equals(action)) {
-//			req.setAttribute("whichPage", "tab1");    // 鞈�澈����et�隞�,摮request
 			/******************************read img*********************************************/
-			res.setContentType("image/gif");  // ���27銵�銵��L314 P.90���
+			res.setContentType("image/gif"); 
 			ServletOutputStream out = res.getOutputStream();
 			String mr_id = req.getParameter("mr_id");
 			req.setCharacterEncoding("UTF-8");
@@ -405,7 +386,7 @@ System.out.println("2");
 				ResultSet rs = stmt.executeQuery(
 					"SELECT mr_image FROM member_report WHERE mr_id ='" + mr_id + "'" );
 				if (rs.next()) {
-					BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("mr_image"));//甈��
+					BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("mr_image"));
 					byte[] buf = new byte[4 * 1024]; // 4K buffer
 					int len;
 					while ((len = in.read(buf)) != -1) {
@@ -431,9 +412,9 @@ System.out.println("2");
 
 	public String getFileNameFromPart(Part part) {
 		String header = part.getHeader("content-disposition");
-		System.out.println("header=" + header); // 皜祈岫�
+		System.out.println("header=" + header); 
 		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
-		System.out.println("filename=" + filename); // 皜祈岫�
+		System.out.println("filename=" + filename);
 		if (filename.length() == 0) {
 			return null;
 
