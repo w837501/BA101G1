@@ -20,12 +20,13 @@
      <!-- FONTAWESOME STYLES-->
     <link href="<%=request.getContextPath() %>/backend/assets/css/font-awesome.css" rel="stylesheet" />
         <!-- CUSTOM STYLES-->
-    <link href="<%=request.getContextPath() %>/backend/assets/css/custom.css" rel="stylesheet" />
     	<!-- LOGIN STYLES -->
-    <link href="<%=request.getContextPath() %>/backend/assets/css/login.css" rel="stylesheet" />
     <script src="<%=request.getContextPath() %>/backend/assets/js/login.js"></script>
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="<%=request.getContextPath() %>/backend/assets/css/custom.css" rel="stylesheet" />
+    <link href="<%=request.getContextPath() %>/backend/assets/css/login.css" rel="stylesheet" />
 </head>
 <body>
     <div id="wrapper">
@@ -146,20 +147,16 @@
 							    <!-- 標籤面板：標籤區 -->
 							    <ul class="nav nav-tabs" role="tablist" style="margin-top : 10px;">
 							        <li role="presentation" class="active">
-
 							        	<form action="<%=request.getContextPath() %>/member_report/member_report.do" method="post">
 											<a href="#tab1" onclick="parentNode.submit();" aria-controls="tab1" role="tab" data-toggle="tab" class="btn btn-large btn-primary">未審核</a>&nbsp;&nbsp;&nbsp;&nbsp;
-
 											<input type="hidden" name="action" value="listAll3">
 											<input type="hidden" name="whichTab" value="tab1">
 										</form> 
 							        </li>
 									
 							        <li role="presentation">
-
 							        	<form action="<%=request.getContextPath() %>/member_report/member_report.do" method="post">
 											<a href="#tab3" onclick="parentNode.submit();" aria-controls="tab3" role="tab" data-toggle="tab" class="btn btn-large btn-primary">已審核</a>
-
 											<input type="hidden" name="action" value="listAll3">
 											<input type="hidden" name="whichTab" value="tab3">
 										</form> 
@@ -198,11 +195,12 @@
 														</td>
 														<td>${mrVO.mr_time}</td>
 														<td>${mrVO.mr_state}</td>
-														  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/memr/member_report.do">
+														  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member_report/member_report.do">
 														<td>
+															<div class="well">${(mrVO.mr_result eq null) ? '請勾選' : (mrVO.mr_result)}</div>
 													        <div data-toggle="buttons">
-													          <label class="btn btn-default btn-circle btn-lg"><input type="radio" name="mr_result" value="成立" id="good" ${(mrVO.mr_result == '成立')? 'checked' : '' }><i class="glyphicon glyphicon-ok"></i></label>
-													          <label class="btn btn-default btn-circle btn-lg"><input type="radio" name="mr_result" value="不成立" id="bad" ${(mrVO.mr_result == '不成立')? 'checked' : ''}><i class="glyphicon glyphicon-remove"></i></label>
+													          <label class="btn btn-default btn-circle btn-lg good"><input type="radio" name="mr_result" value="成立" ${(mrVO.mr_result == '成立')? 'checked' : '' } onchange="handleChange1()"><i class="glyphicon glyphicon-ok"></i></label>
+													          <label class="btn btn-default btn-circle btn-lg bad" ><input type="radio" name="mr_result" value="不成立" ${(mrVO.mr_result == '不成立')? 'checked' : ''} onchange="handleChange1()"><i class="glyphicon glyphicon-remove" ></i></label>
 													        </div>
 														</td>			
 														<td>
@@ -243,6 +241,7 @@
       <!-- CUSTOM SCRIPTS -->
     <script src="<%=request.getContextPath() %>/backend/assets/js/custom.js"></script>
     
+    	<script src="https://code.jquery.com/jquery.js"></script>
     
 </body>
 </html>
@@ -265,8 +264,16 @@
         line-height: 1.33;
         border-radius: 25px;
       }
-      .radio-toolbar label + input[type="radio"]:checked { 
-    	background:gray !important;
-	}
 
 </style>
+<script>
+$(".good").on('click',function(){   //選取id為demo的元素，並且綁定onclick事件。
+	   $(this).css("background-color","yellowgreen");  //將id為demo的元素，其背景顏色設為紅色。
+	   $(".bad").css("background-color","white");  //將id為demo的元素，其背景顏色設為紅色。
+});
+$(".bad").on('click',function(){   //選取id為demo的元素，並且綁定onclick事件。
+	   $(this).css("background-color","yellowgreen");  //將id為demo的元素，其背景顏色設為紅色。
+	   $(".good").css("background-color","white");  //將id為demo的元素，其背景顏色設為紅色。
+});
+</script>
+

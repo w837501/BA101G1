@@ -168,7 +168,7 @@
                                         <c:forEach var="adVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
                                             <tr align='center' valign='middle' ${(adVO.ad_id==param.ad_id) ? 'bgcolor=#CCCCFF': ''}>
                                                 <td>${adVO.ad_id}</td>
-                                                <td>${storeSvc.getOneStore(adVO.store_id).store_name}</td>
+                                                <td>${storeSvc.getOneStore1(adVO.store_id).store_name}</td>
                                                 <td>${adVO.ad_name}</td>
                                                 <td>${adVO.ad_content}</td>
                                                 <td><img src='<%=request.getContextPath()%>/ad?ad_id=${adVO.ad_id}'   height="100"></td>
@@ -186,7 +186,7 @@
                                                     </select>
                                                     <input type="submit" value="°e¥X">
                                                     <input type="hidden" name="ad_id" value="${adVO.ad_id}">
-                                                    <input type="hidden" name="store_phone" value="${storeSvc.getOneStore(adVO.store_id).store_phone}">
+                                                    <input type="hidden" name="store_phone" value="${storeSvc.getOneStore1(adVO.store_id).store_phone}">
                                                     <input type="hidden" name="action" value="updateUnckeckedAdState">      
                                                     </FORM>
                                                 </td>
