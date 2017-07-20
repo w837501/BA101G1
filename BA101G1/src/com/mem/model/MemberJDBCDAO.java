@@ -343,4 +343,22 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 		}
 		return memberVO;
 	}
+
+	@Override
+	public List<MemberVO> getAllUncheckedMember() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateMemberState(String mem_state, String mem_id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Integer getAllUncheckedCount() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -32,6 +32,8 @@ public class AdDAO implements AdDAO_interface {
 	private static final String Find_ALL = "select * from AD ";
 	
 	private static final String AD_Available ="select * from Ad where ad_state = '¥Zµn¤¤' order by ad_time";
+	private static final String FIND_ALL_UNCHECKED_AD = "SELECT * FROM AD  WHERE AD_STATE NOT LIKE '%¥Zµn¤¤%' AND AD_STATE NOT LIKE '%¤U¬[%' ";
+	private static final String UPDATE_AD_STATE = "UPDATE AD SET AD_STATE= ? WHERE AD_ID = ?";
 	
 	
 	@Override
@@ -293,4 +295,86 @@ public class AdDAO implements AdDAO_interface {
 		}
 		return adlist;
 	}
+	@Override
+	public void updateAdState(String ad_state ,String ad_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_AD_STATE);
+			
+			pstmt.setString(1, ad_state );
+			pstmt.setString(2, ad_id);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+	}		
+		
+		@Override
+		public List<AdVO> getAllUncheckedAd() {
+			List<AdVO> adlist = new ArrayList<AdVO>();
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			AdVO adVO = null;
+
+			try {
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(FIND_ALL_UNCHECKED_AD);
+				rs = pstmt.executeQuery();
+				while(rs.next()){
+					adVO=new AdVO();
+					adVO.setAd_id(rs.getString("ad_id"));
+					adVO.setStore_id(rs.getString("store_id"));
+					adVO.setAd_name(rs.getString("ad_name"));
+					adVO.setAd_content(rs.getString("ad_content"));
+					adVO.setAd_image(rs.getBytes("ad_image"));
+					adVO.setAd_time(rs.getTimestamp("ad_time"));
+					adVO.setAd_state(rs.getString("ad_state"));
+					adVO.setAd_push_content(rs.getString("ad_push_content"));
+					adlist.add(adVO);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			return adlist;
+		}
+	
 }

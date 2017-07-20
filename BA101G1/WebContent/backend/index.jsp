@@ -135,9 +135,9 @@
 <!-- ****************廣告審核(使用listSize取值)************************ -->
 <%@ page import="com.ad.model.*"%>
 	<%  AdService adSvc = new AdService();
-//		List<AdVO> list = adSvc.getAllUncheckedAd();
-//		Integer listSize = list.size();
-//		pageContext.setAttribute("listSize", listSize); %>
+		List<AdVO> list = adSvc.getAllUncheckedAd();
+		Integer listSize = list.size();
+		pageContext.setAttribute("listSize", listSize); %>
 		
                     <div class="col-md-4"> 
 
@@ -164,8 +164,8 @@
 <!-- ****************商家審核(使用SQL select count(*)取值)************************ -->
 <%@ page import="com.store.model.*"%>
 	<%  StoreService storeSvc = new StoreService();
-//		Integer storecount = storeSvc.getAllUncheckedCount();
-//		pageContext.setAttribute("storecount", storecount); %>
+		Integer storecount = storeSvc.getAllUncheckedCount();
+		pageContext.setAttribute("storecount", storecount); %>
                          	
 								<div class="alert alert-success">
 								    目前有

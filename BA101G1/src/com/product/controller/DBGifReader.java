@@ -28,7 +28,7 @@ public class DBGifReader extends HttpServlet {
 			String pro_id2=new String(pro_id.getBytes("ISO-8859-1"),"UTF-8");
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(
-				"SELECT pro_image FROM product WHERE pro_id ='"+pro_id2+"' order by '"+pro_id2+"'" );
+				"SELECT pro_image FROM product WHERE pro_id ='"+pro_id2+"'");
 
 			if (rs.next()) {
 				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream(1));

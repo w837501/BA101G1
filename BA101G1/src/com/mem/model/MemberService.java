@@ -49,4 +49,16 @@ private MemberDAO_interface dao;
 	public MemberVO getMem_Acc(String mem_mail) {
 		return dao.findAcc(mem_mail);
 	}
+	public MemberVO updateMemberState(String mem_state , String mem_id){
+		MemberVO memberVO = new MemberVO();
+		memberVO.setMem_state(mem_state);
+		memberVO.setMem_id(mem_id);
+		dao.updateMemberState(mem_state, mem_id);
+		return memberVO;
+		
+	}
+	
+	public Integer getAllUncheckedCount(){
+		return dao.getAllUncheckedCount();
+	}
 }

@@ -1,8 +1,11 @@
 package com.store.model;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import com.store.model.StoreVO;
+import com.store_commit.model.StoreCommitVO;
 
 public class StoreService {
 
@@ -105,6 +108,23 @@ public class StoreService {
 		storeVO.setStore_count(store_count);
 		storeVO.setStore_id(store_id);
 		dao.updateStoreStar(storeVO);
+		return storeVO;
+	}
+	public Set<StoreCommitVO> getStoreCommitsByStore_id(String store_id) {
+		return dao.getStoreCommitsByStore_id(store_id);
+	}
+	public List<StoreVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
+	}
+	public Integer getAllUncheckedCount(){
+		return dao.getAllUncheckedCount();
+	}
+	
+	public StoreVO updateStoreState(String store_state,String store_id){
+		StoreVO storeVO=new StoreVO();
+		storeVO.setStore_id(store_id);
+		storeVO.setStore_state(store_state);
+		dao.updateStoreState(store_state, store_id);
 		return storeVO;
 	}
 }

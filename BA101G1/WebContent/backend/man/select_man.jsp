@@ -61,21 +61,11 @@
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/str/selectPage.jsp"><i class="fa fa-bar-chart-o "></i>商家檢舉 </a>
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-qrcode "></i>審核商家no</a>
-                    </li>     
+                      
                     <li>
                         <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>一般訂單查詢</a>
                     </li>  
-                    <li>
-                        <a href="#"><i class="fa fa-qrcode "></i>管理儲值交易no</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-qrcode "></i>銷售/統計no</a>
-                    </li>      
-                    <li>
-                        <a href="#"><i class="fa fa-qrcode "></i>錢包管理no</a>
-                    </li>                                                                      
+                                                                            
                     <li>
                         <a href="<%=request.getContextPath() %>/backend/push/selectPage.jsp"><i class="fa fa-edit "></i>推播</a>
                     </li>                  

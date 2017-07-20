@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import com.man.model.ManagerService;
 import com.mem.model.MemberService;
 import com.mem.model.MemberVO;
+import com.tools.MailService;
 
 public class MemberServlet extends HttpServlet {
 
@@ -25,7 +26,7 @@ public class MemberServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		HttpSession session=req.getSession();
+		HttpSession session = req.getSession();
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
@@ -267,5 +268,46 @@ public class MemberServlet extends HttpServlet {
 			}
 			res.sendRedirect(req.getContextPath() + "/index.jsp");
 		}
+
+		if ("updateMemberState".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			try {
+
+				String mem_id = req.getParameter("mem_id");
+				String mem_state = req.getParameter("mem_state");
+				MemberVO memberVO = new MemberVO();
+				memberVO.setMem_id(mem_id);
+				memberVO.setMem_state(mem_state);
+
+				MemberService memberSvc = new MemberService();
+				memberVO = memberSvc.updateMemberState(mem_state, mem_id);
+				// ==============寄MAIL
+
+				if (req.getParameter("mem_state").equals("未認證")) {
+					MailService mailSvc = new MailService();
+					mailSvc.sendMail(req.getParameter("mem_mail"), "很抱歉您未通過認證", "aaaaaaaa");
+
+				} else if (req.getParameter("mem_state").equals("已認證")) {
+					MailService mailSvc = new MailService();
+					mailSvc.sendMail(req.getParameter("mem_mail"), "恭喜您已通過認證", "bbbbbbbbb");
+
+				} else {
+					MailService mailSvc = new MailService();
+					mailSvc.sendMail(req.getParameter("mem_mail"), "停權中", "ccccccccccccc");
+				}
+				// ==============
+				req.setAttribute("memberVO", memberVO);
+				String url = "/backend/member/listAllMemberState.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+			} catch (Exception e) {
+				errorMsgs.add("修改失敗" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/member/listAllMemberState.jsp");
+				failureView.forward(req, res);
+			}
+		}
 	}
+
 }
