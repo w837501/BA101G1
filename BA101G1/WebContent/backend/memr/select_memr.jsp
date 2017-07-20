@@ -215,7 +215,7 @@
 															     <input type="hidden" name="mr_time" value="${mrVO.mr_time}">
 															     <input type="hidden" name="mr_state" value="${mrVO.mr_state}">
 															     <input type="hidden" name="action"	value="update">
-															     <input type="submit" value="確認修改" disabled="${(mrVO.mr_state eq '已審核') ? 'disabled' : ''}"> 
+															     <input type="submit" value="確認修改" disabled="${(mrVO.mr_state eq '已審核') ? 'true' : 'false'}"> 
 															  </FORM>
 															 </td>
 														 
