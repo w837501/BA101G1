@@ -180,7 +180,7 @@
 				<td>${scVO.sc_state}</td>
 				<td>
 					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/backend/store_commit/store_commit.do">
+						ACTION="<%=request.getContextPath()%>/storecommit.do">
 						<input type="submit" value="н╫зя"> 
 						<input type="hidden" name="sc_id" value="${scVO.sc_id}"> 
 						<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">

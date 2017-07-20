@@ -234,7 +234,7 @@
 <%-- 												<c:forEach var="PermissionVO" items="${list}"> --%>
 													<c:forEach var="Permission_AbilityVO" items="${paSvc.all}">
 <%-- 									                    <c:if test="${PermissionVO.pa_id eq Permission_AbilityVO.pa_id}"> --%>
-									                    	<option value="${PermissionVO.pa_id}" ${(Permission_AbilityVO.pa_id==PermissionVO.pa_id)? 'selected':'' } >
+									                    	<option value="${Permission_AbilityVO.pa_id}" ${(Permission_AbilityVO.pa_id==PermissionVO.pa_id)? 'selected':'' } >
 										                    	【${Permission_AbilityVO.pa_id } - ${Permission_AbilityVO.pa_name}】
 <%-- 									                    </c:if> --%>
 									                </c:forEach>
@@ -247,8 +247,6 @@
 										</td>
 										<td>
 												<input type="submit" value="刪除">
-												<input type="hidden" name="man_id" value="${manVO.man_id }">
-												<input type="hidden" name="pa_id" value="${PermissionVO.pa_id }">
 												<input type="hidden" name="action" value="delete">
 										</td>
 									</form>	

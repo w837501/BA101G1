@@ -86,15 +86,16 @@ public class StoreCommitServlet extends HttpServlet {
 		if("getOne_For_Update".equals(action)){ 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+			System.out.println("123");
 			try{
 //1.钡Μ叫―把计				
-				String sc_id = new String(req.getParameter("sc_id"));
+				String sc_id = req.getParameter("sc_id");
+				System.out.println(sc_id);
 //2.秨﹍琩高戈				
-				StoreService storeSvc = new StoreService();
-				StoreVO storeVO = storeSvc.getOneStore(sc_id);
+				StoreCommitService storecommitSvc = new StoreCommitService();
+				StoreCommitVO scVO = storecommitSvc.getOneStoreCommit(sc_id);
 //3.琩高ЧΘ,非称锣ユ				
-				req.setAttribute("storeVO", storeVO);
+				req.setAttribute("scVO", scVO);
 				String url = "/backend/store_commit/updateStoreCommitInput.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
