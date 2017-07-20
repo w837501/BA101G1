@@ -211,7 +211,6 @@ public class StoreDAO implements StoreDAO_interface {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		StoreVO storeVO = null;
-
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(Find_by_PK);
