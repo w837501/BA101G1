@@ -37,17 +37,16 @@
 			<%@ include file="pages/page1.file" %> 
             <ul>
             	<c:forEach var="newsVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1 %>">
-            	<li>
+            	<li style="text-align:center;line-height:100px;">
             		<a href="news.do?news_name=${newsVO.news_name}&news_time=${newsVO.news_time}&news_id=${newsVO.news_id}&action=getOne_For_Display">
 					<img src="<%=request.getContextPath() %>/MRDBGifReader?whichImg=latn&id=${newsVO.news_id}"
 					width="170px" height="170px" vspace="10px" style="display:block; margin:auto;border-radius: 25%;"></a>
-					<br>
-					<p>
-
-					<h3>${newsVO.news_name}</h3>
-					<fmt:formatDate value="${newsVO.news_time}" pattern="yyyy-MM-dd"/>  
-
-					</p>
+					<div style="font-family:標楷體;font-size:25px;color:blue;">
+						${newsVO.news_name}
+					</div>
+					<div style="font-family:標楷體;font-size:20px;color:maroon;margin-top:-20px;">
+						<fmt:formatDate value="${newsVO.news_time}" pattern="yyyy-MM-dd"/>
+					</div>
             	</li>
             	</c:forEach>
             </ul>

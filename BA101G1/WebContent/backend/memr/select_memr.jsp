@@ -144,18 +144,22 @@
 						<div class="col-xs-12 col-sm-12">
 							<div role="tabpanel">
 							    <!-- 標籤面板：標籤區 -->
-							    <ul class="nav nav-tabs" role="tablist">
+							    <ul class="nav nav-tabs" role="tablist" style="margin-top : 10px;">
 							        <li role="presentation" class="active">
-							        	<form action="member_report.do" method="post">
-											<a href="#tab1" onclick="parentNode.submit();" aria-controls="tab1" role="tab" data-toggle="tab">未審核&nbsp;&nbsp;</a>
+
+							        	<form action="<%=request.getContextPath() %>/member_report/member_report.do" method="post">
+											<a href="#tab1" onclick="parentNode.submit();" aria-controls="tab1" role="tab" data-toggle="tab" class="btn btn-large btn-primary">未審核</a>&nbsp;&nbsp;&nbsp;&nbsp;
+
 											<input type="hidden" name="action" value="listAll3">
 											<input type="hidden" name="whichTab" value="tab1">
 										</form> 
 							        </li>
-
+									
 							        <li role="presentation">
-							        	<form action="member_report.do" method="post">
-											<a href="#tab3" onclick="parentNode.submit();" aria-controls="tab3" role="tab" data-toggle="tab">已審核&nbsp;&nbsp;</a>
+
+							        	<form action="<%=request.getContextPath() %>/member_report/member_report.do" method="post">
+											<a href="#tab3" onclick="parentNode.submit();" aria-controls="tab3" role="tab" data-toggle="tab" class="btn btn-large btn-primary">已審核</a>
+
 											<input type="hidden" name="action" value="listAll3">
 											<input type="hidden" name="whichTab" value="tab3">
 										</form> 
@@ -165,7 +169,7 @@
 							    <!-- 標籤面板：內容區 -->
 							    <div class="tab-content">
 							        <div role="tabpanel" class="tab-pane active" id="tab1">
-										<table border='1' bordercolor='#CCCCFF' width='1250'>
+										<table border='1' bordercolor='#CCCCFF' width='1250' style="margin-top : 10px;">
 											<tr>
 												<th>會員檢舉單號</th>
 												<th>會員編號</th>
@@ -177,7 +181,7 @@
 												<th>檢舉時間</th>
 												<th>審核狀態</th>
 												<th>檢舉結果</th>
-												<th></th>
+												<th>修改</th>
 											</tr>
 											<c:forEach var="mrVO" items="${list}" >
 													<tr align='center' valign='middle' ${(mrVO.mr_id==param.mr_id) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
@@ -201,9 +205,7 @@
 													          <label class="btn btn-default btn-circle btn-lg"><input type="radio" name="mr_result" value="不成立" id="bad" ${(mrVO.mr_result == '不成立')? 'checked' : ''}><i class="glyphicon glyphicon-remove"></i></label>
 													        </div>
 														</td>			
-											
 														<td>
-														     <input type="submit" value="確認修改"> 
 														     <input type="hidden" name="mr_id" value="${mrVO.mr_id}">
 														     <input type="hidden" name="mem_id" value="${mrVO.mem_id}">
 														     <input type="hidden" name="order_id" value="${mrVO.order_id}">
@@ -213,8 +215,9 @@
 														     <input type="hidden" name="mr_time" value="${mrVO.mr_time}">
 														     <input type="hidden" name="mr_state" value="${mrVO.mr_state}">
 														     <input type="hidden" name="action"	value="update">
+														     <input type="submit" value="確認修改"> 
 														  </FORM>
-														</td>
+														 </td>
 													</tr>
 											</c:forEach>
 										</table>
@@ -244,7 +247,7 @@
 </body>
 </html>
 <style type="text/css">
-      body{margin:40px;}
+      body{margin:0px;}
       .btn-circle {
         width: 30px;
         height: 30px;

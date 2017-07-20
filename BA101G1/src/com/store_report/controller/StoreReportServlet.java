@@ -138,7 +138,14 @@ public class StoreReportServlet extends HttpServlet {
 				StoreReportService srSvc = new StoreReportService();
 				StoreReportVO srVO = srSvc.getOneStoreReport(sr_id);
 				byte[] sr_image = srVO.getSr_image();
-				
+				if(sr_image == null){
+					sr_image = null;
+					System.out.println("146 "+ sr_image);
+				}else{
+					sr_image = srVO.getSr_image();
+					System.out.println("149 "+ sr_image);
+				}
+				System.out.println("151 "+ sr_image+"AAAAAAAAAAAAAA");
 				java.sql.Timestamp sr_time = null;
 				try {
 					sr_time = java.sql.Timestamp.valueOf(req.getParameter("sr_time").trim());
@@ -147,14 +154,9 @@ public class StoreReportServlet extends HttpServlet {
 					errorMsgs.add("輸入錯誤");
 				}
 
-				String sr_state = null;
-				try {
 //					sr_state = req.getParameter("sr_state").trim();
-					sr_state = "已審核";
-				} catch (Exception e) {
-					errorMsgs.add("請輸入狀態");
+				String sr_state = "已審核";
 
-				}
 
 				String sr_result = null;
 				try {
@@ -166,6 +168,13 @@ public class StoreReportServlet extends HttpServlet {
 					errorMsgs.add("請輸入結果");
 				}
 
+				if(sc_id==null){
+					sc_id=null;
+				}
+				if(order_id==null){
+					order_id=null;
+				}
+				
 				srVO.setSr_id(sr_id);
 				srVO.setStore_id(store_id);
 				srVO.setSc_id(sc_id);
