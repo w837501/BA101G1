@@ -224,7 +224,6 @@ private static final String GET_STORE_COMMIT_BYSTORE_ID ="select sc_id , store_i
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		StoreVO storeVO = null;
-
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(Find_by_PK);
