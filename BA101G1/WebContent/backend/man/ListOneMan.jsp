@@ -10,32 +10,48 @@ ManagerVO managerVO=(ManagerVO)request.getAttribute("managerVO");
 <head>
 <title>員工資料</title>
 </head>
-<body bgcolor='white'>
-
-<table border='1' cellpadding="5" cellspacing="0" width='600'>
-	<tr bgcolor='#CCF' align='center' valign='middle' height='20'>
-	<td>
-	<h3>員工資料</h3>	
-	<a href="select_man.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁	</a>
-	</td>
-	</tr>
-</table>
-
-<table border='1' bordercolor='#CCF' width='600'>
-	<tr>
-		<th>管理員編號</th>
-		<th>管理員名字</th>
-		<th>管理員電話</th>
-		<th>密碼</th>
-		<th>信箱</th>
-	</tr>
-	<tr align='center' valign='middle'>
-		<td><%=managerVO.getMan_id() %></td>
-		<td><%=managerVO.getMan_name() %></td>
-		<td><%=managerVO.getMan_phone() %></td>
-		<td><%=managerVO.getMan_pw() %></td>
-		<td><%=managerVO.getMan_mail() %></td>
-	</tr>
+		<div class="container">
+			<div class="form-group">
+				<label for="aa" class="col-xs-12 col-sm-3 control-label">
+					管理員編號
+				</label>
+				<div class="col-xs-6 col-sm-9">
+					<input type="text" name="aa" placeholder="文字" class="form-control" value="<%=managerVO.getMan_id() %>">
+				</div>
+			</div><br>
+			<div class="form-group">
+				<label for="aa" class="col-xs-12 col-sm-3 control-label" value="<%=managerVO.getMan_name() %>">
+					管理員名字
+				</label>
+				<div class="col-xs-6 col-sm-3">
+					<input type="text" name="aa" placeholder="文字" class="form-control">
+				</div>
+			</div><br>
+			<div class="form-group">
+				<label for="aa" class="col-xs-12 col-sm-3 control-label">
+					管理員電話
+				</label>
+				<div class="col-xs-6 col-sm-3">
+					<input type="text" name="aa" placeholder="文字" class="form-control" value="<%=managerVO.getMan_phone() %>">
+				</div>
+			</div><br>
+			<div class="form-group">
+				<label for="aa" class="col-xs-12 col-sm-3 control-label">
+					密碼
+				</label>
+				<div class="col-xs-6 col-sm-3">
+					<input type="password" name="aa" placeholder="文字" class="form-control" value="<%=managerVO.getMan_pw() %>">
+				</div>
+			</div><br>
+			<div class="form-group">
+				<label for="aa" class="col-xs-12 col-sm-3 control-label">
+					信箱
+				</label>
+				<div class="col-xs-6 col-sm-3">
+					<input type="text" name="aa" placeholder="文字" class="form-control" value="<%=managerVO.getMan_mail() %>">
+				</div>
+			</div><br>
+		</div>
 </table>
 </body>
 </html>

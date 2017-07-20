@@ -87,14 +87,6 @@ public class MemberReportServlet extends HttpServlet {
 			}
 		}
 
-		if ("listAll3".equals(action)) {
-			System.out.println("bbbbb"+req.getParameter("action"));
-			
-			String url = "/backend/memr/select_memr.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url);
-			successView.forward(req, res);
-		}
-
 
 		if ("getOne_For_Update".equals(action)) { 
 
@@ -173,6 +165,7 @@ public class MemberReportServlet extends HttpServlet {
 				String mr_result = null;
 				try {
 					mr_result = req.getParameter("mr_result").trim();
+					System.out.println("aaaaaaaaaa " + mr_result);
 					if(mr_state.isEmpty()){
 						mr_state = "未審核";
 					}

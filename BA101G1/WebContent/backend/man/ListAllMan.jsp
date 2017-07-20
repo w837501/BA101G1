@@ -149,17 +149,25 @@
 <!-- ****************內頁************************ -->
 <br>
 				<table  class="table table-hover">
-					<tr>
+					<tr style="background-color: orange;">
 						<th>管理員編號</th>
 						<th>管理員名字</th>
 						<th>管理員電話</th>
 						<th>密碼</th>
 						<th>信箱</th>
-						<th>無效刪除because fk</th>
+						<th>刪除</th>
 					</tr>
 					<c:forEach var="ManagerVO" items="${list}">
 						<tr align='center' valign='middle'>
-							<td>${ManagerVO.man_id }</td>
+							<td>
+					        	<form action="<%=request.getContextPath() %>/backend/man/man.do" method="post">
+									<a href="#tab1" onclick="parentNode.submit();">${ManagerVO.man_id }</a>
+									<input type="hidden" name="action" value="getOne_For_Display">
+									<input type="hidden" name="man_id" value="${ManagerVO.man_id}">
+									<input type="hidden" name="whichPage" value="列出單一管理員">
+								</form> 
+							</td>
+
 							<td>${ManagerVO.man_name }</td>
 						    <td>${ManagerVO.man_phone }</td>
 						    <td>${ManagerVO.man_pw }</td>
@@ -174,6 +182,15 @@
 							</tr>
 					</c:forEach>
 				</table>
+<!-- *********************include頁面******************* -->
+<%if ("列出單一管理員"==request.getAttribute("whichPage")){%>
+       <jsp:include page="ListOneMan.jsp" />
+<%} %>
+<%if ("修改單一管理員"==request.getAttribute("whichPage")){%>
+       <jsp:include page="UpdateMan.jsp" />
+<%} %>
+
+<!-- *********************include頁面******************* -->
 <!-- ****************內頁************************ -->
 
         </div>
