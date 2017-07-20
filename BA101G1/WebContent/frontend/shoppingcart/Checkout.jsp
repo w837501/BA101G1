@@ -105,19 +105,26 @@ MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 
 
 				<FORM METHOD = "post" ACTION = "<%=request.getContextPath()%>/frontend/selectOrder/order.do" name = "checkform" >
-					<div>
 						<h1 id="title">點餐設定</h1>
-							
 								<div id="getWay">
-									取餐方式
+								<table border="0">
+									<tr>
+									<td>取餐方式</td>
+									<td>
 										<input type="radio" name="order_way" value="內用">內用　
 										<input type="radio" name="order_way" value="外帶">外帶　
 										<input type="radio" name="order_way" value="外送">外送　
-										<br>
-									外送地址
+									</td>
+									</tr>
+									<tr>
+									<td>外送地址</td>
+									<td>
 										<input type = "TEXT" name="receive_address" id="address" value ="<%= (orderVO==null)? " ": orderVO.getReceive_address()%>">
-										<br>
-									取餐時間
+									</td>
+									</tr>
+									<tr>
+									<td>取餐時間</td>
+									<td>
 										<input type="text" id="datepicker3" name="order_taketime1" value="<%= (orderVO==null)? " ": orderVO.getOrder_taketime()%>">
             							<label for="SearchTime">
             								<span>時間</span>:&nbsp;
@@ -161,13 +168,15 @@ MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 										<option value="23:00">23:00</option>
 										<option value="23:30">23:30</option>
 									</select> 
-									<br>
-									付款方式
-										<input type="radio" name="pay" value="cash">現金　
-										<input type="radio" name="pay" value="payPal">電子錢包
-									<br>
-									備註
-										<textarea name="order_note" id="note" cols="30" rows="3" value="123"></textarea>	
+  									</td>
+  									</tr>
+									<tr>
+									<td>備註</td>
+									<td>
+										<textarea name="order_note" id="note" cols="30" rows="3" value="123"></textarea>
+									</td>
+									</tr>
+								</table>			
 								</div>
 		
 								<div class="col-xs-12 col-sm-8">
@@ -175,17 +184,15 @@ MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 								<div class="col-xs-12 col-sm-4">
 									<br>
 									<br>
-									<a href=""><i class="glyphicon glyphicon-ok"></i>取消</a>
+									<a href="<%=request.getContextPath()%>/store/storeClass.jsp"><i class="glyphicon glyphicon-ok"></i>取消</a>
 									<input type="hidden"  value = "setOrder_Into" name="action">
 									<input type="hidden"  value = "<%=amount%> " name="amount">
 									<input type="hidden"  value = "<%=buylist%>" name="buylist">
 									<input type="hidden"  value = "<%=memberVO.getMem_id()%>" name="mem_id">
 									<input type="hidden"  value = "<%=productVO.getStore_id()%>" name="store_id">
-									<input type="submit" value="送出新增">
+									<input type="submit"  value="送出新增">
 								</div>
 									<br>
-									<br>
-					</div>
 						<a href="<%=request.getContextPath()%>/store/store.do?action=getProduct_By_Store&store_id=<%=productVO.getStore_id() %>&quentity=<%=productVO.getQuantity()%>">是否繼續購物</a>
 				</FORM>
 			</div>
@@ -197,8 +204,7 @@ MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 					<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
 					<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
 					</ul>
-			</div>
-					
+			</div>	
 	</div>
 </body>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
