@@ -41,7 +41,7 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 	private static final String DELETE = 
 			"DELETE FROM store_order where order_id = ?";
 	private static final String GET_ONE_STMT = 
-			"SELECT order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address, order_note, order_taketime from order where order_id = ?";
+			"SELECT * from store_order where order_id = ?";
 	private static final String GET_ALL_STMT = 
 			"SELECT order_id, order_time, mem_id, store_id, order_state, totalprice, order_way, receive_address,  order_note, order_taketime from store_order order by order_id";
 	
@@ -210,7 +210,7 @@ public class Store_OrderDAO implements Store_OrderDAO_interface{
 				// empVo ¤]ºÙ¬° Domain objects
 				orderVO = new Store_OrderVO();
 				orderVO.setOrder_id(rs.getString("order_id"));
-				orderVO.setOrder_time(rs.getTimestamp("rec_mon"));
+				orderVO.setOrder_time(rs.getTimestamp("order_time"));
 				orderVO.setMem_id(rs.getString("mem_id"));
 				orderVO.setStore_id(rs.getString("store_id"));
 				orderVO.setOrder_state(rs.getString("order_state"));

@@ -167,7 +167,7 @@ MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 										<option value="23:00">23:00</option>
 										<option value="23:30">23:30</option>
 									</select> 
-<<<<<<< HEAD
+
   									</td>
   									</tr>
 									<tr>
@@ -177,11 +177,7 @@ MemberVO memberVO=(MemberVO)session.getAttribute("memberVO");
 									</td>
 									</tr>
 								</table>			
-=======
-									<br>
-									³Æµù
-										<textarea name="order_note" id="note" cols="30" rows="3" value="123"></textarea>	
->>>>>>> branch 'master' of https://github.com/w837501/BA101G1.git
+
 								</div>
 		
 								<div class="col-xs-12 col-sm-8">

@@ -193,7 +193,7 @@ session.removeAttribute("shoppingcart");
 				ProductService productSvc=new ProductService();
 				productSvc.addPro(store_id, pro_name, pro_price, pro_state, pro_image, pc_id, pro_content);
 				
-				String url="/product/product.jsp";
+				String url="/store/store_list_all_product.jsp";
 				RequestDispatcher successView=req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}catch(Exception e){

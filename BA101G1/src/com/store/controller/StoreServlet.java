@@ -437,12 +437,12 @@ public class StoreServlet extends HttpServlet {
 				
 				//==============寄MAIL
 				
-				if(req.getParameter("store_state").equals("開店中")){
+				if(req.getParameter("store_state").equals("審核中")){
 					System.out.println("asdasdasdasd");
 					MailService mailSvc = new MailService();
 					mailSvc.sendMail(req.getParameter("store_acc"), "很抱歉您未通過認證", "aaaaaaaa");
 					
-				}else if(req.getParameter("store_state").equals("審核中")){
+				}else if(req.getParameter("store_state").equals("開店中")){
 					MailService mailSvc = new MailService();
 					mailSvc.sendMail(req.getParameter("store_acc"), "恭喜您已通過認證", "bbbbbbbbb");
 					
