@@ -196,6 +196,14 @@
     <servlet-name>PServlet</servlet-name>
     <url-pattern>/backend/per/p.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>PAServlet</servlet-name>
+    <servlet-class>com.permission_ability.controller.PAServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PAServlet</servlet-name>
+    <url-pattern>/backend/perA/pa.do</url-pattern>
+  </servlet-mapping>
 
   
 

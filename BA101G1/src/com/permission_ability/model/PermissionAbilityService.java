@@ -32,7 +32,7 @@ public class PermissionAbilityService {
 		
 	}
 	//wrong 
-	public void deletePermission( String pa_id){
+	public void deletePermission(String pa_id){
 		dao.delete(pa_id);
 	}
 	
@@ -42,5 +42,16 @@ public class PermissionAbilityService {
 	
 	public List<Permission_AbilityVO> getAll(){
 		return dao.getAll();
+	}
+	
+	public Permission_AbilityVO addPA(String pa_id, String pa_name){
+		Permission_AbilityVO paVO = new Permission_AbilityVO();
+		
+		paVO.setPa_id(pa_id);
+		paVO.setPa_name(pa_name);
+		dao.insert(paVO);
+		
+		return paVO;
+		
 	}
 }

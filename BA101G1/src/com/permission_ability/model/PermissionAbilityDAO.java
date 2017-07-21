@@ -22,6 +22,7 @@ public class PermissionAbilityDAO implements Permission_AbilityDAO_interface{
 //	private static final String GET_ALL_STMT = "from PermissionVO order by man_id desc";
 	private static final String GET_ALL_STMT = "SELECT * FROM permission_ability";
 	private static final String GET_ONE_STMT = "SELECT * where pa_id = ?";
+	private static final String INSERT_STMT = "INSERT into permission_ability(pa_id , pa_name ) VALUES(?,?)";
 	
 	private static DataSource ds = null;
 	static {
@@ -34,6 +35,32 @@ public class PermissionAbilityDAO implements Permission_AbilityDAO_interface{
 	}
 	@Override
 	public void insert(Permission_AbilityVO paVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(INSERT_STMT);
+
+			pstmt.setString(1, paVO.getPa_id());
+			pstmt.setString(2, paVO.getPa_name());
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	@Override

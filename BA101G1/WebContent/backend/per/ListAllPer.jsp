@@ -246,14 +246,31 @@
 											
 										</td>
 										<td>
-												<input type="submit" value="刪除">
-												<input type="hidden" name="action" value="delete">
+											<input type="submit" value="刪除">
+											<input type="hidden" name="action" value="delete">
 										</td>
 									</form>	
 								</tr>
 							</tbody>
 						</table>
-        
+						
+<!-- *********************include頁面******************* -->
+<form action="<%=request.getContextPath() %>/backend/perA/pa.do" method="post">
+	<a href="#" onclick="parentNode.submit();">新增權限</a>
+	<input type="hidden" name="action" value="addPA">
+</form> 
+<form action="<%=request.getContextPath() %>/backend/perA/pa.do" method="post">
+	<a href="#" onclick="parentNode.submit();">列出權限</a>
+	<input type="hidden" name="action" value="listPA">
+</form> 
+<%if ("新增單一權限功能"==request.getAttribute("whichPage")){%>
+       <jsp:include page="/backend/perA/addPA.jsp" />
+<%} %>
+<%if ("列出權限功能"==request.getAttribute("whichPage")){%>
+       <jsp:include page="/backend/perA/ListAllPA.jsp" />
+<%} %>
+
+<!-- *********************include頁面******************* -->
 <!-- ****************內頁************************ -->
 
         </div>
