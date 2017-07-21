@@ -29,7 +29,8 @@ public class ManagerJNDIDAO implements ManagerDAO_interface {
 	private static final String DELETE = "DELETE FROM MANAGER where man_id = ?";
 	private static final String Find_by_PK = "select * from manager where man_id=?";
 	private static final String GET_ALL = "select * from manager";
-
+	private static final String FindPK_by_EMAIL = "select man_id from manager where man_mail=?";
+	
 	@Override
 	public void insert(ManagerVO managerVO) {
 		Connection con = null;
@@ -232,5 +233,49 @@ public class ManagerJNDIDAO implements ManagerDAO_interface {
 			}
 		}
 		return managerlist;
+	}
+
+	@Override
+	public String findByEmail(String man_mail) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String man = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(FindPK_by_EMAIL);
+			pstmt.setString(1, man_mail);
+			rs = pstmt.executeQuery();
+			rs.next();
+			String man_id = rs.getString("man_id");
+			man = new String(man_mail);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return man = null;
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return man;
 	}
 }

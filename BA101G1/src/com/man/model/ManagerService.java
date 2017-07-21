@@ -46,7 +46,9 @@ public class ManagerService {
 	public List<ManagerVO> getAll() {
 		return dao.getAll();
 	}
-
+	public String getOneManByEmail(String man_mail) {
+		return dao.findByEmail(man_mail);
+	}
 
 	
 	
