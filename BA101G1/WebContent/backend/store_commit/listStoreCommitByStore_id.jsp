@@ -44,13 +44,21 @@
 					 	<tr>
 							<td>µû»ù¤À¼Æ</td>
 							<td>
-							<select size="1" name="sc_score">
-								<option value="1">1
-								<option value="2">2
-								<option value="3">3
-								<option value="4">4
-								<option value="5">5
-							</option></select>
+							<p class="starWrapper" onmouseover="rate(this,event)" onmouseleave="test(this,event)"> 
+							<img src="<%=request.getContextPath()%>/images/star_01.png">
+							<img src="<%=request.getContextPath()%>/images/star_01.png">
+							<img src="<%=request.getContextPath()%>/images/star_01.png">
+							<img src="<%=request.getContextPath()%>/images/star_01.png">
+							<img src="<%=request.getContextPath()%>/images/star_01.png">
+							<input type="hidden" name="sc_score" id="sc_score" value=0>
+<!-- 							<select size="1" name="sc_score"> -->
+<!-- 								<option value="1">1 -->
+<!-- 								<option value="2">2 -->
+<!-- 								<option value="3">3 -->
+<!-- 								<option value="4">4 -->
+<!-- 								<option value="5">5 -->
+<!-- 							</option></select> -->
+							
 							</td>
 						</tr>
 						<tr>
@@ -93,4 +101,50 @@
 	</div>
 </div>
 </body>
+<script>
+	var score = 0;
+	function rate(obj,oEvent){
+		var imgSrc = '<%=request.getContextPath()%>/images/star_01.png' ;
+		var imgSrc_2 = '<%=request.getContextPath()%>/images/star_02.png' ;
+
+		var e = oEvent || window.event; 
+		var target = e.target || e.srcElement;  
+		var imgArray = obj.getElementsByTagName("img");
+		var hasClick = false;
+		
+		for(var i=0;i<imgArray.length;i++){ 
+		   imgArray[i]._num = i; 
+		   imgArray[i].onclick=function(){ 
+				var scScore = document.getElementById("sc_score");
+				scScore.value = this._num+1;
+				score = this._num+1;
+				return;
+		   };
+		} 
+		
+		if(target.tagName=="IMG"){
+		   for(var j=0;j<imgArray.length;j++){
+		    if(j<=target._num){
+		     imgArray[j].src=imgSrc_2;
+		    }else {
+		     imgArray[j].src=imgSrc; 
+		    }
+		   }
+		}else {
+		   for(var k=0;k<imgArray.length;k++){
+		     imgArray[k].src=imgSrc; 
+		   }
+		}
+
+	}
+	function test(obj,oEvent){
+		var imgSrc = '<%=request.getContextPath()%>/images/star_01.png' ;
+		var imgSrc_2 = '<%=request.getContextPath()%>/images/star_02.png' ;
+		var imgArray = obj.getElementsByTagName("img");
+		for(var i=0;i<score;i++){
+			imgArray[i].src=imgSrc_2; 
+		} 
+	}
+</script>
+
 </html>
