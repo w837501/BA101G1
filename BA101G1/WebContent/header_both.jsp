@@ -26,24 +26,27 @@
 			
 			<c:if test="${not empty memberVO || not empty storeVO}">
 				<c:if test="${not empty memberVO}">
-				<span class="login">
+					<%session.removeAttribute("storeVO"); %>
+					<span class="login">
+						<a href="<%=request.getContextPath()%>/backend/mem/mem.do?action=logout">Logout</a>  
+						<div style="margin-left: 0px;">
+					</span>
 				
-					<a href="<%=request.getContextPath()%>/backend/mem/mem.do?action=logout">Logout</a>  
-					<div style="margin-left: 0px;">
-				</span>
-				<span class="name">
-					<a href="<%=request.getContextPath()%>/frontend/mem/member_info.jsp">你好，<%=memberVO.getMem_name() %></a>
-				</span>
+					<span class="name">
+						<a href="<%=request.getContextPath()%>/frontend/mem/member_info.jsp">你好，<%=memberVO.getMem_name() %></a>
+					</span>
 				</c:if>
 				<c:if test="${not empty storeVO}">
-				<span class="login">
+					<%session.removeAttribute("memberVO"); %>
+					<span class="login">
+						<a href="<%=request.getContextPath()%>/store/store.do?action=logout">Logout</a>  
+						<div style="margin-left: 0px;">
+					</span>
+					
+					<span class="name">
+						<a href="<%=request.getContextPath()%>/store/store_info.jsp">你好，<%=storeVO.getStore_name() %></a>	
+					</span>
 				
-					<a href="<%=request.getContextPath()%>/store/store.do?action=logout">Logout</a>  
-					<div style="margin-left: 0px;">
-				</span>
-				<span class="name">
-				<a href="<%=request.getContextPath()%>/store/store_info.jsp">你好，<%=storeVO.getStore_name() %></a>	
-				</span>
 				</c:if>
 			</c:if>
 			

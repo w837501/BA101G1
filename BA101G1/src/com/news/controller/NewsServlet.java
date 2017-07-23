@@ -45,9 +45,9 @@ public class NewsServlet extends HttpServlet {
 				NewsVO newsVO = dao.findByPrimaryKey(news_id);
 			
 				req.setAttribute("newsVO", newsVO);
-				
+				// I want to go frontend page to show detailOfNews.jsp
 				RequestDispatcher successView = req
-					.getRequestDispatcher("/backend/news/listOneNews.jsp");
+					.getRequestDispatcher("/frontend/latestnews/detailOfNews.jsp");
 				successView.forward(req, res);
 				return;
 			}	catch(Exception e){

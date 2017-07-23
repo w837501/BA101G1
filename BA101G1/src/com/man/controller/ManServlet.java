@@ -315,27 +315,26 @@ public class ManServlet extends HttpServlet {
 			
 			errorMsgs.add("");
 			/******************我新增的帳密條件判斷*********************/
-			String account = req.getParameter("loginUser").trim();
+			String email = req.getParameter("loginUser").trim();
 			String password = req.getParameter("loginPwd").trim();
 			HttpSession session = req.getSession();
 			ManagerService manSvc = new ManagerService();
-			
-			
-			
+
 			session.setAttribute("errorMsgs", errorMsgs);
 			session.setAttribute("location" , req.getRequestURI());
-			session.setAttribute("loginUser" , account);
 			try {
-				if(account.isEmpty()){
-					errorMsgs.add("員工編號不能為空");
+				if(email.isEmpty()){
+					errorMsgs.add("email不能為空");
 					res.sendRedirect(req.getContextPath()+"/backend/man/login_man.jsp");
 					return;
 				}
-				if(manSvc.getOneMan(account)==null){
+				if(manSvc.getOneManByEmail(email)==null){
 					res.sendRedirect(req.getContextPath()+"/backend/man/login_man.jsp");
-					errorMsgs.add("請輸入正確員工編號");
+					errorMsgs.add("請輸入正確email");
 					return;
 				}
+				/***********此處將man_id 改為 man_email登入*************/
+				String account = manSvc.getOneManByEmail(email);
 				if(manSvc.getOneMan(account).getMan_id()==null){
 					res.sendRedirect(req.getContextPath()+"/backend/man/login_man.jsp");
 					errorMsgs.add("請輸入正確員工編號");
@@ -351,13 +350,14 @@ public class ManServlet extends HttpServlet {
 					errorMsgs.add("請輸入正確密碼");
 					return;
 				}
+				System.out.println("aaa "+email+" bbb "+account+" ccc "+manSvc.getOneMan(account).getMan_pw());
 				/******************我新增的帳密條件判斷*********************/
 			String man_id = account;
 			ManagerVO managerVO = manSvc.getOneMan(man_id);
 			PermissionService pSvc = new PermissionService();
 			List<PermissionVO> permList = null;
 			permList = pSvc.findByManId(man_id);
-			System.out.println(permList.toString());
+			System.out.println("permList.size "+permList.size());
 			/****************transferID***********************/
 			HttpSession sessionId = req.getSession();
 			sessionId.setAttribute("account", account);

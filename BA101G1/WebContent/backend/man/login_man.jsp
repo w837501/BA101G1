@@ -25,7 +25,7 @@
             	<div class="avatar"><img src="<%=request.getContextPath()%>/backend/assets/img/logo.png" style="width: 120px;"/></div>
             	<div class="form-box">
 	                <form action="<%=request.getContextPath() %>/backend/man/man.do" method="post">
-	                    <input type="text" name="loginUser" placeholder="username" id="loginAcc">
+	                    <input type="text" name="loginUser" placeholder="userEmail" id="loginAcc">
 	                    <input type="password" name="loginPwd" placeholder="password" id="loginPas">
 	                    <input type="hidden" name="action" value="loginCHK">
 	                    <input type="submit" value="送出" class="btn btn-info " id="abc">
@@ -101,27 +101,27 @@
             });
 });
 	function myFunction1(){
-		document.getElementById("loginAcc").value = "MAN-000001";
+		document.getElementById("loginAcc").value = "wang@abc.com";
 		document.getElementById("loginPas").value = "group1";
 	}
 	function myFunction2(){
-		document.getElementById("loginAcc").value = "MAN-000002";
+		document.getElementById("loginAcc").value = "jay@abc.com";
 		document.getElementById("loginPas").value = "group1";
 	}
 	function myFunction3(){
-		document.getElementById("loginAcc").value = "MAN-000004";
+		document.getElementById("loginAcc").value = "fat@abc.com";
 		document.getElementById("loginPas").value = "group1";
 	}
 	function myFunction4(){
-		document.getElementById("loginAcc").value = "MAN-000005";
+		document.getElementById("loginAcc").value = "ygo@abc.com";
 		document.getElementById("loginPas").value = "group1";
 	}
 	function myFunction5(){
-		document.getElementById("loginAcc").value = "MAN-000003";
+		document.getElementById("loginAcc").value = "stupid@abc.com";
 		document.getElementById("loginPas").value = "group1";
 	}
 	function myFunction6(){
-		document.getElementById("loginAcc").value = "MAN-000006";
+		document.getElementById("loginAcc").value = "yang@abc.com";
 		document.getElementById("loginPas").value = "group1";
 	}
 </script>

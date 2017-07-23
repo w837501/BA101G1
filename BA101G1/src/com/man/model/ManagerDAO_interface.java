@@ -9,5 +9,6 @@ public interface ManagerDAO_interface {
     public void delete(String man_id);
     public ManagerVO findByPrimaryKey(String man_id);
     public List<ManagerVO> getAll();
+	public String findByEmail(String man_mail);
 
 }
