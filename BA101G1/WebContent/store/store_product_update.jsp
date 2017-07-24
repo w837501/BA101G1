@@ -15,7 +15,11 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>�Y�q�ڽu�W�q�\�t��</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script type="text/javascript" src="js/pic_preview.js"></script>
+
+<title>吃訂我線上訂餐系統</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 </head>
 <style>
@@ -53,59 +57,59 @@
 		<div class="contents" style="margin-top:30px;margin-bottom:900px;">
 			<div id="mem-button" style="margin-left:50px;float:left;">
 				
-				<h1>�ڪ��b��</h1><br>
+				<h1>我的帳戶</h1><br>
 							
 				<a href="<%=request.getContextPath() %>/store/store_update.jsp" class="list-group-item">
-					<div>�ק���</div>
+					<div>修改資料</div>
 				</a>
 				<a href="<%=request.getContextPath()%>/store/store_list_all_product.jsp " class="list-group-item">
-					<div>�d�ߩҦ��ӫ~</div>
+					<div>查詢所有商品</div>
 				</a>
 				<a href="<%=request.getContextPath()%>/store/store_order.jsp " class="list-group-item">
-					<div>�d�ߩҦ��q��</div>
+					<div>查詢所有訂單</div>
 				</a>
 				<a href="<%=request.getContextPath()%>/store/store_order_notconfirm.jsp " class="list-group-item">
-					<div>�d�ߥ��T�{�q��</div>
+					<div>查詢未確認訂單</div>
 				</a>
 				<a href="<%=request.getContextPath()%>/store/store_order_handleing.jsp " class="list-group-item">
-					<div>�d�߶i�椤�q��</div>
+					<div>查詢進行中訂單</div>
 				</a>
 				<a href="<%=request.getContextPath()%>/store/store_order_finish.jsp " class="list-group-item">
-					<div>�d�ߤw�����q��</div>
+					<div>查詢已完成訂單</div>
 				</a>
 				<a href="<%=request.getContextPath()%>/store/store_report.jsp " class="list-group-item">
-					<div>�d�����|</div>
+					<div>查詢檢舉</div>
 				</a>
 				<a href="<%=request.getContextPath()%>/store/store_insert_product.jsp " class="list-group-item">
-					<div>�ӫ~�s�W</div>
+					<div>商品新增</div>
 				</a>
 				<a href="<%=request.getContextPath()%>/store/store_insert_ad.jsp " class="list-group-item">
-					<div>�s�i�s�W</div>
+					<div>廣告新增</div>
 				</a>
 					
 				</div>
 				<div style="width:650px;float:right;margin-top:20px;margin-right:50px;">
 			
 				<div > 
-					  <h3>�����ӫ~�C��</h3>
+					  <h3>全部商品列表</h3>
  				</div> 
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do" name="form1" enctype="multipart/form-data">
 				<table border="0">
 				<tr>
-		<td>�ӫ~�s��:<font color=red><b>*</b></font></td>
+		<td>商品編號:</td>
 		<td><%=productVO.getPro_id() %></td>
 	</tr>
 	<tr>
-		<td>�Ӯa�s��:<font color=red><b>*</b></font></td>
+		<td>商家編號:</td>
 		<td><%=productVO.getStore_id() %></td>
 	</tr>
 	<tr>
-		<td>�ӫ~�W��:<font color=red><b>*</b></font></td>
+		<td>商品名稱:</td>
 		<td><input type="text" name="pro_name" size="45" value="<%=productVO.getPro_name()%>" />
 	</tr>
 	<jsp:useBean id="productclassSvc" scope="page" class="com.product_class.model.ProductClassService" />
 	<tr>
-		<td>�ӫ~���O:<font color=red><b>*</b></font></td>
+		<td>商品類別:</td>
 		<td><select size="1" name="pc_id">
 			<c:forEach var="ProductClassVO" items="${productclassSvc.all}">
 				<option value="${ProductClassVO.pc_id}" ${(productVO.pc_id==ProductClassVO.pc_id)? 'selected':'' } >${ProductClassVO.pc_name}
@@ -113,17 +117,17 @@
 		</select></td>
 	</tr>
 	<tr>
-		<td>�ӫ~���:<font color=red><b>*</b></font></td>
+		<td>商品單價:</td>
 		<td><input type="text" name="pro_price" size="45" value="<%=productVO.getPro_price()%>" />
 	</tr>
 	<tr>
-		<td>�ӫ~���A:<font color=red><b>*</b></font></td>
+		<td>商品狀態:</td>
 		<td><select name="pro_state">
-			<option value='�W�[' ${(productVO.pro_state=='�W�[') ? 'selected':''}>�W�[</option>
-			<option value='�U�[' ${(productVO.pro_state=='�U�[') ? 'selected':''}>�U�[</option></select> </td>
+			<option value='上架' ${(productVO.pro_state=='上架') ? 'selected':''}>上架</option>
+			<option value='下架' ${(productVO.pro_state=='下架') ? 'selected':''}>下架</option></select> </td>
 	</tr>
 	<tr>
-		<td>�ӫ~�Ϥ�:<font color=red><b>*</b></font></td>
+		<td>商品圖片:</td>
 			<td>
 			<input type="file" name="pro_image" id="upfile1">
 			 <p>
@@ -132,14 +136,14 @@
 			</td>
 	</tr>
 		<tr>
-		<td>�ӫ~����:<font color=red><b>*</b></font></td>
+		<td>商品說明:</td>
 		<td><input type="text" name="pro_content" size="45" value="<%=productVO.getPro_content()%>" />
 	</tr>
 				
 				 </table>
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="pro_id" value="<%=productVO.getPro_id() %>">
-				<input type="submit" value="�e�X�ק�">
+				<input type="submit" value="送出修改">
 				 </FORM>
 					
 

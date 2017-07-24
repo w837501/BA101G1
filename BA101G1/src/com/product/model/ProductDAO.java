@@ -28,7 +28,7 @@ public class ProductDAO implements ProductDAO_interface {
 
 	private static final String INSERT_STMT = "INSERT INTO PRODUCT (PRO_ID,STORE_ID,PRO_NAME,PRO_PRICE,PRO_STATE,PRO_IMAGE,PC_ID,PRO_CONTENT) VALUES ('PRO'||'-'||LPAD(to_char(store_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?)";
 	private static final String DELETE = "DELETE FROM PRODUCT where pro_id = ?";
-	private static final String UPDATE_STMT = "UPDATE PRODUCT set store_id=?, pro_name=?, pro_price=?, pro_total=?, pro_state=?, pro_image=?, pc_id=?, pro_content=? where pro_id = ?";
+	private static final String UPDATE_STMT = "UPDATE PRODUCT set  pro_name=?, pro_price=?, pro_state=?, pro_image=?, pc_id=?, pro_content=? where pro_id = ?";
 	private static final String Find_by_PK = "select * from PRODUCT where pro_id=? and pro_state = '¤W¬['";
 	private static final String Find_by_PK2 = "select * from PRODUCT where pro_id=? ";
 	private static final String Find_ALL = "select * from PRODUCT ";
@@ -80,14 +80,13 @@ public class ProductDAO implements ProductDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
-			pstmt.setString(1, productVO.getStore_id());
-			pstmt.setString(2, productVO.getPro_name());
-			pstmt.setInt(3, (int) productVO.getPro_price());
-			pstmt.setString(4, productVO.getPro_state());
-			pstmt.setBytes(5, productVO.getPro_image());
-			pstmt.setString(6, productVO.getPc_id());
-			pstmt.setString(7, productVO.getPro_content());
-			pstmt.setString(8, productVO.getPro_id());
+			pstmt.setString(1, productVO.getPro_name());
+			pstmt.setInt(2, (int) productVO.getPro_price());
+			pstmt.setString(3, productVO.getPro_state());
+			pstmt.setBytes(4, productVO.getPro_image());
+			pstmt.setString(5, productVO.getPc_id());
+			pstmt.setString(6, productVO.getPro_content());
+			pstmt.setString(7, productVO.getPro_id());
 
 			pstmt.executeUpdate();
 
