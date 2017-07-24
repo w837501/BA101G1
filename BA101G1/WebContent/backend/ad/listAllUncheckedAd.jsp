@@ -124,6 +124,7 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-lg-12">
+                    Backend_Index
                         <!-- <h2></h2>  內頁標題  -->
                     </div>
                 </div>              
@@ -132,9 +133,56 @@
                     </div>
                     
 <!-- ****************內頁************************ -->
+                    <br>
+<!-- ****************代辦事項div************************ -->
+<!-- ****************廣告審核(使用listSize取值)************************ -->
+<%@ page import="com.ad.model.*"%>
+	<%  AdService adSvc = new AdService();
+		List<AdVO> listsize = adSvc.getAllUncheckedAd();
+		Integer listSize = listsize.size();
+		pageContext.setAttribute("listSize", listSize); %>
+		
+                    <div class="col-md-4"> 
 
+                         <div class="schedule">
+                         
+								<div class="alert alert-danger">
+									目前有
+                                    ${listSize}									
+									筆待審核的廣告  <a href="<%=request.getContextPath() %>/backend/ad/listAllUncheckedAd.jsp">點我開啟</a>
+								
+								</div>	                         
+<!-- ****************廣告審核************************ -->
+<%-- <!-- ****************會員審核(使用SQL select count(*)取值)************************ -->
+<%@ page import="com.mem.model.*" %>
+<% MemberService memberSvc = new MemberService(); 
+   Integer count = memberSvc.getAllUncheckedCount();
+   pageContext.setAttribute("count" , count);%>
+								<div class="alert alert-info">
+									目前有
+									${count}
+									 筆待審核的會員   <a href="<%=request.getContextPath() %>/backend/member/listAllMemberState.jsp">點我前往</a>
+								</div>
+<!-- ****************會員審核************************ --> --%>
+<!-- ****************商家審核(使用SQL select count(*)取值)************************ -->
+<%@ page import="com.store.model.*"%>
+	<%  StoreService storeService = new StoreService();
+		Integer storecount = storeService.getAllUncheckedCount();
+		pageContext.setAttribute("storecount", storecount); %>
+                         	
+								<div class="alert alert-success">
+								    目前有
+								  ${storecount}
+								    筆待審核的商家   <a href="#" onClick="getAllUncheckedStore();">列出全部</a>
+								</div>
+                         </div>
+                    </div>
+                    <div class="col-md-8"> 
+                    </div>
+<!-- ****************商家審核************************ -->                    
+<!-- ****************代辦事項div************************ -->
 
-                  <br>
+                  <br><br><br><br><br><br><br><br>
                     
                     <a href="<%=request.getContextPath() %>/backend/ad/listAllAd.jsp"></i>列出全部廣告</a>
                     
@@ -147,8 +195,8 @@
                                         </ul>
                                     </font>
                                 </c:if>
-                                <br>
-	<%  AdService adSvc = new AdService();
+                                
+	<%  
 		List<AdVO> list = adSvc.getAllUncheckedAd();
 		request.setAttribute("adSvc",adSvc);
 		pageContext.setAttribute("list", list); %>
@@ -217,6 +265,29 @@
     
 </body>
 </html>
+<script>
+function getAllUncheckedStore(){ 
+  //===建立xhr物件(填入程式碼)
+  var xhr = new XMLHttpRequest();
+  //設定好回呼函數   
+  xhr.onreadystatechange = function (){
+    if( xhr.readyState == 4){
+      if( xhr.status == 200){
+      //取回...回傳的資料
+         document.getElementById("page-inner").innerHTML = xhr.responseText;
+      }else{
+         alert( xhr.status );
+      }//xhr.status == 200
+    }//xhr.readyState == 4
+  };//onreadystatechange 
+  
+  //建立好Get連接
+  var url= "<%=request.getContextPath()%>/backend/store/listAllStoreStateAjax.jsp";
+  xhr.open("Get",url,true); 
 
+  //送出請求 
+  xhr.send( null );
+}
+</script>
   
  
