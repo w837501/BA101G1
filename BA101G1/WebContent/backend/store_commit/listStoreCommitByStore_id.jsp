@@ -81,6 +81,12 @@
 			
 				<ul id="blogs">
 					<li class="box">
+					<span style="float:right;">
+						<form method="post" action="<%=request.getContextPath()%>/frontend/mem/member_addMR.jsp">
+							<input type="submit" value="ÀËÁ|">
+							<input type="hidden" name="sc_id" value="${scVO.sc_id}">
+					</form>
+						</span>
 						<div class="links">
 							<a class="time"><fmt:formatDate  pattern="yyyy-MM-dd HH:mm:ss" value="${scVO.sc_time}"/></a>
 							<h2>${memberSvc.getOneMem(scVO.mem_id).mem_name}</h2>
@@ -88,6 +94,7 @@
 							<img src="<%=request.getContextPath()%>/images/star.jpg" height="15" width="15" alt="star">
 							<p>${scVO.sc_content}</p>
 						</div>
+						
 					</li>
 				</ul>
 			

@@ -27,22 +27,11 @@ pageContext.setAttribute("sc_id", sc_id);
 </head>
 <script language="JavaScript" src="js/pic_preview.js"></script>
 <body bgcolor='white'>
+	<div id="contents" >
+			<div id="main"style="width:800px;">
+				<div id="items">
 
-		<h3>商家檢舉資料新增 - addMR.jsp</h3>
-
-
-<h3>會員檢舉資料:</h3>
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font color='red'>請修正以下錯誤:
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li>${message}</li>
-		</c:forEach>
-	</ul>
-	</font>
-</c:if>
-
+<li class="box" style="width:500px;">
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store_report/store_report.do" name="form1" enctype="multipart/form-data">
 <table border="0">
 
@@ -95,6 +84,11 @@ pageContext.setAttribute("sc_id", sc_id);
 	<input type="hidden" name="sc_id" value="<%=sc_id %>">
 </c:if>
 <input type="submit" value="送出新增"></FORM>
+</li>
+</div>
+</div>
+</div>
+
 </body>
 
 </html>
