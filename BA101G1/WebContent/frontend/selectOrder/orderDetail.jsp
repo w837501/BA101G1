@@ -11,7 +11,6 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <title>吃訂我線上訂餐系統</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 <style>
@@ -43,7 +42,11 @@
 </head>
 <body>
 	<%
-		String amount1 =  (String) session.getAttribute("amount1");
+		
+		String order_id=(String) request.getParameter("order_id");
+		Store_OrderService storeorderSvc=new Store_OrderService();
+		int amount1=storeorderSvc.getOneOrder(order_id).getTotalprice();
+		pageContext.setAttribute("amount1", amount1);
 	%>
 	<div id="page">
 		<div id="header">
@@ -66,7 +69,7 @@
 						</a>
 				</div>
 
-				<<div style="width:650px;float:right;margin-top:20px;margin-right:50px;">
+				<div style="width:650px;float:right;margin-top:20px;margin-right:50px;">
 					<div> 
 						<h3>會員詳細訂單明細</h3>
 						<hr color="#FFFFFF">
@@ -80,6 +83,7 @@
                     		<th>單價</th>
                     	</tr>
                     	<jsp:useBean id="productSvc" scope="page" class="com.product.model.ProductService"></jsp:useBean>
+                    	<jsp:useBean id="orderSvc" scope="page" class="com.order.model.Store_OrderService"></jsp:useBean>
                     	<c:forEach var="orderlistVO" items="${orderlistVO}">
                     	<tr align='center' valign='middle'>
                     		<td>
@@ -90,7 +94,6 @@
                     		<td>${productSvc.getOnePro(orderlistVO.pro_id).pro_name}</td>
 							<td>${orderlistVO.order_amount}</td>
                     		<td>${orderlistVO.price}</td>
-                    		<td></td>
                     		
                     	</tr>
                     	</c:forEach>
@@ -98,7 +101,7 @@
 								<td></td>
 								<td></td>
 								<td>Subtotal:</td>
-								<td>$<%=amount1%></td>   
+								<td>$<%=amount1 %></td>   
 							</tr>
                     </table>		
 				</div>

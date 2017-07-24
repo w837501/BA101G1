@@ -49,8 +49,7 @@
 	</tr>
  	<tr>
 		<td>評價時間</td>
-		<td><input type="date" name="sc_time" size="45" 
-			value="<%=scVO.getSc_time()%>" /></td>
+		<td><%=scVO.getSc_time()%></td>
 	</tr>
 	<tr>
 		<td>評價狀態</td>
@@ -65,6 +64,7 @@
             <input type="hidden" name="sc_id" value="<%=scVO.getSc_id()%>">
             <input type="hidden" name="mem_id" value="<%=scVO.getMem_id()%>">
             <input type="hidden" name="store_id" value="<%=scVO.getStore_id()%>">
+            <input type="hidden" name="sc_time" value="<%=scVO.getSc_time()%>">
             <input type="hidden" name="requestURL" value="<%=request.getParameter("requestURL")%>">
             <input type="hidden" name="whichPage" value="<%=request.getParameter("whichPage")%>"> 
             <input type="submit" value="送出修改"></FORM>

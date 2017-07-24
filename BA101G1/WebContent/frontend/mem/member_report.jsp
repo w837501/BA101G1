@@ -54,7 +54,7 @@ memberreportVO=memberreportSvc.getMemberReportByMem_id(mem_id);
 			<jsp:include page="/header_member.jsp"></jsp:include>
 		</div>
 
-		<div class="contents" style="margin-top:30px;margin-bottom:500px;">
+		<div class="contents" style="margin-top:30px;margin-bottom:1000px;">
 			
 				<div id="mem-button" style="margin-left:50px;float:left;">
 						
@@ -88,8 +88,8 @@ memberreportVO=memberreportSvc.getMemberReportByMem_id(mem_id);
 							<th width="10%"><font size="2">Εγ₯ά</font></th>
 						</tr>
 					</table>
-						<c:forEach var="member_reportVO" items="${memberreportVO}" >
-						<table border='1' bordercolor='#CCCCFF' width='680'>
+					<c:forEach var="member_reportVO" items="${memberreportVO}" >
+					<table border='1' bordercolor='#CCCCFF' width='680'>
 						<tr align='center' valign='middle'${(member_reportVO.mr_id==param.mr_id)?'bgcolor=#CCCCFF':'' }>
 							<td width="11%"><font size="2">${member_reportVO.mr_id }</font></td>
 							<td width="10%"><font size="2">${member_reportVO.order_id }</font></td>
@@ -100,13 +100,13 @@ memberreportVO=memberreportSvc.getMemberReportByMem_id(mem_id);
 							<td width="10%"><font size="2">${member_reportVO.mr_result }</font></td>
 							<td width="10%">
 							<input type="button" value="Show" class="abc" >
-						</td>
+							</td>
 						</tr>
 						<tr style="display: none;">
-						<td><img src="<%=request.getContextPath() %>/MRDBGifReader?whichImg=memr&id=${member_reportVO.mr_id }"style="max-width: 150px; max-height: 150px;"></td>
+							<td colspan="8" align="center"><img src="<%=request.getContextPath() %>/MRDBGifReader?whichImg=memr&id=${member_reportVO.mr_id }"></td>
 						</tr>
 					</table>
-						</c:forEach>
+					</c:forEach>
 				</div>
 		</div>
 		
@@ -116,7 +116,7 @@ memberreportVO=memberreportSvc.getMemberReportByMem_id(mem_id);
 
 	</div>
 	<script src="https://code.jquery.com/jquery.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
 <script type="text/javascript">

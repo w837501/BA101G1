@@ -75,57 +75,7 @@ $(document).ready(
 							<div>查詢檢舉</div>
 						</a>
 				</div>
-				
-<<<<<<< HEAD
-				 <table border='1' bordercolor='#CCCCFF' width='600'>
-	<tr>
-		<th>訂單編號</th>
-		<th>訂餐時間</th>
-		<th>店家名稱</th>
-		<th>總金額</th>
-		<th>取餐方式</th>
-		<th>訂單狀態</th>
-		<th>取消訂單</th>
-		<th>檢舉商家</th>
-	</tr>
-	<c:forEach var="store_orderVO1" items="${store_orderVO}" >
-	<tr align='center' valign='middle' ${(store_orderVO1.order_id==param.order_id) ? 'bgcolor=#CCCCFF':''}>
-		<td>
-			<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO1.order_id}&totalprice=${store_orderVO1.totalprice }">${store_orderVO1.order_id}</a>
-		</td>
-		<td><fmt:formatDate  pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO1.order_time }"/></td>
- 		<td>${store_orderVO1.store_name }</td>
-		<td>${store_orderVO1.totalprice }</td>
-		<td>${store_orderVO1.order_way }</td>
-		<td>${store_orderVO1.order_state }</td>
-		<td><c:if test="${store_orderVO1.order_state eq '未確認'}">
-			<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
-							<input type="submit" value="取消訂單">
-							<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
-							<input type="hidden" name="store_id" value="${store_orderVO1.store_id}">
-							<input type="hidden" name="action" value="Cancel">
-						</form>
-			</c:if>
-<%-- 			<c:if test="${store_orderVO1.order_state != '未確認'}">無法取消</c:if> --%>
-		</td>
-		<td><c:if test="${store_orderVO1.order_state eq '已取消'}">
-			<form method="post" action="<%=request.getContextPath()%>/frontend/mem/member_addMR.jsp">
-							<input type="submit" value="檢舉">
-							<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
-						</form>
-		</c:if>
-			<c:if test="${store_orderVO1.order_state eq '已取餐'}">
-				<form method="post" action="<%=request.getContextPath()%>/frontend/mem/member_addMR.jsp">
-								<input type="submit" value="檢舉">
-								<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
-				</form>
-			</c:if>
-			
-<%-- 			<c:if test="${store_orderVO1.order_state != '已取消' &&store_orderVO1.order_state != '已取餐'}">無法檢舉</c:if> --%>
-		</td>
-	</tr>
-	</c:forEach>
-=======
+	
 				<div style="float:right;margin-top:20px;margin-right:50px;">
 					<div class="page-header"> 
 						<h3>會員訂單紀錄</h3>
@@ -145,9 +95,6 @@ $(document).ready(
 							<th width="10%"><font size="2">明細</font></th>
 						</tr>
 					</table>
->>>>>>> branch 'master' of https://github.com/w837501/BA101G1.git
-
-					
 				<c:forEach var="store_orderVO1" items="${store_orderVO}" >
 				<table border='1' bordercolor='#CCCCFF' width='680'>
 					<tr align='center' valign='middle' ${(store_orderVO1.order_id==param.order_id) ? 'bgcolor=#CCCCFF':''}>

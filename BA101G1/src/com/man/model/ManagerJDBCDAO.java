@@ -276,4 +276,10 @@ public class ManagerJDBCDAO implements ManagerDAO_interface {
 		}
 
 	}
+
+	@Override
+	public String findByEmail(String man_mail) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

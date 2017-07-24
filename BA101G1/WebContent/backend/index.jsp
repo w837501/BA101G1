@@ -124,13 +124,13 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-lg-12">
-                     	<h2>Backend_Index</h2>   
+                     	   Backend_Index   
                     </div>
                 </div>              
                     <div class="col-lg-12 ">
 
                     </div>
-                    
+                    <br>
 <!-- ****************代辦事項div************************ -->
 <!-- ****************廣告審核(使用listSize取值)************************ -->
 <%@ page import="com.ad.model.*"%>
@@ -170,7 +170,7 @@
 								<div class="alert alert-success">
 								    目前有
 								  ${storecount}
-								    筆待審核的商家   <a href="<%=request.getContextPath() %>/backend/store/listAllStoreState.jsp">點我前往</a>
+								    筆待審核的商家   <a href="#" onClick="getAllUncheckedStore();">列出全部</a>
 								</div>
                          </div>
                     </div>
@@ -199,5 +199,32 @@
     
 </body>
 </html>
+
+
+
+<script>
+function getAllUncheckedStore(){ 
+  //===建立xhr物件(填入程式碼)
+  var xhr = new XMLHttpRequest();
+  //設定好回呼函數   
+  xhr.onreadystatechange = function (){
+    if( xhr.readyState == 4){
+      if( xhr.status == 200){
+      //取回...回傳的資料
+         document.getElementById("page-inner").innerHTML = xhr.responseText;
+      }else{
+         alert( xhr.status );
+      }//xhr.status == 200
+    }//xhr.readyState == 4
+  };//onreadystatechange 
+  
+  //建立好Get連接
+  var url= "<%=request.getContextPath()%>/backend/store/listAllStoreStateAjax.jsp";
+  xhr.open("Get",url,true); 
+
+  //送出請求 
+  xhr.send( null );
+}
+</script>
 
 

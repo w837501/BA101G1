@@ -20,7 +20,7 @@ public class StoreCommitServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
+		System.out.println("ㄍㄧ~~~~~");
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
@@ -174,11 +174,13 @@ public class StoreCommitServlet extends HttpServlet {
 			String store_id =req.getParameter("store_id").trim();
 			String mem_id = req.getParameter("mem_id").trim();
 			String sc_content = req.getParameter("sc_content").trim();
-			Integer sc_score=Integer.parseInt(req.getParameter("sc_score"));
+			Integer sc_score = 0;
+			if(req.getParameter("sc_score") != null){
+				sc_score = Integer.parseInt(req.getParameter("sc_score"));
+			}
 			System.out.println(store_id);
 			System.out.println(mem_id);
 			System.out.println(sc_content);
-			System.out.println(sc_score);
 			System.out.println();
 			StoreCommitVO scVO = new StoreCommitVO();
 			scVO.setStore_id(store_id);
@@ -217,6 +219,7 @@ System.out.println("a");
 //其他可能的錯誤處理			
 		} catch (Exception e) {
 			System.out.println("555555");
+			e.printStackTrace();
 			errorMsgs.add("修改資料失敗:"+e.getMessage());
 			RequestDispatcher failureView = req
 					.getRequestDispatcher("/store_commit/addStoreCommit.jsp");

@@ -153,7 +153,7 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 							<td colspan="2"></td>
 							<td colspan="2"><font size="2">${productSvc.getOnePro(orderlistVO.pro_id).pro_name}</font></td>		
 							<td colspan="2"><font size="2">${orderlistVO.order_amount}</font></td>
-					 		<td colspan="2"><font size="2">${orderlistVO.price}</font></td>
+					 		<td colspan="2"><font size="2">${orderlistVO.order_amount*orderlistVO.price}</font></td>
 						</tr>
 					</c:forEach>
 				</table>

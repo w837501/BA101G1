@@ -213,7 +213,9 @@
 														     <input type="hidden" name="mr_time" value="${mrVO.mr_time}">
 														     <input type="hidden" name="mr_state" value="${mrVO.mr_state}">
 														     <input type="hidden" name="action"	value="update">
-														     <input type="submit" value="確認修改"> 
+														     <c:if test="${'未審核' eq (mrVO.mr_state)}">
+														     	<input type="submit" value="確認修改">
+														     </c:if> 
 														  </FORM>
 														 </td>
 													</tr>

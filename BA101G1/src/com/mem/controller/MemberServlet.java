@@ -272,6 +272,7 @@ public class MemberServlet extends HttpServlet {
 		if ("updateMemberState".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			String requestURL=req.getParameter("requestURL");
 			try {
 
 				String mem_id = req.getParameter("mem_id");
@@ -298,13 +299,13 @@ public class MemberServlet extends HttpServlet {
 				}
 				// ==============
 				req.setAttribute("memberVO", memberVO);
-				String url = "/backend/member/listAllMemberState.jsp";
+				String url = "/backend/member/select_mem.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 			} catch (Exception e) {
 				errorMsgs.add("­×§ï¥¢±Ñ" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/backend/member/listAllMemberState.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/backend/member/select_mem.jsp");
 				failureView.forward(req, res);
 			}
 		}

@@ -36,7 +36,7 @@ public class StoreCommitDAO implements StoreCommitDAO_interface {
 	
 	private static final String GET_ALL = "SELECT * from store_commit order by sc_id";
 	
-	private static final String GET_ALL_BY_STORE_ID="select * from store_commit where store_id=?";
+	private static final String GET_ALL_BY_STORE_ID="select * from store_commit where store_id=? and sc_state='Εγ₯ά'";
     private static final String DELETE_STORE_COMMIT = "delete from store_commit where sc_id=? ";
 
 
