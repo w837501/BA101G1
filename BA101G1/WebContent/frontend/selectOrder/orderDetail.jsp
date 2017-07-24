@@ -39,12 +39,13 @@
 		text-decoration:none;
 	}
 	
+
 </style>
 </head>
 <body>
 	<div id="page">
 		<div id="header">
-			<jsp:include page="/header_member.jsp"></jsp:include>
+			<jsp:include page="/header_both.jsp" />
 		</div>
 
 		<div class="contents" style="margin-top:30px;margin-bottom:500px;">
@@ -63,9 +64,9 @@
 						</a>
 				</div>
 
-				<<div style="width:650px;float:right;margin-top:20px;margin-right:50px;">
+				<div style="width:650px;float:right;margin-top:20px;margin-right:50px;">
 					<div> 
-						<h3>會員詳細訂單明細</h3>
+						<h3>會員詳細訂單明細-${orderlistVO.order_state }</h3>
 						<hr color="#FFFFFF">
 	 				</div> 
                     
@@ -89,6 +90,7 @@
                     		<td>${orderlistVO.price}</td>
                     	</tr>
                     	</c:forEach>
+		                <div id="progressbar"></div>
                     </table>			
 				</div>
 			</div>			
@@ -100,5 +102,58 @@
 
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </body>
 </html>
+<script>
+$( function() {
+    $( "#progressbar" ).progressbar({
+      value: 25
+    });
+  } );
+    var MyPoint = "/MyEchoServer";
+    var host = window.location.host;
+    var path = window.location.pathname;
+    var webCtx = path.substring(0, path.indexOf('/', 1));
+    var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+    
+	var statusOutput = document.getElementById("statusOutput");
+	var webSocket;
+	
+	function connect() {
+		// 建立 websocket 物件
+		webSocket = new WebSocket(endPointURL); //	 1.執行完，觸發MyEchoServer.java的onOpen()
+		
+		webSocket.onopen = function(event) { 
+			console.log("成功連線");
+		};
+
+		webSocket.onmessage = function(event) { // 6.執行完，觸發messagesArea.value，用message重複加上;
+		
+		};
+
+		webSocket.onclose = function(event) {
+			
+		};
+	}
+	
+	
+	var pgBar = document.getElementById("progressbar");
+	
+	function sendMessage() { // 4.執行完，觸發MyEchoServer.java的onMessage()
+	   
+	    
+	    
+
+	}
+
+	
+	function disconnect () {
+		webSocket.close();
+	}
+
+
+    
+</script>

@@ -300,9 +300,9 @@
 									name="form2">
 	
 									<label for="store_acc">帳號</label> <input type="text" name="store_acc"
-										id="store_acc" placeholder="請輸入E-MAIL" value="ABCABC50@abc.com"> <br> <br> <label
+										id="store_acc" placeholder="請輸入E-MAIL" value="account1@abc.com"> <br> <br> <label
 										for="store_pw">密碼</label> <input type="password" name="store_pw"
-										id="store_pw" placeholder="請輸入密碼" value="505050"> <br> <br> <a
+										id="store_pw" placeholder="請輸入密碼" value="password"> <br> <br> <a
 										herf="">忘記密碼?</a> <br> <br> <input type=submit
 										value=" 登入 "><input type="hidden" name="requestURL"
 										value="<%=request.getServletPath()%>">

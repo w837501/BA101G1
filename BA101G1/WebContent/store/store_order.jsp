@@ -52,7 +52,7 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 <body>
 	<div id="page">
 		<div id="header">
-			<jsp:include page="/header_store.jsp"></jsp:include>
+			<jsp:include page="/header_both.jsp" />
 		</div>
 
 		<div class="contents" style="margin-top:30px;margin-bottom:900px;">
@@ -109,7 +109,13 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 					<c:forEach var="store_orderVO" items="${store_orderVO}" >
 					<tr align='center' valign='middle'>
 						<td width="10%">
-							<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO.order_id}">${store_orderVO.order_id}</a>
+<%-- 							<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO.order_id}">${store_orderVO.order_id}</a> --%>
+				        	<form action="<%=request.getContextPath() %>/frontend/selectOrder/orderlist.do" method="post">
+								<a href="#" onclick="parentNode.submit();">${store_orderVO.order_id}</a>
+								<input type="hidden" name="action" value="getOneOrder_For_DetailDisplay">
+								<input type="hidden" name="order_id" value="${store_orderVO.order_id}">
+							</form>
+
 						</td>
 				
 						<td width="15%"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO.order_time }"/></td>

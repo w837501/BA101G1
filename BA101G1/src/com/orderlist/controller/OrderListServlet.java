@@ -24,10 +24,9 @@ public class OrderListServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		
 		
+			System.out.println("action :  "+action);
 		if ("getOneOrder_For_DetailDisplay".equals(action)) { 
 			
-
-
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -39,7 +38,7 @@ public class OrderListServlet extends HttpServlet {
 				String str2 = req.getParameter("pro_id");
 				String str3 = req.getParameter("quentity");
 				String order_id = req.getParameter("order_id");
-System.out.println("XXX"+str2);
+System.out.println("orderlist.do : order_id "+str1+" pro_id "+str2+" quentity "+str3);
 				OrderlistService orderSvc = new OrderlistService();
 				List<OrderlistVO> orderlistVO=new LinkedList<OrderlistVO>();
 //				List<ProductVO> productVO=new LinkedList<ProductVO>();
