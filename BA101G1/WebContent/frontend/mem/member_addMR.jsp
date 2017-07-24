@@ -27,7 +27,11 @@ pageContext.setAttribute("store_id", store_id);
 <title>會員檢舉資料新增 - addMR.jsp</title></head>
 <script language="JavaScript" src="js/pic_preview.js"></script>
 <body bgcolor='white'>
+<div id="contents" >
+			<div id="main"style="width:800px;">
+				<div id="items">
 
+<li class="box" style="width:500px;">
 
 
 <h3>會員檢舉資料:</h3>
@@ -94,6 +98,11 @@ pageContext.setAttribute("store_id", store_id);
 <input type="hidden" name="sc_id" value="<%=sc_id %>"></c:if>
 
 <input type="submit" value="送出新增"></FORM>
+</li>
+</div>
+</div>
+</div>
+
 </body>
 
 </html>
