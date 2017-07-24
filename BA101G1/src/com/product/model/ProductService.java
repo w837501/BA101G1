@@ -30,10 +30,9 @@ public class ProductService {
 		return proVO;
 	}
 	
-	public ProductVO updatePro(String store_id, String pro_id, String pro_name, Number pro_price, String pro_state, byte[] pro_image,String pc_id,String pro_content){
+	public ProductVO updatePro( String pro_id, String pro_name, Number pro_price, String pro_state, byte[] pro_image,String pc_id,String pro_content){
 		ProductVO proVO=new ProductVO();
 		
-		proVO.setStore_id(store_id);
 		proVO.setPro_id(pro_id);
 		proVO.setPro_name(pro_name);
 		proVO.setPro_price(pro_price);

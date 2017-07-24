@@ -16,6 +16,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script type="text/javascript" src="js/pic_preview.js"></script>
 <title>吃訂我線上訂餐系統</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 </head>
@@ -63,20 +64,20 @@
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do" name="form1" enctype="multipart/form-data">
 				<table border="0">
 				<tr>
-		<td>商品編號:<font color=red><b>*</b></font></td>
+		<td>商品編號:</td>
 		<td><%=productVO.getPro_id() %></td>
 	</tr>
 	<tr>
-		<td>商家編號:<font color=red><b>*</b></font></td>
+		<td>商家編號:</td>
 		<td><%=productVO.getStore_id() %></td>
 	</tr>
 	<tr>
-		<td>商品名稱:<font color=red><b>*</b></font></td>
+		<td>商品名稱:</td>
 		<td><input type="text" name="pro_name" size="45" value="<%=productVO.getPro_name()%>" />
 	</tr>
 	<jsp:useBean id="productclassSvc" scope="page" class="com.product_class.model.ProductClassService" />
 	<tr>
-		<td>商品類別:<font color=red><b>*</b></font></td>
+		<td>商品類別:</td>
 		<td><select size="1" name="pc_id">
 			<c:forEach var="ProductClassVO" items="${productclassSvc.all}">
 				<option value="${ProductClassVO.pc_id}" ${(productVO.pc_id==ProductClassVO.pc_id)? 'selected':'' } >${ProductClassVO.pc_name}
@@ -84,17 +85,17 @@
 		</select></td>
 	</tr>
 	<tr>
-		<td>商品單價:<font color=red><b>*</b></font></td>
+		<td>商品單價:</td>
 		<td><input type="text" name="pro_price" size="45" value="<%=productVO.getPro_price()%>" />
 	</tr>
 	<tr>
-		<td>商品狀態:<font color=red><b>*</b></font></td>
+		<td>商品狀態:</td>
 		<td><select name="pro_state">
 			<option value='上架' ${(productVO.pro_state=='上架') ? 'selected':''}>上架</option>
 			<option value='下架' ${(productVO.pro_state=='下架') ? 'selected':''}>下架</option></select> </td>
 	</tr>
 	<tr>
-		<td>商品圖片:<font color=red><b>*</b></font></td>
+		<td>商品圖片:</td>
 			<td>
 			<input type="file" name="pro_image" id="upfile1">
 			 <p>
@@ -103,7 +104,7 @@
 			</td>
 	</tr>
 		<tr>
-		<td>商品說明:<font color=red><b>*</b></font></td>
+		<td>商品說明:</td>
 		<td><input type="text" name="pro_content" size="45" value="<%=productVO.getPro_content()%>" />
 	</tr>
 				

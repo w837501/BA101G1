@@ -276,11 +276,11 @@ session.removeAttribute("shoppingcart");
 				productVO2=proSvc.getOnePro(pro_id);
 				byte[] defaultpic=productVO2.getPro_image();
 				if (getFileNameFromPart(pic) != null)
-					productVO=proSvc.updatePro(store_id, pro_id, pro_name, pro_price, pro_state, pro_image, pc_id, pro_content);
+					productVO=proSvc.updatePro(pro_id, pro_name, pro_price, pro_state, pro_image, pc_id, pro_content);
 				else
-					productVO=proSvc.updatePro(store_id, pro_id, pro_name, pro_price, pro_state, defaultpic, pc_id, pro_content);
+					productVO=proSvc.updatePro(pro_id, pro_name, pro_price, pro_state, defaultpic, pc_id, pro_content);
 				
-				String url = "/product/ListAllProduct.jsp";
+				String url = "/store/store_list_all_product.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
 				successView.forward(req, res);
 

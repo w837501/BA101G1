@@ -95,14 +95,14 @@
 							<td><%=storeVO.getStore_id() %></td>
 						</tr>
 						<tr>
-							<td>商家名稱:<font color=red><b>*</b></font></td>
+							<td>商家名稱:</td>
 							<td><input type="text" name="store_name" size="45" value="<%=storeVO.getStore_name()%>" />
 						</tr>
 						
 						<jsp:useBean id="storeclassSvc" scope="page" class="com.store_class.model.StoreClassService" />
 						
 						<tr>
-							<td>商家類別:<font color=red><b>*</b></font></td>
+							<td>商家類別:</td>
 							<td><select size="1" name="sc_id">
 								<c:forEach var="StoreClassVO" items="${storeclassSvc.all}">
 									<option value="${StoreClassVO.sc_id}" ${(storeVO.sc_id==StoreClassVO.sc_id)? 'selected':'' } >${StoreClassVO.sc_name}
@@ -111,41 +111,41 @@
 						</tr>
 						
 						<tr>
-							<td>商家簡介:<font color=red><b>*</b></font></td>
+							<td>商家簡介:</td>
 							<td><input type="text" name="store_content" size="45" value="<%=storeVO.getStore_content()%>" />
 						</tr>
 						<tr>
-							<td>商家電話:<font color=red><b>*</b></font></td>
+							<td>商家電話:</td>
 							<td><input type="text" name="store_phone" size="45" value="<%=storeVO.getStore_phone()%>" />
 						</tr>
 						<tr>
-							<td>商家地址:<font color=red><b>*</b></font></td>
+							<td>商家地址:</td>
 							<td><input type="text" name="store_addr" size="45" value="<%=storeVO.getStore_addr()%>" />
 						</tr>
 						<tr>
-							<td>店家圖片:<font color=red><b>*</b></font></td>
+							<td>店家圖片:</td>
 							<td>
 						    	<img src="<%=request.getContextPath()%>/StoreReader?store_id=${storeVO.store_id}" id="image" style="max-width: 150px; max-height: 150px;">
 								<input type="file" name="store_image" id="upfile1">
 							</td>
 						</tr>
 						<tr>
-							<td>商家帳號:<font color=red><b>*</b></font></td>
+							<td>商家帳號:</td>
 							<td><%=storeVO.getStore_acc() %></td>
 						</tr>
 						<tr>
-							<td>商家密碼:<font color=red><b>*</b></font></td>
-							<td><input type="text" name="store_pw" size="45" value="<%=storeVO.getStore_pw()%>" />
+							<td>商家密碼:</td>
+							<td><input type="password" name="store_pw" size="45" value="<%=storeVO.getStore_pw()%>" />
 						</tr>
 						<tr>
-							<td>商家是否外送:<font color=red><b>*</b></font></td>
+							<td>商家是否外送:</td>
 							<td><select name="store_out">
 								<option value='有外送' ${(storeVO.store_out=='有外送') ? 'selected':''}>有外送</option>
 								<option value='沒有外送' ${(storeVO.store_out=='沒有外送') ? 'selected':''}>沒有外送</option></select>
 							</td>
 						</tr>
 						<tr>
-							<td>商家地區 :<font color=red><b>*</b></font></td>
+							<td>商家地區 :</td>
 							<td>
 							<select size="1" name="store_zone">
 								<option value="基隆市" ${(storeVO.store_zone=='基隆市') ? 'selected':''}>基隆市
