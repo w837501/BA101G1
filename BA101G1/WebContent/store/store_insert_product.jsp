@@ -85,110 +85,105 @@ ProductVO productVO=(ProductVO)request.getAttribute("productVO");
 				</a>
 			
 			</div>
-				<div style="width:650px;float:right;margin-top:20px;margin-right:50px;">
-					<div> 
-						  <h3>商品新增</h3>
-	 				</div> 
- 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do" name="form1" enctype="multipart/form-data">
-				<div class="form-group">
-					<br> <label for="pro_name" class="col-xs-12 col-sm-3 control-label">商品名稱</label> 
-					<div class="col-xs-12 col-sm-6">
-					<input type="text" name="pro_name" id="pro_name"
-						placeholder="請輸入商品名稱"
-						value="<%=(productVO == null) ? "珍奶" : productVO.getPro_name()%>">
+			<div style="width:650px;float:right;margin-top:20px;margin-right:50px;">
+				<div> 
+					  <h3>商品新增</h3>
+	 			</div> 
+	 				
+	 			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do" name="form1" enctype="multipart/form-data">
+					<div class="form-group">
+						商品名稱
+						<input type="text" name="pro_name" id="pro_name" placeholder="請輸入商品名稱" value="<%=(productVO == null) ? "珍奶" : productVO.getPro_name()%>">
 					</div>
-					<div class="col-xs-12 col-sm-3">
+					<div>
 						<span class='error1_name' style="margin-left:-60px;"></span>
 						<img src="" id="error_img_name">
 						<span class='correct_name' style="margin-left:-100px;"></span> 
 						<img src="" id="correct_img_name"> 
 					</div>
-				</div>
-				<div class="form-group">
-				<jsp:useBean id="productclassSvc" scope="page" class="com.product_class.model.ProductClassService" />
-					<br> <label for="pc_id" class="col-xs-12 col-sm-3 control-label">商品名稱</label> 
-					<div class="col-xs-12 col-sm-6">
-					<select size="1" name="pc_id">
-					<c:forEach var="ProductClassVO" items="${productclassSvc.all}">
-					<option value="${ProductClassVO.pc_id}" ${(productVO.pc_id==ProductClassVO.pc_id)? 'selected':'' } >${ProductClassVO.pc_name}
-					</c:forEach>
-					</select>
-					</div>
-					<div class="col-xs-12 col-sm-3">
-						<span class='error1_name' style="margin-left:-60px;"></span>
-						<img src="" id="error_img_name">
-						<span class='correct_name' style="margin-left:-100px;"></span> 
-						<img src="" id="correct_img_name"> 
-					</div>
-				</div>
-				<div class="form-group">
-					<br> <label for="pro_price" class="col-xs-12 col-sm-3 control-label">商品價格</label> 
-					<div class="col-xs-12 col-sm-6">
-					<input type="text" name="pro_price" id="pro_price"
-						placeholder="請輸入商品價格"
-						value="<%=(productVO == null) ? "50" : productVO.getPro_price()%>">
-					</div>
-					<div class="col-xs-12 col-sm-3">
-						<span class='error1_price' style="margin-left:-60px;"></span>
-						<img src="" id="error_img_price">
-						<span class='correct_price' style="margin-left:-100px;"></span> 
-						<img src="" id="correct_img_price"> 
-					</div>
-				</div>
 				
-				<div class="form-group">
-					<br> <label for="pro_content" class="col-xs-12 col-sm-3 control-label">商品狀態</label> 
-					<div class="col-xs-12 col-sm-6">
-						<select size="1" name="pro_state">
-							<option value="上架">上架
-							<option value="下架">下架</option></select>
+					<div class="form-group">
+					<jsp:useBean id="productclassSvc" scope="page" class="com.product_class.model.ProductClassService" />
+							
+						<table>
+							<tr>
+								<td>商品名稱</td>
+								<td>
+									<select size="1" name="pc_id">
+										<c:forEach var="ProductClassVO" items="${productclassSvc.all}">
+											<option value="${ProductClassVO.pc_id}" ${(productVO.pc_id==ProductClassVO.pc_id)? 'selected':'' } >${ProductClassVO.pc_name}
+										</c:forEach>
+									</select>
+								</td>
+							</tr>
+						</table>
+							
+						<div>
+							<span class='error1_name' style="margin-left:-60px;"></span>
+							<img src="" id="error_img_name">
+							<span class='correct_name' style="margin-left:-100px;"></span> 
+							<img src="" id="correct_img_name"> 
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<br> <label for="pro_content" class="col-xs-12 col-sm-3 control-label">商品說明</label> 
-					<div class="col-xs-12 col-sm-6">
-					<input type="text" name="pro_content" id="pro_content"
-						placeholder="請輸入商品說明"
-						value="<%=(productVO == null) ? "50asdsd" : productVO.getPro_content()%>">
+						
+					<div class="form-group">
+						商品價格 
+						<input type="text" name="pro_price" id="pro_price"
+							placeholder="請輸入商品價格"
+							value="<%=(productVO == null) ? "50" : productVO.getPro_price()%>">
+						<div>
+							<span class='error1_price' style="margin-left:-60px;"></span>
+							<img src="" id="error_img_price">
+							<span class='correct_price' style="margin-left:-100px;"></span> 
+							<img src="" id="correct_img_price"> 
+						</div>
 					</div>
-					<div class="col-xs-12 col-sm-3">
-						<span class='error1_content' style="margin-left:-60px;"></span>
-						<img src="" id="error_img_content">
-						<span class='correct_content' style="margin-left:-100px;"></span> 
-						<img src="" id="correct_img_content"> 
+					
+					<div class="form-group" style="padding-bottom:30px;">
+						<table>
+							<tr>
+								<td>商品狀態</td>
+								<td>
+									<select size="1" name="pro_state">
+										<option value="上架">上架
+										<option value="下架">下架</option></select>
+								</td>
+							</tr>
+						</table>
 					</div>
-				</div>
-				<div class="form-group">
-					<br> <label for="pro_image" class="col-xs-12 col-sm-3 control-label">商品照片</label> 
-					<div class="col-xs-12 col-sm-9">
-					<input type="file" name="pro_image" id="upfile1" >
-					<p>
-						<img id="image"  style="max-width: 200px; max-height: 200px;">
-					</p>
+					
+					<div class="form-group">
+						商品說明
+						<input type="text" name="pro_content" id="pro_content"
+							placeholder="請輸入商品說明"
+							value="<%=(productVO == null) ? "50asdsd" : productVO.getPro_content()%>">
+						<div>
+							<span class='error1_content' style="margin-left:-60px;"></span>
+							<img src="" id="error_img_content">
+							<span class='correct_content' style="margin-left:-100px;"></span> 
+							<img src="" id="correct_img_content"> 
+						</div>
 					</div>
-				</div>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<div class="form-group">
-					<div class="col-xs-12 col-sm-4"></div>
-					<div class="col-xs-12 col-sm-8">
+					
+					<div class="form-group">
+						商品照片
+						<input type="file" name="pro_image" id="upfile1" >
+						<p>
+							<img id="image"  style="max-width: 200px; max-height: 200px;">
+						</p>
+					</div>
+					
+					<div class="form-group">
 						<input type="hidden" name="action" value="insert">
 						<input type="hidden" name="store_id" value="<%=storeVO.getStore_id()%>">
 						<input type="submit" value="送出新增"> 
 					</div>
-				</div>
 				 </FORM>
-				 </div>
+				</div>
 			</div>
-		</div>
 		<div id="footer">
 			<jsp:include page="/footer.jsp"></jsp:include>
 		</div>
-
-	<script src="https://code.jquery.com/jquery.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</div>
 </body>
 </html>

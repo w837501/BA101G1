@@ -114,12 +114,11 @@ AdVO adVO=(AdVO)request.getAttribute("adVO");
 					</tr>
 					<tr>
 						<td>廣告圖片:<font color=red><b>*</b></font></td>
-						<td><input type="file" name="upfile1" id="upfile1" >
-						 <p>
-				    	<img id="image"   style="max-width: 150px; max-height: 150px;">
-							</p>
+						<td>
+							<img id="image" style="max-width: 150px; max-height: 150px;">
+							<input type="file" name="upfile1" id="upfile1" >
 				  		</td>
-						</tr>
+					</tr>
 					<tr>
 						<td>廣告時間: </td>
 						<td><input class="cal-TextBox"
