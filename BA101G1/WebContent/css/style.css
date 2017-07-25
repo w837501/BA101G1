@@ -131,7 +131,6 @@ img {
 	text-decoration: none;
 }
 .links > a.time {
-	border-right: 1px solid #938ce8;
 	padding-left: 0;
 }
 .links > a:hover, .more:hover {
@@ -891,6 +890,7 @@ form#message {
 	padding: 0;
 }
 #blogs > li {
+	background-color: #FFFFFF;
 	display: inline-block;
 	width: 666px;
 	margin: 0 0 18px;

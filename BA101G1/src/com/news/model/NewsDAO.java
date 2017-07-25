@@ -26,7 +26,7 @@ public class NewsDAO implements NewsDAO_interface{
 		}
 	}
 	
-	private static final String INSERT_STMT = "INSERT into NEWS(news_id , man_id , news_name , news_content , news_image , news_time ) VALUES('NEWS'||'-'||LPAD(to_char(NEWS_SEQ.NEXTVAL),5,'0'),?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT into NEWS(news_id , man_id , news_name , news_content , news_image  ) VALUES('NEWS'||'-'||LPAD(to_char(NEWS_SEQ.NEXTVAL),5,'0'),?,?,?,?)";
 	private static final String UPDATE_STMT = "UPDATE NEWS set man_id=? , news_name=?, news_content=?, news_image=? where news_id=?";
 	private static final String DELETE = "DELETE FROM NEWS where news_id = ?";
 	private static final String Find_by_PK = "select * from NEWS where news_id=?";
@@ -44,7 +44,6 @@ public class NewsDAO implements NewsDAO_interface{
 			pstmt.setString(2, newsVO.getNews_name());
 			pstmt.setString(3, newsVO.getNews_content());
 			pstmt.setBytes(4, newsVO.getNews_image());
-			pstmt.setTimestamp(5, newsVO.getNews_time());
 
 			pstmt.executeUpdate();
 

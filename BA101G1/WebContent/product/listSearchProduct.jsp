@@ -5,13 +5,13 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%-- æ­¤é ç·´ç¿’æŽ¡ç”¨ Script çš„å¯«æ³•å–å€¼ --%>
+<%-- ¦¹­¶½m²ß±Ä¥Î Script ªº¼gªk¨ú­È --%>
 <%--
 	StoreService storeSvc = new StoreService();
 	String store_id = (String)request.getAttribute("store_id");
 	List<StoreVO> list = storeSvc.getOneStore(store_id);
  --%>
-<%-- å–å‡º Concroller EmpServlet.javaå·²å­˜å…¥requestçš„EmpVOç‰©ä»¶--%>
+<%-- ¨ú¥X Concroller EmpServlet.java¤w¦s¤JrequestªºEmpVOª«¥ó--%>
 <%-- <%List<StoreVO> storeVO = (List) request.getAttribute("storelist");%> --%>
 
 
@@ -24,7 +24,7 @@
 </head>
 <body>
 	<div id="items">
-	<h3>å•†å“æœå°‹çµæžœ</h3>
+	<h3>°Ó«~·j´Mµ²ªG</h3>
 		<ul>
 			<c:forEach var="productVO" items="${productlist}">
 			<li class="box">

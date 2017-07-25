@@ -15,12 +15,14 @@
 %>
 <html>
 <head>
-<meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>吃訂我線上訂餐系統</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
-
+	<script src="https://code.jquery.com/jquery.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 $(document).ready(
 		function() {
@@ -48,12 +50,16 @@ $(document).ready(
 		border-radius: 5px;
 		margin-bottom: 30px;
 	}
+	
 	a{
 		text-decoration:none;
 	}
 	
+    #progressbar .ui-progressbar-value {
+    background-color: lightgreen;
+    }
 </style>
-<body>
+<body onload="connect();" onunload="disconnect();">
 	<div id="page">
 		<div id="header">
 			<jsp:include page="/header_member.jsp"></jsp:include>
@@ -80,7 +86,8 @@ $(document).ready(
 					<div class="page-header"> 
 						<h3>會員訂單紀錄</h3>
 			 		</div> 
-							
+					<div id="textBox">123</div>		
+					<div id="progressbar"></div>		
 					<table border='1' bordercolor='#CCCCFF' width='680' bgcolor='#FFBB66'>
 						<tr>
 							<th width="11%"><font size="2">訂單編號</font></th>
@@ -101,19 +108,24 @@ $(document).ready(
 				<table border='1' bordercolor='#CCCCFF' width='680'>
 					<tr align='center' valign='middle' ${(store_orderVO1.order_id==param.order_id) ? 'bgcolor=#CCCCFF':''}>
 						<td width="11%"><font size="2">
-							<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO1.order_id}">${store_orderVO1.order_id}</a>
+							<a href="<%=request.getContextPath()%>/frontend/selectOrder/orderlist.do?action=getOneOrder_For_DetailDisplay&order_id=${store_orderVO1.order_id}" name="ahrefName">${store_orderVO1.order_id}</a>
 						</td>
 						<td width="10%"><font size="2"><fmt:formatDate  pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO1.order_time }"/></font></td>
 						<td width="10%"><font size="2"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO1.order_taketime }"/></font></td>
 				 		<td width="10%"><font size="2">${store_orderVO1.store_name }</font></td>
 						<td width="10%"><font size="2">${store_orderVO1.totalprice }</font></td>
 						<td width="10%"><font size="2">${store_orderVO1.order_way }</font></td>
-						<td width="10%"><font size="2">${store_orderVO1.order_state }</font></td>
+						<td width="10%"><font size="2">
+						<!-- ***************************************************************** -->
+						<div name="statusOutput">${store_orderVO1.order_state}</div>
+	
+						</font></td>
+						<!-- ***************************************************************** -->
 						<td width="10%"><font size="2">
 							<c:if test="${store_orderVO1.order_state eq '未確認'}">
 								<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
 
-									<input type="submit" value="取消訂單">
+									<input type="submit" value="取消">
 
 									<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
 									<input type="hidden" name="store_id" value="${store_orderVO1.store_id}">
@@ -159,14 +171,13 @@ $(document).ready(
 				</div>
 			
 		</div>
-		
 		<div id="footer">
 			<jsp:include page="/footer.jsp"/>
 		</div>
 
 	</div>
 	
-	<script src="https://code.jquery.com/jquery.js"></script>
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
@@ -176,5 +187,127 @@ $(".abc").on('click',function(){
 	var father=$(".abc").eq($(".abc").index(this)).parent().parent().siblings();
 	father.toggle();
 })
- 
+</script>
+<script>
+	var a = 0;
+
+	$( function() {
+	    $( "#progressbar" ).progressbar({
+	      value: a
+	    });
+	  } );
+    
+    
+    var MyPoint = "/MyEchoServer";
+    var host = window.location.host;
+    var path = window.location.pathname;
+    var webCtx = path.substring(0, path.indexOf('/', 1));
+    var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+    
+	var statusOutput = document.getElementsByName("statusOutput");//HTML中要更換的文字
+	var webSocket;
+	var str2 , upABC , b;
+	function connect() {
+		// 建立 websocket 物件
+		webSocket = new WebSocket(endPointURL); // 1.執行完，觸發MyEchoServer.java的onOpen()
+		
+		webSocket.onopen = function(event) { // 3.執行完，觸發updateStatus("WebSocket 成功連線");
+			
+		};
+
+		webSocket.onmessage = function(event) { // 6.執行完，觸發messagesArea.value，用message重複加上;
+			var order_id = document.getElementsByName("ahrefName");	//HTML中<a href>中的文字order_id
+			console.log(order_id);
+			var jsonObj = JSON.parse(event.data);
+			var val = jsonObj.status;
+			var key = jsonObj.orderId;
+			for(var i=0;order_id.length;i++ ){
+				if(order_id[i].innerHTML==key){
+// 					updateStatus( upABC,ra1,str);因為長度剛好跟statusOutput[j]一致，一對一	
+					statusOutput[i].innerHTML = val;
+					console.log('val'+val+' a '+a);
+					switch(val) {
+					    case "未確認":
+					    	a = 0;
+					        break;
+					    case "已確認":
+					    	a = 50;
+					        break;
+					    case "待取餐":
+					    	a = 100;
+					        break;
+					    default:
+					    	a = 100;
+					}
+					
+				    var progressbar = $( "#progressbar" ),
+				      progressLabel = $( ".progress-label" );
+				 
+				    progressbar.progressbar({
+				      value: false,
+				      change: function() {
+				        progressLabel.text( progressbar.progressbar( "value" ) + "%" );
+				      },
+				      complete: function() {
+				        progressLabel.text( "Complete!" );
+				      }
+				    });
+				 	b = a;
+				    function progress() {
+				      var val = progressbar.progressbar( "value" ) || a-50;
+				 
+				      progressbar.progressbar( "value", val + 2 );
+				 
+				      if ( val < a ) {
+				        setTimeout( progress, 80 );
+				      }
+				    }
+				 
+				    setTimeout( progress, 2000 );
+// 					var b;
+// 					while(b!=a){
+// 						b++;
+// 					}
+// 					$( function() {
+// 						$( "#progressbar" ).progressbar({
+// 							value: a
+// 						});
+// 					});
+				}
+
+
+					
+					
+					document.getElementById("textBox").innerHTML=order_id[i].innerHTML+" : "+val;
+				}
+			}
+		};
+
+		webSocket.onclose = function(event) {
+			updateStatus("WebSocket 已離線");
+		};
+	
+	function sendMessage(id) { // 4.執行完，觸發MyEchoServer.java的onMessage()
+			str2 = id;
+	        var jsonObj = {"orderId": id , "status" : "未確認"};
+	        webSocket.send(JSON.stringify(jsonObj));// 4.執行完，觸發MyEchoServer.java的onMessage()
+	}
+	
+	function disconnect () {
+		webSocket.close();
+	}
+
+	
+// 	function updateStatus(upABC,ra1,newStatus) {
+// 		console.log(upABC+" : "+ra1+" : ");
+// 		for(var j=0;j<statusOutput.length;j++){
+// 			console.log(statusOutput[j].outerHTML);
+// 			if(upABC == ra1){
+// 				statusOutput[j].innerHTML = newStatus;	
+// 			}
+				
+// 		}
+		
+// 	}
+    
 </script>

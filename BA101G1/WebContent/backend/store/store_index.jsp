@@ -143,65 +143,7 @@
                     
 <br>                  
  <ul>
-       <li><a href='<%=request.getContextPath()%>/backend/store/listAllStore.jsp'>列出全部商家</a> </li> <br>
-       <li><a href='<%=request.getContextPath()%>/backend/store_class/listAllStoreClass.jsp'>商家類別</a> </li> <br>
-
-  <li>
-    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store/store.do" >
-        <b>輸入商家編號 (如STO-000001):</b>
-        <input type="text" name="store_id">
-        <input type="submit" value="送出">
-        <input type="hidden" name="action" value="getOne_For_Display">
-    </FORM>
-  </li>
-
-
- <jsp:useBean id="storeSvc" scope="page" class="com.store.model.StoreService" />
- 
- 
- 
-  <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store/store.do" >
-       <b>選擇商家編號</b>
-       <select size="1" name="store_id">                                        
-         <c:forEach var="storeVO" items="${storeSvc.all}" >
-          <option value="${storeVO.store_id}">${storeVO.store_id}
-         </c:forEach>   
-       </select>
-       <input type="submit" value="送出">
-       <input type="hidden" name="action" value="getOne_For_Display">                                       
-    </FORM>
-  </li>
- 
-
-   <jsp:useBean id="scsSvc" scope="page" class="com.store_class.model.StoreClassService" />
-  
-<%--   <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/store_class/store_class.do" >
-       <b><font>選擇商家類型:</font></b>
-       <select size="1" name="sc_id">
-         <c:forEach var="scsVO" items="${scsSvc.all}" > 
-          <option value="${scsVO.sc_id}">${scsVO.sc_name}
-         </c:forEach>   
-       </select>
-       <input type="submit" value="送出">
-       <input type="hidden" name="action" value="listStores_ByStoreClassFormStoreIndex">
-     </FORM>
-  </li> --%>
-
-
-
-  <li>
-    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store/store.do" >
-        <b>輸入商家編號(如STO-000001)找出所有商家評價</b>
-        <input type="text" name="store_id">
-        <input type="submit" value="送出">
-        <input type="hidden" name="action" value="getStoreCommitsByStore_id">
-    </FORM>
-  </li>
-  
-
-  <li><a href='<%=request.getContextPath()%>/backend/store/addStore.jsp'>新增</a>商家</li>
+      <jsp:include page="/backend/store/listAllStoreState.jsp"></jsp:include>
 </ul>
 
 

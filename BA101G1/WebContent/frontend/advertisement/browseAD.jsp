@@ -19,25 +19,19 @@
 <title>吃訂我線上訂餐系統</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 </head>
-<body bgcolor='white'>
+<style>
+	b{
+		margin-left:20px;
+	}
+</style>
+<body>
 	<div id="page">
 		<div id="header">
-			<div id="logo">
-				<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/logo.png" alt="LOGO"></a>
-				<span id="login"><a href="news.html">Login in</a></span>
-
-				<ul>
-					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
-					<li><a href="news.html">最新消息</a></li>
-				</ul>
-			</div>
+			<jsp:include page="/header_member.jsp"></jsp:include>
 		</div>
 		<div id="classcontents">
 			<p>	
-				<font size = "500px">
+				<font size = "6">
 					<b> 廣告瀏覽 </b>
 				</font>
 			</p>
@@ -49,15 +43,16 @@
 						<c:forEach var="adVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1 %>">
 							<li>
 								<a href="ad.do?action=getOne_For_Display&ad_id=${adVO.ad_id }">
-									<h3><img src="<%=request.getContextPath()%>/advertisement/DBGifReader.do?ad_id=${adVO.ad_id}" style="max-width: 150px; max-height: 150px;"><h3>
+									<img src="<%=request.getContextPath()%>/advertisement/DBGifReader.do?ad_id=${adVO.ad_id}" style="max-width: 150px; max-height: 150px;">
 									<h3>${adVO.ad_name}</h3><br>
-									<fmt:formatDate value="${adVO.ad_time}" pattern="yyyy-MM-dd"/>
+									<h3><font color="#fff" size="2"><fmt:formatDate value="${adVO.ad_time}" pattern="yyyy-MM-dd"/></font></h3>
 								</a>
 							</li>
 	    				</c:forEach>
 	    			</ul>
 	    	</div>
 				<%@ include file="pages/page2.file" %>
+		</div>
 			<div id="footer">
 				<ul class="navigation">
 					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
@@ -68,7 +63,6 @@
 				</ul>
 				<p id="footnote">Eternal Beauty Essentials 2012. All Rights Reserved.</p>
 			</div>
-		</div>
 	</div>
 </body>		
 </html>

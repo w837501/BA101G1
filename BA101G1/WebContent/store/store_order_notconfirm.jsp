@@ -49,7 +49,7 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 	
 </style>
 
-<body>
+<body onload="connect();" onunload="disconnect();">
 	<div id="page">
 		<div id="header">
 			<jsp:include page="/header_store.jsp"></jsp:include>
@@ -114,10 +114,10 @@ List<Store_OrderVO> store_orderVO=new LinkedList<Store_OrderVO>();
 						<td width="10%"><font size="2"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${store_orderVO.order_taketime }"/></font></td>
 						<td width="10%"><font size="2">${store_orderVO.totalprice }</font></td>
 						<td width="10%"><font size="2">${store_orderVO.order_way }</font></td>
-						<td width="10%"><font size="2">${store_orderVO.order_state }</font></td>
+						<td width="10%"><font size="2"><div id="statusOutput">${store_orderVO.order_state}</div></font></td>
 						<td width="10%"><font size="2">
 							<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
-							<input type="submit" value="確認">
+							<input type="submit" value="確認" onclick="sendMessage(this.id)" id="${store_orderVO.order_id}">
 							<input type="hidden" name="order_id" value="${store_orderVO.order_id}">
 							<input type="hidden" name="store_id" value="${storeVO.store_id}">
 							<input type="hidden" name="action" value="Confirm_Order">
@@ -168,4 +168,52 @@ $(".abc").on('click',function(){
 	father.toggle();
 })
  
+</script>
+<script>
+    
+    var MyPoint = "/MyEchoServer";
+    var host = window.location.host;
+    var path = window.location.pathname;
+    var webCtx = path.substring(0, path.indexOf('/', 1));
+    var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+    
+	var statusOutput = document.getElementById("statusOutput");
+	var str2;
+	var webSocket;
+	
+	function connect() {
+		// 建立 websocket 物件
+		webSocket = new WebSocket(endPointURL); // 1.執行完，觸發MyEchoServer.java的onOpen()
+		
+		webSocket.onopen = function(event) { // 3.執行完，觸發updateStatus("WebSocket 成功連線");
+			updateStatus("未確認");
+		};
+
+		webSocket.onmessage = function(event) { // 6.執行完，觸發messagesArea.value，用message重複加上;
+			var jsonObj = JSON.parse(event.data);
+			var str = jsonObj.status;
+			var ra1 = jsonObj.orderId;
+				updateStatus(str);
+		};
+
+		webSocket.onclose = function(event) {
+			updateStatus("WebSocket 已離線");
+		};
+	}
+	function sendMessage(id) { // 4.執行完，觸發MyEchoServer.java的onMessage()
+		
+				str2 = id;
+	        var jsonObj = {"orderId": id , "status" : "已確認"};
+	        webSocket.send(JSON.stringify(jsonObj));// 4.執行完，觸發MyEchoServer.java的onMessage()
+	}
+	
+	function disconnect () {
+		webSocket.close();
+	}
+
+	
+	function updateStatus(newStatus) {
+		statusOutput.innerHTML = newStatus;
+	}
+    
 </script>

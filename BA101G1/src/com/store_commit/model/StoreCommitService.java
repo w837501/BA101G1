@@ -37,7 +37,7 @@ public class StoreCommitService {
 		scVO.setSc_content(sc_content);
 		scVO.setSc_time(sc_time);
 		scVO.setSc_state(sc_state);
-		dao.insert(scVO);
+		dao.update(scVO);
 		
 		return scVO;
 		

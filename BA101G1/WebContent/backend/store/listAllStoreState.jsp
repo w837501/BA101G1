@@ -1,138 +1,79 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="BIG5"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.man.model.*"%>
 <%@ page import="java.util.*"%>
+
 <%@ page import="com.store.model.*"%>
 <%@ page import="com.tools.*"%>
-                        <jsp:useBean id="store_start_time" scope="page" class="java.util.Date" />
-                        <jsp:useBean id="store_end_time" scope="page" class="java.util.Date" />
-                        <html>
-
-                        <head>
-  <title>¶Y≠qß⁄EatMe</title>
-    <!-- BOOTSTRAP STYLES-->
+<jsp:useBean id="store_start_time" scope="page" class="java.util.Date" />
+<jsp:useBean id="store_end_time" scope="page" class="java.util.Date" />
+<%
+//	ManagerVO managerVO = (ManagerVO)request.getAttribute("managerVO");
+//	session.setAttribute("manVO" , managerVO);
+%>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>ÂêÉË®ÇÊàëEatMe</title>
+	<!-- BOOTSTRAP STYLES-->
     <link href="<%=request.getContextPath() %>/backend/assets/css/bootstrap.css" rel="stylesheet" />
         <!-- CUSTOM STYLES-->
     <link href="<%=request.getContextPath() %>/backend/assets/css/custom.css" rel="stylesheet" />
-        <!-- LOGIN STYLES -->
+    	<!-- LOGIN STYLES -->
     <link href="<%=request.getContextPath() %>/backend/assets/css/login.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-                        </head>
+</head>
 <body>
-    <div id="wrapper">
-         <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="adjust-nav">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="" href="<%=request.getContextPath() %>/backend/index.jsp">
-                        <img src="<%=request.getContextPath() %>/backend/assets/img/LOGO_2.png" style="width: 180px;"/>
-                    </a>
-                </div>
-                <span class="logout-spn" >
+Backend_Index
+<br><br>                    
+<!-- ****************‰ª£Ëæ¶‰∫ãÈ†Ödiv************************ -->
+<!-- ****************Âª£ÂëäÂØ©Ê†∏(‰ΩøÁî®listSizeÂèñÂÄº)************************ -->
+<%@ page import="com.ad.model.*"%>
+	<%  AdService adSvc = new AdService();
+		List<AdVO> listsize = adSvc.getAllUncheckedAd();
+		Integer listSize = listsize.size();
+		pageContext.setAttribute("listSize", listSize); %>
+		
+                    <div class="col-md-4"> 
 
-                        ${manVO.man_id} ${manVO.man_name}
-                  <a href="<%=request.getContextPath() %>/backend/man/login_man.jsp">µn•X</a>
-                </span>
-            </div>
-        </div>
-        </div>
-        <!-- /. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-                    <c:forEach var="perm" items="${permList}">
-                        <c:if test="${perm.pa_id eq '0'}">
-                            <li class="active-link">
-                                <a href="<%=request.getContextPath() %>/backend/member/select_mem.jsp" ><i class="fa fa-desktop "></i>∑|≠˚∫ﬁ≤z </a>
-                            </li>
-                        </c:if>
-                    </c:forEach>
-                    
-                    <c:forEach var="perm" items="${permList}">
-                        <c:if test="${perm.pa_id eq '1'}">
-                            <li>
-                                    <a href="<%=request.getContextPath() %>/backend/store/store_index.jsp"><i class="fa fa-bar-chart-o"></i>∞”Æa∑|≠˚∫ﬁ≤z</a>
-                            </li>   
-                        </c:if>
-                    </c:forEach>
-                    
-                    <c:forEach var="perm" items="${permList}">
-                        <c:if test="${perm.pa_id eq '8'}">
-                            <li>
-                                <a href="<%=request.getContextPath() %>/backend/man/ListAllMan.jsp"><i class="fa fa-bar-chart-o"></i>∫ﬁ≤z≠˚∫ﬁ≤z</a>
-                            </li> 
-                       </c:if>
-                    </c:forEach>
+                         <div class="schedule">
                          
-                    <c:forEach var="perm" items="${permList}">
-                        <c:if test="${perm.pa_id eq '9'}"> 
-                                                     
-                            <li>
-                                <a href="<%=request.getContextPath() %>/backend/memr/select_memr.jsp"><i class="fa fa-bar-chart-o"></i>∑|≠˚¿À¡| </a>
-                            </li>
-                            <li>
-                                <a href="<%=request.getContextPath() %>/backend/str/select_str.jsp"><i class="fa fa-bar-chart-o"></i>∞”Æa¿À¡|</a>
-                            </li>
-                            
-                         </c:if>
-                    </c:forEach>
-                            
-                   <c:forEach var="perm" items="${permList}">
-                        <c:if test="${perm.pa_id eq '3'}">                                  
-                            <li>
-                                <a href="<%=request.getContextPath() %>/backend/news/news_index.jsp"><i class="fa fa-bar-chart-o"></i>•Zµn≥Ã∑sÆ¯Æß</a>
-                            </li>
-                        </c:if>
-                    </c:forEach>
-                    
-                    <c:forEach var="perm" items="${permList}">
-                        <c:if test="${perm.pa_id eq '4'}">
-                            <li>
-                                <a href="<%=request.getContextPath() %>/backend/ad/listAllAd.jsp"><i class="fa fa-bar-chart-o"></i>ºsßi∫ﬁ≤z</a>
-                            </li>
-                        </c:if>
-                    </c:forEach>
-                    
-                    <c:forEach var="perm" items="${permList}">
-                        <c:if test="${perm.pa_id eq '8'}">
-                            <li>
-                                <a href="<%=request.getContextPath() %>/backend/per/ListAllPer.jsp"><i class="fa fa-bar-chart-o"></i>≈v≠≠∫ﬁ≤z</a>
-                            </li>
-                        </c:if>
-                    </c:forEach>
-                    
-                    <c:forEach var="perm" items="${permList}">
-                        <c:if test="${perm.pa_id eq '10'}">
-                            <li>
-                                <a href="<%=request.getContextPath() %>/backend/store_commit/store_commit_index.jsp"><i class="fa fa-bar-chart-o"></i>∞”Æaµ˚ª˘∫ﬁ≤z</a>
-                            </li>
-                         </c:if>
-                    </c:forEach>
-                                   
-                </ul>
-              </div>
-
-        </nav>
-        <!-- /. NAV SIDE  -->
-        <div id="page-wrapper" >
-            <div id="page-inner">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- <h2></h2>  §∫≠∂º–√D  -->
+								<div class="alert alert-danger">
+									ÁõÆÂâçÊúâ
+                                    ${listSize}									
+									Á≠ÜÂæÖÂØ©Ê†∏ÁöÑÂª£Âëä  <a href="<%=request.getContextPath() %>/backend/ad/listAllUncheckedAd.jsp">ÈªûÊàëÈñãÂïü</a>
+								
+								</div>	                         
+<!-- ****************Âª£ÂëäÂØ©Ê†∏************************ -->
+<%-- <!-- ****************ÊúÉÂì°ÂØ©Ê†∏(‰ΩøÁî®SQL select count(*)ÂèñÂÄº)************************ -->
+<%@ page import="com.mem.model.*" %>
+<% MemberService memberSvc = new MemberService(); 
+   Integer count = memberSvc.getAllUncheckedCount();
+   pageContext.setAttribute("count" , count);%>
+								<div class="alert alert-info">
+									ÁõÆÂâçÊúâ
+									${count}
+									 Á≠ÜÂæÖÂØ©Ê†∏ÁöÑÊúÉÂì°   <a href="<%=request.getContextPath() %>/backend/member/listAllMemberState.jsp">ÈªûÊàëÂâçÂæÄ</a>
+								</div>
+<!-- ****************ÊúÉÂì°ÂØ©Ê†∏************************ --> --%>
+<!-- ****************ÂïÜÂÆ∂ÂØ©Ê†∏(‰ΩøÁî®SQL select count(*)ÂèñÂÄº)************************ -->
+<%@ page import="com.store.model.*"%>
+	<%  StoreService storeService = new StoreService();
+		Integer storecount = storeService.getAllUncheckedCount();
+		pageContext.setAttribute("storecount", storecount); %>
+                         	
+								<div class="alert alert-success">
+								    ÁõÆÂâçÊúâ
+								  ${storecount}
+								    Á≠ÜÂæÖÂØ©Ê†∏ÁöÑÂïÜÂÆ∂   <a href="#" onClick="getAllUncheckedStore();">ÂàóÂá∫ÂÖ®ÈÉ®</a>
+								</div>
+                         </div>
                     </div>
-                </div>              
-                    <div class="col-lg-12 ">
-
+                    <div class="col-md-8"> 
                     </div>
-                    
-<!-- ****************§∫≠∂************************ -->
-
-
+<!-- ****************ÂïÜÂÆ∂ÂØ©Ê†∏************************ -->                    
+<!-- ****************‰ª£Ëæ¶‰∫ãÈ†Ödiv************************ -->
 
 <br> 
                            
@@ -142,11 +83,12 @@
 		pageContext.setAttribute("list", list);
 	%>
 <jsp:useBean id="scsSvc" scope="page" class="com.store_class.model.StoreClassService"/>
-<a href="<%=request.getContextPath()%>/backend/store/store_index.jsp">∞”Æa</a>
-<a href="<%=request.getContextPath()%>/backend/store/listAllStore.jsp">¶C•X•˛≥°∞”Æa</a>
-<a href='<%=request.getContextPath()%>/backend/store_class/listAllStoreClass.jsp'>∞”Æa√˛ßO</a>
+<br><br><br><br><br><br><br>
+<a href="<%=request.getContextPath()%>/backend/store/store_index.jsp">ÂïÜÂÆ∂</a>
+<a href="<%=request.getContextPath()%>/backend/store/listAllStore.jsp">ÂàóÂá∫ÂÖ®ÈÉ®ÂïÜÂÆ∂</a>
+<a href='<%=request.getContextPath()%>/backend/store_class/listAllStoreClass.jsp'>ÂïÜÂÆ∂È°ûÂà•</a>
                                 <c:if test="${not empty errorMsgs}">
-                                    <font color='red'>Ω–≠◊•ø•H§Uø˘ª~:
+                                    <font color='red'>Ë´ã‰øÆÊ≠£‰ª•‰∏ãÈåØË™§:
                                         <ul>
                                             <c:forEach var="message" items="${errorMsgs}">
                                                 <li>${message}</li>
@@ -155,18 +97,19 @@
                                     </font>
                                 </c:if>
                                 
+                                
                                 <table class="table table-hover">
                                     <tr>
-                                        <th align="center">Ωs∏π</th>
-                                        <th>√˛ßO</th>
-                                        <th>¶W∫Ÿ</th>
-                                        <th>¬≤§∂</th>
-                                        <th>πq∏‹</th>
-                                        <th>¶aß}</th>
-                                        <th>∂iæn§È¥¡</th>
-                                        <th>∑”§˘</th>
-                                        <th>¶a∞œ</th>
-                                        <th>™¨∫A</th>
+                                        <th align="center">Á∑®Ëôü</th>
+                                        <th>È°ûÂà•</th>
+                                        <th>ÂêçÁ®±</th>
+                                        <th>Á∞°‰ªã</th>
+                                        <th>ÈõªË©±</th>
+                                        <th>Âú∞ÂùÄ</th>
+                                        <th>ÈÄ≤ÈßêÊó•Êúü</th>
+                                        <th>ÁÖßÁâá</th>
+                                        <th>Âú∞ÂçÄ</th>
+                                        <th>ÁãÄÊÖã</th>
                                     </tr>
                                     <br>
                                     <%@ include file="pages/page1.file"%>
@@ -182,16 +125,17 @@
                                                 <td><img src='<%=request.getContextPath()%>/store?store_id=${storeVO.store_id}'   height="70"></td>
                                                 <td>${storeVO.store_zone}</td>
                                                 <td width="30">
-                                                    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/store/store.do" name="form1">
+                                                    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store/store.do" name="form1">
                                                         <select size="1" name="store_state">
-                                                           <option value="ºfÆ÷§§" ${(storeVO.store_state=="ºfÆ÷§§")?'selected':'' } >ºfÆ÷§§
-                                                           <option value="∂}©±§§" ${(storeVO.store_state=="∂}©±§§")?'selected':'' } >∂}©±§§
-                                                           <option value="∞±∑~" ${(storeVO.store_state=="∞±∑~")?'selected':'' } >∞±∑~
+                                                           <option value="ÂØ©Ê†∏‰∏≠" ${(storeVO.store_state=="ÂØ©Ê†∏‰∏≠")?'selected':'' } >ÂØ©Ê†∏‰∏≠
+                                                           <option value="ÈñãÂ∫ó‰∏≠" ${(storeVO.store_state=="ÈñãÂ∫ó‰∏≠")?'selected':'' } >ÈñãÂ∫ó‰∏≠
+                                                           <option value="ÂÅúÊ•≠" ${(storeVO.store_state=="ÂÅúÊ•≠")?'selected':'' } >ÂÅúÊ•≠
                                                         </select>
-                                                        <input type="submit" value="∞e•X">
+                                                        <input type="submit" value="ÈÄÅÂá∫">
                                                         <input type="hidden" name="store_acc" value="${storeVO.store_acc}">
                                                         <input type="hidden" name="store_id" value="${storeVO.store_id}">
                                                         <input type="hidden" name="action" value="updateStoreState">      
+                                                        <input type="hidden" name="requestURL" value="<%=request.getServletPath() %>">      
                                                      </FORM>
                                                  </td>                                                
                                             </tr>
@@ -199,21 +143,8 @@
                                 </table>
                                 <%@ include file="pages/page2.file"%>
 
-
-
-        
-<!-- ****************§∫≠∂************************ -->
-
-        </div>
-        <!-- /. PAGE WRAPPER  -->
-
-                  <!-- /. ROW  --> 
-            </div>   
-        </div>             
-        <div class="footer">
-        </div>
      <!-- /. WRAPPER  -->
-
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
     <script src="<%=request.getContextPath() %>/backend/assets/js/jquery-1.10.2.js"></script>
       <!-- BOOTSTRAP SCRIPTS -->
@@ -223,5 +154,29 @@
     
     
 </body>
-                        </html>
-                     
+</html>
+<script>
+function getAllUncheckedStore(){ 
+  //===Âª∫Á´ãxhrÁâ©‰ª∂(Â°´ÂÖ•Á®ãÂºèÁ¢º)
+  var xhr = new XMLHttpRequest();
+  //Ë®≠ÂÆöÂ•ΩÂõûÂëºÂáΩÊï∏   
+  xhr.onreadystatechange = function (){
+    if( xhr.readyState == 4){
+      if( xhr.status == 200){
+      //ÂèñÂõû...ÂõûÂÇ≥ÁöÑË≥áÊñô
+         document.getElementById("page-inner").innerHTML = xhr.responseText;
+      }else{
+         alert( xhr.status );
+      }//xhr.status == 200
+    }//xhr.readyState == 4
+  };//onreadystatechange 
+  
+  //Âª∫Á´ãÂ•ΩGetÈÄ£Êé•
+  var url= "<%=request.getContextPath()%>/backend/store/listAllStoreStateAjax.jsp";
+  xhr.open("Get",url,true); 
+
+  //ÈÄÅÂá∫Ë´ãÊ±Ç 
+  xhr.send( null );
+}
+</script>
+

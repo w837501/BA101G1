@@ -26,75 +26,74 @@ pageContext.setAttribute("sc_id", sc_id);
 <script src="<%=request.getContextPath()%>/js/mobile.js" type="text/javascript"></script>
 </head>
 <script language="JavaScript" src="js/pic_preview.js"></script>
-<body bgcolor='white'>
+<body>
+<div id="page">
+	<div id="header">
+		<jsp:include page="/header_both.jsp" />
+	</div>
+	<div id="contents">
+		<div id="main"style="width:800px;">
+			<div id="items">
 
-		<h3>商家檢舉資料新增 - addMR.jsp</h3>
-
-
-<h3>會員檢舉資料:</h3>
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font color='red'>請修正以下錯誤:
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li>${message}</li>
-		</c:forEach>
-	</ul>
-	</font>
-</c:if>
-
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store_report/store_report.do" name="form1" enctype="multipart/form-data">
-<table border="0">
-
-	<tr>
-		<td>商家編號:</td>
-		<td><%=storeVO.getStore_id() %></td>
-	</tr>
-	<c:if test="${ not empty order_id}">
-	<tr>
-		<td>訂單編號:</td>
-		<td><%=order_id %> 
-		</td>
-	</tr>
-	</c:if>
-	
-	<c:if test="${not empty sc_id  }">
-	<tr>
-		<td>評論編號:</td>
-		<td><%=sc_id %>
-		</td>
-	</tr>
-	</c:if>
-	
-	<tr>
-		<td>檢舉內容:</td>
-		<td><input type="TEXT" name="sr_content" size="45"
-			value="" /></td>
-	</tr>
-	<tr>
-		<td>檢舉圖片:</td>
-		<td>			
-		<div id="demo">
-	        <input id="upfile1" type="file"  name="sr_image"/>
-	        <p>
-	            <img id="image"  style="max-width: 150px; max-height: 150px;">
-	        </p>
-	    </div>
-		</td>
-	</tr>
-	
-
-</table>
-<br>
-<input type="hidden" name="action" value="insert">
-<input type="hidden" name="store_id" value="${storeVO.store_id }">
-<c:if test="${ order_id != null}">
-	<input type="hidden" name="order_id" value="<%=order_id %>">
-</c:if>
-<c:if test="${ sc_id !=null}">
-	<input type="hidden" name="sc_id" value="<%=sc_id %>">
-</c:if>
-<input type="submit" value="送出新增"></FORM>
+				<li class="box" style="width:800px;">
+				
+					<h3>商家檢舉資料:</h3>
+				
+					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/store_report/store_report.do" name="form1" enctype="multipart/form-data">
+						<table border="0" align="center">
+						
+							<tr>
+								<td>商家編號:</td>
+								<td><%=storeVO.getStore_id() %></td>
+							</tr>
+							<c:if test="${ not empty order_id}">
+							<tr>
+								<td>訂單編號:</td>
+								<td><%=order_id %></td>
+							</tr>
+							</c:if>
+							<c:if test="${not empty sc_id  }">
+							<tr>
+								<td>評論編號:</td>
+								<td><%=sc_id %></td>
+							</tr>
+							</c:if>
+							<tr>
+								<td>檢舉內容:</td>
+								<td><input type="TEXT" name="sr_content" size="45"value="" /></td>
+							</tr>
+							<tr>
+								<td>檢舉圖片:</td>
+								<td>			
+									<div id="demo">
+								        <input id="upfile1" type="file"  name="sr_image"/>
+								    </div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<img id="image"  style="max-width: 150px; max-height: 150px;">
+								</td>
+							</tr>
+						</table>
+					<input type="hidden" name="action" value="insert">
+					<input type="hidden" name="store_id" value="${storeVO.store_id }">
+					
+					<c:if test="${ order_id != null}">
+					<input type="hidden" name="order_id" value="<%=order_id %>"></c:if>
+						
+					<c:if test="${ sc_id !=null}">
+					<input type="hidden" name="sc_id" value="<%=sc_id %>"></c:if>
+					
+					<input type="submit" value="送出新增"></FORM>
+				</li>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<jsp:include page="/footer.jsp"/>
+	</div>
+</div>
 </body>
 
 </html>

@@ -161,12 +161,9 @@
                                     <tr>
                                         <th align="center">廣告編號</th>
                                         <th>商家名稱</th>
-                                        <th>商品名稱</th>
                                         <th>廣告標題</th>
                                         <th>廣告內文</th>
                                         <th>廣告圖片</th>
-                                        <th>廣告時間</th>
-                                        <th>廣告推播內容</th>
                                         <th>選擇審查狀態</th>
                                     </tr>
                                     <br>
@@ -175,14 +172,11 @@
                                             <tr align='center' valign='middle' ${(adVO.ad_id==param.ad_id) ? 'bgcolor=#CCCCFF': ''}>
                                                 <td>${adVO.ad_id}</td>
                                                 <td>${storeSvc.getOneStore(adVO.store_id).store_name}</td>
-                                                <td>${productSvc.findByStore_id(adVO.store_id).pro_name}</td>
                                                 <td>${adVO.ad_name}</td>
                                                 <td>${adVO.ad_content}</td>
-                                                <td><img src='<%=request.getContextPath()%>/ad?ad_id=${adVO.ad_id}'   height="70"></td>
-                                                <td>
-                                                    <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${adVO.ad_time}" />
-                                                </td>
-                                                <td>${adVO.ad_push_content}</td>
+                                                <td><img src='<%=request.getContextPath()%>/advertisement/DBGifReader.do?ad_id=${adVO.ad_id}'   height="70"></td>
+                                                
+                                                
                                                 
                                                 <td width="150">
                                                     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Ad" name="form1">

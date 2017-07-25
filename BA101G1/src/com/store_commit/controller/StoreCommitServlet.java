@@ -20,7 +20,7 @@ public class StoreCommitServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
+		System.out.println("ㄍㄧ~~~~~");
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
@@ -86,15 +86,16 @@ public class StoreCommitServlet extends HttpServlet {
 		if("getOne_For_Update".equals(action)){ 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+			System.out.println("123");
 			try{
 //1.接收請求參數				
-				String sc_id = new String(req.getParameter("sc_id"));
+				String sc_id = req.getParameter("sc_id");
+				System.out.println(sc_id);
 //2.開始查詢資料				
-				StoreService storeSvc = new StoreService();
-				StoreVO storeVO = storeSvc.getOneStore(sc_id);
+				StoreCommitService storecommitSvc = new StoreCommitService();
+				StoreCommitVO scVO = storecommitSvc.getOneStoreCommit(sc_id);
 //3.查詢完成,準備轉交				
-				req.setAttribute("storeVO", storeVO);
+				req.setAttribute("scVO", scVO);
 				String url = "/backend/store_commit/updateStoreCommitInput.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -112,6 +113,7 @@ public class StoreCommitServlet extends HttpServlet {
 		if("update".equals(action)){ 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			System.out.println("123132");
 		try{
 //1.接收請求參數 - 輸入格式的錯誤處理	
 			String sc_id = new String(req.getParameter("sc_id").trim());
@@ -121,7 +123,12 @@ public class StoreCommitServlet extends HttpServlet {
 			java.sql.Timestamp sc_time = java.sql.Timestamp.valueOf(req.getParameter("sc_time").trim());
 			String sc_state =req.getParameter("sc_state").trim();
 			
-
+			System.out.println(sc_id);
+			System.out.println(store_id);
+			System.out.println(mem_id);
+			System.out.println(sc_content);
+			System.out.println(sc_time);
+			System.out.println(sc_state);
 			StoreCommitVO scVO = new StoreCommitVO();
 			
 			scVO.setSc_id(sc_id);
@@ -139,13 +146,13 @@ public class StoreCommitServlet extends HttpServlet {
 				return;
 			}
 			
-			
+			System.out.println("123123");
 //2.開始修改資料		
 			StoreCommitService storeSvc = new StoreCommitService();
 			scVO = storeSvc.updateStoreCommit(sc_id, store_id , mem_id , sc_content , sc_time , sc_state);
 //3.修改完成,準備轉交
 			req.setAttribute("scVO", scVO);
-			String url = "/store_commit/listOneStoreCommit.jsp";
+			String url = "/backend/store_commit/listAllStoreCommit.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 //其他可能的錯誤處理			
@@ -167,11 +174,13 @@ public class StoreCommitServlet extends HttpServlet {
 			String store_id =req.getParameter("store_id").trim();
 			String mem_id = req.getParameter("mem_id").trim();
 			String sc_content = req.getParameter("sc_content").trim();
-			Integer sc_score=Integer.parseInt(req.getParameter("sc_score"));
+			Integer sc_score = 0;
+			if(req.getParameter("sc_score") != null){
+				sc_score = Integer.parseInt(req.getParameter("sc_score"));
+			}
 			System.out.println(store_id);
 			System.out.println(mem_id);
 			System.out.println(sc_content);
-			System.out.println(sc_score);
 			System.out.println();
 			StoreCommitVO scVO = new StoreCommitVO();
 			scVO.setStore_id(store_id);
@@ -210,6 +219,7 @@ System.out.println("a");
 //其他可能的錯誤處理			
 		} catch (Exception e) {
 			System.out.println("555555");
+			e.printStackTrace();
 			errorMsgs.add("修改資料失敗:"+e.getMessage());
 			RequestDispatcher failureView = req
 					.getRequestDispatcher("/store_commit/addStoreCommit.jsp");

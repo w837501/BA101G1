@@ -422,8 +422,10 @@ public class StoreServlet extends HttpServlet {
 			res.sendRedirect(req.getContextPath() + "/index.jsp");
 		}
 		if("updateStoreState".equals(action)){
+			System.out.println("123");
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			String requestURL=req.getParameter("requestURL");
 			try{
 				String store_state = req.getParameter("store_state");
 				String store_id = req.getParameter("store_id");
@@ -435,12 +437,12 @@ public class StoreServlet extends HttpServlet {
 				
 				//==============寄MAIL
 				
-				if(req.getParameter("store_state").equals("開店中")){
+				if(req.getParameter("store_state").equals("審核中")){
 					System.out.println("asdasdasdasd");
 					MailService mailSvc = new MailService();
 					mailSvc.sendMail(req.getParameter("store_acc"), "很抱歉您未通過認證", "aaaaaaaa");
 					
-				}else if(req.getParameter("store_state").equals("審核中")){
+				}else if(req.getParameter("store_state").equals("開店中")){
 					MailService mailSvc = new MailService();
 					mailSvc.sendMail(req.getParameter("store_acc"), "恭喜您已通過認證", "bbbbbbbbb");
 					
@@ -452,7 +454,7 @@ public class StoreServlet extends HttpServlet {
 				
 				req.setAttribute("storeVO", storeVO);
 				String url = "/backend/store/listAllStoreState.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
+				RequestDispatcher successView = req.getRequestDispatcher(requestURL);
 				successView.forward(req, res);
 			}catch(Exception e){
 				errorMsgs.add("修改失敗" + e.getMessage());

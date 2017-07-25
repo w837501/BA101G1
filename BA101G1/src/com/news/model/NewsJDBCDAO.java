@@ -1,5 +1,9 @@
 package com.news.model;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,7 +22,7 @@ public class NewsJDBCDAO implements NewsDAO_interface{
 	String userid = "BA101G1";
 	String passwd = "ba101g1";
 	
-	private static final String INSERT_STMT = "INSERT into NEWS VALUES(?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT into NEWS (NEWS_ID,MAN_ID,NEWS_NAME,NEWS_CONTENT) VALUES('NEWS'||'-'||LPAD(to_char(news_seq.NEXTVAL),5,'0'),?,?,?)";
 	private static final String UPDATE_STMT = "UPDATE NEWS set news_name=?, news_content=?, news_image=?, news_time=?, news_push_content=? where news_id=?";
 	private static final String DELETE = "DELETE FROM NEWS where news_id = ?";
 	private static final String Find_by_PK = "select * from NEWS where news_id=?";
@@ -33,13 +37,9 @@ public class NewsJDBCDAO implements NewsDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, newsVO.getNews_id());
-			pstmt.setString(2, newsVO.getMan_id());
-			pstmt.setString(3, newsVO.getNews_name());
-			pstmt.setString(4, newsVO.getNews_content());
-			pstmt.setBytes(5, newsVO.getNews_image());
-			pstmt.setTimestamp(6, newsVO.getNews_time());
-			pstmt.setString(7, newsVO.getNews_push_content());
+			pstmt.setString(1, newsVO.getMan_id());
+			pstmt.setString(2, newsVO.getNews_name());
+			pstmt.setString(3, newsVO.getNews_content());
 
 			pstmt.executeUpdate();
 
@@ -246,28 +246,35 @@ public class NewsJDBCDAO implements NewsDAO_interface{
 		NewsJDBCDAO newsdao = new NewsJDBCDAO();
 		
 		//新增
-//		NewsVO newsVO1 = new NewsVO();
-//		newsVO1.setNews_id("NEWS-00005");
-//		newsVO1.setMan_id("MAN-000001");
-//		newsVO1.setNews_name("YOYOYOYO123123");
-//		newsVO1.setNews_content("沒有內文唷");
-//		newsVO1.setNews_image(null);
-//		newsVO1.setNews_time(new Timestamp(System.currentTimeMillis()));
-//		newsVO1.setNews_push_content("推播");
-//
-//		newsdao.insert(newsVO1);
+		NewsVO newsVO1 = new NewsVO();
+		newsVO1.setNews_id("NEWS-00005");
+		newsVO1.setMan_id("MAN-000001");
+		newsVO1.setNews_name("YOYOYOYO123123");
+		newsVO1.setNews_content("沒有內文唷");
+		 byte[] pic=null;
+			try {
+				pic = getPictureByteArray("C:/Users/glayk/git/BA101G1/BA101G1/WebContent/FakeInfo/king.png");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		newsVO1.setNews_image(pic);
+		newsVO1.setNews_time(new Timestamp(System.currentTimeMillis()));
+		newsVO1.setNews_push_content("推播");
+
+		newsdao.insert(newsVO1);
 		
 //		修改
-		NewsVO newsVO2 = new NewsVO();
-		newsVO2.setNews_name("HAHAHAHAHA");
-		newsVO2.setNews_content("哦~哦~哦~哦~哦~哦~爪爪");
-		newsVO2.setNews_image(null);
-		newsVO2.setNews_time(new Timestamp(System.currentTimeMillis()));
-		newsVO2.setNews_push_content("推播123");
-		newsVO2.setNews_id("NEWS-00001");
-
-		newsdao.update(newsVO2);
-		
+//		NewsVO newsVO2 = new NewsVO();
+//		newsVO2.setNews_name("HAHAHAHAHA");
+//		newsVO2.setNews_content("哦~哦~哦~哦~哦~哦~爪爪");
+//		newsVO2.setNews_image(null);
+//		newsVO2.setNews_time(new Timestamp(System.currentTimeMillis()));
+//		newsVO2.setNews_push_content("推播123");
+//		newsVO2.setNews_id("NEWS-00001");
+//
+//		newsdao.update(newsVO2);
+//		
 		//刪除
 //		newsdao.delete("NEWS-00005");
 		
@@ -292,6 +299,21 @@ public class NewsJDBCDAO implements NewsDAO_interface{
 //			System.out.println(aNews.getNews_push_content());
 //			System.out.println("---------------------");
 //		}
+	}
+	
+	public static byte[] getPictureByteArray(String path) throws IOException {
+		 File file = new File(path);
+		 FileInputStream fis = new FileInputStream(file);
+		 ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		 byte[] buffer = new byte[8192];
+		 int i;
+		 while ((i = fis.read(buffer)) != -1) {
+		  baos.write(buffer, 0, i);
+		 }
+		 baos.close();
+		 fis.close();
+
+		 return baos.toByteArray();
 	}
 	
 }

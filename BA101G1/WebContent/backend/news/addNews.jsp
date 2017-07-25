@@ -171,18 +171,7 @@ NewsVO newsVO = (NewsVO) request.getAttribute("newsVO");
 		<td>消息圖片</td>
 		<td><input type="file" id="myFile2" name="news_image" /></td>
 	</tr>	
- 	<tr>
-		<td>消息時間</td>
-		<td><input type="date" name="news_time" size="45" 
-			value="<%= (newsVO==null)? "" : newsVO.getNews_time()%>" /></td>
-	</tr>
-	<tr>
-		<td>消息推播內容</td>
-		<td><input type="TEXT" name="news_push_content" size="45" placeholder="請輸入消息推播內容"
-			value="<%= (newsVO==null)? "" : newsVO.getNews_push_content()%>" /></td>
-	</tr>	
-	
-
+ 	
 </table>
 
 

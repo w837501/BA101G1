@@ -163,10 +163,6 @@
 			<th>評價時間</th>
 			<th>評價狀態</th>
 			<th>修改</th>
-			<th>刪除</th>
-
-
-
 		</tr>
 		<%@ include file="pages/page1.file"%>
 		
@@ -180,7 +176,7 @@
 				<td>${scVO.sc_state}</td>
 				<td>
 					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/backend/store_commit/store_commit.do">
+						ACTION="<%=request.getContextPath()%>/storecommit.do">
 						<input type="submit" value="修改"> 
 						<input type="hidden" name="sc_id" value="${scVO.sc_id}"> 
 						<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
@@ -190,16 +186,16 @@
 				</td>
 
 
-				<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/backend/store_commit/store_commit.do">
-						<input type="submit" value="刪除"> 
-						<input type="hidden" name="sc_id" value="${scVO.sc_id}"> 
-						<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-<input type="hidden" name="whichPage"	value="<%=whichPage%>"> 						
-						<input type="hidden" name="action" value="delete">
-					</FORM>
-				</td>
+<!-- 				<td> -->
+<!-- 					<FORM METHOD="post" -->
+<%-- 						ACTION="<%=request.getContextPath()%>/backend/store_commit/store_commit.do"> --%>
+<!-- 						<input type="submit" value="刪除">  -->
+<%-- 						<input type="hidden" name="sc_id" value="${scVO.sc_id}">  --%>
+<%-- 						<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"> --%>
+<%-- <input type="hidden" name="whichPage"	value="<%=whichPage%>"> 						 --%>
+<!-- 						<input type="hidden" name="action" value="delete"> -->
+<!-- 					</FORM> -->
+<!-- 				</td> -->
 			</tr>
 		</c:forEach>
 	</table>
@@ -211,14 +207,8 @@
 <!-- ****************內頁************************ -->
 
         </div>
-        <!-- /. PAGE WRAPPER  -->
-
-                  <!-- /. ROW  --> 
             </div>   
-        </div>             
-        <div class="footer">
-        </div>
-     <!-- /. WRAPPER  -->
+        
 
     <!-- JQUERY SCRIPTS -->
     <script src="<%=request.getContextPath() %>/backend/assets/js/jquery-1.10.2.js"></script>

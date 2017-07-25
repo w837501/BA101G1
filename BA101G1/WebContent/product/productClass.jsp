@@ -48,7 +48,7 @@
 							<c:forEach var="pcVO" items="${pcSvc.all}" varStatus="loop">
 							<li>
 								<IMG src="<%=request.getContextPath()%>/ProductClassReader?pc_id=${pcVO.pc_id}" height="200">
-								<h3><a href='<%=request.getContextPath()%>/product/product.do?action=getProductClass&pc_id=${pcVO.pc_id}'>${pcVO.pc_name}</a></h3>
+								<h3 font="red"><a href='<%=request.getContextPath()%>/product/product.do?action=getProductClass&pc_id=${pcVO.pc_id}'>${pcVO.pc_name}</a></h3>
 							</li>
 							</c:forEach>
 						</ul>

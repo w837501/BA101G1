@@ -118,7 +118,7 @@ storereportVO=storereportSvc.getReportByStore_id(store_id);
 						</td>
 					</tr>	
 					<tr style="display: none;">
-					<td><img src="<%=request.getContextPath() %>/SR_DBGifReader?sr_id=${store_reportVO.sr_id }"style="max-width: 150px; max-height: 150px;"></td>
+					<td colspan="8" align="center"><img src="<%=request.getContextPath() %>/SR_DBGifReader?sr_id=${store_reportVO.sr_id }" height="200px"></td>
 					</tr>
 				</table>
 				</c:forEach>

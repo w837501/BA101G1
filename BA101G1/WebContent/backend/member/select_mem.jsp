@@ -35,7 +35,8 @@
                 </div>
                 
                 <span class="logout-spn" >
-                  <a href="#" data-toggle="modal" data-target="#login-modal">登入</a>  
+                  ${manVO.man_id} ${manVO.man_name}
+                  <a href="<%=request.getContextPath() %>/backend/man/login_man.jsp">登出</a> 
                 </span>
                 
                 
@@ -84,9 +85,6 @@
 					</c:forEach>
 					
                     <li>
-                        <a href="<%=request.getContextPath()%>/frontend/selectOrder/selectOrder.jsp"><i class="fa fa-table "></i>一般訂單查詢</a>
-                    </li>  
-                    <li>
                         <a href="<%=request.getContextPath() %>/backend/news/news_index.jsp"><i class="fa fa-bar-chart-o"></i>刊登最新消息</a>
                     </li>
                     <li>
@@ -112,15 +110,7 @@
         <div class="copyrights">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
         <div id="page-wrapper" >
             <div id="page-inner">
-                <div class="row">
-                    <div class="col-lg-12">
-                     	<h2>後端管理者平台</h2>   
-                    </div>
-                </div>              
-                 <!-- /. ROW  -->
-                  <hr />
-                <div class="row">
-                <!-- ******************select_man.jsp原先內容********************* -->
+                
 
 					<body bgcolor='white'>
 					<table border='1' cellpadding='5' cellspacing='0' width='400'>
@@ -142,69 +132,13 @@
 						</font>
 						</c:if>
 						
-					<ul>
-						<li><a href="<%=request.getContextPath()%>/backend/member/listAllMember.jsp">List</a> all Manager</li><br><br>
-                        
-                        <a href="<%=request.getContextPath() %>/backend/member/listAllMemberState.jsp" ></i>列出全部待審核會員 </a>						
-						
-						<li>
-							<form action="<%=request.getContextPath()%>/backend/member/member.do" method="post">
-								<b>輸入會員編號(MEM-000001):</b>
-								<input type="text" name="mem_id">
-								<input type="submit" value="送出">
-								<input type="hidden" name="action" value="getOne_For_Display">
-							</form>
-						</li>
-					
-						<jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemberService"></jsp:useBean>
-					
-						<li>
-							<form action="<%=request.getContextPath()%>/backend/member/member.do" method="post">
-								<b>選擇會員編號:</b>
-								<select size="1" name="mem_id">
-									<c:forEach var="MemberVO" items="${memSvc.all }">
-										<option value="${MemberVO.mem_id }">${MemberVO.mem_id }</option>
-									</c:forEach>
-								</select>
-								<input type="submit" value="送出">
-								<input type="hidden" name="action" value="getOne_For_Display">
-							</form>
-						</li>
-						
-						<li>
-							<form method="post" action="<%=request.getContextPath()%>/backend/member/member.do">
-								<b>選擇員工姓名:</b>
-								<select size="1" name="mem_id">
-									<c:forEach var="MemberVO" items="${memSvc.all }">
-										<option value="${MemberVO.mem_id }">${MemberVO.mem_name}</option>
-									</c:forEach>
-								</select>
-								<input type="submit" value="送出">
-								<input type="hidden" name="action" value="getOne_For_Display">
-							</form>
-						</li>
-					</ul>	
-						<h3>會員管理</h3>
-							<ul>
-								<li><a href="<%=request.getContextPath()%>/backend/member/addMember.jsp">ADD</a> a new Mem</li>
-							</ul>
-				<!-- ******************select_man.jsp原先內容********************* -->
-
+					<jsp:include page="/backend/member/listAllMemberState.jsp"></jsp:include>
                 </div>
 
                   <!-- /. ROW  --> 
             </div>   
         </div>             
-        <div class="footer">
-      
-    
-            <div class="row">
-                <div class="col-lg-12" >
-                    &copy;  2014 yourdomain.com | More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
-                </div>
-            </div>
-        </div>
-          
+        
 
      <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -235,4 +169,3 @@
 <!-- ***************************Login***************************** -->    
 </body>
 </html>
-
