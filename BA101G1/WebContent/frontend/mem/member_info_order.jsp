@@ -87,7 +87,7 @@ $(document).ready(
 						<h3>會員訂單紀錄</h3>
 			 		</div> 
 					<div id="textBox">123</div>		
-					<div id="progressbar"></div>		
+<!-- 					<div id="progressbar"></div>		 -->
 					<table border='1' bordercolor='#CCCCFF' width='680' bgcolor='#FFBB66'>
 						<tr>
 							<th width="11%"><font size="2">訂單編號</font></th>
@@ -160,12 +160,16 @@ $(document).ready(
 						</tr>
 					<c:forEach var="orderlistVO" items="${orderlistSvc.getOrderlist(store_orderVO1.order_id)}" >
 						<tr style="display: none;">
-							<td colspan="4"></td>
+							<td colspan="4" ></td>
 							<td colspan="2">${productSvc.getOnePro(orderlistVO.pro_id).pro_name}</td>		
 							<td colspan="2">${orderlistVO.order_amount}</td>
 							<td colspan="2">${orderlistVO.price}</td>
 						</tr>
+						
 					</c:forEach>
+					<tr>
+					<td colspan="10" id="progressbar"></td>
+					</tr>
 				</table>
 				</c:forEach>
 				</div>
@@ -192,7 +196,7 @@ $(".abc").on('click',function(){
 	var a = 0;
 
 	$( function() {
-	    $( "#progressbar" ).progressbar({
+	    $( ".progressbar" ).progressbar({
 	      value: a
 	    });
 	  } );
