@@ -20,46 +20,44 @@
 	</head>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 <script src="<%=request.getContextPath()%>/js/mobile.js" type="text/javascript"></script>
-	<body>
+<style>
+	b{
+		margin-left:20px;
+	}
+</style>
+<body>
 	<div id="page">
 		<div id="header">
-
 			<jsp:include page="/header_member.jsp"></jsp:include>
-
 		</div>
 	    <div id="classcontents">
-
-		<p>
-			<font size = "500px">
-				<b>最新消息</b>
-			</font>
-		</p>
-
-		<div id="items">
-			<%@ include file="pages/page1.file" %> 
-            <ul>
-            	<c:forEach var="newsVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1 %>">
-            	<li style="text-align:center;line-height:100px;">
-            		<a href="news.do?news_name=${newsVO.news_name}&news_time=${newsVO.news_time}&news_id=${newsVO.news_id}&action=getOne_For_Display">
-
-					<img src="<%=request.getContextPath() %>/MRDBGifReader?whichImg=latn&id=${newsVO.news_id}"
-					width="170px" height="170px" vspace="10px" style="display:block; margin:auto;border-radius: 25%;"></a>
-
-					<br>
-					<p>
-
-					<h3>${newsVO.news_name}</h3>
-					<fmt:formatDate value="${newsVO.news_time}" pattern="yyyy-MM-dd"/>  
-
-            	</li>
-            	</c:forEach>
-            </ul>   
-	    </div>
-	    	<%@ include file="pages/page2.file" %>
+			<p>
+				<font size = "6"><b>最新消息</b></font>
+			</p>
+	
+			<div id="items">
+				<%@ include file="pages/page1.file" %> 
+	            <ul>
+	            	<c:forEach var="newsVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1 %>">
+	            	<li style="text-align:center;line-height:100px;">
+	            		<a href="news.do?news_name=${newsVO.news_name}&news_time=${newsVO.news_time}&news_id=${newsVO.news_id}&action=getOne_For_Display">
+							<IMG src="<%=request.getContextPath() %>/MRDBGifReader?whichImg=latn&id=${newsVO.news_id}" style="max-width: 150px; max-height: 150px;">
+						<h3>${newsVO.news_name}</h3>
+						<h3><font color="#fff" size="2"><fmt:formatDate value="${newsVO.news_time}" pattern="yyyy.MM.dd"/></font></h3>
+						</a>
+						
+	            	</li>
+	            	</c:forEach>
+	            </ul>   
+		    </div>
+		    	<%@ include file="pages/page2.file" %>
+			
+		</div>
 		<div id="footer">
 			<jsp:include page="/footer.jsp"/>
 		</div>
-		</div>
 	</div>
 </body>
+
+
 </html>
