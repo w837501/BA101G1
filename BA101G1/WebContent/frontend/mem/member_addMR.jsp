@@ -38,9 +38,7 @@ pageContext.setAttribute("store_id", store_id);
 		
 				<li class="box" style="width:800px;">
 				
-				
 				<h3>會員檢舉資料:</h3>
-				
 				
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member_report/member_report.do" name="form1" enctype="multipart/form-data">
 				<table border="0" align="center">
@@ -84,7 +82,6 @@ pageContext.setAttribute("store_id", store_id);
 						</td>
 					</tr>
 				</table>
-				<br>
 				<input type="hidden" name="action" value="insert">
 				<input type="hidden" name="mem_id" value="${memberVO.mem_id }">
 				
@@ -105,7 +102,7 @@ pageContext.setAttribute("store_id", store_id);
 	</div>
 	
 	<div id="footer">
-			<jsp:include page="/footer.jsp"/>
+		<jsp:include page="/footer.jsp"/>
 	</div>
 </div>
 

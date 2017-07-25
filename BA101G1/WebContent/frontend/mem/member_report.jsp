@@ -103,7 +103,7 @@ memberreportVO=memberreportSvc.getMemberReportByMem_id(mem_id);
 							</td>
 						</tr>
 						<tr style="display: none;">
-							<td colspan="8" align="center"><img src="<%=request.getContextPath() %>/MRDBGifReader?whichImg=memr&id=${member_reportVO.mr_id }"></td>
+							<td colspan="8" align="center"><img src="<%=request.getContextPath() %>/MRDBGifReader?whichImg=memr&id=${member_reportVO.mr_id }" height="200px"></td>
 						</tr>
 					</table>
 					</c:forEach>
