@@ -26,81 +26,87 @@ pageContext.setAttribute("store_id", store_id);
 </head>
 <title>會員檢舉資料新增 - addMR.jsp</title></head>
 <script language="JavaScript" src="js/pic_preview.js"></script>
-<body bgcolor='white'>
-<div id="contents" >
-			<div id="main"style="width:800px;">
-				<div id="items">
+<body>
+<div id="page">
+	<div id="header">
+		<jsp:include page="/header_both.jsp" />
+	</div>
 
-<li class="box" style="width:500px;">
-
-
-<h3>會員檢舉資料:</h3>
-
-
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member_report/member_report.do" name="form1" enctype="multipart/form-data">
-<table border="0">
-
-	<tr>
-		<td>會員編號:</td>
-		<td><%=memberVO.getMem_id() %></td>
-	</tr>
-	<c:if test="${ not empty order_id}">
-	<tr>
-		<td>訂單編號:</td>
-		<td><%=order_id %> 
-		</td>
-	</tr>
-	</c:if>
-	<c:if test="${not empty store_id  }">
-	<tr>
-		<td>商家編號:</td>
-		<td><%=store_id %></td>
-	</tr>
-	</c:if>
-	<c:if test="${not empty sc_id  }">
-	<tr>
-		<td>評論編號:</td>
-		<td><%=sc_id %>
-		</td>
-	</tr>
-	</c:if>
+	<div id="contents" >
+		<div id="main" style="width:800px;">
+			<div id="items">
+		
+				<li class="box" style="width:800px;">
+				
+				
+				<h3>會員檢舉資料:</h3>
+				
+				
+				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member_report/member_report.do" name="form1" enctype="multipart/form-data">
+				<table border="0" align="center">
+					<tr>
+						<td>會員編號:</td>
+						<td><%=memberVO.getMem_id() %></td>
+					</tr>
+					<c:if test="${ not empty order_id}">
+					<tr>
+						<td>訂單編號:</td>
+						<td><%=order_id %></td>
+					</tr>
+					</c:if>
+					<c:if test="${not empty store_id  }">
+					<tr>
+						<td>商家編號:</td>
+						<td><%=store_id %></td>
+					</tr>
+					</c:if>
+					<c:if test="${not empty sc_id  }">
+					<tr>
+						<td>評論編號:</td>
+						<td><%=sc_id %></td>
+					</tr>
+					</c:if>
+					<tr>
+						<td>檢舉內容:</td>
+						<td><input type="TEXT" name="mr_content" size="45" value="" /></td>
+					</tr>
+					<tr>
+						<td>檢舉圖片:</td>
+						<td>			
+							<div id="demo">
+						        <input id="upfile1" type="file"  name="mr_image"/>
+						    </div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<img id="image"  style="max-width: 150px; max-height: 150px;">
+						</td>
+					</tr>
+				</table>
+				<br>
+				<input type="hidden" name="action" value="insert">
+				<input type="hidden" name="mem_id" value="${memberVO.mem_id }">
+				
+				<c:if test="${order_id !=null }">
+				<input type="hidden" name="order_id" value="<%=order_id %>"></c:if>
+				
+				<c:if test="${store_id !=null }">
+				<input type="hidden" name="store_id" value="<%=store_id %>"></c:if>
+				
+				<c:if test="${sc_id !=null }">
+				<input type="hidden" name="sc_id" value="<%=sc_id %>"></c:if>
+				
+				<input type="submit" value="送出新增"></FORM>
+				</li>
+				
+			</div>
+		</div>
+	</div>
 	
-	<tr>
-		<td>檢舉內容:</td>
-		<td><input type="TEXT" name="mr_content" size="45"
-			value="" /></td>
-	</tr>
-	<tr>
-		<td>檢舉圖片:</td>
-		<td>			
-		<div id="demo">
-	        <input id="upfile1" type="file"  name="mr_image"/>
-	        <p>
-	            <img id="image"  style="max-width: 150px; max-height: 150px;">
-	        </p>
-	    </div>
-		</td>
-	</tr>
-	
-
-</table>
-<br>
-<input type="hidden" name="action" value="insert">
-<input type="hidden" name="mem_id" value="${memberVO.mem_id }">
-
-<c:if test="${order_id !=null }">
-<input type="hidden" name="order_id" value="<%=order_id %>"></c:if>
-
-<c:if test="${store_id !=null }">
-<input type="hidden" name="store_id" value="<%=store_id %>"></c:if>
-
-<c:if test="${sc_id !=null }">
-<input type="hidden" name="sc_id" value="<%=sc_id %>"></c:if>
-
-<input type="submit" value="送出新增"></FORM>
-</li>
-</div>
-</div>
+	<div id="footer">
+			<jsp:include page="/footer.jsp"/>
+	</div>
 </div>
 
 </body>
