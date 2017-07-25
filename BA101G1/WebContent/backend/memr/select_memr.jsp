@@ -166,7 +166,7 @@
 							    <!-- 標籤面板：內容區 -->
 							    <div class="tab-content">
 							        <div role="tabpanel" class="tab-pane active" id="tab1">
-										<table border='1' bordercolor='#CCCCFF' width='1250' style="margin-top : 10px;">
+										<table class="table table-hover" style="margin-top : 10px;">
 											<tr>
 												<th>會員檢舉單號</th>
 												<th>會員編號</th>
