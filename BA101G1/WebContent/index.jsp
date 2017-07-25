@@ -121,10 +121,10 @@
 				<ul id="promotions">
 					<li>
 						<div class="poster">
-							<a href="fragrance.html"> <img
+							<a href="http://localhost:8081/BA101G1/store/store.do?action=getProduct_By_Store&store_id=STO-000006"> <img
 								src="<%=request.getContextPath()%>/images/AD_01.jpg" alt="Img"
 								height="282" width="204"></a>
-						</div> <a href="fragrance.html">Shop</a>
+						</div> <a href="http://localhost:8081/BA101G1/store/store.do?action=getProduct_By_Store&store_id=STO-000006">Shop</a>
 						<h2>伯朗分享日</h2>
 						<p>飲品買一送一 【活動日期】：2016/2/1、2/8、2/15、2/22、2/29
 							【活動門市】：全門市(部份門市活動日不同，詳參注意事項2、3之說明) 【活動內容】：凡購買飲品任一杯，再贈送您飲品一杯
@@ -132,10 +132,10 @@
 					</li>
 					<li>
 						<div class="poster">
-							<a href="cosmetics.html"> <img
+							<a href="http://localhost:8081/BA101G1/store/store.do?action=getProduct_By_Store&store_id=STO-000007"> <img
 								src="<%=request.getContextPath()%>/images/AD_02.jpg" alt="Img"
 								height="282" width="204"></a>
-						</div> <a href="cosmetics.html">Shop</a>
+						</div> <a href="http://localhost:8081/BA101G1/store/store.do?action=getProduct_By_Store&store_id=STO-000007">Shop</a>
 						<h2>週末派對餐</h2>
 						<p>
 							21世紀風味館則是今年的每週五、六、日，出示21世紀風味館官網優惠訊息(或截圖)，即可享有週末派對餐（21香草烤雞＋鮮蔬沙拉＋大薯霸x2＋蜂蜜綠茶(L)x2）440元，21香草烤雞單點優惠價
@@ -143,10 +143,10 @@
 					</li>
 					<li>
 						<div class="poster">
-							<a href="skincare.html"> <img
+							<a href="http://localhost:8081/BA101G1/store/store.do?action=getProduct_By_Store&store_id=STO-000004"> <img
 								src="<%=request.getContextPath()%>/images/AD_03.jpg" alt="Img"
 								height="282" width="204"></a> <span class="clearance"></span>
-						</div> <a href="skincare.html">Shop</a>
+						</div> <a href="http://localhost:8081/BA101G1/store/store.do?action=getProduct_By_Store&store_id=STO-000004">Shop</a>
 						<h2>夏夜雙享受</h2>
 						<p>本活動期間為即日起至2015年9月30日之每日夜間21:00~凌晨00:00
 							活動期間內至麥當勞消費，大包薯條第二包$10
