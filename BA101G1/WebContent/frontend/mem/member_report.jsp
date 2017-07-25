@@ -85,7 +85,7 @@ memberreportVO=memberreportSvc.getMemberReportByMem_id(mem_id);
 							<th width="10%"><font size="2">檢舉時間</font></th>
 							<th width="10%"><font size="2">檢舉審核狀態</font></th>
 							<th width="10%"><font size="2">檢舉結果</font></th>
-							<th width="10%"><font size="2">顯示</font></th>
+							<th width="10%"><font size="2">圖片</font></th>
 						</tr>
 					</table>
 					<c:forEach var="member_reportVO" items="${memberreportVO}" >

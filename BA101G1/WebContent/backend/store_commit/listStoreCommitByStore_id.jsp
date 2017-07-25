@@ -90,8 +90,49 @@
 						<div class="links">
 							<a class="time"><fmt:formatDate  pattern="yyyy-MM-dd HH:mm:ss" value="${scVO.sc_time}"/></a>
 							<h2>${memberSvc.getOneMem(scVO.mem_id).mem_name}</h2>
-							µû¤À¡G${scVO.sc_score}
-							<img src="<%=request.getContextPath()%>/images/star.jpg" height="15" width="15" alt="star">
+							µû¤À¡G
+							<c:if test="${scVO.sc_score >= 0 && scVO.sc_score < 1}">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+		                    </c:if>
+		                    <c:if test="${scVO.sc_score >= 1 && scVO.sc_score < 2}">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+		                    </c:if>
+		                    <c:if test="${scVO.sc_score >= 2 && scVO.sc_score < 3}">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+		                    </c:if>
+		                    <c:if test="${scVO.sc_score >= 3 && scVO.sc_score < 4}">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+		                    </c:if>
+		                    <c:if test="${scVO.sc_score >= 4 && scVO.sc_score < 5}">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+		                    </c:if>
+		                    <c:if test="${scVO.sc_score >= 5}">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+		                    </c:if>
 							<p>${scVO.sc_content}</p>
 						</div>
 						

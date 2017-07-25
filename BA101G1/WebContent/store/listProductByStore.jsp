@@ -108,8 +108,49 @@
 				<tr>
 					<td><font color="gray"><fmt:formatDate  pattern="yyyy年MM月dd日 HH:mm:ss" value="${scVO.sc_time}"/>編輯</font></td></tr>
 				<tr>
-					<td>評分：${scVO.sc_score}
-					<img src="<%=request.getContextPath()%>/images/star.jpg" height="15" width="15" alt="star">
+					<td>評分：
+							<c:if test="${scVO.sc_score >= 0 && scVO.sc_score < 1}">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+		                    </c:if>
+		                    <c:if test="${scVO.sc_score >= 1 && scVO.sc_score < 2}">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+		                    </c:if>
+		                    <c:if test="${scVO.sc_score >= 2 && scVO.sc_score < 3}">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+		                    </c:if>
+		                    <c:if test="${scVO.sc_score >= 3 && scVO.sc_score < 4}">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+		                    </c:if>
+		                    <c:if test="${scVO.sc_score >= 4 && scVO.sc_score < 5}">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_01.png">
+		                    </c:if>
+		                    <c:if test="${scVO.sc_score >= 5}">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+			              		<img src="<%=request.getContextPath()%>/images/star_02.png">
+		                    </c:if>
 					</td></tr>
 				<tr>
 					<td height="50px">${scVO.sc_content}</td></tr>
@@ -148,22 +189,6 @@
 					<br>
 					<br>
 					商店評價：<fmt:formatNumber type="number"  maxFractionDigits="1" value="${storeVO.store_star/storeVO.store_count}"/><br>
-							
-<%-- 						<c:if test="${storeVO.store_star >= 0 && storeVO.store_star < 20}"> --%>
-<!-- 		              		★☆☆☆☆ -->
-<%-- 	                    </c:if> --%>
-<%-- 	                    <c:if test="${storeVO.store_star >= 20 && storeVO.store_star < 40}"> --%>
-<!-- 		              		★★☆☆☆ -->
-<%-- 	                    </c:if> --%>
-<%-- 	                    <c:if test="${storeVO.store_star >= 40 && storeVO.store_star < 60}"> --%>
-<!-- 		              		★★★☆☆ -->
-<%-- 	                    </c:if> --%>
-<%-- 	                    <c:if test="${storeVO.store_star >= 60 && storeVO.store_star < 80}"> --%>
-<!-- 		              		★★★★☆ -->
-<%-- 	                    </c:if> --%>
-<%-- 	                    <c:if test="${storeVO.store_star >= 80}"> --%>
-<!-- 		              		★★★★★ -->
-<%-- 	                    </c:if> --%>
 					<br>
 					<a href="<%=request.getContextPath()%>/backend/store_commit/listStoreCommitByStore_id.jsp?store_id=${storeVO.store_id}">評論</a>&nbsp&nbsp&nbsp&nbsp
 					<form method="post" action="<%=request.getContextPath()%>/frontend/mem/member_addMR.jsp">
