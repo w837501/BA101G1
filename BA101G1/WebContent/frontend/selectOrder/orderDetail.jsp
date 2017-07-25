@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>¦Y­q§Ú½u¤W­qÀ\¨t²Î</title>
+<title>åƒè¨‚æˆ‘ç·šä¸Šè¨‚é¤ç³»çµ±</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 <style>
 	#mem-button{
@@ -38,6 +38,7 @@
 		text-decoration:none;
 	}
 	
+
 </style>
 </head>
 <body>
@@ -50,37 +51,37 @@
 	%>
 	<div id="page">
 		<div id="header">
-			<jsp:include page="/header_member.jsp"></jsp:include>
+			<jsp:include page="/header_both.jsp" />
 		</div>
 
 		<div class="contents" style="margin-top:30px;margin-bottom:500px;">
 			
 				<div id="mem-button" style="margin-left:50px;float:left;">
-				    <h1>§Úªº±b¤á</h1><br>
+				    <h1>æˆ‘çš„å¸³æˆ¶</h1><br>
 						
 						<a href="<%=request.getContextPath() %>/frontend/mem/member_info_update.jsp" class="list-group-item">
-							<div>­×§ï¸ê®Æ</div>
+							<div>ä¿®æ”¹è³‡æ–™</div>
 						</a>
 						<a href="<%=request.getContextPath()%>/frontend/mem/member_info_order.jsp " class="list-group-item">
-							<div>¬d¸ß­q³æ</div>
+							<div>æŸ¥è©¢è¨‚å–®</div>
 						</a>
 						<a href="<%=request.getContextPath()%>/frontend/mem/member_report.jsp " class="list-group-item">
-							<div>¬d¸ßÀËÁ|</div>
+							<div>æŸ¥è©¢æª¢èˆ‰</div>
 						</a>
 				</div>
 
 				<div style="width:650px;float:right;margin-top:20px;margin-right:50px;">
 					<div> 
-						<h3>·|­û¸Ô²Ó­q³æ©ú²Ó</h3>
+						<h3>æœƒå“¡è©³ç´°è¨‚å–®æ˜ç´°-${orderlistVO.order_state }</h3>
 						<hr color="#FFFFFF">
 	 				</div> 
                     
                     <table border='1' bordercolor='#CCCCFF' width='600'>
                     	<tr>
-                    		<th>°Ó«~¹Ï¤ù</th>
-                       		<th>°Ó«~¦WºÙ</th>
-                       		<th>°Ó«~¼Æ¶q</th>
-                    		<th>³æ»ù</th>
+                    		<th>å•†å“åœ–ç‰‡</th>
+                       		<th>å•†å“åç¨±</th>
+                       		<th>å•†å“æ•¸é‡</th>
+                    		<th>å–®åƒ¹</th>
                     	</tr>
                     	<jsp:useBean id="productSvc" scope="page" class="com.product.model.ProductService"></jsp:useBean>
                     	<jsp:useBean id="orderSvc" scope="page" class="com.order.model.Store_OrderService"></jsp:useBean>
@@ -97,6 +98,7 @@
                     		
                     	</tr>
                     	</c:forEach>
+
 							<tr>
 								<td></td>
 								<td></td>
@@ -104,6 +106,7 @@
 								<td>$<%=amount1 %></td>   
 							</tr>
                     </table>		
+
 				</div>
 			</div>			
 		</div>	
@@ -114,5 +117,58 @@
 
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </body>
 </html>
+<script>
+$( function() {
+    $( "#progressbar" ).progressbar({
+      value: 25
+    });
+  } );
+    var MyPoint = "/MyEchoServer";
+    var host = window.location.host;
+    var path = window.location.pathname;
+    var webCtx = path.substring(0, path.indexOf('/', 1));
+    var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+    
+	var statusOutput = document.getElementById("statusOutput");
+	var webSocket;
+	
+	function connect() {
+		// å»ºç«‹ websocket ç‰©ä»¶
+		webSocket = new WebSocket(endPointURL); //	 1.åŸ·è¡Œå®Œï¼Œè§¸ç™¼MyEchoServer.javaçš„onOpen()
+		
+		webSocket.onopen = function(event) { 
+			console.log("æˆåŠŸé€£ç·š");
+		};
+
+		webSocket.onmessage = function(event) { // 6.åŸ·è¡Œå®Œï¼Œè§¸ç™¼messagesArea.valueï¼Œç”¨messageé‡è¤‡åŠ ä¸Š;
+		
+		};
+
+		webSocket.onclose = function(event) {
+			
+		};
+	}
+	
+	
+	var pgBar = document.getElementById("progressbar");
+	
+	function sendMessage() { // 4.åŸ·è¡Œå®Œï¼Œè§¸ç™¼MyEchoServer.javaçš„onMessage()
+	   
+	    
+	    
+
+	}
+
+	
+	function disconnect () {
+		webSocket.close();
+	}
+
+
+    
+</script>

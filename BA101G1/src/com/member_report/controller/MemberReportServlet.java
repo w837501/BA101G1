@@ -11,6 +11,8 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import com.member_report.model.*;
+import com.orderlist.model.OrderlistService;
+import com.orderlist.model.OrderlistVO;
 @WebServlet("/BA101G1/member_report/member_report")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class MemberReportServlet extends HttpServlet {
@@ -22,10 +24,10 @@ public class MemberReportServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
+		System.out.println("aaaaaaaaaaaadddddddddddddd");
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
 		if ("getOne_For_Display".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -396,6 +398,46 @@ System.out.println("2");
 			String url = "/backend/memr/select_memr.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
+		}
+		
+		System.out.println("bbbbbbbbbbb");
+		if ("getOneOrder_For_DetailDisplay".equals(action)) { 
+			System.out.println("aaaaaaaaaaaaaaaaaa");
+			
+			
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+
+				String str1 = req.getParameter("order_id");
+				String str2 = req.getParameter("pro_id");
+				String str3 = req.getParameter("quentity");
+				String order_id = req.getParameter("order_id");
+System.out.println("orderlist.do : order_id "+str1+" pro_id "+str2+" quentity "+str3);
+				OrderlistService orderSvc = new OrderlistService();
+				List<OrderlistVO> orderlistVO=new LinkedList<OrderlistVO>();
+//				List<ProductVO> productVO=new LinkedList<ProductVO>();
+				orderlistVO= orderSvc.getOrderlist(order_id);
+//				productVO= orderSvc.getProDetail(str2);
+
+				req.setAttribute("orderlistVO", orderlistVO);
+//				req.setAttribute("productVO", productVO);
+				
+				String url = "/frontend/selectOrder/orderDetail.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
+				successView.forward(req, res);
+
+			} catch (Exception e) {
+				
+				errorMsgs.add( e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/frontend/selectOrder/listOrderByMem.jsp");
+				failureView.forward(req, res);
+			}
 		}
 	}
 
