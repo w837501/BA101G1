@@ -225,7 +225,6 @@ $(".abc").on('click',function(){
 			var val = jsonObj.status;
 			var key = jsonObj.orderId;
 			var pgbarId = document.getElementById(key);
-			alert('onmessage pgbarId' +pgbarId);
 			for(var i=0;order_id.length;i++ ){
 				if(order_id[i].innerHTML==key){
 // 					updateStatus( upABC,ra1,str);因為長度剛好跟statusOutput[j]一致，一對一	

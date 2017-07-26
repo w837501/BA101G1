@@ -291,7 +291,7 @@
 									value="<%=(memberVO == null) ? "sadqwe" : memberVO.getMem_mail()%>" >
 								</div>
 								<div class="col-xs-12 col-sm-3">
-								<span class='error1_mail' style="margin-left:-90px;"></span> 
+								<span class='error1_mail' style="margin-left:-80px;"></span> 
 								<img src="" id="error_img_mail">
 								<span class='correct_mail' style="margin-left:-60px;"></span> 
 								<img src="" id="correct_img_mail"> 
@@ -305,7 +305,7 @@
 									value="<%=(memberVO == null) ? "222212" : memberVO.getMem_pw()%>">
 								</div>
 								<div class="col-xs-12 col-sm-3">
-									<span class='error1_pw' style="margin-left:-90px;"></span>
+									<span class='error1_pw' style="margin-left:-80px;"></span>
 									<img src="" id="error_img_pw">
 									<span class='correct_pw' style="margin-left:-60px;"></span> 
 									<img src="" id="correct_img_pw"> 

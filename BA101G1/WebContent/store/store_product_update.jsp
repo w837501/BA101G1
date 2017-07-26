@@ -89,7 +89,7 @@
 				<div style="width:650px;float:right;margin-top:20px;margin-right:50px;">
 			
 				<div > 
-					  <h3>全部商品列表</h3>
+					  <h3>商品修改</h3>
  				</div> 
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/product/product.do" name="form1" enctype="multipart/form-data">
 				<table border="0">
