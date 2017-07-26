@@ -36,7 +36,7 @@ public class PermissionService {
 		dao.delete(man_id , pa_id);
 	}
 	
-	public PermissionVO getOneRecord(String man_id){
+	public List<PermissionVO> getOneRecord(String man_id){
 		return dao.findByPrimaryKey(man_id);
 	}
 	

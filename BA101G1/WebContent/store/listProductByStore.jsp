@@ -13,8 +13,9 @@
 	List<ProductVO> list=proSvc1.getName(pro_name);
 --%>
 <%-- 取出 Concroller EmpServlet.java已存入request的EmpVO物件--%>
-<%--  <%List<ProductVO> productVO = (List) request.getAttribute("productlist");%>--%>
-
+<%
+List<ProductVO> productVO = (List) request.getAttribute("productlist");
+%>
 <%-- <%StoreVO storeVO = (StoreVO) request.getAttribute("storeVO");%> --%>
 
 <% 

@@ -5,8 +5,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
-	PermissionAbilityDAO dao = new PermissionAbilityDAO();
-	List<Permission_AbilityVO> list=dao.getAll();
+	PermissionAbilityService paSvc = new PermissionAbilityService();
+	List<Permission_AbilityVO> list = paSvc.getAll();
 	pageContext.setAttribute("list", list);
 %>
 

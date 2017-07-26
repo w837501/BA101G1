@@ -1,41 +1,65 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="BIG5"%>
 <%@ page import="com.man.model.*"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.permission.model.*" %>   
+<%@ page import="com.permission_ability.model.*" %>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
 <%
-ManagerVO managerVO=(ManagerVO)request.getAttribute("managerVO");
-%>
+	String user = (String)request.getAttribute("user");
+	pageContext.setAttribute("user", user);
 
+	PermissionService pSvc = new PermissionService();
+	List<PermissionVO> list = pSvc.getAll();
+	pageContext.setAttribute("list", list);
+	
+	ManagerService mSvc = new ManagerService();
+	ManagerVO mVO = mSvc.getOneMan(user);
+	pageContext.setAttribute("mVO", mVO);
+	
+%>
+<jsp:useBean id="paSvc" scope="page" class="com.permission_ability.model.PermissionAbilityDAO" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>­û¤u¸ê®Æ</title>
+<title>åˆ—å‡ºå–®ä¸€ç®¡ç†å“¡æ¬Šé™è³‡æ–™</title>
 </head>
-<body bgcolor='white'>
+	<hr style="border-color: red;">
+	
+	<table class="table table-hover">
+		<tr align='center' valign='middle' >
+			<th>ç®¡ç†å“¡ç·¨è™Ÿ - name</th>
+			<th>æ¬Šé™ç·¨è™Ÿ - åç¨±</th>
+			<th></th>
+		</tr>
+		<c:forEach var="PermissionVO" items="${list}">
+			<tr align='center' valign='middle' >
+				<c:if test="${user eq PermissionVO.man_id}">
+<%-- 						<c:forEach var="manVO" items="listman"> --%>
+<%-- 							<c:if test="${user eq manVO.man_id}"> --%>
+					<td><c:if test="${user eq (mVO.man_id)}">ã€${user} - ${mVO.man_name}ã€‘</c:if></td>
+<%-- 							</c:if> --%>
+<%-- 						</c:forEach> --%>
+					<td>
+						<c:forEach var="Permission_AbilityVO" items="${paSvc.all}">
+		                    <c:if test="${PermissionVO.pa_id==Permission_AbilityVO.pa_id}">
+			                    	ã€${Permission_AbilityVO.pa_id } - ${Permission_AbilityVO.pa_name}ã€‘
+		                    </c:if>
+		                </c:forEach>
+					</td>
 
-<table border='1' cellpadding="5" cellspacing="0" width='600'>
-	<tr bgcolor='#CCF' align='center' valign='middle' height='20'>
-	<td>
-	<h3>­û¤u¸ê®Æ</h3>	
-	<a href="select_man.jsp"><img src="images/back1.gif" width="100" height="32" border="0">¦^­º­¶	</a>
-	</td>
-	</tr>
-</table>
-
-<table border='1' bordercolor='#CCF' width='600'>
-	<tr>
-		<th>ºŞ²z­û½s¸¹</th>
-		<th>ºŞ²z­û¦W¦r</th>
-		<th>ºŞ²z­û¹q¸Ü</th>
-		<th>±K½X</th>
-		<th>«H½c</th>
-	</tr>
-	<tr align='center' valign='middle'>
-		<td><%=managerVO.getMan_id() %></td>
-		<td><%=managerVO.getMan_name() %></td>
-		<td><%=managerVO.getMan_phone() %></td>
-		<td><%=managerVO.getMan_pw() %></td>
-		<td><%=managerVO.getMan_mail() %></td>
-	</tr>
-</table>
+					<td>
+						<form method="post" action="<%=request.getContextPath()%>/backend/per/p.do">
+							<input type="submit" value="åˆªé™¤">
+							<input type="hidden" name="man_id" value="${manVO.man_id }">
+							<input type="hidden" name="pa_id" value="${PermissionVO.pa_id }">
+							<input type="hidden" name="action" value="delete">
+							<input type="hidden" name="iswhich" value="drop">
+						</form>	
+					</td>
+				</c:if>
+	
+			</tr>
+		</c:forEach>
+	</table>
 </body>
 </html>
