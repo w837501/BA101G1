@@ -125,7 +125,7 @@ $(document).ready(
 							<c:if test="${store_orderVO1.order_state eq '未確認'}">
 								<form method="post" action="<%=request.getContextPath()%>/frontend/selectOrder/order.do">
 
-									<input type="submit" value="取消">
+									<input type="submit" value="取消訂單">
 
 									<input type="hidden" name="order_id" value="${store_orderVO1.order_id}">
 									<input type="hidden" name="store_id" value="${store_orderVO1.store_id}">
@@ -166,6 +166,9 @@ $(document).ready(
 							<td colspan="2">${orderlistVO.price}</td>
 						</tr>
 					</c:forEach>
+					<tr>
+					<td colspan="8" class="progressbar"></td>
+					</tr>
 				</table>
 				</c:forEach>
 				</div>
@@ -192,7 +195,7 @@ $(".abc").on('click',function(){
 	var a = 0;
 
 	$( function() {
-	    $( "#progressbar" ).progressbar({
+	    $( ".progressbar" ).progressbar({
 	      value: a
 	    });
 	  } );
@@ -240,7 +243,7 @@ $(".abc").on('click',function(){
 					    	a = 100;
 					}
 					
-				    var progressbar = $( "#progressbar" ),
+				    var progressbar = $( ".progressbar" ),
 				      progressLabel = $( ".progress-label" );
 				 
 				    progressbar.progressbar({

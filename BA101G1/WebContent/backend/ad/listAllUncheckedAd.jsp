@@ -18,7 +18,6 @@
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
-<body>
 
 <body>
     <div id="wrapper">
@@ -131,9 +130,8 @@
                     <div class="col-lg-12 ">
 
                     </div>
-                    
-<!-- ****************內頁************************ -->
                     <br>
+<!-- ****************內頁************************ -->
 <!-- ****************代辦事項div************************ -->
 <!-- ****************廣告審核(使用listSize取值)************************ -->
 <%@ page import="com.ad.model.*"%>
@@ -173,7 +171,8 @@
 								<div class="alert alert-success">
 								    目前有
 								  ${storecount}
-								    筆待審核的商家   <a href="#" onClick="getAllUncheckedStore();">列出全部</a>
+								    <!-- 筆待審核的商家   <a href="#" onClick="getAllUncheckedStore();">列出全部</a> -->
+								  筆待審核的商家   <a href="<%=request.getContextPath() %>/backend/store/listAllStoreState.jsp">列出全部</a>  
 								</div>
                          </div>
                     </div>
@@ -250,7 +249,6 @@
 
                   <!-- /. ROW  --> 
             </div>   
-        </div>             
         <div class="footer">
         </div>
      <!-- /. WRAPPER  -->
