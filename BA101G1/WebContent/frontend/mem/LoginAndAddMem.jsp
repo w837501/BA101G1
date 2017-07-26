@@ -259,14 +259,11 @@
 								ACTION="<%=request.getContextPath()%>/MemberLoginHandler"
 								name="form2">
 
-								<label for="帳號">帳號</label> <input type="text" name="mem_mail"
-									id="帳號" placeholder="請輸入E-MAIL" value="wang@abc.com"> <br> <br> <label
-									for="密碼">密碼</label> <input type="password" name="mem_pw"
-									id="密碼" placeholder="請輸入密碼" value="group1"> <br> <br> <a
-									herf="">忘記密碼?</a> <br> <br> <input type=submit
-									value=" 登入 "><input type="hidden" name="requestURL"
-									value="<%=request.getServletPath()%>">
+								<label for="帳號">帳號</label> <input type="text" name="mem_mail" id="new_mail" placeholder="請輸入E-MAIL"> <br> <br> 
+								<label for="密碼">密碼</label> <input type="password" name="mem_pw" id="new_pw" placeholder="請輸入密碼"> <br> <br> 
+								<input type=submit value=" 登入 "><input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 							</form>
+							<button onclick="myFunction2()">神奇小按鈕</button>
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="tab2">
@@ -281,6 +278,7 @@
 							<%
 								session.removeAttribute("errorMsgs");
 							%>
+							
 							<form METHOD="post" ACTION="<%=request.getContextPath()%>/backend/mem/mem.do">
 							<div class="form-horizontal">
 							<div class="form-group">
@@ -354,14 +352,15 @@
 										<img src="" id="correct_img_phone"> 
 									</div>
 								</div>
-									<div class="form-group">
+								<div class="form-group">
 									<input type="hidden" name="requestURL"
 									value="<%=request.getServletPath()%>"> <br> <br>
 								    <input type="hidden" name="action" value="insert"> 
 								    <input type="submit" value="送出新增" id="input" disabled="disabled"> 
 								    </div>
-								    </div>
+								</div>
 							</form>
+							<button onclick="myFunction1()">神奇小按鈕</button>
 						</div>
 					</div>
 				</div>
@@ -373,4 +372,17 @@
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
+<script>
+function myFunction1(){
+	document.getElementById("mem_mail").value = "xiaoben@tibame.com";
+	document.getElementById("mem_pw").value = "ben810920";
+	document.getElementById("mem_pw1").value = "ben810920";
+	document.getElementById("mem_name").value = "呂宜庭";
+	document.getElementById("mem_phone").value = "0918123456";
+}
+function myFunction2(){
+	document.getElementById("new_mail").value = "xiaoben@tibame.com";
+	document.getElementById("new_pw").value = "ben810920";
+}
+</script>
 </html>
