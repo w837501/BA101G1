@@ -2,10 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.man.model.*"%>
 <%@ page import="java.util.*"%>
-<%
-//	ManagerVO managerVO = (ManagerVO)request.getAttribute("managerVO");
-//	session.setAttribute("manVO" , managerVO);
-%>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -131,6 +128,7 @@
 
                     </div>
                     <br>
+<!-- ****************內頁************************ -->                    
 <!-- ****************代辦事項div************************ -->
 <!-- ****************廣告審核(使用listSize取值)************************ -->
 <%@ page import="com.ad.model.*"%>
@@ -170,7 +168,8 @@
 								<div class="alert alert-success">
 								    目前有
 								  ${storecount}
-								    筆待審核的商家   <a href="#" onClick="getAllUncheckedStore();">列出全部</a>
+								    <!-- 筆待審核的商家   <a href="#" onClick="getAllUncheckedStore();">列出全部</a> -->
+								    筆待審核的商家   <a href="<%=request.getContextPath() %>/backend/store/listAllStoreState.jsp">列出全部</a>
 								</div>
                          </div>
                     </div>
@@ -178,7 +177,7 @@
                     </div>
 <!-- ****************商家審核************************ -->                    
 <!-- ****************代辦事項div************************ -->
-
+<!-- ****************內頁************************ -->
         </div>
         <!-- /. PAGE WRAPPER  -->
 
