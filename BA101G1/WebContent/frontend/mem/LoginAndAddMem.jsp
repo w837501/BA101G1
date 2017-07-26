@@ -293,7 +293,7 @@
 								<div class="col-xs-12 col-sm-3">
 								<span class='error1_mail' style="margin-left:-90px;"></span> 
 								<img src="" id="error_img_mail">
-								<span class='correct_mail' style="margin-left:-90px;"></span> 
+								<span class='correct_mail' style="margin-left:-60px;"></span> 
 								<img src="" id="correct_img_mail"> 
 								</div>
 							</div>
@@ -307,7 +307,7 @@
 								<div class="col-xs-12 col-sm-3">
 									<span class='error1_pw' style="margin-left:-90px;"></span>
 									<img src="" id="error_img_pw">
-									<span class='correct_pw' style="margin-left:-90px;"></span> 
+									<span class='correct_pw' style="margin-left:-60px;"></span> 
 									<img src="" id="correct_img_pw"> 
 								</div>
 							</div>
@@ -321,7 +321,7 @@
 								<div class="col-xs-12 col-sm-3">
 									<span class='error1_pw1' style="margin-left:-100px;"></span>
 									<img src="" id="error_img_pw1">
-									<span class='correct_pw1' style="margin-left:-100px;"></span> 
+									<span class='correct_pw1' style="margin-left:-60px;"></span> 
 									<img src="" id="correct_img_pw1"> 
 								</div>
 							</div>
@@ -336,7 +336,7 @@
 									<div class="col-xs-12 col-sm-3">
 									<span class='error1_name'style="margin-left:-100px;" ></span> 
 									<img src="" id="error_img_name"> 
-									<span class='correct_name' style="margin-left:-100px;"></span> 
+									<span class='correct_name' style="margin-left:-60px;"></span> 
 									<img src="" id="correct_img_name"> 
 									</div>
 								</div>
@@ -350,7 +350,7 @@
 									<div class="col-xs-12 col-sm-3">
 										<span class='error1_phone' style="margin-left:-100px;"></span> 
 										<img src="" id="error_img_phone"> 
-										<span class='correct_phone' style="margin-left:-100px;"></span> 
+										<span class='correct_phone' style="margin-left:-60px;"></span> 
 										<img src="" id="correct_img_phone"> 
 									</div>
 								</div>

@@ -22,9 +22,7 @@
 		<tr>	
 			<td>會員電話：<%=memberVO.getMem_phone() %></td>
 		</tr>	
-		<tr>	
-			<td>會員密碼：<%=memberVO.getMem_pw() %></td>
-		</tr>	
+		
 		<tr>	
 			<td>會員信箱：<%=memberVO.getMem_mail() %></td>
 		</tr>

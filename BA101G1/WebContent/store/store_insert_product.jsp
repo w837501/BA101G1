@@ -95,19 +95,14 @@ ProductVO productVO=(ProductVO)request.getAttribute("productVO");
 						商品名稱
 						<input type="text" name="pro_name" id="pro_name" placeholder="請輸入商品名稱" value="<%=(productVO == null) ? "珍奶" : productVO.getPro_name()%>">
 					</div>
-					<div>
-						<span class='error1_name' style="margin-left:-60px;"></span>
-						<img src="" id="error_img_name">
-						<span class='correct_name' style="margin-left:-100px;"></span> 
-						<img src="" id="correct_img_name"> 
-					</div>
+					
 				
 					<div class="form-group">
 					<jsp:useBean id="productclassSvc" scope="page" class="com.product_class.model.ProductClassService" />
 							
 						<table>
 							<tr>
-								<td>商品名稱</td>
+								<td>商品類別</td>
 								<td>
 									<select size="1" name="pc_id">
 										<c:forEach var="ProductClassVO" items="${productclassSvc.all}">
@@ -117,13 +112,7 @@ ProductVO productVO=(ProductVO)request.getAttribute("productVO");
 								</td>
 							</tr>
 						</table>
-							
-						<div>
-							<span class='error1_name' style="margin-left:-60px;"></span>
-							<img src="" id="error_img_name">
-							<span class='correct_name' style="margin-left:-100px;"></span> 
-							<img src="" id="correct_img_name"> 
-						</div>
+						
 					</div>
 						
 					<div class="form-group">
@@ -131,12 +120,6 @@ ProductVO productVO=(ProductVO)request.getAttribute("productVO");
 						<input type="text" name="pro_price" id="pro_price"
 							placeholder="請輸入商品價格"
 							value="<%=(productVO == null) ? "50" : productVO.getPro_price()%>">
-						<div>
-							<span class='error1_price' style="margin-left:-60px;"></span>
-							<img src="" id="error_img_price">
-							<span class='correct_price' style="margin-left:-100px;"></span> 
-							<img src="" id="correct_img_price"> 
-						</div>
 					</div>
 					
 					<div class="form-group" style="padding-bottom:30px;">
@@ -157,12 +140,6 @@ ProductVO productVO=(ProductVO)request.getAttribute("productVO");
 						<input type="text" name="pro_content" id="pro_content"
 							placeholder="請輸入商品說明"
 							value="<%=(productVO == null) ? "50asdsd" : productVO.getPro_content()%>">
-						<div>
-							<span class='error1_content' style="margin-left:-60px;"></span>
-							<img src="" id="error_img_content">
-							<span class='correct_content' style="margin-left:-100px;"></span> 
-							<img src="" id="correct_img_content"> 
-						</div>
 					</div>
 					
 					<div class="form-group">

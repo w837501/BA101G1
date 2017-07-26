@@ -126,7 +126,7 @@ public class AdServlet extends HttpServlet {
 				AdService adSvc = new AdService();
 				adVO = adSvc.addAd(store_id, ad_name, ad_content, ad_image, ad_time, null);
 				
-				String url = "/frontend/advertisement/browseAD.jsp";
+				String url = "/store/store_info.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {

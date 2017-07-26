@@ -330,7 +330,7 @@
 										value="<%=(storeVO == null) ? "sadqwe" : storeVO.getStore_acc()%>" >
 									</div>
 									<div class="col-xs-12 col-sm-2">
-									<span class='error1_acc' style="margin-left:-60px;"></span> 
+									<span class='error1_acc' style="margin-left:-58px;"></span> 
 									<img src="" id="error_img_acc"> 
 									</div>
 									<div class="col-xs-12 col-sm-2">
@@ -347,7 +347,7 @@
 										value="<%=(storeVO == null) ? "1222212" : storeVO.getStore_pw()%>">
 									</div>
 									<div class="col-xs-12 col-sm-2">
-										<span class='error1_pw' style="margin-left:-60px;"></span>
+										<span class='error1_pw' style="margin-left:-55px;"></span>
 										<img src="" id="error_img_pw">
 									</div>
 									<div class="col-xs-12 col-sm-2">
