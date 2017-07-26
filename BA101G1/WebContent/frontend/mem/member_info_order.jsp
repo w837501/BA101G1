@@ -55,8 +55,8 @@ $(document).ready(
 		text-decoration:none;
 	}
 	
-    #progressbar .ui-progressbar-value {
-    background-color: lightgreen;
+    .pgbarColor .ui-progressbar-value {
+    background-color: lightgreen !important;
     }
 </style>
 <body onload="connect();" onunload="disconnect();">
@@ -86,8 +86,8 @@ $(document).ready(
 					<div class="page-header"> 
 						<h3>會員訂單紀錄</h3>
 			 		</div> 
-					<div id="textBox">123</div>		
-					<div id="progressbar"></div>		
+					<div id="textBox" style="visibility: hidden;"></div>		
+					<div id="progressbar" style="visibility: hidden;"></div>		
 					<table border='1' bordercolor='#CCCCFF' width='680' bgcolor='#FFBB66'>
 						<tr>
 							<th width="11%"><font size="2">訂單編號</font></th>
@@ -167,7 +167,7 @@ $(document).ready(
 						</tr>
 					</c:forEach>
 					<tr>
-					<td colspan="8" class="progressbar"></td>
+					<td colspan="8" class="progressbar pgbarColor" id="${store_orderVO1.order_id}"></td>
 					</tr>
 				</table>
 				</c:forEach>
@@ -192,11 +192,11 @@ $(".abc").on('click',function(){
 })
 </script>
 <script>
-	var a = 0;
+	var finalVal = 0;
 
 	$( function() {
 	    $( ".progressbar" ).progressbar({
-	      value: a
+	      value: finalVal
 	    });
 	  } );
     
@@ -209,7 +209,7 @@ $(".abc").on('click',function(){
     
 	var statusOutput = document.getElementsByName("statusOutput");//HTML中要更換的文字
 	var webSocket;
-	var str2 , upABC , b;
+	var str2 , upABC;
 	function connect() {
 		// 建立 websocket 物件
 		webSocket = new WebSocket(endPointURL); // 1.執行完，觸發MyEchoServer.java的onOpen()
@@ -224,26 +224,28 @@ $(".abc").on('click',function(){
 			var jsonObj = JSON.parse(event.data);
 			var val = jsonObj.status;
 			var key = jsonObj.orderId;
+			var pgbarId = document.getElementById(key);
+			alert('onmessage pgbarId' +pgbarId);
 			for(var i=0;order_id.length;i++ ){
 				if(order_id[i].innerHTML==key){
 // 					updateStatus( upABC,ra1,str);因為長度剛好跟statusOutput[j]一致，一對一	
 					statusOutput[i].innerHTML = val;
-					console.log('val'+val+' a '+a);
+					console.log('val'+val+' finalVal '+finalVal);
 					switch(val) {
 					    case "未確認":
-					    	a = 0;
+					    	finalVal = 0;
 					        break;
 					    case "已確認":
-					    	a = 50;
+					    	finalVal = 50;
 					        break;
 					    case "待取餐":
-					    	a = 100;
+					    	finalVal = 100;
 					        break;
 					    default:
-					    	a = 100;
+					    	finalVal = 100;
 					}
 					
-				    var progressbar = $( ".progressbar" ),
+				    var progressbar = $( "#"+key ),
 				      progressLabel = $( ".progress-label" );
 				 
 				    progressbar.progressbar({
@@ -255,13 +257,12 @@ $(".abc").on('click',function(){
 				        progressLabel.text( "Complete!" );
 				      }
 				    });
-				 	b = a;
 				    function progress() {
-				      var val = progressbar.progressbar( "value" ) || a-50;
+				      var val = progressbar.progressbar( "value" ) || finalVal-50;
 				 
 				      progressbar.progressbar( "value", val + 2 );
 				 
-				      if ( val < a ) {
+				      if ( val < finalVal ) {
 				        setTimeout( progress, 80 );
 				      }
 				    }
