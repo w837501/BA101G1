@@ -87,6 +87,7 @@ public class StoreCommitServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			System.out.println("123");
+			String requestURL=req.getParameter("requestURL");
 			try{
 //1.接收請求參數				
 				String sc_id = req.getParameter("sc_id");
@@ -97,7 +98,7 @@ public class StoreCommitServlet extends HttpServlet {
 //3.查詢完成,準備轉交				
 				req.setAttribute("scVO", scVO);
 				String url = "/backend/store_commit/updateStoreCommitInput.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
+				RequestDispatcher successView = req.getRequestDispatcher(requestURL);
 				successView.forward(req, res);
 //其他可能的錯誤處理				
 			}catch(Exception e){
@@ -129,17 +130,17 @@ public class StoreCommitServlet extends HttpServlet {
 			System.out.println(sc_content);
 			System.out.println(sc_time);
 			System.out.println(sc_state);
-			StoreCommitVO scVO = new StoreCommitVO();
+			StoreCommitVO scVO1 = new StoreCommitVO();
 			
-			scVO.setSc_id(sc_id);
-			scVO.setStore_id(store_id);
-			scVO.setMem_id(mem_id);
-			scVO.setSc_content(sc_content);
-			scVO.setSc_time(sc_time);
-			scVO.setSc_state(sc_state);
+			scVO1.setSc_id(sc_id);
+			scVO1.setStore_id(store_id);
+			scVO1.setMem_id(mem_id);
+			scVO1.setSc_content(sc_content);
+			scVO1.setSc_time(sc_time);
+			scVO1.setSc_state(sc_state);
 			
 			if(!errorMsgs.isEmpty()){
-				req.setAttribute("scVO", scVO);
+				req.setAttribute("scVO", scVO1);
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/store_commit/updateStoreCommitInput.jsp");
 				failureView.forward(req, res);
@@ -149,9 +150,9 @@ public class StoreCommitServlet extends HttpServlet {
 			System.out.println("123123");
 //2.開始修改資料		
 			StoreCommitService storeSvc = new StoreCommitService();
-			scVO = storeSvc.updateStoreCommit(sc_id, store_id , mem_id , sc_content , sc_time , sc_state);
+			scVO1 = storeSvc.updateStoreCommit(sc_id, store_id , mem_id , sc_content , sc_time , sc_state);
 //3.修改完成,準備轉交
-			req.setAttribute("scVO", scVO);
+			req.setAttribute("scVO1", scVO1);
 			String url = "/backend/store_commit/listAllStoreCommit.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);

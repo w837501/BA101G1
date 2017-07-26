@@ -32,6 +32,7 @@
 			<c:if test="${memberVO eq null }">
 				<a href="<%=request.getContextPath()%>/frontend/mem/LoginAndAddMem.jsp">我要登入留言</a>
 			</c:if>
+			<a href="<%=request.getContextPath()%>/store/store.do?action=getProduct_By_Store&store_id=<%=store_id%>">返回店家</a>
 		</div>
 		<div id="main">
 			<c:if test="${memberVO != null }">

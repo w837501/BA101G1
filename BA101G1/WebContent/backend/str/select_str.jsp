@@ -181,7 +181,6 @@
 												<th>商家編號</th>
 												<th>訂單編號</th>
 												<th>評論編號</th>
-												<th>管理員編號</th>
 												<th>檢舉內容</th>
 												<th>檢舉圖片</th>
 												<th>檢舉時間</th>
@@ -195,9 +194,8 @@
 													<tr align='center' valign='middle' ${(srVO.sr_id==param.sr_id) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
 														<td>${srVO.sr_id}</td>
 														<td>${srVO.store_id}</td>
-														<td>${srVO.sc_id}</td>
 														<td>${srVO.order_id}</td>
-														<td>${srVO.man_id}</td>
+														<td>${srVO.sc_id}</td>
 														<td>${srVO.sr_content}</td>
 
 														<td>

@@ -189,7 +189,12 @@ List<ProductVO> productVO = (List) request.getAttribute("productlist");
 					</c:forEach>
 					<br>
 					<br>
-					商店評價：<fmt:formatNumber type="number"  maxFractionDigits="1" value="${storeVO.store_star/storeVO.store_count}"/><br>
+					商店評價：<c:if test="${storeVO.store_star eq '0' }">
+							0
+					</c:if>
+					<c:if test="${storeVO.store_star != '0' }">
+						<fmt:formatNumber type="number"  maxFractionDigits="1" value="${storeVO.store_star/storeVO.store_count}"/><br>
+					</c:if>
 					<br>
 					<a href="<%=request.getContextPath()%>/backend/store_commit/listStoreCommitByStore_id.jsp?store_id=${storeVO.store_id}">評論</a>&nbsp&nbsp&nbsp&nbsp
 					<form method="post" action="<%=request.getContextPath()%>/frontend/mem/member_addMR.jsp">

@@ -172,7 +172,6 @@
 												<th>會員編號</th>
 												<th>訂單編號</th>
 												<th>評論編號</th>
-												<th>管理員編號</th>
 												<th>檢舉內容</th>
 												<th>檢舉圖片</th>
 												<th>檢舉時間</th>
@@ -186,7 +185,6 @@
 														<td>${mrVO.mem_id}</td>
 														<td>${mrVO.order_id}</td>
 														<td>${mrVO.sc_id}</td>
-														<td>${mrVO.man_id}</td>
 														<td>${mrVO.mr_content}</td>
 
 														<td>

@@ -201,9 +201,9 @@
 	</table>
 
 	<%@ include file="pages/page2.file"%>
-
-
-        
+	<c:if test="${scVO != null }">
+	<jsp:include page="/backend/store_commit/updateStoreCommitInput.jsp"></jsp:include>
+        </c:if>
 <!-- ****************¤º­¶************************ -->
 
         </div>

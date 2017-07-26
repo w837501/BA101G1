@@ -30,7 +30,7 @@ public class StoreReportJNDIDAO implements StoreReportDAO_interface {
 	private static final String UPDATE = 
 		"UPDATE STORE_REPORT set store_id=?, sc_id=?, order_id=?, man_id=?, sr_content=?, sr_image=?, sr_time=?, sr_state=?, sr_result=?  where sr_id = ?";
 	private static final String GET_SOME_STMT_BY_SR_STATE = 
-			"SELECT sr_id,store_id,sc_id,order_id,man_id,sr_content,sr_image,sr_time,sr_state,sr_result FROM STORE_REPORT where sr_state = ?";
+			"SELECT sr_id,store_id,sc_id,order_id,man_id,sr_content,sr_image,sr_time,sr_state,sr_result FROM STORE_REPORT where sr_state = ? order by sr_time desc";
 	private static final String GET_BY_STORE_ID = "select * from STORE_REPORT where store_id = ? ";
 	@Override
 	public void insert(StoreReportVO srVO) {

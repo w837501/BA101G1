@@ -44,8 +44,7 @@
 	</tr>
 	<tr>
 		<td>評價</td>
-		<td><input type="TEXT" name="sc_content" size="45" placeholder="評價"
-			value="<%=scVO.getSc_content()%>" /></td>
+		<td><%=scVO.getSc_content()%></td>
 	</tr>
  	<tr>
 		<td>評價時間</td>
@@ -62,6 +61,7 @@
 <br>
             <input type="hidden" name="action" value="update">
             <input type="hidden" name="sc_id" value="<%=scVO.getSc_id()%>">
+            <input type="hidden" name="sc_content" value="<%=scVO.getSc_content()%>">
             <input type="hidden" name="mem_id" value="<%=scVO.getMem_id()%>">
             <input type="hidden" name="store_id" value="<%=scVO.getStore_id()%>">
             <input type="hidden" name="sc_time" value="<%=scVO.getSc_time()%>">
