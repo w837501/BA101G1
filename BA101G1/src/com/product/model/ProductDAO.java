@@ -26,7 +26,7 @@ public class ProductDAO implements ProductDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO PRODUCT (PRO_ID,STORE_ID,PRO_NAME,PRO_PRICE,PRO_STATE,PRO_IMAGE,PC_ID,PRO_CONTENT) VALUES ('PRO'||'-'||LPAD(to_char(store_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO PRODUCT (PRO_ID,STORE_ID,PRO_NAME,PRO_PRICE,PRO_STATE,PRO_IMAGE,PC_ID,PRO_CONTENT) VALUES ('PRO'||'-'||LPAD(to_char(pro_seq.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?)";
 	private static final String DELETE = "DELETE FROM PRODUCT where pro_id = ?";
 	private static final String UPDATE_STMT = "UPDATE PRODUCT set  pro_name=?, pro_price=?, pro_state=?, pro_image=?, pc_id=?, pro_content=? where pro_id = ?";
 	private static final String Find_by_PK = "select * from PRODUCT where pro_id=? and pro_state = '¤W¬['";

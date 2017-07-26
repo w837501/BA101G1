@@ -88,7 +88,7 @@
 							</tr>
 							<tr>
 								<td>會員密碼：</td>
-								<td><input type="TEXT" name="mem_pw" size="45" value="<%=memberVO.getMem_pw() %>"/></td>
+								<td><input type="password" name="mem_pw" size="45" value="<%=memberVO.getMem_pw() %>"/></td>
 							</tr>
 							<tr>
 								<td>會員信箱：</td>

@@ -29,9 +29,9 @@ public class AdDAO implements AdDAO_interface {
 	private static final String UPDATE_STMT = "UPDATE AD set store_id=?, ad_name=?, ad_content=?, ad_image=?, ad_time=?, ad_state=?, ad_push_content=? where ad_id=?";
 	private static final String DELETE = "DELETE FROM AD where ad_id = ?";
 	private static final String Find_by_PK = "select * from AD where ad_id=?";
-	private static final String Find_ALL = "select * from AD ";
+	private static final String Find_ALL = "select * from AD  WHERE AD_STATE ='刊登中'";
 	
-	private static final String AD_Available ="select * from Ad  order by ad_time";
+	private static final String AD_Available ="select * from Ad  WHERE AD_STATE ='刊登中' order by ad_time";
 	private static final String FIND_ALL_UNCHECKED_AD = "SELECT * FROM AD  WHERE AD_STATE NOT LIKE '%刊登中%' AND AD_STATE NOT LIKE '%下架%' ";
 	private static final String UPDATE_AD_STATE = "UPDATE AD SET AD_STATE= ? WHERE AD_ID = ?";
 	
