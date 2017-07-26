@@ -17,8 +17,8 @@ public class DBGifReader extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		res.setHeader("Cache-Control","no-store"); //HTTP 1.1
-		  res.setHeader("Pragma","no-cache");        //HTTP 1.0
-		  res.setDateHeader ("Expires", 0);
+		res.setHeader("Pragma","no-cache");        //HTTP 1.0
+		res.setDateHeader ("Expires", 0);
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("image/gif");
 		ServletOutputStream out = res.getOutputStream();
@@ -40,8 +40,7 @@ public class DBGifReader extends HttpServlet {
 				in.close();
 			} 
 			else {
-				System.out.println("所以這裡要幹嘛?????????????????");
-				InputStream in=getServletContext().getResourceAsStream("/frontend/advertisement/images/logo.png");
+				InputStream in = getServletContext().getResourceAsStream("/NoData/loading_spinner.gif");
 				byte[] buf=new byte[in.available()];
 				in.read(buf);
 				out.write(buf);
@@ -50,8 +49,7 @@ public class DBGifReader extends HttpServlet {
 			rs.close();
 			stmt.close();
 		} catch (Exception e) {
-			System.out.println("沒圖片唷");
-			InputStream in=getServletContext().getResourceAsStream("/frontend/advertisement/images/logo.png");
+			InputStream in = getServletContext().getResourceAsStream("/NoData/loading_spinner.gif");
 			byte[] buf=new byte[in.available()];
 			in.read(buf);
 			out.write(buf);

@@ -19,6 +19,7 @@ AdVO adVO=adSvc.getOneAd(ad_id);
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 		<title>吃訂我線上訂餐系統</title>
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" type="text/css">
+		<script src="<%=request.getContextPath()%>/js/mobile.js" type="text/javascript"></script>
 		<style>
 			table{
 				font-size:25px;
@@ -28,54 +29,48 @@ AdVO adVO=adSvc.getOneAd(ad_id);
 				padding-right:50px;
 				padding-left:50px;
 			}
+			b{
+				margin-left:20px;
+			}
 		</style>
 	</head>
 
-	<body>
-	
-	
+<body>
 	<div id="page">
 		<div id="header">
 			<jsp:include page="/header_member.jsp"></jsp:include>
 		</div>
-	
-		<p><font size = "10px">
-		<b style ="display:inline-block;"> 廣告  > 內容 </b>
-		</font></p>
 		
-		<br>
-<!-- 		<div id="classcontents"> -->
-		<div id="items">
-		<div id="ad" align="center">
-			<table>
-			<tr>
-				<td width="80%">${adVO.ad_name}</td>
-				<td width="20%"><fmt:formatDate value="${adVO.ad_time}" pattern="yyyy-MM-dd"/></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<hr style="border-color:red;">
-				</td>
-			</tr>
-			</table>		
-			<img src="<%=request.getContextPath()%>/advertisement/DBGifReader.do?ad_id=${adVO.ad_id}"style="max-width: 250px; max-height: 250px;"></img>
-		</div>
-			<div id="content">
-				<h3>${adVO.ad_content}</h3>
+		<div id="classcontents">
+		
+			<font size = "5">
+				<b style ="display:inline-block;"> <a href="<%=request.getContextPath()%>/frontend/advertisement/browseAD.jsp">廣告瀏覽</a>  > 內容 </b>
+			</font>
+		
+		
+			<div id="items" style="padding-top:50px;">
+				<div id="ad" align="center">
+					<table>
+						<tr>
+							<td align="left">${adVO.ad_name}</td>
+							<td align="right"><fmt:formatDate value="${adVO.ad_time}" pattern="yyyy-MM-dd"/></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<hr style="border-color:#FFF;">
+							</td>
+						</tr>
+					</table>		
+					<img src="<%=request.getContextPath()%>/advertisement/DBGifReader.do?ad_id=${adVO.ad_id}"style="max-width: 250px; max-height: 250px;"></img>
+				</div>
+				<div id="content">
+					<h3>${adVO.ad_content}</h3>
+				</div>
 			</div>
 		</div>
-<!-- 		</div> -->
 		<div id="footer">
-				<ul class="navigation">
-					<li class="selected"><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/store.do?action=getStoreHot&store_star=80'>熱門商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/store/storeClass.jsp'>找商家</a></li>
-					<li><a href='<%=request.getContextPath()%>/product/productClass.jsp'>找商品</a></li>
-					<li><a href="news.html">最新消息</a></li>
-				</ul>
-				<p id="footnote">Eternal Beauty Essentials 2012. All Rights Reserved.</p>
+			<jsp:include page="/footer.jsp"/>
 		</div>
-		
 	</div>
-	</body>
+</body>
 </html>
