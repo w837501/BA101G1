@@ -1,9 +1,9 @@
 <%@ page import="com.man.model.*"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.permission.model.*" %>   
 <%@ page import="com.permission_ability.model.*" %>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
 <%
 	PermissionService pSvc = new PermissionService();
 	List<PermissionVO> list = pSvc.getAll();
@@ -176,14 +176,14 @@
 							</tr>
 						</c:forEach>
 					</table>
-					
+	<!-- =============================================================================== -->				
 					<table class="table table-hover">
-							<caption>權限 新增--刪除</caption>
+							<div>權限 新增--刪除</div>
 							<thead>
 								<tr>
 									<th>管理員編號 - name</th>
 									<th>權限編號 - 名稱</th>
-									<th></th>
+									<th>列表單一管理員</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -195,31 +195,23 @@
 													<option value="${managerVO.man_id}" ${(manVO.man_id==managerVO.man_id)? 'selected':'' } >${managerVO.man_id}-${managerVO.man_name}
 												</c:forEach>
 											</select>
+										</td>
 
-										</td>
 										<td>
-											<select size="1" name="pa_id">
-<%-- 												<c:forEach var="PermissionVO" items="${list}"> --%>
-													<c:forEach var="Permission_AbilityVO" items="${paSvc.all}">
-<%-- 									                    <c:if test="${PermissionVO.pa_id eq Permission_AbilityVO.pa_id}"> --%>
-									                    	<option value="${Permission_AbilityVO.pa_id}" ${(Permission_AbilityVO.pa_id eq PermissionVO.pa_id)? 'selected':'' } >
-										                    	【${Permission_AbilityVO.pa_id } - ${Permission_AbilityVO.pa_name}】
-<%-- 									                    </c:if> --%>
-									                </c:forEach>
-<%-- 								                </c:forEach> --%>
-											</select>
+											<input type="submit" value="送出">
+											<input type="hidden" name="action" value="getOne_For_Display">
+											<input type="hidden" name="iswhich" value="drop">
 										</td>
+										
 										<td>
-												<input type="submit" value="新增">
-												<input type="hidden" name="man_id" value="${manVO.man_id }">
-												<input type="hidden" name="pa_id" value="${PermissionVO.pa_id }">
-												<input type="hidden" name="action" value="insert">
+												刪除權限
 										</td>
 									</form>	
 								</tr>
 							</tbody>
 							
 							<tbody>
+
 								<tr>
 									<form method="post" action="<%=request.getContextPath()%>/backend/per/p.do">
 										<td>
@@ -230,24 +222,12 @@
 											</select>
 										</td>
 										<td>
-											<select size="1" name="pa_id" id="class">
-<%-- 												<c:forEach var="PermissionVO" items="${list}"> --%>
-													<c:forEach var="Permission_AbilityVO" items="${paSvc.all}">
-<%-- 									                    <c:if test="${PermissionVO.pa_id eq Permission_AbilityVO.pa_id}"> --%>
-									                    	<option value="${Permission_AbilityVO.pa_id}" ${(Permission_AbilityVO.pa_id==PermissionVO.pa_id)? 'selected':'' } >
-										                    	【${Permission_AbilityVO.pa_id } - ${Permission_AbilityVO.pa_name}】
-<%-- 									                    </c:if> --%>
-									                </c:forEach>
-<%-- 								                </c:forEach> --%>
-											</select>
-											
-											
-		
-											
+											<input type="submit" value="送出">
+											<input type="hidden" name="action" value="getOne_For_Display">
+											<input type="hidden" name="iswhich" value="add">
 										</td>
 										<td>
-											<input type="submit" value="刪除">
-											<input type="hidden" name="action" value="delete">
+											新增權限
 										</td>
 									</form>	
 								</tr>
@@ -269,7 +249,12 @@
 <%if ("列出權限功能"==request.getAttribute("whichPage")){%>
        <jsp:include page="/backend/perA/ListAllPA.jsp" />
 <%} %>
-
+<%if ("列出單一權限功能"==request.getAttribute("whichPage")){%>
+       <jsp:include page="/backend/per/ListOneMan.jsp" />
+<%} %>
+<%if ("新增單一管理員權限"==request.getAttribute("whichPage")){%>
+       <jsp:include page="/backend/per/addPer.jsp" />
+<%} %>
 <!-- *********************include頁面******************* -->
 <!-- ****************內頁************************ -->
 

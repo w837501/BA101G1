@@ -160,7 +160,7 @@ public class PermissionJDBCDAO implements PermissionDAO_interface{
 		}
 	}
 	@Override
-	public PermissionVO findByPrimaryKey(String man_id) {
+	public List<PermissionVO> findByPrimaryKey(String man_id) {
 		// TODO Auto-generated method stub
 		PermissionVO permissionVO = null;
 		Connection con = null;
