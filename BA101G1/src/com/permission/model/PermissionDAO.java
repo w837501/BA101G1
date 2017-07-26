@@ -160,6 +160,7 @@ public class PermissionDAO implements PermissionDAO_interface{
 	public List<PermissionVO> findByPrimaryKey(String man_id) {
 		// TODO Auto-generated method stub
 		PermissionVO permissionVO = null;
+		List<PermissionVO> list = new ArrayList<PermissionVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -178,6 +179,7 @@ public class PermissionDAO implements PermissionDAO_interface{
 				permissionVO = new PermissionVO();
 				permissionVO.setMan_id(rs.getString("man_id"));
 				permissionVO.setPa_id(rs.getString("pa_id"));
+				list.add(permissionVO);
 			}
 
 			// Handle any driver errors
@@ -208,7 +210,7 @@ public class PermissionDAO implements PermissionDAO_interface{
 				}
 			}
 		}
-		return permissionVO;
+		return list;
 	}
 
 	@Override

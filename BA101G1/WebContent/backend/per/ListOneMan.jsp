@@ -15,8 +15,9 @@
 	ManagerService mSvc = new ManagerService();
 	ManagerVO mVO = mSvc.getOneMan(user);
 	pageContext.setAttribute("mVO", mVO);
+	
 %>
-
+<jsp:useBean id="paSvc" scope="page" class="com.permission_ability.model.PermissionAbilityDAO" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
