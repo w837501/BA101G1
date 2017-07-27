@@ -46,11 +46,8 @@
 					</p>
         	</div>
 						<button onclick="myFunction1()">俊</button>
-						<button onclick="myFunction2()">治</button>
-						<button onclick="myFunction3()">家</button>
-						<button onclick="myFunction4()">人</button>
-						<button onclick="myFunction5()">宜</button>
 						<button onclick="myFunction6()">哲</button>
+						<button onclick="myFunction2()">老吳</button>
         
 		</div>
 		
@@ -105,20 +102,8 @@
 		document.getElementById("loginPas").value = "group1";
 	}
 	function myFunction2(){
-		document.getElementById("loginAcc").value = "jay@abc.com";
-		document.getElementById("loginPas").value = "group1";
-	}
-	function myFunction3(){
-		document.getElementById("loginAcc").value = "fat@abc.com";
-		document.getElementById("loginPas").value = "group1";
-	}
-	function myFunction4(){
-		document.getElementById("loginAcc").value = "ygo@abc.com";
-		document.getElementById("loginPas").value = "group1";
-	}
-	function myFunction5(){
-		document.getElementById("loginAcc").value = "stupid@abc.com";
-		document.getElementById("loginPas").value = "group1";
+		document.getElementById("loginAcc").value = "ixlogic.wu@abc.com";
+		document.getElementById("loginPas").value = "";
 	}
 	function myFunction6(){
 		document.getElementById("loginAcc").value = "yang@abc.com";
