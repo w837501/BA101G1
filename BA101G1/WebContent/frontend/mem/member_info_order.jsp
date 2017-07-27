@@ -156,7 +156,7 @@ $(document).ready(
 							<td colspan="4"></td>
 							<td colspan="2" bgcolor="#FFBB66">商品名稱</td>		
 							<td colspan="2" bgcolor="#FFBB66">數量</td>
-							<td colspan="2" bgcolor="#FFBB66">總金額</td>
+							<td colspan="2" bgcolor="#FFBB66">金額</td>
 						</tr>
 					<c:forEach var="orderlistVO" items="${orderlistSvc.getOrderlist(store_orderVO1.order_id)}" >
 						<tr style="display: none;">
