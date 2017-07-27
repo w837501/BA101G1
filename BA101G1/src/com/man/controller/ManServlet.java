@@ -254,7 +254,7 @@ public class ManServlet extends HttpServlet {
 		/**************寄送至手機********************************************/
 			 	Send se = new Send();
 			 	String[] tel ={man_phone};
-			 	String message = man_name+"先生你好，這裡是吃訂我線上平台系統，恭喜你註冊囉，密碼已送至信箱，已經可以登入囉";
+			 	String message = man_name+"先生你好，這裡是吃訂我線上平台系統，恭喜你註冊囉，密碼"+passRandom+"已送至信箱，已經可以登入囉";
 			 	se.sendMessage(tel , message);
 		/**************寄送mail********************************************/
 	

@@ -440,15 +440,15 @@ public class StoreServlet extends HttpServlet {
 				if(req.getParameter("store_state").equals("審核中")){
 					System.out.println("asdasdasdasd");
 					MailService mailSvc = new MailService();
-					mailSvc.sendMail(req.getParameter("store_acc"), "很抱歉您未通過認證", "aaaaaaaa");
+					mailSvc.sendMail(req.getParameter("store_acc"), "很抱歉您未通過認證", "目前還在審核中，請稍後");
 					
 				}else if(req.getParameter("store_state").equals("開店中")){
 					MailService mailSvc = new MailService();
-					mailSvc.sendMail(req.getParameter("store_acc"), "恭喜您已通過認證", "bbbbbbbbb");
+					mailSvc.sendMail(req.getParameter("store_acc"), "恭喜您已通過認證", "已經通過驗證了，可以來上架商品了");
 					
 				}else{
 					MailService mailSvc = new MailService();
-					mailSvc.sendMail(req.getParameter("store_acc"), "目前停業中", "ccccccccccccc");
+					mailSvc.sendMail(req.getParameter("store_acc"), "目前停業中", "目前已經停業中");
 				}
 				//==============				
 				
