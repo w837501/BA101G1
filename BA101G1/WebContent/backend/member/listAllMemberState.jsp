@@ -40,8 +40,7 @@
 		<th>會員編號</th>
 		<th>會員姓名</th>
 		<th>會員電話</th>
-		<th>會員編密碼</th>
-		<th>會員編信箱</th>
+		<th>會員信箱</th>
 		<th>會員狀態</th>
 		
 	</tr>
@@ -51,7 +50,6 @@
 			<td>${MemberVO.mem_id }</td>
 			<td>${MemberVO.mem_name }</td>
 			<td>${MemberVO.mem_phone }</td>
-			<td>${MemberVO.mem_pw }</td>
 			<td>${MemberVO.mem_mail }</td>
             <td width="30">
                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/mem/mem.do" name="form1">
