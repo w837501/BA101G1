@@ -300,9 +300,9 @@
 									name="form2">
 	
 									<label for="store_acc">帳號</label> <input type="text" name="store_acc"
-										id="store_acc" placeholder="請輸入E-MAIL" value="account1@abc.com"> <br> <br> <label
+										id="store_acc" placeholder="請輸入E-MAIL" value="ba101g1store@gmail.com"> <br> <br> <label
 										for="store_pw">密碼</label> <input type="password" name="store_pw"
-										id="store_pw" placeholder="請輸入密碼" value="password"> <br> <br> <a
+										id="store_pw" placeholder="請輸入密碼" value="a123456789"> <br> <br> <a
 										herf="">忘記密碼?</a> <br> <br> <input type=submit
 										value=" 登入 "><input type="hidden" name="requestURL"
 										value="<%=request.getServletPath()%>">
@@ -327,7 +327,7 @@
 									<label for="store_acc" class="col-xs-12 col-sm-3 control-label">會員帳號(信箱)</label>
 									<div class="col-xs-12 col-sm-5"> <input type="text"
 										name="store_acc" id="store_acc1" placeholder="請輸入E-MAIL"
-										value="<%=(storeVO == null) ? "sadqwe" : storeVO.getStore_acc()%>" >
+										value="<%=(storeVO == null) ? "ba101g1store" : storeVO.getStore_acc()%>" >
 									</div>
 									<div class="col-xs-12 col-sm-2">
 									<span class='error1_acc' style="margin-left:-58px;"></span> 
@@ -375,7 +375,7 @@
 									<label for="store_name" class="col-xs-12 col-sm-3 control-label">商家名稱</label>
 									<div class="col-xs-12 col-sm-5"> <input type="text"
 										name="store_name" id="store_name" placeholder="請輸入商家名稱"
-										value="<%=(storeVO == null) ? "肯ㄐㄐ" : storeVO.getStore_name()%>" >
+										value="<%=(storeVO == null) ? "老吳車輪餅" : storeVO.getStore_name()%>" >
 									</div>
 									<div class="col-xs-12 col-sm-2">
 									<span class='error1_name' style="margin-left:-60px;"></span> 
@@ -440,7 +440,7 @@
 										<label for="store_addr" class="col-xs-12 col-sm-3 control-label">商家地址</label>
 										<div class="col-xs-12 col-sm-5">
 											<input type="text" name="store_addr" id="store_addr"
-													placeholder="請輸入地址" value="<%=(storeVO == null) ? "我家隔壁" : storeVO.getStore_addr()%>">
+													placeholder="請輸入地址" value="<%=(storeVO == null) ? "資策會門口" : storeVO.getStore_addr()%>">
 										</div>
 										<div class="col-xs-12 col-sm-2">
 											<span class='error1_addr' style="margin-left:-60px;"></span> 

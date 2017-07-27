@@ -77,7 +77,7 @@ public class StoreLoginHandler extends HttpServlet {
 					System.out.println("123123");
 					session.removeAttribute("location"); // *工作2: 看看有無來源網頁
 															// (-->如有來源網頁:則重導至來源網頁)
-					res.sendRedirect(location);
+					res.sendRedirect(req.getContextPath()+"index.jsp");
 					return;
 				}
 			} catch (Exception ignored) {
