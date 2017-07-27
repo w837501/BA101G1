@@ -71,7 +71,7 @@
 	function myFunction3(){
 		document.getElementById("empName").value = "王小傑";
 		document.getElementById("empPhone").value = "0987043790";
-		document.getElementById("empEmail").value = "w837501@gmail.com";
+		document.getElementById("empEmail").value = "ba101g1store@gmail.com";
 	}
 	function chkEmail(){
 		//please input the test email to see is valid
